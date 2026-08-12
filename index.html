@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gran Final - LEVIATÁN</title>
+    <title>ZC26 - Brawl Stars Championship</title>
     <style>
         * {
             margin: 0;
@@ -16,18 +16,21 @@
         }
         body {
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: #0a0a0a;
-            padding: 20px;
             color: #ffffff;
             overflow-x: hidden;
+            padding: 20px;
+        }
+        .page {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 34px;
         }
         .mobile-container {
             width: 100%;
-            max-width: 480px;
-            background: transparent;
         }
         .match-card {
             background: transparent;
@@ -99,12 +102,24 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            position: relative;
+            z-index: 2;
         }
         .team-name {
             font-size: 0.8rem;
             font-weight: 500;
             margin-top: 2px;
             color: #ffffff;
+        }
+        .team-name-pop {
+            display: inline-block;
+            animation: nameGrow 2.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes nameGrow {
+            0%   { transform: scale(1); }
+            15%  { transform: scale(1.5); font-weight: 800; }
+            65%  { transform: scale(1.5); font-weight: 800; }
+            100% { transform: scale(1); font-weight: 500; }
         }
         .octagon-bg {
             position: absolute;
@@ -451,6 +466,139 @@
             padding-top: 10px;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
+
+        /* Section shell shared by ranking / trophy room / credits */
+        .section-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .section-title {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 0.65rem;
+            color: #888888;
+            text-align: center;
+            margin-top: -8px;
+        }
+        .section-updated {
+            font-size: 0.6rem;
+            color: #666666;
+            text-align: center;
+        }
+        .panel {
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 10px;
+        }
+
+        /* Ranking */
+        .rank-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 9px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer;
+            color: inherit;
+            text-align: left;
+        }
+        .rank-row:last-child {
+            border-bottom: none;
+        }
+        .rank-row:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        .rank-pos {
+            font-size: 1rem;
+            font-weight: 900;
+            width: 22px;
+            flex-shrink: 0;
+            color: #ffffff;
+        }
+        .rank-pos.gold { color: #e8c34a; }
+        .rank-pos.silver { color: #c7c7c7; }
+        .rank-pos.bronze { color: #cd7f32; }
+        .rank-flag {
+            width: 26px;
+            height: 18px;
+            border-radius: 3px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #1a1a1a;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .rank-flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .rank-name {
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .rank-name.gold { color: #e8c34a; }
+        .rank-name.silver { color: #c7c7c7; }
+        .rank-name.bronze { color: #cd7f32; }
+        .rank-points {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #dddddd;
+            white-space: nowrap;
+        }
+
+        /* Trophy room */
+        .trophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .trophy-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            padding: 12px 6px;
+            cursor: pointer;
+            border: 1px solid rgba(212,175,55,0.15);
+        }
+        .trophy-item:hover {
+            background: rgba(212,175,55,0.06);
+        }
+        .trophy-logo {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .trophy-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .trophy-label {
+            font-size: 0.6rem;
+            color: #cccccc;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -487,6 +635,214 @@
             box-shadow: 0 0 50px rgba(0,0,0,0.8);
             border-radius: 8px;
         }
+        .info-panel {
+            width: 100%;
+            max-width: 420px;
+            max-height: 85vh;
+            max-height: 85dvh;
+            overflow-y: auto;
+            background: #101010;
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: default;
+        }
+        .info-close {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .info-close span {
+            font-size: 0.7rem;
+            color: #888888;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+        .info-name {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-flag {
+            width: 28px;
+            height: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+        }
+        .info-flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .info-team {
+            font-size: 0.75rem;
+            color: #d4af37;
+            letter-spacing: 1px;
+            margin: 2px 0 16px;
+        }
+        .info-block-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888888;
+            margin: 18px 0 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 4px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 12px;
+        }
+        .info-field-label {
+            font-size: 0.6rem;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-field-value {
+            font-size: 0.8rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .info-field-value.active {
+            color: #6fcf97;
+        }
+        .history-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.75rem;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .history-row:last-child { border-bottom: none; }
+        .history-dates { color: #888888; white-space: nowrap; }
+        .history-team { color: #ffffff; font-weight: 600; text-align: right; }
+        .match-row {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .match-row:last-child { border-bottom: none; }
+        .match-row-top {
+            font-size: 0.6rem;
+            color: #888888;
+            margin-bottom: 4px;
+        }
+        .match-row-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .match-row-tourney {
+            font-size: 0.6rem;
+            color: #666666;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .ach-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.68rem;
+        }
+        .ach-table th {
+            text-align: left;
+            color: #888888;
+            font-weight: 600;
+            font-size: 0.58rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .ach-table td {
+            padding: 6px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: #dddddd;
+            vertical-align: top;
+        }
+        .ach-place {
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        /* Trophy modal */
+        .trophy-modal-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .trophy-modal-logo img {
+            max-width: 90px;
+            max-height: 90px;
+            object-fit: contain;
+        }
+        .trophy-modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-align: center;
+            color: #ffffff;
+        }
+        .trophy-modal-sub {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #d4af37;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .trophy-modal-desc {
+            font-size: 0.75rem;
+            color: #bbbbbb;
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        /* Site footer */
+        .site-footer {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .site-footer-logo {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .site-footer-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .site-footer-text {
+            font-size: 0.5rem;
+            line-height: 1.5;
+            color: #666666;
+        }
+        .site-footer-text p {
+            margin-bottom: 6px;
+        }
+        .site-footer-text .copy-line {
+            color: #999999;
+            font-weight: 600;
+        }
+        .site-footer-text a {
+            color: #888888;
+        }
+
         @media (max-width: 400px) {
             .score-number { font-size: 2rem; }
             .win-text { font-size: 1.8rem; }
@@ -500,134 +856,165 @@
             .event-time { font-size: 0.6rem; }
             .modal-content { max-width: 95%; max-height: 80vh; max-height: 80dvh; }
             .modal-content img { max-height: 80vh; max-height: 80dvh; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<div class="mobile-container">
-    <div class="match-card">
+<div class="page">
 
-        <div class="match-header">
-            <div class="league-info">
-                <h2>GRAN FINAL</h2>
-                <p>Brawl Stars · Agosto 8 de 2026</p>
-            </div>
-            <div class="header-right">
-                <span class="header-date">08/09/26</span>
-                <span class="header-status">Finalized</span>
-            </div>
-        </div>
+    <div class="mobile-container">
+        <div class="match-card">
 
-        <div class="scoreboard">
-            <div class="team">
-                <div class="team-logo"><img src="LPR.png" alt="LPR"></div>
-                <span class="team-name">LPR</span>
-            </div>
-            <div class="score-center">
-                <span class="score-number score-lpr">1</span>
-                <div class="match-status">
-                    <span class="status-badge">Finished</span>
-                    <span class="status-date">Aug 8, 26</span>
+            <div class="match-header">
+                <div class="league-info">
+                    <h2>GRAN FINAL</h2>
+                    <p>Brawl Stars · Agosto 8 de 2026</p>
                 </div>
-                <span class="score-number">3</span>
+                <div class="header-right">
+                    <span class="header-date">08/09/26</span>
+                    <span class="header-status">Finalized</span>
+                </div>
             </div>
-            <div class="team">
-                <div class="octagon-bg"></div>
-                <div class="octagon-ring"></div>
-                <div class="team-logo lev-pop"><img src="LEV.png" alt="LEV"></div>
-                <span class="team-name">LEV</span>
-            </div>
-        </div>
 
-        <div class="bans-wrapper">
-            <div class="bans-title">Baneos globales</div>
-            <div class="bans">
-                <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">belle y spike</span></div>
-                <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">Bibi y Nori</span></div>
-            </div>
-        </div>
-
-        <div class="match-events">
-            <div class="events-col">
-                <div class="event-item" data-image="kockout.jpg">
-                    <div class="event-left">
-                        <div class="event-icon"><img src="hot_zone-icon.png" alt="Knockout"></div>
-                        <div class="event-info">
-                            <span class="event-mode">Knockout</span>
-                            <span class="event-map">Belle rock</span>
-                        </div>
+            <div class="scoreboard">
+                <div class="team">
+                    <div class="team-logo"><img src="LPR.png" alt="LPR"></div>
+                    <span class="team-name">LPR</span>
+                </div>
+                <div class="score-center">
+                    <span class="score-number score-lpr">1</span>
+                    <div class="match-status">
+                        <span class="status-badge">Finished</span>
+                        <span class="status-date">Aug 8, 26</span>
                     </div>
-                    <div class="event-result">2-1 <span class="event-time">12'</span></div>
+                    <span class="score-number">3</span>
+                </div>
+                <div class="team">
+                    <div class="team-logo lev-pop">
+                        <div class="octagon-bg"></div>
+                        <div class="octagon-ring"></div>
+                        <img src="LEV.png" alt="LEV">
+                    </div>
+                    <span class="team-name team-name-pop">LEV</span>
                 </div>
             </div>
-            <div class="events-col">
-                <div class="event-item event-right" data-image="heist.jpg">
-                    <div class="event-result">0-2 <span class="event-time">5'</span></div>
-                    <div class="event-left">
-                        <div class="event-info">
-                            <span class="event-mode">Heist</span>
-                            <span class="event-map">tire maniacs</span>
+
+            <div class="bans-wrapper">
+                <div class="bans-title">Baneos globales</div>
+                <div class="bans">
+                    <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">belle y spike</span></div>
+                    <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">Bibi y Nori</span></div>
+                </div>
+            </div>
+
+            <div class="match-events">
+                <div class="events-col">
+                    <div class="event-item" data-image="kockout.jpg">
+                        <div class="event-left">
+                            <div class="event-icon"><img src="hot_zone-icon.png" alt="Knockout"></div>
+                            <div class="event-info">
+                                <span class="event-mode">Knockout</span>
+                                <span class="event-map">Belle rock</span>
+                            </div>
                         </div>
-                        <div class="event-icon"><img src="heist-icon.png" alt="Heist"></div>
+                        <div class="event-result">2-1 <span class="event-time">12'</span></div>
                     </div>
                 </div>
-                <div class="event-item event-right" data-image="brawlball.jpg">
-                    <div class="event-result">1-2 <span class="event-time">17'</span></div>
-                    <div class="event-left">
-                        <div class="event-info">
-                            <span class="event-mode">Brawl Ball</span>
-                            <span class="event-map">leafy bushes</span>
+                <div class="events-col">
+                    <div class="event-item event-right" data-image="heist.jpg">
+                        <div class="event-result">0-2 <span class="event-time">5'</span></div>
+                        <div class="event-left">
+                            <div class="event-info">
+                                <span class="event-mode">Heist</span>
+                                <span class="event-map">tire maniacs</span>
+                            </div>
+                            <div class="event-icon"><img src="heist-icon.png" alt="Heist"></div>
                         </div>
-                        <div class="event-icon"><img src="brawl_ball-icon.png" alt="Brawl Ball"></div>
+                    </div>
+                    <div class="event-item event-right" data-image="brawlball.jpg">
+                        <div class="event-result">1-2 <span class="event-time">17'</span></div>
+                        <div class="event-left">
+                            <div class="event-info">
+                                <span class="event-mode">Brawl Ball</span>
+                                <span class="event-map">leafy bushes</span>
+                            </div>
+                            <div class="event-icon"><img src="brawl_ball-icon.png" alt="Brawl Ball"></div>
+                        </div>
+                    </div>
+                    <div class="event-item event-right" data-image="gremgrab.jpg">
+                        <div class="event-result">0-2 <span class="event-time">28'</span></div>
+                        <div class="event-left">
+                            <div class="event-info">
+                                <span class="event-mode">Gem Grab</span>
+                                <span class="event-map">doble swoosh</span>
+                            </div>
+                            <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="event-item event-right" data-image="gremgrab.jpg">
-                    <div class="event-result">0-2 <span class="event-time">28'</span></div>
-                    <div class="event-left">
-                        <div class="event-info">
-                            <span class="event-mode">Gem Grab</span>
-                            <span class="event-map">doble swoosh</span>
-                        </div>
-                        <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
-                    </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stats-title">LEVIATAN ESPORT</div>
+                <div class="stat-row">
+                    <span class="stat-value">LEV | Julio <span class="stat-tag">@juliocr36</span></span>
+                    <span class="stat-label captain">Capitán</span>
+                    <span class="stat-value right">(SK | Julio)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-value">LEV | Taikisha <span class="stat-tag">@x_xv</span></span>
+                    <span class="stat-label">Titular</span>
+                    <span class="stat-value right">(タイキシャ)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-value">LEV | JC</span>
+                    <span class="stat-label">Titular</span>
+                    <span class="stat-value right">(~ T X -->JC)</span>
                 </div>
             </div>
-        </div>
 
-        <div class="stats-section">
-            <div class="stats-title">LEVIATAN ESPORT</div>
-            <div class="stat-row">
-                <span class="stat-value">LEV | Julio <span class="stat-tag">@juliocr36</span></span>
-                <span class="stat-label captain">Capitán</span>
-                <span class="stat-value right">(SK | Julio)</span>
+            <div class="footer-win">
+                <div class="selection-tag">Seleccion completa</div>
+                <div class="win-text"><span class="highlight">WIN LEVIATAN ESPORT</span></div>
             </div>
-            <div class="stat-row">
-                <span class="stat-value">LEV | Taikisha <span class="stat-tag">@x_xv</span></span>
-                <span class="stat-label">Titular</span>
-                <span class="stat-value right">(タイキシャ)</span>
+
+            <div class="logo-large">
+                <img src="Untitled218.png" alt="Untitled218">
             </div>
-            <div class="stat-row">
-                <span class="stat-value">LEV | JC</span>
-                <span class="stat-label">Titular</span>
-                <span class="stat-value right">(~ T X -->JC)</span>
+
+            <div class="footer-info">
+                Lugar: Servidores Globales, Brawl Stars<br>
+                Zona horaria: Todos los horarios corresponden a la hora estándar de Perú
             </div>
-        </div>
 
-        <div class="footer-win">
-            <div class="selection-tag">Seleccion completa</div>
-            <div class="win-text"><span class="highlight">WIN LEVIATAN ESPORT</span></div>
         </div>
-
-        <div class="logo-large">
-            <img src="Untitled218.png" alt="Untitled218">
-        </div>
-
-        <div class="footer-info">
-            Lugar: Servidores Globales, Brawl Stars<br>
-            Zona horaria: Todos los horarios corresponden a la hora estándar de Perú
-        </div>
-
     </div>
+
+    <div class="section-block">
+        <div class="section-title">Ranking ZC26</div>
+        <div class="section-subtitle">Se actualiza con cada torneo ZC26</div>
+        <div class="panel" id="rankingList"></div>
+        <div class="section-updated">Última actualización: 12 ago, 2026</div>
+    </div>
+
+    <div class="section-block">
+        <div class="section-title">Sala de Trofeos</div>
+        <div class="section-subtitle">Campeones a lo largo de los torneos ZC26</div>
+        <div class="panel">
+            <div class="trophy-grid" id="trophyGrid"></div>
+        </div>
+    </div>
+
+    <div class="site-footer">
+        <div class="site-footer-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
+        <div class="site-footer-text">
+            <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
+            <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+            <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:istzephyra@gmail.com">istzephyra@gmail.com</a></p>
+        </div>
+    </div>
+
 </div>
 
 <div class="modal-overlay" id="modalOverlay">
@@ -635,7 +1022,254 @@
     <div class="modal-content"><img id="modalImage" src="" alt="Mapa"></div>
 </div>
 
+<div class="modal-overlay" id="playerModalOverlay">
+    <div class="info-panel" id="playerInfoPanel"></div>
+</div>
+
+<div class="modal-overlay" id="trophyModalOverlay">
+    <div class="info-panel" id="trophyInfoPanel"></div>
+</div>
+
 <script>
+    const FLAGS = {
+        ES: { file: "72px-Es_hd.png", name: "España" },
+        PE: { file: "72px-Pe_hd.png", name: "Perú" },
+        GT: { file: "72px-Gt_hd.png", name: "Guatemala" },
+        MX: { file: "72px-Mx_hd.png", name: "México" }
+    };
+
+    const PLAYERS = [
+        {
+            rank: 1, name: "Taikisha", country: "ES", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 290, color: "gold",
+            born: "Por confirmar", status: "Active", role: "Player",
+            alternateIds: ["@x_xv", "タイキシャ"],
+            winnings: "$0", credits: "7,000 créditos",
+            history: [
+                { from: "2026-08-08", to: "Presente", team: "LEVIATÁN ESPORTS" }
+            ],
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "1°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "290 pts · +25 Estelar (Set 4) · +25 Bono MVP" }
+            ]
+        },
+        {
+            rank: 2, name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 275, color: "silver",
+            born: "Por confirmar", status: "Active", role: "Player · Capitán",
+            alternateIds: ["@juliocr36", "SK | Julio"],
+            winnings: "$0", credits: "10,000 créditos",
+            history: [
+                { from: "2026-08-08", to: "Presente", team: "LEVIATÁN ESPORTS" }
+            ],
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "1°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "275 pts · +25 Estelar (Set 1)" }
+            ]
+        },
+        {
+            rank: 3, name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 265, color: "bronze",
+            born: "Por confirmar", status: "Active", role: "Player",
+            alternateIds: ["JC", "~ T X -->JC"],
+            winnings: "$0", credits: "0 créditos",
+            history: [
+                { from: "2026-08-08", to: "Presente", team: "LEVIATÁN ESPORTS" }
+            ],
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "1°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "265 pts · +25 Estelar (Set 3)" }
+            ]
+        },
+        {
+            rank: 4, name: "Nacaru", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 80, color: "normal",
+            born: "Por confirmar", status: "Active", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            history: [
+                { from: "2026-08-08", to: "Presente", team: "Cachorritas repres." }
+            ],
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "80 pts · +25 Estelar (Set 2)" }
+            ]
+        },
+        {
+            rank: 5, name: "Ninja", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 60, color: "normal",
+            born: "Por confirmar", status: "Active", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            history: [
+                { from: "2026-08-08", to: "Presente", team: "Cachorritas repres." }
+            ],
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "60 pts" }
+            ]
+        },
+        {
+            rank: 6, name: "Juanjoxd", country: "GT", team: "Cachorritas repres.", teamTag: "LPR", points: 55, color: "normal",
+            born: "Por confirmar", status: "Active", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            history: [
+                { from: "2026-08-08", to: "Presente", team: "Cachorritas repres." }
+            ],
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "55 pts" }
+            ]
+        }
+    ];
+
+    const TROPHIES = [
+        {
+            team: "LEVIATÁN ESPORTS", logo: "LEV.png",
+            title: "Campeón · ZC26 Gran Final",
+            date: "Agosto 2026",
+            desc: "LEVIATÁN ESPORTS se coronó campeón de la Gran Final ZC26 tras vencer 3-1 a Cachorritas repres. Título obtenido con la alineación de Julio (capitán), Taikisha y JOAR."
+        }
+    ];
+
+    function flagImg(code, size) {
+        const f = FLAGS[code];
+        return `<img src="${f.file}" alt="${f.name}" title="${f.name}" style="${size ? 'width:100%;height:100%;object-fit:cover;' : ''}">`;
+    }
+
+    function renderRanking() {
+        const list = document.getElementById("rankingList");
+        list.innerHTML = PLAYERS.map((p, i) => `
+            <button class="rank-row" data-index="${i}">
+                <span class="rank-pos ${p.color !== 'normal' ? p.color : ''}">${p.rank}</span>
+                <span class="rank-flag">${flagImg(p.country, true)}</span>
+                <span class="rank-name ${p.color !== 'normal' ? p.color : ''}">${p.name}</span>
+                <span class="rank-points">${p.points} pts</span>
+            </button>
+        `).join("");
+        list.querySelectorAll(".rank-row").forEach(row => {
+            row.addEventListener("click", () => openPlayerModal(PLAYERS[row.dataset.index]));
+        });
+    }
+
+    function renderTrophies() {
+        const grid = document.getElementById("trophyGrid");
+        grid.innerHTML = TROPHIES.map((t, i) => `
+            <div class="trophy-item" data-index="${i}">
+                <div class="trophy-logo"><img src="${t.logo}" alt="${t.team}"></div>
+                <div class="trophy-label">${t.team}</div>
+            </div>
+        `).join("");
+        grid.querySelectorAll(".trophy-item").forEach(item => {
+            item.addEventListener("click", () => openTrophyModal(TROPHIES[item.dataset.index]));
+        });
+    }
+
+    function openPlayerModal(p) {
+        const panel = document.getElementById("playerInfoPanel");
+        const f = FLAGS[p.country];
+        panel.innerHTML = `
+            <div class="info-close"><span id="closePlayerModal">✕ cerrar</span></div>
+            <div class="info-name"><span class="info-flag">${flagImg(p.country, true)}</span>${p.name}</div>
+            <div class="info-team">${p.team}</div>
+
+            <div class="info-block-title">Información del jugador</div>
+            <div class="info-grid">
+                <div><div class="info-field-label">Nacionalidad</div><div class="info-field-value">${f.name}</div></div>
+                <div><div class="info-field-label">Nacimiento</div><div class="info-field-value">${p.born}</div></div>
+                <div><div class="info-field-label">Estado</div><div class="info-field-value active">${p.status}</div></div>
+                <div><div class="info-field-label">Rol</div><div class="info-field-value">${p.role}</div></div>
+                <div><div class="info-field-label">Equipo</div><div class="info-field-value">${p.team}</div></div>
+                <div><div class="info-field-label">IDs alternos</div><div class="info-field-value">${p.alternateIds.length ? p.alternateIds.join(", ") : "—"}</div></div>
+                <div><div class="info-field-label">Ganancias aprox.</div><div class="info-field-value">${p.winnings}</div></div>
+                <div><div class="info-field-label">Créditos aprox.</div><div class="info-field-value">${p.credits}</div></div>
+            </div>
+
+            <div class="info-block-title">Historial</div>
+            ${p.history.map(h => `
+                <div class="history-row">
+                    <span class="history-dates">${h.from} — ${h.to}</span>
+                    <span class="history-team">${h.team}</span>
+                </div>
+            `).join("")}
+
+            <div class="info-block-title">Partidas recientes</div>
+            ${p.recent.map(m => `
+                <div class="match-row">
+                    <div class="match-row-top">${m.date} · ${m.time || ""}</div>
+                    <div class="match-row-score">
+                        <span>${m.teamA}</span><span>${m.scoreA} : ${m.scoreB}</span><span>${m.teamB}</span>
+                    </div>
+                    <div class="match-row-tourney">${m.tourney}</div>
+                </div>
+            `).join("")}
+
+            <div class="info-block-title">Logros</div>
+            <table class="ach-table">
+                <thead>
+                    <tr><th>Fecha</th><th>Lugar</th><th>Torneo</th><th>Resultado</th></tr>
+                </thead>
+                <tbody>
+                    ${p.achievements.map(a => `
+                        <tr>
+                            <td>${a.date}</td>
+                            <td class="ach-place">${a.place}</td>
+                            <td>${a.tournament}<br><span style="color:#888;">${a.teamA} ${a.scoreA}:${a.scoreB} ${a.teamB}</span></td>
+                            <td>${a.result}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        `;
+        document.getElementById("playerModalOverlay").classList.add("active");
+        document.getElementById("closePlayerModal").addEventListener("click", closePlayerModal);
+    }
+
+    function closePlayerModal() {
+        document.getElementById("playerModalOverlay").classList.remove("active");
+    }
+
+    function openTrophyModal(t) {
+        const panel = document.getElementById("trophyInfoPanel");
+        panel.innerHTML = `
+            <div class="info-close"><span id="closeTrophyModal">✕ cerrar</span></div>
+            <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
+            <div class="trophy-modal-title">${t.title}</div>
+            <div class="trophy-modal-sub">${t.date}</div>
+            <div class="trophy-modal-desc">${t.desc}</div>
+        `;
+        document.getElementById("trophyModalOverlay").classList.add("active");
+        document.getElementById("closeTrophyModal").addEventListener("click", closeTrophyModal);
+    }
+
+    function closeTrophyModal() {
+        document.getElementById("trophyModalOverlay").classList.remove("active");
+    }
+
+    document.getElementById("playerModalOverlay").addEventListener("click", function (e) {
+        if (e.target === this) closePlayerModal();
+    });
+    document.getElementById("trophyModalOverlay").addEventListener("click", function (e) {
+        if (e.target === this) closeTrophyModal();
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closePlayerModal();
+            closeTrophyModal();
+        }
+    });
+
+    renderRanking();
+    renderTrophies();
+
     const items = document.querySelectorAll('.event-item');
     const overlay = document.getElementById('modalOverlay');
     const modalImg = document.getElementById('modalImage');
