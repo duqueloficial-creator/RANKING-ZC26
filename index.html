@@ -11,6 +11,9 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
         }
+        html {
+            overflow-x: hidden;
+        }
         body {
             min-height: 100vh;
             display: flex;
@@ -19,6 +22,7 @@
             background: #0a0a0a;
             padding: 20px;
             color: #ffffff;
+            overflow-x: hidden;
         }
         .mobile-container {
             width: 100%;
@@ -27,53 +31,53 @@
         }
         .match-card {
             background: transparent;
-            padding: 16px 0;
+            padding: 12px 0;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
         .match-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 4px;
+            padding-bottom: 2px;
         }
         .league-info h2 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #ffffff;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
         .league-info p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #aaaaaa;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         .header-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .header-date {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #cccccc;
             background: rgba(255,255,255,0.05);
-            padding: 4px 12px;
+            padding: 4px 10px;
         }
         .header-status {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             color: #d4af37;
             background: rgba(255,215,0,0.1);
-            padding: 4px 12px;
+            padding: 4px 10px;
             letter-spacing: 1px;
         }
         .scoreboard {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            padding: 4px 0;
         }
         .team {
             display: flex;
@@ -83,8 +87,8 @@
             position: relative;
         }
         .team-logo {
-            width: 56px;
-            height: 56px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -97,52 +101,75 @@
             object-fit: contain;
         }
         .team-name {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            margin-top: 4px;
+            margin-top: 2px;
             color: #ffffff;
         }
         .octagon-bg {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background-color: rgba(130, 130, 130, 0.35);
-            border-radius: 24px;
+            border-radius: 20px;
             clip-path: polygon(30% 5%, 70% 5%, 95% 30%, 95% 70%, 70% 95%, 30% 95%, 5% 70%, 5% 30%);
             transform: translate(-50%, -50%) scale(0);
             opacity: 0;
             z-index: 0;
             pointer-events: none;
             will-change: transform, opacity;
-            animation: octoSpin 2.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+            animation: octoSpin 3.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .octagon-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 20px;
+            clip-path: polygon(30% 5%, 70% 5%, 95% 30%, 95% 70%, 70% 95%, 30% 95%, 5% 70%, 5% 30%);
+            transform: translate(-50%, -50%) scale(2.6) rotate(0deg);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+            animation: ringFadeIn 1.2s ease-out 3.2s forwards, ringSpin 16s linear 3.2s infinite;
         }
         .lev-pop {
             display: inline-block;
             animation: logoPulse 2.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
         }
         @keyframes octoSpin {
-            0%   { transform: translate(-50%, -50%) scale(0.2) rotate(0deg); opacity: 0; }
-            25%  { transform: translate(-50%, -50%) scale(2.5) rotate(25deg); opacity: 0.6; }
-            60%  { transform: translate(-50%, -50%) scale(4.8) rotate(55deg); opacity: 0.25; }
-            100% { transform: translate(-50%, -50%) scale(6.5) rotate(70deg); opacity: 0; }
+            0%   { transform: translate(-50%, -50%) scale(0.35) rotate(0deg); opacity: 0; }
+            12%  { opacity: 0.55; }
+            100% { transform: translate(-50%, -50%) scale(3.4) rotate(55deg); opacity: 0; }
+        }
+        @keyframes ringFadeIn {
+            0%   { opacity: 0; }
+            100% { opacity: 0.15; }
+        }
+        @keyframes ringSpin {
+            0%   { transform: translate(-50%, -50%) scale(2.6) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) scale(2.6) rotate(360deg); }
         }
         @keyframes logoPulse {
             0%   { transform: scale(1); }
-            15%  { transform: scale(1.7); }
-            65%  { transform: scale(1.7); }
+            15%  { transform: scale(1.6); }
+            65%  { transform: scale(1.6); }
             100% { transform: scale(1); }
         }
         .score-center {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             width: 44%;
             justify-content: center;
         }
         .score-number {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 900;
             color: #ffffff;
         }
@@ -156,47 +183,48 @@
             gap: 2px;
         }
         .status-badge {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: #d4af37;
-            background: rgba(255,215,0,0.1);
+            color: #ffffff;
+            background: #3c4043;
             padding: 2px 12px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            border-radius: 12px;
         }
         .status-date {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #aaaaaa;
         }
         .bans-wrapper {
-            background: rgba(0,0,0,0.3);
-            padding: 12px 16px;
-            border-radius: 40px;
-            margin: 4px 0;
+            background: rgba(0,0,0,0.25);
+            padding: 10px 14px;
+            border-radius: 30px;
+            margin: 2px 0;
         }
         .bans-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #aaaaaa;
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .bans {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         .ban-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 6px;
+            font-size: 0.8rem;
             color: #ffffff;
         }
         .ban-icon {
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             background: #b33a3a;
             position: relative;
@@ -207,8 +235,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 70%;
-            height: 3px;
+            width: 65%;
+            height: 2px;
             background: white;
             transform: translate(-50%, -50%) rotate(-45deg);
         }
@@ -217,26 +245,27 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 70%;
-            height: 3px;
+            width: 65%;
+            height: 2px;
             background: white;
             transform: translate(-50%, -50%) rotate(45deg);
         }
         .ban-text {
             background: rgba(212,175,55,0.08);
-            padding: 0 10px;
+            padding: 0 8px;
         }
         .match-events {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 14px 16px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 16px;
+            padding: 12px 14px;
             display: flex;
             justify-content: space-between;
+            gap: 16px;
         }
         .events-col {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             width: 48%;
         }
         .event-item {
@@ -244,8 +273,9 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            padding: 4px 0;
+            padding: 2px 0;
             transition: background 0.2s;
+            gap: 6px;
         }
         .event-item:hover {
             background: rgba(255,215,0,0.04);
@@ -253,38 +283,41 @@
         .event-left {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
         .event-right .event-left {
             flex-direction: row-reverse;
         }
         .event-icon {
-            width: 28px;
-            height: 28px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
         .event-icon img {
             max-width: 100%;
             max-height: 100%;
+            display: block;
         }
         .event-info {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            line-height: 1.1;
         }
         .event-right .event-info {
             align-items: flex-end;
         }
         .event-mode {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             text-transform: uppercase;
             color: #aaaaaa;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         .event-map {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: #ffffff;
             line-height: 1.1;
@@ -292,39 +325,45 @@
         .event-result {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
             font-weight: 600;
             color: #ffffff;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            min-width: 62px;
         }
         .event-right .event-result {
             order: -1;
         }
         .event-time {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #aaaaaa;
-            margin: 0 2px;
+            margin-left: 4px;
+        }
+        .event-right .event-time {
+            margin-left: 0;
+            margin-right: 4px;
         }
         .stats-section {
             background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            padding: 14px 16px;
+            border-radius: 16px;
+            padding: 12px 14px;
         }
         .stats-title {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             color: #ffffff;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 8px;
-            margin-bottom: 10px;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
         }
         .stat-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 0;
+            padding: 4px 0;
             border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .stat-row:last-child {
@@ -333,55 +372,56 @@
         .stat-value {
             font-weight: 500;
             color: #ffffff;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            flex: 1;
         }
         .stat-value.right {
             text-align: right;
             color: #cccccc;
+            flex: 1;
         }
         .stat-label {
             color: #aaaaaa;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-align: center;
+            flex: 0 0 70px;
         }
         .stat-tag {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: #aaaaaa;
             background: rgba(255,255,255,0.05);
-            padding: 0 8px;
-            border-radius: 12px;
+            padding: 0 6px;
+            border-radius: 10px;
             margin-left: 4px;
         }
-        .crown-char {
-            display: inline-block;
-            font-size: 1rem;
+        .stat-label.captain {
             color: #d4af37;
-            text-shadow: 0 0 8px rgba(212,175,55,0.4);
-            margin-right: 2px;
+            font-weight: 700;
         }
         .footer-win {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 10px;
+            padding-top: 8px;
             border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: 6px;
+            margin-top: 4px;
         }
         .selection-tag {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #aaaaaa;
             background: rgba(255,255,255,0.03);
-            padding: 2px 16px;
-            margin-bottom: 4px;
+            padding: 2px 14px;
+            margin-bottom: 2px;
         }
         .win-text {
-            font-size: 2.6rem;
+            font-size: 2.2rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: #d4af37;
             text-shadow: 0 0 12px rgba(255,215,0,0.4);
             line-height: 1.2;
@@ -389,26 +429,26 @@
         }
         .win-text .highlight {
             background: rgba(0,0,0,0.3);
-            padding: 0 10px;
+            padding: 0 8px;
         }
         .logo-large {
             display: flex;
             justify-content: center;
-            margin: 10px 0 6px;
+            margin: 6px 0 4px;
         }
         .logo-large img {
             max-width: 100%;
             width: 100%;
             height: auto;
-            max-height: 400px;
+            max-height: 350px;
             object-fit: contain;
             background: #0a0a0a;
         }
         .footer-info {
             color: #aaaaaa;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-align: center;
-            padding-top: 12px;
+            padding-top: 10px;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
         .modal-overlay {
@@ -428,22 +468,38 @@
         .modal-overlay.active {
             display: flex;
         }
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            max-height: 85dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .modal-content img {
             max-width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
+            max-height: 85dvh;
+            width: auto;
+            height: auto;
             object-fit: contain;
             background: #0a0a0a;
             box-shadow: 0 0 50px rgba(0,0,0,0.8);
             border-radius: 8px;
         }
         @media (max-width: 400px) {
-            .score-number { font-size: 2.2rem; }
-            .win-text { font-size: 2rem; }
-            .team-logo { width: 44px; height: 44px; }
-            .octagon-bg { width: 60px; height: 60px; }
+            .score-number { font-size: 2rem; }
+            .win-text { font-size: 1.8rem; }
+            .team-logo { width: 40px; height: 40px; }
+            .octagon-bg { width: 56px; height: 56px; }
+            .octagon-ring { width: 56px; height: 56px; }
             .events-col { width: 50%; }
-            .event-map { font-size: 0.75rem; }
-            .event-result { font-size: 0.75rem; }
+            .event-map { font-size: 0.7rem; }
+            .event-result { font-size: 0.7rem; }
+            .event-icon { width: 18px; height: 18px; }
+            .event-time { font-size: 0.6rem; }
+            .modal-content { max-width: 95%; max-height: 80vh; max-height: 80dvh; }
+            .modal-content img { max-height: 80vh; max-height: 80dvh; }
         }
     </style>
 </head>
@@ -477,6 +533,7 @@
             </div>
             <div class="team">
                 <div class="octagon-bg"></div>
+                <div class="octagon-ring"></div>
                 <div class="team-logo lev-pop"><img src="LEV.png" alt="LEV"></div>
                 <span class="team-name">LEV</span>
             </div>
@@ -505,7 +562,7 @@
             </div>
             <div class="events-col">
                 <div class="event-item event-right" data-image="heist.jpg">
-                    <div class="event-result"><span class="event-time">5'</span> 0-2</div>
+                    <div class="event-result">0-2 <span class="event-time">5'</span></div>
                     <div class="event-left">
                         <div class="event-info">
                             <span class="event-mode">Heist</span>
@@ -515,7 +572,7 @@
                     </div>
                 </div>
                 <div class="event-item event-right" data-image="brawlball.jpg">
-                    <div class="event-result"><span class="event-time">17'</span> 1-2</div>
+                    <div class="event-result">1-2 <span class="event-time">17'</span></div>
                     <div class="event-left">
                         <div class="event-info">
                             <span class="event-mode">Brawl Ball</span>
@@ -525,7 +582,7 @@
                     </div>
                 </div>
                 <div class="event-item event-right" data-image="gremgrab.jpg">
-                    <div class="event-result"><span class="event-time">28'</span> 0-2</div>
+                    <div class="event-result">0-2 <span class="event-time">28'</span></div>
                     <div class="event-left">
                         <div class="event-info">
                             <span class="event-mode">Gem Grab</span>
@@ -541,7 +598,7 @@
             <div class="stats-title">LEVIATAN ESPORT</div>
             <div class="stat-row">
                 <span class="stat-value">LEV | Julio <span class="stat-tag">@juliocr36</span></span>
-                <span class="stat-label"><span class="crown-char">🜲</span> Capitán</span>
+                <span class="stat-label captain">Capitán</span>
                 <span class="stat-value right">(SK | Julio)</span>
             </div>
             <div class="stat-row">
@@ -588,6 +645,8 @@
             if (src) {
                 modalImg.src = src;
                 overlay.classList.add('active');
+            } else {
+                alert('Imagen no disponible');
             }
         });
     });
