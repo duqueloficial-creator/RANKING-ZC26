@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gran Final - LEVIATÁN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            padding: 20px;
+            color: #ffffff;
+        }
+        .mobile-container {
+            width: 100%;
+            max-width: 480px;
+            background: transparent;
+        }
+        .match-card {
+            background: transparent;
+            padding: 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 4px;
+        }
+        .league-info h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .league-info p {
+            font-size: 0.75rem;
+            color: #aaaaaa;
+            margin-top: 2px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-date {
+            font-size: 0.8rem;
+            color: #cccccc;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 12px;
+        }
+        .header-status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #d4af37;
+            background: rgba(255,215,0,0.1);
+            padding: 4px 12px;
+            letter-spacing: 1px;
+        }
+        .scoreboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 28%;
+            position: relative;
+        }
+        .team-logo {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .team-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .team-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 4px;
+            color: #ffffff;
+        }
+        .octagon-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background-color: rgba(130, 130, 130, 0.35);
+            border-radius: 24px;
+            clip-path: polygon(30% 5%, 70% 5%, 95% 30%, 95% 70%, 70% 95%, 30% 95%, 5% 70%, 5% 30%);
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+            animation: octoSpin 2.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+        }
+        .lev-pop {
+            display: inline-block;
+            animation: logoPulse 2.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes octoSpin {
+            0%   { transform: translate(-50%, -50%) scale(0.2) rotate(0deg); opacity: 0; }
+            25%  { transform: translate(-50%, -50%) scale(2.5) rotate(25deg); opacity: 0.6; }
+            60%  { transform: translate(-50%, -50%) scale(4.8) rotate(55deg); opacity: 0.25; }
+            100% { transform: translate(-50%, -50%) scale(6.5) rotate(70deg); opacity: 0; }
+        }
+        @keyframes logoPulse {
+            0%   { transform: scale(1); }
+            15%  { transform: scale(1.7); }
+            65%  { transform: scale(1.7); }
+            100% { transform: scale(1); }
+        }
+        .score-center {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 44%;
+            justify-content: center;
+        }
+        .score-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #ffffff;
+        }
+        .score-lpr {
+            color: rgba(255,255,255,0.45);
+        }
+        .match-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .status-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #d4af37;
+            background: rgba(255,215,0,0.1);
+            padding: 2px 12px;
+            letter-spacing: 1px;
+        }
+        .status-date {
+            font-size: 0.7rem;
+            color: #aaaaaa;
+        }
+        .bans-wrapper {
+            background: rgba(0,0,0,0.3);
+            padding: 12px 16px;
+            border-radius: 40px;
+            margin: 4px 0;
+        }
+        .bans-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaaaaa;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .bans {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .ban-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+        .ban-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #b33a3a;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .ban-icon::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 3px;
+            background: white;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        .ban-icon::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 3px;
+            background: white;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        .ban-text {
+            background: rgba(212,175,55,0.08);
+            padding: 0 10px;
+        }
+        .match-events {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .events-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 48%;
+        }
+        .event-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 4px 0;
+            transition: background 0.2s;
+        }
+        .event-item:hover {
+            background: rgba(255,215,0,0.04);
+        }
+        .event-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .event-right .event-left {
+            flex-direction: row-reverse;
+        }
+        .event-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .event-icon img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .event-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .event-right .event-info {
+            align-items: flex-end;
+        }
+        .event-mode {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #aaaaaa;
+            letter-spacing: 0.5px;
+        }
+        .event-map {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+        .event-result {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.85rem;
+        }
+        .event-right .event-result {
+            order: -1;
+        }
+        .event-time {
+            font-size: 0.7rem;
+            color: #aaaaaa;
+            margin: 0 2px;
+        }
+        .stats-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 14px 16px;
+        }
+        .stats-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .stat-value {
+            font-weight: 500;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+        .stat-value.right {
+            text-align: right;
+            color: #cccccc;
+        }
+        .stat-label {
+            color: #aaaaaa;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-tag {
+            font-size: 0.6rem;
+            color: #aaaaaa;
+            background: rgba(255,255,255,0.05);
+            padding: 0 8px;
+            border-radius: 12px;
+            margin-left: 4px;
+        }
+        .crown-char {
+            display: inline-block;
+            font-size: 1rem;
+            color: #d4af37;
+            text-shadow: 0 0 8px rgba(212,175,55,0.4);
+            margin-right: 2px;
+        }
+        .footer-win {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 6px;
+        }
+        .selection-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaaaaa;
+            background: rgba(255,255,255,0.03);
+            padding: 2px 16px;
+            margin-bottom: 4px;
+        }
+        .win-text {
+            font-size: 2.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #d4af37;
+            text-shadow: 0 0 12px rgba(255,215,0,0.4);
+            line-height: 1.2;
+            text-align: center;
+        }
+        .win-text .highlight {
+            background: rgba(0,0,0,0.3);
+            padding: 0 10px;
+        }
+        .logo-large {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 6px;
+        }
+        .logo-large img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            background: #0a0a0a;
+        }
+        .footer-info {
+            color: #aaaaaa;
+            font-size: 0.7rem;
+            text-align: center;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            background: #0a0a0a;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            border-radius: 8px;
+        }
+        @media (max-width: 400px) {
+            .score-number { font-size: 2.2rem; }
+            .win-text { font-size: 2rem; }
+            .team-logo { width: 44px; height: 44px; }
+            .octagon-bg { width: 60px; height: 60px; }
+            .events-col { width: 50%; }
+            .event-map { font-size: 0.75rem; }
+            .event-result { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="mobile-container">
+    <div class="match-card">
+
+        <div class="match-header">
+            <div class="league-info">
+                <h2>GRAN FINAL</h2>
+                <p>Brawl Stars · Agosto 8 de 2026</p>
+            </div>
+            <div class="header-right">
+                <span class="header-date">08/09/26</span>
+                <span class="header-status">Finalized</span>
+            </div>
+        </div>
+
+        <div class="scoreboard">
+            <div class="team">
+                <div class="team-logo"><img src="LPR.png" alt="LPR"></div>
+                <span class="team-name">LPR</span>
+            </div>
+            <div class="score-center">
+                <span class="score-number score-lpr">1</span>
+                <div class="match-status">
+                    <span class="status-badge">Finished</span>
+                    <span class="status-date">Aug 8, 26</span>
+                </div>
+                <span class="score-number">3</span>
+            </div>
+            <div class="team">
+                <div class="octagon-bg"></div>
+                <div class="team-logo lev-pop"><img src="LEV.png" alt="LEV"></div>
+                <span class="team-name">LEV</span>
+            </div>
+        </div>
+
+        <div class="bans-wrapper">
+            <div class="bans-title">Baneos globales</div>
+            <div class="bans">
+                <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">belle y spike</span></div>
+                <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">Bibi y Nori</span></div>
+            </div>
+        </div>
+
+        <div class="match-events">
+            <div class="events-col">
+                <div class="event-item" data-image="kockout.jpg">
+                    <div class="event-left">
+                        <div class="event-icon"><img src="hot_zone-icon.png" alt="Knockout"></div>
+                        <div class="event-info">
+                            <span class="event-mode">Knockout</span>
+                            <span class="event-map">Belle rock</span>
+                        </div>
+                    </div>
+                    <div class="event-result">2-1 <span class="event-time">12'</span></div>
+                </div>
+            </div>
+            <div class="events-col">
+                <div class="event-item event-right" data-image="heist.jpg">
+                    <div class="event-result"><span class="event-time">5'</span> 0-2</div>
+                    <div class="event-left">
+                        <div class="event-info">
+                            <span class="event-mode">Heist</span>
+                            <span class="event-map">tire maniacs</span>
+                        </div>
+                        <div class="event-icon"><img src="heist-icon.png" alt="Heist"></div>
+                    </div>
+                </div>
+                <div class="event-item event-right" data-image="brawlball.jpg">
+                    <div class="event-result"><span class="event-time">17'</span> 1-2</div>
+                    <div class="event-left">
+                        <div class="event-info">
+                            <span class="event-mode">Brawl Ball</span>
+                            <span class="event-map">leafy bushes</span>
+                        </div>
+                        <div class="event-icon"><img src="brawl_ball-icon.png" alt="Brawl Ball"></div>
+                    </div>
+                </div>
+                <div class="event-item event-right" data-image="gremgrab.jpg">
+                    <div class="event-result"><span class="event-time">28'</span> 0-2</div>
+                    <div class="event-left">
+                        <div class="event-info">
+                            <span class="event-mode">Gem Grab</span>
+                            <span class="event-map">doble swoosh</span>
+                        </div>
+                        <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-title">LEVIATAN ESPORT</div>
+            <div class="stat-row">
+                <span class="stat-value">LEV | Julio <span class="stat-tag">@juliocr36</span></span>
+                <span class="stat-label"><span class="crown-char">🜲</span> Capitán</span>
+                <span class="stat-value right">(SK | Julio)</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-value">LEV | Taikisha <span class="stat-tag">@x_xv</span></span>
+                <span class="stat-label">Titular</span>
+                <span class="stat-value right">(タイキシャ)</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-value">LEV | JC</span>
+                <span class="stat-label">Titular</span>
+                <span class="stat-value right">(~ T X -->JC)</span>
+            </div>
+        </div>
+
+        <div class="footer-win">
+            <div class="selection-tag">Seleccion completa</div>
+            <div class="win-text"><span class="highlight">WIN LEVIATAN ESPORT</span></div>
+        </div>
+
+        <div class="logo-large">
+            <img src="Untitled218.png" alt="Untitled218">
+        </div>
+
+        <div class="footer-info">
+            Lugar: Servidores Globales, Brawl Stars<br>
+            Zona horaria: Todos los horarios corresponden a la hora estándar de Perú
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="close-area" id="closeModal"></div>
+    <div class="modal-content"><img id="modalImage" src="" alt="Mapa"></div>
+</div>
+
+<script>
+    const items = document.querySelectorAll('.event-item');
+    const overlay = document.getElementById('modalOverlay');
+    const modalImg = document.getElementById('modalImage');
+    items.forEach(el => {
+        el.addEventListener('click', function(e) {
+            const src = this.getAttribute('data-image');
+            if (src) {
+                modalImg.src = src;
+                overlay.classList.add('active');
+            }
+        });
+    });
+    overlay.addEventListener('click', function(e) {
+        if (e.target === this || e.target === document.getElementById('closeModal')) {
+            overlay.classList.remove('active');
+            modalImg.src = '';
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+            overlay.classList.remove('active');
+            modalImg.src = '';
+        }
+    });
+</script>
+</body>
+</html>
