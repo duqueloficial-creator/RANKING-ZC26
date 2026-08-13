@@ -10,6 +10,8 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
         html {
             overflow-x: hidden;
@@ -504,6 +506,15 @@
             border-radius: 16px;
             padding: 10px;
         }
+        #rankingList {
+            max-height: 620px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+        #rankingList.expanded {
+            max-height: none;
+            overflow-y: visible;
+        }
 
         /* Ranking */
         .rank-item {
@@ -527,6 +538,37 @@
         .rank-row:hover {
             background: rgba(255,255,255,0.03);
         }
+        .rank-item.open .rank-row {
+            background: rgba(255,255,255,0.05);
+        }
+        .rank-row.tier-gold {
+            background: rgba(212,175,55,0.10);
+            border-radius: 0;
+        }
+        .rank-row.tier-gold:hover {
+            background: rgba(212,175,55,0.15);
+        }
+        .rank-row.tier-silver {
+            background: rgba(192,192,192,0.09);
+            border-radius: 0;
+        }
+        .rank-row.tier-silver:hover {
+            background: rgba(192,192,192,0.14);
+        }
+        .rank-row.tier-bronze {
+            background: rgba(184,115,51,0.09);
+            border-radius: 0;
+        }
+        .rank-row.tier-bronze:hover {
+            background: rgba(184,115,51,0.14);
+        }
+        .rank-row.tier-gray {
+            background: rgba(255,255,255,0.035);
+            border-radius: 0;
+        }
+        .rank-row.tier-gray:hover {
+            background: rgba(255,255,255,0.06);
+        }
         .rank-row:focus-visible,
         .rank-name:focus-visible,
         .trophy-item:focus-visible,
@@ -535,27 +577,52 @@
             outline-offset: -1px;
         }
         .rank-pos {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 900;
-            width: 22px;
+            width: 24px;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
             color: #ffffff;
         }
-        .rank-pos.gold, .rank-name.gold {
+        .rank-pos.gold {
+            background: linear-gradient(135deg, #97723a 0%, #e3c777 35%, #fdf6e3 55%, #e3c777 75%, #97723a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.22);
+        }
+        .rank-pos.silver {
+            background: linear-gradient(135deg, #888888 0%, #d6d6d6 35%, #ffffff 55%, #d6d6d6 75%, #888888 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.25);
+        }
+        .rank-pos.bronze {
+            background: linear-gradient(135deg, #855c32 0%, #cf9a68 35%, #f3d9bd 55%, #cf9a68 75%, #855c32 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.18);
+        }
+        .rank-name.gold {
             background: linear-gradient(90deg, #97723a 0%, #e3c777 35%, #fdf6e3 55%, #e3c777 75%, #97723a 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.22);
         }
-        .rank-pos.silver, .rank-name.silver {
+        .rank-name.silver {
             background: linear-gradient(90deg, #888888 0%, #d6d6d6 35%, #ffffff 55%, #d6d6d6 75%, #888888 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.25);
         }
-        .rank-pos.bronze, .rank-name.bronze {
+        .rank-name.bronze {
             background: linear-gradient(90deg, #855c32 0%, #cf9a68 35%, #f3d9bd 55%, #cf9a68 75%, #855c32 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -594,19 +661,8 @@
         .rank-points {
             font-size: 0.8rem;
             font-weight: 700;
-            color: #dddddd;
+            color: #c7c7c7;
             white-space: nowrap;
-        }
-        .rank-caret {
-            width: 14px;
-            flex-shrink: 0;
-            text-align: center;
-            font-size: 0.6rem;
-            color: #666666;
-            transition: transform 0.25s ease;
-        }
-        .rank-item.open .rank-caret {
-            transform: rotate(180deg);
         }
         .rank-detail {
             max-height: 0;
@@ -614,7 +670,7 @@
             transition: max-height 0.3s ease;
         }
         .rank-item.open .rank-detail {
-            max-height: 160px;
+            max-height: 200px;
         }
         .rank-detail-inner {
             display: grid;
@@ -630,6 +686,36 @@
             color: #aaaaaa;
             font-weight: 600;
         }
+        .rank-detail-field.full {
+            grid-column: 1 / -1;
+        }
+        .rank-detail-divider {
+            grid-column: 1 / -1;
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 2px 0;
+        }
+        .rank-toggle-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 2px;
+        }
+        .rank-toggle-btn {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #d4af37;
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 20px;
+            padding: 7px 18px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .rank-toggle-btn:hover {
+            background: rgba(212,175,55,0.15);
+        }
 
         /* Trophy room */
         .trophy-grid {
@@ -642,11 +728,12 @@
             flex-direction: column;
             align-items: center;
             gap: 6px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(212,175,55,0.04);
             border-radius: 12px;
             padding: 12px 6px;
             cursor: pointer;
-            border: 1px solid rgba(212,175,55,0.15);
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 10px rgba(212,175,55,0.35);
         }
         .trophy-item:hover {
             background: rgba(212,175,55,0.06);
@@ -736,20 +823,60 @@
             max-height: 85dvh;
             overflow-y: auto;
             background: #101010;
-            border: 1px solid rgba(212,175,55,0.25);
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 16px;
             padding: 20px;
             cursor: default;
+            position: relative;
+        }
+        .info-panel.gold {
+            border: 1px solid rgba(212,175,55,0.7);
+        }
+        .info-panel.silver {
+            border: 1px solid rgba(200,200,200,0.7);
+        }
+        .info-panel.bronze {
+            border: 1px solid rgba(205,127,50,0.7);
         }
         .info-close {
             display: flex;
             justify-content: flex-end;
         }
         .info-close span {
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             color: #888888;
             cursor: pointer;
-            padding: 4px 8px;
+            padding: 4px 6px;
+        }
+        .info-close span:hover {
+            color: #cccccc;
+        }
+        .info-top-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .info-close-x {
+            font-size: 0.85rem;
+            color: #888888;
+            cursor: pointer;
+            padding: 4px 6px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .info-close-x:hover {
+            color: #cccccc;
+        }
+        .info-position-line {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .info-position-label {
+            font-size: 0.65rem;
+            color: #aaaaaa;
+            letter-spacing: 0.5px;
         }
         .info-name {
             font-size: 1.4rem;
@@ -758,6 +885,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 16px;
         }
         .info-flag {
             width: 24px;
@@ -772,11 +901,47 @@
             object-fit: cover;
             display: block;
         }
-        .info-team {
-            font-size: 0.75rem;
-            color: #d4af37;
-            letter-spacing: 1px;
-            margin: 2px 0 16px;
+        .info-pos-badge {
+            display: block;
+            font-weight: 900;
+            line-height: 1;
+            color: #ffffff;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .info-pos-badge.tier-top {
+            font-size: 2.1rem;
+        }
+        .info-pos-badge.tier-mid {
+            font-size: 1.4rem;
+        }
+        .info-pos-badge.tier-low {
+            font-size: 1rem;
+            color: #999999;
+        }
+        .info-pos-badge.gold {
+            background: linear-gradient(135deg, #97723a 0%, #e3c777 35%, #fdf6e3 55%, #e3c777 75%, #97723a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,215,0,0.35);
+        }
+        .info-pos-badge.silver {
+            background: linear-gradient(135deg, #888888 0%, #d6d6d6 35%, #ffffff 55%, #d6d6d6 75%, #888888 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.25);
+        }
+        .info-pos-badge.bronze {
+            background: linear-gradient(135deg, #855c32 0%, #cf9a68 35%, #f3d9bd 55%, #cf9a68 75%, #855c32 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.18);
+        }
+        .info-field-value.muted {
+            color: #999999;
         }
         .info-block-title {
             font-size: 0.65rem;
@@ -806,6 +971,9 @@
         .info-field-value.active {
             color: #6fcf97;
         }
+        .info-field-value.inactive {
+            color: #999999;
+        }
         .history-row {
             display: flex;
             justify-content: space-between;
@@ -818,10 +986,13 @@
         .history-dates { color: #888888; white-space: nowrap; }
         .history-team { color: #ffffff; font-weight: 600; text-align: right; }
         .match-row {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
         }
-        .match-row:last-child { border-bottom: none; }
+        .match-row:last-child { margin-bottom: 0; }
         .match-row-top {
             font-size: 0.6rem;
             color: #888888;
@@ -869,6 +1040,21 @@
             padding: 2px 8px;
             border-radius: 10px;
         }
+        .ach-place.gold {
+            color: #f0d38a;
+            background: rgba(212,175,55,0.15);
+        }
+        .ach-place.silver {
+            color: #e2e2e2;
+            background: rgba(192,192,192,0.15);
+        }
+        .ach-place.gray {
+            color: #b5b5b5;
+            background: rgba(150,150,150,0.12);
+        }
+        .ach-card.gold { border-color: rgba(212,175,55,0.3); }
+        .ach-card.silver { border-color: rgba(200,200,200,0.3); }
+        .ach-card.gray { border-color: rgba(150,150,150,0.25); }
         .ach-tournament {
             font-size: 0.75rem;
             font-weight: 600;
@@ -1089,7 +1275,7 @@
                     <span class="stat-value right">(SK | Julio)</span>
                 </div>
                 <div class="stat-row" data-player="taikisha" tabindex="0" role="button">
-                    <span class="stat-value">LEV | Taikisha <span class="stat-tag">@x_xv</span></span>
+                    <span class="stat-value">LEV | iXLCross <span class="stat-tag">@x_xv</span></span>
                     <span class="stat-label">Titular</span>
                     <span class="stat-value right">(タイキシャ)</span>
                 </div>
@@ -1121,6 +1307,7 @@
         <div class="section-title">Ranking ZC26</div>
         <div class="section-subtitle">Se actualiza con cada torneo ZC26</div>
         <div class="panel" id="rankingList"></div>
+        <div class="rank-toggle-wrap"><button class="rank-toggle-btn" id="rankToggleBtn">Mostrar la Clasificación completa</button></div>
         <div class="section-updated">Última actualización: 12 ago, 2026</div>
     </div>
 
@@ -1158,23 +1345,23 @@
 
 <script>
     const FLAGS = {
-        ES: { file: "72px-Es_hd.png", name: "España" },
-        PE: { file: "72px-Pe_hd.png", name: "Perú" },
-        GT: { file: "72px-Gt_hd.png", name: "Guatemala" },
-        MX: { file: "72px-Mx_hd.png", name: "México" }
+        ES: { file: "72px-Es_hd.png", name: "España", region: "EMEA (Europe, Middle East & Africa)" },
+        PE: { file: "72px-Pe_hd.png", name: "Perú", region: "South America" },
+        GT: { file: "72px-Gt_hd.png", name: "Guatemala", region: "North America" },
+        MX: { file: "72px-Mx_hd.png", name: "México", region: "North America" },
+        AR: { file: "72px-Ar_hd.png", name: "Argentina", region: "South America" },
+        CL: { file: "72px-Cl_hd.png", name: "Chile", region: "South America" },
+        CO: { file: "72px-Co_hd.png", name: "Colombia", region: "South America" }
     };
 
     const PLAYERS = [
         {
             key: "taikisha",
-            rank: 1, name: "Taikisha", country: "ES", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 295, color: "gold",
-            sets: "3 - 1", matches: "7 - 3", estelar: "+25 (Set 4)", mvp: "+25 (MVP)",
-            born: "Por confirmar", status: "Active", role: "Player",
-            alternateIds: ["@x_xv", "タイキシャ"],
+            name: "iXLCross", country: "ES", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 295,
+            events: "1 (3v3)", titles: "1 Campeón", sets: "3 - 1", matches: "7 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: ["@x_xv", "タイキシャ", "Taikisha"],
             winnings: "$0", credits: "7,000 créditos",
-            history: [
-                { from: "2026-08-08", to: "Presente", team: "LEVIATÁN ESPORTS" }
-            ],
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
             ],
@@ -1184,14 +1371,11 @@
         },
         {
             key: "julio",
-            rank: 2, name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270, color: "silver",
-            sets: "3 - 1", matches: "7 - 3", estelar: "+25 (Set 1)", mvp: "0 pts",
-            born: "Por confirmar", status: "Active", role: "Player · Capitán",
+            name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270,
+            events: "1 (3v3)", titles: "1 Campeón", sets: "3 - 1", matches: "7 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: ["@juliocr36", "SK | Julio"],
             winnings: "$0", credits: "10,000 créditos",
-            history: [
-                { from: "2026-08-08", to: "Presente", team: "LEVIATÁN ESPORTS" }
-            ],
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
             ],
@@ -1201,14 +1385,11 @@
         },
         {
             key: "jc",
-            rank: 3, name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270, color: "bronze",
-            sets: "3 - 1", matches: "7 - 3", estelar: "+25 (Set 3)", mvp: "0 pts",
-            born: "Por confirmar", status: "Active", role: "Player",
+            name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270,
+            events: "1 (3v3)", titles: "1 Campeón", sets: "3 - 1", matches: "7 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["JC", "~ T X -->JC"],
             winnings: "$0", credits: "0 créditos",
-            history: [
-                { from: "2026-08-08", to: "Presente", team: "LEVIATÁN ESPORTS" }
-            ],
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
             ],
@@ -1217,15 +1398,48 @@
             ]
         },
         {
+            key: "diego",
+            name: "Diego", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 98,
+            events: "1 (1v1)", titles: "1er lugar", sets: "4 - 0", matches: "9 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["DiegoU_c", "@Diego"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: [
+                { date: "Por confirmar", place: "1°", tier: "1er lugar", tournament: "ZC26 - 1vs1", result: "1er lugar · Sets 4 - 0 · PG-PP 9 - 2 · 98 pts" }
+            ]
+        },
+        {
+            key: "alan",
+            name: "Alan", country: "CO", team: "Jugador individual (1vs1)", teamTag: "", points: 88,
+            events: "1 (1v1)", titles: "1er lugar", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["LcK alan55", "Alān"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: [
+                { date: "Por confirmar", place: "1°", tier: "1er lugar", tournament: "ZC26 - 1vs1", result: "1er lugar · 88 pts" }
+            ]
+        },
+        {
+            key: "freddy",
+            name: "Freddy", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 88,
+            events: "1 (1v1)", titles: "1er lugar", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Freddy", "freddy._jh", "Synse", "feedz", "Nine"],
+            winnings: "$0", credits: "3,500 créditos",
+            recent: [],
+            achievements: [
+                { date: "Por confirmar", place: "1°", tier: "1er lugar", tournament: "ZC26 - 1vs1", result: "1er lugar · 88 pts" }
+            ]
+        },
+        {
             key: "nacaru",
-            rank: 4, name: "Nacaru", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 70, color: "normal",
-            sets: "1 - 3", matches: "3 - 7", estelar: "+25 (Set 2)", mvp: "0 pts",
-            born: "Por confirmar", status: "Active", role: "Player",
+            name: "Nacaru", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 70,
+            events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
-            history: [
-                { from: "2026-08-08", to: "Presente", team: "Cachorritas repres." }
-            ],
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
             ],
@@ -1234,15 +1448,46 @@
             ]
         },
         {
+            key: "fies",
+            name: "Fies", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 64,
+            events: "2 (1v1)", titles: "2 Podios", sets: "3 - 2", matches: "7 - 5",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["me fies 5?"],
+            winnings: "$0", credits: "500 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "adri",
+            name: "Adri", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 52,
+            events: "1 (1v1)", titles: "2do lugar", sets: "3 - 1", matches: "6 - 4",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["4dr1"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: [
+                { date: "Por confirmar", place: "2°", tier: "2do lugar", tournament: "ZC26 - 1vs1", result: "2do lugar · Sets 3 - 1 · PG-PP 6 - 4 · 52 pts" }
+            ]
+        },
+        {
+            key: "sentryks",
+            name: "Sentryks", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 48,
+            events: "1 (1v1)", titles: "2do lugar", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Sentryks"],
+            winnings: "$0", credits: "2,500 créditos",
+            recent: [],
+            achievements: [
+                { date: "Por confirmar", place: "2°", tier: "2do lugar", tournament: "ZC26 - 1vs1", result: "2do lugar · 48 pts" }
+            ]
+        },
+        {
             key: "juanjoxd",
-            rank: 5, name: "Juanjoxd", country: "GT", team: "Cachorritas repres.", teamTag: "LPR", points: 45, color: "normal",
-            sets: "1 - 3", matches: "3 - 7", estelar: "0 pts", mvp: "0 pts",
-            born: "Por confirmar", status: "Active", role: "Player",
+            name: "Juanjoxd", country: "GT", team: "Cachorritas repres.", teamTag: "LPR", points: 45,
+            events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
+            born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
-            history: [
-                { from: "2026-08-08", to: "Presente", team: "Cachorritas repres." }
-            ],
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
             ],
@@ -1252,20 +1497,37 @@
         },
         {
             key: "ninja",
-            rank: 5, name: "Ninja", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 45, color: "normal",
-            sets: "1 - 3", matches: "3 - 7", estelar: "0 pts", mvp: "0 pts",
-            born: "Por confirmar", status: "Active", role: "Player",
+            name: "Ninja", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 45,
+            events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
+            born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
-            history: [
-                { from: "2026-08-08", to: "Presente", team: "Cachorritas repres." }
-            ],
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
             ],
             achievements: [
                 { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "45 pts" }
             ]
+        },
+        {
+            key: "javi",
+            name: "Javi", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 32,
+            events: "2 (1v1)", titles: "1 Podio", sets: "3 - 2", matches: "7 - 6",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["javi826378", "Jave"],
+            winnings: "$0", credits: "500 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "jhustin",
+            name: "Jhustin", country: "CL", team: "Jugador individual (1vs1)", teamTag: "", points: 20,
+            events: "1 (1v1)", titles: "1 Podio", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Jhustin"],
+            winnings: "$0", credits: "1,500 créditos",
+            recent: [],
+            achievements: []
         }
     ];
 
@@ -1274,8 +1536,8 @@
             team: "LEVIATÁN ESPORT", logo: "LEV.png",
             champDate: "Campeón 09-08-2026",
             tourney: "ZC26 GRAN FINAL",
-            mode: "Modalidad: 3 vs 3 · Bo5",
-            desc: "LEVIATÁN ESPORTS se coronó campeón de la Gran Final ZC26 el 09/08/26 tras vencer 3-1 a Cachorritas repres (LPR). Título obtenido con la alineación de Julio (capitán), Taikisha y JOAR."
+            mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
+            desc: "LEVIATÁN ESPORTS se coronó campeón de la Gran Final ZC26 el 09/08/26 tras vencer 3-1 a Cachorritas repres (LPR). Título obtenido con la alineación de Julio (capitán), iXLCross y JOAR."
         }
     ];
 
@@ -1286,27 +1548,31 @@
 
     function renderRanking() {
         const list = document.getElementById("rankingList");
-        list.innerHTML = PLAYERS.map((p, i) => `
+        list.innerHTML = PLAYERS.map((p, i) => {
+            const pos = i + 1; // posición derivada del orden del array: nunca se repite/empata
+            const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
+            const rowTier = pos === 1 ? "tier-gold" : pos === 2 ? "tier-silver" : pos === 3 ? "tier-bronze" : (pos >= 4 && pos <= 7) ? "tier-gray" : "";
+            return `
             <div class="rank-item" data-index="${i}">
-                <div class="rank-row" data-toggle="${i}" tabindex="0" role="button" aria-expanded="false">
-                    <span class="rank-pos ${p.color !== 'normal' ? p.color : ''}">${p.rank}</span>
+                <div class="rank-row ${rowTier}" data-toggle="${i}" tabindex="0" role="button" aria-expanded="false">
+                    <span class="rank-pos ${medal}">${pos}</span>
                     <span class="rank-flag">${flagImg(p.country, true)}</span>
-                    <button class="rank-name ${p.color !== 'normal' ? p.color : ''}" data-open="${i}">${p.name}</button>
+                    <button class="rank-name ${medal}" data-open="${i}">${p.name}</button>
                     <span class="rank-points">${p.points} pts</span>
-                    <span class="rank-caret">▾</span>
                 </div>
                 <div class="rank-detail">
                     <div class="rank-detail-inner">
-                        <div class="rank-detail-field">Equipo: <b>${p.team}</b></div>
+                        <div class="rank-detail-field">Eventos: <b>${p.events}</b></div>
+                        <div class="rank-detail-field">Títulos: <b>${p.titles}</b></div>
                         <div class="rank-detail-field">Sets (G-P): <b>${p.sets}</b></div>
-                        <div class="rank-detail-field">Partidas (G-P): <b>${p.matches}</b></div>
-                        <div class="rank-detail-field">Estelar: <b>${p.estelar}</b></div>
-                        <div class="rank-detail-field">Bono MVP: <b>${p.mvp}</b></div>
-                        <div class="rank-detail-field">Puntos totales: <b>${p.points} pts</b></div>
+                        <div class="rank-detail-field">Partidas (PG-PP): <b>${p.matches}</b></div>
+                        <div class="rank-detail-divider"></div>
+                        <div class="rank-detail-field full">Puntos totales: <b>${p.points} pts</b></div>
                     </div>
                 </div>
             </div>
-        `).join("");
+        `;
+        }).join("");
         list.querySelectorAll("[data-toggle]").forEach(row => {
             const toggle = () => {
                 const item = row.closest(".rank-item");
@@ -1324,7 +1590,23 @@
                 openPlayerModal(PLAYERS[nameBtn.dataset.open]);
             });
         });
+
+        const toggleBtn = document.getElementById("rankToggleBtn");
+        if (toggleBtn) {
+            if (PLAYERS.length <= 10) {
+                toggleBtn.style.display = "none";
+            }
+        }
     }
+
+    let rankingExpanded = false;
+    document.getElementById("rankToggleBtn").addEventListener("click", () => {
+        rankingExpanded = !rankingExpanded;
+        const list = document.getElementById("rankingList");
+        const toggleBtn = document.getElementById("rankToggleBtn");
+        list.classList.toggle("expanded", rankingExpanded);
+        toggleBtn.textContent = rankingExpanded ? "Ocultar la Clasificación completa" : "Mostrar la Clasificación completa";
+    });
 
     function renderTrophies() {
         const grid = document.getElementById("trophyGrid");
@@ -1343,36 +1625,57 @@
         });
     }
 
+    function achTierClass(place) {
+        if (!place) return "";
+        if (place.indexOf("1") !== -1) return "gold";
+        if (place.indexOf("2") !== -1) return "silver";
+        if (place.indexOf("3") !== -1 || place.indexOf("4") !== -1) return "gray";
+        return "";
+    }
+
+    function posTierClass(pos) {
+        if (pos <= 3) return "tier-top";
+        if (pos <= 7) return "tier-mid";
+        return "tier-low";
+    }
+
     function openPlayerModal(p) {
         const panel = document.getElementById("playerInfoPanel");
         const f = FLAGS[p.country];
+        const pos = PLAYERS.indexOf(p) + 1;
+        const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
+        const statusClass = p.status === "Activo" ? "active" : "inactive";
+        const teamDisplay = p.teamTag ? p.team : "No tiene equipo registrado";
+        const teamMuted = p.teamTag ? "" : "muted";
+        const idsDisplay = p.alternateIds.length ? p.alternateIds.join(", ") : "No tiene IDs registradas";
+        const idsMuted = p.alternateIds.length ? "" : "muted";
+        const bornMuted = p.born === "Por confirmar" ? "muted" : "";
+        panel.className = `info-panel ${medal}`;
         panel.innerHTML = `
-            <div class="info-close"><span id="closePlayerModal">✕ cerrar</span></div>
+            <div class="info-top-row">
+                <div class="info-position-line">
+                    <span class="info-pos-badge ${medal} ${posTierClass(pos)}">${pos}</span>
+                    <span class="info-position-label">Posición en el ranking</span>
+                </div>
+                <span class="info-close-x" id="closePlayerModal">✕</span>
+            </div>
             <div class="info-name"><span class="info-flag">${flagImg(p.country, true)}</span>${p.name}</div>
-            <div class="info-team">${p.team}</div>
 
             <div class="info-block-title">Información del jugador</div>
             <div class="info-grid">
                 <div><div class="info-field-label">Nacionalidad</div><div class="info-field-value">${f.name}</div></div>
-                <div><div class="info-field-label">Nacimiento</div><div class="info-field-value">${p.born}</div></div>
-                <div><div class="info-field-label">Estado</div><div class="info-field-value active">${p.status}</div></div>
+                <div><div class="info-field-label">Región</div><div class="info-field-value">${f.region}</div></div>
+                <div><div class="info-field-label">Nacimiento</div><div class="info-field-value ${bornMuted}">${p.born}</div></div>
+                <div><div class="info-field-label">Estado</div><div class="info-field-value ${statusClass}">${p.status}</div></div>
                 <div><div class="info-field-label">Rol</div><div class="info-field-value">${p.role}</div></div>
-                <div><div class="info-field-label">Equipo</div><div class="info-field-value">${p.team}</div></div>
-                <div><div class="info-field-label">IDs alternos</div><div class="info-field-value">${p.alternateIds.length ? p.alternateIds.join(", ") : "—"}</div></div>
+                <div><div class="info-field-label">Equipo</div><div class="info-field-value ${teamMuted}">${teamDisplay}</div></div>
+                <div><div class="info-field-label">IDs alternos</div><div class="info-field-value ${idsMuted}">${idsDisplay}</div></div>
                 <div><div class="info-field-label">Ganancias aprox.</div><div class="info-field-value">${p.winnings}</div></div>
                 <div><div class="info-field-label">Créditos aprox.</div><div class="info-field-value">${p.credits}</div></div>
             </div>
 
-            <div class="info-block-title">Historial</div>
-            ${p.history.map(h => `
-                <div class="history-row">
-                    <span class="history-dates">${h.from} — ${h.to}</span>
-                    <span class="history-team">${h.team}</span>
-                </div>
-            `).join("")}
-
             <div class="info-block-title">Partidas recientes</div>
-            ${p.recent.map(m => `
+            ${p.recent.length ? p.recent.map(m => `
                 <div class="match-row">
                     <div class="match-row-top">${m.date} · ${m.time || ""}</div>
                     <div class="match-row-score">
@@ -1380,20 +1683,23 @@
                     </div>
                     <div class="match-row-tourney">${m.tourney}</div>
                 </div>
-            `).join("")}
+            `).join("") : `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`}
 
             <div class="info-block-title">Logros</div>
-            ${p.achievements.map(a => `
-                <div class="ach-card">
+            ${p.achievements.length ? p.achievements.map(a => {
+                const tier = achTierClass(a.place);
+                return `
+                <div class="ach-card ${tier}">
                     <div class="ach-top">
                         <span class="ach-date">${a.date}</span>
-                        <span class="ach-place">${a.place}</span>
+                        <span class="ach-place ${tier}">${a.place}</span>
                     </div>
                     <div class="ach-tournament">${a.tournament}</div>
-                    <div class="ach-score">${a.teamA} ${a.scoreA} : ${a.scoreB} ${a.teamB}</div>
+                    ${a.teamA ? `<div class="ach-score">${a.teamA} ${a.scoreA} : ${a.scoreB} ${a.teamB}</div>` : ""}
                     <div class="ach-result">${a.result}</div>
                 </div>
-            `).join("")}
+            `;
+            }).join("") : `<div class="ach-card" style="color:#888;">Sin logros de primer o segundo lugar</div>`}
         `;
         panel.scrollTop = 0;
         openModal("playerModalOverlay");
@@ -1407,7 +1713,7 @@
     function openTrophyModal(t) {
         const panel = document.getElementById("trophyInfoPanel");
         panel.innerHTML = `
-            <div class="info-close"><span id="closeTrophyModal">✕ cerrar</span></div>
+            <div class="info-close"><span id="closeTrophyModal">✕</span></div>
             <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
             <div class="trophy-modal-title">${t.team}</div>
             <div class="trophy-modal-sub">${t.champDate}</div>
