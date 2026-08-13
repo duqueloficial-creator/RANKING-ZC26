@@ -507,13 +507,9 @@
             padding: 10px;
         }
         #rankingList {
-            max-height: 620px;
             overflow-y: auto;
-            transition: max-height 0.3s ease;
-        }
-        #rankingList.expanded {
-            max-height: none;
-            overflow-y: visible;
+            max-height: 520px;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Ranking */
@@ -992,6 +988,14 @@
             padding: 10px 12px;
             margin-bottom: 8px;
         }
+        .match-row.match-win {
+            background: rgba(90,150,95,0.10);
+            border-color: rgba(90,150,95,0.35);
+        }
+        .match-row.match-loss {
+            background: rgba(160,80,80,0.10);
+            border-color: rgba(160,80,80,0.35);
+        }
         .match-row:last-child { margin-bottom: 0; }
         .match-row-top {
             font-size: 0.6rem;
@@ -1035,22 +1039,10 @@
         .ach-place {
             font-size: 0.65rem;
             font-weight: 700;
-            color: #d4af37;
-            background: rgba(212,175,55,0.1);
+            color: #cfcfcf;
+            background: rgba(255,255,255,0.06);
             padding: 2px 8px;
             border-radius: 10px;
-        }
-        .ach-place.gold {
-            color: #f0d38a;
-            background: rgba(212,175,55,0.15);
-        }
-        .ach-place.silver {
-            color: #e2e2e2;
-            background: rgba(192,192,192,0.15);
-        }
-        .ach-place.gray {
-            color: #b5b5b5;
-            background: rgba(150,150,150,0.12);
         }
         .ach-card.gold { border-color: rgba(212,175,55,0.3); }
         .ach-card.silver { border-color: rgba(200,200,200,0.3); }
@@ -1071,6 +1063,93 @@
             color: #cccccc;
             padding-top: 6px;
             border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .score-pair {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+        .score-high {
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .score-low {
+            color: #5c5c5c;
+            font-weight: 700;
+        }
+        .score-flat {
+            color: #cccccc;
+            font-weight: 700;
+        }
+        .score-sep {
+            color: #5c5c5c;
+            font-weight: 600;
+        }
+        .carousel {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+            will-change: transform;
+        }
+        .carousel-slide {
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .recent-title-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .recent-counter {
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: #666666;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 2px;
+            margin-bottom: 8px;
+        }
+        .carousel-arrow {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-arrow:active {
+            background: rgba(255,255,255,0.14);
+        }
+        .carousel-counter {
+            font-size: 0.65rem;
+            color: #888888;
+            min-width: 30px;
+            text-align: center;
+        }
+        .carousel-swipe .carousel-track {
+            touch-action: pan-y;
+            cursor: grab;
+        }
+        .carousel-counter-swipe {
+            margin-top: 2px;
+            margin-bottom: 8px;
         }
 
         /* Trophy modal */
@@ -1304,11 +1383,10 @@
     </div>
 
     <div class="section-block">
-        <div class="section-title">Ranking ZC26</div>
-        <div class="section-subtitle">Se actualiza con cada torneo ZC26</div>
+        <div class="section-title">RANKING</div>
+        <div class="section-subtitle">Se actualiza con cada torneo de ZC26</div>
         <div class="panel" id="rankingList"></div>
-        <div class="rank-toggle-wrap"><button class="rank-toggle-btn" id="rankToggleBtn">Mostrar la Clasificación completa</button></div>
-        <div class="section-updated">Última actualización: 12 ago, 2026</div>
+        <div class="section-updated">Última actualización: 13 ago, 2026</div>
     </div>
 
     <div class="section-block">
@@ -1351,186 +1429,469 @@
         MX: { file: "72px-Mx_hd.png", name: "México", region: "North America" },
         AR: { file: "72px-Ar_hd.png", name: "Argentina", region: "South America" },
         CL: { file: "72px-Cl_hd.png", name: "Chile", region: "South America" },
-        CO: { file: "72px-Co_hd.png", name: "Colombia", region: "South America" }
+        CO: { file: "72px-Co_hd.png", name: "Colombia", region: "South America" },
+        BR: { file: "72px-Br_hd.png", name: "Brasil", region: "South America" }
     };
 
     const PLAYERS = [
         {
             key: "taikisha",
-            name: "iXLCross", country: "ES", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 295,
-            events: "1 (3v3)", titles: "1 Campeón", sets: "3 - 1", matches: "7 - 3",
+            name: "iXLCross", country: "ES", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 500,
+            events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["@x_xv", "タイキシャ", "Taikisha"],
-            winnings: "$0", credits: "7,000 créditos",
+            winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
+                { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
             achievements: [
-                { date: "2026-08-08", place: "1°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "295 pts · +25 Estelar (Set 4) · +25 Bono MVP" }
+                { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · 500 pts · +25 Estelar (Set 4) · +25 Bono MVP" },
             ]
         },
         {
             key: "julio",
-            name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270,
-            events: "1 (3v3)", titles: "1 Campeón", sets: "3 - 1", matches: "7 - 3",
+            name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 500,
+            events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: ["@juliocr36", "SK | Julio"],
-            winnings: "$0", credits: "10,000 créditos",
+            winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
+                { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
             achievements: [
-                { date: "2026-08-08", place: "1°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "270 pts · +25 Estelar (Set 1)" }
+                { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · 500 pts · +25 Estelar (Set 1)" },
             ]
         },
         {
             key: "jc",
-            name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270,
-            events: "1 (3v3)", titles: "1 Campeón", sets: "3 - 1", matches: "7 - 3",
+            name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 500,
+            events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["JC", "~ T X -->JC"],
             winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" }
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
+                { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
             achievements: [
-                { date: "2026-08-08", place: "1°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "270 pts · +25 Estelar (Set 3)" }
-            ]
-        },
-        {
-            key: "diego",
-            name: "Diego", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 98,
-            events: "1 (1v1)", titles: "1er lugar", sets: "4 - 0", matches: "9 - 2",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["DiegoU_c", "@Diego"],
-            winnings: "$0", credits: "0 créditos",
-            recent: [],
-            achievements: [
-                { date: "Por confirmar", place: "1°", tier: "1er lugar", tournament: "ZC26 - 1vs1", result: "1er lugar · Sets 4 - 0 · PG-PP 9 - 2 · 98 pts" }
-            ]
-        },
-        {
-            key: "alan",
-            name: "Alan", country: "CO", team: "Jugador individual (1vs1)", teamTag: "", points: 88,
-            events: "1 (1v1)", titles: "1er lugar", sets: "--", matches: "--",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["LcK alan55", "Alān"],
-            winnings: "$0", credits: "0 créditos",
-            recent: [],
-            achievements: [
-                { date: "Por confirmar", place: "1°", tier: "1er lugar", tournament: "ZC26 - 1vs1", result: "1er lugar · 88 pts" }
-            ]
-        },
-        {
-            key: "freddy",
-            name: "Freddy", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 88,
-            events: "1 (1v1)", titles: "1er lugar", sets: "--", matches: "--",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["Freddy", "freddy._jh", "Synse", "feedz", "Nine"],
-            winnings: "$0", credits: "3,500 créditos",
-            recent: [],
-            achievements: [
-                { date: "Por confirmar", place: "1°", tier: "1er lugar", tournament: "ZC26 - 1vs1", result: "1er lugar · 88 pts" }
+                { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · 500 pts · +25 Estelar (Set 3)" },
             ]
         },
         {
             key: "nacaru",
-            name: "Nacaru", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 70,
+            name: "Nacaru", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 250,
             events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
+                { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
             achievements: [
-                { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "70 pts · +25 Estelar (Set 2)" }
+                { date: "2026-08-08", place: "2°", tier: "Subcampeón", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "Subcampeón · 250 pts · +25 Estelar (Set 2)" },
             ]
         },
         {
-            key: "fies",
-            name: "Fies", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 64,
-            events: "2 (1v1)", titles: "2 Podios", sets: "3 - 2", matches: "7 - 5",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["me fies 5?"],
-            winnings: "$0", credits: "500 créditos",
-            recent: [],
-            achievements: []
-        },
-        {
-            key: "adri",
-            name: "Adri", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 52,
-            events: "1 (1v1)", titles: "2do lugar", sets: "3 - 1", matches: "6 - 4",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["4dr1"],
-            winnings: "$0", credits: "0 créditos",
-            recent: [],
-            achievements: [
-                { date: "Por confirmar", place: "2°", tier: "2do lugar", tournament: "ZC26 - 1vs1", result: "2do lugar · Sets 3 - 1 · PG-PP 6 - 4 · 52 pts" }
-            ]
-        },
-        {
-            key: "sentryks",
-            name: "Sentryks", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 48,
-            events: "1 (1v1)", titles: "2do lugar", sets: "--", matches: "--",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["Sentryks"],
-            winnings: "$0", credits: "2,500 créditos",
-            recent: [],
-            achievements: [
-                { date: "Por confirmar", place: "2°", tier: "2do lugar", tournament: "ZC26 - 1vs1", result: "2do lugar · 48 pts" }
-            ]
-        },
-        {
-            key: "juanjoxd",
-            name: "Juanjoxd", country: "GT", team: "Cachorritas repres.", teamTag: "LPR", points: 45,
-            events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
+            key: "juanjo",
+            name: "Juanjo", country: "GT", team: "Cachorritas repres.", teamTag: "LPR", points: 250,
+            events: "2 (3v3/1v1)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
             born: "Por confirmar", status: "Activo", role: "Player",
-            alternateIds: [],
-            winnings: "$0", credits: "0 créditos",
+            alternateIds: ["15_juanjoxd_28", "Juanjoxd"],
+            winnings: "$0", credits: "1,000 créditos",
             recent: [
-                { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
+                { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
             achievements: [
-                { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "45 pts" }
+                { date: "2026-08-08", place: "2°", tier: "Subcampeón", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "Subcampeón · 250 pts" },
             ]
         },
         {
             key: "ninja",
-            name: "Ninja", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 45,
+            name: "Ninja", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 250,
             events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "8 ago 2026", time: "UTC-5", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Gran Final" }
+                { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
+                { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
             achievements: [
-                { date: "2026-08-08", place: "2°", tier: "Gran Final", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "45 pts" }
+                { date: "2026-08-08", place: "2°", tier: "Subcampeón", tournament: "ZC26 - Gran Final", teamA: "LPR", scoreA: 1, teamB: "LEV", scoreB: 3, result: "Subcampeón · 250 pts" },
             ]
         },
         {
-            key: "javi",
-            name: "Javi", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 32,
-            events: "2 (1v1)", titles: "1 Podio", sets: "3 - 2", matches: "7 - 6",
+            key: "diego",
+            name: "Diego", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 120,
+            events: "1 (1v1)", titles: "1er Lugar", sets: "4 - 0", matches: "9 - 2",
             born: "Por confirmar", status: "Inactivo", role: "Player",
-            alternateIds: ["javi826378", "Jave"],
-            winnings: "$0", credits: "500 créditos",
+            alternateIds: ["DiegoU_c", "@Diego"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Zeta/papu", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Hetcr894", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: [
+                { date: "2026-03-30", place: "1°", tier: "1er Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, result: "1er lugar · Sets 4 - 0 · PG-PP 9 - 2 · 120 pts" },
+            ]
+        },
+        {
+            key: "alan",
+            name: "Alan", country: "BR", team: "Jugador individual (1vs1)", teamTag: "", points: 120,
+            events: "1 (1v1)", titles: "1er Lugar", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["LcK alan55", "Alān"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "29 mar 2026", time: "UTC-5", teamA: "Alān", scoreA: 2, teamB: "Me fies 5", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+            ],
+            achievements: [
+                { date: "2026-03-29", place: "1°", tier: "1er Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Alān", scoreA: 2, teamB: "Me fies 5", scoreB: 0, result: "1er lugar · 120 pts" },
+            ]
+        },
+        {
+            key: "freddy",
+            name: "Freddy", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 120,
+            events: "1 (1v1)", titles: "1er Lugar", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Freddy", "freddy._jh", "Synse", "feedz", "Nine"],
+            winnings: "$10", credits: "3,500 créditos",
+            recent: [
+                { date: "6 dic 2025", time: "UTC-5", teamA: "Freddy", scoreA: 2, teamB: "Sentryks", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+            ],
+            achievements: [
+                { date: "2025-12-06", place: "1°", tier: "1er Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Freddy", scoreA: 2, teamB: "Sentryks", scoreB: 0, result: "1er lugar · 120 pts" },
+            ]
+        },
+        {
+            key: "tiagoti",
+            name: "Tiagoti", country: "ES", team: "WB", teamTag: "WB", points: 100,
+            events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: ["@Tiagoti BS"],
+            winnings: "$0", credits: "166 créditos",
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "3°-4°", tier: "3er-4to Lugar", tournament: "ZC26 - Semifinal", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, result: "3er-4to lugar · 100 pts" },
+            ]
+        },
+        {
+            key: "aumc",
+            name: "AUMC", country: "MX", team: "WB", teamTag: "WB", points: 100,
+            events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: ["@AUMCxD"],
+            winnings: "$0", credits: "167 créditos",
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "3°-4°", tier: "3er-4to Lugar", tournament: "ZC26 - Semifinal", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, result: "3er-4to lugar · 100 pts" },
+            ]
+        },
+        {
+            key: "liam",
+            name: "Liam", country: "MX", team: "WB", teamTag: "WB", points: 100,
+            events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: ["@liamno014"],
+            winnings: "$0", credits: "167 créditos",
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "3°-4°", tier: "3er-4to Lugar", tournament: "ZC26 - Semifinal", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, result: "3er-4to lugar · 100 pts" },
+            ]
+        },
+        {
+            key: "marcelo",
+            name: "Marcelo", country: "AR", team: "QQQ", teamTag: "QQQ", points: 100,
+            events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: ["@marcelonigaman", "marcelogm"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "3°-4°", tier: "3er-4to Lugar", tournament: "ZC26 - Semifinal", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, result: "3er-4to lugar · 100 pts" },
+            ]
+        },
+        {
+            key: "astro",
+            name: "Astro", country: "PE", team: "QQQ", teamTag: "QQQ", points: 100,
+            events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: ["@Astro", "Astronomo"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "3°-4°", tier: "3er-4to Lugar", tournament: "ZC26 - Semifinal", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, result: "3er-4to lugar · 100 pts" },
+            ]
+        },
+        {
+            key: "jmvll",
+            name: "Jmvll", country: "PE", team: "QQQ", teamTag: "QQQ", points: 100,
+            events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: ["@Jmvll16", "jmvll"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2026-08-08", place: "3°-4°", tier: "3er-4to Lugar", tournament: "ZC26 - Semifinal", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, result: "3er-4to lugar · 100 pts" },
+            ]
+        },
+        {
+            key: "fies",
+            name: "Fies", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 80,
+            events: "2 (1v1)", titles: "2do Lugar", sets: "3 - 2", matches: "7 - 5",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["me fies 5?"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Javi", scoreA: 2, teamB: "Me fies 5?", scoreB: 1, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 1, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 2, teamB: "Kvaras", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 2, teamB: "ElKakas", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+                { date: "29 mar 2026", time: "UTC-5", teamA: "Alān", scoreA: 2, teamB: "Me fies 5", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+            ],
+            achievements: [
+                { date: "2026-03-29", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Alān", scoreA: 2, teamB: "Me fies 5", scoreB: 0, result: "2do lugar · 80 pts" },
+            ]
+        },
+        {
+            key: "adri",
+            name: "Adri", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 80,
+            events: "1 (1v1)", titles: "2do Lugar", sets: "3 - 1", matches: "6 - 4",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["4dr1"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 1, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "PapiRico", scoreA: 0, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "4dr1", scoreA: 2, teamB: "ZetalPapi Rick", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: [
+                { date: "2026-03-30", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, result: "2do lugar · Sets 3 - 1 · PG-PP 6 - 4 · 80 pts" },
+            ]
+        },
+        {
+            key: "sentryks",
+            name: "Sentryks", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 80,
+            events: "1 (1v1)", titles: "2do Lugar", sets: "--", matches: "--",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["@Sentryks"],
+            winnings: "$0", credits: "2,500 créditos",
+            recent: [
+                { date: "6 dic 2025", time: "UTC-5", teamA: "Freddy", scoreA: 2, teamB: "Sentryks", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+                { date: "6 dic 2025", time: "UTC-5", teamA: "Sentryks", scoreA: 2, teamB: "Deleted User", scoreB: 0, tourney: "ZC26 1v1 · Semifinal" },
+            ],
+            achievements: [
+                { date: "2025-12-06", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Freddy", scoreA: 2, teamB: "Sentryks", scoreB: 0, result: "2do lugar · 80 pts" },
+            ]
+        },
+        {
+            key: "marcos",
+            name: "Marcos", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 60,
+            events: "1 (1v1)", titles: "", sets: "--", matches: "4 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["%ON/MARCOS%", "marcos1148"],
+            winnings: "$0", credits: "0 créditos",
             recent: [],
             achievements: []
         },
         {
+            key: "javi",
+            name: "Javi", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 50,
+            events: "2 (1v1)", titles: "3er Lugar", sets: "3 - 2", matches: "7 - 6",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["javi826378", "Jave"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Javi", scoreA: 2, teamB: "Me fies 5?", scoreB: 1, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Ramiriñogod", scoreA: 0, teamB: "Javi", scoreB: 2, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Pato", scoreA: 1, teamB: "Javi", scoreB: 2, tourney: "ZC26 1v1 · Ronda 1" },
+                { date: "29 mar 2026", time: "UTC-5", teamA: "Jhustin", scoreA: 2, teamB: "Jav", scoreB: 0, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
+            ],
+            achievements: [
+                { date: "2026-03-30", place: "3°", tier: "3er Lugar", tournament: "ZC26 1v1 - 3er y 4to Lugar", teamA: "Javi", scoreA: 2, teamB: "Me fies 5?", scoreB: 1, result: "3er lugar · Sets 3 - 2 · PG-PP 7 - 6 · 50 pts" },
+            ]
+        },
+        {
             key: "jhustin",
-            name: "Jhustin", country: "CL", team: "Jugador individual (1vs1)", teamTag: "", points: 20,
-            events: "1 (1v1)", titles: "1 Podio", sets: "--", matches: "--",
+            name: "Jhustin", country: "BR", team: "Jugador individual (1vs1)", teamTag: "", points: 50,
+            events: "1 (1v1)", titles: "3er Lugar", sets: "--", matches: "--",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["Jhustin"],
             winnings: "$0", credits: "1,500 créditos",
+            recent: [
+                { date: "29 mar 2026", time: "UTC-5", teamA: "Jhustin", scoreA: 2, teamB: "Jav", scoreB: 0, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
+            ],
+            achievements: [
+                { date: "2026-03-29", place: "3°", tier: "3er Lugar", tournament: "ZC26 1v1 - 3er y 4to Lugar", teamA: "Jhustin", scoreA: 2, teamB: "Jav", scoreB: 0, result: "3er lugar · 50 pts" },
+            ]
+        },
+        {
+            key: "loneliness",
+            name: "Loneliness", country: "BR", team: "Jugador individual (1vs1)", teamTag: "", points: 45,
+            events: "1 (1v1)", titles: "", sets: "--", matches: "3 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
             recent: [],
             achievements: []
-        }
+        },
+        {
+            key: "kvaras",
+            name: "Kvaras", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 3",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 2, teamB: "Kvaras", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Jona", scoreA: 1, teamB: "Kvaras", scoreB: 2, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "papirico",
+            name: "PapiRico", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["PapiRico//®"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "PapiRico", scoreA: 0, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "PapiRico", scoreA: 2, teamB: "JOSE PRIME", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "ramirino",
+            name: "Ramiriño", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Ramiriñogod"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Ramiriñogod", scoreA: 0, teamB: "Javi", scoreB: 2, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Ramiriñogod", scoreA: 2, teamB: "MateoTEODOP", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "zeta",
+            name: "Zeta", country: "CO", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 3",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Zeta", "papu"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Zeta/papu", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Zeta/papu", scoreA: 2, teamB: "BYE", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "jona",
+            name: "Jona", country: "CL", team: "Jugador individual (1vs1)", teamTag: "", points: 15,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "1 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Jona", scoreA: 1, teamB: "Kvaras", scoreB: 2, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "hetcr",
+            name: "Hetcr", country: "GT", team: "Jugador individual (1vs1)", teamTag: "", points: 15,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "1 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["Hetcr894"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Hetcr894", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "pato",
+            name: "Pato", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 15,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "1 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Pato", scoreA: 1, teamB: "Javi", scoreB: 2, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "elkakas",
+            name: "ElKakas", country: "BR", team: "Jugador individual (1vs1)", teamTag: "", points: 10,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 2, teamB: "ElKakas", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "joseprime",
+            name: "Jose Prime", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 10,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["JOSE PRIME"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "PapiRico", scoreA: 2, teamB: "JOSE PRIME", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "zetal",
+            name: "Zetal", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 10,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["ZetalPapi Rick"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "4dr1", scoreA: 2, teamB: "ZetalPapi Rick", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
+        {
+            key: "mateo",
+            name: "Mateo", country: "CL", team: "Jugador individual (1vs1)", teamTag: "", points: 10,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: ["MateoTEODOP"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "30 mar 2026", time: "UTC-5", teamA: "Ramiriñogod", scoreA: 2, teamB: "MateoTEODOP", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
+            ],
+            achievements: []
+        },
     ];
-
     const TROPHIES = [
         {
             team: "LEVIATÁN ESPORT", logo: "LEV.png",
@@ -1563,7 +1924,7 @@
                 <div class="rank-detail">
                     <div class="rank-detail-inner">
                         <div class="rank-detail-field">Eventos: <b>${p.events}</b></div>
-                        <div class="rank-detail-field">Títulos: <b>${p.titles}</b></div>
+                        <div class="rank-detail-field">Títulos: <b>${p.titles || "—"}</b></div>
                         <div class="rank-detail-field">Sets (G-P): <b>${p.sets}</b></div>
                         <div class="rank-detail-field">Partidas (PG-PP): <b>${p.matches}</b></div>
                         <div class="rank-detail-divider"></div>
@@ -1591,22 +1952,7 @@
             });
         });
 
-        const toggleBtn = document.getElementById("rankToggleBtn");
-        if (toggleBtn) {
-            if (PLAYERS.length <= 10) {
-                toggleBtn.style.display = "none";
-            }
-        }
     }
-
-    let rankingExpanded = false;
-    document.getElementById("rankToggleBtn").addEventListener("click", () => {
-        rankingExpanded = !rankingExpanded;
-        const list = document.getElementById("rankingList");
-        const toggleBtn = document.getElementById("rankToggleBtn");
-        list.classList.toggle("expanded", rankingExpanded);
-        toggleBtn.textContent = rankingExpanded ? "Ocultar la Clasificación completa" : "Mostrar la Clasificación completa";
-    });
 
     function renderTrophies() {
         const grid = document.getElementById("trophyGrid");
@@ -1625,12 +1971,122 @@
         });
     }
 
-    function achTierClass(place) {
-        if (!place) return "";
-        if (place.indexOf("1") !== -1) return "gold";
-        if (place.indexOf("2") !== -1) return "silver";
-        if (place.indexOf("3") !== -1 || place.indexOf("4") !== -1) return "gray";
-        return "";
+    function scorePairHtml(scoreA, scoreB, flat) {
+        if (flat) {
+            return `<span class="score-pair"><span class="score-flat">${scoreA}</span><span class="score-sep">:</span><span class="score-flat">${scoreB}</span></span>`;
+        }
+        const aClass = scoreA < scoreB ? "score-low" : "score-high";
+        const bClass = scoreB < scoreA ? "score-low" : "score-high";
+        return `<span class="score-pair"><span class="${aClass}">${scoreA}</span><span class="score-sep">:</span><span class="${bClass}">${scoreB}</span></span>`;
+    }
+
+    function normId(s) {
+        return (s || "").toString()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
+    function matchResultClass(p, m) {
+        const tokens = [p.name, ...(p.alternateIds || [])];
+        if (p.teamTag) tokens.push(p.teamTag);
+        const normTokens = tokens.map(normId).filter(Boolean);
+        function sideMatches(sideName) {
+            const ns = normId(sideName);
+            if (!ns) return false;
+            return normTokens.some(t => ns.includes(t) || t.includes(ns));
+        }
+        let side = null;
+        if (sideMatches(m.teamA)) side = "A";
+        else if (sideMatches(m.teamB)) side = "B";
+        if (!side) return "";
+        const won = side === "A" ? m.scoreA > m.scoreB : m.scoreB > m.scoreA;
+        return won ? "match-win" : "match-loss";
+    }
+
+    function renderCarousel(items, itemHtmlFn, emptyHtml, opts) {
+        opts = opts || {};
+        if (!items.length) return opts.externalCounter ? { trackHtml: emptyHtml, counterHtml: "" } : emptyHtml;
+        const count = items.length;
+        const slideWidth = 100 / count;
+        const slides = items.map((it, i) => `<div class="carousel-slide" data-slide="${i}" style="width:${slideWidth}%">${itemHtmlFn(it)}</div>`).join("");
+        let nav = "";
+        if (count > 1 && !opts.externalCounter) {
+            nav = `<div class="carousel-nav">
+                <button type="button" class="carousel-arrow carousel-prev" aria-label="Anterior">‹</button>
+                <span class="carousel-counter"><span class="carousel-counter-current">1</span>/${count}</span>
+                <button type="button" class="carousel-arrow carousel-next" aria-label="Siguiente">›</button>
+            </div>`;
+        }
+        const trackHtml = `<div class="carousel ${opts.swipeOnly ? "carousel-swipe" : ""}" data-current="0" data-total="${count}">
+            <div class="carousel-track" style="width:${count * 100}%">${slides}</div>
+            ${nav}
+        </div>`;
+        if (opts.externalCounter) {
+            const counterHtml = count > 1 ? `<span class="recent-counter"><span class="carousel-counter-current">1</span>/${count}</span>` : "";
+            return { trackHtml, counterHtml };
+        }
+        return trackHtml;
+    }
+
+    function initCarousels(root) {
+        root.querySelectorAll(".carousel").forEach(car => {
+            const total = parseInt(car.dataset.total, 10);
+            let current = parseInt(car.dataset.current, 10);
+            const track = car.querySelector(".carousel-track");
+            const counter = car.querySelector(".carousel-counter-current")
+                || (car.previousElementSibling && car.previousElementSibling.querySelector(".carousel-counter-current"));
+            function show(idx) {
+                current = (idx + total) % total;
+                if (track) track.style.transform = `translateX(-${current * (100 / total)}%)`;
+                if (counter) counter.textContent = current + 1;
+                car.dataset.current = current;
+            }
+            const prevBtn = car.querySelector(".carousel-prev");
+            const nextBtn = car.querySelector(".carousel-next");
+            if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); show(current - 1); });
+            if (nextBtn) nextBtn.addEventListener("click", (e) => { e.stopPropagation(); show(current + 1); });
+
+            if (total > 1 && track) {
+                let startX = null, startY = null, dragging = false, baseOffset = 0;
+                track.addEventListener("pointerdown", (e) => {
+                    dragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    baseOffset = -current * (100 / total);
+                    track.style.transition = "none";
+                    try { track.setPointerCapture(e.pointerId); } catch (err) {}
+                });
+                track.addEventListener("pointermove", (e) => {
+                    if (!dragging) return;
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    if (Math.abs(dy) > Math.abs(dx)) return;
+                    const widthPx = car.getBoundingClientRect().width || 1;
+                    const dragPct = (dx / widthPx) * (100 / total);
+                    track.style.transform = `translateX(${baseOffset + dragPct}%)`;
+                });
+                track.addEventListener("pointerup", (e) => {
+                    if (!dragging) return;
+                    dragging = false;
+                    track.style.transition = "";
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+                        if (dx < 0) show(current + 1); else show(current - 1);
+                    } else {
+                        show(current);
+                    }
+                });
+                track.addEventListener("pointercancel", () => { dragging = false; track.style.transition = ""; show(current); });
+            }
+        });
+    }
+
+    function achPlaceLabel(a) {
+        if (a.tier === "Campeón") return "1st Campeón";
+        if (a.tier === "Subcampeón") return "2nd Subcampeón";
+        if (a.tier === "3er-4to Lugar") return "3rd-4th";
+        return a.place;
     }
 
     function posTierClass(pos) {
@@ -1650,6 +2106,15 @@
         const idsDisplay = p.alternateIds.length ? p.alternateIds.join(", ") : "No tiene IDs registradas";
         const idsMuted = p.alternateIds.length ? "" : "muted";
         const bornMuted = p.born === "Por confirmar" ? "muted" : "";
+        const recentCarousel = renderCarousel(p.recent, m => `
+            <div class="match-row ${matchResultClass(p, m)}">
+                <div class="match-row-top">${m.date} · ${m.time || ""}</div>
+                <div class="match-row-score">
+                    <span>${m.teamA}</span>${scorePairHtml(m.scoreA, m.scoreB)}<span>${m.teamB}</span>
+                </div>
+                <div class="match-row-tourney">${m.tourney}</div>
+            </div>
+        `, `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`, { swipeOnly: true, externalCounter: true });
         panel.className = `info-panel ${medal}`;
         panel.innerHTML = `
             <div class="info-top-row">
@@ -1674,36 +2139,28 @@
                 <div><div class="info-field-label">Créditos aprox.</div><div class="info-field-value">${p.credits}</div></div>
             </div>
 
-            <div class="info-block-title">Partidas recientes</div>
-            ${p.recent.length ? p.recent.map(m => `
-                <div class="match-row">
-                    <div class="match-row-top">${m.date} · ${m.time || ""}</div>
-                    <div class="match-row-score">
-                        <span>${m.teamA}</span><span>${m.scoreA} : ${m.scoreB}</span><span>${m.teamB}</span>
-                    </div>
-                    <div class="match-row-tourney">${m.tourney}</div>
-                </div>
-            `).join("") : `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`}
+            <div class="info-block-title recent-title-row">Partidas recientes ${recentCarousel.counterHtml}</div>
+            ${recentCarousel.trackHtml}
 
             <div class="info-block-title">Logros</div>
-            ${p.achievements.length ? p.achievements.map(a => {
-                const tier = achTierClass(a.place);
+            ${renderCarousel(p.achievements, a => {
                 return `
-                <div class="ach-card ${tier}">
+                <div class="ach-card">
                     <div class="ach-top">
                         <span class="ach-date">${a.date}</span>
-                        <span class="ach-place ${tier}">${a.place}</span>
+                        <span class="ach-place">${achPlaceLabel(a)}</span>
                     </div>
                     <div class="ach-tournament">${a.tournament}</div>
-                    ${a.teamA ? `<div class="ach-score">${a.teamA} ${a.scoreA} : ${a.scoreB} ${a.teamB}</div>` : ""}
+                    ${a.teamA ? `<div class="ach-score">${a.teamA} ${scorePairHtml(a.scoreA, a.scoreB, true)} ${a.teamB}</div>` : ""}
                     <div class="ach-result">${a.result}</div>
                 </div>
             `;
-            }).join("") : `<div class="ach-card" style="color:#888;">Sin logros de primer o segundo lugar</div>`}
+            }, `<div class="ach-card" style="color:#888;">No hay logros registrados</div>`)}
         `;
         panel.scrollTop = 0;
         openModal("playerModalOverlay");
         document.getElementById("closePlayerModal").addEventListener("click", closePlayerModal);
+        initCarousels(panel);
     }
 
     function closePlayerModal() {
