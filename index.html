@@ -15,6 +15,8 @@
         }
         html {
             overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-padding-top: 76px;
         }
         body {
             min-height: 100vh;
@@ -30,6 +32,133 @@
             display: flex;
             flex-direction: column;
             gap: 34px;
+        }
+        .site-header {
+            margin: -20px -20px 24px -20px;
+            padding: 14px 20px;
+            background: #050505;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .site-header-inner {
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .site-header-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+        .site-header-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+        }
+        .site-header-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .menu-toggle {
+            width: 34px;
+            height: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3px 2px;
+            flex-shrink: 0;
+        }
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 68vh;
+            height: 68dvh;
+            max-height: 560px;
+            background: #070707;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            transform: translateY(-100%);
+            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
+            z-index: 900;
+            overflow-y: auto;
+        }
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 1.3rem;
+            color: #888888;
+            cursor: pointer;
+            padding: 6px;
+        }
+        .mobile-menu-link {
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .mobile-menu-link:hover {
+            color: #d4af37;
+        }
+        .mobile-menu-social {
+            position: absolute;
+            bottom: 16px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+        .mobile-menu-social-link {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #888888;
+            text-decoration: none;
+        }
+        .mobile-menu-social-link:hover {
+            color: #d4af37;
         }
         .mobile-container {
             width: 100%;
@@ -364,23 +493,21 @@
         .stats-section {
             background: rgba(0,0,0,0.2);
             border-radius: 16px;
-            padding: 12px 14px;
+            padding: 9px 10px;
         }
         .stats-title {
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             color: #ffffff;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 6px;
-            margin-bottom: 8px;
+            padding-bottom: 5px;
+            margin-bottom: 6px;
         }
         .stat-row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4px 0;
+            flex-direction: column;
             border-bottom: 1px solid rgba(255,255,255,0.03);
             cursor: pointer;
             transition: background 0.2s;
@@ -392,10 +519,18 @@
         .stat-row:last-child {
             border-bottom: none;
         }
+        .stat-row-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 6px;
+            padding: 3px 4px;
+        }
         .stat-value {
             font-weight: 500;
             color: #ffffff;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             flex: 1;
         }
         .stat-value.right {
@@ -403,23 +538,64 @@
             color: #cccccc;
             flex: 1;
         }
+        .stat-name-btn {
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            font-weight: 500;
+            font-size: 0.7rem;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            text-align: left;
+            flex: 1;
+        }
+        .stat-name-btn:hover {
+            text-decoration: underline;
+            text-decoration-color: rgba(255,255,255,0.35);
+        }
         .stat-label {
             color: #aaaaaa;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             text-align: center;
-            flex: 0 0 70px;
+            flex: 0 0 56px;
         }
         .stat-tag {
-            font-size: 0.55rem;
+            font-size: 0.46rem;
             color: #aaaaaa;
             background: rgba(255,255,255,0.05);
-            padding: 0 6px;
+            padding: 0 5px;
             border-radius: 10px;
-            margin-left: 4px;
+            margin-left: 3px;
+        }
+        .stat-row-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .stat-row.open .stat-row-detail {
+            max-height: 100px;
+        }
+        .stat-row-detail-inner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 14px;
+            padding: 2px 4px 8px 4px;
+            font-size: 0.6rem;
+            color: #777777;
+        }
+        .stat-row-detail-inner b {
+            color: #aaaaaa;
+            font-weight: 600;
         }
         .stat-label.captain {
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .stat-label.mvp {
             color: #d4af37;
             font-weight: 700;
         }
@@ -466,7 +642,6 @@
             height: auto;
             max-height: 350px;
             object-fit: contain;
-            background: #0a0a0a;
         }
         .footer-info {
             color: #aaaaaa;
@@ -725,7 +900,7 @@
             align-items: center;
             gap: 6px;
             background: rgba(212,175,55,0.04);
-            border-radius: 12px;
+            border-radius: 0 0 14px 0;
             padding: 12px 6px;
             cursor: pointer;
             border: 1px solid #d4af37;
@@ -778,6 +953,12 @@
             pointer-events: none;
             transition: opacity 0.22s ease, visibility 0.22s ease;
         }
+        #modalOverlay {
+            z-index: 1100;
+        }
+        #playerModalOverlay {
+            z-index: 1050;
+        }
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
@@ -818,12 +999,14 @@
             max-height: 85vh;
             max-height: 85dvh;
             overflow-y: auto;
+            overflow-x: hidden;
             background: #101010;
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 16px;
             padding: 20px;
             cursor: default;
             position: relative;
+            touch-action: pan-y;
         }
         .info-panel.gold {
             border: 1px solid rgba(212,175,55,0.7);
@@ -986,7 +1169,9 @@
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 10px;
             padding: 10px 12px;
-            margin-bottom: 8px;
+            margin-bottom: 14px;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
         .match-row.match-win {
             background: rgba(90,150,95,0.10);
@@ -997,6 +1182,35 @@
             border-color: rgba(160,80,80,0.35);
         }
         .match-row:last-child { margin-bottom: 0; }
+        .recent-list {
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            padding-right: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(212,175,55,0.45) rgba(255,255,255,0.06);
+        }
+        .recent-list:focus-visible {
+            outline: 1px solid rgba(212,175,55,0.6);
+            outline-offset: 2px;
+        }
+        .recent-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .recent-list::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        .recent-list::-webkit-scrollbar-thumb {
+            background: rgba(212,175,55,0.45);
+            border-radius: 6px;
+        }
+        .ach-score .score-high,
+        .ach-score .score-low,
+        .ach-score .score-flat {
+            color: #999999 !important;
+            font-weight: 500 !important;
+        }
         .match-row-top {
             font-size: 0.6rem;
             color: #888888;
@@ -1044,9 +1258,12 @@
             padding: 2px 8px;
             border-radius: 10px;
         }
-        .ach-card.gold { border-color: rgba(212,175,55,0.3); }
-        .ach-card.silver { border-color: rgba(200,200,200,0.3); }
-        .ach-card.gray { border-color: rgba(150,150,150,0.25); }
+        .ach-card.gold { border-color: rgba(212,175,55,0.35); background: rgba(212,175,55,0.05); }
+        .ach-card.silver { border-color: rgba(200,200,200,0.35); background: rgba(200,200,200,0.05); }
+        .ach-card.purple { border-color: rgba(147,112,219,0.4); background: rgba(147,112,219,0.06); }
+        .ach-place.gold { background: rgba(212,175,55,0.18); color: #e3c777; }
+        .ach-place.silver { background: rgba(190,190,190,0.18); color: #dcdcdc; }
+        .ach-place.purple { background: rgba(147,112,219,0.22); color: #c9b3f2; }
         .ach-tournament {
             font-size: 0.75rem;
             font-weight: 600;
@@ -1196,6 +1413,11 @@
             margin-top: 14px;
             line-height: 1.5;
         }
+        .trophy-summary-block {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(212,175,55,0.2);
+        }
 
         /* Site footer */
         .site-footer {
@@ -1233,6 +1455,36 @@
         .site-footer-text a {
             color: #888888;
         }
+        .footer-brand-names {
+            color: #999999;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .footer-extended {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            padding: 8px 0;
+            margin: 6px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer-extended-link {
+            color: #999999;
+            text-decoration: none;
+            font-size: 0.55rem;
+        }
+        .footer-extended-link:hover {
+            color: #d4af37;
+        }
+        .footer-terms-title {
+            color: #999999;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.55rem;
+            margin-top: 8px;
+        }
 
         @media (max-width: 400px) {
             .score-number { font-size: 2rem; }
@@ -1252,9 +1504,36 @@
     </style>
 </head>
 <body>
+
+<div class="site-header" id="top">
+    <div class="site-header-inner">
+        <div class="site-header-brand">
+            <img src="Untitled237.jpg" alt="ZC26" class="site-header-logo">
+            <span class="site-header-title">ZC26 ESPORTS</span>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-menu-close" id="menuClose">✕</span>
+    <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link>ÚLTIMO PARTIDO IMPORTA</a>
+    <a href="#ranking" class="mobile-menu-link" data-menu-link>RANKING</a>
+    <a href="#salon-fama" class="mobile-menu-link" data-menu-link>SALON DE LA FAMA</a>
+    <a href="#creditos" class="mobile-menu-link" data-menu-link>CREDITOS</a>
+    <div class="mobile-menu-social">
+        <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="mobile-menu-social-link">TikTok</a>
+        <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="mobile-menu-social-link">Discord</a>
+        <a href="mailto:zc26.esports.official@gmail.com" class="mobile-menu-social-link">Gmail</a>
+        <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="mobile-menu-social-link">PayPal</a>
+    </div>
+</div>
+
 <div class="page">
 
-    <div class="mobile-container">
+    <div class="mobile-container" id="ultimo-partido">
         <div class="match-card">
 
             <div class="match-header">
@@ -1348,20 +1627,44 @@
 
             <div class="stats-section">
                 <div class="stats-title">LEVIATAN ESPORT</div>
-                <div class="stat-row" data-player="julio" tabindex="0" role="button">
-                    <span class="stat-value">LEV | Julio <span class="stat-tag">@juliocr36</span></span>
-                    <span class="stat-label captain">Capitán</span>
-                    <span class="stat-value right">(SK | Julio)</span>
+                <div class="stat-row" data-player="julio" tabindex="0" role="button" aria-expanded="false">
+                    <div class="stat-row-main">
+                        <button type="button" class="stat-name-btn" data-open-player="julio">LEV | Julio <span class="stat-tag">@juliocr36</span></button>
+                        <span class="stat-label captain">Capitán</span>
+                        <span class="stat-value right">(SK | Julio)</span>
+                    </div>
+                    <div class="stat-row-detail">
+                        <div class="stat-row-detail-inner">
+                            <span>Puntos: <b>500 pts</b></span>
+                            <span>Equipo: <b>LEVIATÁN ESPORTS</b></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-row" data-player="taikisha" tabindex="0" role="button">
-                    <span class="stat-value">LEV | iXLCross <span class="stat-tag">@x_xv</span></span>
-                    <span class="stat-label">Titular</span>
-                    <span class="stat-value right">(タイキシャ)</span>
+                <div class="stat-row" data-player="taikisha" tabindex="0" role="button" aria-expanded="false">
+                    <div class="stat-row-main">
+                        <button type="button" class="stat-name-btn" data-open-player="taikisha">LEV | iXLCross <span class="stat-tag">@x_xv</span></button>
+                        <span class="stat-label mvp">Titular MVP</span>
+                        <span class="stat-value right">(タイキシャ)</span>
+                    </div>
+                    <div class="stat-row-detail">
+                        <div class="stat-row-detail-inner">
+                            <span>Puntos: <b>500 pts</b></span>
+                            <span>Equipo: <b>LEVIATÁN ESPORTS</b></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-row" data-player="jc" tabindex="0" role="button">
-                    <span class="stat-value">LEV | JC</span>
-                    <span class="stat-label">Titular</span>
-                    <span class="stat-value right">(~ T X -->JC)</span>
+                <div class="stat-row" data-player="jc" tabindex="0" role="button" aria-expanded="false">
+                    <div class="stat-row-main">
+                        <button type="button" class="stat-name-btn" data-open-player="jc">LEV | JC</button>
+                        <span class="stat-label">Titular</span>
+                        <span class="stat-value right">(~ T X -->JC)</span>
+                    </div>
+                    <div class="stat-row-detail">
+                        <div class="stat-row-detail-inner">
+                            <span>Puntos: <b>500 pts</b></span>
+                            <span>Equipo: <b>LEVIATÁN ESPORTS</b></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1382,14 +1685,17 @@
         </div>
     </div>
 
-    <div class="section-block">
+    <div class="section-block" id="ranking">
         <div class="section-title">RANKING</div>
         <div class="section-subtitle">Se actualiza con cada torneo de ZC26</div>
         <div class="panel" id="rankingList"></div>
+        <div class="rank-toggle-wrap">
+            <button type="button" class="rank-toggle-btn" id="rankToggleBtn">Mostrar Clasificación completa</button>
+        </div>
         <div class="section-updated">Última actualización: 13 ago, 2026</div>
     </div>
 
-    <div class="section-block">
+    <div class="section-block" id="salon-fama">
         <div class="section-title">Salón de la Fama</div>
         <div class="section-subtitle">Campeones a lo largo de los torneos ZC26</div>
         <div class="panel">
@@ -1397,12 +1703,26 @@
         </div>
     </div>
 
-    <div class="site-footer">
+    <div class="site-footer" id="creditos">
         <div class="site-footer-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
         <div class="site-footer-text">
             <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
             <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
-            <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:istzephyra@gmail.com">istzephyra@gmail.com</a></p>
+            <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
+            <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
+            <p>¿Quieres apoyar a ZC26? Con una donación desde 1 dólar a través de <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a> puedes obtener beneficios dentro de la comunidad.</p>
+            <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página — como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil — por favor contáctanos a través de los medios oficiales indicados arriba.</p>
+            <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
+            <div class="footer-extended">
+                <a href="#top" class="footer-extended-link">Volver arriba</a>
+                <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
+                <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
+                <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
+                <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
+            </div>
+            <p class="footer-terms-title">Términos de uso</p>
+            <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
+            <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
         </div>
     </div>
 
@@ -1440,7 +1760,7 @@
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["@x_xv", "タイキシャ", "Taikisha"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "6,000 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
@@ -1455,7 +1775,7 @@
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: ["@juliocr36", "SK | Julio"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "10,000 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
@@ -1470,7 +1790,7 @@
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["JC", "~ T X -->JC"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "10,000 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
@@ -1530,7 +1850,7 @@
             events: "1 (1v1)", titles: "1er Lugar", sets: "4 - 0", matches: "9 - 2",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["DiegoU_c", "@Diego"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "3,500 créditos",
             recent: [
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
@@ -1547,7 +1867,7 @@
             events: "1 (1v1)", titles: "1er Lugar", sets: "--", matches: "--",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["LcK alan55", "Alān"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "3,500 créditos",
             recent: [
                 { date: "29 mar 2026", time: "UTC-5", teamA: "Alān", scoreA: 2, teamB: "Me fies 5", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
             ],
@@ -1575,7 +1895,7 @@
             events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["@Tiagoti BS"],
-            winnings: "$0", credits: "166 créditos",
+            winnings: "$0", credits: "500 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
@@ -1589,7 +1909,7 @@
             events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: ["@AUMCxD"],
-            winnings: "$0", credits: "167 créditos",
+            winnings: "$0", credits: "500 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
@@ -1603,7 +1923,7 @@
             events: "1 (3v3)", titles: "3er-4to Lugar", sets: "0 - 1", matches: "0 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["@liamno014"],
-            winnings: "$0", credits: "167 créditos",
+            winnings: "$0", credits: "0 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
@@ -1659,7 +1979,7 @@
             events: "2 (1v1)", titles: "2do Lugar", sets: "3 - 2", matches: "7 - 5",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["me fies 5?"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "1,200 créditos",
             recent: [
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Javi", scoreA: 2, teamB: "Me fies 5?", scoreB: 1, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 1, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
@@ -1677,7 +1997,7 @@
             events: "1 (1v1)", titles: "2do Lugar", sets: "3 - 1", matches: "6 - 4",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["4dr1"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "1,000 créditos",
             recent: [
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 1, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
@@ -1719,7 +2039,7 @@
             events: "2 (1v1)", titles: "3er Lugar", sets: "3 - 2", matches: "7 - 6",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["javi826378", "Jave"],
-            winnings: "$0", credits: "0 créditos",
+            winnings: "$0", credits: "700 créditos",
             recent: [
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Javi", scoreA: 2, teamB: "Me fies 5?", scoreB: 1, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
@@ -1737,7 +2057,7 @@
             events: "1 (1v1)", titles: "3er Lugar", sets: "--", matches: "--",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["Jhustin"],
-            winnings: "$0", credits: "1,500 créditos",
+            winnings: "$0", credits: "500 créditos",
             recent: [
                 { date: "29 mar 2026", time: "UTC-5", teamA: "Jhustin", scoreA: 2, teamB: "Jav", scoreB: 0, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
             ],
@@ -1898,7 +2218,8 @@
             champDate: "Campeón 09-08-2026",
             tourney: "ZC26 GRAN FINAL",
             mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
-            desc: "LEVIATÁN ESPORTS se coronó campeón de la Gran Final ZC26 el 09/08/26 tras vencer 3-1 a Cachorritas repres (LPR). Título obtenido con la alineación de Julio (capitán), iXLCross y JOAR."
+            desc: "LEVIATÁN ESPORTS se coronó campeón de la Gran Final ZC26 el 09/08/26 tras vencer 3-1 a Cachorritas repres (LPR). Título obtenido con la alineación de Julio (capitán), iXLCross y JOAR.",
+            full: true
         }
     ];
 
@@ -1907,9 +2228,13 @@
         return `<img src="${f.file}" alt="${f.name}" title="${f.name}" style="${size ? 'width:100%;height:100%;object-fit:cover;' : ''}">`;
     }
 
+    let rankingExpanded = false;
+    const RANKING_TOP_COUNT = 10;
+
     function renderRanking() {
         const list = document.getElementById("rankingList");
-        list.innerHTML = PLAYERS.map((p, i) => {
+        const visiblePlayers = rankingExpanded ? PLAYERS : PLAYERS.slice(0, RANKING_TOP_COUNT);
+        list.innerHTML = visiblePlayers.map((p, i) => {
             const pos = i + 1; // posición derivada del orden del array: nunca se repite/empata
             const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
             const rowTier = pos === 1 ? "tier-gold" : pos === 2 ? "tier-silver" : pos === 3 ? "tier-bronze" : (pos >= 4 && pos <= 7) ? "tier-gray" : "";
@@ -2086,7 +2411,17 @@
         if (a.tier === "Campeón") return "1st Campeón";
         if (a.tier === "Subcampeón") return "2nd Subcampeón";
         if (a.tier === "3er-4to Lugar") return "3rd-4th";
+        if (a.tier === "1er Lugar") return "1st";
+        if (a.tier === "2do Lugar") return "2nd";
+        if (a.tier === "3er Lugar") return "3rd-4th";
         return a.place;
+    }
+
+    function achTierClass(a) {
+        if (a.tier === "Campeón" || a.tier === "1er Lugar") return "gold";
+        if (a.tier === "Subcampeón" || a.tier === "2do Lugar") return "silver";
+        if (a.tier === "3er-4to Lugar" || a.tier === "3er Lugar") return "purple";
+        return "";
     }
 
     function posTierClass(pos) {
@@ -2106,15 +2441,17 @@
         const idsDisplay = p.alternateIds.length ? p.alternateIds.join(", ") : "No tiene IDs registradas";
         const idsMuted = p.alternateIds.length ? "" : "muted";
         const bornMuted = p.born === "Por confirmar" ? "muted" : "";
-        const recentCarousel = renderCarousel(p.recent, m => `
-            <div class="match-row ${matchResultClass(p, m)}">
-                <div class="match-row-top">${m.date} · ${m.time || ""}</div>
-                <div class="match-row-score">
-                    <span>${m.teamA}</span>${scorePairHtml(m.scoreA, m.scoreB)}<span>${m.teamB}</span>
+        const recentListHtml = p.recent.length
+            ? `<div class="recent-list" id="recentList" tabindex="0">${p.recent.map(m => `
+                <div class="match-row ${matchResultClass(p, m)}">
+                    <div class="match-row-top">${m.date} · ${m.time || ""}</div>
+                    <div class="match-row-score">
+                        <span>${m.teamA}</span>${scorePairHtml(m.scoreA, m.scoreB)}<span>${m.teamB}</span>
+                    </div>
+                    <div class="match-row-tourney">${m.tourney}</div>
                 </div>
-                <div class="match-row-tourney">${m.tourney}</div>
-            </div>
-        `, `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`, { swipeOnly: true, externalCounter: true });
+            `).join("")}</div>`
+            : `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`;
         panel.className = `info-panel ${medal}`;
         panel.innerHTML = `
             <div class="info-top-row">
@@ -2137,18 +2474,20 @@
                 <div><div class="info-field-label">IDs alternos</div><div class="info-field-value ${idsMuted}">${idsDisplay}</div></div>
                 <div><div class="info-field-label">Ganancias aprox.</div><div class="info-field-value">${p.winnings}</div></div>
                 <div><div class="info-field-label">Créditos aprox.</div><div class="info-field-value">${p.credits}</div></div>
+                <div><div class="info-field-label">Redes sociales</div><div class="info-field-value muted">Por confirmar</div></div>
             </div>
 
-            <div class="info-block-title recent-title-row">Partidas recientes ${recentCarousel.counterHtml}</div>
-            ${recentCarousel.trackHtml}
+            <div class="info-block-title recent-title-row">Partidas recientes</div>
+            ${recentListHtml}
 
             <div class="info-block-title">Logros</div>
             ${renderCarousel(p.achievements, a => {
+                const tier = achTierClass(a);
                 return `
-                <div class="ach-card">
+                <div class="ach-card ${tier}">
                     <div class="ach-top">
                         <span class="ach-date">${a.date}</span>
-                        <span class="ach-place">${achPlaceLabel(a)}</span>
+                        <span class="ach-place ${tier}">${achPlaceLabel(a)}</span>
                     </div>
                     <div class="ach-tournament">${a.tournament}</div>
                     ${a.teamA ? `<div class="ach-score">${a.teamA} ${scorePairHtml(a.scoreA, a.scoreB, true)} ${a.teamB}</div>` : ""}
@@ -2161,6 +2500,20 @@
         openModal("playerModalOverlay");
         document.getElementById("closePlayerModal").addEventListener("click", closePlayerModal);
         initCarousels(panel);
+        const recentListEl = panel.querySelector("#recentList");
+        if (recentListEl) {
+            const firstRow = recentListEl.querySelector(".match-row");
+            if (firstRow) {
+                const rowStyle = getComputedStyle(firstRow);
+                const mb = parseFloat(rowStyle.marginBottom) || 0;
+                recentListEl.style.height = (firstRow.offsetHeight + mb) + "px";
+            }
+            recentListEl.addEventListener("keydown", (e) => {
+                const step = recentListEl.clientHeight || 90;
+                if (e.key === "ArrowDown") { e.preventDefault(); recentListEl.scrollBy({ top: step, behavior: "smooth" }); }
+                if (e.key === "ArrowUp") { e.preventDefault(); recentListEl.scrollBy({ top: -step, behavior: "smooth" }); }
+            });
+        }
     }
 
     function closePlayerModal() {
@@ -2169,6 +2522,31 @@
 
     function openTrophyModal(t) {
         const panel = document.getElementById("trophyInfoPanel");
+        if (t.full) {
+            panel.className = "info-panel gold";
+            panel.innerHTML = `<div class="info-close"><span id="closeTrophyModal">✕</span></div>`;
+            const original = document.querySelector("#ultimo-partido .match-card");
+            const clone = original.cloneNode(true);
+            panel.appendChild(clone);
+            const summary = document.createElement("div");
+            summary.className = "trophy-summary-block";
+            summary.innerHTML = `
+                <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
+                <div class="trophy-modal-title">${t.team}</div>
+                <div class="trophy-modal-sub">${t.champDate}</div>
+                <div class="trophy-modal-tourney">${t.tourney}</div>
+                <div class="trophy-modal-mode">${t.mode}</div>
+                <div class="trophy-modal-desc">${t.desc}</div>
+            `;
+            panel.appendChild(summary);
+            panel.scrollTop = 0;
+            openModal("trophyModalOverlay");
+            document.getElementById("closeTrophyModal").addEventListener("click", closeTrophyModal);
+            bindStatRows(clone);
+            bindEventItems(clone);
+            return;
+        }
+        panel.className = "info-panel";
         panel.innerHTML = `
             <div class="info-close"><span id="closeTrophyModal">✕</span></div>
             <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
@@ -2213,31 +2591,90 @@
     renderRanking();
     renderTrophies();
 
-    document.querySelectorAll(".stat-row[data-player]").forEach(row => {
-        const openFromRow = () => {
-            const player = PLAYERS.find(p => p.key === row.dataset.player);
-            if (player) openPlayerModal(player);
-        };
-        row.addEventListener("click", openFromRow);
-        row.addEventListener("keydown", e => {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openFromRow(); }
+    const rankToggleBtn = document.getElementById("rankToggleBtn");
+    if (rankToggleBtn) {
+        rankToggleBtn.addEventListener("click", () => {
+            rankingExpanded = !rankingExpanded;
+            rankToggleBtn.textContent = rankingExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
+            renderRanking();
         });
-    });
+    }
 
-    const items = document.querySelectorAll('.event-item');
-    const overlay = document.getElementById('modalOverlay');
-    const modalImg = document.getElementById('modalImage');
-    items.forEach(el => {
-        el.addEventListener('click', function(e) {
-            const src = this.getAttribute('data-image');
-            if (src) {
-                modalImg.src = src;
-                openModal('modalOverlay');
-            } else {
-                alert('Imagen no disponible');
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const menuClose = document.getElementById("menuClose");
+    function openMenu() {
+        mobileMenu.classList.add("open");
+        menuToggle.classList.add("active");
+        menuToggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+    function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.contains("open") ? closeMenu() : openMenu();
+        });
+        if (menuClose) menuClose.addEventListener("click", closeMenu);
+        mobileMenu.querySelectorAll("[data-menu-link]").forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute("href").slice(1);
+                closeMenu();
+                setTimeout(() => {
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 320);
+            });
+        });
+    }
+
+    function bindStatRows(root) {
+        root.querySelectorAll(".stat-row[data-player]").forEach(row => {
+            const toggleDetail = () => {
+                const open = row.classList.toggle("open");
+                row.setAttribute("aria-expanded", open ? "true" : "false");
+            };
+            row.addEventListener("click", (e) => {
+                if (e.target.closest("[data-open-player]")) return;
+                toggleDetail();
+            });
+            row.addEventListener("keydown", e => {
+                if (e.target === row && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggleDetail(); }
+            });
+            const nameBtn = row.querySelector("[data-open-player]");
+            if (nameBtn) {
+                nameBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const player = PLAYERS.find(p => p.key === row.dataset.player);
+                    if (player) openPlayerModal(player);
+                });
             }
         });
-    });
+    }
+
+    function bindEventItems(root) {
+        root.querySelectorAll(".event-item").forEach(el => {
+            el.addEventListener("click", function (e) {
+                const src = this.getAttribute("data-image");
+                if (src) {
+                    modalImg.src = src;
+                    openModal("modalOverlay");
+                } else {
+                    alert("Imagen no disponible");
+                }
+            });
+        });
+    }
+
+    const overlay = document.getElementById('modalOverlay');
+    const modalImg = document.getElementById('modalImage');
+    bindStatRows(document);
+    bindEventItems(document);
     overlay.addEventListener('click', function(e) {
         if (e.target === this || e.target === document.getElementById('closeModal')) {
             closeModal('modalOverlay');
