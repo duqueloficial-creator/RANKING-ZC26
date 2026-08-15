@@ -551,6 +551,7 @@
             text-align: right;
             color: #cccccc;
             flex: 1;
+            min-width: 78px;
         }
         .stat-name-btn {
             background: none;
@@ -1339,6 +1340,35 @@
             grid-template-columns: 1fr 1fr;
             gap: 8px 12px;
         }
+        .info-grid .span-2 {
+            grid-column: 1 / -1;
+        }
+        .contrib-social-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 2px;
+        }
+        .contrib-social-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .contrib-social-platform {
+            font-size: 0.6rem;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .contrib-social-handle {
+            font-size: 0.8rem;
+            color: #5aa9e6;
+            font-weight: 600;
+        }
+        .contrib-social-item:hover .contrib-social-handle {
+            text-decoration: underline;
+        }
         .info-field-label {
             font-size: 0.6rem;
             color: #888888;
@@ -1848,11 +1878,13 @@
     <span class="mobile-menu-close" id="menuClose">✕</span>
     <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link>ÚLTIMO PARTIDO IMPORTA</a>
     <a href="#ranking" class="mobile-menu-link" data-menu-link>RANKING</a>
+    <a href="#contribuciones" class="mobile-menu-link" data-menu-link>CONTRIBUCIONES</a>
     <a href="#salon-fama" class="mobile-menu-link" data-menu-link>SALON DE LA FAMA</a>
     <a href="#creditos" class="mobile-menu-link" data-menu-link>CREDITOS</a>
     <div class="mobile-menu-social">
         <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="mobile-menu-social-link">TikTok</a>
         <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="mobile-menu-social-link">Discord</a>
+        <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="mobile-menu-social-link">YouTube</a>
         <a href="mailto:zc26.esports.official@gmail.com" class="mobile-menu-social-link">Gmail</a>
         <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="mobile-menu-social-link">PayPal</a>
     </div>
@@ -1958,6 +1990,7 @@
                     <div class="stat-row-main">
                         <button type="button" class="stat-name-btn" data-open-player="julio">LEV | Julio <span class="stat-tag">@juliocr36</span></button>
                         <span class="stat-meta">
+                            <span class="mvp-badge" style="visibility:hidden;" aria-hidden="true">MVP</span>
                             <span class="stat-label captain">Capitán</span>
                             <span class="stat-value right">(SK | Julio)</span>
                         </span>
@@ -1989,6 +2022,7 @@
                     <div class="stat-row-main">
                         <button type="button" class="stat-name-btn" data-open-player="jc">LEV | JC</button>
                         <span class="stat-meta">
+                            <span class="mvp-badge" style="visibility:hidden;" aria-hidden="true">MVP</span>
                             <span class="stat-label">Titular</span>
                             <span class="stat-value right">(~ T X -->JC)</span>
                         </span>
@@ -2036,6 +2070,16 @@
         <div class="section-updated">Última actualización: 15 ago, 2026</div>
     </div>
 
+    <div class="section-block" id="contribuciones">
+        <div class="section-title">CONTRIBUCIONES</div>
+        <div class="section-subtitle">Se actualiza con cada contribucion a ZC26</div>
+        <div class="panel" id="contribList"></div>
+        <div class="rank-toggle-wrap">
+            <button type="button" class="rank-toggle-btn" id="contribToggleBtn">Mostrar Clasificación completa</button>
+        </div>
+        <div class="section-updated">Última actualización: 6 dic, 2025</div>
+    </div>
+
     <div class="section-block" id="salon-fama">
         <div class="section-title">Salón de la Fama</div>
         <div class="section-subtitle">Campeones a lo largo de los torneos ZC26</div>
@@ -2050,7 +2094,7 @@
             <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
             <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
             <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
-            <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
+            <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
             <p>¿Quieres apoyar a ZC26? Con una donación desde 1 dólar a través de <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a> puedes obtener beneficios dentro de la comunidad.</p>
             <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página — como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil — por favor contáctanos a través de los medios oficiales indicados arriba.</p>
             <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
@@ -2058,6 +2102,7 @@
                 <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
                 <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
                 <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
+                <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
                 <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
             </div>
             <p class="footer-terms-title">Términos de uso</p>
@@ -2067,7 +2112,7 @@
     </div>
 
     <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 1.4.0.0</div>
+    <div class="version-tag">Versión 1.5.2.0</div>
 
 </div>
 
@@ -2118,7 +2163,7 @@
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: ["@juliocr36", "SK | Julio"],
-            winnings: "$0", credits: "10,000 créditos",
+            winnings: "$10.59", credits: "10,000 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
@@ -2624,6 +2669,106 @@
         return `<img src="${f.file}" alt="${f.name}" title="${f.name}" style="${size ? 'width:100%;height:100%;object-fit:cover;' : ''}">`;
     }
 
+    const CONTRIBUTIONS = [
+        {
+            name: "IstZephyra", country: "PE", amount: 20.59, bestAmount: 10.59,
+            status: "Activo", supportTeam: "LEVIATÁN ESPORTS",
+            alternateIds: ["Zephyra", "byezephyra", "byzephyra"],
+            socials: [
+                { platform: "TikTok", handle: "@byzephyra", url: "https://www.tiktok.com/@byzephyra?_r=1&_t=ZS-98uYe3DX0JJ" },
+                { platform: "YouTube", handle: "@byzephyra", url: "https://www.youtube.com/@IstZephyra" },
+                { platform: "Instagram", handle: "@byezephyra", url: "https://www.instagram.com/byezephyra?igsh=Yzc4ODZiMm5hMzFs" }
+            ]
+        }
+    ];
+    let contribExpanded = false;
+    const CONTRIB_TOP_COUNT = 10;
+
+    function renderContributions() {
+        const list = document.getElementById("contribList");
+        if (!list) return;
+        const visible = contribExpanded ? CONTRIBUTIONS : CONTRIBUTIONS.slice(0, CONTRIB_TOP_COUNT);
+        list.innerHTML = visible.map((c, i) => {
+            const pos = i + 1;
+            const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
+            const rowTier = pos === 1 ? "tier-gold" : pos === 2 ? "tier-silver" : pos === 3 ? "tier-bronze" : (pos >= 4 && pos <= 7) ? "tier-gray" : "";
+            return `
+            <div class="rank-item" data-index="${i}">
+                <div class="rank-row ${rowTier}" data-toggle-contrib="${i}" tabindex="0" role="button" aria-expanded="false">
+                    <span class="rank-pos ${medal}">${pos}</span>
+                    <span class="rank-flag">${flagImg(c.country, true)}</span>
+                    <button class="rank-name ${medal}" data-open-contrib="${i}">${c.name}</button>
+                    <span class="rank-meta">
+                        <span class="rank-points">$${c.amount.toFixed(2)}</span>
+                    </span>
+                </div>
+                <div class="rank-detail">
+                    <div class="rank-detail-inner">
+                        <div class="rank-detail-title full">Datos destacados</div>
+                        <div class="rank-highlight-grid full">
+                            <div class="rank-highlight-item"><span class="rank-highlight-value ${medal}">${pos}º</span><span class="rank-highlight-label">Clasificación actual</span></div>
+                            <div class="rank-highlight-item"><span class="rank-highlight-value">$${c.amount.toFixed(2)}</span><span class="rank-highlight-label">Contribución total</span></div>
+                            <div class="rank-highlight-item"><span class="rank-highlight-value">$${c.bestAmount.toFixed(2)}</span><span class="rank-highlight-label">Mejor contribución</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        }).join("");
+        list.querySelectorAll("[data-toggle-contrib]").forEach(row => {
+            const toggle = () => {
+                const item = row.closest(".rank-item");
+                const open = item.classList.toggle("open");
+                row.setAttribute("aria-expanded", open ? "true" : "false");
+            };
+            row.addEventListener("click", toggle);
+            row.addEventListener("keydown", e => {
+                if (e.target === row && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggle(); }
+            });
+        });
+        list.querySelectorAll("[data-open-contrib]").forEach(nameBtn => {
+            nameBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const idx = Number(nameBtn.dataset.openContrib);
+                openContribModal(CONTRIBUTIONS[idx], idx + 1);
+            });
+        });
+    }
+
+    function openContribModal(c, pos) {
+        const panel = document.getElementById("playerInfoPanel");
+        const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
+        panel.className = `info-panel ${medal}`.trim();
+        panel.style.backgroundImage = "";
+        const socialsHtml = (c.socials && c.socials.length)
+            ? `<div class="contrib-social-list">${c.socials.map(s => `<a class="contrib-social-item" href="${s.url}" target="_blank" rel="noopener"><span class="contrib-social-handle">${s.handle}</span><span class="contrib-social-platform">${s.platform}</span></a>`).join("")}</div>`
+            : `<div class="info-field-value muted">Por confirmar</div>`;
+        panel.innerHTML = `<div class="panel-content">
+            <div class="info-top-row">
+                <div class="info-position-line">
+                    <span class="info-pos-badge ${medal} ${posTierClass(pos)}">${pos}</span>
+                    <span class="info-position-label">Posición en el ranking</span>
+                </div>
+                <span class="info-close-x" id="closePlayerModal">✕</span>
+            </div>
+            <div class="info-name"><span class="info-flag">${flagImg(c.country, true)}</span>${c.name}</div>
+
+            <div class="info-block-title">Información</div>
+            <div class="info-grid">
+                <div><div class="info-field-label">Nacionalidad</div><div class="info-field-value">${FLAGS[c.country].name}</div></div>
+                <div><div class="info-field-label">Región</div><div class="info-field-value">${FLAGS[c.country].region}</div></div>
+                <div><div class="info-field-label">Estado</div><div class="info-field-value ${c.status === "Activo" ? "active" : "inactive"}">${c.status}</div></div>
+                <div><div class="info-field-label">Contribucion</div><div class="info-field-value">$${c.amount.toFixed(2)}</div></div>
+                <div><div class="info-field-label">Equipo de Apoyo</div><div class="info-field-value">${c.supportTeam}</div></div>
+                <div><div class="info-field-label">IDs alternos</div><div class="info-field-value">${c.alternateIds.join(", ")}</div></div>
+                <div class="span-2"><div class="info-field-label">Redes sociales</div>${socialsHtml}</div>
+            </div>
+        </div>`;
+        panel.scrollTop = 0;
+        openModal("playerModalOverlay");
+        document.getElementById("closePlayerModal").addEventListener("click", closePlayerModal);
+    }
+
     let rankingExpanded = false;
     const RANKING_TOP_COUNT = 10;
 
@@ -2825,7 +2970,7 @@
         if (a.tier === "1er Lugar") return "1st";
         if (a.tier === "2do Lugar") return "2nd";
         if (a.tier === "3er Lugar") return "3rd-4th";
-        if (a.tier === "4to Lugar") return "4th";
+        if (a.tier === "4to Lugar") return "3rd-4th";
         return a.place;
     }
 
@@ -3190,6 +3335,7 @@
 
     renderRanking();
     renderTrophies();
+    renderContributions();
 
     const rankToggleBtn = document.getElementById("rankToggleBtn");
     if (rankToggleBtn) {
@@ -3197,6 +3343,15 @@
             rankingExpanded = !rankingExpanded;
             rankToggleBtn.textContent = rankingExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
             renderRanking();
+        });
+    }
+
+    const contribToggleBtn = document.getElementById("contribToggleBtn");
+    if (contribToggleBtn) {
+        contribToggleBtn.addEventListener("click", () => {
+            contribExpanded = !contribExpanded;
+            contribToggleBtn.textContent = contribExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
+            renderContributions();
         });
     }
 
