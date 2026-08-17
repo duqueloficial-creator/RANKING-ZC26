@@ -209,8 +209,8 @@
         .header-status {
             font-size: 0.65rem;
             text-transform: uppercase;
-            color: #d4af37;
-            background: rgba(255,215,0,0.1);
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
             padding: 4px 10px;
             letter-spacing: 1px;
         }
@@ -378,30 +378,8 @@
         .ban-icon {
             width: 18px;
             height: 18px;
-            border-radius: 50%;
-            background: #b33a3a;
-            position: relative;
+            object-fit: contain;
             flex-shrink: 0;
-        }
-        .ban-icon::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 65%;
-            height: 2px;
-            background: white;
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-        .ban-icon::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 65%;
-            height: 2px;
-            background: white;
-            transform: translate(-50%, -50%) rotate(45deg);
         }
         .ban-text {
             background: rgba(212,175,55,0.08);
@@ -644,7 +622,7 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #aaaaaa;
+            color: #ffffff;
             background: rgba(255,255,255,0.03);
             padding: 2px 14px;
             margin-bottom: 2px;
@@ -654,8 +632,8 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #d4af37;
-            text-shadow: 0 0 12px rgba(255,215,0,0.4);
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(255,255,255,0.35);
             line-height: 1.2;
             text-align: center;
             white-space: nowrap;
@@ -823,46 +801,54 @@
             color: #ffffff;
         }
         .rank-pos.gold {
-            background: linear-gradient(90deg, #7d6a4a 0%, #c9b384 35%, #e8ddc9 55%, #c9b384 75%, #7d6a4a 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255,255,255,0.22);
+            background: none;
+            color: #f2dfa0;
         }
         .rank-pos.silver {
-            background: linear-gradient(90deg, #888888 0%, #d6d6d6 35%, #ffffff 55%, #d6d6d6 75%, #888888 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255,255,255,0.25);
+            background: none;
+            color: #e6e6e6;
         }
         .rank-pos.bronze {
-            background: linear-gradient(90deg, #6f5a44 0%, #b3927a 35%, #ddc9ba 55%, #b3927a 75%, #6f5a44 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255,255,255,0.18);
+            background: none;
+            color: #e0ab7f;
+        }
+        .zcf-subpos {
+            font-size: 0.55rem;
+            color: #888888;
+            font-weight: 600;
+            margin-left: -8px;
+            flex-shrink: 0;
         }
         .rank-name.gold {
             background: linear-gradient(90deg, #7d6a4a 0%, #c9b384 35%, #e8ddc9 55%, #c9b384 75%, #7d6a4a 100%);
+            background-size: 250% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.22);
+            animation: rankNameShimmer 4.5s ease-in-out infinite alternate;
         }
         .rank-name.silver {
             background: linear-gradient(90deg, #888888 0%, #d6d6d6 35%, #ffffff 55%, #d6d6d6 75%, #888888 100%);
+            background-size: 250% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.25);
+            animation: rankNameShimmer 4.5s ease-in-out infinite alternate;
         }
         .rank-name.bronze {
             background: linear-gradient(90deg, #6f5a44 0%, #b3927a 35%, #ddc9ba 55%, #b3927a 75%, #6f5a44 100%);
+            background-size: 250% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.18);
+            animation: rankNameShimmer 4.5s ease-in-out infinite alternate;
+        }
+        @keyframes rankNameShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .rank-flag {
             width: 22px;
@@ -887,8 +873,8 @@
             color: #ffffff;
             background: none;
             border: none;
-            padding: 10px 8px;
-            margin: -10px -8px;
+            padding: 10px 18px;
+            margin: -10px -18px;
             font-family: inherit;
             text-align: left;
             cursor: pointer;
@@ -1059,17 +1045,11 @@
             flex-direction: column;
             align-items: center;
             gap: 6px;
-            background: rgba(212,175,55,0.04);
-            border-radius: 0 0 14px 0;
             padding: 12px 6px;
             cursor: pointer;
-            border: 2px solid;
-            border-image: linear-gradient(135deg, #7d6a4a 0%, #c9b384 35%, #e8ddc9 55%, #c9b384 75%, #7d6a4a 100%) 1;
-            box-shadow: 0 0 12px rgba(227,199,119,0.4), inset 0 0 10px rgba(227,199,119,0.1);
         }
         .trophy-item:hover {
             background: rgba(212,175,55,0.06);
-            box-shadow: 0 0 16px rgba(227,199,119,0.55), inset 0 0 10px rgba(227,199,119,0.16);
         }
         .trophy-logo {
             width: 44px;
@@ -1173,6 +1153,15 @@
             cursor: default;
             position: relative;
             touch-action: pan-y;
+            scrollbar-width: none;
+        }
+        .info-panel.flat-corner {
+            border-radius: 0;
+        }
+        .info-panel::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            background: transparent;
         }
         .info-panel.gold {
             border: 2px solid;
@@ -1352,7 +1341,7 @@
         .contrib-social-item {
             display: flex;
             align-items: baseline;
-            gap: 8px;
+            gap: 4px;
             text-decoration: none;
         }
         .contrib-social-platform {
@@ -1363,7 +1352,7 @@
         }
         .contrib-social-handle {
             font-size: 0.8rem;
-            color: #5aa9e6;
+            color: #ffffff;
             font-weight: 600;
         }
         .contrib-social-item:hover .contrib-social-handle {
@@ -1420,23 +1409,16 @@
             overflow-x: hidden;
             scroll-snap-type: y mandatory;
             padding-right: 8px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(212,175,55,0.45) rgba(255,255,255,0.06);
+            scrollbar-width: none;
         }
         .recent-list:focus-visible {
             outline: 1px solid rgba(212,175,55,0.6);
             outline-offset: 2px;
         }
         .recent-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        .recent-list::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-            border-radius: 6px;
-        }
-        .recent-list::-webkit-scrollbar-thumb {
-            background: rgba(212,175,55,0.45);
-            border-radius: 6px;
+            width: 0;
+            height: 0;
+            background: transparent;
         }
         .ach-score .score-high,
         .ach-score .score-low,
@@ -1858,6 +1840,422 @@
             .modal-content img { max-height: 80vh; max-height: 80dvh; }
             .info-grid { grid-template-columns: 1fr; }
         }
+
+        /* ===================================================================
+           ZC26 · Filtro de Ranking (bloque independiente, prefijo "zcf-")
+           No reutiliza ni modifica clases existentes para evitar conflictos.
+        =================================================================== */
+        .zcf-btn-row {
+            display: flex;
+            justify-content: center;
+            margin-top: -4px;
+        }
+        .zcf-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #5aa9e6;
+            background: rgba(90,169,230,0.08);
+            border: 1px solid rgba(90,169,230,0.35);
+            border-radius: 20px;
+            padding: 7px 18px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .zcf-btn:hover {
+            background: rgba(90,169,230,0.16);
+        }
+        .zcf-btn:active {
+            transform: scale(0.97);
+        }
+        .zcf-btn-icon {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+        }
+        .zcf-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.22s ease, visibility 0.22s ease;
+            padding: 0;
+        }
+        .zcf-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .zcf-panel {
+            width: 100%;
+            max-width: 480px;
+            max-height: 85vh;
+            max-height: 85dvh;
+            overflow-y: auto;
+            overscroll-behavior-y: contain;
+            background: #101010;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-bottom: none;
+            border-radius: 18px 18px 0 0;
+            padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+            transform: translateY(24px);
+            opacity: 0;
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.25s ease;
+        }
+        .zcf-overlay.open .zcf-panel {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .zcf-panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+        .zcf-panel-title {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+        .zcf-head-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .zcf-reset-btn {
+            background: none;
+            border: 1px solid rgba(79,157,255,0.5);
+            color: #7fb4ff;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+        .zcf-reset-btn:hover {
+            background: rgba(79,157,255,0.12);
+            color: #ffffff;
+        }
+        .zcf-close-x {
+            font-size: 0.9rem;
+            color: #888888;
+            cursor: pointer;
+            padding: 4px 6px;
+            line-height: 1;
+        }
+        .zcf-close-x:hover {
+            color: #cccccc;
+        }
+        .zcf-section-label {
+            font-size: 0.68rem;
+            color: #999999;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin: 16px 0 8px;
+        }
+        .zcf-search-wrap {
+            position: relative;
+        }
+        .zcf-search-input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.05);
+            color: #ffffff;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .zcf-search-input::placeholder {
+            color: #777777;
+        }
+        .zcf-search-input:focus {
+            border-color: #4f9dff;
+        }
+        .zcf-suggestions {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: #161616;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 10px;
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 5;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .zcf-suggestion-item {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: #dddddd;
+            padding: 10px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .zcf-suggestion-item:last-child {
+            border-bottom: none;
+        }
+        .zcf-suggestion-item:hover {
+            background: rgba(79,157,255,0.14);
+            color: #ffffff;
+        }
+        .zcf-suggestion-item b {
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .zcf-suggestion-id {
+            font-size: 0.68rem;
+            color: #888888;
+            margin-left: 6px;
+        }
+        .zcf-suggestion-empty {
+            padding: 12px;
+            font-size: 0.72rem;
+            color: #888888;
+            text-align: center;
+        }
+        .zcf-checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .zcf-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: #dddddd;
+            cursor: pointer;
+            user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .zcf-checkbox-box {
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            border-radius: 4px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .zcf-checkbox-item.checked {
+            border-color: #4f9dff;
+            background: rgba(79,157,255,0.1);
+            color: #ffffff;
+        }
+        .zcf-checkbox-item.checked .zcf-checkbox-box {
+            background: #2e7dff;
+            border-color: #2e7dff;
+        }
+        .zcf-checkbox-item.checked .zcf-checkbox-box::after,
+        .zcf-country-item.checked .zcf-checkbox-box::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #ffffff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .zcf-country-scroll {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 132px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            padding-right: 2px;
+            cursor: grab;
+        }
+        .zcf-country-scroll::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            background: transparent;
+        }
+        .zcf-country-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: #dddddd;
+            cursor: pointer;
+            user-select: none;
+            flex-shrink: 0;
+        }
+        .zcf-country-item.checked {
+            border-color: #4f9dff;
+            background: rgba(79,157,255,0.1);
+            color: #ffffff;
+        }
+        .zcf-country-item.checked .zcf-checkbox-box {
+            background: #2e7dff;
+            border-color: #2e7dff;
+        }
+        .zcf-no-results {
+            margin-top: 16px;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #ff8888;
+            background: rgba(255,80,80,0.08);
+            border: 1px solid rgba(255,80,80,0.2);
+            border-radius: 10px;
+        }
+        .zcf-empty-ranking {
+            text-align: center;
+            color: #888888;
+            font-size: 0.8rem;
+            padding: 26px 10px;
+        }
+        .zcf-title-lg {
+            font-size: 1.18rem;
+        }
+        .zcf-pts-dec {
+            color: inherit;
+            font-size: 1em;
+            font-weight: inherit;
+        }
+
+        /* ===================================================================
+           ZC26 · Última Clasificación (bloque independiente, prefijo "zclc-")
+        =================================================================== */
+        .zclc-wrap {
+            position: relative;
+        }
+        .zclc-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x proximity;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 2px 2px 4px;
+            cursor: grab;
+        }
+        .zclc-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .zclc-card {
+            flex: 0 0 auto;
+            width: 148px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 16px 12px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 4px;
+            scroll-snap-align: start;
+            position: relative;
+        }
+        .zclc-card-flag {
+            width: 26px;
+            height: 18px;
+            border-radius: 0;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .zclc-card-name {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+            padding: 2px 4px;
+            font-family: inherit;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .zclc-card-name:hover {
+            text-decoration: underline;
+        }
+        .zclc-card-label {
+            font-size: 0.6rem;
+            color: #999999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            margin-top: 4px;
+        }
+        .zclc-card-value {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-top: 2px;
+        }
+
+        /* ===================================================================
+           ZC26 · Barra de desplazamiento visual con auto-desvanecido
+           (bloque independiente, clases genéricas reutilizables "zc-hbar")
+        =================================================================== */
+        .zc-hbar {
+            height: 4px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+            opacity: 0 !important;
+            visibility: hidden;
+            transition: none;
+        }
+        .zc-hbar.zc-visible {
+            opacity: 0 !important;
+        }
+        .zc-hbar-thumb {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, #2f7dff, #57a2ff);
+            border-radius: 4px;
+            transform: translateX(0);
+            transition: transform 0.05s linear;
+        }
+        .zc-dragging {
+            cursor: grabbing !important;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
@@ -1929,14 +2327,6 @@
                 </div>
             </div>
 
-            <div class="bans-wrapper">
-                <div class="bans-title">Baneos globales</div>
-                <div class="bans">
-                    <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">belle y spike</span></div>
-                    <div class="ban-item"><span class="ban-icon"></span><span class="ban-text">Bibi y Nori</span></div>
-                </div>
-            </div>
-
             <div class="match-events">
                 <div class="events-col">
                     <div class="event-item" data-image="kockout.jpg">
@@ -1981,6 +2371,14 @@
                             <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="bans-wrapper">
+                <div class="bans-title">Baneos globales</div>
+                <div class="bans">
+                    <div class="ban-item"><img class="ban-icon" src="Untitled262.png" alt="Ban"><span class="ban-text">belle y spike</span></div>
+                    <div class="ban-item"><img class="ban-icon" src="Untitled262.png" alt="Ban"><span class="ban-text">Bibi y Nori</span></div>
                 </div>
             </div>
 
@@ -2061,13 +2459,32 @@
     </div>
 
     <div class="section-block" id="ranking">
-        <div class="section-title">RANKING</div>
+        <div class="section-title zcf-title-lg">RANKING</div>
         <div class="section-subtitle">Se actualiza con cada torneo de ZC26</div>
+        <div class="zcf-btn-row">
+            <button type="button" class="zcf-btn" id="zcfOpenBtn">
+                <img src="Untitled260.png" alt="" class="zcf-btn-icon" onerror="this.style.display='none'">
+                <span>Filtro</span>
+            </button>
+        </div>
         <div class="panel" id="rankingList"></div>
         <div class="rank-toggle-wrap">
             <button type="button" class="rank-toggle-btn" id="rankToggleBtn">Mostrar Clasificación completa</button>
         </div>
         <div class="section-updated">Última actualización: 15 ago, 2026</div>
+    </div>
+
+    <!-- ===================================================================
+         ZC26 · Última Clasificación (bloque independiente, prefijo "zclc-")
+         Carrusel horizontal con lo más destacado del ranking actual.
+    =================================================================== -->
+    <div class="section-block" id="ultima-clasificacion">
+        <div class="section-title">Última Clasificación</div>
+        <div class="section-subtitle">Lo más destacado del ranking</div>
+        <div class="zclc-wrap">
+            <div class="zclc-scroll" id="zclcScroll"></div>
+            <div class="zc-hbar" id="zclcTrack"><div class="zc-hbar-thumb" id="zclcThumb"></div></div>
+        </div>
     </div>
 
     <div class="section-block" id="contribuciones">
@@ -2112,7 +2529,7 @@
     </div>
 
     <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 1.5.2.0</div>
+    <div class="version-tag">Versión 1.5.7.1</div>
 
 </div>
 
@@ -2127,6 +2544,61 @@
 
 <div class="modal-overlay" id="trophyModalOverlay">
     <div class="info-panel" id="trophyInfoPanel"></div>
+</div>
+
+<!-- ===================================================================
+     ZC26 · Menú de Filtros (bloque HTML independiente, prefijo "zcf-")
+     Vive fuera del flujo normal de la página; se abre como overlay.
+=================================================================== -->
+<div class="zcf-overlay" id="zcfOverlay">
+    <div class="zcf-panel" id="zcfPanel">
+        <div class="zcf-panel-head">
+            <div class="zcf-panel-title">Filtros</div>
+            <div class="zcf-head-actions">
+                <button type="button" class="zcf-reset-btn" id="zcfResetBtn">Restablecer filtros</button>
+                <span class="zcf-close-x" id="zcfCloseBtn">✕</span>
+            </div>
+        </div>
+
+        <div class="zcf-section-label">Jugador</div>
+        <div class="zcf-search-wrap" id="zcfSearchWrap">
+            <input type="text" id="zcfSearchInput" class="zcf-search-input" placeholder="Buscar por nombre o ID..." autocomplete="off" spellcheck="false">
+            <div class="zcf-suggestions" id="zcfSuggestions"></div>
+        </div>
+
+        <div class="zcf-section-label">Región</div>
+        <div class="zcf-checkbox-group" id="zcfRegionGroup">
+            <label class="zcf-checkbox-item" data-region="NA"><span class="zcf-checkbox-box"></span>NA</label>
+            <label class="zcf-checkbox-item" data-region="SA"><span class="zcf-checkbox-box"></span>SA</label>
+            <label class="zcf-checkbox-item" data-region="EMEA"><span class="zcf-checkbox-box"></span>EMEA</label>
+            <label class="zcf-checkbox-item" data-region="ASIA"><span class="zcf-checkbox-box"></span>ASIA</label>
+        </div>
+
+        <div class="zcf-section-label">País</div>
+        <div class="zcf-country-scroll" id="zcfCountryScroll"></div>
+
+        <div class="zcf-section-label">Orden</div>
+        <div class="zcf-checkbox-group" id="zcfOrderGroup">
+            <label class="zcf-checkbox-item" data-order="desc"><span class="zcf-checkbox-box"></span>Mayor a menor</label>
+            <label class="zcf-checkbox-item" data-order="asc"><span class="zcf-checkbox-box"></span>Menor a mayor</label>
+        </div>
+
+        <div class="zcf-section-label">Actividad</div>
+        <div class="zcf-checkbox-group" id="zcfActivityGroup">
+            <label class="zcf-checkbox-item" data-activity="Activo"><span class="zcf-checkbox-box"></span>Activo</label>
+            <label class="zcf-checkbox-item" data-activity="Inactivo"><span class="zcf-checkbox-box"></span>Inactivo</label>
+        </div>
+
+        <div class="zcf-section-label">Movimiento</div>
+        <div class="zcf-checkbox-group" id="zcfMovementGroup">
+            <label class="zcf-checkbox-item" data-movement="up"><span class="zcf-checkbox-box"></span>Subida</label>
+            <label class="zcf-checkbox-item" data-movement="down"><span class="zcf-checkbox-box"></span>Descenso</label>
+            <label class="zcf-checkbox-item" data-movement="new"><span class="zcf-checkbox-box"></span>Nuevo</label>
+            <label class="zcf-checkbox-item" data-movement="same"><span class="zcf-checkbox-box"></span>Nada</label>
+        </div>
+
+        <div class="zcf-no-results" id="zcfNoResults" style="display:none;">No se encontró ningún jugador.</div>
+    </div>
 </div>
 
 <script>
@@ -2192,7 +2664,7 @@
             name: "Nacaru", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 160,
             events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
-            alternateIds: [],
+            alternateIds: ["nacaruuh"],
             winnings: "$0", credits: "0 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
@@ -2222,7 +2694,7 @@
             name: "Ninja", country: "MX", team: "Cachorritas repres.", teamTag: "LPR", points: 130,
             events: "1 (3v3)", titles: "Subcampeón", sets: "1 - 3", matches: "3 - 7",
             born: "Por confirmar", status: "Activo", role: "Player",
-            alternateIds: [],
+            alternateIds: ["ninja._.1081"],
             winnings: "$0", credits: "0 créditos",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
@@ -2535,7 +3007,7 @@
         },
         {
             key: "hetcr",
-            name: "Hetcr", country: "GT", team: "Jugador individual (1vs1)", teamTag: "", points: 15,
+            name: "Hetcr", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 15,
             events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "1 - 2",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["Hetcr894"],
@@ -2769,27 +3241,416 @@
         document.getElementById("closePlayerModal").addEventListener("click", closePlayerModal);
     }
 
+    /* ===================================================================
+       ZC26 · Lógica del Filtro de Ranking (bloque independiente, prefijo "zcf")
+       No modifica variables/funciones existentes, solo las consulta.
+    =================================================================== */
+    let zcfSearchQuery = "";
+    let zcfSelectedRegions = new Set();
+    let zcfSelectedCountries = new Set();
+    let zcfSelectedActivity = new Set();
+    let zcfSelectedMovement = new Set();
+    let zcfSortOrder = "desc"; // "desc" = Top 1 primero (mayor a menor) · "asc" = último del top primero (menor a mayor)
+
+    function zcFormatPoints(value, opts) {
+        opts = opts || {};
+        const negative = value < 0;
+        const abs = Math.abs(value);
+        const parts = abs.toFixed(2).split(".");
+        const sign = negative ? "-" : (opts.showPlus ? "+" : "");
+        return `${sign}${parts[0]}<span class="zcf-pts-dec">.${parts[1]}</span>`;
+    }
+
+    function zcfNormalize(str) {
+        return (str || "").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function zcfGetRegionCode(country) {
+        const region = (typeof FLAGS !== "undefined" && FLAGS[country] && FLAGS[country].region) || "";
+        if (region.indexOf("North America") === 0) return "NA";
+        if (region.indexOf("South America") === 0) return "SA";
+        if (region.indexOf("EMEA") === 0) return "EMEA";
+        if (region.indexOf("Asia") === 0) return "ASIA";
+        return "OTHER";
+    }
+
+    function zcfPlayerMatchesQuery(p, nq) {
+        if (!nq) return true;
+        if (zcfNormalize(p.name).indexOf(nq) !== -1) return true;
+        if (zcfNormalize(p.key).indexOf(nq) !== -1) return true;
+        if (p.alternateIds && p.alternateIds.some(a => zcfNormalize(a).indexOf(nq) !== -1)) return true;
+        return false;
+    }
+
+    function zcfIsFilterActive() {
+        return zcfSearchQuery.trim().length > 0 || zcfSelectedRegions.size > 0 || zcfSelectedCountries.size > 0 || zcfSelectedActivity.size > 0 || zcfSelectedMovement.size > 0;
+    }
+
+    function zcfIsCategoryFilterActive() {
+        return zcfSelectedRegions.size > 0 || zcfSelectedCountries.size > 0 || zcfSelectedActivity.size > 0 || zcfSelectedMovement.size > 0;
+    }
+
+    function zcfGetFilteredEntries() {
+        const nq = zcfNormalize(zcfSearchQuery.trim());
+        const entries = [];
+        PLAYERS.forEach((p, i) => {
+            const matchQuery = zcfPlayerMatchesQuery(p, nq);
+            const matchRegion = zcfSelectedRegions.size === 0 || zcfSelectedRegions.has(zcfGetRegionCode(p.country));
+            const matchCountry = zcfSelectedCountries.size === 0 || zcfSelectedCountries.has(p.country);
+            const matchActivity = zcfSelectedActivity.size === 0 || zcfSelectedActivity.has(p.status);
+            let matchMovement = true;
+            if (zcfSelectedMovement.size > 0) {
+                const change = getRankChange(p.key, i + 1);
+                matchMovement = zcfSelectedMovement.has(change.type);
+            }
+            if (matchQuery && matchRegion && matchCountry && matchActivity && matchMovement) entries.push({ p, i, subPos: entries.length + 1 });
+        });
+        return entries;
+    }
+
+    function zcfEsc(str) {
+        return (str || "").toString().replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function zcfGetSuggestions(rawQuery, limit) {
+        limit = limit || 8;
+        const trimmed = rawQuery.trim();
+        const nq = zcfNormalize(trimmed);
+        if (!nq) return [];
+        const seen = new Set();
+        const results = [];
+        for (const p of PLAYERS) {
+            if (seen.has(p.key)) continue;
+            const nameNorm = zcfNormalize(p.name);
+            const idx = nameNorm.indexOf(nq);
+            if (idx !== -1) {
+                results.push({ player: p, highlightStart: idx, highlightLen: trimmed.length, matchedId: null });
+                seen.add(p.key);
+            } else {
+                let matchedId = null;
+                let idIdx = -1;
+                for (const a of (p.alternateIds || [])) {
+                    const aIdx = zcfNormalize(a).indexOf(nq);
+                    if (aIdx !== -1) { matchedId = a; idIdx = aIdx; break; }
+                }
+                if (matchedId === null) {
+                    const keyIdx = zcfNormalize(p.key).indexOf(nq);
+                    if (keyIdx !== -1) { matchedId = p.key; idIdx = keyIdx; }
+                }
+                if (matchedId !== null) {
+                    results.push({ player: p, highlightStart: -1, highlightLen: 0, matchedId, idHighlightStart: idIdx, idHighlightLen: trimmed.length });
+                    seen.add(p.key);
+                }
+            }
+            if (results.length >= limit) break;
+        }
+        return results;
+    }
+
+    function zcfRenderSuggestions() {
+        const box = document.getElementById("zcfSuggestions");
+        const input = document.getElementById("zcfSearchInput");
+        if (!box || !input) return;
+        const trimmed = input.value.trim();
+        if (!trimmed) {
+            box.innerHTML = "";
+            box.style.display = "none";
+            return;
+        }
+        const sugg = zcfGetSuggestions(trimmed, 8);
+        if (sugg.length === 0) {
+            box.innerHTML = `<div class="zcf-suggestion-empty">No se encontró ningún jugador.</div>`;
+            box.style.display = "block";
+            return;
+        }
+        box.innerHTML = sugg.map(s => {
+            let label;
+            if (s.highlightStart >= 0) {
+                const name = s.player.name;
+                const before = zcfEsc(name.slice(0, s.highlightStart));
+                const match = zcfEsc(name.slice(s.highlightStart, s.highlightStart + s.highlightLen));
+                const after = zcfEsc(name.slice(s.highlightStart + s.highlightLen));
+                label = `${before}<b>${match}</b>${after}`;
+            } else {
+                label = zcfEsc(s.player.name);
+            }
+            let idsHtml = "";
+            if (s.player.alternateIds && s.player.alternateIds.length) {
+                const idsInner = s.player.alternateIds.map(id => {
+                    if (s.matchedId && id === s.matchedId) {
+                        const ibefore = zcfEsc(id.slice(0, s.idHighlightStart));
+                        const imatch = zcfEsc(id.slice(s.idHighlightStart, s.idHighlightStart + s.idHighlightLen));
+                        const iafter = zcfEsc(id.slice(s.idHighlightStart + s.idHighlightLen));
+                        return `${ibefore}<b>${imatch}</b>${iafter}`;
+                    }
+                    return zcfEsc(id);
+                }).join(", ");
+                idsHtml = `<span class="zcf-suggestion-id">${idsInner}</span>`;
+            }
+            return `<button type="button" class="zcf-suggestion-item" data-suggest-name="${zcfEsc(s.player.name)}">${label}${idsHtml}</button>`;
+        }).join("");
+        box.style.display = "block";
+        box.querySelectorAll("[data-suggest-name]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-suggest-name");
+                zcfSearchQuery = input.value;
+                box.innerHTML = "";
+                box.style.display = "none";
+                renderRanking();
+            });
+        });
+    }
+
+    let zcfScrollY = 0;
+    function zcfLockScroll() {
+        zcfScrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${zcfScrollY}px`;
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+    }
+    function zcfUnlockScroll() {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.width = "";
+        window.scrollTo({ top: zcfScrollY, left: 0, behavior: "instant" });
+    }
+
+    function zcfOpenMenu() {
+        // Cierra cualquier otro modal/menú abierto para no pisar el bloqueo de scroll de la página
+        if (typeof closeAllModals === "function") closeAllModals();
+        const menuEl = document.getElementById("mobileMenu");
+        if (menuEl && menuEl.classList.contains("open") && typeof closeMenu === "function") closeMenu();
+        const overlay = document.getElementById("zcfOverlay");
+        if (!overlay) return;
+        zcfLockScroll();
+        overlay.classList.add("open");
+        const input = document.getElementById("zcfSearchInput");
+        if (input) input.focus({ preventScroll: true });
+    }
+    function zcfCloseMenu() {
+        const overlay = document.getElementById("zcfOverlay");
+        if (!overlay) return;
+        overlay.classList.remove("open");
+        zcfUnlockScroll();
+        const box = document.getElementById("zcfSuggestions");
+        if (box) { box.innerHTML = ""; box.style.display = "none"; }
+    }
+
+    function zcfInit() {
+        const openBtn = document.getElementById("zcfOpenBtn");
+        const closeBtn = document.getElementById("zcfCloseBtn");
+        const overlay = document.getElementById("zcfOverlay");
+        const resetBtn = document.getElementById("zcfResetBtn");
+        const input = document.getElementById("zcfSearchInput");
+        const searchWrap = document.getElementById("zcfSearchWrap");
+
+        if (openBtn) openBtn.addEventListener("click", zcfOpenMenu);
+        if (closeBtn) closeBtn.addEventListener("click", zcfCloseMenu);
+        if (overlay) {
+            overlay.addEventListener("click", (e) => {
+                if (e.target === overlay) zcfCloseMenu();
+            });
+        }
+        if (input) {
+            input.addEventListener("input", () => {
+                zcfSearchQuery = input.value;
+                zcfRenderSuggestions();
+                renderRanking();
+            });
+            input.addEventListener("focus", () => {
+                if (input.value.trim()) zcfRenderSuggestions();
+            });
+        }
+        document.addEventListener("click", (e) => {
+            if (searchWrap && !searchWrap.contains(e.target)) {
+                const box = document.getElementById("zcfSuggestions");
+                if (box) box.style.display = "none";
+            }
+        });
+        document.querySelectorAll("#zcfRegionGroup .zcf-checkbox-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const region = item.getAttribute("data-region");
+                item.classList.toggle("checked");
+                if (item.classList.contains("checked")) zcfSelectedRegions.add(region);
+                else zcfSelectedRegions.delete(region);
+                renderRanking();
+            });
+        });
+        document.querySelectorAll("#zcfActivityGroup .zcf-checkbox-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const activity = item.getAttribute("data-activity");
+                item.classList.toggle("checked");
+                if (item.classList.contains("checked")) zcfSelectedActivity.add(activity);
+                else zcfSelectedActivity.delete(activity);
+                renderRanking();
+            });
+        });
+        document.querySelectorAll("#zcfMovementGroup .zcf-checkbox-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const movement = item.getAttribute("data-movement");
+                item.classList.toggle("checked");
+                if (item.classList.contains("checked")) zcfSelectedMovement.add(movement);
+                else zcfSelectedMovement.delete(movement);
+                renderRanking();
+            });
+        });
+        zcfRenderCountryList();
+        document.querySelectorAll("#zcfOrderGroup .zcf-checkbox-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const order = item.getAttribute("data-order");
+                const isChecked = item.classList.contains("checked");
+                if (isChecked) {
+                    item.classList.remove("checked");
+                    zcfSortOrder = "desc";
+                } else {
+                    document.querySelectorAll("#zcfOrderGroup .zcf-checkbox-item").forEach(el => el.classList.remove("checked"));
+                    item.classList.add("checked");
+                    zcfSortOrder = order;
+                }
+                renderRanking();
+            });
+        });
+        if (resetBtn) {
+            resetBtn.addEventListener("click", () => {
+                zcfSearchQuery = "";
+                zcfSelectedRegions.clear();
+                zcfSelectedCountries.clear();
+                zcfSelectedActivity.clear();
+                zcfSelectedMovement.clear();
+                zcfSortOrder = "desc";
+                if (input) input.value = "";
+                document.querySelectorAll("#zcfRegionGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
+                document.querySelectorAll("#zcfCountryScroll .zcf-country-item.checked").forEach(item => item.classList.remove("checked"));
+                document.querySelectorAll("#zcfOrderGroup .zcf-checkbox-item").forEach(item => item.classList.remove("checked"));
+                document.querySelectorAll("#zcfActivityGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
+                document.querySelectorAll("#zcfMovementGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
+                const box = document.getElementById("zcfSuggestions");
+                if (box) { box.innerHTML = ""; box.style.display = "none"; }
+                renderRanking();
+            });
+        }
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay && overlay.classList.contains("open")) zcfCloseMenu();
+        });
+    }
+
+    /* ===================================================================
+       ZC26 · Lista de países del menú de filtros (prefijo "zcf")
+       Una fila por país, scroll vertical de ~3 filas con barra invisible;
+       funciona con rueda (nativo), arrastre de cursor en PC y táctil.
+    =================================================================== */
+    function zcfGetAvailableCountries() {
+        const seen = new Set();
+        const list = [];
+        PLAYERS.forEach(p => {
+            if (!seen.has(p.country) && FLAGS[p.country]) {
+                seen.add(p.country);
+                list.push(p.country);
+            }
+        });
+        list.sort((a, b) => (FLAGS[a].name || a).localeCompare(FLAGS[b].name || b, "es"));
+        return list;
+    }
+
+    function zcfRenderCountryList() {
+        const wrap = document.getElementById("zcfCountryScroll");
+        if (!wrap) return;
+        const countries = zcfGetAvailableCountries();
+        wrap.innerHTML = countries.map(code => `
+            <label class="zcf-country-item" data-country="${code}"><span class="zcf-checkbox-box"></span>${zcfEsc(FLAGS[code].name)}</label>
+        `).join("");
+        wrap.querySelectorAll(".zcf-country-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const code = item.getAttribute("data-country");
+                item.classList.toggle("checked");
+                if (item.classList.contains("checked")) zcfSelectedCountries.add(code);
+                else zcfSelectedCountries.delete(code);
+                renderRanking();
+            });
+        });
+        zcsInitVDrag(wrap);
+    }
+
+    function zcsInitVDrag(el) {
+        if (!el || el.dataset.zcsVBound === "1") return;
+        el.dataset.zcsVBound = "1";
+        let dragging = false, startY = 0, startScroll = 0;
+        el.addEventListener("pointerdown", (e) => {
+            if (e.pointerType !== "mouse") return;
+            dragging = true;
+            el.classList.add("zc-dragging");
+            startY = e.clientY;
+            startScroll = el.scrollTop;
+            el.setPointerCapture(e.pointerId);
+        });
+        el.addEventListener("pointermove", (e) => {
+            if (!dragging) return;
+            el.scrollTop = startScroll - (e.clientY - startY);
+        });
+        function endDrag() {
+            dragging = false;
+            el.classList.remove("zc-dragging");
+        }
+        el.addEventListener("pointerup", endDrag);
+        el.addEventListener("pointerleave", endDrag);
+    }
+
     let rankingExpanded = false;
     const RANKING_TOP_COUNT = 10;
 
     function renderRanking() {
         const list = document.getElementById("rankingList");
-        const visiblePlayers = rankingExpanded ? PLAYERS : PLAYERS.slice(0, RANKING_TOP_COUNT);
-        list.innerHTML = visiblePlayers.map((p, i) => {
+        const rankToggleWrap = document.querySelector("#ranking .rank-toggle-wrap");
+        const zcfActive = typeof zcfIsFilterActive === "function" && zcfIsFilterActive();
+        const showSubPos = typeof zcfIsCategoryFilterActive === "function" && zcfIsCategoryFilterActive();
+        let entries;
+        if (zcfActive) {
+            entries = zcfGetFilteredEntries(); // [{ p, i, subPos }] usando el índice real dentro de PLAYERS
+            if (rankToggleWrap) rankToggleWrap.style.display = "none";
+            if (entries.length === 0) {
+                list.innerHTML = `<div class="zcf-empty-ranking">No se encontró ningún jugador con estos filtros.</div>`;
+                return;
+            }
+        } else {
+            if (rankToggleWrap) rankToggleWrap.style.display = "";
+            const visiblePlayers = rankingExpanded ? PLAYERS : PLAYERS.slice(0, RANKING_TOP_COUNT);
+            entries = visiblePlayers.map((p, i) => ({ p, i }));
+        }
+        if (zcfSelectedMovement.size > 0) {
+            entries = entries.slice().sort((a, b) => {
+                const ca = getRankChange(a.p.key, a.i + 1);
+                const cb = getRankChange(b.p.key, b.i + 1);
+                const va = ca.value || 0, vb = cb.value || 0;
+                return (typeof zcfSortOrder !== "undefined" && zcfSortOrder === "asc") ? va - vb : vb - va;
+            });
+        } else if (typeof zcfSortOrder !== "undefined" && zcfSortOrder === "asc") {
+            entries = entries.slice().reverse();
+        }
+        list.innerHTML = entries.map(({ p, i, subPos }) => {
             const pos = i + 1; // posición derivada del orden del array: nunca se repite/empata
             const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
             const rowTier = pos === 1 ? "tier-gold" : pos === 2 ? "tier-silver" : pos === 3 ? "tier-bronze" : (pos >= 4 && pos <= 7) ? "tier-gray" : "";
+            const subPosHtml = (showSubPos && subPos) ? `<span class="zcf-subpos">(${subPos})</span>` : "";
             const change = getRankChange(p.key, pos);
             const h = computeHighlights(pos, PLAYERS.length);
             return `
             <div class="rank-item" data-index="${i}">
                 <div class="rank-row ${rowTier}" data-toggle="${i}" tabindex="0" role="button" aria-expanded="false">
-                    <span class="rank-pos ${medal}">${pos}</span>
+                    <span class="rank-pos ${medal}">${pos}</span>${subPosHtml}
                     <span class="rank-flag">${flagImg(p.country, true)}</span>
                     <button class="rank-name ${medal}" data-open="${i}">${p.name}</button>
                     <span class="rank-meta">
                         ${rankChangeHtml(change)}
-                        <span class="rank-points">${p.points.toFixed(2)} pts</span>
+                        <span class="rank-points">${zcFormatPoints(p.points)} pts</span>
                     </span>
                 </div>
                 <div class="rank-detail">
@@ -2799,7 +3660,7 @@
                         <div class="rank-detail-field">Sets (G-P): <b>${p.sets}</b></div>
                         <div class="rank-detail-field">Partidas (PG-PP): <b>${p.matches}</b></div>
                         <div class="rank-detail-divider"></div>
-                        <div class="rank-detail-field full">Puntos totales: <b>${p.points.toFixed(2)} pts</b></div>
+                        <div class="rank-detail-field full">Puntos totales: <b>${zcFormatPoints(p.points)} pts</b></div>
                         <div class="rank-detail-divider"></div>
                         <div class="rank-detail-title full">Datos destacados</div>
                         <div class="rank-highlight-grid full">
@@ -2833,6 +3694,151 @@
             });
         });
 
+    }
+
+    /* ===================================================================
+       ZC26 · Última Clasificación (bloque independiente, prefijo "zclc")
+       Calcula datos destacados a partir de PLAYERS / getRankChange ya
+       existentes, sin modificar su lógica.
+    =================================================================== */
+    function zclcComputeHighlights() {
+        const best = { player: PLAYERS[0], pos: 1 };
+
+        let maxUp = null, maxDown = null;
+        PLAYERS.forEach((p, i) => {
+            const pos = i + 1;
+            const change = getRankChange(p.key, pos);
+            if (change.type === "up") {
+                if (!maxUp || change.value > maxUp.value) maxUp = { player: p, value: change.value };
+            } else if (change.type === "down") {
+                if (!maxDown || change.value > maxDown.value) maxDown = { player: p, value: change.value };
+            }
+        });
+
+        let maxGain = null, maxLoss = null;
+        PLAYERS.forEach((p, i) => {
+            const pos = i + 1;
+            const seed = (pos * 17) % 23;
+            const delta = +(((seed - 11) / 11) * 90).toFixed(2);
+            if (!maxGain || delta > maxGain.value) maxGain = { player: p, value: delta };
+            if (!maxLoss || delta < maxLoss.value) maxLoss = { player: p, value: delta };
+        });
+
+        let newHighest = null;
+        PLAYERS.forEach((p, i) => {
+            const pos = i + 1;
+            if (RANK_NEW_PLAYERS.has(p.key)) {
+                if (!newHighest || pos < newHighest.pos) newHighest = { player: p, pos };
+            }
+        });
+        if (!newHighest) newHighest = { player: PLAYERS[Math.min(5, PLAYERS.length - 1)], pos: Math.min(6, PLAYERS.length) };
+
+        return [
+            { label: "Mejor clasificación", player: best.player, valueHtml: `${best.pos}º` },
+            { label: "Mayor subida", player: (maxUp || best).player, valueHtml: maxUp ? `${maxUp.value}` : "—" },
+            { label: "Más puntos conseguidos", player: maxGain.player, valueHtml: zcFormatPoints(maxGain.value, { showPlus: true }) },
+            { label: "Nueva clasificación más alta", player: newHighest.player, valueHtml: `${newHighest.pos}º` },
+            { label: "Mayor descenso", player: (maxDown || best).player, valueHtml: maxDown ? `${maxDown.value}` : "—" },
+            { label: "Más puntos perdidos", player: maxLoss.player, valueHtml: zcFormatPoints(maxLoss.value, { showPlus: true }) }
+        ];
+    }
+
+    function renderLastClassification() {
+        const scroll = document.getElementById("zclcScroll");
+        if (!scroll) return;
+        const items = zclcComputeHighlights();
+        scroll.innerHTML = items.map((it, idx) => `
+            <div class="zclc-card">
+                <span class="zclc-card-flag">${flagImg(it.player.country, true)}</span>
+                <button type="button" class="zclc-card-name" data-zclc-open="${idx}">${it.player.name}</button>
+                <span class="zclc-card-label">${it.label}</span>
+                <span class="zclc-card-value">${it.valueHtml}</span>
+            </div>
+        `).join("");
+        scroll.querySelectorAll("[data-zclc-open]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const idx = Number(btn.dataset.zclcOpen);
+                openPlayerModal(items[idx].player);
+            });
+        });
+        zcsInitHBar(scroll, document.getElementById("zclcTrack"), document.getElementById("zclcThumb"));
+    }
+
+    /* ===================================================================
+       ZC26 · Barra de scroll con pista visual y auto-desvanecido
+       (bloque independiente, reutilizable, prefijo genérico "zcs")
+       - Aparece brevemente al mostrarse (hint) y se oculta sola.
+       - Al usarla (scroll/drag/rueda) reaparece y se oculta más rápido
+         al dejar de usarla.
+       - Soporta rueda del mouse y arrastre con cursor en PC; el táctil
+         usa el scroll nativo del navegador.
+    =================================================================== */
+    function zcsInitHBar(scrollEl, trackEl, thumbEl) {
+        if (!scrollEl || !trackEl || !thumbEl || scrollEl.dataset.zcsBound === "1") return;
+        scrollEl.dataset.zcsBound = "1";
+        let hideTimer = null;
+
+        function updateThumb() {
+            const scrollWidth = scrollEl.scrollWidth;
+            const clientWidth = scrollEl.clientWidth;
+            if (scrollWidth <= clientWidth + 2) {
+                trackEl.style.display = "none";
+                return;
+            }
+            trackEl.style.display = "";
+            const trackWidth = trackEl.clientWidth;
+            const thumbWidth = Math.max(24, (clientWidth / scrollWidth) * trackWidth);
+            thumbEl.style.width = thumbWidth + "px";
+            const maxThumbLeft = Math.max(0, trackWidth - thumbWidth);
+            const maxScrollLeft = Math.max(1, scrollWidth - clientWidth);
+            const ratio = scrollEl.scrollLeft / maxScrollLeft;
+            thumbEl.style.transform = `translateX(${ratio * maxThumbLeft}px)`;
+        }
+
+        function showBar(fast) {
+            trackEl.classList.add("zc-visible");
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                trackEl.classList.remove("zc-visible");
+            }, fast ? 550 : 2200);
+        }
+
+        updateThumb();
+        requestAnimationFrame(() => showBar(false)); // hint inicial: se ve una vez y desaparece sola
+
+        scrollEl.addEventListener("scroll", () => {
+            updateThumb();
+            showBar(true); // al usarla desaparece más rápido al dejar de usarla
+        }, { passive: true });
+
+        scrollEl.addEventListener("wheel", (e) => {
+            if (scrollEl.scrollWidth <= scrollEl.clientWidth) return;
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                scrollEl.scrollLeft += e.deltaY;
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        let dragging = false, dragStartX = 0, dragStartScroll = 0;
+        scrollEl.addEventListener("pointerdown", (e) => {
+            if (e.pointerType !== "mouse") return;
+            dragging = true;
+            scrollEl.classList.add("zc-dragging");
+            dragStartX = e.clientX;
+            dragStartScroll = scrollEl.scrollLeft;
+            scrollEl.setPointerCapture(e.pointerId);
+        });
+        scrollEl.addEventListener("pointermove", (e) => {
+            if (!dragging) return;
+            scrollEl.scrollLeft = dragStartScroll - (e.clientX - dragStartX);
+        });
+        function endDrag() {
+            dragging = false;
+            scrollEl.classList.remove("zc-dragging");
+        }
+        scrollEl.addEventListener("pointerup", endDrag);
+        scrollEl.addEventListener("pointerleave", endDrag);
+        window.addEventListener("resize", updateThumb);
     }
 
     function renderTrophies() {
@@ -3044,7 +4050,7 @@
     function statField(value, fallback) {
         const empty = value === undefined || value === null || value === "" || value === "--";
         return empty
-            ? `<span class="info-field-value unconfirmed">${fallback || "Información sin confirmar"}</span>`
+            ? `<span class="info-field-value unconfirmed">${fallback || "Ninguno"}</span>`
             : `<span class="info-field-value">${value}</span>`;
     }
 
@@ -3075,6 +4081,7 @@
         const f = FLAGS[p.country];
         const pos = PLAYERS.indexOf(p) + 1;
         const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
+        const flatCorner = (pos >= 4 && pos <= 7) ? "flat-corner" : "";
         const statusClass = p.status === "Activo" ? "active" : "inactive";
         const teamDisplay = p.teamTag ? p.team : "No tiene equipo registrado";
         const teamMuted = p.teamTag ? "" : "muted";
@@ -3092,7 +4099,7 @@
                 </div>
             `).join("")}</div>`
             : `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`;
-        panel.className = `info-panel ${medal} ${medal ? "medal-photo-" + medal : ""}`.trim();
+        panel.className = `info-panel ${medal} ${flatCorner} ${medal ? "medal-photo-" + medal : ""}`.trim();
         panel.style.backgroundImage = "";
         const fadeRgb = { gold: "19,17,13", silver: "16,16,16", bronze: "19,17,16" }[medal];
         const mediaHtml = medal
@@ -3336,6 +4343,8 @@
     renderRanking();
     renderTrophies();
     renderContributions();
+    renderLastClassification();
+    zcfInit();
 
     const rankToggleBtn = document.getElementById("rankToggleBtn");
     if (rankToggleBtn) {
