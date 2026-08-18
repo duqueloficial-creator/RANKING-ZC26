@@ -2616,7 +2616,7 @@
     const PLAYERS = [
         {
             key: "taikisha",
-            name: "iXLCross", country: "ES", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 295,
+            name: "iXLCross", country: "MX", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 295,
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["@x_xv", "タイキシャ", "Taikisha"],
@@ -2666,6 +2666,11 @@
             born: "Por confirmar", status: "Activo", role: "Player · Capitán",
             alternateIds: ["nacaruuh"],
             winnings: "$0", credits: "0 créditos",
+            socials: [
+                { platform: "TikTok", handle: "@nacaruuh", url: "https://www.tiktok.com/@nacaruuh?_r=1&_t=ZS-98yVcvwHqQ0" },
+                { platform: "YouTube", handle: "@nacaruuh", url: "https://youtube.com/@nacaruuh?si=ejv9_5GaYrnpeAo3" }
+            ],
+            bsMaxTrophies: "89,000", bsRankedTier: "Master", bsRankedValue: "10300",
             recent: [
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "QQQ", scoreA: 0, teamB: "LPR", scoreB: 3, tourney: "ZC26 · Semifinal" },
@@ -3397,6 +3402,7 @@
                 box.innerHTML = "";
                 box.style.display = "none";
                 renderRanking();
+                zcfCloseMenu();
             });
         });
     }
@@ -3463,6 +3469,14 @@
             });
             input.addEventListener("focus", () => {
                 if (input.value.trim()) zcfRenderSuggestions();
+            });
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    zcfSearchQuery = input.value;
+                    renderRanking();
+                    zcfCloseMenu();
+                }
             });
         }
         document.addEventListener("click", (e) => {
@@ -4132,7 +4146,11 @@
                 <div><div class="info-field-label">IDs alternos</div><div class="info-field-value ${idsMuted}">${idsDisplay}</div></div>
                 <div><div class="info-field-label">Ganancias aprox.</div><div class="info-field-value">${p.winnings}</div></div>
                 <div><div class="info-field-label">Créditos aprox.</div><div class="info-field-value">${p.credits}</div></div>
-                <div><div class="info-field-label">Redes sociales</div><div class="info-field-value muted">Por confirmar</div></div>
+                <div class="span-2"><div class="info-field-label">Redes sociales</div>${
+                    (p.socials && p.socials.length)
+                        ? `<div class="contrib-social-list">${p.socials.map(s => `<a class="contrib-social-item" href="${s.url}" target="_blank" rel="noopener"><span class="contrib-social-handle">${s.handle}</span><span class="contrib-social-platform">${s.platform}</span></a>`).join("")}</div>`
+                        : `<div class="info-field-value muted">Por confirmar</div>`
+                }</div>
             </div>
 
             <div class="info-block-title">Estadísticas y rendimiento competitivo</div>
