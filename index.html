@@ -77,6 +77,39 @@
             object-fit: contain;
             display: block;
         }
+        .section-tabs-wrapper {
+            margin: -20px -20px 20px -20px;
+            padding: 0 20px;
+            background: #050505;
+            border-bottom: 1px solid rgba(255,255,255,0.16);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .section-tabs-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .section-tabs {
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            gap: 18px;
+            white-space: nowrap;
+        }
+        .section-tab {
+            flex-shrink: 0;
+            padding: 10px 1px 9px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #9aa0a6;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+        .section-tab.active {
+            color: #ffffff;
+            font-weight: 700;
+            border-bottom-color: #ffffff;
+        }
         .menu-toggle {
             width: 34px;
             height: 26px;
@@ -254,10 +287,10 @@
             animation: nameGrow 2.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
         }
         @keyframes nameGrow {
-            0%   { transform: scale(1); margin-top: 2px; }
-            15%  { transform: scale(1.5); margin-top: 12px; font-weight: 800; }
-            65%  { transform: scale(1.5); margin-top: 12px; font-weight: 800; }
-            100% { transform: scale(1); margin-top: 2px; font-weight: 500; }
+            0%   { margin-top: 2px; }
+            15%  { margin-top: 12px; }
+            65%  { margin-top: 12px; }
+            100% { margin-top: 2px; }
         }
         .octagon-bg {
             position: absolute;
@@ -384,6 +417,147 @@
         .ban-text {
             background: rgba(212,175,55,0.08);
             padding: 0 8px;
+        }
+        .match-swipe {
+            display: flex;
+            align-items: flex-start;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .match-swipe::-webkit-scrollbar {
+            display: none;
+        }
+        .match-swipe-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            scroll-snap-align: start;
+        }
+        .match-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .timeline-block {
+            background: rgba(0,0,0,0.25);
+            border-radius: 16px;
+            padding: 14px;
+        }
+        .timeline-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .timeline-side {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 42%;
+        }
+        .timeline-side-left {
+            align-items: flex-start;
+        }
+        .timeline-side-right {
+            align-items: flex-end;
+            text-align: right;
+        }
+        .timeline-entry {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #aaaaaa;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .timeline-time {
+            font-size: 0.88rem;
+            color: #aaaaaa;
+            margin-left: 0;
+        }
+        .timeline-icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+        }
+        .timeline-icon-win {
+            width: 32px;
+            height: 32px;
+        }
+        .timeline-icon-card {
+            width: 26px;
+            height: 26px;
+        }
+        .timeline-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .match-tabs-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .match-tabs-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .match-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 2px 2px 4px;
+            white-space: nowrap;
+        }
+        .match-tab {
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.08);
+            border: 1.5px solid transparent;
+            color: #cbccce;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 9px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+        .match-tab.active {
+            background: transparent;
+            border-color: rgba(255,255,255,0.65);
+            color: #ffffff;
+        }
+        .match-tab-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s ease;
+        }
+        .match-tab-content.has-active {
+            grid-template-rows: 1fr;
+        }
+        .match-tab-content-inner {
+            overflow: hidden;
+            min-height: 0;
+            padding: 10px 4px 0;
+        }
+        .match-tab-panel {
+            display: none;
+        }
+        .match-tab-panel.active {
+            display: block;
+        }
+        .tab-info-line {
+            font-size: 0.78rem;
+            margin-bottom: 6px;
+        }
+        .tab-info-label {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .tab-info-value {
+            color: #999999;
         }
         .match-events {
             background: rgba(0,0,0,0.25);
@@ -2272,6 +2446,16 @@
     </div>
 </div>
 
+<div class="section-tabs-wrapper" id="sectionTabsWrapper">
+    <div class="section-tabs" id="sectionTabs">
+        <a href="#top" class="section-tab active" data-section-tab="todo">Todo</a>
+        <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido">Último partido importa</a>
+        <a href="#ranking" class="section-tab" data-section-tab="ranking">Ranking</a>
+        <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones">Contribuciones</a>
+        <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama">Salón de la fama</a>
+    </div>
+</div>
+
 <div class="mobile-menu" id="mobileMenu">
     <span class="mobile-menu-close" id="menuClose">✕</span>
     <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link>ÚLTIMO PARTIDO IMPORTA</a>
@@ -2327,50 +2511,103 @@
                 </div>
             </div>
 
-            <div class="match-events">
-                <div class="events-col">
-                    <div class="event-item" data-image="kockout.jpg">
-                        <div class="event-left">
-                            <div class="event-icon"><img src="hot_zone-icon.png" alt="Knockout"></div>
-                            <div class="event-info">
-                                <span class="event-mode">Knockout</span>
-                                <span class="event-map">Belle rock</span>
+            <div class="match-swipe" id="matchSwipe">
+                <div class="match-swipe-slide">
+                    <div class="match-timeline">
+                        <div class="timeline-block">
+                            <div class="timeline-row">
+                                <div class="timeline-side timeline-side-left">
+                                    <span class="timeline-entry" data-open-player="ninja">Ninja <span class="timeline-time">8'</span></span>
+                                </div>
+                                <div class="timeline-icon timeline-icon-win"><img src="win_icon.png" alt="Gol"></div>
+                                <div class="timeline-side timeline-side-right">
+                                    <span class="timeline-entry" data-open-player="taikisha">iXLCross <span class="timeline-time">17', 26'</span></span>
+                                    <span class="timeline-entry" data-open-player="julio">Juliocr36D <span class="timeline-time">34'</span></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="event-result">2-1 <span class="event-time">12'</span></div>
+                        <div class="timeline-block">
+                            <div class="timeline-row">
+                                <div class="timeline-side timeline-side-left">
+                                    <span class="timeline-entry" data-open-player="juanjo">Juanjo <span class="timeline-time">20'</span></span>
+                                </div>
+                                <div class="timeline-icon timeline-icon-card"><img src="tarjeta_amarilla.png" alt="Tarjeta amarilla"></div>
+                                <div class="timeline-side timeline-side-right"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="events-col">
-                    <div class="event-item event-right" data-image="heist.jpg">
-                        <div class="event-result">0-2 <span class="event-time">5'</span></div>
-                        <div class="event-left">
-                            <div class="event-info">
-                                <span class="event-mode">Heist</span>
-                                <span class="event-map">tire maniacs</span>
+                <div class="match-swipe-slide">
+                    <div class="match-events">
+                        <div class="events-col">
+                            <div class="event-item" data-image="kockout.jpg">
+                                <div class="event-left">
+                                    <div class="event-icon"><img src="hot_zone-icon.png" alt="Knockout"></div>
+                                    <div class="event-info">
+                                        <span class="event-mode">Knockout</span>
+                                        <span class="event-map">Belle rock</span>
+                                    </div>
+                                </div>
+                                <div class="event-result">2-1 <span class="event-time">20'</span></div>
                             </div>
-                            <div class="event-icon"><img src="heist-icon.png" alt="Heist"></div>
+                        </div>
+                        <div class="events-col">
+                            <div class="event-item event-right" data-image="heist.jpg">
+                                <div class="event-result">0-2 <span class="event-time">20'</span></div>
+                                <div class="event-left">
+                                    <div class="event-info">
+                                        <span class="event-mode">Heist</span>
+                                        <span class="event-map">tire maniacs</span>
+                                    </div>
+                                    <div class="event-icon"><img src="heist-icon.png" alt="Heist"></div>
+                                </div>
+                            </div>
+                            <div class="event-item event-right" data-image="brawlball.jpg">
+                                <div class="event-result">1-2 <span class="event-time">20'</span></div>
+                                <div class="event-left">
+                                    <div class="event-info">
+                                        <span class="event-mode">Brawl Ball</span>
+                                        <span class="event-map">leafy bushes</span>
+                                    </div>
+                                    <div class="event-icon"><img src="brawl_ball-icon.png" alt="Brawl Ball"></div>
+                                </div>
+                            </div>
+                            <div class="event-item event-right" data-image="gremgrab.jpg">
+                                <div class="event-result">0-2 <span class="event-time">20'</span></div>
+                                <div class="event-left">
+                                    <div class="event-info">
+                                        <span class="event-mode">Gem Grab</span>
+                                        <span class="event-map">doble swoosh</span>
+                                    </div>
+                                    <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="event-item event-right" data-image="brawlball.jpg">
-                        <div class="event-result">1-2 <span class="event-time">17'</span></div>
-                        <div class="event-left">
-                            <div class="event-info">
-                                <span class="event-mode">Brawl Ball</span>
-                                <span class="event-map">leafy bushes</span>
-                            </div>
-                            <div class="event-icon"><img src="brawl_ball-icon.png" alt="Brawl Ball"></div>
-                        </div>
+                </div>
+            </div>
+
+            <div class="match-tabs-wrapper">
+                <div class="match-tabs" id="matchTabs">
+                    <button type="button" class="match-tab active" data-tab="general">Información general</button>
+                    <button type="button" class="match-tab" data-tab="cronologia">Cronología</button>
+                    <button type="button" class="match-tab" data-tab="alineaciones">Alineaciones</button>
+                    <button type="button" class="match-tab" data-tab="estadisticas">Estadísticas</button>
+                    <button type="button" class="match-tab" data-tab="posiciones">Posiciones</button>
+                    <button type="button" class="match-tab" data-tab="mas-partidos">Más partidos</button>
+                </div>
+            </div>
+            <div class="match-tab-content has-active" id="matchTabContent">
+                <div class="match-tab-content-inner">
+                    <div class="match-tab-panel active" data-tab-panel="general">
+                        <div class="tab-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 AUGT8", manejado por el equipo del soporte</span></div>
+                        <div class="tab-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>
                     </div>
-                    <div class="event-item event-right" data-image="gremgrab.jpg">
-                        <div class="event-result">0-2 <span class="event-time">28'</span></div>
-                        <div class="event-left">
-                            <div class="event-info">
-                                <span class="event-mode">Gem Grab</span>
-                                <span class="event-map">doble swoosh</span>
-                            </div>
-                            <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
-                        </div>
-                    </div>
+                    <div class="match-tab-panel" data-tab-panel="cronologia"></div>
+                    <div class="match-tab-panel" data-tab-panel="alineaciones"></div>
+                    <div class="match-tab-panel" data-tab-panel="estadisticas"></div>
+                    <div class="match-tab-panel" data-tab-panel="posiciones"></div>
+                    <div class="match-tab-panel" data-tab-panel="mas-partidos"></div>
                 </div>
             </div>
 
@@ -2529,7 +2766,7 @@
     </div>
 
     <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 1.5.7.1</div>
+    <div class="version-tag">Versión 1.8.2.0</div>
 
 </div>
 
@@ -4189,7 +4426,7 @@
             }, `<div class="ach-card" style="color:#888;">No hay logros registrados</div>`)}
 
             ${isChampion(p) ? `
-            <div class="info-block-title">Vitrina de premios</div>
+            <div class="info-block-title">PREMIOS</div>
             <div class="vitrina-card" id="vitrinaCard">
                 <img src="mandy-winner.png" class="vitrina-img" alt="Premio">
                 <div class="vitrina-label">winner</div>
@@ -4261,6 +4498,9 @@
             document.getElementById("closeTrophyModal").addEventListener("click", closeTrophyModal);
             bindStatRows(clone);
             bindEventItems(clone);
+            bindMatchTabs(clone);
+            bindTimelineEntries(clone);
+            bindMatchSwipe(clone);
             return;
         }
         panel.className = "info-panel";
@@ -4400,6 +4640,35 @@
         const anyOpen = document.querySelectorAll(".modal-overlay.active").length > 0;
         if (!anyOpen) unlockBodyScroll();
     }
+    const sectionFilterGroups = {
+        "ultimo-partido": ["ultimo-partido"],
+        "ranking": ["ranking", "ultima-clasificacion"],
+        "contribuciones": ["contribuciones"],
+        "salon-fama": ["salon-fama"]
+    };
+    const allFilterableIds = ["ultimo-partido", "ranking", "ultima-clasificacion", "contribuciones", "salon-fama"];
+
+    function applySectionFilter(key) {
+        if (key === "todo") {
+            allFilterableIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = "";
+            });
+            return;
+        }
+        const show = new Set(sectionFilterGroups[key] || []);
+        allFilterableIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = show.has(id) ? "" : "none";
+        });
+    }
+
+    function setActiveSectionTab(key) {
+        document.querySelectorAll(".section-tab").forEach(t => {
+            t.classList.toggle("active", t.dataset.sectionTab === key);
+        });
+    }
+
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener("click", () => {
             mobileMenu.classList.contains("open") ? closeMenu() : openMenu();
@@ -4410,12 +4679,39 @@
                 e.preventDefault();
                 const targetId = link.getAttribute("href").slice(1);
                 closeMenu();
+                if (allFilterableIds.includes(targetId)) {
+                    applySectionFilter(targetId);
+                    setActiveSectionTab(targetId);
+                } else if (targetId === "creditos") {
+                    applySectionFilter("todo");
+                    setActiveSectionTab("todo");
+                }
                 setTimeout(() => {
                     const el = document.getElementById(targetId);
                     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
                 }, 320);
             });
         });
+    }
+
+    const sectionTabs = document.querySelectorAll(".section-tab");
+    if (sectionTabs.length) {
+        sectionTabs.forEach(tab => {
+            tab.addEventListener("click", (e) => {
+                e.preventDefault();
+                const key = tab.dataset.sectionTab;
+                setActiveSectionTab(key);
+                applySectionFilter(key);
+                if (key === "todo") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                    const targetId = tab.getAttribute("href").slice(1);
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+
     }
 
     function bindStatRows(root) {
@@ -4455,6 +4751,56 @@
             });
         });
     }
+
+    function bindMatchTabs(root) {
+        const tabs = root.querySelectorAll(".match-tab");
+        const panels = root.querySelectorAll(".match-tab-panel");
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                tabs.forEach(t => t.classList.remove("active"));
+                panels.forEach(p => p.classList.remove("active"));
+                tab.classList.add("active");
+                const target = root.querySelector(`.match-tab-panel[data-tab-panel="${tab.dataset.tab}"]`);
+                if (target) target.classList.add("active");
+            });
+        });
+    }
+    bindMatchTabs(document);
+
+    function bindTimelineEntries(root) {
+        root.querySelectorAll(".timeline-entry[data-open-player]").forEach(el => {
+            el.addEventListener("click", () => {
+                const player = PLAYERS.find(p => p.key === el.dataset.openPlayer);
+                if (player) openPlayerModal(player);
+            });
+        });
+    }
+    bindTimelineEntries(document);
+
+    function bindMatchSwipe(root) {
+        const swipe = root.querySelector(".match-swipe");
+        if (!swipe) return;
+        const slides = Array.from(swipe.querySelectorAll(".match-swipe-slide"));
+        if (slides.length < 2) return;
+        function updateHeight() {
+            const width = swipe.clientWidth || 1;
+            const maxScroll = swipe.scrollWidth - width;
+            const frac = maxScroll > 0 ? Math.min(1, Math.max(0, swipe.scrollLeft / maxScroll)) : 0;
+            const h0 = slides[0].scrollHeight;
+            const h1 = slides[slides.length - 1].scrollHeight;
+            swipe.style.height = (h0 + (h1 - h0) * frac) + "px";
+        }
+        let ticking = false;
+        swipe.addEventListener("scroll", () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(() => { updateHeight(); ticking = false; });
+            }
+        });
+        window.addEventListener("resize", updateHeight);
+        requestAnimationFrame(updateHeight);
+    }
+    bindMatchSwipe(document);
 
     const overlay = document.getElementById('modalOverlay');
     const modalImg = document.getElementById('modalImage');
