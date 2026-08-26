@@ -13,10 +13,14 @@ ZC26 es una organización independiente dedicada a la creación, desarrollo y ge
 ### Contacto
 
 * **Contacto comercial y soporte:** [zc26.esports.official@gmail.com](mailto:zc26.esports.official@gmail.com)
-* **Discord** https://discord.gg/jfDvXrQ2fu
-* **TikTok** https://www.tiktok.com/@zc.esports
-* **YouTube** https://www.youtube.com/@ZC26eSports
-* **PayPal** https://www.paypal.me/ZCESportsPayPal
+* **Discord:**
+ https://discord.gg/jfDvXrQ2fu
+* **TikTok:**
+ https://www.tiktok.com/@zc.esports
+* **YouTube:**
+ https://www.youtube.com/@ZC26eSports
+* **PayPal:**
+ https://www.paypal.me/ZCESportsPayPal
 
 ## Apoya a ZC26
 
