@@ -1624,16 +1624,35 @@
             color: #ffffff;
         }
         .rank-pos.gold {
-            background: none;
-            color: #f2dfa0;
+            background: linear-gradient(90deg, #7a6b4a 0%, #b3a179 35%, #ded0ad 55%, #b3a179 75%, #7a6b4a 100%);
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 4px rgba(216,201,163,0.3);
+            animation: rankPosShimmer 3s ease-in-out infinite alternate;
         }
         .rank-pos.silver {
-            background: none;
-            color: #e6e6e6;
+            background: linear-gradient(90deg, #6e6e6e 0%, #a8a8a8 35%, #dcdcdc 55%, #a8a8a8 75%, #6e6e6e 100%);
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 4px rgba(214,214,214,0.3);
+            animation: rankPosShimmer 3s ease-in-out infinite alternate;
         }
         .rank-pos.bronze {
-            background: none;
-            color: #e0ab7f;
+            background: linear-gradient(90deg, #6b4f38 0%, #a17a56 35%, #cba483 55%, #a17a56 75%, #6b4f38 100%);
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 4px rgba(208,165,134,0.3);
+            animation: rankPosShimmer 3s ease-in-out infinite alternate;
+        }
+        @keyframes rankPosShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .zcf-subpos {
             font-size: 0.55rem;
@@ -1649,7 +1668,7 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.22);
-            animation: rankNameShimmer 4.5s ease-in-out infinite alternate;
+            animation: rankNameShimmer 3s ease-in-out infinite alternate;
         }
         .rank-name.silver {
             background: linear-gradient(90deg, #888888 0%, #d6d6d6 35%, #ffffff 55%, #d6d6d6 75%, #888888 100%);
@@ -1658,7 +1677,7 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.25);
-            animation: rankNameShimmer 4.5s ease-in-out infinite alternate;
+            animation: rankNameShimmer 3s ease-in-out infinite alternate;
         }
         .rank-name.bronze {
             background: linear-gradient(90deg, #6f5a44 0%, #b3927a 35%, #ddc9ba 55%, #b3927a 75%, #6f5a44 100%);
@@ -1667,7 +1686,7 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(255,255,255,0.18);
-            animation: rankNameShimmer 4.5s ease-in-out infinite alternate;
+            animation: rankNameShimmer 3s ease-in-out infinite alternate;
         }
         @keyframes rankNameShimmer {
             0% { background-position: 0% 50%; }
@@ -2202,18 +2221,21 @@
         }
         .info-panel.gold {
             border: 2px solid;
-            border-image: linear-gradient(135deg, #4a4030 0%, #6f6250 35%, #7a705c 55%, #6f6250 75%, #4a4030 100%) 1;
-            box-shadow: 0 0 7px rgba(160,140,90,0.25), inset 0 0 7px rgba(160,140,90,0.08);
+            border-radius: 0;
+            border-image: linear-gradient(135deg, #453c2c 0%, #5f5340 35%, #766b54 55%, #5f5340 75%, #453c2c 100%) 1;
+            box-shadow: 0 0 7px rgba(140,120,80,0.25), inset 0 0 7px rgba(140,120,80,0.08);
         }
         .info-panel.silver {
             border: 2px solid;
-            border-image: linear-gradient(135deg, #555555 0%, #7d7d7d 35%, #949494 55%, #7d7d7d 75%, #555555 100%) 1;
-            box-shadow: 0 0 7px rgba(160,160,160,0.25), inset 0 0 7px rgba(160,160,160,0.08);
+            border-radius: 0;
+            border-image: linear-gradient(135deg, #434343 0%, #5c5c5c 35%, #757575 55%, #5c5c5c 75%, #434343 100%) 1;
+            box-shadow: 0 0 7px rgba(140,140,140,0.25), inset 0 0 7px rgba(140,140,140,0.08);
         }
         .info-panel.bronze {
             border: 2px solid;
-            border-image: linear-gradient(135deg, #423528 0%, #6f5a45 35%, #806a54 55%, #6f5a45 75%, #423528 100%) 1;
-            box-shadow: 0 0 7px rgba(160,120,80,0.25), inset 0 0 7px rgba(160,120,80,0.08);
+            border-radius: 0;
+            border-image: linear-gradient(135deg, #3d2e21 0%, #5a4531 35%, #70573f 55%, #5a4531 75%, #3d2e21 100%) 1;
+            box-shadow: 0 0 7px rgba(140,100,70,0.25), inset 0 0 7px rgba(140,100,70,0.08);
         }
         .info-panel.medal-photo-gold { background-color: #13110d; }
         .info-panel.medal-photo-silver { background-color: #101010; }
@@ -4273,7 +4295,7 @@
 
         <div class="zcf-section-label">Jugador</div>
         <div class="zcf-search-wrap" id="zcfSearchWrap">
-            <input type="text" id="zcfSearchInput" class="zcf-search-input" placeholder="Buscar por nombre o ID..." autocomplete="off" spellcheck="false">
+            <input type="text" id="zcfSearchInput" class="zcf-search-input" placeholder="Buscar por nombre, ID o país..." autocomplete="off" spellcheck="false">
             <div class="zcf-suggestions" id="zcfSuggestions"></div>
         </div>
 
@@ -4324,7 +4346,9 @@
         BR: { file: "72px-Br_hd.png", name: "Brasil", region: "South America" },
         ECU: { file: "ECU.png", name: "Ecuador", region: "South America" },
         BOL: { file: "BOL.png", name: "Bolivia", region: "South America" },
-        SLV: { file: "SLV.png", name: "El Salvador", region: "North America" }
+        SLV: { file: "SLV.png", name: "El Salvador", region: "North America" },
+        GHA: { file: "GHA.png", name: "Ghana", region: "EMEA (Europe, Middle East & Africa)" },
+        VEN: { file: "VEN.png", name: "Venezuela", region: "South America" }
     };
 
     const PLAYERS = [
@@ -4881,7 +4905,7 @@
         },
         {
             key: "soymanco",
-            name: "SoyManco", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
+            name: "SoyManco", country: "VEN", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
             events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
@@ -4894,7 +4918,7 @@
         },
         {
             key: "kennediano",
-            name: "Kennediano", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
+            name: "Kennediano", country: "GHA", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
             events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
@@ -5205,6 +5229,9 @@
         if (zcfNormalize(p.name).indexOf(nq) !== -1) return true;
         if (zcfNormalize(p.key).indexOf(nq) !== -1) return true;
         if (p.alternateIds && p.alternateIds.some(a => zcfNormalize(a).indexOf(nq) !== -1)) return true;
+        const countryName = (typeof FLAGS !== "undefined" && FLAGS[p.country] && FLAGS[p.country].name) || "";
+        if (countryName && zcfNormalize(countryName).indexOf(nq) !== -1) return true;
+        if (p.country && zcfNormalize(p.country).indexOf(nq) !== -1) return true;
         return false;
     }
 
@@ -5263,8 +5290,13 @@
                     const keyIdx = zcfNormalize(p.key).indexOf(nq);
                     if (keyIdx !== -1) { matchedId = p.key; idIdx = keyIdx; }
                 }
-                if (matchedId !== null) {
-                    results.push({ player: p, highlightStart: -1, highlightLen: 0, matchedId, idHighlightStart: idIdx, idHighlightLen: trimmed.length });
+                let matchedCountry = null;
+                if (matchedId === null) {
+                    const countryName = (typeof FLAGS !== "undefined" && FLAGS[p.country] && FLAGS[p.country].name) || "";
+                    if (countryName && zcfNormalize(countryName).indexOf(nq) !== -1) matchedCountry = countryName;
+                }
+                if (matchedId !== null || matchedCountry !== null) {
+                    results.push({ player: p, highlightStart: -1, highlightLen: 0, matchedId, idHighlightStart: idIdx, idHighlightLen: trimmed.length, matchedCountry });
                     seen.add(p.key);
                 }
             }
@@ -5313,7 +5345,11 @@
                 }).join(", ");
                 idsHtml = `<span class="zcf-suggestion-id">${idsInner}</span>`;
             }
-            return `<button type="button" class="zcf-suggestion-item" data-suggest-name="${zcfEsc(s.player.name)}">${label}${idsHtml}</button>`;
+            let countryHtml = "";
+            if (s.matchedCountry) {
+                countryHtml = `<span class="zcf-suggestion-id">${zcfEsc(s.matchedCountry)}</span>`;
+            }
+            return `<button type="button" class="zcf-suggestion-item" data-suggest-name="${zcfEsc(s.player.name)}">${label}${idsHtml}${countryHtml}</button>`;
         }).join("");
         box.style.display = "block";
         box.querySelectorAll("[data-suggest-name]").forEach(btn => {
@@ -5969,7 +6005,7 @@
     function statField(value, fallback) {
         const empty = value === undefined || value === null || value === "" || value === "--";
         return empty
-            ? `<span class="info-field-value unconfirmed">${fallback || "Ninguno"}</span>`
+            ? `<span class="info-field-value unconfirmed">${fallback || "none"}</span>`
             : `<span class="info-field-value">${value}</span>`;
     }
 
@@ -5977,11 +6013,11 @@
         const hasTrophies = p.bsMaxTrophies !== undefined && p.bsMaxTrophies !== null && p.bsMaxTrophies !== "";
         const ladderValue = hasTrophies
             ? `<img src="trophies-brawl-stars-hd-download-logo-transparent-23.png" class="bs-value-icon" alt="Trofeos">${p.bsMaxTrophies}`
-            : "Ninguno";
+            : "none";
         const hasRank = p.bsRankedTier && RANK_TIER_IMAGES[p.bsRankedTier];
         const rankValue = hasRank
             ? `<img src="${RANK_TIER_IMAGES[p.bsRankedTier]}" class="bs-rank-icon" alt="${p.bsRankedTier}">${p.bsRankedValue || p.bsRankedTier}`
-            : "Ninguno";
+            : "none";
         return `
         <div class="bs-cat-row">
             <div class="bs-category">
@@ -6069,8 +6105,8 @@
 
             <div class="info-block-title">Datos de Brawl Stars</div>
             <div class="info-grid">
-                <div><div class="info-field-label">Player Tag / Player ID</div>${statField(p.bsTag, "Ninguno")}</div>
-                <div><div class="info-field-label">Brawlers principales</div>${statField((p.bsMains || []).join(", "), "Ninguno")}</div>
+                <div><div class="info-field-label">Player Tag / Player ID</div>${statField(p.bsTag, "none")}</div>
+                <div><div class="info-field-label">Brawlers principales</div>${statField((p.bsMains || []).join(", "), "none")}</div>
             </div>
             ${bsCategoryHtml(p)}
 
