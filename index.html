@@ -51,8 +51,10 @@
         .site-header-brand {
             display: flex;
             align-items: center;
+            justify-content: flex-start;
             gap: 10px;
             min-width: 0;
+            flex: 1 1 auto;
         }
         .site-header-logo {
             width: 40px;
@@ -139,68 +141,114 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 68vh;
-            height: 68dvh;
-            max-height: 560px;
+            height: 100vh;
+            height: 100dvh;
             background: #070707;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 0 40px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 22px;
-            transform: translateY(-100%);
-            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
+            align-items: stretch;
+            justify-content: flex-start;
+            padding: 84px 0 22px;
+            transform: translateX(-100%);
+            transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.3, 1);
             will-change: transform;
             z-index: 900;
             overflow-y: auto;
         }
         .mobile-menu.open {
-            transform: translateY(0);
+            transform: translateX(0);
+        }
+        .mobile-menu-topbar {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .mobile-menu-close {
-            position: absolute;
-            top: 18px;
-            right: 22px;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: #888888;
             cursor: pointer;
-            padding: 6px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mobile-menu-mute {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            border: none;
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .mobile-menu-mute img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            display: block;
+        }
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
         }
         .mobile-menu-link {
             color: #ffffff;
-            font-size: 1.05rem;
+            font-size: 1.18rem;
             font-weight: 800;
-            letter-spacing: 2px;
+            letter-spacing: 0.4px;
             text-transform: uppercase;
             text-decoration: none;
-            padding: 10px 20px;
-            text-align: center;
+            padding: 13px 28px;
+            text-align: left;
         }
         .mobile-menu-link:hover {
             color: #d4af37;
         }
+        .mobile-menu-more-label {
+            padding: 0 28px 6px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #777777;
+        }
+        .mobile-menu-bottom {
+            margin-top: auto;
+        }
         .mobile-menu-social {
-            position: absolute;
-            bottom: 16px;
-            left: 0;
-            width: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 18px;
+            flex-direction: column;
         }
         .mobile-menu-social-link {
-            font-size: 0.62rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #888888;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 28px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            color: #dddddd;
             text-decoration: none;
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
         .mobile-menu-social-link:hover {
             color: #d4af37;
+        }
+        .mobile-menu-social-icon {
+            width: 15px;
+            height: 15px;
+            object-fit: contain;
+            opacity: 0.6;
+            flex-shrink: 0;
         }
         .mobile-container {
             width: 100%;
@@ -1875,7 +1923,7 @@
             gap: 5px;
         }
         .rank-name2 {
-            font-size: 0.72rem;
+            font-size: 0.86rem;
             font-weight: 800;
             color: #ffffff;
             background: none;
@@ -1911,7 +1959,7 @@
             color: transparent;
             animation: rankNameShimmer 7s linear infinite;
         }
-        .rank-flag2 { width: 13px; height: 9px; overflow: hidden; flex-shrink: 0; }
+        .rank-flag2 { width: 19px; height: 13px; overflow: hidden; flex-shrink: 0; align-self: center; margin-right: 2px; }
         .rank-flag2 img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .rank-row2-bottom {
             display: flex;
@@ -2118,6 +2166,43 @@
         }
         #modalOverlay {
             z-index: 1100;
+        }
+        /* Brillo de rango: vive DENTRO del panel del jugador como una capa de
+           fondo (no reserva espacio propio), así que no deja un hueco vacío
+           una vez que el destello termina. Se cierra solo junto con el menú.
+           Master y Legendary comparten el mismo tamaño/intensidad de brillo. */
+        .panel-rank-banner {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            height: 90px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .panel-rank-flash {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+        .panel-rank-banner.master .panel-rank-flash {
+            background: radial-gradient(circle at 50% 38%, rgba(255,215,60,0.32) 0%, rgba(255,180,20,0.12) 35%, rgba(255,180,20,0) 72%);
+            animation: zcFlashMaster 1100ms ease-out forwards;
+        }
+        .panel-rank-banner.legendary .panel-rank-flash {
+            background: radial-gradient(circle at 50% 38%, rgba(255,70,70,0.32) 0%, rgba(255,40,40,0.12) 35%, rgba(255,40,40,0) 68%);
+            animation: zcFlashLegendary 1100ms ease-out forwards;
+        }
+        @keyframes zcFlashMaster {
+            0% { opacity: 0; }
+            15% { opacity: 0.85; }
+            100% { opacity: 0; }
+        }
+        @keyframes zcFlashLegendary {
+            0% { opacity: 0; }
+            15% { opacity: 0.85; }
+            100% { opacity: 0; }
         }
         #playerModalOverlay {
             z-index: 1050;
@@ -2669,9 +2754,34 @@
             font-weight: 500 !important;
         }
         .match-row-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
             font-size: 0.6rem;
             color: #888888;
             margin-bottom: 4px;
+        }
+        .match-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 16px;
+            height: 16px;
+            padding: 0 4px;
+            border-radius: 4px;
+            font-size: 0.62rem;
+            font-weight: 800;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .match-badge.win {
+            background: rgba(70,180,90,0.22);
+            color: #5fd97a;
+        }
+        .match-badge.loss {
+            background: rgba(210,70,70,0.22);
+            color: #ff6b6b;
         }
         .match-row-score {
             display: flex;
@@ -2688,6 +2798,8 @@
             margin-top: 4px;
         }
         .ach-card {
+            position: relative;
+            overflow: hidden;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 10px;
@@ -2718,6 +2830,36 @@
         .ach-card.gold { border-color: rgba(212,175,55,0.35); background: rgba(212,175,55,0.05); }
         .ach-card.silver { border-color: rgba(200,200,200,0.35); background: rgba(200,200,200,0.05); }
         .ach-card.purple { border-color: rgba(147,112,219,0.4); background: rgba(147,112,219,0.06); }
+        /* Degradado de brillo que se desliza por el MARCO de la tarjeta (no
+           por el fondo), con un tono más claro del color propio de cada
+           logro en vez de blanco. Se usa una máscara para que solo se vea
+           el aro del borde. */
+        .ach-card.gold::after,
+        .ach-card.silver::after,
+        .ach-card.purple::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            padding: 1.5px;
+            pointer-events: none;
+            background: linear-gradient(115deg, transparent 30%, var(--ach-shine) 50%, transparent 70%);
+            background-size: 220% 100%;
+            background-position: 160% 0;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            animation: achShineSweep 3.6s ease-in-out infinite;
+        }
+        .ach-card.gold::after { --ach-shine: rgba(255, 196, 84, 0.95); }
+        .ach-card.silver::after { --ach-shine: rgba(173, 214, 255, 0.9); }
+        .ach-card.purple::after { --ach-shine: rgba(224, 168, 255, 0.95); }
+        @keyframes achShineSweep {
+            0% { background-position: 160% 0; }
+            55% { background-position: -60% 0; }
+            100% { background-position: -60% 0; }
+        }
         .ach-place.gold { background: rgba(212,175,55,0.18); color: #c9b384; }
         .ach-place.silver { background: rgba(190,190,190,0.18); color: #dcdcdc; }
         .ach-place.purple { background: rgba(147,112,219,0.22); color: #c9b3f2; }
@@ -3505,7 +3647,6 @@
 <div class="site-header" id="top">
     <div class="site-header-inner">
         <div class="site-header-brand">
-            <img src="Untitled237.jpg" alt="ZC26" class="site-header-logo">
             <img src="Untitled257.jpg" alt="ZC26 ESPORTS" class="site-header-title-img">
         </div>
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
@@ -3518,24 +3659,34 @@
     <div class="section-tabs" id="sectionTabs">
         <a href="#ultimo-partido" class="section-tab active" data-section-tab="ultimo-partido">Último partido importa</a>
         <a href="#ranking" class="section-tab" data-section-tab="ranking">Ranking</a>
-        <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones">Contribuciones</a>
+        <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones">Partners</a>
         <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama">Salón de la fama</a>
     </div>
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
-    <span class="mobile-menu-close" id="menuClose">✕</span>
-    <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link>ÚLTIMO PARTIDO IMPORTA</a>
-    <a href="#ranking" class="mobile-menu-link" data-menu-link>RANKING</a>
-    <a href="#contribuciones" class="mobile-menu-link" data-menu-link>CONTRIBUCIONES</a>
-    <a href="#salon-fama" class="mobile-menu-link" data-menu-link>SALON DE LA FAMA</a>
-    <a href="#creditos" class="mobile-menu-link" data-menu-link>CREDITOS</a>
-    <div class="mobile-menu-social">
-        <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="mobile-menu-social-link">TikTok</a>
-        <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="mobile-menu-social-link">Discord</a>
-        <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="mobile-menu-social-link">YouTube</a>
-        <a href="mailto:zc26.esports.official@gmail.com" class="mobile-menu-social-link">Gmail</a>
-        <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="mobile-menu-social-link">PayPal</a>
+    <div class="mobile-menu-topbar">
+        <button type="button" class="mobile-menu-mute" id="soundMuteBtn" aria-label="Silenciar sonidos">
+            <img src="sound_offmuted.png" id="soundMuteIcon" alt="Sonido">
+        </button>
+        <span class="mobile-menu-close" id="menuClose">✕</span>
+    </div>
+    <div class="mobile-menu-links">
+        <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link>ÚLTIMO PARTIDO IMPORTA</a>
+        <a href="#ranking" class="mobile-menu-link" data-menu-link>RANKING</a>
+        <a href="#contribuciones" class="mobile-menu-link" data-menu-link>PARTNERS</a>
+        <a href="#salon-fama" class="mobile-menu-link" data-menu-link>SALON DE LA FAMA</a>
+        <a href="#creditos" class="mobile-menu-link" data-menu-link>CREDITOS</a>
+    </div>
+    <div class="mobile-menu-bottom">
+        <div class="mobile-menu-more-label">MÁS ZC26</div>
+        <div class="mobile-menu-social">
+            <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="mobile-menu-social-link">TikTok<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="mobile-menu-social-link">Discord<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="mobile-menu-social-link">YouTube<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="mailto:zc26.esports.official@gmail.com" class="mobile-menu-social-link">Gmail<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="mobile-menu-social-link">PayPal<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+        </div>
     </div>
 </div>
 
@@ -4400,7 +4551,7 @@
     </div>
 
     <div class="section-block" id="contribuciones">
-        <div class="section-title">CONTRIBUCIONES</div>
+        <div class="section-title">PARTNERS</div>
         <div class="section-subtitle">Se actualiza con cada contribucion a ZC26</div>
         <div class="panel" id="contribList"></div>
         <div class="rank-toggle-wrap">
@@ -4441,7 +4592,7 @@
     </div>
 
     <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 1.9.13.0</div>
+    <div class="version-tag">Versión 2.0.9.6</div>
 
 </div>
 
@@ -4518,6 +4669,55 @@
 </div>
 
 <script>
+    /* ===================================================================
+       ZC26 · Sistema de sonidos de navegación (carpeta /sound)
+    =================================================================== */
+    const ZC_SOUNDS = {
+        entrar: "sound/entrar.ogg",
+        salir: "sound/salir.ogg",
+        cambio: "sound/cambio.ogg",
+        master: "sound/master.ogg",
+        legendary: "sound/legendary.ogg",
+        click: "sound/click.ogg",
+        clickentrar: "sound/clickentrar.ogg",
+        clicksalir: "sound/clicksalir.ogg",
+        salondelafama: "sound/salondelafama.ogg",
+    };
+    const ZC_SOUND_ACTIVE = [];
+    let zcMuted = localStorage.getItem("zcMuted") === "1";
+    function zcPlaySound(name) {
+        if (zcMuted) return;
+        const src = ZC_SOUNDS[name];
+        if (!src) return;
+        try {
+            const audio = new Audio(src);
+            audio.preload = "auto";
+            audio.volume = 0.45;
+            // Mantenemos una referencia activa: en algunos navegadores móviles
+            // un <audio> sin referencias puede ser recolectado por el GC a
+            // mitad de la reproducción, cortando el sonido.
+            ZC_SOUND_ACTIVE.push(audio);
+            const cleanup = () => {
+                const idx = ZC_SOUND_ACTIVE.indexOf(audio);
+                if (idx !== -1) ZC_SOUND_ACTIVE.splice(idx, 1);
+            };
+            audio.addEventListener("ended", cleanup);
+            audio.addEventListener("error", cleanup);
+            audio.play().catch(cleanup);
+        } catch (e) {}
+    }
+    function zcUpdateMuteIcon() {
+        const icon = document.getElementById("soundMuteIcon");
+        if (icon) icon.src = zcMuted ? "sound_onmuted.png" : "sound_offmuted.png";
+        const btn = document.getElementById("soundMuteBtn");
+        if (btn) btn.setAttribute("aria-pressed", zcMuted ? "true" : "false");
+    }
+    function zcToggleMute() {
+        zcMuted = !zcMuted;
+        localStorage.setItem("zcMuted", zcMuted ? "1" : "0");
+        zcUpdateMuteIcon();
+        if (!zcMuted) zcPlaySound("click");
+    }
     const FLAGS = {
         ES: { file: "72px-Es_hd.png", name: "España", region: "EMEA (Europe, Middle East & Africa)" },
         PE: { file: "72px-Pe_hd.png", name: "Perú", region: "South America" },
@@ -5612,6 +5812,7 @@
             const toggle = () => {
                 const item = row.closest(".rank-item");
                 const open = item.classList.toggle("open");
+                zcPlaySound(open ? "clickentrar" : "clicksalir");
                 row.setAttribute("aria-expanded", open ? "true" : "false");
             };
             row.addEventListener("click", toggle);
@@ -5825,6 +6026,7 @@
         box.style.display = "block";
         box.querySelectorAll("[data-suggest-name]").forEach(btn => {
             btn.addEventListener("click", () => {
+                zcPlaySound("click");
                 input.value = btn.getAttribute("data-suggest-name");
                 zcfSearchQuery = input.value;
                 box.innerHTML = "";
@@ -5836,6 +6038,7 @@
     }
 
     function zcfOpenMenu() {
+        zcPlaySound("entrar");
         // Cierra cualquier otro modal/menú abierto para no pisar el bloqueo de scroll de la página
         if (typeof closeAllModals === "function") closeAllModals();
         const menuEl = document.getElementById("mobileMenu");
@@ -5850,6 +6053,7 @@
     function zcfCloseMenu() {
         const overlay = document.getElementById("zcfOverlay");
         if (!overlay) return;
+        zcPlaySound("salir");
         overlay.classList.remove("open");
         unlockBodyScroll();
         const box = document.getElementById("zcfSuggestions");
@@ -5900,6 +6104,7 @@
         document.querySelectorAll("#zcfRegionGroup .zcf-checkbox-item").forEach(item => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
+                zcPlaySound("click");
                 const region = item.getAttribute("data-region");
                 item.classList.toggle("checked");
                 if (item.classList.contains("checked")) zcfSelectedRegions.add(region);
@@ -5910,6 +6115,7 @@
         document.querySelectorAll("#zcfActivityGroup .zcf-checkbox-item").forEach(item => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
+                zcPlaySound("click");
                 const activity = item.getAttribute("data-activity");
                 item.classList.toggle("checked");
                 if (item.classList.contains("checked")) zcfSelectedActivity.add(activity);
@@ -5920,6 +6126,7 @@
         document.querySelectorAll("#zcfMovementGroup .zcf-checkbox-item").forEach(item => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
+                zcPlaySound("click");
                 const movement = item.getAttribute("data-movement");
                 item.classList.toggle("checked");
                 if (item.classList.contains("checked")) zcfSelectedMovement.add(movement);
@@ -5931,6 +6138,7 @@
         document.querySelectorAll("#zcfOrderGroup .zcf-checkbox-item").forEach(item => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
+                zcPlaySound("click");
                 const order = item.getAttribute("data-order");
                 const isChecked = item.classList.contains("checked");
                 if (isChecked) {
@@ -5946,6 +6154,7 @@
         });
         if (resetBtn) {
             resetBtn.addEventListener("click", () => {
+                zcPlaySound("click");
                 zcfSearchQuery = "";
                 zcfSelectedRegions.clear();
                 zcfSelectedCountries.clear();
@@ -5996,6 +6205,7 @@
         wrap.querySelectorAll(".zcf-country-item").forEach(item => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
+                zcPlaySound("click");
                 const code = item.getAttribute("data-country");
                 item.classList.toggle("checked");
                 if (item.classList.contains("checked")) zcfSelectedCountries.add(code);
@@ -6081,10 +6291,10 @@
                         <span class="rank-pos2 ${medal}">${pos}<span class="rank-pos2-dot">.</span></span>${subPosHtml}
                     </div>
                     ${iconHtml}
+                    <span class="rank-flag2">${flagImg(p.country, true)}</span>
                     <div class="rank-row2-info">
                         <div class="rank-row2-top">
                             <button class="rank-name2 ${medal}" data-open="${i}">${p.name}</button>
-                            <span class="rank-flag2">${flagImg(p.country, true)}</span>
                         </div>
                         <div class="rank-row2-bottom">
                             <img class="rank-tier-icon" src="assets/ranks/${tier.icon}" alt="${tier.label}" onerror="this.style.display='none'">
@@ -6121,6 +6331,7 @@
             const toggle = () => {
                 const item = row.closest(".rank-item");
                 const open = item.classList.toggle("open");
+                zcPlaySound(open ? "clickentrar" : "clicksalir");
                 row.setAttribute("aria-expanded", open ? "true" : "false");
             };
             row.addEventListener("click", toggle);
@@ -6371,8 +6582,8 @@
             }
             const prevBtn = car.querySelector(".carousel-prev");
             const nextBtn = car.querySelector(".carousel-next");
-            if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); show(current - 1); });
-            if (nextBtn) nextBtn.addEventListener("click", (e) => { e.stopPropagation(); show(current + 1); });
+            if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); show(current - 1); });
+            if (nextBtn) nextBtn.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); show(current + 1); });
 
             if (total > 1 && track) {
                 let startX = null, startY = null, dragging = false, baseOffset = 0;
@@ -6523,6 +6734,16 @@
         const pos = PLAYERS.indexOf(p) + 1;
         const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
         const flatCorner = (pos >= 4 && pos <= 7) ? "flat-corner" : "";
+        zcPlaySound("entrar");
+        const openTier = getRankTier(pos);
+        const rankKind = openTier.label.startsWith("Masters") ? "master"
+            : openTier.label.startsWith("Legendary") ? "legendary" : null;
+        if (rankKind === "master") zcPlaySound("master");
+        else if (rankKind === "legendary") zcPlaySound("legendary");
+        const rankBannerHtml = rankKind ? `
+            <div class="panel-rank-banner ${rankKind}">
+                <div class="panel-rank-flash"></div>
+            </div>` : "";
         const statusClass = p.status === "Activo" ? "active" : "inactive";
         const teamDisplay = p.teamTag ? p.team : "No tiene equipo registrado";
         const teamMuted = p.teamTag ? "" : "muted";
@@ -6530,15 +6751,23 @@
         const idsMuted = p.alternateIds.length ? "" : "muted";
         const bornMuted = p.born === "Por confirmar" ? "muted" : "";
         const recentListHtml = p.recent.length
-            ? `<div class="recent-list" id="recentList" tabindex="0">${p.recent.map(m => `
-                <div class="match-row ${matchResultClass(p, m)}">
-                    <div class="match-row-top">${m.date} · ${m.time || ""}</div>
+            ? `<div class="recent-list" id="recentList" tabindex="0">${p.recent.map(m => {
+                const rc = matchResultClass(p, m);
+                const badge = rc === "match-win" ? `<span class="match-badge win">W</span>`
+                    : rc === "match-loss" ? `<span class="match-badge loss">L</span>` : "";
+                return `
+                <div class="match-row ${rc}">
+                    <div class="match-row-top">
+                        <span>${m.date} · ${m.time || ""}</span>
+                        ${badge}
+                    </div>
                     <div class="match-row-score">
                         <span>${m.teamA}</span>${scorePairHtml(m.scoreA, m.scoreB)}<span>${m.teamB}</span>
                     </div>
                     <div class="match-row-tourney">${m.tourney}</div>
                 </div>
-            `).join("")}</div>`
+            `;
+            }).join("")}</div>`
             : `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`;
         panel.className = `info-panel ${medal} ${flatCorner} ${medal ? "medal-photo-" + medal : ""}`.trim();
         panel.style.backgroundImage = "";
@@ -6553,6 +6782,7 @@
                </div>`
             : "";
         panel.innerHTML = mediaHtml + `<div class="panel-content">
+            ${rankBannerHtml}
             <div class="info-top-row">
                 <div class="info-position-line">
                     <span class="info-pos-badge ${medal} ${posTierClass(pos)}">${pos}</span>
@@ -6662,6 +6892,7 @@
     }
 
     function closePlayerModal() {
+        zcPlaySound("salir");
         closeModal("playerModalOverlay");
     }
 
@@ -6691,6 +6922,7 @@
             bindStatRows(clone);
             bindEventItems(clone);
             bindMatchTabs(clone);
+            bindMatchStats(clone);
             bindTimelineEntries(clone);
             bindMatchSwipe(clone);
             return;
@@ -6710,6 +6942,7 @@
     }
 
     function closeTrophyModal() {
+        zcPlaySound("salir");
         closeModal("trophyModalOverlay");
     }
 
@@ -6720,6 +6953,7 @@
     const QS2_MATCH_SUMMARY = { home: "LEV", away: "LPR", scoreHome: 3, scoreAway: 1, status: "Finalizado" };
 
     function openQuickStats(row) {
+        zcPlaySound("clickentrar");
         const panel = document.getElementById("quickStatsPanel");
         const nameBtn = row.querySelector(".stat-name-btn");
         const photo = row.querySelector(".lu-photo");
@@ -6788,6 +7022,7 @@
     }
 
     function closeQuickStats() {
+        zcPlaySound("clicksalir");
         closeModal("quickStatsOverlay");
     }
 
@@ -6834,15 +7069,21 @@
             menuToggle.classList.remove("active");
             menuToggle.setAttribute("aria-expanded", "false");
         }
-        lockBodyScroll();
         const el = document.getElementById(id);
         if (el.classList.contains("active")) {
+            // Reabrir el mismo modal: forzamos un reflow para reiniciar la
+            // transición sin dejar un frame "vacío" en medio.
+            el.style.transition = "none";
             el.classList.remove("active");
             void el.offsetWidth;
+            el.style.transition = "";
         }
-        requestAnimationFrame(() => {
-            el.classList.add("active");
-        });
+        // El bloqueo de scroll y la activación del overlay se aplican en el
+        // mismo tick (sin esperar a un requestAnimationFrame) para que el
+        // fondo nunca quede "al descubierto" un frame antes de que el overlay
+        // lo cubra — eso es lo que causaba el parpadeo al abrir un menú.
+        lockBodyScroll();
+        el.classList.add("active");
     }
     function closeModal(id) {
         document.getElementById(id).classList.remove("active");
@@ -6901,6 +7142,7 @@
     const rankToggleBtn = document.getElementById("rankToggleBtn");
     if (rankToggleBtn) {
         rankToggleBtn.addEventListener("click", () => {
+            zcPlaySound("click");
             rankingExpanded = !rankingExpanded;
             rankToggleBtn.textContent = rankingExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
             renderRanking();
@@ -6910,6 +7152,7 @@
     const contribToggleBtn = document.getElementById("contribToggleBtn");
     if (contribToggleBtn) {
         contribToggleBtn.addEventListener("click", () => {
+            zcPlaySound("click");
             contribExpanded = !contribExpanded;
             contribToggleBtn.textContent = contribExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
             renderContributions();
@@ -6920,6 +7163,7 @@
     const mobileMenu = document.getElementById("mobileMenu");
     const menuClose = document.getElementById("menuClose");
     function openMenu() {
+        zcPlaySound("clickentrar");
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
         modalStack = [];
         mobileMenu.classList.add("open");
@@ -6928,6 +7172,7 @@
         lockBodyScroll();
     }
     function closeMenu() {
+        zcPlaySound("clicksalir");
         mobileMenu.classList.remove("open");
         menuToggle.classList.remove("active");
         menuToggle.setAttribute("aria-expanded", "false");
@@ -6942,7 +7187,12 @@
     };
     const allFilterableIds = ["ultimo-partido", "ranking", "ultima-clasificacion", "contribuciones", "salon-fama"];
 
-    function applySectionFilter(key) {
+    let zcCurrentSection = "ultimo-partido";
+    function applySectionFilter(key, silent) {
+        if (!silent) {
+            zcPlaySound(key === zcCurrentSection ? "click" : "cambio");
+        }
+        zcCurrentSection = key;
         if (key === "todo") {
             allFilterableIds.forEach(id => {
                 const el = document.getElementById(id);
@@ -6962,13 +7212,16 @@
             t.classList.toggle("active", t.dataset.sectionTab === key);
         });
     }
-    applySectionFilter("ultimo-partido");
+    applySectionFilter("ultimo-partido", true);
 
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener("click", () => {
             mobileMenu.classList.contains("open") ? closeMenu() : openMenu();
         });
         if (menuClose) menuClose.addEventListener("click", closeMenu);
+        const soundMuteBtn = document.getElementById("soundMuteBtn");
+        if (soundMuteBtn) soundMuteBtn.addEventListener("click", zcToggleMute);
+        zcUpdateMuteIcon();
         mobileMenu.querySelectorAll("[data-menu-link]").forEach(link => {
             link.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -7008,6 +7261,7 @@
             if (!isLineupRow) {
                 const toggleDetail = () => {
                     const open = row.classList.toggle("open");
+                    zcPlaySound(open ? "clickentrar" : "clicksalir");
                     row.setAttribute("aria-expanded", open ? "true" : "false");
                 };
                 row.addEventListener("click", (e) => {
@@ -7047,6 +7301,7 @@
             el.addEventListener("click", function (e) {
                 const src = this.getAttribute("data-image");
                 if (src) {
+                    zcPlaySound("entrar");
                     modalImg.src = src;
                     openModal("modalOverlay");
                 } else {
@@ -7061,6 +7316,7 @@
         const panels = root.querySelectorAll(".match-tab-panel");
         tabs.forEach(tab => {
             tab.addEventListener("click", () => {
+                zcPlaySound("click");
                 tabs.forEach(t => t.classList.remove("active"));
                 panels.forEach(p => p.classList.remove("active"));
                 tab.classList.add("active");
@@ -7096,6 +7352,7 @@
 
         mvsTabs.forEach(tab => {
             tab.addEventListener("click", () => {
+                zcPlaySound("click");
                 mvsTabs.forEach(t => t.classList.remove("active"));
                 tab.classList.add("active");
                 active = tab.dataset.mvsTab;
@@ -7105,6 +7362,7 @@
 
         if (moreBtn) {
             moreBtn.addEventListener("click", () => {
+                zcPlaySound("click");
                 expanded = !expanded;
                 render();
             });
@@ -7170,6 +7428,7 @@
     bindEventItems(document);
     overlay.addEventListener('click', function(e) {
         if (e.target === this || e.target === document.getElementById('closeModal')) {
+            zcPlaySound("salir");
             closeModal('modalOverlay');
             modalImg.src = '';
         }
