@@ -13,6 +13,18 @@
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
         }
+        :root {
+            --page-width: 480px;
+        }
+        @media (min-width: 700px) {
+            :root { --page-width: 700px; }
+        }
+        @media (min-width: 1024px) {
+            :root { --page-width: 940px; }
+        }
+        @media (min-width: 1440px) {
+            :root { --page-width: 1100px; }
+        }
         html {
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -28,7 +40,7 @@
         }
         .page {
             width: 100%;
-            max-width: 480px;
+            max-width: var(--page-width);
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -41,7 +53,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .site-header-inner {
-            max-width: 480px;
+            max-width: var(--page-width);
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -93,7 +105,7 @@
             display: none;
         }
         .section-tabs {
-            max-width: 480px;
+            max-width: var(--page-width);
             margin: 0 auto;
             display: flex;
             gap: 18px;
@@ -124,6 +136,8 @@
             justify-content: space-between;
             padding: 3px 2px;
             flex-shrink: 0;
+            position: relative;
+            z-index: 950;
         }
         .menu-toggle span {
             display: block;
@@ -131,11 +145,12 @@
             width: 100%;
             background: #ffffff;
             border-radius: 2px;
-            transition: transform 0.25s ease, opacity 0.25s ease;
+            transform-origin: center;
+            transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
         }
-        .menu-toggle.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
-        .menu-toggle.active span:nth-child(2) { opacity: 0; }
-        .menu-toggle.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -161,21 +176,11 @@
         }
         .mobile-menu-topbar {
             position: absolute;
-            top: 14px;
-            right: 20px;
+            top: 18px;
+            left: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .mobile-menu-close {
-            font-size: 1.15rem;
-            color: #888888;
-            cursor: pointer;
-            width: 34px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .mobile-menu-mute {
             width: 34px;
@@ -537,9 +542,46 @@
         }
         .mvs-row {
             display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .mvs-row-top {
+            display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 8px;
+        }
+        .mvs-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mvs-bar-track {
+            flex: 1 1 0;
+            height: 5px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.06);
+            overflow: hidden;
+            display: flex;
+        }
+        .mvs-bar-track-left {
+            justify-content: flex-end;
+        }
+        .mvs-bar-track-right {
+            justify-content: flex-start;
+        }
+        .mvs-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .mvs-bar-lev {
+            background: #d93025;
+        }
+        .mvs-bar-lpr {
+            background: #1565c0;
+        }
+        .mvs-bar-neutral {
+            background: rgba(255,255,255,0.3);
         }
         .mvs-val {
             flex: 0 0 52px;
@@ -1408,7 +1450,9 @@
         .lu-corner-bl { bottom: -1px; left: -16px; }
         .lu-rating.rt-elite { background: #1e8e3e; }
         .lu-rating.rt-good { background: #f9a825; color: #1a1400; }
+        .lu-rating.rt-mid { background: #e8720c; }
         .lu-rating.rt-low { background: #d93025; }
+        .lu-rating.rt-top { background: #1565c0; }
         .lu-rating.rt-na { background: #4a4a4a; color: #f0f0f0; }
         .lu-detail-inner {
             display: flex;
@@ -1668,6 +1712,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            line-height: 1;
             background: none;
             color: #ffffff;
         }
@@ -1866,6 +1912,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
             gap: 2px;
         }
         .rank-pos2 {
@@ -1873,6 +1920,7 @@
             font-size: 0.86rem;
             color: #ffffff;
             flex-shrink: 0;
+            line-height: 1;
         }
         .rank-pos2-dot { }
         .rank-pos2.gold {
@@ -1972,8 +2020,16 @@
             overflow: hidden;
             margin-left: -3px;
         }
-        .rank-tier-icon { width: 19px; height: 19px; object-fit: contain; flex-shrink: 0; margin: -3px 0; }
-        .rank-tier-name { white-space: nowrap; font-weight: 700; color: #b9b9b9; }
+        .rank-tier-icon {
+            width: 13px;
+            height: 13px;
+            object-fit: contain;
+            object-position: center;
+            flex-shrink: 0;
+            display: block;
+            align-self: center;
+        }
+        .rank-tier-name { white-space: nowrap; font-weight: 700; color: #b9b9b9; font-size: 0.68rem; }
         .rank-row2-points { white-space: nowrap; margin-left: auto; padding-left: 10px; }
         .rank-region {
             font-size: 0.66rem;
@@ -2085,6 +2141,9 @@
             margin-top: 2px;
         }
         .rank-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
             font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 1px;
@@ -2099,6 +2158,13 @@
         }
         .rank-toggle-btn:hover {
             background: rgba(90,169,230,0.16);
+        }
+        .rank-toggle-icon {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
         }
 
         /* Trophy room */
@@ -2150,7 +2216,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2160,49 +2226,102 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.12s ease, visibility 0.12s ease;
-            will-change: opacity;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            transition: opacity 0.25s ease, visibility 0.25s ease, backdrop-filter 0.25s ease, -webkit-backdrop-filter 0.25s ease;
+            will-change: opacity, backdrop-filter;
             transform: translateZ(0);
         }
         #modalOverlay {
             z-index: 1100;
         }
-        /* Brillo de rango: vive DENTRO del panel del jugador como una capa de
-           fondo (no reserva espacio propio), así que no deja un hueco vacío
-           una vez que el destello termina. Se cierra solo junto con el menú.
-           Master y Legendary comparten el mismo tamaño/intensidad de brillo. */
-        .panel-rank-banner {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            height: 90px;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
+        /* Brillo de rango: sale directamente del número de "Posición en el
+           ranking" (no de una franja arriba del panel), así que no deja
+           hueco vacío y se cierra solo junto con el menú. Se usa un núcleo
+           chico + un halo difuminado (blur) para que se vea como brillo/luz
+           real y no como un círculo sólido. Mismo tamaño/intensidad para
+           los 4 rangos, solo cambia el color. */
+        .info-pos-badge.pos-glow-master,
+        .info-pos-badge.pos-glow-legendary,
+        .info-pos-badge.pos-glow-pro,
+        .info-pos-badge.pos-glow-mythic {
+            position: relative;
+            z-index: 1;
         }
-        .panel-rank-flash {
+        .info-pos-badge.pos-glow-master::before,
+        .info-pos-badge.pos-glow-master::after,
+        .info-pos-badge.pos-glow-legendary::before,
+        .info-pos-badge.pos-glow-legendary::after,
+        .info-pos-badge.pos-glow-pro::before,
+        .info-pos-badge.pos-glow-pro::after,
+        .info-pos-badge.pos-glow-mythic::before,
+        .info-pos-badge.pos-glow-mythic::after {
+            content: "";
             position: absolute;
-            inset: 0;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
             opacity: 0;
         }
-        .panel-rank-banner.master .panel-rank-flash {
-            background: radial-gradient(circle at 50% 38%, rgba(255,215,60,0.32) 0%, rgba(255,180,20,0.12) 35%, rgba(255,180,20,0) 72%);
-            animation: zcFlashMaster 1100ms ease-out forwards;
+        .info-pos-badge.pos-glow-master::before,
+        .info-pos-badge.pos-glow-legendary::before,
+        .info-pos-badge.pos-glow-pro::before,
+        .info-pos-badge.pos-glow-mythic::before {
+            width: 74px;
+            height: 74px;
+            filter: blur(9px);
+            animation-duration: 1300ms;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+            animation-name: zcGlowHalo;
         }
-        .panel-rank-banner.legendary .panel-rank-flash {
-            background: radial-gradient(circle at 50% 38%, rgba(255,70,70,0.32) 0%, rgba(255,40,40,0.12) 35%, rgba(255,40,40,0) 68%);
-            animation: zcFlashLegendary 1100ms ease-out forwards;
+        .info-pos-badge.pos-glow-master::after,
+        .info-pos-badge.pos-glow-legendary::after,
+        .info-pos-badge.pos-glow-pro::after,
+        .info-pos-badge.pos-glow-mythic::after {
+            width: 30px;
+            height: 30px;
+            filter: blur(4px);
+            animation-duration: 1300ms;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+            animation-name: zcGlowCore;
         }
-        @keyframes zcFlashMaster {
-            0% { opacity: 0; }
-            15% { opacity: 0.85; }
-            100% { opacity: 0; }
+        .info-pos-badge.pos-glow-master::before {
+            background: radial-gradient(circle, rgba(255,215,60,0.65) 0%, rgba(255,180,20,0.28) 42%, rgba(255,180,20,0) 78%);
         }
-        @keyframes zcFlashLegendary {
-            0% { opacity: 0; }
-            15% { opacity: 0.85; }
-            100% { opacity: 0; }
+        .info-pos-badge.pos-glow-master::after {
+            background: radial-gradient(circle, rgba(255,245,210,0.9) 0%, rgba(255,210,110,0.4) 55%, rgba(255,210,110,0) 100%);
+        }
+        .info-pos-badge.pos-glow-legendary::before {
+            background: radial-gradient(circle, rgba(255,80,80,0.65) 0%, rgba(255,40,40,0.28) 42%, rgba(255,40,40,0) 78%);
+        }
+        .info-pos-badge.pos-glow-legendary::after {
+            background: radial-gradient(circle, rgba(255,210,210,0.9) 0%, rgba(255,90,90,0.4) 55%, rgba(255,90,90,0) 100%);
+        }
+        .info-pos-badge.pos-glow-pro::before {
+            background: radial-gradient(circle, rgba(70,220,110,0.65) 0%, rgba(40,190,90,0.28) 42%, rgba(40,190,90,0) 78%);
+        }
+        .info-pos-badge.pos-glow-pro::after {
+            background: radial-gradient(circle, rgba(210,255,225,0.9) 0%, rgba(110,230,150,0.4) 55%, rgba(110,230,150,0) 100%);
+        }
+        .info-pos-badge.pos-glow-mythic::before {
+            background: radial-gradient(circle, rgba(180,90,255,0.65) 0%, rgba(150,50,230,0.28) 42%, rgba(150,50,230,0) 78%);
+        }
+        .info-pos-badge.pos-glow-mythic::after {
+            background: radial-gradient(circle, rgba(230,210,255,0.9) 0%, rgba(190,130,255,0.4) 55%, rgba(190,130,255,0) 100%);
+        }
+        @keyframes zcGlowHalo {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+            30% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+        }
+        @keyframes zcGlowCore {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+            25% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
         }
         #playerModalOverlay {
             z-index: 1050;
@@ -2217,6 +2336,8 @@
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         .modal-content, .info-panel {
             transform: scale(0.96) translateY(8px);
@@ -2571,6 +2692,32 @@
             color: #aaaaaa;
             letter-spacing: 0.5px;
         }
+        .info-position-label.pos-glow-master,
+        .info-position-label.pos-glow-legendary,
+        .info-position-label.pos-glow-pro,
+        .info-position-label.pos-glow-mythic {
+            animation-duration: 1300ms;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+            animation-name: zcLabelGlow;
+        }
+        .info-position-label.pos-glow-master {
+            --zc-label-glow: rgba(255,205,60,0.95);
+        }
+        .info-position-label.pos-glow-legendary {
+            --zc-label-glow: rgba(255,70,70,0.95);
+        }
+        .info-position-label.pos-glow-pro {
+            --zc-label-glow: rgba(70,220,110,0.95);
+        }
+        .info-position-label.pos-glow-mythic {
+            --zc-label-glow: rgba(180,90,255,0.95);
+        }
+        @keyframes zcLabelGlow {
+            0% { color: #aaaaaa; text-shadow: none; }
+            30% { color: #ffffff; text-shadow: 0 0 6px var(--zc-label-glow), 0 0 14px var(--zc-label-glow); }
+            100% { color: #aaaaaa; text-shadow: none; }
+        }
         .info-name {
             font-size: 1.4rem;
             font-weight: 900;
@@ -2803,8 +2950,8 @@
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 8px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
         }
         .ach-card:last-child {
             margin-bottom: 0;
@@ -2813,7 +2960,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .ach-date {
             font-size: 0.6rem;
@@ -2836,7 +2983,10 @@
            el aro del borde. */
         .ach-card.gold::after,
         .ach-card.silver::after,
-        .ach-card.purple::after {
+        .ach-card.purple::after,
+        .ach-card.gold::before,
+        .ach-card.silver::before,
+        .ach-card.purple::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -2850,14 +3000,18 @@
             -webkit-mask-composite: xor;
             mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             mask-composite: exclude;
-            animation: achShineSweep 3.6s ease-in-out infinite;
+            animation: achShineSweep 3.6s linear infinite;
         }
-        .ach-card.gold::after { --ach-shine: rgba(255, 196, 84, 0.95); }
-        .ach-card.silver::after { --ach-shine: rgba(173, 214, 255, 0.9); }
-        .ach-card.purple::after { --ach-shine: rgba(224, 168, 255, 0.95); }
+        .ach-card.gold::before,
+        .ach-card.silver::before,
+        .ach-card.purple::before {
+            animation-delay: -1.8s;
+        }
+        .ach-card.gold::after, .ach-card.gold::before { --ach-shine: rgba(255, 196, 84, 0.95); }
+        .ach-card.silver::after, .ach-card.silver::before { --ach-shine: rgba(173, 214, 255, 0.9); }
+        .ach-card.purple::after, .ach-card.purple::before { --ach-shine: rgba(224, 168, 255, 0.95); }
         @keyframes achShineSweep {
             0% { background-position: 160% 0; }
-            55% { background-position: -60% 0; }
             100% { background-position: -60% 0; }
         }
         .ach-place.gold { background: rgba(212,175,55,0.18); color: #c9b384; }
@@ -2867,17 +3021,17 @@
             font-size: 0.75rem;
             font-weight: 600;
             color: #ffffff;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .ach-score {
             font-size: 0.7rem;
             color: #999999;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .ach-result {
             font-size: 0.68rem;
             color: #cccccc;
-            padding-top: 6px;
+            padding-top: 4px;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
         .score-pair {
@@ -2905,9 +3059,11 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: height 0.28s ease;
         }
         .carousel-track {
             display: flex;
+            align-items: flex-start;
             transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
             will-change: transform;
         }
@@ -2966,6 +3122,111 @@
         .carousel-counter-swipe {
             margin-top: 2px;
             margin-bottom: 8px;
+        }
+        .stat-bar-track {
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.08);
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        .stat-bar-fill.good { background: linear-gradient(90deg,#4fae72,#6fcf97); }
+        .stat-bar-fill.mid { background: linear-gradient(90deg,#c9a232,#e8c547); }
+        .stat-bar-fill.bad { background: linear-gradient(90deg,#d94f4f,#ff6b6b); }
+        .info-grid.stat-compact .info-field-label {
+            font-size: 0.56rem;
+        }
+        .info-grid.stat-compact .info-field-value {
+            font-size: 0.74rem;
+        }
+        .radar-gauge-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .stat-radar-wrap {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex: 1 1 150px;
+            padding: 2px 0 0;
+        }
+        .stat-radar-svg {
+            width: 100%;
+            max-width: 190px;
+            height: auto;
+        }
+        .radar-label {
+            font-size: 6.2px;
+            fill: #bbbbbb;
+        }
+        .radar-value {
+            font-size: 10.5px;
+            font-weight: 800;
+            fill: #ffffff;
+        }
+        .radar-label-hit {
+            cursor: pointer;
+        }
+        .radar-tooltip {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            background: rgba(18,18,18,0.97);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 8px;
+            padding: 7px 9px;
+            font-size: 0.6rem;
+            line-height: 1.35;
+            color: #eeeeee;
+            max-width: 155px;
+            width: max-content;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+            z-index: 20;
+            pointer-events: none;
+            transform: translate(-50%, calc(-100% - 10px));
+        }
+        .radar-tooltip-title {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.64rem;
+            margin-bottom: 3px;
+        }
+        .gauge-col {
+            flex: 0 0 84px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .gauge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .gauge-svg {
+            width: 100%;
+            max-width: 68px;
+            height: auto;
+        }
+        .gauge-value {
+            font-size: 12px;
+            font-weight: 800;
+            fill: #ffffff;
+        }
+        .gauge-label {
+            font-size: 0.5rem;
+            color: #999999;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-top: 2px;
         }
 
         /* Estadísticas / Brawl Stars data */
@@ -3269,7 +3530,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.4);
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -3277,13 +3538,17 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.22s ease, visibility 0.22s ease;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            transition: opacity 0.25s ease, visibility 0.25s ease, backdrop-filter 0.25s ease, -webkit-backdrop-filter 0.25s ease;
             padding: 0;
         }
         .zcf-overlay.open {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         .zcf-panel {
             width: 100%;
@@ -3429,25 +3694,25 @@
         .zcf-checkbox-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
         .zcf-checkbox-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 12px;
+            gap: 6px;
+            padding: 7px 10px;
             border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 10px;
-            font-size: 0.75rem;
+            border-radius: 9px;
+            font-size: 0.66rem;
             color: #dddddd;
             cursor: pointer;
             user-select: none;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.6px;
         }
         .zcf-checkbox-box {
-            width: 16px;
-            height: 16px;
+            width: 13px;
+            height: 13px;
             border: 1.5px solid rgba(255,255,255,0.35);
             border-radius: 4px;
             flex-shrink: 0;
@@ -3466,10 +3731,10 @@
         .zcf-country-item.checked .zcf-checkbox-box::after {
             content: "";
             position: absolute;
-            left: 4px;
-            top: 1px;
+            left: 3px;
+            top: 0px;
             width: 4px;
-            height: 8px;
+            height: 7px;
             border: solid #ffffff;
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
@@ -3640,6 +3905,1140 @@
             cursor: grabbing !important;
             user-select: none;
         }
+
+        /* ===================== HOME: DESTACADAS (STORIES) ===================== */
+        .home-section {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .home-section-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #B8863D;
+            padding: 0 2px;
+        }
+        .stories-row {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 4px 2px 10px 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .stories-row::-webkit-scrollbar { display: none; }
+        .story-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: 0 0 auto;
+            width: 72px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+        }
+        .story-ring {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            padding: 3px;
+            background: conic-gradient(from 45deg, #d4af37, #FFE9A0, #B8863D, #7A4A2A, #d4af37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease;
+        }
+        .story-item:active .story-ring { transform: scale(0.94); }
+        .story-item.story-seen .story-ring {
+            background: #3a3a3a;
+        }
+        .story-ring-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #0a0a0a;
+            padding: 2px;
+        }
+        .story-ring-inner img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+        .story-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #D9E1E8;
+            text-align: center;
+            line-height: 1.2;
+            max-width: 72px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ===================== STORY VIEWER (FULLSCREEN) ===================== */
+        .story-viewer {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            touch-action: none;
+        }
+        .story-viewer.active { display: flex; }
+        .story-viewer-media {
+            position: relative;
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+        .story-viewer-media > .story-slide {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: storyFadeIn 0.22s ease forwards;
+            overflow: hidden;
+        }
+        .story-slide-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(35px) brightness(0.5) saturate(1.15);
+            transform: scale(1.2);
+        }
+        .story-slide-fg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        @keyframes storyFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .story-progress-row {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            gap: 6px;
+            padding: 10px 10px 0 10px;
+            z-index: 10;
+        }
+        .story-progress-track {
+            flex: 1;
+            height: 3px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.28);
+            overflow: hidden;
+            transition: flex-grow 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .story-progress-track.is-active {
+            flex-grow: 2.6; /* la barra activa se ve más ancha, igual que en Novedades */
+        }
+        .story-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #ffffff;
+            border-radius: 3px;
+        }
+        .story-progress-track.progress-done .story-progress-fill {
+            width: 100% !important;
+        }
+        .story-progress-fill.progress-animating {
+            transition: width linear;
+        }
+        .story-viewer-top {
+            position: absolute;
+            top: 22px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            z-index: 10;
+        }
+        .story-viewer-user {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .story-viewer-username {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+        /* Reproductor de música de la destacada: disco que gira + nombre de la
+           canción que "sale" desde el disco, se queda visible un momento y
+           vuelve a esconderse detrás del disco, en bucle. */
+        .story-music-player {
+            display: none;
+            align-items: center;
+            gap: 7px;
+        }
+        .story-music-player.visible {
+            display: flex;
+        }
+        .story-music-disc {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.65));
+            animation: storyDiscSpin 2.6s linear infinite;
+        }
+        @keyframes storyDiscSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .story-music-track {
+            position: relative;
+            overflow: hidden;
+            height: 15px;
+            max-width: 46vw;
+            width: 210px;
+            -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+            mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+        }
+        .story-music-name {
+            position: absolute;
+            left: 0;
+            top: 0;
+            white-space: nowrap;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.65);
+            transform: translateX(-100%);
+            animation: storyMusicNameSlide 8s ease-in-out infinite;
+        }
+        @keyframes storyMusicNameSlide {
+            0%   { transform: translateX(-100%); }
+            12%  { transform: translateX(0%); }
+            55%  { transform: translateX(0%); }
+            67%  { transform: translateX(-100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .story-viewer-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .story-viewer-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+        }
+        .story-viewer-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .story-tap-zones {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            z-index: 5;
+        }
+        .story-tap-zone { flex: 1; }
+        .story-cta-btn {
+            position: absolute;
+            left: 50%;
+            bottom: 26px;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: none;
+            background: #ffffff;
+            color: #111111 !important;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 11px 26px;
+            border-radius: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+        }
+        .story-cta-btn.visible { display: block; }
+        .story-viewer-caption-bar {
+            position: relative;
+            z-index: 6;
+            padding: 14px 16px 22px 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+            pointer-events: none;
+        }
+
+        /* ===================== NOVEDADES (estilo feed, sin marco) ===================== */
+        .novedades-card {
+            position: relative;
+            /* Se extiende de borde a borde de la pantalla, saliendo del padding del .page */
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            overflow: hidden;
+        }
+        .novedades-progress-row {
+            display: flex;
+            gap: 6px;
+            padding: 10px 14px 4px 14px;
+        }
+        .novedades-progress-track {
+            flex: 1;
+            height: 2px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.22);
+            overflow: hidden;
+            transition: flex-grow 0.35s ease;
+        }
+        .novedades-progress-track.is-active {
+            flex-grow: 2.6; /* la barra activa se ve más ancha, como en el ejemplo */
+        }
+        .novedades-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+        .novedades-track {
+            display: flex;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .novedades-track::-webkit-scrollbar { display: none; }
+        .novedad-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        .novedad-img-wrap {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: #000;
+        }
+        .novedad-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none; /* la imagen no intercepta el deslizado */
+            -webkit-user-drag: none;
+        }
+        .novedad-body {
+            padding: 16px 20px 26px 20px;
+        }
+        .novedad-tag {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #B8863D;
+            margin-bottom: 6px;
+        }
+        .novedad-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: #F0EDE6;
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+        .novedad-more-btn {
+            display: inline-block;
+            background: #ffffff;
+            color: #111 !important;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 10px 22px;
+            border-radius: 24px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .novedad-social-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .novedad-social-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #1f1f1f;
+            color: #fff;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 9px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .novedad-social-btn img {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ===================== ENCABEZADO GRANDE (Momentos / Historias destacadas) ===================== */
+        .section-heading {
+            font-size: 21px;
+            font-weight: 900;
+            color: #F0EDE6;
+            line-height: 1.28;
+            padding: 0 2px;
+        }
+
+        /* ===================== MOMENTOS DE LA BSC (clips) ===================== */
+        .momentos-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 2px 2px 10px 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .momentos-row::-webkit-scrollbar { display: none; }
+        .momento-card {
+            position: relative;
+            flex: 0 0 auto;
+            width: 148px;
+            aspect-ratio: 3 / 4;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .momento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+        .momento-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 42%, rgba(0,0,0,0) 62%);
+        }
+        .momento-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 2;
+            background: #ffffff;
+            color: #111;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .momento-play {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            z-index: 2;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .momento-play::after {
+            content: "";
+            border-style: solid;
+            border-width: 5px 0 5px 8px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 2px;
+        }
+        .momento-caption {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            z-index: 2;
+            color: #fff;
+            font-size: 12.5px;
+            font-weight: 700;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        /* ===================== HISTORIAS DESTACADAS ===================== */
+        .hd-hero {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .hd-hero-img-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+        }
+        .hd-hero-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .hd-hero-tag {
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #B8863D;
+        }
+        .hd-hero-title {
+            margin-top: 4px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #F0EDE6;
+            line-height: 1.35;
+        }
+        .hd-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 6px;
+        }
+        .hd-list-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: none;
+            border: none;
+            padding: 0;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+        }
+        .hd-list-thumb {
+            flex: 0 0 92px;
+            width: 92px;
+            aspect-ratio: 4 / 3;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        .hd-list-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .hd-list-text { flex: 1; min-width: 0; }
+        .hd-list-tag {
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #B8863D;
+            margin-bottom: 3px;
+        }
+        .hd-list-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #F0EDE6;
+            line-height: 1.35;
+        }
+
+        /* ===================== NOVEDAD DETAIL PAGE ===================== */
+        .novedad-detail {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            z-index: 3500;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .novedad-detail.active { display: flex; }
+        .novedad-detail-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 18px 16px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            background: #0a0a0a;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .novedad-detail-back img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        .novedad-detail-hero {
+            width: 100%;
+            max-height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+        .novedad-detail-content {
+            padding: 22px 20px 60px 20px;
+            max-width: min(var(--page-width), 640px);
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .novedad-detail-tag {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #B8863D;
+            margin-bottom: 10px;
+        }
+        .novedad-detail-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.25;
+            margin-bottom: 18px;
+        }
+        .novedad-detail-body p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #D9E1E8;
+            margin-bottom: 16px;
+        }
+        .novedad-detail-body p:first-of-type::first-letter {
+            font-size: 2.6em;
+            font-weight: 800;
+            color: #d4af37;
+            float: left;
+            line-height: 0.8;
+            padding-right: 6px;
+            padding-top: 4px;
+        }
+
+        /* Selector de idioma */
+        .lang-switcher {
+            position: relative;
+        }
+        .lang-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 34px;
+            padding: 0 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.06);
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .lang-toggle-btn img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+        }
+        .lang-toggle-arrow {
+            width: 11px;
+            height: 11px;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .lang-toggle-btn[aria-expanded="true"] .lang-toggle-arrow {
+            transform: rotate(180deg);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 250px;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            box-shadow: 0 14px 34px rgba(0,0,0,0.6);
+            padding: 6px;
+            display: none;
+            flex-direction: column;
+            gap: 3px;
+            z-index: 950;
+        }
+        .lang-dropdown.open {
+            display: flex;
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            background: transparent;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+        }
+        .lang-option:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        .lang-option.active {
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.05);
+            font-weight: 800;
+        }
+        .lang-option-check {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            display: none;
+        }
+        .lang-option.active .lang-option-check {
+            display: block;
+        }
+
+        /* ===================================================================
+           ADAPTACIÓN TABLET / ESCRITORIO
+           En vez de solo estirar el ancho, se reubican y redimensionan
+           componentes clave para aprovechar el espacio horizontal extra.
+        =================================================================== */
+
+        /* --- Tablet (>=700px) --- */
+        @media (min-width: 700px) {
+            body {
+                padding: 28px 32px 40px;
+            }
+            html {
+                font-size: 17px;
+            }
+            .site-header {
+                margin: -28px -32px 28px -32px;
+                padding: 18px 32px;
+            }
+            .site-header-inner {
+                max-width: none;
+            }
+            .section-tabs-wrapper {
+                margin: -28px -32px 26px -32px;
+                padding: 0 32px;
+                overflow-x: visible;
+            }
+            .section-tabs {
+                gap: 30px;
+                justify-content: center;
+            }
+            .section-tab {
+                font-size: 0.78rem;
+                padding: 12px 2px 11px;
+            }
+            .page {
+                gap: 40px;
+            }
+
+            /* Alineaciones (Titulares): se mantiene el orden vertical original
+               (LEV arriba, VS, LPR abajo) — nada de columnas lado a lado.
+               Como la página es más ancha, las 3 tarjetas de cada equipo se
+               reparten en una sola fila más grande y con más aire. */
+            .lu-block-titulares .lu-block-grid {
+                gap: 30px 14px;
+            }
+            .lu-card .lu-photo,
+            .lu-card .lu-avatar-wrap {
+                width: 68px;
+                height: 68px;
+            }
+            .lu-card .stat-name-btn {
+                font-size: 0.8rem;
+            }
+            .lu-card .lu-role {
+                font-size: 0.56rem;
+            }
+            .lu-avatar-wrap .lu-rating {
+                width: 34px;
+                font-size: 0.68rem;
+            }
+
+            /* Historias destacadas: lista vertical -> grid de 2 columnas */
+            .hd-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px 20px;
+            }
+
+            /* Destacadas (stories) del inicio: centradas en vez de pegadas
+               a la izquierda, ahora que sobra espacio horizontal */
+            .stories-row {
+                justify-content: center;
+            }
+
+            /* Datos destacados del ranking: usa todo el ancho en una fila */
+            .rank-highlight-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            /* Filas del ranking (bandera, nombre, rango, puntos): un poco
+               más grandes para aprovechar el ancho extra de tablet/escritorio */
+            .rank-row {
+                padding: 12px 10px;
+                gap: 12px;
+            }
+            .rank-pos {
+                font-size: 1rem;
+                width: auto;
+                min-width: 30px;
+                padding: 0 2px;
+            }
+            .rank-flag {
+                width: 26px;
+                height: 18px;
+            }
+            .rank-name {
+                font-size: 0.95rem;
+                padding: 12px 20px;
+                margin: -12px -20px;
+            }
+            .rank-points {
+                font-size: 0.82rem;
+                min-width: 66px;
+            }
+            .rank-change {
+                font-size: 0.64rem;
+                min-width: 40px;
+            }
+            .rank-row2 {
+                min-height: 50px;
+                gap: 10px;
+            }
+            .rank-wedge {
+                width: auto;
+                min-width: 40px;
+                padding: 0 2px;
+            }
+            .rank-pos2 {
+                font-size: 1rem;
+            }
+            .rank-player-icon {
+                width: 32px;
+                height: 32px;
+            }
+            .rank-name2 {
+                font-size: 0.98rem;
+            }
+            .rank-flag2 {
+                width: 22px;
+                height: 15px;
+            }
+            .rank-row2-bottom {
+                font-size: 0.62rem;
+            }
+            .rank-tier-icon {
+                width: 15px;
+                height: 15px;
+            }
+            .rank-tier-name {
+                font-size: 0.76rem;
+            }
+            .rank-region {
+                width: 30px;
+                height: 30px;
+                font-size: 0.72rem;
+            }
+            #rankingList {
+                max-height: 600px;
+            }
+
+            /* Paneles/modales un poco más amplios y cómodos de leer */
+            .info-panel {
+                max-width: 560px;
+            }
+            .quick-stats-panel {
+                max-width: 400px;
+            }
+
+            /* Salón de la fama: más trofeos por fila al haber más espacio */
+            .trophy-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 14px;
+            }
+
+            /* Menú de "Filtros" del ranking: en tablet/escritorio sigue
+               siendo la misma hoja que sube desde abajo de la página (igual
+               que el menú de 3 rayas), solo que más ancha y con los 6 campos
+               repartidos en una grilla simétrica de 3 columnas x 2 filas:
+               País (el más grande) y Actividad (el más chico) comparten la
+               primera columna para que quede equilibrado visualmente. */
+            .zcf-panel {
+                max-width: 640px;
+                padding: 26px 30px calc(26px + env(safe-area-inset-bottom, 0px));
+            }
+            .zcf-fields-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: auto auto;
+                gap: 18px 22px;
+            }
+            .zcf-field-country { grid-column: 1; grid-row: 1; }
+            .zcf-field-activity { grid-column: 1; grid-row: 2; }
+            .zcf-field-region { grid-column: 2; grid-row: 1; }
+            .zcf-field-order { grid-column: 2; grid-row: 2; }
+            .zcf-field-movement { grid-column: 3; grid-row: 1; }
+            .zcf-field-achievement { grid-column: 3; grid-row: 2; }
+            .zcf-checkbox-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            /* Orden y Logros usan palabras/etiquetas más largas, así que sus
+               opciones se apilan en una sola columna (una por fila) para que
+               se lean bien y quede prolijo, en vez de ir 2 por fila. */
+            .zcf-field-order .zcf-checkbox-group,
+            .zcf-field-achievement .zcf-checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            .zcf-country-scroll {
+                max-height: 170px;
+            }
+        }
+
+        /* --- Escritorio (>=1024px) --- */
+        @media (min-width: 1024px) {
+            body {
+                padding: 36px 40px 48px;
+                background: radial-gradient(ellipse 1100px 700px at 50% 0%, rgba(255,255,255,0.035), transparent 60%), #0a0a0a;
+            }
+            html {
+                font-size: 17.5px;
+            }
+            .site-header {
+                margin: -36px -40px 32px -40px;
+                padding: 20px 40px;
+            }
+            .section-tabs-wrapper {
+                margin: -36px -40px 30px -40px;
+                padding: 0 40px;
+            }
+            .section-tab {
+                font-size: 0.82rem;
+            }
+            .site-header-title,
+            .site-header-title-img {
+                font-size: 1.5rem;
+                height: 50px;
+            }
+
+            /* Alineaciones: aún un poco más grandes en escritorio, ya que
+               las 3 tarjetas de cada equipo (LEV arriba, LPR abajo) tienen
+               todavía más espacio para repartirse */
+            .lu-block-titulares .lu-block-grid {
+                gap: 34px 18px;
+            }
+            .lu-card .lu-photo,
+            .lu-card .lu-avatar-wrap {
+                width: 78px;
+                height: 78px;
+            }
+            .lu-card .stat-name-btn {
+                font-size: 0.86rem;
+            }
+            .lu-card .lu-role {
+                font-size: 0.6rem;
+            }
+            .lu-avatar-wrap .lu-rating {
+                width: 38px;
+                font-size: 0.72rem;
+            }
+            .lu-block-suplentes .lu-block-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 26px 10px;
+            }
+
+            /* Historias destacadas: 3 columnas cuando sobra espacio */
+            .hd-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            /* Las filas de estadísticas de partido respiran mejor con más
+               espacio entre etiqueta y valores */
+            .mvs-row-top {
+                gap: 16px;
+            }
+            .mvs-val {
+                flex-basis: 64px;
+            }
+
+            /* Filas del ranking: un poco más grandes todavía en escritorio */
+            .rank-row {
+                padding: 14px 12px;
+                gap: 14px;
+            }
+            .rank-pos {
+                font-size: 1.1rem;
+                width: auto;
+                min-width: 36px;
+                padding: 0 2px;
+            }
+            .rank-flag {
+                width: 30px;
+                height: 20px;
+            }
+            .rank-name {
+                font-size: 1.02rem;
+                padding: 14px 22px;
+                margin: -14px -22px;
+            }
+            .rank-points {
+                font-size: 0.88rem;
+                min-width: 74px;
+            }
+            .rank-change {
+                font-size: 0.68rem;
+                min-width: 44px;
+            }
+            .rank-row2 {
+                min-height: 56px;
+                gap: 12px;
+            }
+            .rank-wedge {
+                width: auto;
+                min-width: 44px;
+                padding: 0 2px;
+            }
+            .rank-pos2 {
+                font-size: 1.08rem;
+            }
+            .rank-player-icon {
+                width: 36px;
+                height: 36px;
+            }
+            .rank-name2 {
+                font-size: 1.05rem;
+            }
+            .rank-flag2 {
+                width: 24px;
+                height: 16px;
+            }
+            .rank-row2-bottom {
+                font-size: 0.68rem;
+            }
+            .rank-tier-icon {
+                width: 16px;
+                height: 16px;
+            }
+            .rank-tier-name {
+                font-size: 0.8rem;
+            }
+            .rank-region {
+                width: 34px;
+                height: 34px;
+                font-size: 0.76rem;
+            }
+            #rankingList {
+                max-height: 680px;
+            }
+
+            /* Salón de la fama: aún más trofeos por fila en escritorio */
+            .trophy-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 16px;
+            }
+
+            /* Filtros: en escritorio la hoja sigue subiendo desde abajo de
+               la página (mismo comportamiento que en tablet), solo un poco
+               más ancha y con textos más grandes para pantalla de PC. */
+            .zcf-panel {
+                max-width: 760px;
+                padding: 30px 36px calc(30px + env(safe-area-inset-bottom, 0px));
+            }
+            .zcf-panel-title {
+                font-size: 1.1rem;
+            }
+            .zcf-fields-grid {
+                gap: 22px 26px;
+            }
+            .zcf-checkbox-group {
+                gap: 8px;
+            }
+            .zcf-search-input {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+            }
+            .zcf-section-label {
+                font-size: 0.72rem;
+            }
+            .zcf-checkbox-item {
+                font-size: 0.68rem;
+                padding: 8px 10px;
+            }
+
+            /* Paneles de jugador / trofeo (incluye las Alineaciones
+               clonadas del último partido dentro del Salón de la Fama):
+               más anchos para que la comparativa LEV | VS | LPR respire. */
+            .info-panel {
+                max-width: 760px;
+            }
+            .quick-stats-panel {
+                max-width: 420px;
+            }
+        }
+
+        /* --- Escritorio grande (>=1440px) --- */
+        @media (min-width: 1440px) {
+            .lu-block-suplentes .lu-block-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            .info-panel {
+                max-width: 860px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3649,7 +5048,7 @@
         <div class="site-header-brand">
             <img src="Untitled257.jpg" alt="ZC26 ESPORTS" class="site-header-title-img">
         </div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <button class="menu-toggle" id="menuToggle" data-i18n-aria="aria.openMenu" data-i18n-aria-default="Abrir menú" aria-label="Abrir menú" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
     </div>
@@ -3657,29 +5056,55 @@
 
 <div class="section-tabs-wrapper" id="sectionTabsWrapper">
     <div class="section-tabs" id="sectionTabs">
-        <a href="#ultimo-partido" class="section-tab active" data-section-tab="ultimo-partido">Último partido importa</a>
-        <a href="#ranking" class="section-tab" data-section-tab="ranking">Ranking</a>
-        <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones">Partners</a>
-        <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama">Salón de la fama</a>
+        <a href="#inicio" class="section-tab active" data-section-tab="inicio" data-i18n="nav.home" data-i18n-default="Home">Home</a>
+        <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
+        <a href="#ranking" class="section-tab" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
+        <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
+        <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
     </div>
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-topbar">
-        <button type="button" class="mobile-menu-mute" id="soundMuteBtn" aria-label="Silenciar sonidos">
+        <div class="lang-switcher" id="langSwitcher">
+            <button type="button" class="lang-toggle-btn" id="langToggleBtn" aria-haspopup="true" aria-expanded="false">
+                <img src="language.png" alt="">
+                <span id="langToggleLabel">Español</span>
+                <svg class="lang-toggle-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="lang-dropdown" id="langDropdown" role="menu">
+                <button type="button" class="lang-option" data-lang="en" role="menuitem">
+                    <span>English</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="lang-option" data-lang="es-es" role="menuitem">
+                    <span>Español (España)</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="lang-option active" data-lang="es-la" role="menuitem">
+                    <span>Español (Latinoamérica)</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="lang-option" data-lang="pt" role="menuitem">
+                    <span>Português</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+        </div>
+        <button type="button" class="mobile-menu-mute" id="soundMuteBtn" data-i18n-aria="aria.muteSounds" data-i18n-aria-default="Silenciar sonidos" aria-label="Silenciar sonidos">
             <img src="sound_offmuted.png" id="soundMuteIcon" alt="Sonido">
         </button>
-        <span class="mobile-menu-close" id="menuClose">✕</span>
     </div>
     <div class="mobile-menu-links">
-        <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link>ÚLTIMO PARTIDO IMPORTA</a>
-        <a href="#ranking" class="mobile-menu-link" data-menu-link>RANKING</a>
-        <a href="#contribuciones" class="mobile-menu-link" data-menu-link>PARTNERS</a>
-        <a href="#salon-fama" class="mobile-menu-link" data-menu-link>SALON DE LA FAMA</a>
-        <a href="#creditos" class="mobile-menu-link" data-menu-link>CREDITOS</a>
+        <a href="#inicio" class="mobile-menu-link" data-menu-link data-i18n="nav.home.upper" data-i18n-default="HOME">HOME</a>
+        <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
+        <a href="#ranking" class="mobile-menu-link" data-menu-link data-i18n="nav.ranking.upper" data-i18n-default="RANKING">RANKING</a>
+        <a href="#contribuciones" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
+        <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
+        <a href="#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
     </div>
     <div class="mobile-menu-bottom">
-        <div class="mobile-menu-more-label">MÁS ZC26</div>
+        <div class="mobile-menu-more-label" data-i18n="menu.moreLabel" data-i18n-default="MÁS ZC26">MÁS ZC26</div>
         <div class="mobile-menu-social">
             <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="mobile-menu-social-link">TikTok<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
             <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="mobile-menu-social-link">Discord<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
@@ -3691,6 +5116,208 @@
 </div>
 
 <div class="page">
+
+    <div class="section-block" id="inicio">
+
+        <!-- ===================== DESTACADAS (STORIES) ===================== -->
+        <div class="home-section">
+            <div class="stories-row" id="storiesRow">
+                <button type="button" class="story-item" data-story-id="lev-winner">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><img src="news/LEVCHAMP.jpg" alt="LEV WINNER"></div>
+                    </div>
+                    <span class="story-label">LEV WINNER</span>
+                </button>
+                <button type="button" class="story-item" data-story-id="matches-aug8">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><img src="news/matchaug8(1).jpg" alt="MATCHES AUG 8"></div>
+                    </div>
+                    <span class="story-label">MATCHES, AUG 8</span>
+                </button>
+                <button type="button" class="story-item" data-story-id="bsc-aug8">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><img src="LEV.png" alt="BSC AUG 8"></div>
+                    </div>
+                    <span class="story-label">BSC, AUG 8</span>
+                </button>
+                <button type="button" class="story-item" data-story-id="resumen-agosto">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><img src="news/novedades8aug1.png" alt="RESUMEN AGOSTO"></div>
+                    </div>
+                    <span class="story-label">RESUMEN AGOSTO</span>
+                </button>
+                <button type="button" class="story-item" data-story-id="brawler-blast">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><img src="news/novedades2sep2.jpg" alt="BRAWLER BLAST"></div>
+                    </div>
+                    <span class="story-label">BRAWLER BLAST</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===================== NOVEDADES ===================== -->
+        <div class="home-section">
+            <div class="novedades-card" id="novedadesCard">
+                <div class="novedades-track" id="novedadesTrack">
+                    <div class="novedad-slide" data-novedad-index="0">
+                        <div class="novedad-img-wrap"><img src="news/novedades25sep1.jpg" alt="ZC26 ESPORTS"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">ZC26 ESPORTS™</div>
+                            <div class="novedad-text">Regresa la ZC26 Brawl Stars este mes de septiembre</div>
+                            <button type="button" class="novedad-more-btn" data-open-novedad="0">Más info.</button>
+                        </div>
+                    </div>
+
+                    <div class="novedad-slide" data-novedad-index="1">
+                        <div class="novedad-img-wrap"><img src="news/novedades8aug1.png" alt="ZC26 ESPORTS"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">ZC26 ESPORTS™</div>
+                            <div class="novedad-text">LEVIATÁN ESPORTS se corona CAMPEÓN de la ZC26 Agosto</div>
+                            <button type="button" class="novedad-more-btn" data-open-novedad="1">Más info.</button>
+                        </div>
+                    </div>
+
+                    <div class="novedad-slide" data-novedad-index="2">
+                        <div class="novedad-img-wrap"><img src="news/novedades2sep2.jpg" alt="Brawl Stars Oficial"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">Brawl Stars Oficial</div>
+                            <div class="novedad-text">El sistema Camino Starr será reemplazado por una nueva mecánica llamada Brawler Blast</div>
+                            <button type="button" class="novedad-more-btn" data-open-novedad="2">Más info.</button>
+                        </div>
+                    </div>
+
+                    <div class="novedad-slide" data-novedad-index="3">
+                        <div class="novedad-img-wrap"><img src="news/novedades2sep1.jpg" alt="Redes sociales"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">Redes sociales</div>
+                            <div class="novedad-text">Apoyamos y síguenos en nuestras redes sociales</div>
+                            <div class="novedad-social-row">
+                                <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="novedad-social-btn"><img src="reenviar.png" alt="">TikTok</a>
+                                <a href="https://www.youtube.com/@zc.esports" target="_blank" rel="noopener" class="novedad-social-btn"><img src="reenviar.png" alt="">YouTube</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="novedades-progress-row" id="novedadesProgressRow"></div>
+            </div>
+        </div>
+
+        <!-- ===================== MOMENTOS DE LA BSC (CLIPS) ===================== -->
+        <div class="home-section">
+            <div class="section-heading">Momentos de la BSC de la ZC26™</div>
+            <div class="momentos-row" id="momentosRow">
+                <button type="button" class="momento-card" data-story-id="clip-1">
+                    <span class="momento-badge">NEW</span>
+                    <span class="momento-play"></span>
+                    <img src="clip/clip(1).png" alt="">
+                    <span class="momento-caption">Gran Final 🏆</span>
+                </button>
+                <button type="button" class="momento-card" data-story-id="clip-2">
+                    <span class="momento-badge">NEW</span>
+                    <span class="momento-play"></span>
+                    <img src="clip/clip(2).png" alt="">
+                    <span class="momento-caption">Taikisha, MVP 🏆</span>
+                </button>
+                <button type="button" class="momento-card" data-story-id="clip-3">
+                    <span class="momento-badge">NEW</span>
+                    <span class="momento-play"></span>
+                    <img src="clip/clip(3).png" alt="">
+                    <span class="momento-caption">Punto de campeonato</span>
+                </button>
+                <button type="button" class="momento-card" data-story-id="clip-4">
+                    <span class="momento-play"></span>
+                    <img src="clip/clip(4).png" alt="">
+                    <span class="momento-caption">Mejor jugada</span>
+                </button>
+                <button type="button" class="momento-card" data-story-id="clip-5">
+                    <span class="momento-play"></span>
+                    <img src="clip/clip(5).png" alt="">
+                    <span class="momento-caption">Highlights</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===================== HISTORIAS DESTACADAS ===================== -->
+        <div class="home-section">
+            <div class="section-heading">Historias destacadas</div>
+
+            <button type="button" class="hd-hero" data-open-novedad="1">
+                <div class="hd-hero-img-wrap"><img src="historiasdestacadas/HD(1).png" alt=""></div>
+                <div class="hd-hero-tag">ZC26 ESPORTS™</div>
+                <div class="hd-hero-title">LEVIATÁN ESPORTS se corona CAMPEÓN de la ZC26 Agosto</div>
+            </button>
+
+            <div class="hd-list">
+                <button type="button" class="hd-list-item" data-open-novedad="1">
+                    <div class="hd-list-thumb"><img src="historiasdestacadas/HD(2).png" alt=""></div>
+                    <div class="hd-list-text">
+                        <div class="hd-list-tag">ZC26 ESPORTS™</div>
+                        <div class="hd-list-title">Taikisha, elegido MVP de la Gran Final</div>
+                    </div>
+                </button>
+                <button type="button" class="hd-list-item" data-open-novedad="1">
+                    <div class="hd-list-thumb"><img src="historiasdestacadas/HD(3).png" alt=""></div>
+                    <div class="hd-list-text">
+                        <div class="hd-list-tag">ZC26 ESPORTS™</div>
+                        <div class="hd-list-title">Así se jugó la final: Leviatán se impuso 3-1 en los mapas</div>
+                    </div>
+                </button>
+                <button type="button" class="hd-list-item" data-open-novedad="0">
+                    <div class="hd-list-thumb"><img src="historiasdestacadas/HD(4).png" alt=""></div>
+                    <div class="hd-list-text">
+                        <div class="hd-list-tag">ZC26 ESPORTS™</div>
+                        <div class="hd-list-title">La ZC26 vuelve este septiembre</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===================== STORY VIEWER OVERLAY ===================== -->
+    <div class="story-viewer" id="storyViewer">
+        <div class="story-viewer-media" id="storyViewerMedia">
+            <div class="story-progress-row" id="storyProgressRow"></div>
+            <div class="story-viewer-top">
+                <div class="story-viewer-user">
+                    <span class="story-viewer-username" id="storyViewerUsername"></span>
+                    <div class="story-music-player" id="storyMusicPlayer">
+                        <img class="story-music-disc" src="songreproduction.png" alt="">
+                        <div class="story-music-track">
+                            <span class="story-music-name" id="storyMusicName"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="story-viewer-controls">
+                    <button type="button" class="story-viewer-btn" id="storyMuteBtn">
+                        <img id="storyMuteIcon" src="sound_offmuted.png" alt="Silenciar">
+                    </button>
+                    <button type="button" class="story-viewer-btn" id="storyCloseBtn">
+                        <img src="closeiconex.png" alt="Cerrar">
+                    </button>
+                </div>
+            </div>
+            <div class="story-tap-zones">
+                <div class="story-tap-zone" id="storyZoneBack"></div>
+                <div class="story-tap-zone" id="storyZoneNext"></div>
+            </div>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="story-cta-btn" id="storyCtaBtn"></a>
+        </div>
+    </div>
+
+    <!-- ===================== NOVEDAD DETAIL OVERLAY ===================== -->
+    <div class="novedad-detail" id="novedadDetail">
+        <div class="novedad-detail-back" id="novedadDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <img class="novedad-detail-hero" id="novedadDetailHero" src="" alt="">
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag" id="novedadDetailTag"></div>
+            <div class="novedad-detail-title" id="novedadDetailTitle"></div>
+            <div class="novedad-detail-body" id="novedadDetailBody"></div>
+        </div>
+    </div>
 
     <div class="mobile-container" id="ultimo-partido">
         <div class="match-card">
@@ -3844,7 +5471,7 @@
                                                             <div class="stat-row-main lu-row-main">
                                                                 <div class="lu-avatar-wrap" data-quick-stats tabindex="0" role="button" aria-label="Ver estadisticas">
                                                                     <img class="lu-photo" src="cross.png" alt="iXCross">
-                                                                    <span class="lu-rating rt-elite">9.4</span>
+                                                                    <span class="lu-rating rt-top">9.4</span>
                                                                     <span class="lu-corner-icon-num lu-corner-br"><img src="icon_stats%20(1).png" alt=""><span>2</span></span>
                                                                 </div>
                                                                 <span class="lu-name-wrap">
@@ -3870,7 +5497,7 @@
                                                             <div class="stat-row-main lu-row-main">
                                                                 <div class="lu-avatar-wrap" data-quick-stats tabindex="0" role="button" aria-label="Ver estadisticas">
                                                                     <img class="lu-photo" src="julio.png" alt="Julio">
-                                                                    <span class="lu-rating rt-good">7.6</span>
+                                                                    <span class="lu-rating rt-elite">7.6</span>
                                                                     <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
                                                                 </div>
                                                                 <span class="lu-name-wrap">
@@ -3926,7 +5553,7 @@
                                                             <div class="stat-row-main lu-row-main">
                                                                 <div class="lu-avatar-wrap" data-quick-stats tabindex="0" role="button" aria-label="Ver estadisticas">
                                                                     <img class="lu-photo" src="ninja.png" alt="Ninja">
-                                                                    <span class="lu-rating rt-good">7.1</span>
+                                                                    <span class="lu-rating rt-elite">7.1</span>
                                                                     <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
                                                                 </div>
                                                                 <span class="lu-name-wrap">
@@ -4195,7 +5822,7 @@
                                                             <div class="stat-row-main lu-row-main">
                                                                 <div class="lu-avatar-wrap" data-quick-stats tabindex="0" role="button" aria-label="Ver estadisticas">
                                                                     <img class="lu-photo" src="cross.png" alt="iXCross">
-                                                                    <span class="lu-rating rt-elite">9.4</span>
+                                                                    <span class="lu-rating rt-top">9.4</span>
                                                                     <span class="lu-corner-icon-num lu-corner-br"><img src="icon_stats%20(1).png" alt=""><span>2</span></span>
                                                                 </div>
                                                                 <span class="lu-name-wrap">
@@ -4221,7 +5848,7 @@
                                                             <div class="stat-row-main lu-row-main">
                                                                 <div class="lu-avatar-wrap" data-quick-stats tabindex="0" role="button" aria-label="Ver estadisticas">
                                                                     <img class="lu-photo" src="julio.png" alt="Julio">
-                                                                    <span class="lu-rating rt-good">7.6</span>
+                                                                    <span class="lu-rating rt-elite">7.6</span>
                                                                     <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
                                                                 </div>
                                                                 <span class="lu-name-wrap">
@@ -4277,7 +5904,7 @@
                                                             <div class="stat-row-main lu-row-main">
                                                                 <div class="lu-avatar-wrap" data-quick-stats tabindex="0" role="button" aria-label="Ver estadisticas">
                                                                     <img class="lu-photo" src="ninja.png" alt="Ninja">
-                                                                    <span class="lu-rating rt-good">7.1</span>
+                                                                    <span class="lu-rating rt-elite">7.1</span>
                                                                     <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
                                                                 </div>
                                                                 <span class="lu-name-wrap">
@@ -4530,9 +6157,90 @@
                 <span>Filtro</span>
             </button>
         </div>
+
+        <!-- ===================================================================
+             ZC26 · Menú de Filtros (bloque HTML independiente, prefijo "zcf-")
+             Se abre como una hoja que sube desde abajo de la página (overlay,
+             igual que el menú de 3 rayas) en móvil, tablet y escritorio.
+        =================================================================== -->
+        <div class="zcf-overlay" id="zcfOverlay">
+            <div class="zcf-panel" id="zcfPanel">
+                <div class="zcf-panel-head">
+                    <div class="zcf-panel-title">Filtros</div>
+                    <div class="zcf-head-actions">
+                        <button type="button" class="zcf-reset-btn" id="zcfResetBtn">Restablecer filtros</button>
+                        <span class="zcf-close-x" id="zcfCloseBtn">✕</span>
+                    </div>
+                </div>
+
+                <div class="zcf-section-label">Jugador</div>
+                <div class="zcf-search-wrap" id="zcfSearchWrap">
+                    <input type="text" id="zcfSearchInput" class="zcf-search-input" placeholder="Buscar por nombre, ID o país..." autocomplete="off" spellcheck="false">
+                    <div class="zcf-suggestions" id="zcfSuggestions"></div>
+                </div>
+
+                <div class="zcf-fields-grid" id="zcfFieldsGrid">
+                    <div class="zcf-field zcf-field-region">
+                        <div class="zcf-section-label">Región</div>
+                        <div class="zcf-checkbox-group" id="zcfRegionGroup">
+                            <label class="zcf-checkbox-item" data-region="NA"><span class="zcf-checkbox-box"></span>NA</label>
+                            <label class="zcf-checkbox-item" data-region="SA"><span class="zcf-checkbox-box"></span>SA</label>
+                            <label class="zcf-checkbox-item" data-region="EMEA"><span class="zcf-checkbox-box"></span>EMEA</label>
+                            <label class="zcf-checkbox-item" data-region="ASIA"><span class="zcf-checkbox-box"></span>ASIA</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-country">
+                        <div class="zcf-section-label">País</div>
+                        <div class="zcf-country-scroll" id="zcfCountryScroll"></div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-order">
+                        <div class="zcf-section-label">Orden</div>
+                        <div class="zcf-checkbox-group" id="zcfOrderGroup">
+                            <label class="zcf-checkbox-item" data-order="desc"><span class="zcf-checkbox-box"></span>Mayor a menor</label>
+                            <label class="zcf-checkbox-item" data-order="asc"><span class="zcf-checkbox-box"></span>Menor a mayor</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-activity">
+                        <div class="zcf-section-label">Actividad</div>
+                        <div class="zcf-checkbox-group" id="zcfActivityGroup">
+                            <label class="zcf-checkbox-item" data-activity="Activo"><span class="zcf-checkbox-box"></span>Activo</label>
+                            <label class="zcf-checkbox-item" data-activity="Inactivo"><span class="zcf-checkbox-box"></span>Inactivo</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-movement">
+                        <div class="zcf-section-label">Movimiento</div>
+                        <div class="zcf-checkbox-group" id="zcfMovementGroup">
+                            <label class="zcf-checkbox-item" data-movement="up"><span class="zcf-checkbox-box"></span>Subida</label>
+                            <label class="zcf-checkbox-item" data-movement="down"><span class="zcf-checkbox-box"></span>Descenso</label>
+                            <label class="zcf-checkbox-item" data-movement="new"><span class="zcf-checkbox-box"></span>Nuevo</label>
+                            <label class="zcf-checkbox-item" data-movement="same"><span class="zcf-checkbox-box"></span>Nada</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-achievement">
+                        <div class="zcf-section-label">Logros</div>
+                        <div class="zcf-checkbox-group" id="zcfAchievementGroup">
+                            <label class="zcf-checkbox-item" data-achievement="champion"><span class="zcf-checkbox-box"></span>Champion</label>
+                            <label class="zcf-checkbox-item" data-achievement="runner-up"><span class="zcf-checkbox-box"></span>2nd Runner-Up</label>
+                            <label class="zcf-checkbox-item" data-achievement="3rd-4th"><span class="zcf-checkbox-box"></span>3rd-4th Place</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="zcf-no-results" id="zcfNoResults" style="display:none;">No se encontró ningún jugador.</div>
+            </div>
+        </div>
+
         <div class="panel" id="rankingList"></div>
         <div class="rank-toggle-wrap">
-            <button type="button" class="rank-toggle-btn" id="rankToggleBtn">Mostrar Clasificación completa</button>
+            <button type="button" class="rank-toggle-btn" id="rankToggleBtn">
+                <img src="rankingopen.png" alt="" class="rank-toggle-icon" id="rankToggleIcon">
+                <span id="rankToggleLabel">Mostrar Clasificación completa</span>
+            </button>
         </div>
         <div class="section-updated">Última actualización: 30 agosto, 2026</div>
     </div>
@@ -4555,7 +6263,10 @@
         <div class="section-subtitle">Se actualiza con cada contribucion a ZC26</div>
         <div class="panel" id="contribList"></div>
         <div class="rank-toggle-wrap">
-            <button type="button" class="rank-toggle-btn" id="contribToggleBtn">Mostrar Clasificación completa</button>
+            <button type="button" class="rank-toggle-btn" id="contribToggleBtn">
+                <img src="rankingopen.png" alt="" class="rank-toggle-icon" id="contribToggleIcon">
+                <span id="contribToggleLabel">Mostrar Clasificación completa</span>
+            </button>
         </div>
         <div class="section-updated">Última actualización: 6 dic, 2025</div>
     </div>
@@ -4592,7 +6303,7 @@
     </div>
 
     <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 2.0.9.6</div>
+    <div class="version-tag">Versión 3.0.16.5</div>
 
 </div>
 
@@ -4613,61 +6324,6 @@
     <div class="quick-stats-panel" id="quickStatsPanel"></div>
 </div>
 
-<!-- ===================================================================
-     ZC26 · Menú de Filtros (bloque HTML independiente, prefijo "zcf-")
-     Vive fuera del flujo normal de la página; se abre como overlay.
-=================================================================== -->
-<div class="zcf-overlay" id="zcfOverlay">
-    <div class="zcf-panel" id="zcfPanel">
-        <div class="zcf-panel-head">
-            <div class="zcf-panel-title">Filtros</div>
-            <div class="zcf-head-actions">
-                <button type="button" class="zcf-reset-btn" id="zcfResetBtn">Restablecer filtros</button>
-                <span class="zcf-close-x" id="zcfCloseBtn">✕</span>
-            </div>
-        </div>
-
-        <div class="zcf-section-label">Jugador</div>
-        <div class="zcf-search-wrap" id="zcfSearchWrap">
-            <input type="text" id="zcfSearchInput" class="zcf-search-input" placeholder="Buscar por nombre, ID o país..." autocomplete="off" spellcheck="false">
-            <div class="zcf-suggestions" id="zcfSuggestions"></div>
-        </div>
-
-        <div class="zcf-section-label">Región</div>
-        <div class="zcf-checkbox-group" id="zcfRegionGroup">
-            <label class="zcf-checkbox-item" data-region="NA"><span class="zcf-checkbox-box"></span>NA</label>
-            <label class="zcf-checkbox-item" data-region="SA"><span class="zcf-checkbox-box"></span>SA</label>
-            <label class="zcf-checkbox-item" data-region="EMEA"><span class="zcf-checkbox-box"></span>EMEA</label>
-            <label class="zcf-checkbox-item" data-region="ASIA"><span class="zcf-checkbox-box"></span>ASIA</label>
-        </div>
-
-        <div class="zcf-section-label">País</div>
-        <div class="zcf-country-scroll" id="zcfCountryScroll"></div>
-
-        <div class="zcf-section-label">Orden</div>
-        <div class="zcf-checkbox-group" id="zcfOrderGroup">
-            <label class="zcf-checkbox-item" data-order="desc"><span class="zcf-checkbox-box"></span>Mayor a menor</label>
-            <label class="zcf-checkbox-item" data-order="asc"><span class="zcf-checkbox-box"></span>Menor a mayor</label>
-        </div>
-
-        <div class="zcf-section-label">Actividad</div>
-        <div class="zcf-checkbox-group" id="zcfActivityGroup">
-            <label class="zcf-checkbox-item" data-activity="Activo"><span class="zcf-checkbox-box"></span>Activo</label>
-            <label class="zcf-checkbox-item" data-activity="Inactivo"><span class="zcf-checkbox-box"></span>Inactivo</label>
-        </div>
-
-        <div class="zcf-section-label">Movimiento</div>
-        <div class="zcf-checkbox-group" id="zcfMovementGroup">
-            <label class="zcf-checkbox-item" data-movement="up"><span class="zcf-checkbox-box"></span>Subida</label>
-            <label class="zcf-checkbox-item" data-movement="down"><span class="zcf-checkbox-box"></span>Descenso</label>
-            <label class="zcf-checkbox-item" data-movement="new"><span class="zcf-checkbox-box"></span>Nuevo</label>
-            <label class="zcf-checkbox-item" data-movement="same"><span class="zcf-checkbox-box"></span>Nada</label>
-        </div>
-
-        <div class="zcf-no-results" id="zcfNoResults" style="display:none;">No se encontró ningún jugador.</div>
-    </div>
-</div>
-
 <script>
     /* ===================================================================
        ZC26 · Sistema de sonidos de navegación (carpeta /sound)
@@ -4678,12 +6334,16 @@
         cambio: "sound/cambio.ogg",
         master: "sound/master.ogg",
         legendary: "sound/legendary.ogg",
+        mythic: "sound/mithyc.ogg",
+        pro: "sound/PRORANK.ogg",
         click: "sound/click.ogg",
         clickentrar: "sound/clickentrar.ogg",
         clicksalir: "sound/clicksalir.ogg",
         salondelafama: "sound/salondelafama.ogg",
+        cambioidioma: "sound/cambioidioma.ogg",
     };
     const ZC_SOUND_ACTIVE = [];
+    let zcActiveRankAudio = null;
     let zcMuted = localStorage.getItem("zcMuted") === "1";
     function zcPlaySound(name) {
         if (zcMuted) return;
@@ -4705,6 +6365,43 @@
             audio.addEventListener("error", cleanup);
             audio.play().catch(cleanup);
         } catch (e) {}
+    }
+    // Sonidos de rango (master/legendary/pro/mythic): son exclusivos entre
+    // sí. Si ya hay uno sonando (por ejemplo al pasar rápido de un perfil
+    // a otro), lo cortamos antes de reproducir el siguiente para que nunca
+    // se acumulen ni se escuchen dos rangos a la vez.
+    function zcPlayRankSound(name) {
+        if (zcActiveRankAudio) {
+            try {
+                zcActiveRankAudio.pause();
+                zcActiveRankAudio.currentTime = 0;
+            } catch (e) {}
+            zcActiveRankAudio = null;
+        }
+        if (zcMuted) return;
+        const src = ZC_SOUNDS[name];
+        if (!src) return;
+        try {
+            const audio = new Audio(src);
+            audio.preload = "auto";
+            audio.volume = 0.45;
+            zcActiveRankAudio = audio;
+            const cleanup = () => {
+                if (zcActiveRankAudio === audio) zcActiveRankAudio = null;
+            };
+            audio.addEventListener("ended", cleanup);
+            audio.addEventListener("error", cleanup);
+            audio.play().catch(cleanup);
+        } catch (e) {}
+    }
+    function zcStopRankSound() {
+        if (zcActiveRankAudio) {
+            try {
+                zcActiveRankAudio.pause();
+                zcActiveRankAudio.currentTime = 0;
+            } catch (e) {}
+            zcActiveRankAudio = null;
+        }
     }
     function zcUpdateMuteIcon() {
         const icon = document.getElementById("soundMuteIcon");
@@ -5651,23 +7348,27 @@
        ZC26 · Nuevo diseño del ranking: rangos por posición, región e
        íconos de personaje (video/gif) por jugador.
     =================================================================== */
-    const ZC_RANK_TIERS = [
-        { max: 7,        label: "Masters Rank",    icon: "Masters_League.webp" },
-        { max: 27,       label: "Legendary 3 Rank",icon: "Legendary_League.webp" },
-        { max: 47,       label: "Legendary 2 Rank",icon: "Legendary_League.webp" },
-        { max: 67,       label: "Legendary 1 Rank",icon: "Legendary_League.webp" },
-        { max: 87,       label: "Mythic 3 Rank",   icon: "Legendary_League.webp" },
-        { max: 107,      label: "Mythic 2 Rank",   icon: "Legendary_League.webp" },
-        { max: 127,      label: "Mythic 1 Rank",   icon: "Legendary_League.webp" },
-        { max: 147,      label: "Diamond 3 Rank",  icon: "Legendary_League.webp" },
-        { max: 167,      label: "Diamond 2 Rank",  icon: "Legendary_League.webp" },
-        { max: 187,      label: "Diamond 1 Rank",  icon: "Legendary_League.webp" },
-        { max: 207,      label: "Gold Rank",       icon: "Legendary_League.webp" },
-        { max: 227,      label: "Silver Rank",     icon: "Legendary_League.webp" },
-        { max: Infinity, label: "Bronze Rank",     icon: "Legendary_League.webp" },
-    ];
+    // Escalón de rangos (sin numeración por niveles): Combat Grandmaster
+    // (top 7) -> Combat Master (siguientes 30) -> Combat Ace (siguientes
+    // 60) -> Mythic Rank (el resto). "kind" se usa para el sonido y el
+    // color del brillo al abrir el perfil de un jugador.
+    const ZC_RANK_ICONS = {
+        pro: "Pro_pl.png",
+        master: "Masters_pl.png",
+        legendary: "Legendary_pl.png",
+        mythic: "Mythic_pl.png"
+    };
     function getRankTier(pos) {
-        return ZC_RANK_TIERS.find(t => pos <= t.max);
+        if (pos <= 7) {
+            return { label: "Combat Grandmaster", icon: ZC_RANK_ICONS.pro, kind: "pro" };
+        }
+        if (pos <= 37) {
+            return { label: "Combat Master", icon: ZC_RANK_ICONS.master, kind: "master" };
+        }
+        if (pos <= 97) {
+            return { label: "Combat Ace", icon: ZC_RANK_ICONS.legendary, kind: "legendary" };
+        }
+        return { label: "Mythic Rank", icon: ZC_RANK_ICONS.mythic, kind: "mythic" };
     }
     const ZC_REGION_BY_COUNTRY = {
         AR: "SA", BOL: "SA", BR: "SA", CL: "SA", CO: "SA", ECU: "SA", PE: "SA", VEN: "SA",
@@ -5872,6 +7573,7 @@
     let zcfSelectedCountries = new Set();
     let zcfSelectedActivity = new Set();
     let zcfSelectedMovement = new Set();
+    let zcfSelectedAchievements = new Set();
     let zcfSortOrder = "desc"; // "desc" = Top 1 primero (mayor a menor) · "asc" = último del top primero (menor a mayor)
 
     function zcFormatPoints(value, opts) {
@@ -5908,11 +7610,21 @@
     }
 
     function zcfIsFilterActive() {
-        return zcfSearchQuery.trim().length > 0 || zcfSelectedRegions.size > 0 || zcfSelectedCountries.size > 0 || zcfSelectedActivity.size > 0 || zcfSelectedMovement.size > 0;
+        return zcfSearchQuery.trim().length > 0 || zcfSelectedRegions.size > 0 || zcfSelectedCountries.size > 0 || zcfSelectedActivity.size > 0 || zcfSelectedMovement.size > 0 || zcfSelectedAchievements.size > 0;
     }
 
     function zcfIsCategoryFilterActive() {
-        return zcfSelectedRegions.size > 0 || zcfSelectedCountries.size > 0 || zcfSelectedActivity.size > 0 || zcfSelectedMovement.size > 0;
+        return zcfSelectedRegions.size > 0 || zcfSelectedCountries.size > 0 || zcfSelectedActivity.size > 0 || zcfSelectedMovement.size > 0 || zcfSelectedAchievements.size > 0;
+    }
+
+    function zcfPlayerAchievementTypes(p) {
+        const types = new Set();
+        (p.achievements || []).forEach(a => {
+            if (a.tier === "Campeón" || a.tier === "1er Lugar") types.add("champion");
+            else if (a.tier === "Subcampeón" || a.tier === "2do Lugar") types.add("runner-up");
+            else if (a.tier === "3er-4to Lugar" || a.tier === "3er Lugar" || a.tier === "4to Lugar") types.add("3rd-4th");
+        });
+        return types;
     }
 
     function zcfGetFilteredEntries() {
@@ -5928,7 +7640,12 @@
                 const change = getRankChange(p.key, i + 1);
                 matchMovement = zcfSelectedMovement.has(change.type);
             }
-            if (matchQuery && matchRegion && matchCountry && matchActivity && matchMovement) entries.push({ p, i, subPos: entries.length + 1 });
+            let matchAchievement = true;
+            if (zcfSelectedAchievements.size > 0) {
+                const types = zcfPlayerAchievementTypes(p);
+                matchAchievement = Array.from(zcfSelectedAchievements).some(t => types.has(t));
+            }
+            if (matchQuery && matchRegion && matchCountry && matchActivity && matchMovement && matchAchievement) entries.push({ p, i, subPos: entries.length + 1 });
         });
         return entries;
     }
@@ -6045,6 +7762,9 @@
         if (menuEl && menuEl.classList.contains("open") && typeof closeMenu === "function") closeMenu();
         const overlay = document.getElementById("zcfOverlay");
         if (!overlay) return;
+        // La hoja de filtros ahora sube desde abajo de la página como overlay
+        // en cualquier tamaño de pantalla (igual que el menú de 3 rayas),
+        // así que siempre bloqueamos el scroll del fondo mientras está abierta.
         lockBodyScroll();
         overlay.classList.add("open");
         const input = document.getElementById("zcfSearchInput");
@@ -6134,6 +7854,17 @@
                 renderRanking();
             });
         });
+        document.querySelectorAll("#zcfAchievementGroup .zcf-checkbox-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                zcPlaySound("click");
+                const ach = item.getAttribute("data-achievement");
+                item.classList.toggle("checked");
+                if (item.classList.contains("checked")) zcfSelectedAchievements.add(ach);
+                else zcfSelectedAchievements.delete(ach);
+                renderRanking();
+            });
+        });
         zcfRenderCountryList();
         document.querySelectorAll("#zcfOrderGroup .zcf-checkbox-item").forEach(item => {
             item.addEventListener("click", (e) => {
@@ -6160,6 +7891,7 @@
                 zcfSelectedCountries.clear();
                 zcfSelectedActivity.clear();
                 zcfSelectedMovement.clear();
+                zcfSelectedAchievements.clear();
                 zcfSortOrder = "desc";
                 if (input) input.value = "";
                 document.querySelectorAll("#zcfRegionGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
@@ -6167,6 +7899,7 @@
                 document.querySelectorAll("#zcfOrderGroup .zcf-checkbox-item").forEach(item => item.classList.remove("checked"));
                 document.querySelectorAll("#zcfActivityGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
                 document.querySelectorAll("#zcfMovementGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
+                document.querySelectorAll("#zcfAchievementGroup .zcf-checkbox-item.checked").forEach(item => item.classList.remove("checked"));
                 const box = document.getElementById("zcfSuggestions");
                 if (box) { box.innerHTML = ""; box.style.display = "none"; }
                 renderRanking();
@@ -6297,9 +8030,9 @@
                             <button class="rank-name2 ${medal}" data-open="${i}">${p.name}</button>
                         </div>
                         <div class="rank-row2-bottom">
-                            <img class="rank-tier-icon" src="assets/ranks/${tier.icon}" alt="${tier.label}" onerror="this.style.display='none'">
+                            <img class="rank-tier-icon rank-tier-icon-${tier.kind}" src="assets/ranks/${tier.icon}" alt="${tier.label}" onerror="this.style.display='none'">
                             <span class="rank-tier-name">${tier.label}</span>
-                            <span class="rank-row2-points">${zcFormatPoints(p.points)} points</span>
+                            <span class="rank-row2-points">${zcFormatPoints(p.points)} pts</span>
                         </div>
                     </div>
                     <div class="rank-region region-${region.toLowerCase()}">${getRegionLabel(region)}</div>
@@ -6311,8 +8044,6 @@
                         <div class="rank-detail-field">Sets (G-P): <b>${p.sets}</b></div>
                         <div class="rank-detail-field">Partidas (PG-PP): <b>${p.matches}</b></div>
                         <div class="rank-detail-divider"></div>
-                        <div class="rank-detail-field full">Puntos totales: <b>${zcFormatPoints(p.points)} pts</b></div>
-                        <div class="rank-detail-divider"></div>
                         <div class="rank-detail-title full">Datos destacados</div>
                         <div class="rank-highlight-grid full">
                             <div class="rank-highlight-item"><span class="rank-highlight-value ${medal}">${h.current}º</span><span class="rank-highlight-label">Clasificación actual</span></div>
@@ -6322,6 +8053,8 @@
                             <div class="rank-highlight-item"><span class="rank-highlight-value rise">${realRise}</span><span class="rank-highlight-label">Mayor subida</span></div>
                             <div class="rank-highlight-item"><span class="rank-highlight-value fall">${realFall}</span><span class="rank-highlight-label">Mayor bajada</span></div>
                         </div>
+                        <div class="rank-detail-divider"></div>
+                        <div class="rank-detail-field full">Puntos totales: <b>${zcFormatPoints(p.points)} pts</b></div>
                     </div>
                 </div>
             </div>
@@ -6549,7 +8282,7 @@
         const slideWidth = 100 / count;
         const slides = items.map((it, i) => `<div class="carousel-slide" data-slide="${i}" style="width:${slideWidth}%">${itemHtmlFn(it)}</div>`).join("");
         let nav = "";
-        if (count > 1 && !opts.externalCounter) {
+        if (count > 1 && !opts.externalCounter && !opts.hideNav) {
             nav = `<div class="carousel-nav">
                 <button type="button" class="carousel-arrow carousel-prev" aria-label="Anterior">‹</button>
                 <span class="carousel-counter"><span class="carousel-counter-current">1</span>/${count}</span>
@@ -6572,14 +8305,21 @@
             const total = parseInt(car.dataset.total, 10);
             let current = parseInt(car.dataset.current, 10);
             const track = car.querySelector(".carousel-track");
+            const slides = Array.from(car.querySelectorAll(".carousel-slide"));
             const counter = car.querySelector(".carousel-counter-current")
                 || (car.previousElementSibling && car.previousElementSibling.querySelector(".carousel-counter-current"));
+            function applyHeight() {
+                const activeSlide = slides[current];
+                if (activeSlide) car.style.height = activeSlide.scrollHeight + "px";
+            }
             function show(idx) {
                 current = (idx + total) % total;
                 if (track) track.style.transform = `translateX(-${current * (100 / total)}%)`;
                 if (counter) counter.textContent = current + 1;
                 car.dataset.current = current;
+                applyHeight();
             }
+            applyHeight();
             const prevBtn = car.querySelector(".carousel-prev");
             const nextBtn = car.querySelector(".carousel-next");
             if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); show(current - 1); });
@@ -6621,14 +8361,69 @@
         });
     }
 
+    function initRadarTooltips(root) {
+        root.querySelectorAll(".stat-radar-wrap").forEach(wrap => {
+            const svg = wrap.querySelector(".stat-radar-svg");
+            if (!svg) return;
+            let tooltipEl = wrap.querySelector(".radar-tooltip");
+            if (!tooltipEl) {
+                tooltipEl = document.createElement("div");
+                tooltipEl.className = "radar-tooltip";
+                wrap.appendChild(tooltipEl);
+            }
+            function hideTooltip() { tooltipEl.style.display = "none"; delete tooltipEl.dataset.idx; }
+            function positionTooltip(hit) {
+                const wrapRect = wrap.getBoundingClientRect();
+                const hitRect = hit.getBoundingClientRect();
+                const x = hitRect.left + hitRect.width / 2 - wrapRect.left;
+                const yTop = hitRect.top - wrapRect.top;
+                const yBottom = hitRect.bottom - wrapRect.top;
+                requestAnimationFrame(() => {
+                    const ttRect = tooltipEl.getBoundingClientRect();
+                    const halfW = ttRect.width / 2;
+                    const clampedX = Math.max(halfW + 4, Math.min(wrapRect.width - halfW - 4, x));
+                    tooltipEl.style.left = clampedX + "px";
+                    if (yTop - ttRect.height - 10 < 0) {
+                        tooltipEl.style.transform = "translate(-50%, 10px)";
+                        tooltipEl.style.top = yBottom + "px";
+                    } else {
+                        tooltipEl.style.transform = "translate(-50%, calc(-100% - 10px))";
+                        tooltipEl.style.top = yTop + "px";
+                    }
+                });
+            }
+            svg.querySelectorAll(".radar-label-hit").forEach(hit => {
+                hit.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const idx = hit.dataset.idx;
+                    const item = RADAR_ITEMS[parseInt(idx, 10)];
+                    if (!item) return;
+                    if (tooltipEl.dataset.idx === idx && tooltipEl.style.display === "block") {
+                        hideTooltip();
+                        return;
+                    }
+                    zcPlaySound("click");
+                    tooltipEl.dataset.idx = idx;
+                    tooltipEl.innerHTML = `<div class="radar-tooltip-title">${item.full}</div><div>${item.desc}</div>`;
+                    tooltipEl.style.display = "block";
+                    positionTooltip(hit);
+                });
+            });
+            if (!wrap.dataset.tooltipOutsideBound) {
+                wrap.dataset.tooltipOutsideBound = "1";
+                document.addEventListener("click", hideTooltip);
+            }
+        });
+    }
+
     function achPlaceLabel(a) {
-        if (a.tier === "Campeón") return "1st Campeón";
-        if (a.tier === "Subcampeón") return "2nd Subcampeón";
-        if (a.tier === "3er-4to Lugar") return "3rd-4th";
+        if (a.tier === "Campeón") return "1st Champion";
+        if (a.tier === "Subcampeón") return "2nd Runner-Up";
+        if (a.tier === "3er-4to Lugar") return "3rd-4th place";
         if (a.tier === "1er Lugar") return "1st";
         if (a.tier === "2do Lugar") return "2nd";
-        if (a.tier === "3er Lugar") return "3rd-4th";
-        if (a.tier === "4to Lugar") return "3rd-4th";
+        if (a.tier === "3er Lugar") return "3rd-4th place";
+        if (a.tier === "4to Lugar") return "3rd-4th place";
         return a.place;
     }
 
@@ -6650,10 +8445,6 @@
         silver: "top2picture.png",
         bronze: "top3picture.png"
     };
-    Object.values(MEDAL_IMAGES).forEach((src) => {
-        const preload = new Image();
-        preload.src = src;
-    });
 
     const RANK_TIER_IMAGES = {
         "Bronce": "Bronze.png",
@@ -6692,6 +8483,182 @@
         return (p.points / n).toFixed(1) + " pts";
     }
 
+    function computeAvgPointsNum(p) {
+        const n = extractEventsCount(p.events);
+        if (!n || n <= 0) return null;
+        return p.points / n;
+    }
+
+    function pctFromRecord(str) {
+        const rec = parseRecord(str);
+        if (!rec || (rec.w + rec.l) === 0) return null;
+        return (rec.w / (rec.w + rec.l)) * 100;
+    }
+
+    let _maxAvgPointsCache = null;
+    function maxAvgPoints() {
+        if (_maxAvgPointsCache === null) {
+            const vals = PLAYERS.map(computeAvgPointsNum).filter(v => v !== null && v > 0);
+            _maxAvgPointsCache = vals.length ? Math.max(...vals) : 1;
+        }
+        return _maxAvgPointsCache;
+    }
+
+    let _maxPointsCache = null;
+    function maxPoints() {
+        if (_maxPointsCache === null) {
+            const vals = PLAYERS.map(p => p.points || 0);
+            _maxPointsCache = vals.length ? Math.max(...vals) : 1;
+        }
+        return _maxPointsCache;
+    }
+
+    function statBarClass(pct) {
+        return pct >= 66 ? "good" : pct >= 33 ? "mid" : "bad";
+    }
+
+    function statBarHtml(pct) {
+        if (pct === null || pct === undefined || isNaN(pct)) return "";
+        const clamped = Math.max(0, Math.min(100, pct));
+        return `<div class="stat-bar-track"><div class="stat-bar-fill ${statBarClass(clamped)}" style="width:${clamped}%"></div></div>`;
+    }
+
+    function seededValue(seedStr, min, max) {
+        let h = 0;
+        for (let i = 0; i < seedStr.length; i++) { h = (h * 31 + seedStr.charCodeAt(i)) >>> 0; }
+        const frac = (h % 1000) / 1000;
+        return Math.round(min + frac * (max - min));
+    }
+
+    function computeExtraStat(p, statKey) {
+        return seededValue((p.key || p.name || "x") + "_" + statKey, 32, 96);
+    }
+
+    function computePotencial(p) {
+        const pct = (p.points || 0) / (maxPoints() || 1);
+        return Math.round(40 + pct * 59);
+    }
+
+    function computeHabilidades(p) {
+        const winPct = pctFromRecord(p.sets);
+        const matchesPct = pctFromRecord(p.matches);
+        const vals = [winPct, matchesPct].filter(v => v !== null);
+        if (!vals.length) return 50;
+        return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+    }
+
+    function countAchievementPlaces(p) {
+        const ach = Array.isArray(p.achievements) ? p.achievements : [];
+        let firsts = 0, seconds = 0, thirds = 0, fourths = 0;
+        ach.forEach(a => {
+            const place = String(a.place || "");
+            if (place.startsWith("1")) firsts++;
+            else if (place.startsWith("2")) seconds++;
+            else if (place.startsWith("3")) thirds++;
+            else if (place.startsWith("4")) fourths++;
+        });
+        return { firsts, seconds, thirds, fourths };
+    }
+
+    function computeReputacion(p) {
+        // 1) Rendimiento acumulado: puntos totales frente al máximo del ranking.
+        const ptsScore = Math.min(100, ((p.points || 0) / (maxPoints() || 1)) * 100);
+
+        // 2) Logros: los títulos ganados son lo que más pesa en el prestigio internacional.
+        const { firsts, seconds, thirds, fourths } = countAchievementPlaces(p);
+        const titlesScore = Math.min(100, firsts * 35 + seconds * 16 + thirds * 8 + fourths * 4);
+
+        // 3) Rendimiento competitivo: porcentaje de sets ganados.
+        const winPct = pctFromRecord(p.sets);
+        const winScore = winPct === null ? 40 : winPct;
+
+        // 4) Trayectoria/actividad: cuántos mapas ha disputado en total.
+        const rec = parseRecord(p.matches);
+        const totalMatches = rec ? rec.w + rec.l : 0;
+        const activityScore = Math.min(100, (totalMatches / 20) * 100);
+
+        let score = ptsScore * 0.38 + titlesScore * 0.34 + winScore * 0.16 + activityScore * 0.12;
+
+        // Quien apenas ha competido no puede tener gran renombre internacional,
+        // sin importar qué tan bien le haya ido en su único partido.
+        if (totalMatches <= 2) score = Math.min(score, 30);
+        else if (totalMatches <= 4) score = Math.min(score, 45);
+
+        // Sin puntos ni logros de ningún tipo, la reputación parte de un piso bajo.
+        if (!p.points && firsts + seconds + thirds + fourths === 0) score = Math.min(score, 20);
+
+        return Math.max(5, Math.min(99, Math.round(score)));
+    }
+
+    const RADAR_ITEMS = [
+        { key: "winrate", label: "Victorias %", full: "Porcentaje de Victorias", desc: "Porcentaje de partidas o sets ganados sobre el total jugado.", get: p => pctFromRecord(p.sets) ?? 50 },
+        { key: "sets", label: "Sets", full: "Récord de Sets (G-P)", desc: "Balance de sets ganados y perdidos en la competencia.", get: p => pctFromRecord(p.sets) ?? 50 },
+        { key: "mapas", label: "Mapas", full: "Récord de Mapas/Modos (PG-PP)", desc: "Balance de mapas o modos ganados y perdidos.", get: p => pctFromRecord(p.matches) ?? 50 },
+        { key: "avgpts", label: "Pts/Torneo", full: "Promedio de Puntos por Torneo", desc: "Puntos obtenidos en promedio por cada torneo disputado.", get: p => { const v = computeAvgPointsNum(p); return v === null ? 30 : Math.round((v / (maxAvgPoints() || 1)) * 100); } },
+        { key: "pool", label: "Pool", full: "Versatilidad de Pool (Drafteo)", desc: "Qué tan variado y flexible es su repertorio de personajes al draftear.", get: p => computeExtraStat(p, "pool") },
+        { key: "zona", label: "Zona", full: "Control de Zona y Posicionamiento", desc: "Capacidad para controlar el mapa y mantener buena posición durante la partida.", get: p => computeExtraStat(p, "zona") },
+        { key: "kda", label: "K/D/A", full: "Eficiencia en Combate (K/D/A)", desc: "Relación entre eliminaciones, muertes y asistencias en combate.", get: p => computeExtraStat(p, "kda") },
+        { key: "super", label: "Súper", full: "Impacto y Uso del Súper", desc: "Qué tan efectivo es usando su habilidad Súper en el momento correcto.", get: p => computeExtraStat(p, "super") },
+        { key: "obj", label: "Objetivos", full: "Toma de Objetivos del Modo de Juego", desc: "Contribución en la captura o cumplimiento de los objetivos del modo.", get: p => computeExtraStat(p, "obj") },
+        { key: "superv", label: "Superviv.", full: "Supervivencia y Mitigación de Daño", desc: "Capacidad para sobrevivir y reducir el daño recibido en combate.", get: p => computeExtraStat(p, "superv") }
+    ];
+
+    function buildRadarSvg(p) {
+        const items = RADAR_ITEMS.map(it => ({ label: it.label, value: Math.max(0, Math.min(100, it.get(p))) }));
+        const n = items.length;
+        const size = 200;
+        const center = size / 2;
+        const maxR = 66;
+        const angleStep = (2 * Math.PI) / n;
+        function pointAt(i, r) {
+            const angle = -Math.PI / 2 + i * angleStep;
+            return [center + r * Math.cos(angle), center + r * Math.sin(angle)];
+        }
+        const rings = [0.25, 0.5, 0.75, 1].map(f => {
+            const pts = items.map((_, i) => pointAt(i, maxR * f).join(",")).join(" ");
+            return `<polygon points="${pts}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
+        }).join("");
+        const axes = items.map((_, i) => {
+            const [x, y] = pointAt(i, maxR);
+            return `<line x1="${center}" y1="${center}" x2="${x}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
+        }).join("");
+        const dataPts = items.map((it, i) => pointAt(i, maxR * (it.value / 100)).join(",")).join(" ");
+        const labels = items.map((it, i) => {
+            const [x, y] = pointAt(i, maxR + 18);
+            let anchor = "middle";
+            if (x < center - 6) anchor = "end";
+            else if (x > center + 6) anchor = "start";
+            const displayVal = Math.round(it.value);
+            return `<g class="radar-label-hit" data-idx="${i}">
+                <circle cx="${x}" cy="${y}" r="15" fill="transparent" pointer-events="all"/>
+                <text x="${x}" y="${y - 5}" text-anchor="${anchor}" dominant-baseline="middle" class="radar-label" pointer-events="none">${it.label}</text>
+                <text x="${x}" y="${y + 7}" text-anchor="${anchor}" dominant-baseline="middle" class="radar-value" pointer-events="none">${displayVal}</text>
+            </g>`;
+        }).join("");
+        return `<svg viewBox="0 0 ${size} ${size}" class="stat-radar-svg">
+            ${rings}${axes}
+            <polygon points="${dataPts}" fill="rgba(111,207,151,0.32)" stroke="#6fcf97" stroke-width="1.5"/>
+            ${labels}
+        </svg>`;
+    }
+
+    function buildGaugeSvg(label, value) {
+        const v = Math.max(0, Math.min(100, Math.round(value)));
+        const r = 34, cx = 42, cy = 40;
+        const circumference = Math.PI * r;
+        const dash = (v / 100) * circumference;
+        const color = v >= 66 ? "#6fcf97" : v >= 33 ? "#e8c547" : "#ff6b6b";
+        const arcPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
+        return `<div class="gauge-item">
+            <svg viewBox="0 0 84 50" class="gauge-svg">
+                <path d="${arcPath}" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="7" stroke-linecap="round"/>
+                <path d="${arcPath}" fill="none" stroke="${color}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${dash} ${circumference}"/>
+                <text x="${cx}" y="${cy - 4}" text-anchor="middle" class="gauge-value">${v}</text>
+            </svg>
+            <div class="gauge-label">${label}</div>
+        </div>`;
+    }
+
     function findMvpRecognition(p) {
         const found = (p.achievements || []).find(a => /mvp/i.test(a.result || ""));
         if (!found) return null;
@@ -6718,11 +8685,11 @@
         return `
         <div class="bs-cat-row">
             <div class="bs-category">
-                <div class="bs-cat-header"><img src="icon_trophy.png" class="bs-cat-icon" alt="Ladder">Ladder</div>
+                <div class="bs-cat-header"><img src="icon_trophy.png" class="bs-cat-icon" alt="Escalafón">Escalafón</div>
                 <div class="bs-cat-value ${hasTrophies ? "" : "unconfirmed"}">${ladderValue}</div>
             </div>
             <div class="bs-category">
-                <div class="bs-cat-header"><img src="PGXQuvMxD7wiFkvTEC72.png" class="bs-cat-icon" alt="Ranked">Ranked</div>
+                <div class="bs-cat-header"><img src="PGXQuvMxD7wiFkvTEC72.png" class="bs-cat-icon" alt="Clasificatoria">Clasificatoria</div>
                 <div class="bs-cat-value ${hasRank ? "" : "unconfirmed"}">${rankValue}</div>
             </div>
         </div>`;
@@ -6736,14 +8703,12 @@
         const flatCorner = (pos >= 4 && pos <= 7) ? "flat-corner" : "";
         zcPlaySound("entrar");
         const openTier = getRankTier(pos);
-        const rankKind = openTier.label.startsWith("Masters") ? "master"
-            : openTier.label.startsWith("Legendary") ? "legendary" : null;
-        if (rankKind === "master") zcPlaySound("master");
-        else if (rankKind === "legendary") zcPlaySound("legendary");
-        const rankBannerHtml = rankKind ? `
-            <div class="panel-rank-banner ${rankKind}">
-                <div class="panel-rank-flash"></div>
-            </div>` : "";
+        const rankKind = openTier.kind;
+        if (rankKind === "master") zcPlayRankSound("master");
+        else if (rankKind === "legendary") zcPlayRankSound("legendary");
+        else if (rankKind === "pro") zcPlayRankSound("pro");
+        else if (rankKind === "mythic") zcPlayRankSound("mythic");
+        const rankGlowClass = rankKind ? `pos-glow-${rankKind}` : "";
         const statusClass = p.status === "Activo" ? "active" : "inactive";
         const teamDisplay = p.teamTag ? p.team : "No tiene equipo registrado";
         const teamMuted = p.teamTag ? "" : "muted";
@@ -6771,22 +8736,12 @@
             : `<div class="match-row"><div class="match-row-top" style="color:#888;">Sin partidas registradas</div></div>`;
         panel.className = `info-panel ${medal} ${flatCorner} ${medal ? "medal-photo-" + medal : ""}`.trim();
         panel.style.backgroundImage = "";
-        const fadeRgb = { gold: "19,17,13", silver: "16,16,16", bronze: "19,17,16" }[medal];
-        const mediaHtml = medal
-            ? `<div class="panel-media ${medal}">
-                <div class="panel-media-img" id="panelMediaImg" style="background-image:
-                    linear-gradient(rgba(${fadeRgb},0.62), rgba(${fadeRgb},0.62)),
-                    linear-gradient(to bottom, rgba(${fadeRgb},1) 0%, rgba(${fadeRgb},0.95) 5%, rgba(${fadeRgb},0.75) 10%, rgba(${fadeRgb},0.4) 16%, rgba(${fadeRgb},0.1) 22%, rgba(${fadeRgb},0) 30%),
-                    linear-gradient(to bottom, rgba(${fadeRgb},0) 0%, rgba(${fadeRgb},0.1) 30%, rgba(${fadeRgb},0.4) 48%, rgba(${fadeRgb},0.75) 62%, rgba(${fadeRgb},0.95) 70%, rgba(${fadeRgb},1) 75%, rgba(${fadeRgb},1) 100%),
-                    url('${MEDAL_IMAGES[medal]}')"></div>
-               </div>`
-            : "";
+        const mediaHtml = "";
         panel.innerHTML = mediaHtml + `<div class="panel-content">
-            ${rankBannerHtml}
             <div class="info-top-row">
                 <div class="info-position-line">
-                    <span class="info-pos-badge ${medal} ${posTierClass(pos)}">${pos}</span>
-                    <span class="info-position-label">Posición en el ranking</span>
+                    <span class="info-pos-badge ${medal} ${posTierClass(pos)} ${rankGlowClass}">${pos}</span>
+                    <span class="info-position-label ${rankGlowClass}">Posición en el ranking</span>
                 </div>
                 <span class="info-close-x">✕</span>
             </div>
@@ -6811,13 +8766,30 @@
             </div>
 
             <div class="info-block-title">Estadísticas y rendimiento competitivo</div>
-            <div class="info-grid">
-                <div><div class="info-field-label">Porcentaje de victorias</div>${statField(computeWinRate(p))}</div>
-                <div><div class="info-field-label">Récord de sets (G-P)</div>${statField(p.sets)}</div>
-                <div><div class="info-field-label">Récord de mapas/modos (PG-PP)</div>${statField(p.matches)}</div>
-                <div><div class="info-field-label">Reconocimientos especiales</div>${statField(pos === 1 ? "MVP" : (pos === 2 || pos === 3) ? "Jugador Sorpresa" : findMvpRecognition(p))}</div>
-                <div><div class="info-field-label">Promedio de puntos por torneo</div>${statField(computeAvgPoints(p))}</div>
-            </div>
+            ${(() => {
+                const winPct = pctFromRecord(p.sets);
+                const setsPct = pctFromRecord(p.sets);
+                const matchesPct = pctFromRecord(p.matches);
+                const avgNum = computeAvgPointsNum(p);
+                const avgPct = avgNum === null ? null : (avgNum / (maxAvgPoints() || 1)) * 100;
+                const recognition = pos === 1 ? "MVP" : (p.key === "zyrox" || p.key === "robertbv") ? "Jugador Sorpresa" : (pos === 2 || pos === 3) ? "Jugador Sorpresa" : findMvpRecognition(p);
+                const statsSlideHtml = `<div class="info-grid stat-compact">
+                    <div><div class="info-field-label">Porcentaje de victorias</div>${statField(computeWinRate(p))}${statBarHtml(winPct)}</div>
+                    <div><div class="info-field-label">Récord de sets (G-P)</div>${statField(p.sets)}${statBarHtml(setsPct)}</div>
+                    <div><div class="info-field-label">Récord de mapas/modos (PG-PP)</div>${statField(p.matches)}${statBarHtml(matchesPct)}</div>
+                    <div><div class="info-field-label">Promedio de puntos por torneo</div>${statField(computeAvgPoints(p))}${statBarHtml(avgPct)}</div>
+                    <div class="span-2"><div class="info-field-label">Reconocimientos especiales</div>${statField(recognition)}</div>
+                </div>`;
+                const radarSlideHtml = `<div class="radar-gauge-row">
+                        <div class="stat-radar-wrap">${buildRadarSvg(p)}</div>
+                        <div class="gauge-col">
+                            ${buildGaugeSvg("Potencial", computePotencial(p))}
+                            ${buildGaugeSvg("Habilidades", computeHabilidades(p))}
+                            ${buildGaugeSvg("Reputación Int.", computeReputacion(p))}
+                        </div>
+                    </div>`;
+                return renderCarousel([0, 1], (i) => i === 0 ? statsSlideHtml : radarSlideHtml, "", { swipeOnly: true, hideNav: true });
+            })()}
 
             <div class="info-block-title">Datos de Brawl Stars</div>
             <div class="info-grid">
@@ -6860,6 +8832,7 @@
         const vitrinaCard = panel.querySelector("#vitrinaCard");
         if (vitrinaCard) vitrinaCard.addEventListener("click", () => openTrophyModal(TROPHIES[0]));
         initCarousels(panel);
+        initRadarTooltips(panel);
         const panelMedia = panel.querySelector(".panel-media");
         const headerEnd = panel.querySelector("#infoHeaderEnd");
         if (panelMedia && headerEnd) {
@@ -6893,6 +8866,7 @@
 
     function closePlayerModal() {
         zcPlaySound("salir");
+        zcStopRankSound();
         closeModal("playerModalOverlay");
     }
 
@@ -7100,6 +9074,7 @@
         modalStack = [];
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
         modalImg.src = "";
+        zcStopRankSound();
         const menuEl = document.getElementById("mobileMenu");
         const menuOpen = menuEl && menuEl.classList.contains("open");
         if (!menuOpen) unlockBodyScroll();
@@ -7140,28 +9115,33 @@
     zcfInit();
 
     const rankToggleBtn = document.getElementById("rankToggleBtn");
+    const rankToggleIcon = document.getElementById("rankToggleIcon");
+    const rankToggleLabel = document.getElementById("rankToggleLabel");
     if (rankToggleBtn) {
         rankToggleBtn.addEventListener("click", () => {
             zcPlaySound("click");
             rankingExpanded = !rankingExpanded;
-            rankToggleBtn.textContent = rankingExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
+            rankToggleLabel.textContent = rankingExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
+            rankToggleIcon.src = rankingExpanded ? "rankingcerrar.png" : "rankingopen.png";
             renderRanking();
         });
     }
 
     const contribToggleBtn = document.getElementById("contribToggleBtn");
+    const contribToggleIcon = document.getElementById("contribToggleIcon");
+    const contribToggleLabel = document.getElementById("contribToggleLabel");
     if (contribToggleBtn) {
         contribToggleBtn.addEventListener("click", () => {
             zcPlaySound("click");
             contribExpanded = !contribExpanded;
-            contribToggleBtn.textContent = contribExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
+            contribToggleLabel.textContent = contribExpanded ? "Ocultar Clasificación completa" : "Mostrar Clasificación completa";
+            contribToggleIcon.src = contribExpanded ? "rankingcerrar.png" : "rankingopen.png";
             renderContributions();
         });
     }
 
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
-    const menuClose = document.getElementById("menuClose");
     function openMenu() {
         zcPlaySound("clickentrar");
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
@@ -7180,14 +9160,15 @@
         if (!anyOpen) unlockBodyScroll();
     }
     const sectionFilterGroups = {
+        "inicio": ["inicio"],
         "ultimo-partido": ["ultimo-partido"],
         "ranking": ["ranking", "ultima-clasificacion"],
         "contribuciones": ["contribuciones"],
         "salon-fama": ["salon-fama"]
     };
-    const allFilterableIds = ["ultimo-partido", "ranking", "ultima-clasificacion", "contribuciones", "salon-fama"];
+    const allFilterableIds = ["inicio", "ultimo-partido", "ranking", "ultima-clasificacion", "contribuciones", "salon-fama"];
 
-    let zcCurrentSection = "ultimo-partido";
+    let zcCurrentSection = "inicio";
     function applySectionFilter(key, silent) {
         if (!silent) {
             zcPlaySound(key === zcCurrentSection ? "click" : "cambio");
@@ -7212,16 +9193,219 @@
             t.classList.toggle("active", t.dataset.sectionTab === key);
         });
     }
-    applySectionFilter("ultimo-partido", true);
+    applySectionFilter("inicio", true);
 
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener("click", () => {
             mobileMenu.classList.contains("open") ? closeMenu() : openMenu();
         });
-        if (menuClose) menuClose.addEventListener("click", closeMenu);
         const soundMuteBtn = document.getElementById("soundMuteBtn");
         if (soundMuteBtn) soundMuteBtn.addEventListener("click", zcToggleMute);
         zcUpdateMuteIcon();
+
+        (function initLangSwitcher() {
+            const LANG_STORAGE_KEY = "zc26_lang";
+            // Los diccionarios reales viven en archivos externos (carpeta /idioma/),
+            // no aquí, para no inflar este HTML. Se cargan solo cuando se necesitan.
+            // Se cargan con <script src="..."> (no con fetch) para que funcione
+            // abriendo el HTML directamente con doble clic, sin necesitar servidor.
+            const langFiles = {
+                "en": { src: "idioma/en.js", varName: "ZC_LANG_EN" },
+                "es-es": { src: "idioma/es-es.js", varName: "ZC_LANG_ES_ES" },
+                "pt": { src: "idioma/pt.js", varName: "ZC_LANG_PT" }
+            };
+            const langShortLabel = {
+                "en": "English",
+                "es-es": "Español",
+                "es-la": "Español",
+                "pt": "Português"
+            };
+
+            let currentDict = null; // null = es-la (idioma original, sin traducir)
+            const dictCache = {};   // cache en memoria para no re-descargar el .txt
+
+            // Traduce un texto exacto (recortando espacios) usando el diccionario activo.
+            function zcT(str) {
+                if (!currentDict) return str;
+                const trimmed = String(str).trim();
+                if (!trimmed) return str;
+                const hit = currentDict[trimmed];
+                return hit !== undefined ? hit : str;
+            }
+            window.zcT = zcT;
+
+            function translateWithWhitespace(str) {
+                if (!currentDict) return str;
+                const trimmed = str.trim();
+                if (!trimmed) return str;
+                const hit = currentDict[trimmed];
+                if (hit === undefined) return str;
+                const lead = str.match(/^\s*/)[0];
+                const trail = str.match(/\s*$/)[0];
+                return lead + hit + trail;
+            }
+
+            const SKIP_TAGS = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"]);
+            const originalMap = new WeakMap(); // Text node -> texto original en español (LatAm)
+            const knownNodes = [];             // lista de todos los Text nodes ya vistos
+
+            function isInsideLangSwitcher(node) {
+                let el = node.nodeType === 3 ? node.parentElement : node;
+                while (el) {
+                    if (el.id === "langSwitcher") return true;
+                    el = el.parentElement;
+                }
+                return false;
+            }
+
+            function harvestTextNode(node) {
+                if (originalMap.has(node)) return; // ya lo conocemos
+                if (isInsideLangSwitcher(node)) return; // no tocar el propio selector de idioma
+                if (!node.textContent || !node.textContent.trim()) return;
+                originalMap.set(node, node.textContent);
+                knownNodes.push(node);
+                if (currentDict) node.textContent = translateWithWhitespace(node.textContent);
+            }
+
+            function harvestSubtree(root) {
+                if (root.nodeType === 3) {
+                    harvestTextNode(root);
+                    return;
+                }
+                if (root.nodeType !== 1 || SKIP_TAGS.has(root.nodeName)) return;
+                const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                    acceptNode(n) {
+                        if (SKIP_TAGS.has(n.parentNode && n.parentNode.nodeName)) return NodeFilter.FILTER_REJECT;
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                });
+                let n;
+                while ((n = walker.nextNode())) harvestTextNode(n);
+            }
+
+            // Atributos estáticos traducibles, capturados una sola vez al cargar.
+            const ATTR_NAMES = ["placeholder", "aria-label", "title"];
+            const attrRecords = [];
+            function harvestAttrs() {
+                document.querySelectorAll("[placeholder],[aria-label],[title]").forEach(el => {
+                    if (isInsideLangSwitcher(el)) return;
+                    ATTR_NAMES.forEach(attr => {
+                        if (el.hasAttribute(attr)) {
+                            const val = el.getAttribute(attr);
+                            if (val && val.trim()) attrRecords.push({ el, attr, original: val });
+                        }
+                    });
+                });
+            }
+
+            function applyAll() {
+                knownNodes.forEach(node => {
+                    const original = originalMap.get(node);
+                    node.textContent = currentDict ? translateWithWhitespace(original) : original;
+                });
+                attrRecords.forEach(rec => {
+                    rec.el.setAttribute(rec.attr, currentDict ? translateWithWhitespace(rec.original) : rec.original);
+                });
+            }
+
+            // Captura inicial de todo lo que ya está en la página.
+            harvestSubtree(document.body);
+            harvestAttrs();
+
+            // Observador: cualquier contenido nuevo que la página genere después
+            // (rankings, contribuciones, buscador, botones "mostrar más"...) se
+            // traduce automáticamente en cuanto aparece, sin tocar el resto del código.
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(m => {
+                    m.addedNodes && m.addedNodes.forEach(node => harvestSubtree(node));
+                });
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+
+            function loadDict(lang) {
+                return new Promise((resolve) => {
+                    if (lang === "es-la") { currentDict = null; resolve(); return; }
+                    if (dictCache[lang]) { currentDict = dictCache[lang]; resolve(); return; }
+                    const info = langFiles[lang];
+                    if (!info) { currentDict = null; resolve(); return; }
+
+                    // Si el <script> del idioma ya fue insertado antes, no lo duplicamos.
+                    const existing = document.querySelector(`script[data-lang-file="${lang}"]`);
+                    if (existing && window[info.varName]) {
+                        dictCache[lang] = window[info.varName];
+                        currentDict = dictCache[lang];
+                        resolve();
+                        return;
+                    }
+
+                    const script = document.createElement("script");
+                    script.src = info.src;
+                    script.dataset.langFile = lang;
+                    script.onload = () => {
+                        const dict = window[info.varName] || {};
+                        dictCache[lang] = dict;
+                        currentDict = dict;
+                        resolve();
+                    };
+                    script.onerror = (e) => {
+                        console.warn("No se pudo cargar el archivo de idioma:", info.src, e);
+                        currentDict = null;
+                        resolve();
+                    };
+                    document.head.appendChild(script);
+                });
+            }
+
+            let currentAppliedLang = null;
+            async function applyLanguage(lang) {
+                await loadDict(lang);
+                applyAll();
+
+                const label = document.getElementById("langToggleLabel");
+                if (label) label.textContent = langShortLabel[lang] || "Español";
+
+                document.querySelectorAll(".lang-option").forEach(opt => {
+                    opt.classList.toggle("active", opt.dataset.lang === lang);
+                });
+
+                document.documentElement.setAttribute("lang", lang === "pt" ? "pt" : (lang === "en" ? "en" : "es"));
+
+                try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (e) {}
+                currentAppliedLang = lang;
+            }
+
+            const langSwitcher = document.getElementById("langSwitcher");
+            const langToggleBtn = document.getElementById("langToggleBtn");
+            const langDropdown = document.getElementById("langDropdown");
+
+            if (langToggleBtn && langDropdown) {
+                langToggleBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const isOpen = langDropdown.classList.toggle("open");
+                    langToggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+                langDropdown.querySelectorAll(".lang-option").forEach(opt => {
+                    opt.addEventListener("click", () => {
+                        if (opt.dataset.lang !== currentAppliedLang) zcPlaySound("cambioidioma");
+                        applyLanguage(opt.dataset.lang);
+                        langDropdown.classList.remove("open");
+                        langToggleBtn.setAttribute("aria-expanded", "false");
+                    });
+                });
+                document.addEventListener("click", (e) => {
+                    if (langSwitcher && !langSwitcher.contains(e.target)) {
+                        langDropdown.classList.remove("open");
+                        langToggleBtn.setAttribute("aria-expanded", "false");
+                    }
+                });
+            }
+
+            let savedLang = "es-la";
+            try {
+                savedLang = localStorage.getItem(LANG_STORAGE_KEY) || "es-la";
+            } catch (e) {}
+            applyLanguage(savedLang);
+        })();
         mobileMenu.querySelectorAll("[data-menu-link]").forEach(link => {
             link.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -7234,10 +9418,6 @@
                     applySectionFilter("todo");
                     setActiveSectionTab("todo");
                 }
-                setTimeout(() => {
-                    const el = document.getElementById(targetId);
-                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 320);
             });
         });
     }
@@ -7327,7 +9507,42 @@
     }
     bindMatchTabs(document);
 
+    function initMvsBars(root) {
+        root.querySelectorAll(".mvs-rows .mvs-row").forEach(row => {
+            if (row.querySelector(".mvs-bar-row")) return;
+            const vals = row.querySelectorAll(".mvs-val");
+            if (vals.length !== 2) return;
+
+            const top = document.createElement("div");
+            top.className = "mvs-row-top";
+            while (row.firstChild) top.appendChild(row.firstChild);
+            row.appendChild(top);
+
+            const parseVal = (el) => {
+                const num = parseFloat(el.textContent.replace(",", ".").replace(/[^0-9.\-]/g, ""));
+                return isNaN(num) ? 0 : num;
+            };
+            const sideClass = (el) => el.classList.contains("mvs-win-lev") ? "mvs-bar-lev"
+                : el.classList.contains("mvs-win-lpr") ? "mvs-bar-lpr"
+                : "mvs-bar-neutral";
+
+            const leftVal = parseVal(vals[0]);
+            const rightVal = parseVal(vals[1]);
+            const maxVal = Math.max(leftVal, rightVal);
+            const leftPct = leftVal > 0 && maxVal > 0 ? Math.max(4, Math.round((leftVal / maxVal) * 100)) : 0;
+            const rightPct = rightVal > 0 && maxVal > 0 ? Math.max(4, Math.round((rightVal / maxVal) * 100)) : 0;
+
+            const barRow = document.createElement("div");
+            barRow.className = "mvs-bar-row";
+            barRow.innerHTML =
+                `<div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill ${sideClass(vals[0])}" style="width:${leftPct}%"></div></div>` +
+                `<div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill ${sideClass(vals[1])}" style="width:${rightPct}%"></div></div>`;
+            row.appendChild(barRow);
+        });
+    }
+
     function bindMatchStats(root) {
+        initMvsBars(root);
         root.querySelectorAll(".mvs-wrap").forEach(wrap => {
         const mvsTabs = wrap.querySelectorAll(".mvs-tab");
         const rows = wrap.querySelectorAll(".mvs-rows [data-cat]");
@@ -7433,6 +9648,828 @@
             modalImg.src = '';
         }
     });
+
+    /* ======================================================================
+       DESTACADAS (STORIES) — lógica de reproducción tipo Instagram/FIFA
+    ====================================================================== */
+    (function () {
+        const IMAGE_DURATION_MS = 10000; // 10s por imagen
+
+        // Definición de cada destacada. "items" es la lista de páginas dentro de esa historia.
+        const STORIES = {
+            "lev-winner": {
+                username: "LEV WINNER",
+                avatar: "news/LEVCHAMP.jpg",
+                music: "news/song_leyend.ogg", // suena en bucle mientras dura esta historia
+                items: [
+                    { type: "image", src: "news/LEVCHAMP.jpg", duration: IMAGE_DURATION_MS }
+                ]
+            },
+            "matches-aug8": {
+                username: "MATCHES, AUG 8",
+                avatar: "news/matchaug8(4).jpg",
+                music: "news/song_misery.ogg", // suena en bucle mientras dura esta historia
+                items: [
+                    { type: "image", src: "news/matchaug8(4).jpg", duration: IMAGE_DURATION_MS },
+                    { type: "image", src: "news/matchaug8(3).jpg", duration: IMAGE_DURATION_MS },
+                    { type: "image", src: "news/matchaug8(2).jpg", duration: IMAGE_DURATION_MS },
+                    { type: "image", src: "news/matchaug8(1).jpg", duration: IMAGE_DURATION_MS }
+                ]
+            },
+            "bsc-aug8": {
+                username: "BSC, AUG 8",
+                avatar: "LEV.png",
+                music: null,
+                ctaLabel: "Ver completo",
+                ctaUrl: "https://youtube.com/shorts/y7jDOjuQcy4?si=zRnHhpw6-JHaWb1h",
+                items: [
+                    { type: "video", src: "news/LEVLPR.mp4" }
+                ]
+            },
+            "resumen-agosto": {
+                username: "RESUMEN AGOSTO",
+                avatar: "news/novedades8aug1.png",
+                music: null,
+                items: [
+                    { type: "image", src: "news/novedades8aug1.png", duration: IMAGE_DURATION_MS }
+                ]
+            },
+            "brawler-blast": {
+                username: "BRAWLER BLAST",
+                avatar: "news/novedades2sep2.jpg",
+                music: null,
+                items: [
+                    { type: "image", src: "news/novedades2sep2.jpg", duration: IMAGE_DURATION_MS }
+                ]
+            },
+            "clip-1": {
+                username: "GRAN FINAL",
+                avatar: "clip/clip(1).png",
+                music: null,
+                items: [ { type: "video", src: "clip/video(1).mp4" } ]
+            },
+            "clip-2": {
+                username: "TAIKISHA, MVP",
+                avatar: "clip/clip(2).png",
+                music: null,
+                items: [ { type: "video", src: "clip/video(2).mp4" } ]
+            },
+            "clip-3": {
+                username: "PUNTO DE CAMPEONATO",
+                avatar: "clip/clip(3).png",
+                music: null,
+                items: [ { type: "video", src: "clip/video(3).mp4" } ]
+            },
+            "clip-4": {
+                username: "MEJOR JUGADA",
+                avatar: "clip/clip(4).png",
+                music: null,
+                items: [ { type: "video", src: "clip/video(4).mp4" } ]
+            },
+            "clip-5": {
+                username: "HIGHLIGHTS",
+                avatar: "clip/clip(5).png",
+                music: null,
+                items: [ { type: "video", src: "clip/video(5).mp4" } ]
+            }
+        };
+
+        const STORY_ORDER = ["lev-winner", "matches-aug8", "bsc-aug8", "resumen-agosto", "brawler-blast", "clip-1", "clip-2", "clip-3", "clip-4", "clip-5"];
+
+        // Nombre a mostrar en el reproductor (icono de disco) para cada
+        // canción de fondo de una destacada.
+        const SONG_NAMES = {
+            "news/song_leyend.ogg": "WE ON GO - BIA",
+            "news/song_misery.ogg": "I Miss That Kind of Misery - cynthoni"
+        };
+
+        const viewer = document.getElementById("storyViewer");
+        const mediaWrap = document.getElementById("storyViewerMedia");
+        const progressRow = document.getElementById("storyProgressRow");
+        const usernameEl = document.getElementById("storyViewerUsername");
+        const musicPlayerEl = document.getElementById("storyMusicPlayer");
+        const musicNameEl = document.getElementById("storyMusicName");
+        const muteBtn = document.getElementById("storyMuteBtn");
+        const muteIcon = document.getElementById("storyMuteIcon");
+        const closeBtn = document.getElementById("storyCloseBtn");
+        const zoneBack = document.getElementById("storyZoneBack");
+        const zoneNext = document.getElementById("storyZoneNext");
+        const ctaBtn = document.getElementById("storyCtaBtn");
+
+        let currentStoryId = null;
+        let currentItemIndex = 0;
+        let currentMediaEl = null;
+        let outgoingMediaEl = null;
+        let pendingOutgoingSlideTimer = null;
+        const STORY_CROSSFADE_MS = 220;
+        let bgAudio = null;
+        let storyMuted = localStorage.getItem("zcStoryMuted") === "1";
+        let isPaused = false;
+        let progressTimer = null;
+        let progressStartTime = 0;
+        let progressDuration = 0;
+        let progressElapsedAtPause = 0;
+
+        function updateMuteIcon() {
+            muteIcon.onerror = () => {
+                console.error("[ZC26] No se pudo cargar el ícono de sonido:", muteIcon.src, "→ revisa que el archivo .png exista con ese nombre exacto.");
+            };
+            muteIcon.src = storyMuted ? "sound_onmuted.png" : "sound_offmuted.png";
+        }
+        updateMuteIcon();
+
+        function buildProgressBars(count) {
+            progressRow.innerHTML = "";
+            for (let i = 0; i < count; i++) {
+                const track = document.createElement("div");
+                track.className = "story-progress-track";
+                const fill = document.createElement("div");
+                fill.className = "story-progress-fill";
+                track.appendChild(fill);
+                progressRow.appendChild(track);
+            }
+        }
+
+        function setBarState(index, state) {
+            // state: "done" | "active" | "pending"
+            const tracks = progressRow.querySelectorAll(".story-progress-track");
+            const track = tracks[index];
+            if (!track) return;
+            const fill = track.querySelector(".story-progress-fill");
+            fill.style.transition = "none";
+            if (state === "done") {
+                fill.style.width = "100%";
+            } else if (state === "pending") {
+                fill.style.width = "0%";
+            } else if (state === "active") {
+                fill.style.width = "0%";
+                void fill.offsetWidth; // forzar reflow para poder animar después
+            }
+        }
+
+        function refreshActiveTrackClass() {
+            // La barra activa se ensancha (mismo diseño que Novedades: 1 ancha, resto finas)
+            const tracks = progressRow.querySelectorAll(".story-progress-track");
+            tracks.forEach((t, i) => t.classList.toggle("is-active", i === currentItemIndex));
+        }
+
+        function animateActiveBar(index, durationMs) {
+            const tracks = progressRow.querySelectorAll(".story-progress-track");
+            const track = tracks[index];
+            if (!track) return;
+            const fill = track.querySelector(".story-progress-fill");
+            fill.style.transition = `width ${durationMs}ms linear`;
+            // doble rAF: asegura que el navegador ya aplicó width:0% antes de animar a 100%,
+            // evitando el "salto"/tirón que aparece si se anima en el mismo frame del reset.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    fill.style.width = "100%";
+                });
+            });
+        }
+
+        function stopBgMusic() {
+            if (bgAudio) {
+                const old = bgAudio;
+                bgAudio = null;
+                // fade-out corto para que el corte no se sienta brusco
+                let vol = old.volume;
+                const fade = setInterval(() => {
+                    vol -= 0.25;
+                    if (vol <= 0) {
+                        clearInterval(fade);
+                        old.pause();
+                        old.currentTime = 0;
+                    } else {
+                        old.volume = vol;
+                    }
+                }, 30);
+            }
+        }
+
+        function startBgMusic(src) {
+            stopBgMusic();
+            if (!src) return;
+            const audio = new Audio(src);
+            audio.loop = true;
+            audio.muted = storyMuted;
+            audio.volume = 1;
+            audio.addEventListener("error", () => {
+                console.error("[ZC26] No se pudo cargar el audio de la historia:", src, "→ revisa que el archivo exista exactamente con ese nombre y mayúsculas/minúsculas.");
+            });
+            audio.play().catch((err) => {
+                console.warn("[ZC26] audio.play() falló para", src, err);
+            });
+            bgAudio = audio;
+        }
+
+        // Muestra/oculta el icono de disco + nombre de la canción según si la
+        // destacada actual tiene música de fondo, y reinicia el efecto de
+        // "sale y vuelve a entrar" del texto cada vez que cambia la canción.
+        function updateMusicWidget(src) {
+            const name = src ? SONG_NAMES[src] : null;
+            if (!name) {
+                musicPlayerEl.classList.remove("visible");
+                musicNameEl.textContent = "";
+                return;
+            }
+            musicNameEl.textContent = name;
+            musicPlayerEl.classList.add("visible");
+            // reiniciar la animación desde el principio (si no, al cambiar de
+            // canción seguiría a mitad de camino en vez de empezar de nuevo)
+            musicNameEl.style.animation = "none";
+            void musicNameEl.offsetWidth;
+            musicNameEl.style.animation = "";
+        }
+
+        // Devuelve el <video> "nítido" (primer plano) actualmente mostrado, sea
+        // que currentMediaEl sea un <video> suelto o un wrapper .story-slide.
+        function getFgVideo() {
+            if (!currentMediaEl) return null;
+            if (currentMediaEl.tagName === "VIDEO") return currentMediaEl;
+            const fg = currentMediaEl.querySelector(".story-slide-fg");
+            return (fg && fg.tagName === "VIDEO") ? fg : null;
+        }
+        // Devuelve el <video> borroso de fondo, si el item actual es un video.
+        function getBgVideo() {
+            if (!currentMediaEl || currentMediaEl.tagName === "VIDEO") return null;
+            const bg = currentMediaEl.querySelector(".story-slide-bg");
+            return (bg && bg.tagName === "VIDEO") ? bg : null;
+        }
+
+        function cleanupSlideEl(el) {
+            if (!el) return;
+            el.querySelectorAll("video").forEach(v => {
+                v.pause();
+                v.removeAttribute("src");
+                v.load();
+            });
+            if (el.tagName === "VIDEO") {
+                el.pause();
+                el.removeAttribute("src");
+                el.load();
+            }
+            el.remove();
+        }
+
+        function scheduleOutgoingSlideCleanup(previousSlideEl) {
+            if (!previousSlideEl) return;
+            outgoingMediaEl = previousSlideEl;
+            pendingOutgoingSlideTimer = setTimeout(() => {
+                cleanupSlideEl(outgoingMediaEl);
+                outgoingMediaEl = null;
+                pendingOutgoingSlideTimer = null;
+            }, STORY_CROSSFADE_MS);
+        }
+
+        function clearMediaEl() {
+            if (pendingOutgoingSlideTimer) {
+                clearTimeout(pendingOutgoingSlideTimer);
+                pendingOutgoingSlideTimer = null;
+            }
+            if (outgoingMediaEl) {
+                cleanupSlideEl(outgoingMediaEl);
+                outgoingMediaEl = null;
+            }
+            if (currentMediaEl) {
+                cleanupSlideEl(currentMediaEl);
+                currentMediaEl = null;
+            }
+        }
+
+        function clearProgressTimer() {
+            if (progressTimer) {
+                clearTimeout(progressTimer);
+                progressTimer = null;
+            }
+        }
+
+        // Precarga silenciosa de la siguiente imagen para que el cambio sea instantáneo,
+        // sin el parpadeo/"lag" de esperar la descarga al momento de mostrarla.
+        const preloadCache = new Set();
+        function preloadNextImage() {
+            const story = STORIES[currentStoryId];
+            if (!story) return;
+            const nextItem = story.items[currentItemIndex + 1];
+            if (nextItem && nextItem.type === "image" && !preloadCache.has(nextItem.src)) {
+                const pre = new Image();
+                pre.src = nextItem.src;
+                preloadCache.add(nextItem.src);
+            }
+        }
+
+        function goToStory(storyId, itemIndex) {
+            const story = STORIES[storyId];
+            if (!story) return;
+            currentStoryId = storyId;
+            currentItemIndex = Math.max(0, Math.min(itemIndex, story.items.length - 1));
+
+            usernameEl.textContent = story.username;
+
+            if (story.ctaLabel && story.ctaUrl) {
+                ctaBtn.textContent = story.ctaLabel;
+                ctaBtn.href = story.ctaUrl;
+                ctaBtn.classList.add("visible");
+            } else {
+                ctaBtn.classList.remove("visible");
+                ctaBtn.removeAttribute("href");
+            }
+
+            // Siempre reconstruir las barras al entrar a una historia nueva,
+            // así no queda ningún estado "sucio" de la historia anterior.
+            buildProgressBars(story.items.length);
+
+            // marcar como visto en la barra de destacadas / momentos
+            const storyBtn = document.querySelector(`[data-story-id="${storyId}"]`);
+            if (storyBtn) storyBtn.classList.add("story-seen");
+
+            startBgMusic(story.music);
+            updateMusicWidget(story.music);
+            renderItem();
+        }
+
+        function renderItem() {
+            // No borramos el slide actual todavía: lo dejamos visible como fondo
+            // y el nuevo se desvanece encima (crossfade), así se evita el
+            // parpadeo negro al cambiar de imagen/destacada.
+            if (pendingOutgoingSlideTimer) {
+                clearTimeout(pendingOutgoingSlideTimer);
+                pendingOutgoingSlideTimer = null;
+            }
+            if (outgoingMediaEl) {
+                cleanupSlideEl(outgoingMediaEl);
+                outgoingMediaEl = null;
+            }
+            const previousSlideEl = currentMediaEl;
+            currentMediaEl = null;
+            clearProgressTimer();
+
+            const story = STORIES[currentStoryId];
+            const item = story.items[currentItemIndex];
+
+            // Actualizar estado visual de las barras: anteriores llenas, futuras vacías
+            story.items.forEach((_, i) => {
+                if (i < currentItemIndex) setBarState(i, "done");
+                else if (i > currentItemIndex) setBarState(i, "pending");
+            });
+            setBarState(currentItemIndex, "active");
+            refreshActiveTrackClass();
+            preloadNextImage();
+
+            if (item.type === "image") {
+                const slide = document.createElement("div");
+                slide.className = "story-slide";
+
+                const bg = document.createElement("img");
+                bg.className = "story-slide-bg";
+                bg.src = item.src;
+                bg.alt = "";
+                bg.setAttribute("aria-hidden", "true");
+
+                const fg = document.createElement("img");
+                fg.className = "story-slide-fg";
+                fg.onerror = () => {
+                    console.error("[ZC26] No se pudo cargar la imagen de la historia:", item.src, "→ revisa la ruta/nombre exacto del archivo.");
+                };
+                fg.src = item.src;
+                fg.alt = "";
+
+                slide.appendChild(bg);
+                slide.appendChild(fg);
+                mediaWrap.appendChild(slide);
+                currentMediaEl = slide;
+                scheduleOutgoingSlideCleanup(previousSlideEl);
+                startProgress(item.duration);
+            } else if (item.type === "video") {
+                const slide = document.createElement("div");
+                slide.className = "story-slide";
+
+                const bgVideo = document.createElement("video");
+                bgVideo.className = "story-slide-bg";
+                bgVideo.src = item.src;
+                bgVideo.muted = true;
+                bgVideo.autoplay = true;
+                bgVideo.loop = true;
+                bgVideo.playsInline = true;
+                bgVideo.tabIndex = -1;
+                bgVideo.setAttribute("aria-hidden", "true");
+
+                const video = document.createElement("video");
+                video.className = "story-slide-fg";
+                video.src = item.src;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.muted = storyMuted;
+
+                slide.appendChild(bgVideo);
+                slide.appendChild(video);
+                mediaWrap.appendChild(slide);
+                currentMediaEl = slide;
+                scheduleOutgoingSlideCleanup(previousSlideEl);
+                video.addEventListener("loadedmetadata", () => {
+                    const durMs = (isFinite(video.duration) && video.duration > 0) ? video.duration * 1000 : 15000;
+                    startProgress(durMs);
+                });
+                video.addEventListener("ended", () => advance());
+                video.play().catch(() => {});
+                bgVideo.play().catch(() => {});
+            }
+        }
+
+        function startProgress(durationMs) {
+            progressDuration = durationMs;
+            progressStartTime = Date.now();
+            progressElapsedAtPause = 0;
+            animateActiveBar(currentItemIndex, durationMs);
+            clearProgressTimer();
+            progressTimer = setTimeout(() => advance(), durationMs);
+        }
+
+        function pauseStory() {
+            if (isPaused) return;
+            isPaused = true;
+            progressElapsedAtPause = Date.now() - progressStartTime;
+            clearProgressTimer();
+            if (bgAudio) bgAudio.pause();
+            const fgV1 = getFgVideo(); if (fgV1) fgV1.pause();
+            const bgV1 = getBgVideo(); if (bgV1) bgV1.pause();
+            // congelar la barra en su ancho actual
+            const tracks = progressRow.querySelectorAll(".story-progress-track");
+            const track = tracks[currentItemIndex];
+            if (track) {
+                const fill = track.querySelector(".story-progress-fill");
+                const computedWidth = getComputedStyle(fill).width;
+                fill.style.transition = "none";
+                fill.style.width = computedWidth;
+            }
+        }
+
+        function resumeStory() {
+            if (!isPaused) return;
+            isPaused = false;
+            const remaining = Math.max(50, progressDuration - progressElapsedAtPause);
+            if (bgAudio) bgAudio.play().catch(() => {});
+            const fgV2 = getFgVideo(); if (fgV2) fgV2.play().catch(() => {});
+            const bgV2 = getBgVideo(); if (bgV2) bgV2.play().catch(() => {});
+            const tracks = progressRow.querySelectorAll(".story-progress-track");
+            const track = tracks[currentItemIndex];
+            if (track) {
+                const fill = track.querySelector(".story-progress-fill");
+                fill.style.transition = `width ${remaining}ms linear`;
+                requestAnimationFrame(() => { fill.style.width = "100%"; });
+            }
+            progressStartTime = Date.now() - progressElapsedAtPause;
+            clearProgressTimer();
+            progressTimer = setTimeout(() => advance(), remaining);
+        }
+
+        function advance() {
+            const story = STORIES[currentStoryId];
+            if (currentItemIndex < story.items.length - 1) {
+                currentItemIndex++;
+                renderItem();
+                refreshActiveTrackClass();
+            } else {
+                goToNextStory();
+            }
+        }
+
+        function goBack() {
+            const story = STORIES[currentStoryId];
+            if (currentItemIndex > 0) {
+                currentItemIndex--;
+                renderItem();
+                refreshActiveTrackClass();
+            } else {
+                goToPrevStory();
+            }
+        }
+
+        function goToNextStory() {
+            const idx = STORY_ORDER.indexOf(currentStoryId);
+            if (idx < STORY_ORDER.length - 1) {
+                goToStory(STORY_ORDER[idx + 1], 0);
+            } else {
+                closeViewer();
+            }
+        }
+
+        function goToPrevStory() {
+            const idx = STORY_ORDER.indexOf(currentStoryId);
+            if (idx > 0) {
+                goToStory(STORY_ORDER[idx - 1], 0);
+            } else {
+                // ya está en la primera; reinicia su primer item
+                renderItem();
+            }
+        }
+
+        function openViewer(storyId) {
+            viewer.classList.add("active");
+            document.body.style.overflow = "hidden";
+            goToStory(storyId, 0);
+        }
+
+        function closeViewer() {
+            viewer.classList.remove("active");
+            document.body.style.overflow = "";
+            clearProgressTimer();
+            clearMediaEl();
+            stopBgMusic();
+            updateMusicWidget(null);
+            currentStoryId = null;
+            isPaused = false;
+        }
+
+        // Abrir historia al tocar el círculo de Destacadas o una tarjeta de Momentos
+        document.querySelectorAll(".story-item, .momento-card").forEach(btn => {
+            btn.addEventListener("click", () => {
+                zcPlaySound("click");
+                openViewer(btn.getAttribute("data-story-id"));
+            });
+        });
+
+        // Cerrar
+        closeBtn.addEventListener("click", () => {
+            zcPlaySound("salir");
+            closeViewer();
+        });
+
+        // El botón "Ver completo" no debe disparar la navegación por tap
+        ctaBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            zcPlaySound("click");
+        });
+
+        // Silenciar / activar sonido (afecta música de fondo y video)
+        muteBtn.addEventListener("click", () => {
+            storyMuted = !storyMuted;
+            localStorage.setItem("zcStoryMuted", storyMuted ? "1" : "0");
+            updateMuteIcon();
+            if (bgAudio) bgAudio.muted = storyMuted;
+            const fgV3 = getFgVideo(); if (fgV3) fgV3.muted = storyMuted;
+        });
+
+        // Avanzar / retroceder con tap (evitar doble disparo si viene de un tap táctil)
+        let lastTapNav = 0;
+        function navOnce(fn) {
+            const now = Date.now();
+            if (now - lastTapNav < 250) return; // anti-rebote: evita saltos dobles por tap+click
+            lastTapNav = now;
+            fn();
+        }
+        zoneNext.addEventListener("click", () => navOnce(advance));
+        zoneBack.addEventListener("click", () => navOnce(goBack));
+
+        // Mantener presionado para pausar
+        let pressTimer = null;
+        function bindHoldToPause(zone) {
+            const start = () => {
+                pressTimer = setTimeout(() => pauseStory(), 180);
+            };
+            const end = () => {
+                clearTimeout(pressTimer);
+                if (isPaused) resumeStory();
+            };
+            zone.addEventListener("touchstart", start, { passive: true });
+            zone.addEventListener("touchend", end);
+            zone.addEventListener("touchcancel", end);
+            zone.addEventListener("mousedown", start);
+            zone.addEventListener("mouseup", end);
+            zone.addEventListener("mouseleave", () => { if (isPaused) end(); });
+        }
+        bindHoldToPause(zoneBack);
+        bindHoldToPause(zoneNext);
+
+        // Cerrar con Escape (accesibilidad en desktop)
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && viewer.classList.contains("active")) closeViewer();
+        });
+    })();
+
+    /* ======================================================================
+       NOVEDADES — feed deslizable con barras de progreso (15s c/u)
+       La barra de la novedad activa se ve ancha (como en el ejemplo de FIFA);
+       las demás quedan finas. Se puede deslizar con el dedo o esperar a que
+       avance sola. Solo el botón "Más info." abre el detalle.
+    ====================================================================== */
+    (function () {
+        const NOVEDAD_DURATION_MS = 15000; // 15s por novedad
+        const card = document.getElementById("novedadesCard");
+        if (!card) return;
+
+        const progressRow = document.getElementById("novedadesProgressRow");
+        const trackEl = document.getElementById("novedadesTrack");
+        const slides = Array.from(card.querySelectorAll(".novedad-slide"));
+        const total = slides.length;
+
+        let currentIndex = 0;
+        let timer = null;
+        let isUserScrolling = false;
+        let scrollEndTimeout = null;
+        let programmaticScroll = false;
+
+        // construir barras de progreso (una por novedad)
+        slides.forEach(() => {
+            const barTrack = document.createElement("div");
+            barTrack.className = "novedades-progress-track";
+            const fill = document.createElement("div");
+            fill.className = "novedades-progress-fill";
+            barTrack.appendChild(fill);
+            progressRow.appendChild(barTrack);
+        });
+
+        const tracks = progressRow.querySelectorAll(".novedades-progress-track");
+
+        function setBar(index, state) {
+            const track = tracks[index];
+            if (!track) return;
+            const fill = track.querySelector(".novedades-progress-fill");
+            fill.style.transition = "none";
+            if (state === "done") fill.style.width = "100%";
+            else if (state === "pending") fill.style.width = "0%";
+            else if (state === "active") { fill.style.width = "0%"; void fill.offsetWidth; }
+        }
+
+        function animateBar(index) {
+            const track = tracks[index];
+            const fill = track.querySelector(".novedades-progress-fill");
+            fill.style.transition = `width ${NOVEDAD_DURATION_MS}ms linear`;
+            requestAnimationFrame(() => { fill.style.width = "100%"; });
+        }
+
+        function render() {
+            tracks.forEach((t, i) => t.classList.toggle("is-active", i === currentIndex));
+            slides.forEach((_, i) => {
+                if (i < currentIndex) setBar(i, "done");
+                else if (i > currentIndex) setBar(i, "pending");
+            });
+            setBar(currentIndex, "active");
+            animateBar(currentIndex);
+        }
+
+        function clearTimer() {
+            if (timer) { clearTimeout(timer); timer = null; }
+        }
+
+        function scheduleNext() {
+            clearTimer();
+            timer = setTimeout(() => {
+                const nextIndex = (currentIndex + 1) % total;
+                goTo(nextIndex);
+            }, NOVEDAD_DURATION_MS);
+        }
+
+        function scrollToSlide(index) {
+            programmaticScroll = true;
+            trackEl.scrollTo({ left: trackEl.clientWidth * index, behavior: "smooth" });
+            // liberar el flag una vez termina el scroll suave
+            setTimeout(() => { programmaticScroll = false; }, 500);
+        }
+
+        function goTo(index) {
+            currentIndex = ((index % total) + total) % total;
+            clearTimer();
+            render();
+            scrollToSlide(currentIndex);
+            scheduleNext();
+        }
+
+        // El usuario desliza manualmente: detectamos a qué novedad llegó y
+        // sincronizamos las barras con esa posición, sin esperar el timer.
+        function syncToScrollPosition() {
+            liveSync();
+            isUserScrolling = false;
+            scheduleNext();
+        }
+
+        // Sincroniza las barras EN VIVO mientras el dedo va deslizando,
+        // en vez de esperar a que el scroll termine por completo.
+        let liveSyncRAF = null;
+        function liveSync() {
+            const newIndex = Math.max(0, Math.min(Math.round(trackEl.scrollLeft / trackEl.clientWidth), total - 1));
+            if (newIndex !== currentIndex) {
+                currentIndex = newIndex;
+                render();
+            }
+        }
+        function scheduleLiveSync() {
+            if (liveSyncRAF) return;
+            liveSyncRAF = requestAnimationFrame(() => {
+                liveSyncRAF = null;
+                liveSync();
+            });
+        }
+
+        if ("onscrollend" in window) {
+            // API moderna: dispara justo cuando el scroll (y el snap) terminan, sin retrasos artificiales
+            trackEl.addEventListener("scroll", () => {
+                if (programmaticScroll) return;
+                isUserScrolling = true;
+                clearTimer();
+                scheduleLiveSync();
+            }, { passive: true });
+            trackEl.addEventListener("scrollend", () => {
+                if (programmaticScroll) return;
+                syncToScrollPosition();
+            });
+        } else {
+            // Fallback para navegadores sin scrollend
+            trackEl.addEventListener("scroll", () => {
+                if (programmaticScroll) return;
+                isUserScrolling = true;
+                clearTimer();
+                scheduleLiveSync();
+                clearTimeout(scrollEndTimeout);
+                scrollEndTimeout = setTimeout(syncToScrollPosition, 100);
+            }, { passive: true });
+        }
+
+        render();
+        scheduleNext();
+
+        // ===================== DETALLE DE NOVEDAD =====================
+        const NOVEDAD_DETAILS = {
+            0: {
+                tag: "ZC26 ESPORTS™",
+                title: "Regresa la ZC26 Brawl Stars este mes de septiembre",
+                hero: "news/novedades25sep1.jpg",
+                paragraphs: [
+                    "Estimada comunidad, nos alegra mucho ponernos en contacto con ustedes para compartir varias novedades importantes sobre el desarrollo de nuestros torneos. Como bien recordarán, en la última edición el equipo de Levantan Esports se quedó con el primer lugar tras una excelente participación.",
+                    "Después de ese evento, nos tomamos un tiempo fuera de las canchas para planificar todo con calma, pero la espera terminó y estamos de vuelta oficialmente con una nueva entrega de la ZC26. En esta oportunidad, volveremos a medir el nivel de todos en la modalidad de tres contra tres dentro de Brawl Stars.",
+                    "La estructura del torneo está pensada para mantener la emoción de principio a fin, ya que será una competencia intensa donde solo un equipo logrará llevarse el trofeo de campeón. Sabemos que la exigencia es alta, por lo que esperamos ver partidas muy disputadas entre los mejores grupos que se presenten.",
+                    "Para esta edición decidimos renovar varias cosas. Incorporamos nuevas reglas y mecánicas de juego que buscan equilibrar la cancha para todos los participantes. La idea principal es que cada equipo compita en igualdad de condiciones, sin ventajas injustas para nadie.",
+                    "Además, contaremos con un equipo de moderación dedicado a revisar cada partida de cerca, asegurando que el ambiente se mantenga limpio, respetuoso y ordenado durante los días de competencia.",
+                    "Otro punto en el que pusimos mucho esfuerzo fue en la claridad del reglamento. Queremos que cualquier persona que tenga ganas de jugar pueda entender el formato sin complicaciones, incluso si es la primera vez que participa en un torneo de este tipo.",
+                    "No hace falta ser un experto en competencias para sumarse; las guías y las instrucciones están redactadas de forma sencilla para que todos sepan exactamente cómo inscribirse, cómo reportar sus resultados y cómo avanzar en cada fase.",
+                    "Los invitamos a ponerse de acuerdo con sus compañeros, armar sus alineaciones con tiempo y empezar a practicar. En los próximos días seguiremos publicando más detalles sobre los horarios y la forma de registro, así que manténganse atentos a los anuncios."
+                ]
+            },
+            1: {
+                tag: "ZC26 ESPORTS™",
+                title: "LEVIATÁN ESPORTS se corona CAMPEÓN de la ZC26 Agosto",
+                hero: "news/novedades8aug1.png",
+                paragraphs: [
+                    "El torneo oficial de tres contra tres de Brawl Stars ha llegado a su final, consagrando a Leviatán Esports como el gran campeón de esta edición inaugural. La jornada de competencia estuvo marcada por un nivel técnico sobresaliente y series de alta intensidad en cada una de las rondas disputadas.",
+                    "Antes del inicio de los enfrentamientos en la gran final, ambos equipos aplicaron su estrategia en la fase de vetos. Quedaron excluidos de la partida los personajes Belle, Spike, Bibi y Nori, lo que obligó a las escuadras a replantear sus composiciones tácticas para la serie decisiva.",
+                    "El desarrollo del encuentro final mostró un desempeño firme por parte de Leviatán Esports, superando a su rival por un marcador de tres sets a uno. El primer set se jugó en el mapa Neumáticos Maniáticos, donde Leviatán tomó la ventaja inicial con una victoria limpia de dos a cero.",
+                    "En el segundo mapa, Roca de Belle, el conjunto rival logró responder y empatar la serie al adjudicarse el punto con un resultado de dos a uno. Sin embargo, Leviatán recuperó el control de las acciones en el tercer mapa, Arbustos Frondosos, imponiéndose dos a uno en un duelo muy disputado, y finalmente cerró el campeonato en el mapa Doble Swoosh con un categórico dos a cero.",
+                    "A nivel individual, el jugador Taikisha fue reconocido como la figura más destacada del evento por su brillante rendimiento a lo largo de las partidas, recibiendo una bonificación especial por su aporte al equipo.",
+                    "Con estos resultados, la tabla general de posiciones quedó encabezada por Leviatán Esports en el primer lugar, escoltado por el subcampeón en la segunda casilla y cerrando el podio con el tercer puesto del torneo.",
+                    "Agradecemos la participación de todos los competidores y les invitamos a mantenerse atentos a las próximas ediciones."
+                ]
+            },
+            2: {
+                tag: "Brawl Stars Oficial",
+                title: "El sistema Camino Starr será reemplazado por una nueva mecánica llamada Brawler Blast",
+                hero: "news/novedades2sep2.jpg",
+                paragraphs: [
+                    "El sistema Camino Starr será reemplazado por una nueva mecánica llamada Brawler Blast. Con este cambio, al reunir la cantidad de créditos requerida, se desbloqueará un personaje de manera aleatoria dentro de una determinada rareza, otorgando además progresión extra para dicho personaje.",
+                    "Al conseguir los créditos necesarios, se abrirá una pantalla especial donde se mostrarán los personajes disponibles. Al tocar la pantalla, las opciones se irán eliminando una a una hasta revelar al personaje obtenido.",
+                    "Cada descarte otorgará fragmentos de gemas que se convertirán directamente en mejoras para el personaje, como puntos de fuerza, gadgets, habilidades estelares, engranajes o hipercargas. Siempre se asegurará al menos un nivel de fuerza, con la posibilidad de obtener un personaje mejorado al máximo.",
+                    "Cuando se añada un nuevo personaje al juego, este se sumará a la lista de su respectiva rareza y podrá aparecer en Brawler Blast, aunque no se podrá priorizar su desbloqueo inmediato.",
+                    "Asimismo, el veintinueve de agosto se entregarán mil quinientos créditos como compensación por los ajustes en el sistema. Los jugadores podrán decidir si utilizar estos créditos antes de la actualización para conseguir el personaje que estén desbloqueando actualmente o guardarlos para el nuevo sistema aleatorio."
+                ]
+            }
+        };
+
+        const detailOverlay = document.getElementById("novedadDetail");
+        const detailBack = document.getElementById("novedadDetailBack");
+        const detailHero = document.getElementById("novedadDetailHero");
+        const detailTag = document.getElementById("novedadDetailTag");
+        const detailTitle = document.getElementById("novedadDetailTitle");
+        const detailBody = document.getElementById("novedadDetailBody");
+
+        function openDetail(index) {
+            const data = NOVEDAD_DETAILS[index];
+            if (!data) return;
+            clearTimer(); // pausar el carrusel de novedades mientras se lee el detalle
+            detailHero.src = data.hero;
+            detailTag.textContent = data.tag;
+            detailTitle.textContent = data.title;
+            detailBody.innerHTML = data.paragraphs.map(p => `<p>${p}</p>`).join("");
+            detailOverlay.classList.add("active");
+            detailOverlay.scrollTop = 0;
+            document.body.style.overflow = "hidden";
+            zcPlaySound("entrar");
+        }
+
+        function closeDetail() {
+            detailOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+            zcPlaySound("salir");
+            scheduleNext(); // reanudar el carrusel de novedades
+        }
+
+        document.querySelectorAll("[data-open-novedad]").forEach(el => {
+            el.addEventListener("click", () => {
+                const idx = parseInt(el.getAttribute("data-open-novedad"), 10);
+                openDetail(idx);
+            });
+        });
+
+        detailBack.addEventListener("click", closeDetail);
+    })();
 </script>
 </body>
 </html>
