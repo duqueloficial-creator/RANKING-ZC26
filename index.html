@@ -30,6 +30,14 @@
             scroll-behavior: smooth;
             scroll-padding-top: 76px;
             scrollbar-gutter: stable;
+            background: #0a0a0a;
+            scrollbar-width: none; /* Firefox: oculta la barra de scroll */
+            -ms-overflow-style: none; /* Edge/IE: oculta la barra de scroll */
+        }
+        html::-webkit-scrollbar {
+            display: none; /* Chrome/Safari/Opera: oculta la barra de scroll */
+            width: 0;
+            height: 0;
         }
         body {
             min-height: 100vh;
@@ -37,6 +45,13 @@
             color: #ffffff;
             overflow-x: hidden;
             padding: 20px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
         }
         .page {
             width: 100%;
@@ -1637,11 +1652,6 @@
             background: rgba(0,0,0,0.2);
             border-radius: 16px;
             padding: 10px;
-        }
-        #rankingList {
-            overflow-y: auto;
-            max-height: 520px;
-            -webkit-overflow-scrolling: touch;
         }
 
         /* Ranking */
@@ -3524,6 +3534,82 @@
             display: block;
             flex-shrink: 0;
         }
+        .zcf-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .zcf-title-left {
+            text-align: left;
+        }
+        .zcf-subtitle-left {
+            text-align: left;
+            margin-top: -10px;
+        }
+        .zcf-btn-icon-only {
+            flex-shrink: 0;
+        }
+        .zcf-btn-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 4px;
+            border-radius: 50%;
+            background: #5aa9e6;
+            color: #ffffff;
+            font-size: 0.62rem;
+            font-weight: 800;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        /* ===================================================================
+           ZC26 · FAQ "¿Cómo se calcula la Clasificación?" (prefijo "zcelo-")
+        =================================================================== */
+        .zcelo-faq {
+            padding: 6px 2px 0;
+        }
+        .zcelo-faq-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .zcelo-faq-text {
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #b6bcc2;
+            margin-bottom: 10px;
+        }
+        .zcelo-faq-list {
+            margin: 0 0 14px;
+            padding-left: 18px;
+        }
+        .zcelo-faq-list li {
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #b6bcc2;
+            margin-bottom: 4px;
+        }
+        .zcelo-faq-link {
+            display: inline-block;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: #5aa9e6;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: left;
+        }
+        .zcelo-faq-link:hover {
+            color: #7cc0f5;
+        }
         .zcf-overlay {
             position: fixed;
             top: 0;
@@ -3805,6 +3891,14 @@
         /* ===================================================================
            ZC26 · Última Clasificación (bloque independiente, prefijo "zclc-")
         =================================================================== */
+        .zclc-title-lg {
+            font-size: 1.3rem;
+            text-align: left;
+        }
+        .zclc-subtitle-left {
+            text-align: left;
+            margin-top: -10px;
+        }
         .zclc-wrap {
             position: relative;
         }
@@ -4559,6 +4653,50 @@
             padding-right: 6px;
             padding-top: 4px;
         }
+        .novedad-detail-body h4 {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 26px 0 12px;
+            letter-spacing: 0.3px;
+        }
+        .novedad-detail-body ul,
+        .novedad-detail-body ol {
+            margin: 0 0 16px;
+            padding-left: 20px;
+        }
+        .novedad-detail-body li {
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: #D9E1E8;
+            margin-bottom: 8px;
+        }
+        .novedad-detail-body li ul {
+            margin: 6px 0 0;
+        }
+        .novedad-detail-body li li {
+            font-size: 13.5px;
+            color: #b9c3cc;
+            margin-bottom: 5px;
+        }
+        .novedad-detail-formula {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin: 6px 0 18px;
+            font-size: 14.5px;
+            color: #f0c94a;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            overflow-x: auto;
+        }
+        .novedad-detail-note {
+            font-size: 13px;
+            color: #999999;
+            line-height: 1.6;
+            margin: -8px 0 18px;
+        }
 
         /* Selector de idioma */
         .lang-switcher {
@@ -4794,9 +4932,6 @@
                 height: 30px;
                 font-size: 0.72rem;
             }
-            #rankingList {
-                max-height: 600px;
-            }
 
             /* Paneles/modales un poco más amplios y cómodos de leer */
             .info-panel {
@@ -4980,9 +5115,6 @@
                 width: 34px;
                 height: 34px;
                 font-size: 0.76rem;
-            }
-            #rankingList {
-                max-height: 680px;
             }
 
             /* Salón de la fama: aún más trofeos por fila en escritorio */
@@ -5316,6 +5448,90 @@
             <div class="novedad-detail-tag" id="novedadDetailTag"></div>
             <div class="novedad-detail-title" id="novedadDetailTitle"></div>
             <div class="novedad-detail-body" id="novedadDetailBody"></div>
+        </div>
+    </div>
+
+    <!-- ===================== ELO DETAIL OVERLAY ===================== -->
+    <div class="novedad-detail" id="eloDetail">
+        <div class="novedad-detail-back" id="eloDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag">ZC26 ESPORTS™</div>
+            <div class="novedad-detail-title">¿Cómo se calcula la Clasificación?</div>
+            <div class="novedad-detail-body">
+                <p>El nuevo modelo para calcular el Ranking Mundial de Brawl Stars (BWR) fue desarrollado tras analizar el rendimiento de los equipos en modos 1v1 y 3v3 durante múltiples temporadas, probando y discutiendo diversos algoritmos.</p>
+                <p>El objetivo principal es contar con un sistema intuitivo, transparente y preciso para medir la fuerza real de los jugadores y clubes en la escena competitiva, garantizando oportunidades equitativas para que las organizaciones de todas las regiones (LATAM, Europa, NA, Asia, etc.) asciendan en la tabla global.</p>
+
+                <h4>Sobre la nueva fórmula</h4>
+                <p>El método Elo suma o resta puntos al total acumulado de cada jugador o equipo en función de los resultados de sus partidas (en lugar de promediar). Los puntos ganados o perdidos se determinan según el nivel del rival, garantizando que vencer a un equipo o jugador de rango superior otorgue una recompensa significativamente mayor.</p>
+                <p>La FIFA adaptó este formato bajo el nombre de algoritmo "SUMA", el cual adaptamos directamente para los formatos 1v1 (Duels / Duelos) y 3v3 (Atrapagemas, Balón Brawl, Zona Restringida, Caza de Gemas, etc.):</p>
+                <ul>
+                    <li>Ajuste de ponderación por tipo de evento:
+                        <ul>
+                            <li>Menor impacto en partidas de exhibición o scrims oficiales; mayor impacto en fases finales de torneos Mayor/Championship.</li>
+                            <li>Mayor valor a las rondas de eliminación directa (Playoffs) frente a las fases de grupos o clasificatorias abiertas.</li>
+                        </ul>
+                    </li>
+                    <li>Exención de penalización: sin pérdida de puntos al ser eliminado en las rondas finales K.O. de eventos presenciales o Majors.</li>
+                </ul>
+
+                <h4>La fórmula base</h4>
+                <p>La fórmula base del algoritmo SUMA es:</p>
+                <div class="novedad-detail-formula">P = P_antes + I × (W − We)</div>
+                <ul>
+                    <li><b>P_antes:</b> puntos del jugador o equipo antes del set/partida.</li>
+                    <li><b>I:</b> importancia del torneo o enfrentamiento:
+                        <ul>
+                            <li>I = 05 — Showmatches o partidas de exhibición sin invitación oficial</li>
+                            <li>I = 10 — Partidas de exhibición / Scrims oficiales transmitidas</li>
+                            <li>I = 15 — Fase de grupos de Ligas Regionales Semiprofesionales</li>
+                            <li>I = 25 — Playoffs y Finales de Ligas Regionales</li>
+                            <li>I = 25 — Clasificatorias Abiertas (Open Qualifiers) a Torneos Majors o BSC (Brawl Stars Championship)</li>
+                            <li>I = 35 — Fase de grupos de Torneos Internacionales / Majors hasta cuartos de final</li>
+                            <li>I = 40 — Fase de grupos de Torneos Internacionales desde cuartos de final en adelante</li>
+                            <li>I = 50 — Fase final del Mundial / World Finals hasta cuartos de final</li>
+                            <li>I = 60 — Fase final del Mundial / World Finals desde cuartos de final hasta la Gran Final</li>
+                        </ul>
+                    </li>
+                    <li><b>W:</b> resultado del set/partida — 1 = victoria clara (ej. 2-0 o 3-0 en sets); 0.5 = empate/desempate por objetivos; 0 = derrota.</li>
+                    <li><b>We:</b> resultado esperado según la diferencia de nivel, calculado como:</li>
+                </ul>
+                <div class="novedad-detail-formula">We = 1 / (10^(−dr/600) + 1)</div>
+                <p class="novedad-detail-note">Donde dr es la diferencia de puntos entre ambos competidores: dr = [P_antes del Equipo A − P_antes del Equipo B].</p>
+
+                <p><b>Ejemplo:</b> el Equipo A tiene 1300 puntos y vence en una Clasificatoria Abierta al Equipo B, que tiene 1500 puntos.</p>
+                <ul>
+                    <li>Equipo A: P = 1300 + 25 × (1 − (1 / (10^(−(1300−1500)/600) + 1)))</li>
+                    <li>Equipo B: P = 1500 + 25 × (0 − (1 / (10^(−(1500−1300)/600) + 1)))</li>
+                </ul>
+                <p class="novedad-detail-note">Resultado: el Equipo A suma 17 puntos (P = 1317) y el Equipo B pierde 17 puntos (P = 1483).</p>
+
+                <h4>Reglas especiales para el competitivo de Brawl Stars</h4>
+                <ul>
+                    <li>Sets ajustados (Bracket de Perdedores / Tiebreaker): un set decidido en la última partida decisiva (ej. 2-1 en sets o en tiempo suplementario de Balón Brawl) otorga un valor de victoria parcial para el ganador y no penaliza severamente al perdedor. Si el set se decide en Tiebreaker estricto: W del equipo ganador = 0.75, W del equipo perdedor = 0.5.</li>
+                    <li>Protección en Knockout de Finals: los equipos eliminados en los Brackets de Eliminación Directa de un torneo presencial o Major no pierden puntos de ranking, incluso frente a un rival de menor puntaje (si W − We es menor que 0, entonces P = P_antes). Esto protege el esfuerzo de los equipos por haber clasificado a las etapas finales presenciales.</li>
+                </ul>
+
+                <h4>Proceso de conversión inicial (Seeding de Temporada)</h4>
+                <p>Para iniciar una nueva temporada competitiva, los equipos y jugadores se posicionan de forma homogénea en una escala de 800 a 1600 puntos según sus resultados del año anterior. La diferencia base entre cada puesto del ranking es de 4 puntos.</p>
+                <div class="novedad-detail-formula">P_inicial = 1600 − (R − 1) × 4</div>
+                <ul>
+                    <li>Top 1 Global (Sembrado #1): P_inicial = 1600</li>
+                    <li>Sembrado #3: P_inicial = 1592</li>
+                    <li>Sembrado #100: P_inicial = 1204</li>
+                    <li>Sembrado #200: P_inicial = 804</li>
+                </ul>
+
+                <h4>Beneficios para el ecosistema Esports de Brawl Stars</h4>
+                <ol>
+                    <li>Premia el rendimiento constante: elimina el estancamiento de puntos y permite que las sorpresas (upsets) de equipos emergentes en modos 1v1 o 3v3 se reflejen de inmediato en la tabla general.</li>
+                    <li>Cero penalizaciones por inactividad injusta: el ranking no degrada puntos artificialmente por el paso del tiempo, eliminando la necesidad de competir en eventos menores solo para "mantener la posición".</li>
+                    <li>Balance global interregional: elimina el sesgo regional. Un equipo de LATAM o Asia tiene exactamente la misma oportunidad de escalar al Top 1 Global que un equipo de Europa o Norteamérica al ganar torneos de similar categoría.</li>
+                    <li>Claridad en la selección de Seeds: permite a los organizadores de torneos (TOs) sembrar los brackets de torneos 1v1 y 3v3 de forma justa, evitando cruces de alto nivel en las primeras rondas de una clasificatoria.</li>
+                </ol>
+            </div>
         </div>
     </div>
 
@@ -6148,15 +6364,29 @@
         </div>
     </div>
 
+    <!-- ===================================================================
+         ZC26 · Última Clasificación (bloque independiente, prefijo "zclc-")
+         Carrusel horizontal con lo más destacado del ranking actual.
+    =================================================================== -->
+    <div class="section-block" id="ultima-clasificacion">
+        <div class="section-title zclc-title-lg">Última Clasificación</div>
+        <div class="section-subtitle zclc-subtitle-left">Lo más destacado del ranking</div>
+        <div class="zclc-wrap">
+            <div class="zclc-scroll" id="zclcScroll"></div>
+            <div class="zc-hbar" id="zclcTrack"><div class="zc-hbar-thumb" id="zclcThumb"></div></div>
+        </div>
+    </div>
+
     <div class="section-block" id="ranking">
-        <div class="section-title zcf-title-lg">RANKING</div>
-        <div class="section-subtitle">Se actualiza con cada torneo de ZC26</div>
-        <div class="zcf-btn-row">
-            <button type="button" class="zcf-btn" id="zcfOpenBtn">
+        <div class="zcf-header-row">
+            <div class="section-title zcf-title-lg zcf-title-left">Leaderboard</div>
+            <button type="button" class="zcf-btn zcf-btn-icon-only" id="zcfOpenBtn">
                 <img src="Untitled260.png" alt="" class="zcf-btn-icon" onerror="this.style.display='none'">
-                <span>Filtro</span>
+                <span>Filtros</span>
+                <span class="zcf-btn-count" id="zcfFilterCount" style="display:none;">0</span>
             </button>
         </div>
+        <div class="section-subtitle zcf-subtitle-left">Se actualiza con cada torneo de ZC26</div>
 
         <!-- ===================================================================
              ZC26 · Menú de Filtros (bloque HTML independiente, prefijo "zcf-")
@@ -6243,18 +6473,21 @@
             </button>
         </div>
         <div class="section-updated">Última actualización: 30 agosto, 2026</div>
-    </div>
+        <div class="section-updated">Próxima actualización oficial: 25 septiembre 2026</div>
 
-    <!-- ===================================================================
-         ZC26 · Última Clasificación (bloque independiente, prefijo "zclc-")
-         Carrusel horizontal con lo más destacado del ranking actual.
-    =================================================================== -->
-    <div class="section-block" id="ultima-clasificacion">
-        <div class="section-title">Última Clasificación</div>
-        <div class="section-subtitle">Lo más destacado del ranking</div>
-        <div class="zclc-wrap">
-            <div class="zclc-scroll" id="zclcScroll"></div>
-            <div class="zc-hbar" id="zclcTrack"><div class="zc-hbar-thumb" id="zclcThumb"></div></div>
+        <!-- ===================================================================
+             ZC26 · FAQ "¿Cómo se calcula la Clasificación?" (prefijo "zcelo-")
+        =================================================================== -->
+        <div class="zcelo-faq">
+            <div class="zcelo-faq-title">¿Cómo se calcula la Clasificación?</div>
+            <p class="zcelo-faq-text">La Clasificación ZC26 se determina utilizando el Modelo Elo. Este método suma o resta puntos por partidos al total de puntos existente de un equipo. Los puntos que se suman o restan vienen determinados en parte por:</p>
+            <ul class="zcelo-faq-list">
+                <li>Nivel relativo del jugador</li>
+                <li>Importancia del partido</li>
+                <li>Resultado del partido</li>
+                <li>Resultado esperado del partido</li>
+            </ul>
+            <button type="button" class="zcelo-faq-link" id="zceloOpenBtn">Más información sobre cómo se calcula la Clasificación</button>
         </div>
     </div>
 
@@ -6416,20 +6649,20 @@
         if (!zcMuted) zcPlaySound("click");
     }
     const FLAGS = {
-        ES: { file: "72px-Es_hd.png", name: "España", region: "EMEA (Europe, Middle East & Africa)" },
-        PE: { file: "72px-Pe_hd.png", name: "Perú", region: "South America" },
-        GT: { file: "72px-Gt_hd.png", name: "Guatemala", region: "North America" },
-        MX: { file: "72px-Mx_hd.png", name: "México", region: "North America" },
-        AR: { file: "72px-Ar_hd.png", name: "Argentina", region: "South America" },
-        CL: { file: "72px-Cl_hd.png", name: "Chile", region: "South America" },
-        CO: { file: "72px-Co_hd.png", name: "Colombia", region: "South America" },
-        BR: { file: "72px-Br_hd.png", name: "Brasil", region: "South America" },
-        ECU: { file: "ECU.png", name: "Ecuador", region: "South America" },
-        BOL: { file: "BOL.png", name: "Bolivia", region: "South America" },
-        SLV: { file: "SLV.png", name: "El Salvador", region: "North America" },
-        GHA: { file: "GHA.png", name: "Ghana", region: "EMEA (Europe, Middle East & Africa)" },
-        VEN: { file: "VEN.png", name: "Venezuela", region: "South America" },
-        HON: { file: "HON.png", name: "Honduras", region: "North America" }
+        ES: { file: "72px-Es_hd.png", name: "España", region: "EMEA (Europa, Medio Oriente y África)" },
+        PE: { file: "72px-Pe_hd.png", name: "Perú", region: "Sudamérica" },
+        GT: { file: "72px-Gt_hd.png", name: "Guatemala", region: "Norteamérica" },
+        MX: { file: "72px-Mx_hd.png", name: "México", region: "Norteamérica" },
+        AR: { file: "72px-Ar_hd.png", name: "Argentina", region: "Sudamérica" },
+        CL: { file: "72px-Cl_hd.png", name: "Chile", region: "Sudamérica" },
+        CO: { file: "72px-Co_hd.png", name: "Colombia", region: "Sudamérica" },
+        BR: { file: "72px-Br_hd.png", name: "Brasil", region: "Sudamérica" },
+        ECU: { file: "ECU.png", name: "Ecuador", region: "Sudamérica" },
+        BOL: { file: "BOL.png", name: "Bolivia", region: "Sudamérica" },
+        SLV: { file: "SLV.png", name: "El Salvador", region: "Norteamérica" },
+        GHA: { file: "GHA.png", name: "Ghana", region: "EMEA (Europa, Medio Oriente y África)" },
+        VEN: { file: "VEN.png", name: "Venezuela", region: "Sudamérica" },
+        HON: { file: "HON.png", name: "Honduras", region: "Norteamérica" }
     };
 
     const PLAYERS = [
@@ -7360,15 +7593,15 @@
     };
     function getRankTier(pos) {
         if (pos <= 7) {
-            return { label: "Combat Grandmaster", icon: ZC_RANK_ICONS.pro, kind: "pro" };
+            return { label: "Immortal Combat", icon: ZC_RANK_ICONS.pro, kind: "pro" };
         }
         if (pos <= 37) {
-            return { label: "Combat Master", icon: ZC_RANK_ICONS.master, kind: "master" };
+            return { label: "Master Combat", icon: ZC_RANK_ICONS.master, kind: "master" };
         }
         if (pos <= 97) {
-            return { label: "Combat Ace", icon: ZC_RANK_ICONS.legendary, kind: "legendary" };
+            return { label: "As Combat", icon: ZC_RANK_ICONS.legendary, kind: "legendary" };
         }
-        return { label: "Mythic Rank", icon: ZC_RANK_ICONS.mythic, kind: "mythic" };
+        return { label: "Rango Mítico", icon: ZC_RANK_ICONS.mythic, kind: "mythic" };
     }
     const ZC_REGION_BY_COUNTRY = {
         AR: "SA", BOL: "SA", BR: "SA", CL: "SA", CO: "SA", ECU: "SA", PE: "SA", VEN: "SA",
@@ -7590,12 +7823,12 @@
     }
 
     function zcfGetRegionCode(country) {
-        const region = (typeof FLAGS !== "undefined" && FLAGS[country] && FLAGS[country].region) || "";
-        if (region.indexOf("North America") === 0) return "NA";
-        if (region.indexOf("South America") === 0) return "SA";
-        if (region.indexOf("EMEA") === 0) return "EMEA";
-        if (region.indexOf("Asia") === 0) return "ASIA";
-        return "OTHER";
+        // Usa el mismo mapeo país → región que el resto del sitio (getRegion),
+        // en vez de comparar contra el texto de FLAGS[country].region, que está
+        // en español ("Norteamérica", "Sudamérica") y nunca coincidía con
+        // "North America"/"South America", dejando NA y SA sin funcionar.
+        const region = getRegion(country);
+        return (region === "NA" || region === "SA" || region === "EMEA" || region === "ASIA") ? region : "OTHER";
     }
 
     function zcfPlayerMatchesQuery(p, nq) {
@@ -7976,7 +8209,21 @@
     let rankingExpanded = false;
     const RANKING_TOP_COUNT = 10;
 
+    function zcfUpdateFilterCount() {
+        const badge = document.getElementById("zcfFilterCount");
+        if (!badge) return;
+        const count = zcfSelectedRegions.size + zcfSelectedCountries.size + zcfSelectedActivity.size
+            + zcfSelectedMovement.size + zcfSelectedAchievements.size + (zcfSearchQuery.trim() ? 1 : 0);
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = "inline-flex";
+        } else {
+            badge.style.display = "none";
+        }
+    }
+
     function renderRanking() {
+        zcfUpdateFilterCount();
         const list = document.getElementById("rankingList");
         const rankToggleWrap = document.querySelector("#ranking .rank-toggle-wrap");
         const zcfActive = typeof zcfIsFilterActive === "function" && zcfIsFilterActive();
@@ -9113,6 +9360,26 @@
     renderContributions();
     renderLastClassification();
     zcfInit();
+
+    // ZC26 · Overlay "¿Cómo se calcula la Clasificación?" (prefijo "zcelo-")
+    const zceloOpenBtn = document.getElementById("zceloOpenBtn");
+    const eloDetail = document.getElementById("eloDetail");
+    const eloDetailBack = document.getElementById("eloDetailBack");
+    if (zceloOpenBtn && eloDetail) {
+        zceloOpenBtn.addEventListener("click", () => {
+            eloDetail.classList.add("active");
+            eloDetail.scrollTop = 0;
+            document.body.style.overflow = "hidden";
+            zcPlaySound("entrar");
+        });
+    }
+    if (eloDetailBack && eloDetail) {
+        eloDetailBack.addEventListener("click", () => {
+            eloDetail.classList.remove("active");
+            document.body.style.overflow = "";
+            zcPlaySound("salir");
+        });
+    }
 
     const rankToggleBtn = document.getElementById("rankToggleBtn");
     const rankToggleIcon = document.getElementById("rankToggleIcon");
