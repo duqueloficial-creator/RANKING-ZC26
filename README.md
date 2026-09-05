@@ -1,58 +1,41 @@
-# ZC26 — README
+# ZC26 — sitio dividido en varias páginas
 
-**ZC26. Todos los derechos reservados.**
+## Qué cambió
+- `index.html` ahora solo contiene el header, el menú, el selector de idioma y la sección **Home**. Antes tenía las 5 secciones a la vez (10.7k líneas); ahora tiene 420.
+- Cada categoría vive en su propio archivo dentro de `/page/`:
+  - `page/lastgame.html` → Último partido
+  - `page/ranking.html` → Ranking
+  - `page/partners.html` → Partners
+  - `page/hall-of-fame.html` → Salón de la fama (incluye el pie de página / créditos)
+- El CSS se movió a `css/style.css` y el JS a `js/app.js`. Los 5 archivos HTML cargan estos dos mismos archivos, así que el navegador los descarga una sola vez y los reutiliza en el resto de páginas (se guardan en caché).
+- El menú, el botón de sonido y el selector de idioma están en las 5 páginas de forma idéntica, y su estado se guarda en `localStorage`, por eso se mantienen activos aunque cambies de página (esto ya lo hacía tu código original, no tuve que tocarlo).
+- Cada página marca como "activa" la pestaña que le corresponde, de forma fija (ya no hace falta JavaScript para eso).
 
-ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de **Brawl Stars**.
+## Por qué todavía comparten CSS y JS
+Revisé las 4.180 líneas de JavaScript: el ranking, el salón de la fama y el partido usan variables y datos compartidos (por ejemplo el arreglo `PLAYERS`, el sistema de sonidos, los modales de jugador/trofeo). Separar ese JS por página sin poder probarlo en un navegador real habría sido arriesgado — podía romper cosas silenciosamente. Por eso lo dejé como un solo `app.js` compartido: es 100% el mismo código que ya tenías, solo que ahora vive en un archivo aparte y cada página descarga únicamente el HTML de su propia sección (que es lo que más pesaba). Si más adelante quieres separar el JS también, puedo ayudarte, pero requeriría poder probarlo paso a paso.
 
-> **Aviso:** ZC26 no está afiliada, patrocinada ni respaldada por Supercell. Todos los nombres, marcas registradas, personajes, recursos e imágenes relacionados con el juego pertenecen exclusivamente a sus respectivos creadores y propietarios.
+## Carpetas de imágenes/sonidos — no las toqué
+Como solo subiste el `index.html`, este paquete NO incluye tus carpetas de imágenes, sonidos e idiomas (`news/`, `clip/`, `historiasdestacadas/`, `sound/`, `idioma/`, y las imágenes sueltas de la raíz). Cópialas tal cual las tienes ahora, en la **raíz del proyecto**, junto a este nuevo `index.html`. Las rutas siguen funcionando gracias a `<base href="../">` en los archivos dentro de `/page/`.
 
-## Organización
+## Estructura final que debes subir a GitHub
+```
+tu-repo/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── app.js
+├── page/
+│   ├── lastgame.html
+│   ├── ranking.html
+│   ├── partners.html
+│   └── hall-of-fame.html
+├── news/              ← tus carpetas existentes, sin cambios
+├── clip/
+├── historiasdestacadas/
+├── sound/
+├── idioma/
+└── (resto de imágenes sueltas: LEV.png, Untitled257.jpg, etc.)
+```
 
-**ZC26 BSC — Brawl Stars Championship**
-
-### Contacto
-
-* **Contacto comercial y soporte:** [zc26.esports.official@gmail.com](mailto:zc26.esports.official@gmail.com)
-* **Discord:**
- https://discord.gg/jfDvXrQ2fu
-* **TikTok:**
- https://www.tiktok.com/@zc.esports
-* **YouTube:**
- https://www.youtube.com/@ZC26eSports
-* **PayPal:**
- https://www.paypal.me/ZCESportsPayPal
-
-## Apoya a ZC26
-
-¿Quieres apoyar el proyecto?
-
-Puedes realizar una donación desde **$1 USD** a través de PayPal. Las donaciones pueden otorgar beneficios dentro de la comunidad.
-
-## Modificación de datos
-
-Si deseas solicitar una modificación o corrección de tu información dentro de la página, como:
-
-* Nombre
-* Región
-* Fecha de nacimiento
-* Apodo
-* Redes sociales
-* Otros datos asociados a tu perfil
-
-Por favor, ponte en contacto con nosotros mediante los medios oficiales indicados anteriormente.
-
-## Marcadores
-
-**ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)**
-
-## Términos de uso
-
-Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa.
-
-No está permitido **redistribuir, copiar, modificar o reutilizar** el contenido original sin autorización expresa de ZC26.
-
-La información proporcionada se ofrece sin garantías y puede ser modificada, actualizada o retirada sin previo aviso.
-
-### Copyright
-
-**Copyright © ZC ESPORTS 2026. Todos los derechos reservados.**
+Todo sigue siendo 100% offline: sin base de datos, sin `fetch`, sin backend. Funciona igual abriendo `index.html` con doble clic o publicado en GitHub Pages.
