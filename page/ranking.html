@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <title>ZC26 - Ranking</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="site-header" id="top">
+    <div class="site-header-inner">
+        <div class="site-header-brand">
+            <img src="Untitled257.jpg" alt="ZC26 ESPORTS" class="site-header-title-img">
+        </div>
+        <button class="menu-toggle" id="menuToggle" data-i18n-aria="aria.openMenu" data-i18n-aria-default="Abrir menú" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</div>
+
+<div class="section-tabs-wrapper" id="sectionTabsWrapper">
+    <div class="section-tabs" id="sectionTabs">
+        <a href="index.html" class="section-tab " data-section-tab="inicio" data-i18n="nav.home" data-i18n-default="Home">Home</a>
+        <a href="page/lastgame.html" class="section-tab " data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
+        <a href="page/ranking.html" class="section-tab active" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
+        <a href="page/partners.html" class="section-tab " data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
+        <a href="page/hall-of-fame.html" class="section-tab " data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
+    </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-topbar">
+        <div class="lang-switcher" id="langSwitcher">
+            <button type="button" class="lang-toggle-btn" id="langToggleBtn" aria-haspopup="true" aria-expanded="false">
+                <img src="language.png" alt="">
+                <span id="langToggleLabel">Español</span>
+                <svg class="lang-toggle-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="lang-dropdown" id="langDropdown" role="menu">
+                <button type="button" class="lang-option" data-lang="en" role="menuitem">
+                    <span>English</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="lang-option" data-lang="es-es" role="menuitem">
+                    <span>Español (España)</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="lang-option active" data-lang="es-la" role="menuitem">
+                    <span>Español (Latinoamérica)</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="lang-option" data-lang="pt" role="menuitem">
+                    <span>Português</span>
+                    <svg class="lang-option-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+        </div>
+        <button type="button" class="mobile-menu-mute" id="soundMuteBtn" data-i18n-aria="aria.muteSounds" data-i18n-aria-default="Silenciar sonidos" aria-label="Silenciar sonidos">
+            <img src="sound_offmuted.png" id="soundMuteIcon" alt="Sonido">
+        </button>
+    </div>
+    <div class="mobile-menu-links">
+        <a href="index.html" class="mobile-menu-link" data-menu-link data-i18n="nav.home.upper" data-i18n-default="HOME">HOME</a>
+        <a href="page/lastgame.html" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
+        <a href="page/ranking.html" class="mobile-menu-link" data-menu-link data-i18n="nav.ranking.upper" data-i18n-default="RANKING">RANKING</a>
+        <a href="page/partners.html" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
+        <a href="page/hall-of-fame.html" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
+        <a href="page/hall-of-fame.html#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
+    </div>
+    <div class="mobile-menu-bottom">
+        <div class="mobile-menu-more-label" data-i18n="menu.moreLabel" data-i18n-default="MÁS ZC26">MÁS ZC26</div>
+        <div class="mobile-menu-social">
+            <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="mobile-menu-social-link">TikTok<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="mobile-menu-social-link">Discord<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="mobile-menu-social-link">YouTube<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="mailto:zc26.esports.official@gmail.com" class="mobile-menu-social-link">Gmail<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+            <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="mobile-menu-social-link">PayPal<img src="reenviar.png" class="mobile-menu-social-icon" alt=""></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="page">
+
+    <div class="section-block" id="ranking">
+        <div class="zcf-header-row">
+            <div class="section-title zcf-title-lg zcf-title-left">Leaderboard</div>
+            <button type="button" class="zcf-btn zcf-btn-icon-only" id="zcfOpenBtn">
+                <img src="Untitled260.png" alt="" class="zcf-btn-icon" onerror="this.style.display='none'">
+                <span>Filtros</span>
+                <span class="zcf-btn-count" id="zcfFilterCount" style="display:none;">0</span>
+            </button>
+        </div>
+        <div class="section-subtitle zcf-subtitle-left">Se actualiza con cada torneo de ZC26</div>
+
+        <!-- ===================================================================
+             ZC26 · Menú de Filtros (bloque HTML independiente, prefijo "zcf-")
+             Se abre como una hoja que sube desde abajo de la página (overlay,
+             igual que el menú de 3 rayas) en móvil, tablet y escritorio.
+        =================================================================== -->
+        <div class="zcf-overlay" id="zcfOverlay">
+            <div class="zcf-panel" id="zcfPanel">
+                <div class="zcf-panel-head">
+                    <div class="zcf-panel-title">Filtros</div>
+                    <div class="zcf-head-actions">
+                        <button type="button" class="zcf-reset-btn" id="zcfResetBtn">Restablecer filtros</button>
+                        <span class="zcf-close-x" id="zcfCloseBtn">✕</span>
+                    </div>
+                </div>
+
+                <div class="zcf-section-label">Jugador</div>
+                <div class="zcf-search-wrap" id="zcfSearchWrap">
+                    <input type="text" id="zcfSearchInput" class="zcf-search-input" placeholder="Buscar por nombre, ID o país..." autocomplete="off" spellcheck="false">
+                    <div class="zcf-suggestions" id="zcfSuggestions"></div>
+                </div>
+
+                <div class="zcf-fields-grid" id="zcfFieldsGrid">
+                    <div class="zcf-field zcf-field-region">
+                        <div class="zcf-section-label">Región</div>
+                        <div class="zcf-checkbox-group" id="zcfRegionGroup">
+                            <label class="zcf-checkbox-item" data-region="NA"><span class="zcf-checkbox-box"></span>NA</label>
+                            <label class="zcf-checkbox-item" data-region="SA"><span class="zcf-checkbox-box"></span>SA</label>
+                            <label class="zcf-checkbox-item" data-region="EMEA"><span class="zcf-checkbox-box"></span>EMEA</label>
+                            <label class="zcf-checkbox-item" data-region="ASIA"><span class="zcf-checkbox-box"></span>ASIA</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-country">
+                        <div class="zcf-section-label">País</div>
+                        <div class="zcf-country-scroll" id="zcfCountryScroll"></div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-order">
+                        <div class="zcf-section-label">Orden</div>
+                        <div class="zcf-checkbox-group" id="zcfOrderGroup">
+                            <label class="zcf-checkbox-item" data-order="desc"><span class="zcf-checkbox-box"></span>Mayor a menor</label>
+                            <label class="zcf-checkbox-item" data-order="asc"><span class="zcf-checkbox-box"></span>Menor a mayor</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-activity">
+                        <div class="zcf-section-label">Actividad</div>
+                        <div class="zcf-checkbox-group" id="zcfActivityGroup">
+                            <label class="zcf-checkbox-item" data-activity="Activo"><span class="zcf-checkbox-box"></span>Activo</label>
+                            <label class="zcf-checkbox-item" data-activity="Inactivo"><span class="zcf-checkbox-box"></span>Inactivo</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-movement">
+                        <div class="zcf-section-label">Movimiento</div>
+                        <div class="zcf-checkbox-group" id="zcfMovementGroup">
+                            <label class="zcf-checkbox-item" data-movement="up"><span class="zcf-checkbox-box"></span>Subida</label>
+                            <label class="zcf-checkbox-item" data-movement="down"><span class="zcf-checkbox-box"></span>Descenso</label>
+                            <label class="zcf-checkbox-item" data-movement="new"><span class="zcf-checkbox-box"></span>Nuevo</label>
+                            <label class="zcf-checkbox-item" data-movement="same"><span class="zcf-checkbox-box"></span>Nada</label>
+                        </div>
+                    </div>
+
+                    <div class="zcf-field zcf-field-achievement">
+                        <div class="zcf-section-label">Logros</div>
+                        <div class="zcf-checkbox-group" id="zcfAchievementGroup">
+                            <label class="zcf-checkbox-item" data-achievement="champion"><span class="zcf-checkbox-box"></span>Champion</label>
+                            <label class="zcf-checkbox-item" data-achievement="runner-up"><span class="zcf-checkbox-box"></span>2nd Runner-Up</label>
+                            <label class="zcf-checkbox-item" data-achievement="3rd-4th"><span class="zcf-checkbox-box"></span>3rd-4th Place</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="zcf-no-results" id="zcfNoResults" style="display:none;">No se encontró ningún jugador.</div>
+            </div>
+        </div>
+
+        <div class="panel" id="rankingList"></div>
+        <div class="rank-toggle-wrap">
+            <button type="button" class="rank-toggle-btn" id="rankToggleBtn">
+                <img src="rankingopen.png" alt="" class="rank-toggle-icon" id="rankToggleIcon">
+                <span id="rankToggleLabel">Mostrar Clasificación completa</span>
+            </button>
+        </div>
+        <div class="section-updated">Última actualización: 30 agosto, 2026</div>
+        <div class="section-updated">Próxima actualización oficial: 25 septiembre 2026</div>
+
+        <!-- ===================================================================
+             ZC26 · FAQ "¿Cómo se calcula la Clasificación?" (prefijo "zcelo-")
+        =================================================================== -->
+        <div class="zcelo-faq">
+            <div class="zcelo-faq-title">¿Cómo se calcula la Clasificación?</div>
+            <p class="zcelo-faq-text">La Clasificación ZC26 se determina utilizando el Modelo Elo. Este método suma o resta puntos por partidos al total de puntos existente de un equipo. Los puntos que se suman o restan vienen determinados en parte por:</p>
+            <ul class="zcelo-faq-list">
+                <li>Nivel relativo del jugador</li>
+                <li>Importancia del partido</li>
+                <li>Resultado del partido</li>
+                <li>Resultado esperado del partido</li>
+            </ul>
+            <button type="button" class="zcelo-faq-link" id="zceloOpenBtn">Más información sobre cómo se calcula la Clasificación</button>
+        </div>
+    </div>
+
+
+    <!-- ===================== STORY VIEWER OVERLAY ===================== -->
+    <div class="story-viewer" id="storyViewer">
+        <div class="story-viewer-media" id="storyViewerMedia">
+            <div class="story-progress-row" id="storyProgressRow"></div>
+            <div class="story-viewer-top">
+                <div class="story-viewer-user">
+                    <span class="story-viewer-username" id="storyViewerUsername"></span>
+                    <div class="story-music-player" id="storyMusicPlayer">
+                        <img class="story-music-disc" src="songreproduction.png" alt="">
+                        <div class="story-music-track">
+                            <span class="story-music-name" id="storyMusicName"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="story-viewer-controls">
+                    <button type="button" class="story-viewer-btn" id="storyMuteBtn">
+                        <img id="storyMuteIcon" src="sound_offmuted.png" alt="Silenciar">
+                    </button>
+                    <button type="button" class="story-viewer-btn" id="storyCloseBtn">
+                        <img src="closeiconex.png" alt="Cerrar">
+                    </button>
+                </div>
+            </div>
+            <div class="story-tap-zones">
+                <div class="story-tap-zone" id="storyZoneBack"></div>
+                <div class="story-tap-zone" id="storyZoneNext"></div>
+            </div>
+            <a href="javascript:void(0);" target="_blank" rel="noopener noreferrer" class="story-cta-btn" id="storyCtaBtn"></a>
+        </div>
+    </div>
+
+    <!-- ===================== NOVEDAD DETAIL OVERLAY ===================== -->
+    <div class="novedad-detail" id="novedadDetail">
+        <div class="novedad-detail-back" id="novedadDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <img class="novedad-detail-hero" id="novedadDetailHero" src="" alt="">
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag" id="novedadDetailTag"></div>
+            <div class="novedad-detail-title" id="novedadDetailTitle"></div>
+            <div class="novedad-detail-body" id="novedadDetailBody"></div>
+        </div>
+    </div>
+
+    <!-- ===================== ELO DETAIL OVERLAY ===================== -->
+    <div class="novedad-detail" id="eloDetail">
+        <div class="novedad-detail-back" id="eloDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag">ZC26 ESPORTS™</div>
+            <div class="novedad-detail-title">¿Cómo se calcula la Clasificación?</div>
+            <div class="novedad-detail-body">
+                <p>El nuevo modelo para calcular el Ranking Mundial de Brawl Stars (BWR) fue desarrollado tras analizar el rendimiento de los equipos en modos 1v1 y 3v3 durante múltiples temporadas, probando y discutiendo diversos algoritmos.</p>
+                <p>El objetivo principal es contar con un sistema intuitivo, transparente y preciso para medir la fuerza real de los jugadores y clubes en la escena competitiva, garantizando oportunidades equitativas para que las organizaciones de todas las regiones (LATAM, Europa, NA, Asia, etc.) asciendan en la tabla global.</p>
+
+                <h4>Sobre la nueva fórmula</h4>
+                <p>El método Elo suma o resta puntos al total acumulado de cada jugador o equipo en función de los resultados de sus partidas (en lugar de promediar). Los puntos ganados o perdidos se determinan según el nivel del rival, garantizando que vencer a un equipo o jugador de rango superior otorgue una recompensa significativamente mayor.</p>
+                <p>La FIFA adaptó este formato bajo el nombre de algoritmo "SUMA", el cual adaptamos directamente para los formatos 1v1 (Duels / Duelos) y 3v3 (Atrapagemas, Balón Brawl, Zona Restringida, Caza de Gemas, etc.):</p>
+                <ul>
+                    <li>Ajuste de ponderación por tipo de evento:
+                        <ul>
+                            <li>Menor impacto en partidas de exhibición o scrims oficiales; mayor impacto en fases finales de torneos Mayor/Championship.</li>
+                            <li>Mayor valor a las rondas de eliminación directa (Playoffs) frente a las fases de grupos o clasificatorias abiertas.</li>
+                        </ul>
+                    </li>
+                    <li>Exención de penalización: sin pérdida de puntos al ser eliminado en las rondas finales K.O. de eventos presenciales o Majors.</li>
+                </ul>
+
+                <h4>La fórmula base</h4>
+                <p>La fórmula base del algoritmo SUMA es:</p>
+                <div class="novedad-detail-formula">P = P_antes + I × (W − We)</div>
+                <ul>
+                    <li><b>P_antes:</b> puntos del jugador o equipo antes del set/partida.</li>
+                    <li><b>I:</b> importancia del torneo o enfrentamiento:
+                        <ul>
+                            <li>I = 05 — Showmatches o partidas de exhibición sin invitación oficial</li>
+                            <li>I = 10 — Partidas de exhibición / Scrims oficiales transmitidas</li>
+                            <li>I = 15 — Fase de grupos de Ligas Regionales Semiprofesionales</li>
+                            <li>I = 25 — Playoffs y Finales de Ligas Regionales</li>
+                            <li>I = 25 — Clasificatorias Abiertas (Open Qualifiers) a Torneos Majors o BSC (Brawl Stars Championship)</li>
+                            <li>I = 35 — Fase de grupos de Torneos Internacionales / Majors hasta cuartos de final</li>
+                            <li>I = 40 — Fase de grupos de Torneos Internacionales desde cuartos de final en adelante</li>
+                            <li>I = 50 — Fase final del Mundial / World Finals hasta cuartos de final</li>
+                            <li>I = 60 — Fase final del Mundial / World Finals desde cuartos de final hasta la Gran Final</li>
+                        </ul>
+                    </li>
+                    <li><b>W:</b> resultado del set/partida — 1 = victoria clara (ej. 2-0 o 3-0 en sets); 0.5 = empate/desempate por objetivos; 0 = derrota.</li>
+                    <li><b>We:</b> resultado esperado según la diferencia de nivel, calculado como:</li>
+                </ul>
+                <div class="novedad-detail-formula">We = 1 / (10^(−dr/600) + 1)</div>
+                <p class="novedad-detail-note">Donde dr es la diferencia de puntos entre ambos competidores: dr = [P_antes del Equipo A − P_antes del Equipo B].</p>
+
+                <p><b>Ejemplo:</b> el Equipo A tiene 1300 puntos y vence en una Clasificatoria Abierta al Equipo B, que tiene 1500 puntos.</p>
+                <ul>
+                    <li>Equipo A: P = 1300 + 25 × (1 − (1 / (10^(−(1300−1500)/600) + 1)))</li>
+                    <li>Equipo B: P = 1500 + 25 × (0 − (1 / (10^(−(1500−1300)/600) + 1)))</li>
+                </ul>
+                <p class="novedad-detail-note">Resultado: el Equipo A suma 17 puntos (P = 1317) y el Equipo B pierde 17 puntos (P = 1483).</p>
+
+                <h4>Reglas especiales para el competitivo de Brawl Stars</h4>
+                <ul>
+                    <li>Sets ajustados (Bracket de Perdedores / Tiebreaker): un set decidido en la última partida decisiva (ej. 2-1 en sets o en tiempo suplementario de Balón Brawl) otorga un valor de victoria parcial para el ganador y no penaliza severamente al perdedor. Si el set se decide en Tiebreaker estricto: W del equipo ganador = 0.75, W del equipo perdedor = 0.5.</li>
+                    <li>Protección en Knockout de Finals: los equipos eliminados en los Brackets de Eliminación Directa de un torneo presencial o Major no pierden puntos de ranking, incluso frente a un rival de menor puntaje (si W − We es menor que 0, entonces P = P_antes). Esto protege el esfuerzo de los equipos por haber clasificado a las etapas finales presenciales.</li>
+                </ul>
+
+                <h4>Proceso de conversión inicial (Seeding de Temporada)</h4>
+                <p>Para iniciar una nueva temporada competitiva, los equipos y jugadores se posicionan de forma homogénea en una escala de 800 a 1600 puntos según sus resultados del año anterior. La diferencia base entre cada puesto del ranking es de 4 puntos.</p>
+                <div class="novedad-detail-formula">P_inicial = 1600 − (R − 1) × 4</div>
+                <ul>
+                    <li>Top 1 Global (Sembrado #1): P_inicial = 1600</li>
+                    <li>Sembrado #3: P_inicial = 1592</li>
+                    <li>Sembrado #100: P_inicial = 1204</li>
+                    <li>Sembrado #200: P_inicial = 804</li>
+                </ul>
+
+                <h4>Beneficios para el ecosistema Esports de Brawl Stars</h4>
+                <ol>
+                    <li>Premia el rendimiento constante: elimina el estancamiento de puntos y permite que las sorpresas (upsets) de equipos emergentes en modos 1v1 o 3v3 se reflejen de inmediato en la tabla general.</li>
+                    <li>Cero penalizaciones por inactividad injusta: el ranking no degrada puntos artificialmente por el paso del tiempo, eliminando la necesidad de competir en eventos menores solo para "mantener la posición".</li>
+                    <li>Balance global interregional: elimina el sesgo regional. Un equipo de LATAM o Asia tiene exactamente la misma oportunidad de escalar al Top 1 Global que un equipo de Europa o Norteamérica al ganar torneos de similar categoría.</li>
+                    <li>Claridad en la selección de Seeds: permite a los organizadores de torneos (TOs) sembrar los brackets de torneos 1v1 y 3v3 de forma justa, evitando cruces de alto nivel en las primeras rondas de una clasificatoria.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-footer" id="creditos">
+        <div class="site-footer-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
+        <div class="site-footer-text">
+            <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
+            <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+            <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
+            <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
+            <p>¿Quieres apoyar a ZC26? Con una donación desde 1 dólar a través de <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a> puedes obtener beneficios dentro de la comunidad.</p>
+            <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página — como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil — por favor contáctanos a través de los medios oficiales indicados arriba.</p>
+            <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
+            <div class="footer-extended">
+                <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
+                <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
+                <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
+                <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
+                <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
+            </div>
+            <p class="footer-terms-title">Términos de uso</p>
+            <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
+            <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+        </div>
+    </div>
+
+    <a href="javascript:void(0);" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});">Volver arriba</a>
+    <div class="version-tag">Versión 3.0.16.5</div>
+
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="close-area" id="closeModal"></div>
+    <div class="modal-content"><img id="modalImage" src="" alt="Mapa"></div>
+</div>
+
+<div class="modal-overlay" id="playerModalOverlay">
+    <div class="info-panel" id="playerInfoPanel"></div>
+</div>
+
+<div class="modal-overlay" id="trophyModalOverlay">
+    <div class="info-panel" id="trophyInfoPanel"></div>
+</div>
+
+<div class="modal-overlay" id="quickStatsOverlay">
+    <div class="quick-stats-panel" id="quickStatsPanel"></div>
+</div>
+
+
+<script src="js/app.js"></script>
+</body>
+</html>
