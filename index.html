@@ -569,28 +569,34 @@
         .mvs-bar-row {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .mvs-bar-track {
-            height: 4px;
-            border-radius: 999px;
-            transition: flex-grow 0.25s ease;
+            flex: 1 1 0;
+            height: 5px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.06);
+            overflow: hidden;
+            display: flex;
         }
-        .mvs-bar-lpr {
-            background: rgba(255,255,255,0.3);
+        .mvs-bar-track-left {
+            justify-content: flex-end;
+        }
+        .mvs-bar-track-right {
+            justify-content: flex-start;
+        }
+        .mvs-bar-fill {
+            height: 100%;
+            border-radius: 3px;
         }
         .mvs-bar-lev {
             background: #d93025;
         }
-        .qs2-stat-row {
-            flex-wrap: wrap;
+        .mvs-bar-lpr {
+            background: #1565c0;
         }
-        .qs2-stat-bar-row {
-            flex: 1 1 100%;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 4px;
+        .mvs-bar-neutral {
+            background: rgba(255,255,255,0.3);
         }
         .mvs-val {
             flex: 0 0 52px;
@@ -3203,11 +3209,6 @@
             font-size: 0.64rem;
             margin-bottom: 3px;
         }
-        .gauge-tooltip {
-            position: fixed;
-            max-width: min(200px, calc(100vw - 24px));
-            z-index: 4000;
-        }
         .gauge-col {
             flex: 0 0 84px;
             display: flex;
@@ -3236,15 +3237,6 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
             margin-top: 2px;
-        }
-        .radar-gauge-row {
-            position: relative;
-        }
-        .gauge-col {
-            position: relative;
-        }
-        .gauge-item-hit {
-            cursor: pointer;
         }
 
         /* Estadísticas / Brawl Stars data */
@@ -4708,9 +4700,8 @@
         }
         .novedad-detail-related-item {
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 12px;
+            flex-direction: column;
+            gap: 2px;
             background: none;
             border: none;
             padding: 0;
@@ -4718,20 +4709,6 @@
             cursor: pointer;
             width: 100%;
             font-family: inherit;
-        }
-        .novedad-detail-related-thumb {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 10px;
-            flex-shrink: 0;
-            background: #111;
-        }
-        .novedad-detail-related-text {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-width: 0;
         }
         .novedad-detail-related-tag {
             font-size: 10px;
@@ -6683,93 +6660,6 @@
 
 <script>
     /* ===================================================================
-       ZC26 · Navegación de menús con botón de retroceso (móvil) y
-       Escape (PC). Cada vez que se abre un menú/overlay se añade una
-       entrada al historial del navegador (sin cambiar la URL). Al
-       presionar "atrás" en el teléfono, el navegador dispara "popstate"
-       y cerramos ese menú en vez de salir de la página o de Chrome.
-       Al cerrar un menú con la "X" o con Escape hacemos lo inverso:
-       consumimos esa entrada del historial (history.back()) para que
-       el botón de atrás del teléfono quede sincronizado.
-    =================================================================== */
-    const zcOverlayStack = [];
-    let zcSuppressPopstate = 0;
-
-    // Llamar al ABRIR un menú/overlay: registra el cierre y agrega una
-    // entrada al historial. closeFn debe ser la función que lo cierra.
-    // Devuelve un "token" único para esa apertura — guárdalo si ese mismo
-    // tipo de overlay puede abrirse más de una vez en la pila a la vez
-    // (ej. modales anidados), para poder cerrar EXACTAMENTE esa entrada
-    // y no otra con el mismo nombre.
-    function zcOverlayOpened(name, closeFn) {
-        const entry = { name, closeFn };
-        zcOverlayStack.push(entry);
-        history.pushState({ zcOverlay: name }, "", location.href);
-        return entry;
-    }
-
-    // Llamar al CERRAR un menú/overlay (por "X", clic afuera o Escape):
-    // quita su entrada y retrocede una posición en el historial.
-    // Acepta el nombre (string) — sirve si solo puede haber UNA entrada
-    // con ese nombre a la vez — o el token exacto devuelto por
-    // zcOverlayOpened, necesario cuando puede haber varias entradas con
-    // el mismo nombre intercaladas con otras (ej. modales anidados).
-    function zcOverlayClosed(nameOrEntry) {
-        const idx = typeof nameOrEntry === "string"
-            ? zcOverlayStack.map((e) => e.name).lastIndexOf(nameOrEntry)
-            : zcOverlayStack.indexOf(nameOrEntry);
-        if (idx === -1) return; // ya se quitó (ej. por el propio popstate)
-        zcOverlayStack.splice(idx, 1);
-        zcSuppressPopstate++;
-        history.back();
-    }
-
-    // Igual que zcOverlayClosed, pero quita TODAS las entradas con ese
-    // nombre de una sola vez (ej: cerrar toda una pila de modales).
-    function zcOverlayClosedAll(name) {
-        let count = 0;
-        for (let i = zcOverlayStack.length - 1; i >= 0; i--) {
-            if (zcOverlayStack[i].name === name) {
-                zcOverlayStack.splice(i, 1);
-                count++;
-            }
-        }
-        if (count > 0) {
-            zcSuppressPopstate += count;
-            if (count === 1) history.back();
-            else history.go(-count);
-        }
-    }
-
-    window.addEventListener("popstate", function () {
-        if (zcSuppressPopstate > 0) {
-            // Este "popstate" lo provocó nuestro propio history.back(),
-            // la interfaz ya se cerró antes de llamarlo.
-            zcSuppressPopstate--;
-            return;
-        }
-        if (zcOverlayStack.length === 0) return;
-        const entry = zcOverlayStack.pop();
-        if (typeof entry.closeFn === "function") entry.closeFn();
-    });
-
-    // Escape también revierte el último cambio de categoría/pestaña
-    // (secciones que no son overlays de pantalla completa, ej. tabs).
-    // Estas entradas se cierran SIEMPRE por posición (la última abierta),
-    // nunca por nombre, para no afectar otra entrada igual más abajo.
-    document.addEventListener("keydown", (e) => {
-        if (e.key !== "Escape") return;
-        if (zcOverlayStack.length === 0) return;
-        const top = zcOverlayStack[zcOverlayStack.length - 1];
-        if (top.name === "sectionTab" || top.name === "matchTab") {
-            zcOverlayStack.pop();
-            zcSuppressPopstate++;
-            history.back();
-            if (typeof top.closeFn === "function") top.closeFn();
-        }
-    });
-
-    /* ===================================================================
        ZC26 · Sistema de sonidos de navegación (carpeta /sound)
     =================================================================== */
     const ZC_SOUNDS = {
@@ -8213,7 +8103,6 @@
         overlay.classList.add("open");
         const input = document.getElementById("zcfSearchInput");
         if (input) input.focus({ preventScroll: true });
-        zcOverlayOpened("zcfMenu", zcfCloseMenu);
     }
     function zcfCloseMenu() {
         const overlay = document.getElementById("zcfOverlay");
@@ -8223,7 +8112,6 @@
         unlockBodyScroll();
         const box = document.getElementById("zcfSuggestions");
         if (box) { box.innerHTML = ""; box.style.display = "none"; }
-        zcOverlayClosed("zcfMenu");
     }
 
     function zcfInit() {
@@ -9102,22 +8990,14 @@
         </svg>`;
     }
 
-    const GAUGE_ITEMS = [
-        { key: "potencial", label: "Potencial", full: "Potencial", desc: "Qué tan alto puede llegar el jugador, según sus puntos acumulados frente al máximo del ranking." },
-        { key: "habilidades", label: "Habilidades", full: "Habilidades", desc: "Nivel general de juego mostrado en competencia, según su balance de victorias en sets y mapas." },
-        { key: "reputacion", label: "Reputación Int.", full: "Reputación Internacional", desc: "Qué tan reconocido y famoso es el jugador a nivel internacional, más allá de su liga local." }
-    ];
-
-    function buildGaugeSvg(idx, value) {
-        const item = GAUGE_ITEMS[idx];
-        const label = item ? item.label : "";
+    function buildGaugeSvg(label, value) {
         const v = Math.max(0, Math.min(100, Math.round(value)));
         const r = 34, cx = 42, cy = 40;
         const circumference = Math.PI * r;
         const dash = (v / 100) * circumference;
         const color = v >= 66 ? "#6fcf97" : v >= 33 ? "#e8c547" : "#ff6b6b";
         const arcPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
-        return `<div class="gauge-item gauge-item-hit" data-gauge-idx="${idx}" role="button" tabindex="0" aria-label="¿Qué significa ${label}?">
+        return `<div class="gauge-item">
             <svg viewBox="0 0 84 50" class="gauge-svg">
                 <path d="${arcPath}" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="7" stroke-linecap="round"/>
                 <path d="${arcPath}" fill="none" stroke="${color}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${dash} ${circumference}"/>
@@ -9125,70 +9005,6 @@
             </svg>
             <div class="gauge-label">${label}</div>
         </div>`;
-    }
-
-    let gaugeTooltipEl = null;
-    function getGaugeTooltipEl() {
-        if (!gaugeTooltipEl) {
-            gaugeTooltipEl = document.createElement("div");
-            gaugeTooltipEl.className = "gauge-tooltip radar-tooltip";
-            document.body.appendChild(gaugeTooltipEl);
-        }
-        return gaugeTooltipEl;
-    }
-
-    function initGaugeTooltips(root) {
-        const tooltipEl = getGaugeTooltipEl();
-
-        function hideTooltip() { tooltipEl.style.display = "none"; delete tooltipEl.dataset.idx; }
-
-        function positionTooltip(hit) {
-            const pad = 10;
-            const hitRect = hit.getBoundingClientRect();
-            const x = hitRect.left + hitRect.width / 2;
-            const yTop = hitRect.top;
-            const yBottom = hitRect.bottom;
-            requestAnimationFrame(() => {
-                const ttRect = tooltipEl.getBoundingClientRect();
-                const halfW = ttRect.width / 2;
-                const clampedX = Math.max(halfW + pad, Math.min(window.innerWidth - halfW - pad, x));
-                tooltipEl.style.left = clampedX + "px";
-                if (yTop - ttRect.height - pad < 0) {
-                    tooltipEl.style.transform = "translate(-50%, 10px)";
-                    tooltipEl.style.top = Math.min(yBottom, window.innerHeight - ttRect.height - pad) + "px";
-                } else {
-                    tooltipEl.style.transform = "translate(-50%, calc(-100% - 10px))";
-                    tooltipEl.style.top = Math.max(pad, yTop) + "px";
-                }
-            });
-        }
-
-        root.querySelectorAll(".radar-gauge-row .gauge-item[data-gauge-idx]").forEach(hit => {
-            if (hit.dataset.gaugeBound) return;
-            hit.dataset.gaugeBound = "1";
-            hit.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const idx = hit.dataset.gaugeIdx;
-                const item = GAUGE_ITEMS[parseInt(idx, 10)];
-                if (!item) return;
-                if (tooltipEl.dataset.idx === idx && tooltipEl.style.display === "block") {
-                    hideTooltip();
-                    return;
-                }
-                zcPlaySound("click");
-                tooltipEl.dataset.idx = idx;
-                tooltipEl.innerHTML = `<div class="radar-tooltip-title">${item.full}</div><div>${item.desc}</div>`;
-                tooltipEl.style.display = "block";
-                positionTooltip(hit);
-            });
-        });
-
-        if (!document.body.dataset.gaugeTooltipGlobalBound) {
-            document.body.dataset.gaugeTooltipGlobalBound = "1";
-            document.addEventListener("click", hideTooltip);
-            window.addEventListener("scroll", hideTooltip, true);
-            window.addEventListener("resize", hideTooltip);
-        }
     }
 
     function findMvpRecognition(p) {
@@ -9315,9 +9131,9 @@
                 const radarSlideHtml = `<div class="radar-gauge-row">
                         <div class="stat-radar-wrap">${buildRadarSvg(p)}</div>
                         <div class="gauge-col">
-                            ${buildGaugeSvg(0, computePotencial(p))}
-                            ${buildGaugeSvg(1, computeHabilidades(p))}
-                            ${buildGaugeSvg(2, computeReputacion(p))}
+                            ${buildGaugeSvg("Potencial", computePotencial(p))}
+                            ${buildGaugeSvg("Habilidades", computeHabilidades(p))}
+                            ${buildGaugeSvg("Reputación Int.", computeReputacion(p))}
                         </div>
                     </div>`;
                 return renderCarousel([0, 1], (i) => i === 0 ? statsSlideHtml : radarSlideHtml, "", { swipeOnly: true, hideNav: true });
@@ -9365,7 +9181,6 @@
         if (vitrinaCard) vitrinaCard.addEventListener("click", () => openTrophyModal(TROPHIES[0]));
         initCarousels(panel);
         initRadarTooltips(panel);
-        initGaugeTooltips(panel);
         const panelMedia = panel.querySelector(".panel-media");
         const headerEnd = panel.querySelector("#infoHeaderEnd");
         if (panelMedia && headerEnd) {
@@ -9459,41 +9274,6 @@
     };
     const QS2_MATCH_SUMMARY = { home: "LEV", away: "LPR", scoreHome: 3, scoreAway: 1, status: "Finalizado" };
 
-    // Busca la fila del jugador rival que ocupa el mismo puesto dentro de la
-    // misma alineación (titular 1 vs titular 1, suplente 2 vs suplente 2...),
-    // para poder comparar sus estadísticas con una barra de dos colores.
-    function findCounterpartRow(row) {
-        const grid = row.closest(".lu-block-grid");
-        if (!grid) return null;
-        const rows = Array.from(grid.querySelectorAll(":scope > .stat-row.lu-row.lu-card"));
-        const idx = rows.indexOf(row);
-        if (idx === -1 || rows.length % 2 !== 0) return null;
-        const half = rows.length / 2;
-        const counterIdx = idx < half ? idx + half : idx - half;
-        return rows[counterIdx] || null;
-    }
-
-    // Extrae el primer número de un texto de estadística ("11/11" -> 11,
-    // "153.1" -> 153.1). Si no hay número (ej. "Sí"/"No"), devuelve null.
-    function qs2ParseStatNum(text) {
-        const m = String(text).replace(",", ".").match(/-?\d+(\.\d+)?/);
-        return m ? parseFloat(m[0]) : null;
-    }
-
-    function qs2CompareBarHtml(myVal, myTag, oppVal, oppTag) {
-        if (myVal === null || oppVal === null) return "";
-        const total = myVal + oppVal;
-        let myPct = total > 0 ? (myVal / total) * 100 : 50;
-        myPct = Math.max(4, Math.min(96, myPct));
-        const oppPct = 100 - myPct;
-        const myClass = myTag === "LEV" ? "mvs-bar-lev" : "mvs-bar-lpr";
-        const oppClass = oppTag === "LEV" ? "mvs-bar-lev" : "mvs-bar-lpr";
-        return `<div class="qs2-stat-bar-row">` +
-            `<div class="mvs-bar-track ${myClass}" style="flex:${myPct} 1 0"></div>` +
-            `<div class="mvs-bar-track ${oppClass}" style="flex:${oppPct} 1 0"></div>` +
-            `</div>`;
-    }
-
     function openQuickStats(row) {
         zcPlaySound("clickentrar");
         const panel = document.getElementById("quickStatsPanel");
@@ -9509,26 +9289,13 @@
         const player = PLAYERS.find(p => p.key === row.dataset.player);
         const teamTag = (player && QS2_TEAM_INFO[player.teamTag]) ? player.teamTag : "LEV";
         const teamInfo = QS2_TEAM_INFO[teamTag];
-        const oppTag = teamTag === "LEV" ? "LPR" : "LEV";
 
-        const counterpartRow = findCounterpartRow(row);
-        const counterpartDetail = counterpartRow ? counterpartRow.querySelector(".lu-detail-inner") : null;
-        const counterpartItems = counterpartDetail ? Array.from(counterpartDetail.querySelectorAll(".lu-stat-item")) : [];
-
-        const statRows = detail ? Array.from(detail.querySelectorAll(".lu-stat-item")).map((item, i) => {
+        const statRows = detail ? Array.from(detail.querySelectorAll(".lu-stat-item")).map(item => {
             const img = item.querySelector("img");
             const bEl = item.querySelector("b");
             const label = img ? img.getAttribute("alt") : item.textContent.split(":")[0].trim();
             const value = bEl ? bEl.textContent.trim() : "";
-
-            const oppItem = counterpartItems[i];
-            const oppBEl = oppItem ? oppItem.querySelector("b") : null;
-            const oppValue = oppBEl ? oppBEl.textContent.trim() : null;
-            const myNum = qs2ParseStatNum(value);
-            const oppNum = oppValue !== null ? qs2ParseStatNum(oppValue) : null;
-            const barHtml = qs2CompareBarHtml(myNum, teamTag, oppNum, oppTag);
-
-            return `<div class="qs2-stat-row"><span>${label}</span><b>${value}</b>${barHtml}</div>`;
+            return `<div class="qs2-stat-row"><span>${label}</span><b>${value}</b></div>`;
         }).join("") : "";
 
         const homeInfo = QS2_TEAM_INFO[QS2_MATCH_SUMMARY.home];
@@ -9606,8 +9373,7 @@
         window.scrollTo({ top: scrollLockY, left: 0, behavior: "instant" });
     }
 
-    let modalStack = []; // { id, entry } — cada nivel oculto debajo del modal actual
-    let modalOverlayEntry = null; // token de historial del modal actualmente visible
+    let modalStack = [];
 
     function openModal(id) {
         const current = document.querySelector(".modal-overlay.active");
@@ -9618,17 +9384,14 @@
             current.classList.remove("active");
             void current.offsetWidth;
             current.style.transition = "";
-            modalStack.push({ id: current.id, entry: modalOverlayEntry });
-            modalOverlayEntry = null;
+            modalStack.push(current.id);
         }
         if (mobileMenu && mobileMenu.classList.contains("open")) {
             mobileMenu.classList.remove("open");
             menuToggle.classList.remove("active");
             menuToggle.setAttribute("aria-expanded", "false");
-            zcOverlayClosed("mobileMenu");
         }
         const el = document.getElementById(id);
-        const wasActive = el.classList.contains("active");
         if (el.classList.contains("active")) {
             // Reabrir el mismo modal: forzamos un reflow para reiniciar la
             // transición sin dejar un frame "vacío" en medio.
@@ -9643,22 +9406,12 @@
         // lo cubra — eso es lo que causaba el parpadeo al abrir un menú.
         lockBodyScroll();
         el.classList.add("active");
-        // Solo agregamos una nueva entrada al historial si es un nivel nuevo
-        // (no cuando se refresca el contenido del mismo modal ya abierto).
-        // Guardamos el token exacto (no solo el nombre "modal") porque puede
-        // haber varios modales apilados a la vez — cerrar por nombre podría
-        // quitar el nivel equivocado si hay otra cosa (ej. un cambio de
-        // pestaña) intercalada en medio de la pila.
-        if (!wasActive) modalOverlayEntry = zcOverlayOpened("modal", () => closeModal(id));
     }
     function closeModal(id) {
         document.getElementById(id).classList.remove("active");
-        zcOverlayClosed(modalOverlayEntry);
-        modalOverlayEntry = null;
         if (modalStack.length > 0) {
-            const prev = modalStack.pop();
-            document.getElementById(prev.id).classList.add("active");
-            modalOverlayEntry = prev.entry;
+            const prevId = modalStack.pop();
+            document.getElementById(prevId).classList.add("active");
             return;
         }
         const menuEl = document.getElementById("mobileMenu");
@@ -9667,14 +9420,12 @@
     }
     function closeAllModals() {
         modalStack = [];
-        modalOverlayEntry = null;
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
         modalImg.src = "";
         zcStopRankSound();
         const menuEl = document.getElementById("mobileMenu");
         const menuOpen = menuEl && menuEl.classList.contains("open");
         if (!menuOpen) unlockBodyScroll();
-        zcOverlayClosedAll("modal");
     }
 
     document.getElementById("playerModalOverlay").addEventListener("click", function (e) {
@@ -9715,29 +9466,21 @@
     const zceloOpenBtn = document.getElementById("zceloOpenBtn");
     const eloDetail = document.getElementById("eloDetail");
     const eloDetailBack = document.getElementById("eloDetailBack");
-    function zcOpenEloDetail() {
-        eloDetail.classList.add("active");
-        eloDetail.scrollTop = 0;
-        document.body.style.overflow = "hidden";
-        zcPlaySound("entrar");
-        zcOverlayOpened("eloDetail", zcCloseEloDetail);
-    }
-    function zcCloseEloDetail() {
-        eloDetail.classList.remove("active");
-        document.body.style.overflow = "";
-        zcPlaySound("salir");
-        zcOverlayClosed("eloDetail");
-    }
     if (zceloOpenBtn && eloDetail) {
-        zceloOpenBtn.addEventListener("click", zcOpenEloDetail);
+        zceloOpenBtn.addEventListener("click", () => {
+            eloDetail.classList.add("active");
+            eloDetail.scrollTop = 0;
+            document.body.style.overflow = "hidden";
+            zcPlaySound("entrar");
+        });
     }
     if (eloDetailBack && eloDetail) {
-        eloDetailBack.addEventListener("click", zcCloseEloDetail);
+        eloDetailBack.addEventListener("click", () => {
+            eloDetail.classList.remove("active");
+            document.body.style.overflow = "";
+            zcPlaySound("salir");
+        });
     }
-    // Cerrar con Escape (accesibilidad en PC)
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && eloDetail.classList.contains("active")) zcCloseEloDetail();
-    });
 
     const rankToggleBtn = document.getElementById("rankToggleBtn");
     const rankToggleIcon = document.getElementById("rankToggleIcon");
@@ -9771,13 +9514,10 @@
         zcPlaySound("clickentrar");
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
         modalStack = [];
-        modalOverlayEntry = null;
-        zcOverlayClosedAll("modal");
         mobileMenu.classList.add("open");
         menuToggle.classList.add("active");
         menuToggle.setAttribute("aria-expanded", "true");
         lockBodyScroll();
-        zcOverlayOpened("mobileMenu", closeMenu);
     }
     function closeMenu() {
         zcPlaySound("clicksalir");
@@ -9786,12 +9526,7 @@
         menuToggle.setAttribute("aria-expanded", "false");
         const anyOpen = document.querySelectorAll(".modal-overlay.active").length > 0;
         if (!anyOpen) unlockBodyScroll();
-        zcOverlayClosed("mobileMenu");
     }
-    // Cerrar el menú con Escape (accesibilidad en PC)
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && mobileMenu.classList.contains("open")) closeMenu();
-    });
     const sectionFilterGroups = {
         "inicio": ["inicio"],
         "ultimo-partido": ["ultimo-partido"],
@@ -10061,18 +9796,8 @@
             tab.addEventListener("click", (e) => {
                 e.preventDefault();
                 const key = tab.dataset.sectionTab;
-                const prevKey = zcCurrentSection;
                 setActiveSectionTab(key);
                 applySectionFilter(key);
-                // Si realmente cambiamos de categoría, el botón de atrás del
-                // teléfono (o Escape) debe volver a la categoría anterior en
-                // vez de salir de la página.
-                if (key !== prevKey) {
-                    zcOverlayOpened("sectionTab", () => {
-                        setActiveSectionTab(prevKey);
-                        applySectionFilter(prevKey, true);
-                    });
-                }
             });
         });
 
@@ -10139,27 +9864,12 @@
         const panels = root.querySelectorAll(".match-tab-panel");
         tabs.forEach(tab => {
             tab.addEventListener("click", () => {
-                const prevTab = root.querySelector(".match-tab.active");
-                const prevKey = prevTab ? prevTab.dataset.tab : null;
-                const key = tab.dataset.tab;
                 zcPlaySound("click");
                 tabs.forEach(t => t.classList.remove("active"));
                 panels.forEach(p => p.classList.remove("active"));
                 tab.classList.add("active");
-                const target = root.querySelector(`.match-tab-panel[data-tab-panel="${key}"]`);
+                const target = root.querySelector(`.match-tab-panel[data-tab-panel="${tab.dataset.tab}"]`);
                 if (target) target.classList.add("active");
-                // El botón de atrás del teléfono (o Escape) vuelve a la
-                // pestaña anterior en vez de salir de la página.
-                if (prevKey && prevKey !== key) {
-                    zcOverlayOpened("matchTab", () => {
-                        tabs.forEach(t => t.classList.remove("active"));
-                        panels.forEach(p => p.classList.remove("active"));
-                        const prevTabEl = root.querySelector(`.match-tab[data-tab="${prevKey}"]`);
-                        const prevPanelEl = root.querySelector(`.match-tab-panel[data-tab-panel="${prevKey}"]`);
-                        if (prevTabEl) prevTabEl.classList.add("active");
-                        if (prevPanelEl) prevPanelEl.classList.add("active");
-                    });
-                }
             });
         });
     }
@@ -10180,19 +9890,21 @@
                 const num = parseFloat(el.textContent.replace(",", ".").replace(/[^0-9.\-]/g, ""));
                 return isNaN(num) ? 0 : num;
             };
+            const sideClass = (el) => el.classList.contains("mvs-win-lev") ? "mvs-bar-lev"
+                : el.classList.contains("mvs-win-lpr") ? "mvs-bar-lpr"
+                : "mvs-bar-neutral";
 
             const leftVal = parseVal(vals[0]);
             const rightVal = parseVal(vals[1]);
-            const total = leftVal + rightVal;
-            let leftPct = total > 0 ? (leftVal / total) * 100 : 50;
-            leftPct = Math.max(4, Math.min(96, leftPct));
-            const rightPct = 100 - leftPct;
+            const maxVal = Math.max(leftVal, rightVal);
+            const leftPct = leftVal > 0 && maxVal > 0 ? Math.max(4, Math.round((leftVal / maxVal) * 100)) : 0;
+            const rightPct = rightVal > 0 && maxVal > 0 ? Math.max(4, Math.round((rightVal / maxVal) * 100)) : 0;
 
             const barRow = document.createElement("div");
             barRow.className = "mvs-bar-row";
             barRow.innerHTML =
-                `<div class="mvs-bar-track mvs-bar-lpr" style="flex:${leftPct} 1 0"></div>` +
-                `<div class="mvs-bar-track mvs-bar-lev" style="flex:${rightPct} 1 0"></div>`;
+                `<div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill ${sideClass(vals[0])}" style="width:${leftPct}%"></div></div>` +
+                `<div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill ${sideClass(vals[1])}" style="width:${rightPct}%"></div></div>`;
             row.appendChild(barRow);
         });
     }
@@ -10862,7 +10574,6 @@
             viewer.classList.add("active");
             document.body.style.overflow = "hidden";
             goToStory(storyId, 0);
-            zcOverlayOpened("storyViewer", closeViewer);
         }
 
         function closeViewer() {
@@ -10874,7 +10585,6 @@
             updateMusicWidget(null);
             currentStoryId = null;
             isPaused = false;
-            zcOverlayClosed("storyViewer");
         }
 
         // Abrir historia al tocar el círculo de Destacadas o una tarjeta de Momentos
@@ -11187,7 +10897,7 @@
                 const item = document.createElement("button");
                 item.type = "button";
                 item.className = "novedad-detail-related-item";
-                item.innerHTML = `<img class="novedad-detail-related-thumb" src="${data.hero}" alt="" loading="lazy"><div class="novedad-detail-related-text"><span class="novedad-detail-related-tag">${data.tag}</span><span class="novedad-detail-related-name">${data.title}</span></div>`;
+                item.innerHTML = `<span class="novedad-detail-related-tag">${data.tag}</span><span class="novedad-detail-related-name">${data.title}</span>`;
                 item.addEventListener("click", () => openDetail(idx, detailCloseCb));
                 detailRelatedList.appendChild(item);
             });
@@ -11207,7 +10917,6 @@
             document.body.style.overflow = "hidden";
             zcPlaySound("entrar");
             detailCloseCb = typeof onClose === "function" ? onClose : null;
-            zcOverlayOpened("novedadDetail", closeDetail);
         }
 
         // Se expone globalmente para poder abrir el detalle de una novedad
@@ -11220,7 +10929,6 @@
             zcPlaySound("salir");
             if (detailCloseCb) { const cb = detailCloseCb; detailCloseCb = null; cb(); }
             scheduleNext(); // reanudar el carrusel de novedades
-            zcOverlayClosed("novedadDetail");
         }
 
         document.querySelectorAll("[data-open-novedad]").forEach(el => {
@@ -11231,11 +10939,6 @@
         });
 
         detailBack.addEventListener("click", closeDetail);
-
-        // Cerrar con Escape (accesibilidad en PC)
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && detailOverlay.classList.contains("active")) closeDetail();
-        });
     })();
 
     /* ======================================================================
