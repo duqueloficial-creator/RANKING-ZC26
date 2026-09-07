@@ -1657,6 +1657,14 @@
         /* Ranking */
         .rank-item {
             border-bottom: 1px solid rgba(255,255,255,0.04);
+            /* Optimización: evita renderizar (layout/paint) las filas de
+               ranking/contribuciones que están fuera del viewport. El
+               navegador reserva ~76px de alto mientras la fila no se ha
+               pintado y luego recuerda el alto real una vez visible.
+               El toggle de "abrir fila" sigue funcionando porque solo se
+               puede pulsar una fila que ya está visible (sin containment). */
+            content-visibility: auto;
+            contain-intrinsic-size: auto 76px;
         }
         .rank-item:last-child {
             border-bottom: none;
