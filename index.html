@@ -1653,6 +1653,12 @@
             border-radius: 16px;
             padding: 10px;
         }
+        /* ZC26 · el panel del ranking usa un poco menos de aire lateral
+           propio para que las filas (que sangran hasta su borde) aprovechen
+           más ancho de pantalla. */
+        #rankingList {
+            padding: 6px;
+        }
 
         /* Ranking */
         .rank-item {
@@ -1884,44 +1890,47 @@
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
-        /* ZC26 · Nuevo diseño de fila (cuña + personaje + rango + región) */
+        /* ZC26 · Diseño de fila estilo tabla FIFA: todas las filas (incluido
+           el podio) miden lo mismo y usan todo el ancho disponible de lado
+           a lado. En vez de una línea separadora entre filas, se alternan
+           dos tonos de fondo (como el ranking oficial de FIFA) para que se
+           puedan diferenciar sin recortar espacio vertical. El podio (top 3)
+           ya NO tiene fondo de color propio: solo conserva el brillo del
+           número/nombre (ver .rank-pos2.gold/silver/bronze y
+           .rank-name2.gold/silver/bronze, sin tocar). */
+        #rankingList .rank-item {
+            border-bottom: none;
+        }
         .rank-row2 {
-            padding: 0;
             align-items: center;
-            min-height: 42px;
+            min-height: 46px;
             gap: 8px;
-        }
-        .rank-row2.tier-gold {
-            background: #1c1608;
+            width: calc(100% + 12px);
+            margin: 0 -6px;
+            padding: 10px 10px;
             border-radius: 0;
-            padding: 4px 0;
+            background: transparent;
         }
-        .rank-row2.tier-silver {
-            background: #202329;
+        /* ZC26 · anula el fondo amarillo/plata/bronce y el fondo fijo del
+           top 4-7 que venían de las reglas ".rank-row.tier-*" (pensadas
+           para otra lista) y que igual pintaban estas filas por compartir
+           clase ".rank-row". Así el podio y el top 7 siguen el mismo
+           patrón de franjas alternas que el resto de la tabla. */
+        #rankingList .rank-row.tier-gold,
+        #rankingList .rank-row.tier-silver,
+        #rankingList .rank-row.tier-bronze,
+        #rankingList .rank-row.tier-gray {
+            background: transparent;
             border-radius: 0;
-            padding: 4px 0;
         }
-        .rank-row2.tier-bronze {
-            background: #1b120a;
-            border-radius: 0;
-            padding: 4px 0;
+        #rankingList .rank-item:nth-child(even) .rank-row2 {
+            background: rgba(255,255,255,0.035);
         }
-        .rank-row2.tier-gray {
-            background: #101010;
-            border-radius: 0;
-            padding: 4px 0;
+        #rankingList .rank-item .rank-row2:hover {
+            background: rgba(255,255,255,0.075);
         }
-        .rank-row2.tier-gold:hover {
-            background: #241d0c;
-        }
-        .rank-row2.tier-silver:hover {
-            background: #292d34;
-        }
-        .rank-row2.tier-bronze:hover {
-            background: #23170d;
-        }
-        .rank-row2.tier-gray:hover {
-            background: #171717;
+        #rankingList .rank-item.open .rank-row2 {
+            background: rgba(255,255,255,0.09);
         }
         .rank-wedge {
             position: relative;
@@ -2049,6 +2058,34 @@
         }
         .rank-tier-name { white-space: nowrap; font-weight: 700; color: #b9b9b9; font-size: 0.68rem; }
         .rank-row2-points { white-space: nowrap; margin-left: auto; padding-left: 10px; }
+        /* ZC26 · columna de "Puntos" propia, solo visible en tablet/
+           escritorio (en móvil los puntos se muestran junto al tier,
+           como ya estaba) */
+        .rank-points-col {
+            display: none;
+            width: 88px;
+            min-width: 88px;
+            justify-content: center;
+            text-align: center;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+            margin-left: auto;
+            padding: 0 4px;
+            flex-shrink: 0;
+        }
+        .rank-more-chevron {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            color: #8a8a8a;
+            transition: transform 0.25s ease;
+        }
+        .rank-more-chevron svg { width: 100%; height: 100%; }
+        .rank-item.open .rank-more-chevron { transform: rotate(180deg); color: #ffffff; }
         .rank-region {
             font-size: 0.66rem;
             font-weight: 900;
@@ -2340,6 +2377,23 @@
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
             25% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
             100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+        }
+        /* ZC26 · el número de "Posición en el ranking" toma el color de su
+           brillo (halo) de fondo, pero desaturado: no es el color exacto
+           del brillo, solo una variante más suave para que se lea bien.
+           No afecta al podio (oro/plata/bronce), que conserva su propio
+           degradado brillante sin tocar. */
+        .info-pos-badge.pos-glow-master:not(.gold):not(.silver):not(.bronze) {
+            color: #d8c48f;
+        }
+        .info-pos-badge.pos-glow-legendary:not(.gold):not(.silver):not(.bronze) {
+            color: #d99999;
+        }
+        .info-pos-badge.pos-glow-pro:not(.gold):not(.silver):not(.bronze) {
+            color: #93c9a4;
+        }
+        .info-pos-badge.pos-glow-mythic:not(.gold):not(.silver):not(.bronze) {
+            color: #b6a0d4;
         }
         #playerModalOverlay {
             z-index: 1050;
@@ -3617,6 +3671,148 @@
         }
         .zcelo-faq-link:hover {
             color: #7cc0f5;
+        }
+
+        /* ===================================================================
+           ZC26 · Novedades de la Clasificación (prefijo "zcnr-")
+        =================================================================== */
+        .zcnr-block {
+            padding-top: 8px;
+        }
+        .zcnr-heading {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #ffffff;
+            padding: 0 2px;
+            margin-bottom: 10px;
+        }
+        .zcnr-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 2px 2px 10px 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .zcnr-row::-webkit-scrollbar { display: none; }
+        .zcnr-card {
+            flex: 0 0 auto;
+            width: 210px;
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 0;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            color: inherit;
+            font-family: inherit;
+        }
+        .zcnr-card-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #000;
+            overflow: hidden;
+        }
+        .zcnr-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+        .zcnr-card-body {
+            padding: 10px 12px 14px;
+        }
+        .zcnr-card-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #B8863D;
+            margin-bottom: 6px;
+        }
+        .zcnr-card-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #F0EDE6;
+            line-height: 1.35;
+        }
+        .zcnr-card-date {
+            font-size: 10px;
+            color: #7a7a7a;
+            margin-top: 8px;
+        }
+        .zcnr-all-btn {
+            margin: 4px auto 0;
+        }
+        .zcnr-interest-heading {
+            margin-top: 4px;
+        }
+
+        /* Grilla de "Todas las novedades" (página completa, 2 columnas) */
+        .zcnr-all-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-top: 4px;
+        }
+        .zcnr-all-card {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: inherit;
+            font-family: inherit;
+        }
+        .zcnr-all-card-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 0;
+            overflow: hidden;
+            background: #141414;
+        }
+        .zcnr-all-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+        .zcnr-all-card-tag {
+            margin-top: 10px;
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #B8863D;
+        }
+        .zcnr-all-card-title {
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #F0EDE6;
+            line-height: 1.35;
+        }
+        .zcnr-all-card-date {
+            margin-top: 6px;
+            font-size: 10.5px;
+            color: #7a7a7a;
+        }
+        @media (min-width: 700px) {
+            .zcnr-all-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px 28px;
+            }
         }
         .zcf-overlay {
             position: fixed;
@@ -4980,43 +5176,60 @@
                 font-size: 0.64rem;
                 min-width: 40px;
             }
+            /* ZC26 · en tablet/escritorio la tabla se ve más compacta,
+               "densa" y ancha (como la tabla de referencia de FIFA): todas
+               las filas miden lo mismo, sin distinción de tamaño para el
+               podio, y siguen ocupando todo el ancho disponible. */
             .rank-row2 {
-                min-height: 50px;
+                min-height: 44px;
                 gap: 10px;
+                padding: 8px 10px;
             }
+            /* Columna de posición a ancho fijo: los números de 1 y 2 cifras
+               quedan siempre centrados igual, sin desplazar el resto de la fila */
             .rank-wedge {
-                width: auto;
-                min-width: 40px;
-                padding: 0 2px;
+                width: 34px;
+                min-width: 34px;
+                padding: 0;
             }
             .rank-pos2 {
-                font-size: 1rem;
+                font-size: 0.84rem;
             }
             .rank-player-icon {
-                width: 32px;
-                height: 32px;
+                width: 26px;
+                height: 26px;
             }
             .rank-name2 {
-                font-size: 0.98rem;
+                font-size: 0.84rem;
             }
             .rank-flag2 {
-                width: 22px;
-                height: 15px;
+                width: 19px;
+                height: 13px;
             }
             .rank-row2-bottom {
-                font-size: 0.62rem;
+                font-size: 0.56rem;
             }
             .rank-tier-icon {
-                width: 15px;
-                height: 15px;
+                width: 13px;
+                height: 13px;
             }
             .rank-tier-name {
-                font-size: 0.76rem;
+                font-size: 0.68rem;
             }
             .rank-region {
-                width: 30px;
-                height: 30px;
-                font-size: 0.72rem;
+                width: 24px;
+                height: 24px;
+                font-size: 0.6rem;
+            }
+            .rank-points-col {
+                display: inline-flex;
+                font-size: 0.78rem;
+            }
+            .rank-row2-points {
+                display: none;
+            }
+            .rank-more-chevron {
+                display: inline-flex;
             }
 
             /* Paneles/modales un poco más amplios y cómodos de leer */
@@ -5164,43 +5377,60 @@
                 font-size: 0.68rem;
                 min-width: 44px;
             }
+            /* ZC26 · escritorio: tabla más ancha y "respirada" (estilo
+               tabla de referencia de FIFA), columna de posición a ancho
+               fijo para que 1 y 2 cifras queden siempre bien centradas.
+               Todas las filas (incluido el podio) miden lo mismo. */
             .rank-row2 {
-                min-height: 56px;
-                gap: 12px;
+                min-height: 52px;
+                gap: 14px;
+                padding: 12px 16px;
             }
             .rank-wedge {
-                width: auto;
-                min-width: 44px;
-                padding: 0 2px;
+                width: 40px;
+                min-width: 40px;
+                padding: 0;
             }
             .rank-pos2 {
-                font-size: 1.08rem;
+                font-size: 0.95rem;
             }
             .rank-player-icon {
-                width: 36px;
-                height: 36px;
+                width: 30px;
+                height: 30px;
             }
             .rank-name2 {
-                font-size: 1.05rem;
+                font-size: 0.94rem;
             }
             .rank-flag2 {
-                width: 24px;
-                height: 16px;
+                width: 22px;
+                height: 15px;
             }
             .rank-row2-bottom {
-                font-size: 0.68rem;
+                font-size: 0.6rem;
             }
             .rank-tier-icon {
-                width: 16px;
-                height: 16px;
+                width: 15px;
+                height: 15px;
             }
             .rank-tier-name {
-                font-size: 0.8rem;
+                font-size: 0.72rem;
             }
             .rank-region {
-                width: 34px;
-                height: 34px;
-                font-size: 0.76rem;
+                width: 28px;
+                height: 28px;
+                font-size: 0.64rem;
+            }
+            .rank-points-col {
+                display: inline-flex;
+                width: 104px;
+                min-width: 104px;
+                font-size: 0.9rem;
+            }
+            .rank-row2-points {
+                display: none;
+            }
+            .rank-more-chevron {
+                display: inline-flex;
             }
 
             /* Salón de la fama: aún más trofeos por fila en escritorio */
@@ -5569,6 +5799,7 @@
         <div class="novedad-detail-content">
             <div class="novedad-detail-tag">ZC26 ESPORTS™</div>
             <div class="novedad-detail-title">¿Cómo se calcula la Clasificación?</div>
+            <div class="section-updated" style="text-align:left;margin:-10px 0 16px;">Última actualización: viernes, 11 de Septiembre de 2026, 14:54</div>
             <div class="novedad-detail-body">
                 <p>El nuevo modelo para calcular el Ranking Mundial de Brawl Stars (BWR) fue desarrollado tras analizar el rendimiento de los equipos en modos 1v1 y 3v3 durante múltiples temporadas, probando y discutiendo diversos algoritmos.</p>
                 <p>El objetivo principal es contar con un sistema intuitivo, transparente y preciso para medir la fuerza real de los jugadores y clubes en la escena competitiva, garantizando oportunidades equitativas para que las organizaciones de todas las regiones (LATAM, Europa, NA, Asia, etc.) asciendan en la tabla global.</p>
@@ -5640,6 +5871,79 @@
                     <li>Balance global interregional: elimina el sesgo regional. Un equipo de LATAM o Asia tiene exactamente la misma oportunidad de escalar al Top 1 Global que un equipo de Europa o Norteamérica al ganar torneos de similar categoría.</li>
                     <li>Claridad en la selección de Seeds: permite a los organizadores de torneos (TOs) sembrar los brackets de torneos 1v1 y 3v3 de forma justa, evitando cruces de alto nivel en las primeras rondas de una clasificatoria.</li>
                 </ol>
+            </div>
+            <div class="novedad-detail-credits site-footer-text">
+                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
+                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+                <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
+                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
+                <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
+                <div class="footer-extended">
+                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
+                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
+                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
+                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
+                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
+                </div>
+                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== NOVEDAD DE LA CLASIFICACIÓN · DETALLE ===================== -->
+    <div class="novedad-detail" id="rankingNovedadDetail" style="z-index:3600;">
+        <div class="novedad-detail-back" id="rankingNovedadDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <img class="novedad-detail-hero" id="rankingNovedadDetailHero" src="" alt="">
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag" id="rankingNovedadDetailTag"></div>
+            <div class="novedad-detail-title" id="rankingNovedadDetailTitle"></div>
+            <div class="section-updated" id="rankingNovedadDetailDate" style="text-align:left;margin:-10px 0 16px;"></div>
+            <div class="novedad-detail-body" id="rankingNovedadDetailBody"></div>
+            <div class="novedad-detail-credits site-footer-text">
+                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
+                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+                <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
+                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
+                <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
+                <div class="footer-extended">
+                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
+                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
+                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
+                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
+                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
+                </div>
+                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== TODAS LAS NOVEDADES DE LA CLASIFICACIÓN ===================== -->
+    <div class="novedad-detail" id="zcnrAllDetail">
+        <div class="novedad-detail-back" id="zcnrAllDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag">ZC26 ESPORTS™</div>
+            <div class="novedad-detail-title">Clasificación ZC26 - Últimas noticias</div>
+            <div class="zcnr-all-grid" id="zcnrAllGrid"></div>
+            <div class="novedad-detail-credits site-footer-text">
+                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
+                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+                <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
+                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
+                <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
+                <div class="footer-extended">
+                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
+                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
+                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
+                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
+                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
+                </div>
+                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
             </div>
         </div>
     </div>
@@ -6597,6 +6901,91 @@
                 <li>Resultado esperado del partido</li>
             </ul>
             <button type="button" class="zcelo-faq-link" id="zceloOpenBtn">Más información sobre cómo se calcula la Clasificación</button>
+        </div>
+
+        <!-- ===================================================================
+             ZC26 · Novedades de la Clasificación (prefijo "zcnr-")
+        =================================================================== -->
+        <div class="zcnr-block">
+            <div class="zcnr-heading">Novedades de la Clasificación</div>
+            <div class="zcnr-row" id="zcnrRow">
+                <button type="button" class="zcnr-card" data-open-ranking-novedad="zyroxs-1">
+                    <div class="zcnr-card-img"><img src="NDCnews/NNDCC(1).png" alt="" onerror="this.style.display='none'"></div>
+                    <div class="zcnr-card-body">
+                        <div class="zcnr-card-tag">Ranking 1vs1</div>
+                        <div class="zcnr-card-title">Zyroxs escala 18 puestos tras coronarse campeón del Torneo Duelos ZC26</div>
+                        <div class="zcnr-card-date">30 ago 2026</div>
+                    </div>
+                </button>
+                <button type="button" class="zcnr-card" data-open-ranking-novedad="robertbv-1">
+                    <div class="zcnr-card-img"><img src="NDCnews/NNDCC(2).png" alt="" onerror="this.style.display='none'"></div>
+                    <div class="zcnr-card-body">
+                        <div class="zcnr-card-tag">Ranking 1vs1</div>
+                        <div class="zcnr-card-title">La hazaña de RobertBV: 100% de victorias sin perder una sola ronda</div>
+                        <div class="zcnr-card-date">27 ago 2026</div>
+                    </div>
+                </button>
+                <button type="button" class="zcnr-card" data-open-ranking-novedad="lev-1">
+                    <div class="zcnr-card-img"><img src="NDCnews/NNDCC(3).png" alt="" onerror="this.style.display='none'"></div>
+                    <div class="zcnr-card-body">
+                        <div class="zcnr-card-tag">Ranking 3vs3</div>
+                        <div class="zcnr-card-title">LEVIATÁN ESPORTS toma el primer puesto tras coronarse campeón de la ZC26 Agosto</div>
+                        <div class="zcnr-card-date">8 ago 2026</div>
+                    </div>
+                </button>
+                <button type="button" class="zcnr-card" data-open-ranking-novedad="movimientos-1">
+                    <div class="zcnr-card-img"><img src="NDCnews/NNDCC(4).png" alt="" onerror="this.style.display='none'"></div>
+                    <div class="zcnr-card-body">
+                        <div class="zcnr-card-tag">Ranking General</div>
+                        <div class="zcnr-card-title">Semana de movimientos: varios equipos entran al Top 10 de la Clasificación</div>
+                        <div class="zcnr-card-date">5 ago 2026</div>
+                    </div>
+                </button>
+                <button type="button" class="zcnr-card" data-open-ranking-novedad="temporada-1">
+                    <div class="zcnr-card-img"><img src="NDCnews/NNDCC(5).png" alt="" onerror="this.style.display='none'"></div>
+                    <div class="zcnr-card-body">
+                        <div class="zcnr-card-tag">Ranking General</div>
+                        <div class="zcnr-card-title">Arranca la nueva temporada: así se reinicia la puntuación de cada jugador</div>
+                        <div class="zcnr-card-date">1 ago 2026</div>
+                    </div>
+                </button>
+            </div>
+            <div class="rank-toggle-wrap">
+                <button type="button" class="rank-toggle-btn zcnr-all-btn" id="zcnrAllBtn">
+                    <img src="rankingopen.png" alt="" class="rank-toggle-icon">
+                    <span>Todas las novedades de la Clasificación</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ZC26 · También podría interesarle... (novedades generales)
+        =================================================================== -->
+        <div class="zcnr-block">
+            <div class="zcnr-heading zcnr-interest-heading">También podría interesarle...</div>
+            <div class="hd-list">
+                <button type="button" class="hd-list-item" data-open-novedad="0">
+                    <div class="hd-list-thumb"><img src="news/novedades25sep1.jpg" alt=""></div>
+                    <div class="hd-list-text">
+                        <div class="hd-list-tag">ZC26 ESPORTS™</div>
+                        <div class="hd-list-title">Regresa la ZC26 Brawl Stars este mes de septiembre</div>
+                    </div>
+                </button>
+                <button type="button" class="hd-list-item" data-open-novedad="1">
+                    <div class="hd-list-thumb"><img src="news/novedades8aug1.png" alt=""></div>
+                    <div class="hd-list-text">
+                        <div class="hd-list-tag">ZC26 ESPORTS™</div>
+                        <div class="hd-list-title">LEVIATÁN ESPORTS se corona CAMPEÓN de la ZC26 Agosto</div>
+                    </div>
+                </button>
+                <button type="button" class="hd-list-item" data-open-novedad="2">
+                    <div class="hd-list-thumb"><img src="news/novedades2sep2.jpg" alt=""></div>
+                    <div class="hd-list-text">
+                        <div class="hd-list-tag">Brawl Stars Oficial</div>
+                        <div class="hd-list-title">El sistema Camino Starr será reemplazado por Brawler Blast</div>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -8391,7 +8780,9 @@
                             <span class="rank-row2-points">${zcFormatPoints(p.points)} pts</span>
                         </div>
                     </div>
+                    <span class="rank-points-col">${zcFormatPoints(p.points)} pts</span>
                     <div class="rank-region region-${region.toLowerCase()}">${getRegionLabel(region)}</div>
+                    <span class="rank-more-chevron"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 </div>
                 <div class="rank-detail">
                     <div class="rank-detail-inner">
@@ -9489,6 +9880,154 @@
             zcPlaySound("salir");
         });
     }
+
+    // ===================================================================
+    // ZC26 · Novedades de la Clasificación (prefijo "zcnr-")
+    // ===================================================================
+    (function () {
+        const RANKING_NOVEDAD_DETAILS = {
+            "zyroxs-1": {
+                tag: "Ranking 1vs1",
+                title: "Zyroxs escala 18 puestos en el Ranking 1vs1 tras coronarse campeón del Torneo Duelos ZC26",
+                date: "30 ago 2026",
+                thumb: "NDCnews/NNDCC(1).png",
+                paragraphs: [
+                    "El jugador argentino Zyroxs protagonizó una de las subidas más marcadas de la temporada dentro del Ranking 1vs1 de ZC26, tras adjudicarse el título del Torneo Duelos disputado este fin de semana. Con este resultado, escaló dieciocho posiciones en la tabla general y se instaló entre los diez mejores del formato individual.",
+                    "El camino hacia el título no fue sencillo: Zyroxs debió superar a varios rivales sembrados por encima de él en la clasificación, lo que impactó de forma directa en el cálculo de su puntuación bajo el modelo Elo utilizado por ZC26, ya que vencer a jugadores de mayor puntaje otorga una recompensa proporcionalmente mayor.",
+                    "Con este salto en el ranking, Argentina vuelve a tener representación en la zona alta de la tabla de Duelos, un resultado que la comunidad celebró en redes sociales apenas se confirmaron los puntos actualizados.",
+                    "El próximo movimiento oficial del Ranking 1vs1 se reflejará en la actualización programada para los próximos días, donde se confirmará si Zyroxs logra sostenerse dentro del top 10."
+                ]
+            },
+            "robertbv-1": {
+                tag: "Ranking 1vs1",
+                title: "La hazaña de RobertBV: 100% de victorias sin perder una sola ronda",
+                date: "27 ago 2026",
+                thumb: "NDCnews/NNDCC(2).png",
+                paragraphs: [
+                    "RobertBV firmó una de las actuaciones más dominantes que se recuerdan en un torneo 1vs1 de ZC26 al completar el evento con un registro perfecto: ganó todas sus rondas sin ceder ni una sola, un cien por ciento de efectividad que rara vez se ve en el competitivo de Duelos.",
+                    "El nivel mostrado por RobertBV a lo largo de las rondas de eliminación directa obligó al sistema de puntuación a otorgarle una recompensa considerable, dado que varios de sus rivales ya contaban con puntuaciones elevadas dentro del ranking.",
+                    "Este resultado no solo se tradujo en una fuerte subida dentro de la tabla de posiciones, sino que también posicionó a RobertBV como uno de los nombres más comentados de cara a las próximas clasificatorias de ZC26.",
+                    "Desde la organización remarcaron que este tipo de actuaciones son las que el nuevo modelo de puntuación busca premiar: el rendimiento constante y sin margen de error dentro de un mismo torneo."
+                ]
+            },
+            "lev-1": {
+                tag: "Ranking 3vs3",
+                title: "LEVIATÁN ESPORTS toma el primer puesto del Ranking 3vs3 tras coronarse campeón de la ZC26 Agosto",
+                date: "8 ago 2026",
+                thumb: "NDCnews/NNDCC(3).png",
+                paragraphs: [
+                    "Tras conquistar el título de la ZC26 Agosto con un contundente tres a uno en la gran final, Leviatán Esports se hizo con el primer puesto del Ranking 3vs3, desplazando a un rival que había liderado la tabla durante buena parte de la temporada.",
+                    "El equipo sumó una cantidad importante de puntos gracias a la importancia otorgada a las rondas de Playoffs y a la Gran Final del torneo, categorías con mayor peso dentro de la fórmula de cálculo del ranking.",
+                    "Con este resultado, Leviatán Esports se convierte en el primer equipo en ocupar la cima del Ranking 3vs3 desde el reinicio de la temporada, marcando así el nivel a batir para el resto de las organizaciones."
+                ]
+            },
+            "movimientos-1": {
+                tag: "Ranking General",
+                title: "Semana de movimientos: varios equipos y jugadores entran al Top 10 de la Clasificación ZC26",
+                date: "5 ago 2026",
+                thumb: "NDCnews/NNDCC(4).png",
+                paragraphs: [
+                    "La actualización de esta semana trajo varios cambios dentro del Top 10 general de ZC26, tanto en la modalidad 1vs1 como en 3vs3. Distintos equipos y jugadores lograron sumar puntos suficientes tras una seguidilla de torneos y scrims oficiales disputados en las últimas semanas.",
+                    "Entre los movimientos más destacados se encuentran nuevas incorporaciones al top de la tabla, además de descensos de algunos nombres que venían sosteniendo su posición desde hace varias actualizaciones.",
+                    "Desde ZC26 recordamos que la tabla se actualiza automáticamente con cada torneo oficial, por lo que se recomienda revisar la sección de Ranking con frecuencia para no perderse ningún cambio."
+                ]
+            },
+            "temporada-1": {
+                tag: "Ranking General",
+                title: "Arranca la nueva temporada: así se reinicia la puntuación de cada jugador y equipo",
+                date: "1 ago 2026",
+                thumb: "NDCnews/NNDCC(5).png",
+                paragraphs: [
+                    "Con el inicio de la nueva temporada competitiva de ZC26, todos los jugadores y equipos fueron reposicionados dentro de una escala homogénea de puntos, en base a sus resultados obtenidos durante la temporada anterior.",
+                    "Este proceso de sembrado inicial busca garantizar que la tabla de posiciones refleje de forma justa el nivel competitivo alcanzado por cada participante, evitando así grandes desbalances de puntaje al comienzo de la temporada.",
+                    "A partir de este nuevo punto de partida, cada resultado en torneos oficiales, scrims transmitidos y clasificatorias comenzará a modificar la puntuación según el modelo Elo detallado en la sección \"¿Cómo se calcula la Clasificación?\"."
+                ]
+            }
+        };
+        // Orden cronológico (de la más reciente a la más antigua), igual
+        // que se muestran las tarjetas en "Novedades de la Clasificación"
+        // y en la página de "Todas las novedades".
+        const RANKING_NOVEDAD_ORDER = ["zyroxs-1", "robertbv-1", "lev-1", "movimientos-1", "temporada-1"];
+
+        const rnDetail = document.getElementById("rankingNovedadDetail");
+        const rnBack = document.getElementById("rankingNovedadDetailBack");
+        const rnHero = document.getElementById("rankingNovedadDetailHero");
+        const rnTag = document.getElementById("rankingNovedadDetailTag");
+        const rnTitle = document.getElementById("rankingNovedadDetailTitle");
+        const rnDate = document.getElementById("rankingNovedadDetailDate");
+        const rnBody = document.getElementById("rankingNovedadDetailBody");
+
+        function anyOverlayActive() {
+            return document.querySelector(".novedad-detail.active") !== null;
+        }
+
+        function openRankingNovedad(id) {
+            const data = RANKING_NOVEDAD_DETAILS[id];
+            if (!data || !rnDetail) return;
+            rnHero.src = data.thumb;
+            rnTag.textContent = data.tag;
+            rnTitle.textContent = data.title;
+            rnDate.textContent = "Publicado: " + data.date;
+            rnBody.innerHTML = data.paragraphs.map(p => `<p>${p}</p>`).join("");
+            rnDetail.classList.add("active");
+            rnDetail.scrollTop = 0;
+            document.body.style.overflow = "hidden";
+            zcPlaySound("entrar");
+        }
+        function closeRankingNovedad() {
+            rnDetail.classList.remove("active");
+            zcPlaySound("salir");
+            if (!anyOverlayActive()) document.body.style.overflow = "";
+        }
+        if (rnBack) rnBack.addEventListener("click", closeRankingNovedad);
+        document.querySelectorAll("[data-open-ranking-novedad]").forEach(el => {
+            el.addEventListener("click", () => {
+                openRankingNovedad(el.getAttribute("data-open-ranking-novedad"));
+            });
+        });
+
+        // Página "Todas las novedades de la Clasificación"
+        const zcnrAllBtn = document.getElementById("zcnrAllBtn");
+        const zcnrAllDetail = document.getElementById("zcnrAllDetail");
+        const zcnrAllDetailBack = document.getElementById("zcnrAllDetailBack");
+        const zcnrAllGrid = document.getElementById("zcnrAllGrid");
+
+        if (zcnrAllGrid) {
+            zcnrAllGrid.innerHTML = RANKING_NOVEDAD_ORDER.map(id => {
+                const data = RANKING_NOVEDAD_DETAILS[id];
+                return `
+                <button type="button" class="zcnr-all-card" data-open-ranking-novedad="${id}">
+                    <div class="zcnr-all-card-img"><img src="${data.thumb}" alt="" onerror="this.style.display='none'"></div>
+                    <div class="zcnr-all-card-tag">${data.tag}</div>
+                    <div class="zcnr-all-card-title">${data.title}</div>
+                    <div class="zcnr-all-card-date">${data.date}</div>
+                </button>`;
+            }).join("");
+            // Los clics dentro de la grilla recién creada también deben
+            // abrir el detalle de esa novedad (se agrega aquí porque el
+            // listener global de arriba ya corrió antes de crear estos botones).
+            zcnrAllGrid.querySelectorAll("[data-open-ranking-novedad]").forEach(el => {
+                el.addEventListener("click", () => {
+                    openRankingNovedad(el.getAttribute("data-open-ranking-novedad"));
+                });
+            });
+        }
+        if (zcnrAllBtn && zcnrAllDetail) {
+            zcnrAllBtn.addEventListener("click", () => {
+                zcnrAllDetail.classList.add("active");
+                zcnrAllDetail.scrollTop = 0;
+                document.body.style.overflow = "hidden";
+                zcPlaySound("entrar");
+            });
+        }
+        if (zcnrAllDetailBack && zcnrAllDetail) {
+            zcnrAllDetailBack.addEventListener("click", () => {
+                zcnrAllDetail.classList.remove("active");
+                zcPlaySound("salir");
+                if (!anyOverlayActive()) document.body.style.overflow = "";
+            });
+        }
+    })();
 
     const rankToggleBtn = document.getElementById("rankToggleBtn");
     const rankToggleIcon = document.getElementById("rankToggleIcon");
