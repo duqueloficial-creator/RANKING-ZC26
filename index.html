@@ -2404,6 +2404,9 @@
         #quickStatsOverlay {
             z-index: 1050;
         }
+        #allMatchesOverlay {
+            z-index: 1060;
+        }
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
@@ -2954,7 +2957,6 @@
             overflow-y: auto;
             overflow-x: hidden;
             scroll-snap-type: y mandatory;
-            padding-right: 8px;
             scrollbar-width: none;
         }
         .recent-list:focus-visible {
@@ -3015,6 +3017,449 @@
             color: #666666;
             text-align: center;
             margin-top: 4px;
+        }
+        /* ZC26 · botón "Ver todos" junto al título "Partidas recientes" */
+        .am-open-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            color: #cfcfcf;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .am-open-btn:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .am-open-btn-icon {
+            width: 10px;
+            height: 7px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .am-open-btn-icon span {
+            display: block;
+            width: 100%;
+            height: 1.2px;
+            background: currentColor;
+            border-radius: 1px;
+        }
+        /* ZC26 · modal "Todos los partidos" (misma familia visual que el
+           resto de paneles: info-panel reutilizado, así hereda el ancho
+           progresivo en tablet/escritorio) */
+        .am-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .am-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .am-subtitle {
+            font-size: 0.7rem;
+            color: #888888;
+        }
+        .am-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .am-list-head {
+            display: none;
+        }
+        .am-row {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-left: 3px solid rgba(255,255,255,0.15);
+            border-radius: 0;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+        }
+        .am-row.am-win { border-left-color: #5fd97a; }
+        .am-row.am-loss { border-left-color: #ff6b6b; }
+        .am-row-date {
+            font-size: 0.62rem;
+            color: #888888;
+            text-align: center;
+        }
+        .am-row-tier {
+            display: flex;
+            justify-content: center;
+        }
+        .am-tier-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.58rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+        .am-tier-badge.tier-s { background: rgba(255,215,60,0.16); color: #e3c878; }
+        .am-tier-badge.tier-a { background: rgba(70,220,110,0.16); color: #82CB9B; }
+        .am-tier-badge.tier-b { background: rgba(140,150,170,0.18); color: #a9b4c4; }
+        .am-row-tourney {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #dddddd;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .am-round {
+            font-weight: 400;
+            color: #888888;
+        }
+        .am-row-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .am-score-num {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .am-score-nums {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .am-score-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .am-score-finished {
+            background: #26262a;
+            color: #e8e8e8;
+            font-size: 0.56rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .am-score-status-date {
+            font-size: 0.5rem;
+            color: #888888;
+            white-space: nowrap;
+        }
+        .am-opponent {
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+            text-decoration: none;
+            display: inline;
+        }
+        .am-opponent-plain {
+            display: inline;
+        }
+        .am-empty {
+            color: #888888;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .am-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+            margin-bottom: 2px;
+        }
+        .am-filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .am-filter-btn {
+            background: none;
+            border: none;
+            color: #888888;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .am-filter-btn:hover { color: #cccccc; }
+        .am-filter-btn.active {
+            background: rgba(255,255,255,0.12);
+            color: #ffffff;
+        }
+        .am-filter-btn.active[data-result-filter="win"] { color: #5fd97a; }
+        .am-filter-btn.active[data-result-filter="loss"] { color: #ff6b6b; }
+        @media (min-width: 700px) and (max-width: 899px) {
+            .am-list-head { display: none; }
+            .am-row {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    "date    tier"
+                    "tourney tier"
+                    "score   score";
+                gap: 8px;
+                padding: 16px 18px;
+                text-align: initial;
+            }
+            .am-row-date {
+                grid-area: date;
+                text-align: left;
+                font-size: 0.72rem;
+                white-space: nowrap;
+            }
+            .am-row-tier {
+                grid-area: tier;
+                justify-content: flex-end;
+                align-self: start;
+            }
+            .am-row-tourney {
+                grid-area: tourney;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .am-row-score {
+                grid-area: score;
+                display: grid;
+                width: auto;
+                max-width: 100%;
+                justify-content: center;
+                grid-template-columns: minmax(60px,max-content) auto minmax(60px,max-content);
+                column-gap: 10px;
+                margin: 4px auto 0;
+            }
+            .am-row-score .match-badge { display: none; }
+            .am-row-score .am-score-num {
+                min-width: 20px;
+                text-align: center;
+            }
+            .am-row-score .am-score-name {
+                font-size: 0.78rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .am-row-score .am-score-name-own {
+                grid-column: 1;
+                text-align: right;
+            }
+            .am-row-score .am-score-nums { grid-column: 2; }
+            .am-row-score .am-score-name-opp {
+                grid-column: 3;
+                text-align: left;
+            }
+        }
+        /* ZC26 · en tablet/escritorio la lista se ve como una tabla de
+           verdad (fecha · tier · torneo · marcador · rival), imitando el
+           estilo de referencia de estadísticas de partidos */
+        @media (min-width: 900px) {
+            #allMatchesPanel {
+                max-width: 820px;
+            }
+            .am-filters {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 22px;
+            }
+            .am-list-head {
+                display: grid;
+                grid-template-columns: minmax(130px,150px) minmax(60px,80px) minmax(160px,1fr) minmax(220px,260px);
+                align-items: center;
+                gap: 12px;
+                padding: 0 18px 12px;
+                font-size: 0.66rem;
+                font-weight: 800;
+                letter-spacing: 0.4px;
+                text-transform: uppercase;
+                color: #666666;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                margin-bottom: 8px;
+            }
+            .am-head-date,
+            .am-head-tier { text-align: center; }
+            .am-head-tourney { text-align: left; }
+            .am-head-score {
+                text-align: center;
+            }
+            .am-row {
+                display: grid;
+                grid-template-columns: minmax(130px,150px) minmax(60px,80px) minmax(160px,1fr) minmax(220px,260px);
+                align-items: center;
+                gap: 12px;
+                padding: 16px 18px;
+                text-align: initial;
+            }
+            .am-row-date {
+                font-size: 0.74rem;
+                text-align: center;
+                white-space: nowrap;
+            }
+            .am-row-tier { justify-content: center; }
+            .am-row-tier .match-badge { display: none; }
+            .am-row-tourney {
+                font-size: 0.8rem;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .am-row-score {
+                display: grid;
+                width: 100%;
+                max-width: 100%;
+                grid-template-columns: minmax(0,max-content) auto minmax(0,max-content);
+                align-items: center;
+                justify-content: center;
+                column-gap: 8px;
+                margin: 0 auto;
+            }
+            .am-row-score .match-badge { display: none; }
+            .am-row-score .am-score-num {
+                min-width: 20px;
+                text-align: center;
+            }
+            .am-row-score .am-score-name {
+                font-size: 0.74rem;
+                max-width: 80px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .am-row-score .am-score-name-own {
+                grid-column: 1;
+                text-align: right;
+            }
+            .am-row-score .am-score-nums { grid-column: 2; }
+            .am-row-score .am-score-name-opp {
+                grid-column: 3;
+                text-align: left;
+            }
+        }
+        /* ZC26 · "Todos los partidos" SOLO en teléfono: evento + ronda +
+           tier arriba a la izquierda, W/L en la esquina superior derecha,
+           marcador grande centrado con nombres a los lados y el color
+           del ganador/perdedor en los números. En escritorio no se
+           usa nada de este bloque (los bloques de arriba quedan igual). */
+        @media (max-width: 699px) {
+            .am-row {
+                position: relative;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    "tourney tier"
+                    "date    date"
+                    "score   score";
+                text-align: left;
+                padding: 14px 14px 14px 14px;
+                column-gap: 10px;
+                row-gap: 4px;
+            }
+            .am-row-tourney {
+                grid-area: tourney;
+                text-align: left;
+                align-items: baseline;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 4px;
+                padding-right: 4px;
+            }
+            .am-row .am-round { margin-left: 0; }
+            .am-row-tier {
+                grid-area: tier;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 6px;
+            }
+            .am-row-tier .match-badge {
+                margin: 0;
+            }
+            .am-row-date-corner {
+                grid-area: date;
+                position: static;
+                background: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                font-size: 0.58rem;
+                color: #888888;
+                text-align: left;
+            }
+            .am-row-score {
+                grid-area: score;
+                display: grid;
+                grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+                align-items: center;
+                column-gap: 8px;
+                padding: 6px 0 2px;
+            }
+            .am-row-score .match-badge {
+                display: none;
+            }
+            .am-score-name {
+                font-size: 0.78rem;
+                font-weight: 700;
+                color: #cfcfcf;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .am-score-name-own {
+                grid-column: 1;
+                text-align: right;
+            }
+            .am-score-nums {
+                grid-column: 2;
+                justify-content: center;
+                gap: 14px;
+                white-space: nowrap;
+            }
+            .am-score-name-opp {
+                grid-column: 3;
+                text-align: left;
+            }
+            .am-score-num {
+                font-size: 1.6rem;
+                font-weight: 900;
+            }
+            .am-score-num.am-score-white { color: #ffffff; }
+            .am-score-num.am-score-gray { color: #8a8a8a; }
+            .am-score-finished {
+                font-size: 0.62rem;
+                padding: 3px 10px;
+                border-radius: 12px;
+            }
+            .am-score-status-date {
+                font-size: 0.54rem;
+            }
         }
         .ach-card {
             position: relative;
@@ -3145,7 +3590,7 @@
         }
         .recent-title-row {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             justify-content: space-between;
             gap: 8px;
         }
@@ -7034,7 +7479,7 @@
     </div>
 
     <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 3.0.16.5</div>
+    <div class="version-tag">Versión 4.2.0.19</div>
 
 </div>
 
@@ -7053,6 +7498,10 @@
 
 <div class="modal-overlay" id="quickStatsOverlay">
     <div class="quick-stats-panel" id="quickStatsPanel"></div>
+</div>
+
+<div class="modal-overlay" id="allMatchesOverlay">
+    <div class="info-panel" id="allMatchesPanel"></div>
 </div>
 
 <script>
@@ -9022,6 +9471,60 @@
         return won ? "match-win" : "match-loss";
     }
 
+    // ZC26 · encuentra el jugador del ranking que corresponde a un nombre,
+    // tag de equipo o ID alterno (se usa para poder abrir el perfil del
+    // rival directamente desde "Todos los partidos").
+    function findPlayerByToken(token) {
+        const nt = normId(token);
+        if (!nt) return null;
+        return PLAYERS.find(pl => {
+            const cands = [pl.name, pl.teamTag, ...(pl.alternateIds || [])].map(normId).filter(Boolean);
+            return cands.some(c => c === nt || c.includes(nt) || nt.includes(c));
+        }) || null;
+    }
+
+    // ZC26 · dado un jugador y una partida de su historial, decide de qué
+    // lado jugó, su marcador propio, el rival y si ganó o perdió.
+    function matchPerspective(p, m) {
+        const tokens = [p.name, ...(p.alternateIds || [])];
+        if (p.teamTag) tokens.push(p.teamTag);
+        const normTokens = tokens.map(normId).filter(Boolean);
+        function sideMatches(sideName) {
+            const ns = normId(sideName);
+            if (!ns) return false;
+            return normTokens.some(t => ns.includes(t) || t.includes(ns));
+        }
+        const side = sideMatches(m.teamA) ? "A" : (sideMatches(m.teamB) ? "B" : "A");
+        const myScore = side === "A" ? m.scoreA : m.scoreB;
+        const oppScore = side === "A" ? m.scoreB : m.scoreA;
+        const oppLabel = side === "A" ? m.teamB : m.teamA;
+        const ownLabel = side === "A" ? m.teamA : m.teamB;
+        return { myScore, oppScore, oppLabel, ownLabel, win: myScore > oppScore, oppPlayer: findPlayerByToken(oppLabel) };
+    }
+
+    // ZC26 · clasifica cada partida por Tier y nombre de torneo:
+    // - 3vs3 → Tier-S (torneo "ZC26 Ago"), es el torneo más importante
+    // - 1vs1 original (la que jugó RobertBV) → Tier-A
+    // - 1vs1 "Edición 4" → Tier-B
+    function matchTierMeta(tourney) {
+        const parts = (tourney || "").split("·").map(s => s.trim());
+        const event = parts[0] || "";
+        const round = parts[1] || "";
+        let tier, tierClass, tournament, is3v3;
+        if (/1v1|1vs1/i.test(event)) {
+            is3v3 = false;
+            if (/edici[oó]n\s*4/i.test(event)) {
+                tier = "Tier-B"; tierClass = "tier-b"; tournament = "1vs1 Edición 4";
+            } else {
+                tier = "Tier-A"; tierClass = "tier-a"; tournament = "ZC26 1v1";
+            }
+        } else {
+            is3v3 = true;
+            tier = "Tier-S"; tierClass = "tier-s"; tournament = "ZC26 Ago";
+        }
+        return { tier, tierClass, tournament, round, is3v3 };
+    }
+
     function renderCarousel(items, itemHtmlFn, emptyHtml, opts) {
         opts = opts || {};
         if (!items.length) return opts.externalCounter ? { trackHtml: emptyHtml, counterHtml: "" } : emptyHtml;
@@ -9545,7 +10048,7 @@
             </div>
             ${bsCategoryHtml(p)}
 
-            <div class="info-block-title recent-title-row">Partidas recientes</div>
+            <div class="info-block-title recent-title-row">Partidas recientes<button type="button" class="am-open-btn" data-all-matches="${PLAYERS.indexOf(p)}" aria-label="Ver todos los partidos"><span class="am-open-btn-icon"><span></span><span></span><span></span></span></button></div>
             ${recentListHtml}
 
             <div class="info-block-title">Logros</div>
@@ -9615,6 +10118,118 @@
         zcPlaySound("salir");
         zcStopRankSound();
         closeModal("playerModalOverlay");
+    }
+
+    // ZC26 · modal "Todos los partidos": tabla completa del historial de un
+    // jugador (fecha, tier, torneo, marcador y rival, con acceso directo al
+    // perfil del rival si está en el ranking).
+    function openAllMatchesModal(p) {
+        const panel = document.getElementById("allMatchesPanel");
+        const matches = p.recent || [];
+        const rowsHtml = matches.length
+            ? matches.map(m => {
+                const meta = matchTierMeta(m.tourney);
+                const persp = matchPerspective(p, m);
+                const oppIdx = (!meta.is3v3 && persp.oppPlayer) ? PLAYERS.indexOf(persp.oppPlayer) : -1;
+                const oppNameHtml = oppIdx >= 0
+                    ? `<button type="button" class="am-score-name am-score-name-opp am-opponent" data-open-player="${oppIdx}">${persp.oppLabel}</button>`
+                    : `<span class="am-score-name am-score-name-opp am-opponent-plain">${persp.oppLabel}</span>`;
+                return `
+                <div class="am-row ${persp.win ? "am-win" : "am-loss"}" data-tier="${meta.tierClass}" data-result="${persp.win ? "win" : "loss"}">
+                    <div class="am-row-date am-row-date-corner">${m.date}${m.time ? " · " + m.time : ""}</div>
+                    <div class="am-row-tier">
+                        <span class="am-tier-badge ${meta.tierClass}">${meta.tier}</span>
+                        <span class="match-badge ${persp.win ? "win" : "loss"}">${persp.win ? "W" : "L"}</span>
+                    </div>
+                    <div class="am-row-tourney">
+                        <span class="am-tourney-name">${meta.tournament}</span>${meta.round ? `<span class="am-round">${meta.round}</span>` : ""}
+                    </div>
+                    <div class="am-row-score">
+                        <span class="match-badge ${persp.win ? "win" : "loss"}">${persp.win ? "W" : "L"}</span>
+                        <span class="am-score-name am-score-name-own">${persp.ownLabel}</span>
+                        <span class="am-score-nums">
+                            <span class="am-score-num ${persp.win ? "am-score-white" : "am-score-gray"}">${persp.myScore}</span>
+                            <span class="am-score-status">
+                                <span class="am-score-finished">Finished</span>
+                                <span class="am-score-status-date">${m.date}</span>
+                            </span>
+                            <span class="am-score-num ${persp.win ? "am-score-gray" : "am-score-white"}">${persp.oppScore}</span>
+                        </span>
+                        ${oppNameHtml}
+                    </div>
+                </div>`;
+            }).join("")
+            : `<div class="am-empty">Sin partidas registradas</div>`;
+        panel.className = "info-panel";
+        const filtersHtml = matches.length ? `
+            <div class="am-filters">
+                <div class="am-filter-group" data-filter-group="tier">
+                    <button type="button" class="am-filter-btn active" data-tier-filter="all">Todos</button>
+                    <button type="button" class="am-filter-btn" data-tier-filter="tier-s">Tier-S</button>
+                    <button type="button" class="am-filter-btn" data-tier-filter="tier-a">Tier-A</button>
+                    <button type="button" class="am-filter-btn" data-tier-filter="tier-b">Tier-B</button>
+                </div>
+                <div class="am-filter-group" data-filter-group="result">
+                    <button type="button" class="am-filter-btn active" data-result-filter="all">Todos</button>
+                    <button type="button" class="am-filter-btn" data-result-filter="win">Victorias</button>
+                    <button type="button" class="am-filter-btn" data-result-filter="loss">Derrotas</button>
+                </div>
+            </div>` : "";
+        panel.innerHTML = `
+            <div class="info-top-row">
+                <div class="am-title-wrap">
+                    <div class="am-title">Todos los partidos</div>
+                    <div class="am-subtitle">${p.name}</div>
+                </div>
+                <span class="info-close-x">✕</span>
+            </div>
+            ${filtersHtml}
+            <div class="am-list-head">
+                <span class="am-head-date">Fecha</span><span class="am-head-tier">Tier</span><span class="am-head-tourney">Torneo</span><span class="am-head-score">Marcador</span>
+            </div>
+            <div class="am-list">${rowsHtml}</div>
+            <div class="am-empty am-empty-filtered" style="display:none;">No hay partidas con ese filtro</div>
+        `;
+        panel.scrollTop = 0;
+        openModal("allMatchesOverlay");
+        zcPlaySound("entrar");
+        initAllMatchesFilters(panel);
+    }
+    // ZC26 · filtros de la modal "Todos los partidos": por Tier
+    // (Tier-S/A/B) y por resultado (Victorias/Derrotas), combinables
+    // entre sí. Funciona igual en escritorio y en teléfono.
+    function initAllMatchesFilters(panel) {
+        const state = { tier: "all", result: "all" };
+        const rows = Array.from(panel.querySelectorAll(".am-list .am-row"));
+        const emptyFiltered = panel.querySelector(".am-empty-filtered");
+        function applyFilters() {
+            let visibleCount = 0;
+            rows.forEach(row => {
+                const matchesTier = state.tier === "all" || row.dataset.tier === state.tier;
+                const matchesResult = state.result === "all" || row.dataset.result === state.result;
+                const show = matchesTier && matchesResult;
+                row.style.display = show ? "" : "none";
+                if (show) visibleCount++;
+            });
+            if (emptyFiltered) emptyFiltered.style.display = visibleCount === 0 ? "" : "none";
+        }
+        panel.querySelectorAll(".am-filter-group").forEach(group => {
+            const groupKey = group.dataset.filterGroup;
+            group.querySelectorAll(".am-filter-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    group.querySelectorAll(".am-filter-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    state[groupKey] = btn.dataset.tierFilter || btn.dataset.resultFilter || "all";
+                    zcPlaySound("click");
+                    applyFilters();
+                });
+            });
+        });
+        applyFilters();
+    }
+    function closeAllMatchesModal() {
+        zcPlaySound("salir");
+        closeModal("allMatchesOverlay");
     }
 
     function openTrophyModal(t) {
@@ -9836,6 +10451,9 @@
     document.getElementById("quickStatsOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeQuickStats();
     });
+    document.getElementById("allMatchesOverlay").addEventListener("click", function (e) {
+        if (e.target === this) closeAllMatchesModal();
+    });
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeAllModals();
     });
@@ -9852,6 +10470,20 @@
             closeTrophyModal();
         } else if (e.target.closest("#quickStatsPanel .info-close-x")) {
             closeQuickStats();
+        } else if (e.target.closest("#allMatchesPanel .info-close-x")) {
+            closeAllMatchesModal();
+        } else {
+            const allMatchesBtn = e.target.closest("[data-all-matches]");
+            if (allMatchesBtn) {
+                zcPlaySound("click");
+                openAllMatchesModal(PLAYERS[Number(allMatchesBtn.dataset.allMatches)]);
+                return;
+            }
+            const oppBtn = e.target.closest("#allMatchesPanel [data-open-player]");
+            if (oppBtn) {
+                zcPlaySound("click");
+                openPlayerModal(PLAYERS[Number(oppBtn.dataset.openPlayer)]);
+            }
         }
     });
 
