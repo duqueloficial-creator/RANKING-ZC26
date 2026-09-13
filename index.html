@@ -3165,6 +3165,32 @@
             color: #888888;
             white-space: nowrap;
         }
+        .am-score-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            min-width: 0;
+        }
+        .am-team-shield {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: #1c1c20;
+            border: 1px solid rgba(255,255,255,0.06);
+            object-fit: contain;
+            padding: 3px;
+            flex-shrink: 0;
+        }
+        .am-score-rank {
+            font-size: 0.52rem;
+            font-weight: 600;
+            color: #888888;
+            background: rgba(255,255,255,0.05);
+            padding: 1px 7px;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
         .am-opponent {
             background: none;
             border: none;
@@ -3269,19 +3295,21 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-            .am-row-score .am-score-name-own {
+            .am-row-score .am-score-team-own {
                 grid-column: 1;
-                text-align: right;
             }
             .am-row-score .am-score-nums { grid-column: 2; }
-            .am-row-score .am-score-name-opp {
+            .am-row-score .am-score-team-opp {
                 grid-column: 3;
-                text-align: left;
             }
         }
         /* ZC26 · en tablet/escritorio la lista se ve como una tabla de
            verdad (fecha · tier · torneo · marcador · rival), imitando el
-           estilo de referencia de estadísticas de partidos */
+           estilo de referencia de estadísticas de partidos.
+           Las columnas se comparten entre TODAS las filas mediante un
+           grid único (subgrid en cada .am-row), así "Finished" y el
+           marcador quedan exactamente alineados fila por fila en vez
+           de centrarse cada uno por separado según el largo del nombre. */
         @media (min-width: 900px) {
             #allMatchesPanel {
                 max-width: 820px;
@@ -3293,7 +3321,8 @@
             }
             .am-list-head {
                 display: grid;
-                grid-template-columns: minmax(130px,150px) minmax(60px,80px) minmax(160px,1fr) minmax(220px,260px);
+                grid-template-columns: subgrid;
+                grid-column: 1 / 7;
                 align-items: center;
                 gap: 12px;
                 padding: 0 18px 12px;
@@ -3309,37 +3338,45 @@
             .am-head-tier { text-align: center; }
             .am-head-tourney { text-align: left; }
             .am-head-score {
+                grid-column: 5;
                 text-align: center;
+            }
+            .am-table {
+                display: grid;
+                grid-template-columns: minmax(130px,150px) minmax(60px,80px) minmax(160px,240px) 100px max-content 100px;
+            }
+            .am-list {
+                display: grid;
+                grid-template-columns: subgrid;
+                grid-column: 1 / 7;
+                align-items: stretch;
+                gap: 10px;
             }
             .am-row {
                 display: grid;
-                grid-template-columns: minmax(130px,150px) minmax(60px,80px) minmax(160px,1fr) minmax(220px,260px);
+                grid-template-columns: subgrid;
+                grid-column: 1 / 7;
                 align-items: center;
                 gap: 12px;
                 padding: 16px 18px;
                 text-align: initial;
             }
             .am-row-date {
+                grid-column: 1;
                 font-size: 0.74rem;
                 text-align: center;
                 white-space: nowrap;
             }
-            .am-row-tier { justify-content: center; }
+            .am-row-tier { grid-column: 2; justify-content: center; }
             .am-row-tier .match-badge { display: none; }
             .am-row-tourney {
+                grid-column: 3;
                 font-size: 0.8rem;
                 text-align: left;
                 align-items: flex-start;
             }
             .am-row-score {
-                display: grid;
-                width: 100%;
-                max-width: 100%;
-                grid-template-columns: minmax(0,max-content) auto minmax(0,max-content);
-                align-items: center;
-                justify-content: center;
-                column-gap: 8px;
-                margin: 0 auto;
+                display: contents;
             }
             .am-row-score .match-badge { display: none; }
             .am-row-score .am-score-num {
@@ -3348,19 +3385,19 @@
             }
             .am-row-score .am-score-name {
                 font-size: 0.74rem;
-                max-width: 80px;
+                max-width: 90px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-            .am-row-score .am-score-name-own {
-                grid-column: 1;
-                text-align: right;
+            .am-row-score .am-score-team-own {
+                grid-column: 4;
+                justify-self: end;
             }
-            .am-row-score .am-score-nums { grid-column: 2; }
-            .am-row-score .am-score-name-opp {
-                grid-column: 3;
-                text-align: left;
+            .am-row-score .am-score-nums { grid-column: 5; }
+            .am-row-score .am-score-team-opp {
+                grid-column: 6;
+                justify-self: start;
             }
         }
         /* ZC26 · "Todos los partidos" SOLO en teléfono: evento + ronda +
@@ -3432,9 +3469,8 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-            .am-score-name-own {
+            .am-score-team-own {
                 grid-column: 1;
-                text-align: right;
             }
             .am-score-nums {
                 grid-column: 2;
@@ -3442,9 +3478,8 @@
                 gap: 14px;
                 white-space: nowrap;
             }
-            .am-score-name-opp {
+            .am-score-team-opp {
                 grid-column: 3;
-                text-align: left;
             }
             .am-score-num {
                 font-size: 1.6rem;
@@ -3459,6 +3494,19 @@
             }
             .am-score-status-date {
                 font-size: 0.54rem;
+            }
+            /* ZC26 · escudo por defecto más grande y sin borde/línea en
+               teléfono (se conserva el fondo, solo se agranda el ícono y
+               se quita el borde para que se vea limpio como el de
+               referencia). */
+            .am-team-shield {
+                width: 40px;
+                height: 40px;
+                padding: 6px;
+                border: none;
+            }
+            .am-score-team {
+                gap: 5px;
             }
         }
         .ach-card {
@@ -10123,6 +10171,13 @@
     // ZC26 · modal "Todos los partidos": tabla completa del historial de un
     // jugador (fecha, tier, torneo, marcador y rival, con acceso directo al
     // perfil del rival si está en el ranking).
+    const ZC_SHIELD_DEFAULT = "escudo-default.png";
+    function teamShieldHtml() {
+        return `<img class="am-team-shield" src="${ZC_SHIELD_DEFAULT}" alt="" onerror="this.style.visibility='hidden'">`;
+    }
+    function rankPillHtml(idx) {
+        return idx >= 0 ? `<span class="am-score-rank">— ${idx + 1}°.</span>` : "";
+    }
     function openAllMatchesModal(p) {
         const panel = document.getElementById("allMatchesPanel");
         const matches = p.recent || [];
@@ -10131,6 +10186,7 @@
                 const meta = matchTierMeta(m.tourney);
                 const persp = matchPerspective(p, m);
                 const oppIdx = (!meta.is3v3 && persp.oppPlayer) ? PLAYERS.indexOf(persp.oppPlayer) : -1;
+                const ownIdx = !meta.is3v3 ? PLAYERS.indexOf(p) : -1;
                 const oppNameHtml = oppIdx >= 0
                     ? `<button type="button" class="am-score-name am-score-name-opp am-opponent" data-open-player="${oppIdx}">${persp.oppLabel}</button>`
                     : `<span class="am-score-name am-score-name-opp am-opponent-plain">${persp.oppLabel}</span>`;
@@ -10146,7 +10202,11 @@
                     </div>
                     <div class="am-row-score">
                         <span class="match-badge ${persp.win ? "win" : "loss"}">${persp.win ? "W" : "L"}</span>
-                        <span class="am-score-name am-score-name-own">${persp.ownLabel}</span>
+                        <div class="am-score-team am-score-team-own">
+                            ${!meta.is3v3 ? teamShieldHtml() : ""}
+                            <span class="am-score-name am-score-name-own">${persp.ownLabel}</span>
+                            ${rankPillHtml(ownIdx)}
+                        </div>
                         <span class="am-score-nums">
                             <span class="am-score-num ${persp.win ? "am-score-white" : "am-score-gray"}">${persp.myScore}</span>
                             <span class="am-score-status">
@@ -10155,7 +10215,11 @@
                             </span>
                             <span class="am-score-num ${persp.win ? "am-score-gray" : "am-score-white"}">${persp.oppScore}</span>
                         </span>
-                        ${oppNameHtml}
+                        <div class="am-score-team am-score-team-opp">
+                            ${!meta.is3v3 ? teamShieldHtml() : ""}
+                            ${oppNameHtml}
+                            ${rankPillHtml(oppIdx)}
+                        </div>
                     </div>
                 </div>`;
             }).join("")
@@ -10184,10 +10248,12 @@
                 <span class="info-close-x">✕</span>
             </div>
             ${filtersHtml}
-            <div class="am-list-head">
-                <span class="am-head-date">Fecha</span><span class="am-head-tier">Tier</span><span class="am-head-tourney">Torneo</span><span class="am-head-score">Marcador</span>
+            <div class="am-table">
+                <div class="am-list-head">
+                    <span class="am-head-date">Fecha</span><span class="am-head-tier">Tier</span><span class="am-head-tourney">Torneo</span><span class="am-head-score">Marcador</span>
+                </div>
+                <div class="am-list">${rowsHtml}</div>
             </div>
-            <div class="am-list">${rowsHtml}</div>
             <div class="am-empty am-empty-filtered" style="display:none;">No hay partidas con ese filtro</div>
         `;
         panel.scrollTop = 0;
