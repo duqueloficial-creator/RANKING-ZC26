@@ -3245,6 +3245,84 @@
         }
         .am-filter-btn.active[data-result-filter="win"] { color: #5fd97a; }
         .am-filter-btn.active[data-result-filter="loss"] { color: #ff6b6b; }
+        /* ZC26 · barra de búsqueda de las modales "Todos los partidos" /
+           "Todos los logros": input + lista de sugerencias con el texto
+           coincidente en negrita. */
+        .zc-search-wrap {
+            position: relative;
+            margin-top: 14px;
+        }
+        .zc-search-input {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.78rem;
+            padding: 9px 34px 9px 12px;
+            outline: none;
+        }
+        .zc-search-input::placeholder { color: #888888; }
+        .zc-search-input:focus {
+            border-color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.09);
+        }
+        .zc-search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border: 1.4px solid #888888;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .zc-search-icon::after {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 1.4px;
+            background: #888888;
+            right: -4px;
+            bottom: -1px;
+            transform: rotate(45deg);
+        }
+        .zc-search-suggestions {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% + 4px);
+            background: #17171a;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 20;
+            max-height: 220px;
+            overflow-y: auto;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+        }
+        .zc-search-suggestion {
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            color: #aaaaaa;
+            cursor: pointer;
+        }
+        .zc-search-suggestion:hover,
+        .zc-search-suggestion.zc-active {
+            background: rgba(255,255,255,0.08);
+            color: #dddddd;
+        }
+        .zc-search-suggestion b {
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .zc-search-empty {
+            display: none;
+        }
         @media (min-width: 700px) and (max-width: 899px) {
             .am-list-head { display: none; }
             .am-row {
@@ -7552,6 +7630,10 @@
     <div class="info-panel" id="allMatchesPanel"></div>
 </div>
 
+<div class="modal-overlay" id="allAchievementsOverlay">
+    <div class="info-panel" id="allAchievementsPanel"></div>
+</div>
+
 <script>
     /* ===================================================================
        ZC26 · Sistema de sonidos de navegación (carpeta /sound)
@@ -9502,6 +9584,16 @@
             .toLowerCase().replace(/[^a-z0-9]/g, "");
     }
 
+    // ZC26 · normalización "suave" para la barra de búsqueda de las modales
+    // (quita acentos y pasa a minúsculas, pero conserva espacios/guiones
+    // para que la coincidencia de subcadenas funcione como en un buscador
+    // normal).
+    function searchNorm(s) {
+        return (s || "").toString()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+    }
+
     function matchResultClass(p, m) {
         const tokens = [p.name, ...(p.alternateIds || [])];
         if (p.teamTag) tokens.push(p.teamTag);
@@ -10099,7 +10191,7 @@
             <div class="info-block-title recent-title-row">Partidas recientes<button type="button" class="am-open-btn" data-all-matches="${PLAYERS.indexOf(p)}" aria-label="Ver todos los partidos"><span class="am-open-btn-icon"><span></span><span></span><span></span></span></button></div>
             ${recentListHtml}
 
-            <div class="info-block-title">Logros</div>
+            <div class="info-block-title recent-title-row">Logros<button type="button" class="am-open-btn" data-all-achievements="${PLAYERS.indexOf(p)}" aria-label="Ver todos los logros"><span class="am-open-btn-icon"><span></span><span></span><span></span></span></button></div>
             <div class="ach-list">
             ${p.achievements.length ? p.achievements.map(a => {
                 const tier = achTierClass(a);
@@ -10178,6 +10270,59 @@
     function rankPillHtml(idx) {
         return idx >= 0 ? `<span class="am-score-rank">— ${idx + 1}°.</span>` : "";
     }
+    // ZC26 · barra de búsqueda reutilizable para las modales "Todos los
+    // partidos" y "Todos los logros". `candidates` es la lista de términos
+    // sugeribles (fecha, torneo, rival, tier, resultado...); al escribir se
+    // filtran los que contienen el texto y se resalta en negrita la parte
+    // coincidente. Al hacer click en una sugerencia se autocompleta el input
+    // y se dispara la búsqueda.
+    function markupHighlight(candidate, q) {
+        const nCand = searchNorm(candidate);
+        const idx = nCand.indexOf(q);
+        if (idx === -1) return candidate;
+        return candidate.slice(0, idx) + "<b>" + candidate.slice(idx, idx + q.length) + "</b>" + candidate.slice(idx + q.length);
+    }
+    function initSearchBox(panel, opts) {
+        const input = panel.querySelector(opts.inputSelector);
+        const box = panel.querySelector(opts.boxSelector);
+        if (!input || !box) return;
+        function renderSuggestions(raw) {
+            const q = searchNorm(raw).trim();
+            if (!q) { box.innerHTML = ""; box.style.display = "none"; return; }
+            const seen = new Set();
+            const results = [];
+            for (const c of opts.candidates) {
+                const key = searchNorm(c);
+                if (!key.includes(q) || seen.has(key)) continue;
+                seen.add(key);
+                results.push(c);
+                if (results.length >= 8) break;
+            }
+            if (!results.length) { box.innerHTML = ""; box.style.display = "none"; return; }
+            box.innerHTML = results.map(c => `<div class="zc-search-suggestion" data-suggestion="${c.replace(/"/g, "&quot;")}">${markupHighlight(c, q)}</div>`).join("");
+            box.style.display = "block";
+        }
+        input.addEventListener("input", () => {
+            opts.onQueryChange(input.value);
+            renderSuggestions(input.value);
+        });
+        input.addEventListener("focus", () => renderSuggestions(input.value));
+        // mousedown (no click) para que se dispare antes del blur del input
+        // y así no se cierre la lista de sugerencias antes de registrarse.
+        box.addEventListener("mousedown", (e) => {
+            const item = e.target.closest("[data-suggestion]");
+            if (!item) return;
+            e.preventDefault();
+            input.value = item.dataset.suggestion;
+            box.innerHTML = "";
+            box.style.display = "none";
+            opts.onQueryChange(input.value);
+            zcPlaySound("click");
+        });
+        input.addEventListener("blur", () => {
+            setTimeout(() => { box.style.display = "none"; }, 150);
+        });
+    }
     function openAllMatchesModal(p) {
         const panel = document.getElementById("allMatchesPanel");
         const matches = p.recent || [];
@@ -10191,7 +10336,7 @@
                     ? `<button type="button" class="am-score-name am-score-name-opp am-opponent" data-open-player="${oppIdx}">${persp.oppLabel}</button>`
                     : `<span class="am-score-name am-score-name-opp am-opponent-plain">${persp.oppLabel}</span>`;
                 return `
-                <div class="am-row ${persp.win ? "am-win" : "am-loss"}" data-tier="${meta.tierClass}" data-result="${persp.win ? "win" : "loss"}">
+                <div class="am-row ${persp.win ? "am-win" : "am-loss"}" data-tier="${meta.tierClass}" data-result="${persp.win ? "win" : "loss"}" data-search="${searchNorm([m.date, m.time, meta.tier, meta.tournament, meta.round, persp.ownLabel, persp.oppLabel, persp.win ? "victoria win" : "derrota loss"].filter(Boolean).join(" "))}">
                     <div class="am-row-date am-row-date-corner">${m.date}${m.time ? " · " + m.time : ""}</div>
                     <div class="am-row-tier">
                         <span class="am-tier-badge ${meta.tierClass}">${meta.tier}</span>
@@ -10224,6 +10369,25 @@
                 </div>`;
             }).join("")
             : `<div class="am-empty">Sin partidas registradas</div>`;
+        const searchCandidates = [];
+        const seenCand = new Set();
+        function addCand(v) {
+            if (!v) return;
+            const key = searchNorm(v);
+            if (!key || seenCand.has(key)) return;
+            seenCand.add(key);
+            searchCandidates.push(v);
+        }
+        matches.forEach(m => {
+            const meta = matchTierMeta(m.tourney);
+            const persp = matchPerspective(p, m);
+            addCand(m.date);
+            addCand(meta.tournament);
+            addCand(meta.round);
+            addCand(meta.tier);
+            addCand(persp.oppLabel);
+            addCand(persp.win ? "Victoria" : "Derrota");
+        });
         panel.className = "info-panel";
         const filtersHtml = matches.length ? `
             <div class="am-filters">
@@ -10239,6 +10403,12 @@
                     <button type="button" class="am-filter-btn" data-result-filter="loss">Derrotas</button>
                 </div>
             </div>` : "";
+        const searchHtml = matches.length ? `
+            <div class="zc-search-wrap">
+                <input type="text" class="zc-search-input" data-am-search-input placeholder="Buscar por nombre, fecha, torneo, rival, tier..." autocomplete="off">
+                <span class="zc-search-icon"></span>
+                <div class="zc-search-suggestions" data-am-search-box></div>
+            </div>` : "";
         panel.innerHTML = `
             <div class="info-top-row">
                 <div class="am-title-wrap">
@@ -10247,6 +10417,7 @@
                 </div>
                 <span class="info-close-x">✕</span>
             </div>
+            ${searchHtml}
             ${filtersHtml}
             <div class="am-table">
                 <div class="am-list-head">
@@ -10259,13 +10430,14 @@
         panel.scrollTop = 0;
         openModal("allMatchesOverlay");
         zcPlaySound("entrar");
-        initAllMatchesFilters(panel);
+        initAllMatchesFilters(panel, searchCandidates);
     }
     // ZC26 · filtros de la modal "Todos los partidos": por Tier
-    // (Tier-S/A/B) y por resultado (Victorias/Derrotas), combinables
-    // entre sí. Funciona igual en escritorio y en teléfono.
-    function initAllMatchesFilters(panel) {
-        const state = { tier: "all", result: "all" };
+    // (Tier-S/A/B), por resultado (Victorias/Derrotas) y por texto libre
+    // (barra de búsqueda con sugerencias), combinables entre sí. Funciona
+    // igual en escritorio y en teléfono.
+    function initAllMatchesFilters(panel, searchCandidates) {
+        const state = { tier: "all", result: "all", query: "" };
         const rows = Array.from(panel.querySelectorAll(".am-list .am-row"));
         const emptyFiltered = panel.querySelector(".am-empty-filtered");
         function applyFilters() {
@@ -10273,7 +10445,8 @@
             rows.forEach(row => {
                 const matchesTier = state.tier === "all" || row.dataset.tier === state.tier;
                 const matchesResult = state.result === "all" || row.dataset.result === state.result;
-                const show = matchesTier && matchesResult;
+                const matchesQuery = !state.query || (row.dataset.search || "").includes(state.query);
+                const show = matchesTier && matchesResult && matchesQuery;
                 row.style.display = show ? "" : "none";
                 if (show) visibleCount++;
             });
@@ -10291,11 +10464,139 @@
                 });
             });
         });
+        if (searchCandidates && searchCandidates.length) {
+            initSearchBox(panel, {
+                inputSelector: "[data-am-search-input]",
+                boxSelector: "[data-am-search-box]",
+                candidates: searchCandidates,
+                onQueryChange: (value) => {
+                    state.query = searchNorm(value).trim();
+                    applyFilters();
+                }
+            });
+        }
         applyFilters();
     }
     function closeAllMatchesModal() {
         zcPlaySound("salir");
         closeModal("allMatchesOverlay");
+    }
+
+    // ZC26 · modal "Todos los logros": misma familia visual que "Todos los
+    // partidos" (info-panel reutilizado), con filtro por tipo de logro y
+    // barra de búsqueda (fecha, evento/torneo, rival, tier/lugar...).
+    function openAllAchievementsModal(p) {
+        const panel = document.getElementById("allAchievementsPanel");
+        const achievements = p.achievements || [];
+        const cardsHtml = achievements.length
+            ? achievements.map(a => {
+                const tier = achTierClass(a);
+                const place = achPlaceLabel(a);
+                return `
+                <div class="ach-card ${tier}" data-ach-tier="${tier || "other"}" data-search="${searchNorm([a.date, place, a.tournament, a.teamA, a.teamB, a.result].filter(Boolean).join(" "))}">
+                    <div class="ach-top">
+                        <span class="ach-date">${a.date}</span>
+                        <span class="ach-place ${tier}">${place}</span>
+                    </div>
+                    <div class="ach-tournament">${a.tournament}</div>
+                    ${a.teamA ? `<div class="ach-score">${a.teamA} ${scorePairHtml(a.scoreA, a.scoreB, true)} ${a.teamB}</div>` : ""}
+                    <div class="ach-result">${a.result}</div>
+                </div>`;
+            }).join("")
+            : `<div class="am-empty">Sin logros registrados</div>`;
+        const searchCandidates = [];
+        const seenCand = new Set();
+        function addCand(v) {
+            if (!v) return;
+            const key = searchNorm(v);
+            if (!key || seenCand.has(key)) return;
+            seenCand.add(key);
+            searchCandidates.push(v);
+        }
+        achievements.forEach(a => {
+            addCand(a.date);
+            addCand(achPlaceLabel(a));
+            addCand(a.tournament);
+            addCand(a.teamA);
+            addCand(a.teamB);
+        });
+        panel.className = "info-panel";
+        const filtersHtml = achievements.length ? `
+            <div class="am-filters">
+                <div class="am-filter-group" data-filter-group="achTier">
+                    <button type="button" class="am-filter-btn active" data-ach-tier-filter="all">Todos</button>
+                    <button type="button" class="am-filter-btn" data-ach-tier-filter="gold">Oro</button>
+                    <button type="button" class="am-filter-btn" data-ach-tier-filter="silver">Plata</button>
+                    <button type="button" class="am-filter-btn" data-ach-tier-filter="purple">3ro-4to</button>
+                </div>
+            </div>` : "";
+        const searchHtml = achievements.length ? `
+            <div class="zc-search-wrap">
+                <input type="text" class="zc-search-input" data-ach-search-input placeholder="Buscar por nombre, fecha, evento, rival, tier..." autocomplete="off">
+                <span class="zc-search-icon"></span>
+                <div class="zc-search-suggestions" data-ach-search-box></div>
+            </div>` : "";
+        panel.innerHTML = `
+            <div class="info-top-row">
+                <div class="am-title-wrap">
+                    <div class="am-title">Todos los logros</div>
+                    <div class="am-subtitle">${p.name}</div>
+                </div>
+                <span class="info-close-x">✕</span>
+            </div>
+            ${searchHtml}
+            ${filtersHtml}
+            <div class="ach-list">${cardsHtml}</div>
+            <div class="am-empty am-empty-filtered" style="display:none;">No hay logros con ese filtro</div>
+        `;
+        panel.scrollTop = 0;
+        openModal("allAchievementsOverlay");
+        zcPlaySound("entrar");
+        initAllAchievementsFilters(panel, searchCandidates);
+    }
+    function initAllAchievementsFilters(panel, searchCandidates) {
+        const state = { achTier: "all", query: "" };
+        const cards = Array.from(panel.querySelectorAll(".ach-list .ach-card"));
+        const emptyFiltered = panel.querySelector(".am-empty-filtered");
+        function applyFilters() {
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const matchesTier = state.achTier === "all" || card.dataset.achTier === state.achTier;
+                const matchesQuery = !state.query || (card.dataset.search || "").includes(state.query);
+                const show = matchesTier && matchesQuery;
+                card.style.display = show ? "" : "none";
+                if (show) visibleCount++;
+            });
+            if (emptyFiltered) emptyFiltered.style.display = visibleCount === 0 ? "" : "none";
+        }
+        panel.querySelectorAll(".am-filter-group").forEach(group => {
+            const groupKey = group.dataset.filterGroup;
+            group.querySelectorAll(".am-filter-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    group.querySelectorAll(".am-filter-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    state[groupKey] = btn.dataset.achTierFilter || "all";
+                    zcPlaySound("click");
+                    applyFilters();
+                });
+            });
+        });
+        if (searchCandidates && searchCandidates.length) {
+            initSearchBox(panel, {
+                inputSelector: "[data-ach-search-input]",
+                boxSelector: "[data-ach-search-box]",
+                candidates: searchCandidates,
+                onQueryChange: (value) => {
+                    state.query = searchNorm(value).trim();
+                    applyFilters();
+                }
+            });
+        }
+        applyFilters();
+    }
+    function closeAllAchievementsModal() {
+        zcPlaySound("salir");
+        closeModal("allAchievementsOverlay");
     }
 
     function openTrophyModal(t) {
@@ -10520,6 +10821,9 @@
     document.getElementById("allMatchesOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeAllMatchesModal();
     });
+    document.getElementById("allAchievementsOverlay").addEventListener("click", function (e) {
+        if (e.target === this) closeAllAchievementsModal();
+    });
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeAllModals();
     });
@@ -10538,11 +10842,19 @@
             closeQuickStats();
         } else if (e.target.closest("#allMatchesPanel .info-close-x")) {
             closeAllMatchesModal();
+        } else if (e.target.closest("#allAchievementsPanel .info-close-x")) {
+            closeAllAchievementsModal();
         } else {
             const allMatchesBtn = e.target.closest("[data-all-matches]");
             if (allMatchesBtn) {
                 zcPlaySound("click");
                 openAllMatchesModal(PLAYERS[Number(allMatchesBtn.dataset.allMatches)]);
+                return;
+            }
+            const allAchievementsBtn = e.target.closest("[data-all-achievements]");
+            if (allAchievementsBtn) {
+                zcPlaySound("click");
+                openAllAchievementsModal(PLAYERS[Number(allAchievementsBtn.dataset.allAchievements)]);
                 return;
             }
             const oppBtn = e.target.closest("#allMatchesPanel [data-open-player]");
