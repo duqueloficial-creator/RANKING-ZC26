@@ -1653,6 +1653,133 @@
             border-radius: 16px;
             padding: 10px;
         }
+
+        /* ===================== ZC26 · CALENDARIO DE ENCUENTROS ===================== */
+        .zcfx-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+        .zcfx-day {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .zcfx-day-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 2px;
+        }
+        .zcfx-day-name {
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+        .zcfx-day-date {
+            font-size: 0.62rem;
+            color: #8a8f98;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .zcfx-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .zcfx-card {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            background: linear-gradient(135deg, #14161c 0%, #0c0d11 100%);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            padding: 12px 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .zcfx-group-badge {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: #6c7280;
+            text-transform: uppercase;
+        }
+        .zcfx-teams {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            min-width: 0;
+            padding-top: 14px;
+        }
+        .zcfx-team-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+        .zcfx-team-logo {
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .zcfx-team-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .zcfx-team-name {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .zcfx-divider {
+            width: 1px;
+            align-self: stretch;
+            background: rgba(255,255,255,0.12);
+            flex-shrink: 0;
+        }
+        .zcfx-date {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 56px;
+            text-align: center;
+            gap: 2px;
+        }
+        .zcfx-date-num {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+        }
+        .zcfx-date-month {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #8a8f98;
+            text-transform: uppercase;
+        }
+        @media (min-width: 700px) {
+            .zcfx-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        }
         /* ZC26 · el panel del ranking usa un poco menos de aire lateral
            propio para que las filas (que sangran hasta su borde) aprovechen
            más ancho de pantalla. */
@@ -6078,6 +6205,7 @@
         <a href="#inicio" class="section-tab active" data-section-tab="inicio" data-i18n="nav.home" data-i18n-default="Home">Home</a>
         <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
         <a href="#ranking" class="section-tab" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
+        <a href="#zc26" class="section-tab" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="ZC26">ZC26</a>
         <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
         <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
     </div>
@@ -6118,6 +6246,7 @@
         <a href="#inicio" class="mobile-menu-link" data-menu-link data-i18n="nav.home.upper" data-i18n-default="HOME">HOME</a>
         <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
         <a href="#ranking" class="mobile-menu-link" data-menu-link data-i18n="nav.ranking.upper" data-i18n-default="RANKING">RANKING</a>
+        <a href="#zc26" class="mobile-menu-link" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="ZC26">ZC26</a>
         <a href="#contribuciones" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
         <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
         <a href="#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
@@ -7558,6 +7687,15 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <div class="section-block" id="zc26">
+        <div class="section-title">ZC26 · CALENDARIO</div>
+        <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
+        <div class="panel">
+            <div class="zcfx-wrap" id="zc26FixturesList"></div>
+        </div>
+        <div class="section-updated">Todos los horarios se confirmarán próximamente</div>
     </div>
 
     <div class="section-block" id="contribuciones">
@@ -10865,6 +11003,140 @@
         }
     });
 
+    /* ===================== ZC26 · CALENDARIO DE ENCUENTROS ===================== */
+    const ZC26_TEAM_LOGOS = {
+        "Leviatán Esports": "escudo_logo/Leviatan-esports.png",
+        "Peruanos FC": "escudo_logo/Peruanos-FC.png",
+        "Quiero KeKe": "escudo_logo/Quiero-KeKe.png",
+        "POS JR": "escudo_logo/POS-JR.png",
+        "GAMBLING FC": "escudo_logo/GAMBLING-FC.png",
+        "KURO ØNIX": "escudo_logo/KURO-ONIX.png",
+        "POS": "escudo_logo/POS.png",
+        "SGC": "escudo_logo/SGC.png",
+        "LPE": "escudo_logo/LPE.png",
+        "Phoenix": "escudo_logo/Phoenix.png",
+        "BLASTERS": "escudo_logo/Blasters.png",
+        "TEAM ATENAS": "escudo_logo/TEAM-ATENAS.png",
+        "Baraja de Elite": "escudo_logo/Baraja-de-Elite.png",
+        "Sinister Haven": "escudo_logo/Sinister-Haven.png",
+        "GTA": "escudo_logo/gta.png",
+        "Unorthodox": "escudo_logo/Unorthodox.png",
+        "RAISE EARTH": "escudo_logo/escudo-default.png",
+        "op7": "escudo_logo/op7.png",
+        "SYNOX GAMING": "escudo_logo/SYNOX-GAMING.png",
+        "PRO LEGENDS": "escudo_logo/escudo-default.png",
+        "Wosu Esport": "escudo_logo/Wosu-Esport.png",
+        "Egresados Del Conalep": "escudo_logo/Egresados-Del-Conalep.png",
+        "Acuñas": "escudo_logo/Acuñas.png",
+        "OMEN NOCTE": "escudo_logo/OMEN-NOCTE.png"
+    };
+    function zc26Logo(team) {
+        return ZC26_TEAM_LOGOS[team] || "escudo_logo/escudo-default.png";
+    }
+    const ZC26_FIXTURES = [
+        {
+            day: "Domingo", num: 20, month: "SEP",
+            matches: [
+                { group: "A", home: "Leviatán Esports", away: "Peruanos FC" },
+                { group: "B", home: "GAMBLING FC", away: "KURO ØNIX" },
+                { group: "C", home: "LPE", away: "Phoenix" },
+                { group: "D", home: "Baraja de Elite", away: "Sinister Haven" },
+                { group: "E", home: "RAISE EARTH", away: "op7" },
+                { group: "F", home: "Wosu Esport", away: "Egresados Del Conalep" }
+            ]
+        },
+        {
+            day: "Lunes", num: 21, month: "SEP",
+            matches: [
+                { group: "A", home: "Quiero KeKe", away: "POS JR" },
+                { group: "B", home: "POS", away: "SGC" },
+                { group: "C", home: "BLASTERS", away: "TEAM ATENAS" },
+                { group: "D", home: "GTA", away: "Unorthodox" },
+                { group: "E", home: "SYNOX GAMING", away: "PRO LEGENDS" },
+                { group: "F", home: "Acuñas", away: "OMEN NOCTE" }
+            ]
+        },
+        {
+            day: "Martes", num: 22, month: "SEP",
+            matches: [
+                { group: "A", home: "Leviatán Esports", away: "Quiero KeKe" },
+                { group: "B", home: "GAMBLING FC", away: "SGC" },
+                { group: "C", home: "LPE", away: "TEAM ATENAS" },
+                { group: "D", home: "Unorthodox", away: "Baraja de Elite" },
+                { group: "E", home: "RAISE EARTH", away: "PRO LEGENDS" },
+                { group: "F", home: "Wosu Esport", away: "OMEN NOCTE" }
+            ]
+        },
+        {
+            day: "Miércoles", num: 23, month: "SEP",
+            matches: [
+                { group: "A", home: "POS JR", away: "Peruanos FC" },
+                { group: "B", home: "KURO ØNIX", away: "POS" },
+                { group: "C", home: "Phoenix", away: "BLASTERS" },
+                { group: "D", home: "GTA", away: "Sinister Haven" },
+                { group: "E", home: "SYNOX GAMING", away: "op7" },
+                { group: "F", home: "Acuñas", away: "Egresados Del Conalep" }
+            ]
+        },
+        {
+            day: "Jueves", num: 24, month: "SEP",
+            matches: [
+                { group: "A", home: "Leviatán Esports", away: "POS JR" },
+                { group: "B", home: "GAMBLING FC", away: "POS" },
+                { group: "C", home: "LPE", away: "BLASTERS" },
+                { group: "D", home: "GTA", away: "Baraja de Elite" },
+                { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING" },
+                { group: "F", home: "Acuñas", away: "Wosu Esport" }
+            ]
+        },
+        {
+            day: "Viernes", num: 25, month: "SEP",
+            matches: [
+                { group: "A", home: "Quiero KeKe", away: "Peruanos FC" },
+                { group: "B", home: "KURO ØNIX", away: "SGC" },
+                { group: "C", home: "Phoenix", away: "TEAM ATENAS" },
+                { group: "D", home: "Unorthodox", away: "Sinister Haven" },
+                { group: "E", home: "PRO LEGENDS", away: "op7" },
+                { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE" }
+            ]
+        }
+    ];
+    function renderZc26Fixtures() {
+        const wrap = document.getElementById("zc26FixturesList");
+        if (!wrap) return;
+        wrap.innerHTML = ZC26_FIXTURES.map(day => `
+            <div class="zcfx-day">
+                <div class="zcfx-day-head">
+                    <span class="zcfx-day-name">${day.day}</span>
+                    <span class="zcfx-day-date">${day.num} ${day.month}</span>
+                </div>
+                <div class="zcfx-list">
+                    ${day.matches.map(m => `
+                        <div class="zcfx-card">
+                            <span class="zcfx-group-badge">Grupo ${m.group}</span>
+                            <div class="zcfx-teams">
+                                <div class="zcfx-team-row">
+                                    <span class="zcfx-team-logo"><img src="${zc26Logo(m.home)}" alt="${m.home}"></span>
+                                    <span class="zcfx-team-name">${m.home}</span>
+                                </div>
+                                <div class="zcfx-team-row">
+                                    <span class="zcfx-team-logo"><img src="${zc26Logo(m.away)}" alt="${m.away}"></span>
+                                    <span class="zcfx-team-name">${m.away}</span>
+                                </div>
+                            </div>
+                            <span class="zcfx-divider"></span>
+                            <div class="zcfx-date">
+                                <span class="zcfx-date-num">${day.num}</span>
+                                <span class="zcfx-date-month">${day.month}</span>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `).join("");
+    }
+    renderZc26Fixtures();
+
     renderRanking();
     renderTrophies();
     renderContributions();
@@ -11088,10 +11360,11 @@
         "inicio": ["inicio"],
         "ultimo-partido": ["ultimo-partido"],
         "ranking": ["ranking", "ultima-clasificacion"],
+        "zc26": ["zc26"],
         "contribuciones": ["contribuciones"],
         "salon-fama": ["salon-fama"]
     };
-    const allFilterableIds = ["inicio", "ultimo-partido", "ranking", "ultima-clasificacion", "contribuciones", "salon-fama"];
+    const allFilterableIds = ["inicio", "ultimo-partido", "ranking", "ultima-clasificacion", "zc26", "contribuciones", "salon-fama"];
 
     let zcCurrentSection = "inicio";
     function applySectionFilter(key, silent) {
