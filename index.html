@@ -140,6 +140,13 @@
             font-weight: 700;
             border-bottom-color: #ffffff;
         }
+        .section-tab-zc26 {
+            color: #ff8a1e;
+        }
+        .section-tab-zc26.active {
+            color: #ff8a1e;
+            border-bottom-color: #ff8a1e;
+        }
         .menu-toggle {
             width: 34px;
             height: 26px;
@@ -231,6 +238,9 @@
         }
         .mobile-menu-link:hover {
             color: #d4af37;
+        }
+        .mobile-menu-link-zc26 {
+            color: #ff8a1e;
         }
         .mobile-menu-more-label {
             padding: 0 28px 6px;
@@ -1905,6 +1915,296 @@
             font-size: 0.64rem;
             font-weight: 500;
             color: #9aa0a6;
+        }
+
+        /* ===================== ZC26 · GROUP (clasificación) ===================== */
+        .zcgrp-phase-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin: 14px 0 20px;
+            overflow-x: auto;
+        }
+        .zcgrp-phase-tab {
+            background: none;
+            border: none;
+            color: #8a8f98;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0 0 11px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+        .zcgrp-phase-tab.active {
+            color: #ffffff;
+        }
+        .zcgrp-phase-tab.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+        .zcgrp-group {
+            margin-bottom: 24px;
+        }
+        .zcgrp-group-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            padding: 0 2px;
+        }
+        .zcgrp-table {
+            background: linear-gradient(135deg, #14161c 0%, #0c0d11 100%);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .zcgrp-row {
+            display: grid;
+            grid-template-columns: 20px 1fr 22px 22px 22px 30px 92px;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .zcgrp-row:last-child {
+            border-bottom: none;
+        }
+        .zcgrp-head {
+            color: #7d828b;
+            font-size: 0.58rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .zcgrp-col-pos {
+            color: #8a8f98;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+        .zcgrp-col-team {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.15s ease, transform 0.15s ease;
+        }
+        @media (hover: hover) {
+            .zcgrp-col-team:hover {
+                background: rgba(255,255,255,0.05);
+            }
+        }
+        .zcgrp-col-team:active {
+            transform: scale(0.98);
+        }
+        .zcgrp-team-logo {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .zcgrp-team-name {
+            display: block;
+            flex: 1 1 auto;
+            min-width: 0;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #f0f0f0;
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            touch-action: pan-x;
+        }
+        .zcgrp-team-name::-webkit-scrollbar {
+            display: none;
+        }
+        .zcgrp-col-num {
+            text-align: center;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #d7d9dd;
+        }
+        .zcgrp-col-pts {
+            color: #ffffff;
+        }
+        .zcgrp-col-last5 {
+            display: flex;
+            gap: 4px;
+            justify-content: flex-end;
+        }
+        .zcgrp-dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.22);
+            flex-shrink: 0;
+        }
+        .zcgrp-round-carousel {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .zcgrp-round-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.18);
+            background: transparent;
+            color: #c9cdd3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
+        }
+        .zcgrp-round-arrow svg {
+            width: 15px;
+            height: 15px;
+        }
+        .zcgrp-round-arrow:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: #ffffff;
+            background: rgba(255,255,255,0.05);
+        }
+        .zcgrp-round-arrow:active {
+            transform: scale(0.86);
+        }
+        .zcgrp-round-arrow:disabled {
+            opacity: 0.35;
+            cursor: default;
+            transform: none;
+        }
+        .zcgrp-round-track {
+            flex: 1;
+            display: flex;
+            gap: 26px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            padding: 2px 4px 10px;
+        }
+        .zcgrp-round-track::-webkit-scrollbar {
+            display: none;
+        }
+        .zcgrp-round-item {
+            flex-shrink: 0;
+            background: none;
+            border: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #767b85;
+            padding: 0 0 10px;
+            position: relative;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(.4,0,.2,1);
+        }
+        .zcgrp-round-item::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+            transform: scaleX(0);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
+        }
+        .zcgrp-round-item.active {
+            color: #ffffff;
+            font-weight: 800;
+            transform: scale(1.05);
+        }
+        .zcgrp-round-item.active::after {
+            transform: scaleX(1);
+            opacity: 1;
+        }
+        .zcgrp-empty-state {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a8f98;
+            line-height: 1.6;
+            padding: 40px 16px;
+            border: 1px dashed rgba(255,255,255,0.12);
+            border-radius: 14px;
+        }
+        .zcgrp-legend {
+            background: none;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-radius: 0;
+            padding: 16px 2px 0;
+            margin-top: 14px;
+            max-width: 260px;
+        }
+        .zcgrp-legend-title {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #b7bac0;
+            margin-bottom: 8px;
+        }
+        .zcgrp-legend-title-spaced {
+            margin-top: 12px;
+        }
+        .zcgrp-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.72rem;
+            color: #c9cdd3;
+            padding: 4px 0;
+        }
+        .zcgrp-legend-swatch {
+            width: 15px;
+            height: 15px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .zcgrp-legend-swatch-blue {
+            background: #4a80f5;
+        }
+        .zcgrp-legend-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .zcgrp-legend-icon svg {
+            width: 60%;
+            height: 60%;
+        }
+        .zcgrp-legend-icon-win {
+            background: #2fa84f;
+        }
+        .zcgrp-legend-icon-draw {
+            background: #9a9ea8;
+        }
+        .zcgrp-legend-icon-loss {
+            background: #d64545;
+        }
+        .zcgrp-legend-icon-none {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.35);
         }
         /* ZC26 · el panel del ranking usa un poco menos de aire lateral
            propio para que las filas (que sangran hasta su borde) aprovechen
@@ -6329,9 +6629,10 @@
 <div class="section-tabs-wrapper" id="sectionTabsWrapper">
     <div class="section-tabs" id="sectionTabs">
         <a href="#inicio" class="section-tab active" data-section-tab="inicio" data-i18n="nav.home" data-i18n-default="Home">Home</a>
+        <a href="#zc26" class="section-tab section-tab-zc26" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="Partidos">Partidos</a>
+        <a href="#group" class="section-tab section-tab-zc26" data-section-tab="group" data-i18n="nav.group" data-i18n-default="Posiciones">Posiciones</a>
         <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
         <a href="#ranking" class="section-tab" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
-        <a href="#zc26" class="section-tab" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="ZC26">ZC26</a>
         <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
         <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
     </div>
@@ -6372,7 +6673,8 @@
         <a href="#inicio" class="mobile-menu-link" data-menu-link data-i18n="nav.home.upper" data-i18n-default="HOME">HOME</a>
         <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
         <a href="#ranking" class="mobile-menu-link" data-menu-link data-i18n="nav.ranking.upper" data-i18n-default="RANKING">RANKING</a>
-        <a href="#zc26" class="mobile-menu-link" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="ZC26">ZC26</a>
+        <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
+        <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
         <a href="#contribuciones" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
         <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
         <a href="#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
@@ -7816,7 +8118,7 @@
     </div>
 
     <div class="section-block" id="zc26">
-        <div class="section-title">ZC26 · CALENDARIO</div>
+        <div class="section-title">ZC26 · PARTIDOS</div>
         <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
         <div class="zc-search-wrap">
             <input type="text" class="zc-search-input" id="zc26SearchInput" placeholder="Buscar equipo, grupo o día..." autocomplete="off">
@@ -7837,6 +8139,63 @@
             <div class="zc26-no-results" id="zc26NoResults">No se encontraron partidos con ese filtro.</div>
         </div>
         <div class="section-updated">Todos los horarios se confirmarán próximamente</div>
+    </div>
+
+    <div class="section-block" id="group">
+        <div class="section-title">ZC26 · POSICIONES</div>
+        <div class="section-subtitle">Clasificación por grupo y fases del torneo</div>
+        <div class="zcgrp-phase-tabs">
+            <button type="button" class="zcgrp-phase-tab active" data-zcgrp-phase="groups">Fase de grupos</button>
+            <button type="button" class="zcgrp-phase-tab" data-zcgrp-phase="knockout">Fase de eliminación directa</button>
+        </div>
+        <div class="zcgrp-phase-panel" id="zcgrpGroupsPanel">
+            <div id="zcgrpGroupsList"></div>
+            <div class="zcgrp-legend">
+                <div class="zcgrp-legend-title">Ascenso</div>
+                <div class="zcgrp-legend-item">
+                    <span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span>
+                    <span>Fase de eliminación directa</span>
+                </div>
+                <div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 5 partidos</div>
+                <div class="zcgrp-legend-item">
+                    <span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span>
+                    <span>Ganó</span>
+                </div>
+                <div class="zcgrp-legend-item">
+                    <span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span>
+                    <span>Empate</span>
+                </div>
+                <div class="zcgrp-legend-item">
+                    <span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span>
+                    <span>Perdió</span>
+                </div>
+                <div class="zcgrp-legend-item">
+                    <span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span>
+                    <span>No jugó</span>
+                </div>
+            </div>
+        </div>
+        <div class="zcgrp-phase-panel" id="zcgrpKnockoutPanel" style="display:none;">
+            <div class="zcgrp-round-carousel" id="zcgrpRoundCarousel">
+                <button type="button" class="zcgrp-round-arrow" data-round-dir="prev" aria-label="Ronda anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+                </button>
+                <div class="zcgrp-round-track" id="zcgrpRoundTrack">
+                    <button type="button" class="zcgrp-round-item active" data-round="0">Octavos</button>
+                    <button type="button" class="zcgrp-round-item" data-round="1">Cuartos</button>
+                    <button type="button" class="zcgrp-round-item" data-round="2">Semifinal</button>
+                    <button type="button" class="zcgrp-round-item" data-round="3">Final</button>
+                </div>
+                <button type="button" class="zcgrp-round-arrow" data-round-dir="next" aria-label="Ronda siguiente">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                </button>
+            </div>
+            <div class="zcgrp-empty-state">
+                La fase de eliminación directa todavía no está disponible.<br>
+                Se habilitará automáticamente al terminar la fase de grupos, con los cruces de cada llave.
+            </div>
+        </div>
+        <div class="section-updated">La clasificación se actualizará conforme se disputen los encuentros</div>
     </div>
 
     <div class="section-block" id="contribuciones">
@@ -11437,6 +11796,122 @@
         });
     }
 
+    /* ===================== ZC26 · GROUP (clasificación) ===================== */
+    function zc26TeamsByGroup() {
+        const map = {};
+        ZC26_FIXTURES.forEach(day => {
+            day.matches.forEach(m => {
+                if (!map[m.group]) map[m.group] = [];
+                [m.home, m.away].forEach(t => {
+                    if (!map[m.group].includes(t)) map[m.group].push(t);
+                });
+            });
+        });
+        return map;
+    }
+    function renderZc26Groups() {
+        const wrap = document.getElementById("zcgrpGroupsList");
+        if (!wrap) return;
+        const byGroup = zc26TeamsByGroup();
+        const groupLetters = ["A", "B", "C", "D", "E", "F"];
+        const last5Dots = `<span class="zcgrp-dot"></span>`.repeat(5);
+        wrap.innerHTML = groupLetters.map(g => {
+            const teams = byGroup[g] || [];
+            return `
+            <div class="zcgrp-group">
+                <div class="zcgrp-group-title">Grupo ${g}</div>
+                <div class="zcgrp-table">
+                    <div class="zcgrp-row zcgrp-head">
+                        <span class="zcgrp-col-pos">N°</span>
+                        <span class="zcgrp-col-team">Equipo</span>
+                        <span class="zcgrp-col-num">W</span>
+                        <span class="zcgrp-col-num">D</span>
+                        <span class="zcgrp-col-num">L</span>
+                        <span class="zcgrp-col-num zcgrp-col-pts">Pts</span>
+                        <span class="zcgrp-col-last5">Últimos 5</span>
+                    </div>
+                    ${teams.map((t, i) => `
+                    <div class="zcgrp-row">
+                        <span class="zcgrp-col-pos">${i + 1}</span>
+                        <span class="zcgrp-col-team" data-zcgrp-team="${t}">
+                            <img class="zcgrp-team-logo" src="${zc26Logo(t)}" alt="">
+                            <span class="zcgrp-team-name">${t}</span>
+                        </span>
+                        <span class="zcgrp-col-num">0</span>
+                        <span class="zcgrp-col-num">0</span>
+                        <span class="zcgrp-col-num">0</span>
+                        <span class="zcgrp-col-num zcgrp-col-pts">0</span>
+                        <span class="zcgrp-col-last5">${last5Dots}</span>
+                    </div>`).join("")}
+                </div>
+            </div>`;
+        }).join("");
+    }
+    renderZc26Groups();
+    document.getElementById("zcgrpGroupsList").addEventListener("click", function (e) {
+        const teamEl = e.target.closest("[data-zcgrp-team]");
+        if (!teamEl) return;
+        const teamName = teamEl.dataset.zcgrpTeam;
+        setActiveSectionTab("zc26");
+        applySectionFilter("zc26");
+        const searchInput = document.getElementById("zc26SearchInput");
+        if (searchInput) {
+            searchInput.value = teamName;
+            applyZc26Filters();
+        }
+        const target = document.getElementById("zc26");
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        zcPlaySound("click");
+    });
+    document.querySelectorAll(".zcgrp-phase-tab").forEach(tab => {
+        tab.addEventListener("click", function () {
+            document.querySelectorAll(".zcgrp-phase-tab").forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
+            const phase = this.dataset.zcgrpPhase;
+            const groupsPanel = document.getElementById("zcgrpGroupsPanel");
+            const knockoutPanel = document.getElementById("zcgrpKnockoutPanel");
+            if (groupsPanel) groupsPanel.style.display = phase === "groups" ? "" : "none";
+            if (knockoutPanel) knockoutPanel.style.display = phase === "knockout" ? "" : "none";
+            zcPlaySound("click");
+        });
+    });
+
+    // ===================== ZC26 · Carrusel de rondas (eliminación directa) =====================
+    (function () {
+        const track = document.getElementById("zcgrpRoundTrack");
+        const carousel = document.getElementById("zcgrpRoundCarousel");
+        if (!track || !carousel) return;
+        const items = Array.from(track.querySelectorAll(".zcgrp-round-item"));
+        const prevBtn = carousel.querySelector('[data-round-dir="prev"]');
+        const nextBtn = carousel.querySelector('[data-round-dir="next"]');
+
+        function setActive(index) {
+            index = Math.max(0, Math.min(items.length - 1, index));
+            items.forEach((it, i) => it.classList.toggle("active", i === index));
+            items[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+            if (prevBtn) prevBtn.disabled = index === 0;
+            if (nextBtn) nextBtn.disabled = index === items.length - 1;
+        }
+
+        items.forEach((item, i) => {
+            item.addEventListener("click", () => {
+                setActive(i);
+                zcPlaySound("click");
+            });
+        });
+        if (prevBtn) prevBtn.addEventListener("click", () => {
+            const current = items.findIndex(it => it.classList.contains("active"));
+            setActive(current - 1);
+            zcPlaySound("click");
+        });
+        if (nextBtn) nextBtn.addEventListener("click", () => {
+            const current = items.findIndex(it => it.classList.contains("active"));
+            setActive(current + 1);
+            zcPlaySound("click");
+        });
+        setActive(0);
+    })();
+
     renderRanking();
     renderTrophies();
     renderContributions();
@@ -11661,10 +12136,11 @@
         "ultimo-partido": ["ultimo-partido"],
         "ranking": ["ranking", "ultima-clasificacion"],
         "zc26": ["zc26"],
+        "group": ["group"],
         "contribuciones": ["contribuciones"],
         "salon-fama": ["salon-fama"]
     };
-    const allFilterableIds = ["inicio", "ultimo-partido", "ranking", "ultima-clasificacion", "zc26", "contribuciones", "salon-fama"];
+    const allFilterableIds = ["inicio", "ultimo-partido", "ranking", "ultima-clasificacion", "zc26", "group", "contribuciones", "salon-fama"];
 
     let zcCurrentSection = "inicio";
     function applySectionFilter(key, silent) {
