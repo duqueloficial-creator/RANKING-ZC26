@@ -439,6 +439,10 @@
             font-weight: 900;
             color: #ffffff;
         }
+        .score-number-empty {
+            display: inline-block;
+            min-width: 34px;
+        }
         .score-lpr {
             color: rgba(255,255,255,0.45);
         }
@@ -1860,61 +1864,70 @@
             border-radius: 8px;
             letter-spacing: 0.3px;
         }
-        .zc26mm-face {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
+        .zc26mm-scoreboard {
+            margin: 4px 0;
         }
-        .zc26mm-team {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            flex: 1 1 0;
-            min-width: 0;
+        .zc26mm-scoreboard .team {
+            width: 33%;
         }
-        .zc26mm-logo {
-            width: 84px;
-            height: 84px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .zc26mm-scoreboard .team-logo {
+            width: 56px;
+            height: 56px;
             background: rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 14px;
+            border-radius: 16px;
+            padding: 9px;
         }
-        .zc26mm-logo img {
+        .zc26mm-scoreboard .team-name {
+            font-size: 0.64rem;
             max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-        .zc26mm-name {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #ffffff;
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.25;
             text-align: center;
         }
-        .zc26mm-center {
+        .zc26mm-scoreboard .score-center {
+            width: 34%;
+            gap: 8px;
+        }
+        .zc26mm-scoreboard .score-number {
+            font-size: 1.7rem;
+        }
+        .zc26mm-scoreboard .score-number-empty {
+            min-width: 24px;
+        }
+        .zc26mm-tabs {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            gap: 8px;
+            overflow-x: auto;
+            margin-top: 22px;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .zc26mm-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .zc26mm-tab-btn {
             flex-shrink: 0;
-            gap: 4px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #a8adb5;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 9px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
         }
-        .zc26mm-center-date {
-            font-size: 0.82rem;
-            font-weight: 700;
+        .zc26mm-tab-btn:active {
+            transform: scale(0.94);
+        }
+        .zc26mm-tab-btn.active {
             color: #ffffff;
-            line-height: 1;
-        }
-        .zc26mm-center-day {
-            font-size: 0.64rem;
-            font-weight: 500;
-            color: #9aa0a6;
+            border-color: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.1);
+            font-weight: 700;
         }
 
         /* ===================== ZC26 · GROUP (clasificación) ===================== */
@@ -1925,6 +1938,11 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin: 14px 0 20px;
             overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .zcgrp-phase-tabs::-webkit-scrollbar {
+            display: none;
         }
         .zcgrp-phase-tab {
             background: none;
@@ -11489,6 +11507,12 @@
         } else if (e.target.closest("#zc26MatchPanel .info-close-x")) {
             closeZc26Match();
         } else {
+            const zc26mmTabBtn = e.target.closest("#zc26MatchPanel .zc26mm-tab-btn");
+            if (zc26mmTabBtn) {
+                zc26mmTabBtn.parentElement.querySelectorAll(".zc26mm-tab-btn").forEach(b => b.classList.remove("active"));
+                zc26mmTabBtn.classList.add("active");
+                zcPlaySound("click");
+            }
             const allMatchesBtn = e.target.closest("[data-all-matches]");
             if (allMatchesBtn) {
                 zcPlaySound("click");
@@ -11676,19 +11700,30 @@
                     <span class="zc26mm-status" style="color:${accent};background:${accent}22;border:1px solid ${accent}55">Próximo</span>
                 </div>
             </div>
-            <div class="zc26mm-face">
-                <div class="zc26mm-team">
-                    <span class="zc26mm-logo"><img src="${zc26Logo(home)}" alt="${home}"></span>
-                    <span class="zc26mm-name">${home}</span>
+            <div class="scoreboard zc26mm-scoreboard">
+                <div class="team">
+                    <div class="team-logo"><img src="${zc26Logo(home)}" alt="${home}"></div>
+                    <span class="team-name">${home}</span>
                 </div>
-                <div class="zc26mm-center">
-                    <span class="zc26mm-center-date">${String(num).padStart(2, "0")}/09</span>
-                    <span class="zc26mm-center-day">Hora por confirmar</span>
+                <div class="score-center">
+                    <span class="score-number score-number-empty"></span>
+                    <div class="match-status">
+                        <span class="status-badge">Próximo</span>
+                        <span class="status-date">${String(num).padStart(2, "0")}/09</span>
+                    </div>
+                    <span class="score-number score-number-empty"></span>
                 </div>
-                <div class="zc26mm-team">
-                    <span class="zc26mm-logo"><img src="${zc26Logo(away)}" alt="${away}"></span>
-                    <span class="zc26mm-name">${away}</span>
+                <div class="team">
+                    <div class="team-logo"><img src="${zc26Logo(away)}" alt="${away}"></div>
+                    <span class="team-name">${away}</span>
                 </div>
+            </div>
+            <div class="zc26mm-tabs">
+                <button type="button" class="zc26mm-tab-btn active" data-zc26mm-tab="general">Información general</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="cronologia">Cronología</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="alineaciones">Alineaciones</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="estadisticas">Estadísticas</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="mas-partidos">Más partidos</button>
             </div>
         `;
         zcPlaySound("clickentrar");
