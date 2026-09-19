@@ -1780,6 +1780,132 @@
         @media (min-width: 700px) {
             .zcfx-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         }
+        .zcfx-card { cursor: pointer; transition: border-color 0.15s ease, transform 0.15s ease; }
+        .zcfx-card:active { transform: scale(0.98); }
+        #zc26 .zc-search-wrap { margin-top: 12px; margin-bottom: 10px; }
+        #zc26 .am-filter-group { margin-bottom: 14px; justify-content: center; }
+        .zc-search-suggestion-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .zc-search-suggestion-logo {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .zc26-no-results {
+            display: none;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a8f98;
+            padding: 30px 10px;
+        }
+
+        /* ---- ZC26 match detail modal ---- */
+        .zc26mm-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        .zc26mm-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .zc26mm-title-sub {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #8a8f98;
+            margin-left: 5px;
+        }
+        .zc26mm-date {
+            font-size: 0.72rem;
+            color: #8a8f98;
+            margin-top: 5px;
+        }
+        .zc26mm-tags {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .zc26mm-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #c9cdd3;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
+        }
+        .zc26mm-status {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
+        }
+        .zc26mm-face {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .zc26mm-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .zc26mm-logo {
+            width: 84px;
+            height: 84px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 14px;
+        }
+        .zc26mm-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .zc26mm-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+        }
+        .zc26mm-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            gap: 4px;
+        }
+        .zc26mm-center-date {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1;
+        }
+        .zc26mm-center-day {
+            font-size: 0.64rem;
+            font-weight: 500;
+            color: #9aa0a6;
+        }
         /* ZC26 · el panel del ranking usa un poco menos de aire lateral
            propio para que las filas (que sangran hasta su borde) aprovechen
            más ancho de pantalla. */
@@ -7692,8 +7818,23 @@
     <div class="section-block" id="zc26">
         <div class="section-title">ZC26 · CALENDARIO</div>
         <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
+        <div class="zc-search-wrap">
+            <input type="text" class="zc-search-input" id="zc26SearchInput" placeholder="Buscar equipo, grupo o día..." autocomplete="off">
+            <span class="zc-search-icon"></span>
+            <div class="zc-search-suggestions" id="zc26SearchBox"></div>
+        </div>
+        <div class="am-filter-group" id="zc26GroupFilter" data-filter-group="zc26-group">
+            <button type="button" class="am-filter-btn active" data-zc26-group-filter="all">Todos</button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="A">Grupo A</button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="B">Grupo B</button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="C">Grupo C</button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="D">Grupo D</button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="E">Grupo E</button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="F">Grupo F</button>
+        </div>
         <div class="panel">
             <div class="zcfx-wrap" id="zc26FixturesList"></div>
+            <div class="zc26-no-results" id="zc26NoResults">No se encontraron partidos con ese filtro.</div>
         </div>
         <div class="section-updated">Todos los horarios se confirmarán próximamente</div>
     </div>
@@ -7770,6 +7911,10 @@
 
 <div class="modal-overlay" id="allAchievementsOverlay">
     <div class="info-panel" id="allAchievementsPanel"></div>
+</div>
+
+<div class="modal-overlay" id="zc26MatchOverlay">
+    <div class="info-panel" id="zc26MatchPanel"></div>
 </div>
 
 <script>
@@ -10982,6 +11127,8 @@
             closeAllMatchesModal();
         } else if (e.target.closest("#allAchievementsPanel .info-close-x")) {
             closeAllAchievementsModal();
+        } else if (e.target.closest("#zc26MatchPanel .info-close-x")) {
+            closeZc26Match();
         } else {
             const allMatchesBtn = e.target.closest("[data-all-matches]");
             if (allMatchesBtn) {
@@ -11021,10 +11168,9 @@
         "Sinister Haven": "escudo_logo/Sinister-Haven.png",
         "GTA": "escudo_logo/gta.png",
         "Unorthodox": "escudo_logo/Unorthodox.png",
-        "RAISE EARTH": "escudo_logo/escudo-default.png",
+        "RAISE EARTH": "escudo_logo/raisen_heart.png",
         "op7": "escudo_logo/op7.png",
         "SYNOX GAMING": "escudo_logo/SYNOX-GAMING.png",
-        "PRO LEGENDS": "escudo_logo/escudo-default.png",
         "Wosu Esport": "escudo_logo/Wosu-Esport.png",
         "Egresados Del Conalep": "escudo_logo/Egresados-Del-Conalep.png",
         "Acuñas": "escudo_logo/Acuñas.png",
@@ -11052,7 +11198,7 @@
                 { group: "B", home: "POS", away: "SGC" },
                 { group: "C", home: "BLASTERS", away: "TEAM ATENAS" },
                 { group: "D", home: "GTA", away: "Unorthodox" },
-                { group: "E", home: "SYNOX GAMING", away: "PRO LEGENDS" },
+                { group: "E", home: "SYNOX GAMING", away: "Wosu Esport" },
                 { group: "F", home: "Acuñas", away: "OMEN NOCTE" }
             ]
         },
@@ -11063,7 +11209,7 @@
                 { group: "B", home: "GAMBLING FC", away: "SGC" },
                 { group: "C", home: "LPE", away: "TEAM ATENAS" },
                 { group: "D", home: "Unorthodox", away: "Baraja de Elite" },
-                { group: "E", home: "RAISE EARTH", away: "PRO LEGENDS" },
+                { group: "E", home: "RAISE EARTH", away: "Wosu Esport" },
                 { group: "F", home: "Wosu Esport", away: "OMEN NOCTE" }
             ]
         },
@@ -11096,7 +11242,7 @@
                 { group: "B", home: "KURO ØNIX", away: "SGC" },
                 { group: "C", home: "Phoenix", away: "TEAM ATENAS" },
                 { group: "D", home: "Unorthodox", away: "Sinister Haven" },
-                { group: "E", home: "PRO LEGENDS", away: "op7" },
+                { group: "E", home: "Wosu Esport", away: "op7" },
                 { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE" }
             ]
         }
@@ -11112,7 +11258,7 @@
                 </div>
                 <div class="zcfx-list">
                     ${day.matches.map(m => `
-                        <div class="zcfx-card">
+                        <div class="zcfx-card" data-zc26-match data-group="${m.group}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}">
                             <span class="zcfx-group-badge">Grupo ${m.group}</span>
                             <div class="zcfx-teams">
                                 <div class="zcfx-team-row">
@@ -11136,6 +11282,160 @@
         `).join("");
     }
     renderZc26Fixtures();
+
+    const ZC26_GROUP_COLORS = {
+        A: "#22c55e",
+        B: "#3b82f6",
+        C: "#eab308",
+        D: "#ef4444",
+        E: "#a855f7",
+        F: "#06b6d4"
+    };
+    const ZC26_MONTH_NAMES = {
+        SEP: "septiembre"
+    };
+    function openZc26Match(card) {
+        const panel = document.getElementById("zc26MatchPanel");
+        if (!panel || !card) return;
+        const group = card.dataset.group || "";
+        const home = card.dataset.home || "";
+        const away = card.dataset.away || "";
+        const day = card.dataset.day || "";
+        const num = card.dataset.num || "";
+        const month = card.dataset.month || "";
+        const accent = ZC26_GROUP_COLORS[group] || "#8a8f98";
+        const monthFull = ZC26_MONTH_NAMES[month] || month;
+        panel.innerHTML = `
+            <div class="info-close"><span class="info-close-x">✕</span></div>
+            <div class="zc26mm-head">
+                <div>
+                    <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">Fase de grupos</span></div>
+                    <div class="zc26mm-date">${day} ${num} de ${monthFull} · 2026</div>
+                </div>
+                <div class="zc26mm-tags">
+                    <span class="zc26mm-tag">Grupo ${group}</span>
+                    <span class="zc26mm-status" style="color:${accent};background:${accent}22;border:1px solid ${accent}55">Próximo</span>
+                </div>
+            </div>
+            <div class="zc26mm-face">
+                <div class="zc26mm-team">
+                    <span class="zc26mm-logo"><img src="${zc26Logo(home)}" alt="${home}"></span>
+                    <span class="zc26mm-name">${home}</span>
+                </div>
+                <div class="zc26mm-center">
+                    <span class="zc26mm-center-date">${String(num).padStart(2, "0")}/09</span>
+                    <span class="zc26mm-center-day">Hora por confirmar</span>
+                </div>
+                <div class="zc26mm-team">
+                    <span class="zc26mm-logo"><img src="${zc26Logo(away)}" alt="${away}"></span>
+                    <span class="zc26mm-name">${away}</span>
+                </div>
+            </div>
+        `;
+        zcPlaySound("clickentrar");
+        openModal("zc26MatchOverlay");
+    }
+    function closeZc26Match() {
+        zcPlaySound("clicksalir");
+        closeModal("zc26MatchOverlay");
+    }
+    document.getElementById("zc26FixturesList").addEventListener("click", function (e) {
+        const card = e.target.closest("[data-zc26-match]");
+        if (card) openZc26Match(card);
+    });
+    document.getElementById("zc26MatchOverlay").addEventListener("click", function (e) {
+        if (e.target === this) closeZc26Match();
+    });
+    function applyZc26Filters() {
+        const searchInput = document.getElementById("zc26SearchInput");
+        const searchVal = searchNorm((searchInput && searchInput.value) || "").trim();
+        const activeGroupBtn = document.querySelector("#zc26GroupFilter .am-filter-btn.active");
+        const activeGroup = activeGroupBtn ? activeGroupBtn.dataset.zc26GroupFilter : "all";
+        let anyVisible = false;
+        document.querySelectorAll("#zc26FixturesList .zcfx-day").forEach(dayEl => {
+            let dayHasVisible = false;
+            dayEl.querySelectorAll(".zcfx-card").forEach(card => {
+                const group = card.dataset.group || "";
+                const home = searchNorm(card.dataset.home || "");
+                const away = searchNorm(card.dataset.away || "");
+                const dayName = searchNorm(card.dataset.day || "");
+                const matchesGroup = activeGroup === "all" || group === activeGroup;
+                const matchesSearch = !searchVal
+                    || home.includes(searchVal)
+                    || away.includes(searchVal)
+                    || dayName.includes(searchVal)
+                    || searchNorm("grupo " + group).includes(searchVal);
+                const visible = matchesGroup && matchesSearch;
+                card.style.display = visible ? "" : "none";
+                if (visible) { dayHasVisible = true; anyVisible = true; }
+            });
+            dayEl.style.display = dayHasVisible ? "" : "none";
+        });
+        const noResults = document.getElementById("zc26NoResults");
+        if (noResults) noResults.style.display = anyVisible ? "none" : "block";
+    }
+    const zc26SearchInputEl = document.getElementById("zc26SearchInput");
+    const zc26SearchBoxEl = document.getElementById("zc26SearchBox");
+    const ZC26_ALL_TEAM_NAMES = Object.keys(ZC26_TEAM_LOGOS);
+    const ZC26_GROUP_LABELS = ["Grupo A", "Grupo B", "Grupo C", "Grupo D", "Grupo E", "Grupo F"];
+    const ZC26_DAY_NAMES = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+    const ZC26_SEARCH_CANDIDATES = [...ZC26_ALL_TEAM_NAMES, ...ZC26_GROUP_LABELS, ...ZC26_DAY_NAMES];
+    function zc26RenderSuggestions(raw) {
+        if (!zc26SearchBoxEl) return;
+        const q = searchNorm(raw).trim();
+        if (!q) { zc26SearchBoxEl.innerHTML = ""; zc26SearchBoxEl.style.display = "none"; return; }
+        const seen = new Set();
+        const results = [];
+        for (const c of ZC26_SEARCH_CANDIDATES) {
+            const key = searchNorm(c);
+            if (!key.includes(q) || seen.has(key)) continue;
+            seen.add(key);
+            results.push(c);
+            if (results.length >= 8) break;
+        }
+        if (!results.length) { zc26SearchBoxEl.innerHTML = ""; zc26SearchBoxEl.style.display = "none"; return; }
+        zc26SearchBoxEl.innerHTML = results.map(c => {
+            const isTeam = !!ZC26_TEAM_LOGOS[c];
+            const logoHtml = isTeam ? `<img class="zc-search-suggestion-logo" src="${zc26Logo(c)}" alt="">` : "";
+            return `<div class="zc-search-suggestion" data-suggestion="${c.replace(/"/g, "&quot;")}">
+                <span class="zc-search-suggestion-row">${logoHtml}<span>${markupHighlight(c, q)}</span></span>
+            </div>`;
+        }).join("");
+        zc26SearchBoxEl.style.display = "block";
+    }
+    if (zc26SearchInputEl) {
+        zc26SearchInputEl.addEventListener("input", () => {
+            applyZc26Filters();
+            zc26RenderSuggestions(zc26SearchInputEl.value);
+        });
+        zc26SearchInputEl.addEventListener("focus", () => zc26RenderSuggestions(zc26SearchInputEl.value));
+        zc26SearchInputEl.addEventListener("blur", () => {
+            setTimeout(() => { if (zc26SearchBoxEl) zc26SearchBoxEl.style.display = "none"; }, 150);
+        });
+    }
+    if (zc26SearchBoxEl) {
+        zc26SearchBoxEl.addEventListener("mousedown", (e) => {
+            const item = e.target.closest("[data-suggestion]");
+            if (!item) return;
+            e.preventDefault();
+            zc26SearchInputEl.value = item.dataset.suggestion;
+            zc26SearchBoxEl.innerHTML = "";
+            zc26SearchBoxEl.style.display = "none";
+            applyZc26Filters();
+            zcPlaySound("click");
+        });
+    }
+    const zc26GroupFilterEl = document.getElementById("zc26GroupFilter");
+    if (zc26GroupFilterEl) {
+        zc26GroupFilterEl.addEventListener("click", function (e) {
+            const btn = e.target.closest(".am-filter-btn");
+            if (!btn) return;
+            zcPlaySound("click");
+            this.querySelectorAll(".am-filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            applyZc26Filters();
+        });
+    }
 
     renderRanking();
     renderTrophies();
