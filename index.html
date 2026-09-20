@@ -134,18 +134,35 @@
             color: #9aa0a6;
             text-decoration: none;
             border-bottom: 2px solid transparent;
+            position: relative;
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(.4,0,.2,1);
+        }
+        .section-tab::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transform: scaleX(0);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
         }
         .section-tab.active {
             color: #ffffff;
             font-weight: 700;
-            border-bottom-color: #ffffff;
+        }
+        .section-tab.active::after {
+            transform: scaleX(1);
+            opacity: 1;
         }
         .section-tab-zc26 {
             color: #ff8a1e;
         }
         .section-tab-zc26.active {
             color: #ff8a1e;
-            border-bottom-color: #ff8a1e;
         }
         .menu-toggle {
             width: 34px;
@@ -228,12 +245,12 @@
         }
         .mobile-menu-link {
             color: #ffffff;
-            font-size: 1.18rem;
+            font-size: 0.92rem;
             font-weight: 800;
             letter-spacing: 0.4px;
             text-transform: uppercase;
             text-decoration: none;
-            padding: 13px 28px;
+            padding: 11px 28px;
             text-align: left;
         }
         .mobile-menu-link:hover {
@@ -242,9 +259,89 @@
         .mobile-menu-link-zc26 {
             color: #ff8a1e;
         }
+        /* Menú móvil: submenús con cruz animada (+ / −) */
+        .mm-row { display: flex; align-items: center; }
+        .mm-row .mobile-menu-link { flex: 0 0 auto; padding-right: 8px; }
+        .mm-group-zc .mm-toggle { color: #ff8a1e; }
+        .mm-toggle {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            border: none;
+            background: none;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .mm-toggle:active, .mm-toggle:focus, .mm-toggle:hover { background: none; outline: none; box-shadow: none; }
+        .mm-plus {
+            position: relative;
+            width: 12px;
+            height: 12px;
+            display: block;
+            transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+        }
+        .mm-plus::before,
+        .mm-plus::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            margin-top: -1px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.25s ease;
+        }
+        .mm-plus::after { transform: rotate(90deg); }
+        .mm-group.open .mm-plus { transform: rotate(180deg); }
+        .mm-group.open .mm-plus::after { transform: rotate(0deg); }
+        .mm-sub {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mm-group.open .mm-sub { grid-template-rows: 1fr; }
+        .mm-sub-inner {
+            overflow: hidden;
+            min-height: 0;
+            margin-left: 32px;
+            border-left: 1px solid rgba(255,255,255,0.12);
+            display: flex;
+            flex-direction: column;
+        }
+        .mm-sub-link {
+            display: block;
+            padding: 8px 14px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #b9bdc5;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.28s ease, transform 0.28s ease, color 0.15s ease;
+        }
+        .mm-group.open .mm-sub-link { opacity: 1; transform: none; }
+        .mm-group.open .mm-sub-link:nth-child(2) { transition-delay: 0.04s; }
+        .mm-group.open .mm-sub-link:nth-child(3) { transition-delay: 0.08s; }
+        .mm-group.open .mm-sub-link:nth-child(4) { transition-delay: 0.12s; }
+        .mm-group.open .mm-sub-link:nth-child(5) { transition-delay: 0.16s; }
+        .mm-group.open .mm-sub-link:nth-child(6) { transition-delay: 0.2s; }
+        .mm-sub-link:hover { color: #d4af37; }
+        .mm-sub-link:last-child { margin-bottom: 4px; }
+        #ranking, #ultima-clasificacion, #zceloFaq, #zcnrBlock, #matchTabs, #zcgrpPhaseTabs,
+        #home-destacadas, #home-novedades, #home-momentos, #home-historias { scroll-margin-top: 16px; }
         .mobile-menu-more-label {
             padding: 0 28px 6px;
-            font-size: 0.68rem;
+            font-size: 0.62rem;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -262,8 +359,8 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            padding: 12px 28px;
-            font-size: 0.92rem;
+            padding: 10px 28px;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.6px;
             color: #dddddd;
@@ -550,11 +647,9 @@
             cursor: pointer;
             position: relative;
             flex-shrink: 0;
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(.4,0,.2,1);
         }
-        .mvs-tab.active {
-            color: #ffffff;
-        }
-        .mvs-tab.active::after {
+        .mvs-tab::after {
             content: '';
             position: absolute;
             left: 0;
@@ -563,6 +658,16 @@
             height: 2px;
             border-radius: 2px;
             background: #4a86e8;
+            transform: scaleX(0);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
+        }
+        .mvs-tab.active {
+            color: #ffffff;
+        }
+        .mvs-tab.active::after {
+            transform: scaleX(1);
+            opacity: 1;
         }
         .mvs-rows {
             display: flex;
@@ -2332,11 +2437,9 @@
             cursor: pointer;
             position: relative;
             white-space: nowrap;
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(.4,0,.2,1);
         }
-        .zcgrp-phase-tab.active {
-            color: #ffffff;
-        }
-        .zcgrp-phase-tab.active::after {
+        .zcgrp-phase-tab::after {
             content: "";
             position: absolute;
             left: 0;
@@ -2345,6 +2448,16 @@
             height: 2px;
             background: #ffffff;
             border-radius: 2px;
+            transform: scaleX(0);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
+        }
+        .zcgrp-phase-tab.active {
+            color: #ffffff;
+        }
+        .zcgrp-phase-tab.active::after {
+            transform: scaleX(1);
+            opacity: 1;
         }
         .zcgrp-group {
             margin-bottom: 24px;
@@ -2544,7 +2657,6 @@
         .zcgrp-legend {
             background: none;
             border: none;
-            border-top: 1px solid rgba(255,255,255,0.08);
             border-radius: 0;
             padding: 16px 2px 0;
             margin-top: 14px;
@@ -7066,11 +7178,55 @@
         </button>
     </div>
     <div class="mobile-menu-links">
-        <a href="#inicio" class="mobile-menu-link" data-menu-link data-i18n="nav.home.upper" data-i18n-default="HOME">HOME</a>
-        <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
-        <a href="#ranking" class="mobile-menu-link" data-menu-link data-i18n="nav.ranking.upper" data-i18n-default="RANKING">RANKING</a>
+        <div class="mm-group" data-mm-group>
+            <div class="mm-row">
+                <a href="#inicio" class="mobile-menu-link" data-menu-link data-i18n="nav.home.upper" data-i18n-default="HOME">HOME</a>
+                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Home"><span class="mm-plus" aria-hidden="true"></span></button>
+            </div>
+            <div class="mm-sub"><div class="mm-sub-inner">
+                <a href="#home-destacadas" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-destacadas">Destacadas</a>
+                <a href="#home-novedades" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-novedades">Novedades</a>
+                <a href="#home-momentos" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-momentos">Momentos de la BSC de la ZC26™</a>
+                <a href="#home-historias" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-historias">Historias destacadas</a>
+            </div></div>
+        </div>
+        <div class="mm-group" data-mm-group>
+            <div class="mm-row">
+                <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
+                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Último Partido Importa"><span class="mm-plus" aria-hidden="true"></span></button>
+            </div>
+            <div class="mm-sub"><div class="mm-sub-inner">
+                <a href="#matchTabs" class="mm-sub-link" data-menu-sub data-parent="ultimo-partido" data-target="matchTabs" data-action="match-tab:general">Información general</a>
+                <a href="#matchTabs" class="mm-sub-link" data-menu-sub data-parent="ultimo-partido" data-target="matchTabs" data-action="match-tab:cronologia">Cronología</a>
+                <a href="#matchTabs" class="mm-sub-link" data-menu-sub data-parent="ultimo-partido" data-target="matchTabs" data-action="match-tab:alineaciones">Alineaciones</a>
+                <a href="#matchTabs" class="mm-sub-link" data-menu-sub data-parent="ultimo-partido" data-target="matchTabs" data-action="match-tab:estadisticas">Estadísticas</a>
+                <a href="#matchTabs" class="mm-sub-link" data-menu-sub data-parent="ultimo-partido" data-target="matchTabs" data-action="match-tab:posiciones">Posiciones</a>
+                <a href="#matchTabs" class="mm-sub-link" data-menu-sub data-parent="ultimo-partido" data-target="matchTabs" data-action="match-tab:mas-partidos">Más partidos</a>
+            </div></div>
+        </div>
+        <div class="mm-group" data-mm-group>
+            <div class="mm-row">
+                <a href="#ranking" class="mobile-menu-link" data-menu-link data-i18n="nav.ranking.upper" data-i18n-default="RANKING">RANKING</a>
+                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Ranking"><span class="mm-plus" aria-hidden="true"></span></button>
+            </div>
+            <div class="mm-sub"><div class="mm-sub-inner">
+                <a href="#ultima-clasificacion" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="ultima-clasificacion">Última Clasificación</a>
+                <a href="#ranking" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="ranking">Leaderboard</a>
+                <a href="#zceloFaq" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="zceloFaq">¿Cómo se calcula la Clasificación?</a>
+                <a href="#zcnrBlock" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="zcnrBlock">Novedades de la Clasificación</a>
+            </div></div>
+        </div>
         <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
-        <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
+        <div class="mm-group mm-group-zc" data-mm-group>
+            <div class="mm-row">
+                <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
+                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Posiciones"><span class="mm-plus" aria-hidden="true"></span></button>
+            </div>
+            <div class="mm-sub"><div class="mm-sub-inner">
+                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:groups">Fase de grupos</a>
+                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:knockout">Fase de eliminación directa</a>
+            </div></div>
+        </div>
         <a href="#contribuciones" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
         <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
         <a href="#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
@@ -7092,7 +7248,7 @@
     <div class="section-block" id="inicio">
 
         <!-- ===================== DESTACADAS (STORIES) ===================== -->
-        <div class="home-section">
+        <div class="home-section" id="home-destacadas">
             <div class="stories-row" id="storiesRow">
                 <button type="button" class="story-item" data-story-id="lev-winner">
                     <div class="story-ring">
@@ -7128,7 +7284,7 @@
         </div>
 
         <!-- ===================== NOVEDADES ===================== -->
-        <div class="home-section">
+        <div class="home-section" id="home-novedades">
             <div class="novedades-card" id="novedadesCard">
                 <div class="novedades-track" id="novedadesTrack">
                     <div class="novedad-slide" data-novedad-index="0">
@@ -7175,7 +7331,7 @@
         </div>
 
         <!-- ===================== MOMENTOS DE LA BSC (CLIPS) ===================== -->
-        <div class="home-section">
+        <div class="home-section" id="home-momentos">
             <div class="section-heading">Momentos de la BSC de la ZC26™</div>
             <div class="momentos-row" id="momentosRow">
                 <button type="button" class="momento-card" data-story-id="clip-1">
@@ -7210,7 +7366,7 @@
         </div>
 
         <!-- ===================== HISTORIAS DESTACADAS ===================== -->
-        <div class="home-section">
+        <div class="home-section" id="home-historias">
             <div class="section-heading">Historias destacadas</div>
 
             <button type="button" class="hd-hero" data-open-novedad="1">
@@ -8415,7 +8571,7 @@
         <!-- ===================================================================
              ZC26 · FAQ "¿Cómo se calcula la Clasificación?" (prefijo "zcelo-")
         =================================================================== -->
-        <div class="zcelo-faq">
+        <div class="zcelo-faq" id="zceloFaq">
             <div class="zcelo-faq-title">¿Cómo se calcula la Clasificación?</div>
             <p class="zcelo-faq-text">La Clasificación ZC26 se determina utilizando el Modelo Elo. Este método suma o resta puntos por partidos al total de puntos existente de un equipo. Los puntos que se suman o restan vienen determinados en parte por:</p>
             <ul class="zcelo-faq-list">
@@ -8430,7 +8586,7 @@
         <!-- ===================================================================
              ZC26 · Novedades de la Clasificación (prefijo "zcnr-")
         =================================================================== -->
-        <div class="zcnr-block">
+        <div class="zcnr-block" id="zcnrBlock">
             <div class="zcnr-heading">Novedades de la Clasificación</div>
             <div class="zcnr-row" id="zcnrRow">
                 <button type="button" class="zcnr-card" data-open-ranking-novedad="zyroxs-1">
@@ -8541,7 +8697,7 @@
     <div class="section-block" id="group">
         <div class="section-title">ZC26 · POSICIONES</div>
         <div class="section-subtitle">Clasificación por grupo y fases del torneo</div>
-        <div class="zcgrp-phase-tabs">
+        <div class="zcgrp-phase-tabs" id="zcgrpPhaseTabs">
             <button type="button" class="zcgrp-phase-tab active" data-zcgrp-phase="groups">Fase de grupos</button>
             <button type="button" class="zcgrp-phase-tab" data-zcgrp-phase="knockout">Fase de eliminación directa</button>
         </div>
@@ -9822,6 +9978,18 @@
                 { platform: "YouTube", handle: "@byzephyra", url: "https://www.youtube.com/@IstZephyra" },
                 { platform: "Instagram", handle: "@byezephyra", url: "https://www.instagram.com/byezephyra?igsh=Yzc4ODZiMm5hMzFs" }
             ]
+        },
+        {
+            name: "carldeidad_11", country: "PE", amount: 0.05, bestAmount: 0.05,
+            status: "Activo", supportTeam: "Por confirmar",
+            alternateIds: [],
+            socials: []
+        },
+        {
+            name: "mari_19o18", country: "CO", amount: 0.02, bestAmount: 0.02,
+            status: "Activo", supportTeam: "Por confirmar",
+            alternateIds: [],
+            socials: []
         }
     ];
     let contribExpanded = false;
@@ -9905,7 +10073,7 @@
                 <div><div class="info-field-label">Estado</div><div class="info-field-value ${c.status === "Activo" ? "active" : "inactive"}">${c.status}</div></div>
                 <div><div class="info-field-label">Contribucion</div><div class="info-field-value">$${c.amount.toFixed(2)}</div></div>
                 <div><div class="info-field-label">Equipo de Apoyo</div><div class="info-field-value">${c.supportTeam}</div></div>
-                <div><div class="info-field-label">IDs alternos</div><div class="info-field-value">${c.alternateIds.join(", ")}</div></div>
+                <div><div class="info-field-label">IDs alternos</div><div class="info-field-value">${c.alternateIds.length ? c.alternateIds.join(", ") : "Por confirmar"}</div></div>
                 <div class="span-2"><div class="info-field-label">Redes sociales</div>${socialsHtml}</div>
             </div>
         </div>`;
@@ -13073,6 +13241,54 @@
             });
         });
     }
+
+    // Menú móvil · submenús (cruz + / −) y navegación a subcategorías
+    (function () {
+        const menu = document.getElementById("mobileMenu");
+        if (!menu) return;
+        const groups = Array.from(menu.querySelectorAll("[data-mm-group]"));
+        groups.forEach(g => {
+            const btn = g.querySelector("[data-mm-toggle]");
+            if (!btn) return;
+            btn.addEventListener("click", () => {
+                const willOpen = !g.classList.contains("open");
+                groups.forEach(o => {
+                    if (o !== g && o.classList.contains("open")) {
+                        o.classList.remove("open");
+                        const ob = o.querySelector("[data-mm-toggle]");
+                        if (ob) ob.setAttribute("aria-expanded", "false");
+                    }
+                });
+                g.classList.toggle("open", willOpen);
+                btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+                zcPlaySound(willOpen ? "clickentrar" : "clicksalir");
+            });
+        });
+        menu.querySelectorAll("[data-menu-sub]").forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const parent = link.dataset.parent;
+                const targetId = link.dataset.target;
+                const action = link.dataset.action || "";
+                closeMenu();
+                if (allFilterableIds.includes(parent)) {
+                    applySectionFilter(parent, true);
+                    setActiveSectionTab(parent);
+                }
+                if (action.indexOf("match-tab:") === 0) {
+                    const t = document.querySelector('.match-tab[data-tab="' + action.slice(10) + '"]');
+                    if (t && !t.classList.contains("active")) t.click();
+                } else if (action.indexOf("phase:") === 0) {
+                    const t = document.querySelector('.zcgrp-phase-tab[data-zcgrp-phase="' + action.slice(6) + '"]');
+                    if (t && !t.classList.contains("active")) t.click();
+                }
+                setTimeout(() => {
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 120);
+            });
+        });
+    })();
 
     const sectionTabs = document.querySelectorAll(".section-tab");
     if (sectionTabs.length) {
