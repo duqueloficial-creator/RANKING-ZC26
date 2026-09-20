@@ -1876,6 +1876,123 @@
             margin-top: 10px;
         }
 
+        /* ===================== ZC26 · PREDICCIONES (top 10 a ganar el torneo) ===================== */
+        .wcpred {
+            margin-top: 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 12px 12px 10px;
+        }
+        .wcpred-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .wcpred-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0;
+        }
+        .wcpred-toggle {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            color: #dfe1e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            appearance: none;
+            transition: background-color 0.15s ease, transform 0.12s ease;
+        }
+        .wcpred-toggle:active { transform: scale(0.92); background: rgba(255,255,255,0.14); }
+        @media (hover: hover) {
+            .wcpred-toggle:hover { background: rgba(255,255,255,0.14); }
+        }
+        .wcpred-toggle svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+        }
+        .wcpred.collapsed .wcpred-toggle svg { transform: rotate(180deg); }
+        /* La descripción queda siempre visible; solo la lista se pliega */
+        .wcpred-desc {
+            margin: 6px 0 2px;
+            font-size: 0.72rem;
+            line-height: 1.4;
+            color: #a9adb4;
+        }
+        .wcpred-body {
+            display: grid;
+            grid-template-rows: 1fr;
+            transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .wcpred.collapsed .wcpred-body { grid-template-rows: 0fr; }
+        .wcpred-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+        .wcpred-list {
+            list-style: none;
+            margin: 8px 0 0;
+            padding: 0;
+        }
+        .wcpred-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .wcpred-item:last-child { border-bottom: none; }
+        .wcpred-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .wcpred-logo img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+        .wcpred-name {
+            flex: 1 1 auto;
+            min-width: 0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .wcpred-pct {
+            flex-shrink: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            font-variant-numeric: tabular-nums;
+        }
+        .wcpred-foot {
+            margin-top: 8px;
+            font-size: 0.6rem;
+            line-height: 1.45;
+            color: #6f747d;
+        }
+
         /* ===================== ZC26 · CALENDARIO DE ENCUENTROS ===================== */
         .zcfx-wrap {
             display: flex;
@@ -9085,6 +9202,21 @@
                 <div class="wcstat-empty">Aún no hay datos disponibles.</div>
             </div>
         </div>
+        <div class="wcpred" id="wcPred">
+            <div class="wcpred-head">
+                <h3 class="wcpred-title">Predicciones</h3>
+                <button type="button" class="wcpred-toggle" id="wcPredToggle" aria-expanded="true" aria-controls="wcPredBody" aria-label="Mostrar u ocultar predicciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>
+                </button>
+            </div>
+            <p class="wcpred-desc">Los 10 mejores equipos con probabilidades de ganar el título de la ZC26</p>
+            <div class="wcpred-body" id="wcPredBody">
+                <div class="wcpred-inner">
+                    <ul class="wcpred-list" id="wcPredList"></ul>
+                    <p class="wcpred-foot">Probabilidades estimadas con fines informativos. Cambiarán conforme se disputen los partidos.</p>
+                </div>
+            </div>
+        </div>
         <div class="section-updated">Se actualizará una vez inicien los partidos</div>
     </div>
 
@@ -13186,6 +13318,41 @@
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         zcPlaySound("click");
     });
+    /* ZC26 · Predicciones: top 10 de equipos con más probabilidad de ganar el torneo.
+       Porcentajes bajos a propósito (aún no se juegan partidos). Se pueden editar aquí. */
+    (function () {
+        const WC_PRED_TOP10 = [
+            ["op7", 10],
+            ["SYNOX GAMING", 9],
+            ["BLASTERS", 8],
+            ["Leviatán Esports", 7],
+            ["GTA", 6],
+            ["Unorthodox", 5],
+            ["OMEN NOCTE", 4],
+            ["GAMBLING FC", 4],
+            ["POS", 3],
+            ["Egresados Del Conalep", 3]
+        ];
+        const list = document.getElementById("wcPredList");
+        if (list) {
+            list.innerHTML = WC_PRED_TOP10.map(([team, pct]) => `
+                <li class="wcpred-item">
+                    <span class="wcpred-logo"><img src="${zc26Logo(team)}" alt=""></span>
+                    <span class="wcpred-name">${team}</span>
+                    <span class="wcpred-pct">${pct}%</span>
+                </li>`).join("");
+        }
+        const box = document.getElementById("wcPred");
+        const btn = document.getElementById("wcPredToggle");
+        if (box && btn) {
+            btn.addEventListener("click", () => {
+                const willCollapse = !box.classList.contains("collapsed");
+                box.classList.toggle("collapsed", willCollapse);
+                btn.setAttribute("aria-expanded", willCollapse ? "false" : "true");
+                zcPlaySound(willCollapse ? "clicksalir" : "clickentrar");
+            });
+        }
+    })();
     (function () {
         const cols = document.getElementById("zcgrpCols");
         const btn = document.getElementById("zcgrpColsToggle");
