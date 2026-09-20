@@ -1798,6 +1798,75 @@
         .zcfx-card:active { transform: scale(0.98); }
         #zc26 .zc-search-wrap { margin-top: 12px; margin-bottom: 10px; }
         #zc26 .am-filter-group { margin-bottom: 14px; justify-content: center; }
+        /* ZC26 · Partidos: búsqueda con botón borrar + filtros de grupo */
+        #zc26 .zc-search-input { padding: 10px 40px 10px 14px; border-radius: 10px; }
+        #zc26 .zc-search-wrap.has-value .zc-search-icon { display: none; }
+        .zc-search-clear {
+            display: none;
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            color: #dddddd;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.15s ease, transform 0.15s ease;
+        }
+        #zc26 .zc-search-wrap.has-value .zc-search-clear { display: flex; }
+        .zc-search-clear:hover { background: rgba(255,255,255,0.22); color: #ffffff; }
+        .zc-search-clear:active { transform: translateY(-50%) scale(0.9); }
+        #zc26 #zc26GroupFilter.zcg-filter {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(6, 1fr);
+            gap: 5px;
+            padding: 5px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+        }
+        #zc26 #zc26GroupFilter .am-filter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            min-width: 0;
+            padding: 9px 0;
+            font-size: 0.68rem;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            color: #9a9fa8;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+        }
+        #zc26 #zc26GroupFilter .am-filter-btn:hover { color: #ffffff; background: rgba(255,255,255,0.05); }
+        #zc26 #zc26GroupFilter .am-filter-btn:active { transform: scale(0.95); }
+        #zc26 #zc26GroupFilter .am-filter-btn.active {
+            color: #ffffff;
+            background: rgba(255,255,255,0.12);
+            background: color-mix(in srgb, var(--gc) 22%, transparent);
+            border-color: var(--gc);
+        }
+        .zcg-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gc);
+            flex-shrink: 0;
+        }
+        .zcg-pre { display: none; }
+        @media (min-width: 640px) {
+            #zc26 #zc26GroupFilter .am-filter-btn { font-size: 0.76rem; padding: 10px 0; }
+            #zc26 #zc26GroupFilter.zcg-filter { grid-template-columns: 1.2fr repeat(6, 1fr); gap: 6px; }
+            .zcg-pre { display: inline; }
+            .zcg-dot { width: 7px; height: 7px; }
+        }
         .zc-search-suggestion-row {
             display: flex;
             align-items: center;
@@ -1929,6 +1998,296 @@
             background: rgba(255,255,255,0.1);
             font-weight: 700;
         }
+        /* ZC26 · Alineaciones de los partidos: un cuadro titulares + un cuadro suplentes */
+        .zc26mm-lu-wrap { margin-top: 8px; gap: 8px; }
+        .zc26mm-lu-wrap .lu-block { padding: 7px 8px; border-radius: 12px; }
+        .zc26mm-lu-wrap .lu-block-suplentes { margin-top: 0; }
+        .zc26mm-lu-wrap .lu-sub-title { font-size: 0.52rem; letter-spacing: 1.6px; padding-bottom: 4px; margin-bottom: 6px; }
+        .lu-block .lu-block-grid.zc26lu-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 4px;
+        }
+        .zc26lu-team {
+            flex: 0 0 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.58rem;
+            font-weight: 700;
+            color: #c9cdd3;
+            padding: 2px 2px 3px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .zc26lu-team:not(:first-child) { margin-top: 4px; }
+        .zc26lu-team img { width: 14px; height: 14px; object-fit: contain; }
+        .zc26lu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 0 2px;
+            width: 72px;
+            min-width: 0;
+        }
+        .zc26lu-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            object-fit: cover;
+            background: #1a1a1a;
+            flex-shrink: 0;
+        }
+        .zc26lu-subs-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .zc26lu-subs-col {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: flex-start;
+            gap: 8px 2px;
+            padding: 0 4px;
+            min-width: 0;
+        }
+        .zc26lu-subs-col + .zc26lu-subs-col { border-left: 1px solid rgba(255,255,255,0.06); }
+        .zc26lu-subs-col .zc26lu-team:not(:first-child) { margin-top: 0; }
+        .zc26lu-subs-col .zc26lu-card { width: 64px; }
+        .zc26lu-none { flex: 0 0 100%; text-align: center; font-size: 0.55rem; color: #6f747c; padding-top: 4px; }
+        .zc26lu-break { flex: 0 0 100%; height: 0; }
+        .zc26mm-lu-wrap .zc26lu-coach-block { padding: 6px 8px; border-radius: 12px; }
+        .zc26mm-lu-wrap .lu-coaches { padding: 4px 4px; }
+        .zc26mm-lu-wrap .lu-coach-name { font-size: 0.64rem; }
+        .zc26mm-lu-wrap .lu-coach-role.zc26lu-coach-role {
+            font-size: 0.5rem;
+            text-transform: none;
+            letter-spacing: 0.2px;
+        }
+        .zc26mm-lu-wrap .lu-coach-role img { width: 11px; height: 11px; }
+        .zc26mm-lu-wrap .lu-ratings-note { font-size: 0.52rem; padding: 2px 6px; }
+        .zc26lu-name {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .zc26lu-role {
+            font-size: 0.42rem;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            text-align: center;
+        }
+
+        /* --- Tamaños reducidos del modal de partido --- */
+        .zc26mm-head { margin-bottom: 12px; }
+        .zc26mm-title { font-size: 0.85rem; }
+        .zc26mm-title-sub { font-size: 0.7rem; }
+        .zc26mm-date { font-size: 0.6rem; margin-top: 3px; }
+        .zc26mm-tag, .zc26mm-status { font-size: 0.55rem; padding: 3px 7px; border-radius: 6px; }
+        .zc26mm-scoreboard .team-logo { width: 54px; height: 54px; padding: 9px; border-radius: 15px; }
+        .zc26mm-scoreboard .team-name { font-size: 0.56rem; }
+        .zc26mm-scoreboard .score-number { font-size: 1.3rem; }
+        .zc26mm-tabs { margin-top: 14px; gap: 6px; }
+        .zc26mm-tab-btn { font-size: 0.62rem; padding: 6px 12px; }
+        .zc26mm-tab-content {
+            margin-top: 18px;
+        }
+        .zc26mm-stat-block {
+            padding-top: 4px;
+        }
+        .zc26mm-stat-block + .zc26mm-stat-block {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .zc26mm-stat-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .zc26mm-stat-sub {
+            font-size: 0.72rem;
+            color: #9aa0a6;
+            margin-top: 2px;
+            margin-bottom: 14px;
+        }
+        .zc26mm-form-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+        .zc26mm-form-row:first-of-type {
+            border-top: none;
+        }
+        .zc26mm-form-team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            flex: 1 1 0;
+            justify-content: flex-end;
+        }
+        .zc26mm-form-logo {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .zc26mm-form-name {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #d6d9de;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .zc26mm-form-dots {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+            flex: 1 1 0;
+            justify-content: flex-start;
+        }
+        .zc26mm-form-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .zc26mm-form-dot-none {
+            border: 1.5px solid rgba(255,255,255,0.3);
+            background: transparent;
+        }
+        .zc26mm-prob-block .zc26mm-stat-title {
+            font-size: 0.95rem;
+        }
+        .zc26mm-stat-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .zc26mm-prob-labels {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .zc26mm-prob-label {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .zc26mm-prob-label:nth-child(2) {
+            align-items: center;
+            text-align: center;
+        }
+        .zc26mm-prob-label:last-child {
+            align-items: flex-end;
+            text-align: right;
+        }
+        .zc26mm-prob-name {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #e4e6e9;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .zc26mm-prob-pct {
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+        .zc26mm-prob-pct-home {
+            color: #6ea8fe;
+        }
+        .zc26mm-prob-pct-draw {
+            color: #b9bec7;
+        }
+        .zc26mm-prob-pct-away {
+            color: #ef5350;
+        }
+        .zc26mm-prob-bar {
+            display: flex;
+            width: 100%;
+            height: 8px;
+            gap: 4px;
+        }
+        .zc26mm-prob-seg {
+            height: 100%;
+            border-radius: 4px;
+            min-width: 4px;
+        }
+        .zc26mm-prob-seg-home {
+            background: #6ea8fe;
+        }
+        .zc26mm-prob-seg-draw {
+            background: #6c7280;
+        }
+        .zc26mm-prob-seg-away {
+            background: #ef5350;
+        }
+        .zc26mm-general-section + .zc26mm-general-section {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .zc26mm-general-section-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .zc26mm-general-section .zc26mm-stat-block:first-child {
+            padding-top: 10px;
+        }
+
+        /* --- Estadísticas / general: más compacto + Formación reciente alineada --- */
+        .zc26mm-tab-content { margin-top: 10px; }
+        .zc26mm-info-line { font-size: 0.68rem; margin-bottom: 4px; }
+        .zc26mm-stat-block + .zc26mm-stat-block { margin-top: 14px; padding-top: 12px; }
+        .zc26mm-stat-title, .zc26mm-prob-block .zc26mm-stat-title { font-size: 0.82rem; }
+        .zc26mm-stat-sub { font-size: 0.6rem; margin-bottom: 8px; }
+        .zc26mm-general-section + .zc26mm-general-section { margin-top: 14px; padding-top: 12px; }
+        .zc26mm-general-section-title { font-size: 0.85rem; }
+        .zc26mm-form-row {
+            justify-content: space-between;
+            gap: 10px;
+            padding: 6px 0;
+        }
+        .zc26mm-form-team {
+            flex: 1 1 auto;
+            justify-content: flex-start;
+            gap: 8px;
+        }
+        .zc26mm-form-logo { width: 22px; height: 22px; }
+        .zc26mm-form-name { font-size: 0.68rem; }
+        .zc26mm-form-dots {
+            flex: 0 0 auto;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .zc26mm-form-dot { width: 16px; height: 16px; }
+        .zc26mm-stat-title-row { margin-bottom: 10px; }
+        .zc26mm-prob-name { font-size: 0.62rem; }
+        .zc26mm-prob-pct { font-size: 0.72rem; }
+        .zc26mm-prob-bar { height: 6px; gap: 3px; }
 
         /* ===================== SECRETO · imagen sorpresa por spam de clics ===================== */
         .zc-easter-egg {
@@ -8160,16 +8519,17 @@
         <div class="zc-search-wrap">
             <input type="text" class="zc-search-input" id="zc26SearchInput" placeholder="Buscar equipo, grupo o día..." autocomplete="off">
             <span class="zc-search-icon"></span>
+            <button type="button" class="zc-search-clear" id="zc26SearchClear" aria-label="Borrar búsqueda" title="Borrar búsqueda"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
             <div class="zc-search-suggestions" id="zc26SearchBox"></div>
         </div>
-        <div class="am-filter-group" id="zc26GroupFilter" data-filter-group="zc26-group">
-            <button type="button" class="am-filter-btn active" data-zc26-group-filter="all">Todos</button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="A">Grupo A</button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="B">Grupo B</button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="C">Grupo C</button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="D">Grupo D</button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="E">Grupo E</button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="F">Grupo F</button>
+        <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
+            <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="A" style="--gc:#22c55e"><span class="zcg-dot"></span><span class="zcg-txt"><span class="zcg-pre">Grupo </span>A</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="B" style="--gc:#3b82f6"><span class="zcg-dot"></span><span class="zcg-txt"><span class="zcg-pre">Grupo </span>B</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="C" style="--gc:#eab308"><span class="zcg-dot"></span><span class="zcg-txt"><span class="zcg-pre">Grupo </span>C</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="D" style="--gc:#ef4444"><span class="zcg-dot"></span><span class="zcg-txt"><span class="zcg-pre">Grupo </span>D</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="E" style="--gc:#a855f7"><span class="zcg-dot"></span><span class="zcg-txt"><span class="zcg-pre">Grupo </span>E</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="F" style="--gc:#06b6d4"><span class="zcg-dot"></span><span class="zcg-txt"><span class="zcg-pre">Grupo </span>F</span></button>
         </div>
         <div class="panel">
             <div class="zcfx-wrap" id="zc26FixturesList"></div>
@@ -11530,6 +11890,8 @@
             if (zc26mmTabBtn) {
                 zc26mmTabBtn.parentElement.querySelectorAll(".zc26mm-tab-btn").forEach(b => b.classList.remove("active"));
                 zc26mmTabBtn.classList.add("active");
+                const contentEl = document.getElementById("zc26mmTabContent");
+                if (contentEl) contentEl.innerHTML = zc26RenderTabContent(zc26mmTabBtn.dataset.zc26mmTab, zc26mmCurrentMatch);
                 zcPlaySound("click");
             }
             const allMatchesBtn = e.target.closest("[data-all-matches]");
@@ -11697,6 +12059,251 @@
     const ZC26_MONTH_NAMES = {
         SEP: "septiembre"
     };
+    const ZC26_PROBS = {
+        "Leviatán Esports|Peruanos FC": [81, 7, 12],
+        "Leviatán Esports|Quiero KeKe": [83, 11, 6],
+        "Leviatán Esports|POS JR": [77, 9, 14],
+        "Peruanos FC|Quiero KeKe": [41, 7, 52],
+        "Peruanos FC|POS JR": [39, 9, 52],
+        "Quiero KeKe|POS JR": [47, 11, 42],
+
+        "GAMBLING FC|KURO ØNIX": [47, 14, 39],
+        "GAMBLING FC|SGC": [48, 11, 41],
+        "GAMBLING FC|POS": [44, 12, 44],
+        "KURO ØNIX|SGC": [45, 11, 44],
+        "KURO ØNIX|POS": [38, 16, 46],
+        "SGC|POS": [42, 9, 49],
+
+        "Phoenix|LPE": [34, 14, 52],
+        "Phoenix|TEAM ATENAS": [34, 11, 55],
+        "Phoenix|BLASTERS": [4, 7, 89],
+        "LPE|TEAM ATENAS": [36, 11, 53],
+        "LPE|BLASTERS": [15, 9, 76],
+        "TEAM ATENAS|BLASTERS": [29, 6, 65],
+
+        "Baraja de Elite|Sinister Haven": [48, 12, 40],
+        "Baraja de Elite|Unorthodox": [39, 8, 53],
+        "Baraja de Elite|GTA": [11, 7, 82],
+        "Sinister Haven|Unorthodox": [39, 6, 55],
+        "Sinister Haven|GTA": [14, 8, 78],
+        "Unorthodox|GTA": [48, 11, 41],
+
+        "RAISE EARTH|SYNOX GAMING": [4, 9, 87],
+        "RAISE EARTH|op7": [4, 3, 93],
+        "RAISE EARTH|Wosu Esport": [44, 11, 45],
+        "SYNOX GAMING|op7": [43, 8, 49],
+        "SYNOX GAMING|Wosu Esport": [88, 8, 4],
+        "op7|Wosu Esport": [91, 6, 3],
+
+        "Pro Legends|Egresados Del Conalep": [44, 11, 45],
+        "Pro Legends|OMEN NOCTE": [43, 9, 48],
+        "Pro Legends|Acuñas": [46, 11, 43],
+        "Egresados Del Conalep|OMEN NOCTE": [43, 12, 45],
+        "Egresados Del Conalep|Acuñas": [45, 16, 39],
+        "OMEN NOCTE|Acuñas": [48, 14, 38]
+    };
+    function zc26GetProb(teamHome, teamAway) {
+        const direct = ZC26_PROBS[`${teamHome}|${teamAway}`];
+        if (direct) return { home: direct[0], draw: direct[1], away: direct[2] };
+        const reverse = ZC26_PROBS[`${teamAway}|${teamHome}`];
+        if (reverse) return { home: reverse[2], draw: reverse[1], away: reverse[0] };
+        return { home: 33, draw: 34, away: 33 };
+    }
+    function zc26FormDots() {
+        // No hay encuentros jugados todavía: los 5 espacios quedan como "No jugó"
+        return `<span class="zc26mm-form-dot zc26mm-form-dot-none"></span>`.repeat(5);
+    }
+    function zc26StatsBlocksHtml(ctx) {
+        const p = zc26GetProb(ctx.home, ctx.away);
+        return `
+        <div class="zc26mm-stat-block">
+            <div class="zc26mm-stat-title">Formación reciente</div>
+            <div class="zc26mm-stat-sub">Últimos 5 partidos</div>
+            <div class="zc26mm-form-row">
+                <div class="zc26mm-form-team">
+                    <img class="zc26mm-form-logo" src="${zc26Logo(ctx.home)}" alt="">
+                    <span class="zc26mm-form-name">${ctx.home}</span>
+                </div>
+                <div class="zc26mm-form-dots">${zc26FormDots()}</div>
+            </div>
+            <div class="zc26mm-form-row">
+                <div class="zc26mm-form-team">
+                    <img class="zc26mm-form-logo" src="${zc26Logo(ctx.away)}" alt="">
+                    <span class="zc26mm-form-name">${ctx.away}</span>
+                </div>
+                <div class="zc26mm-form-dots">${zc26FormDots()}</div>
+            </div>
+        </div>
+        <div class="zc26mm-stat-block zc26mm-prob-block">
+            <div class="zc26mm-stat-title-row">
+                <span class="zc26mm-stat-title">Probabilidad de victoria</span>
+            </div>
+            <div class="zc26mm-prob-labels">
+                <div class="zc26mm-prob-label">
+                    <span class="zc26mm-prob-name">${ctx.home}</span>
+                    <span class="zc26mm-prob-pct zc26mm-prob-pct-home">${p.home}%</span>
+                </div>
+                <div class="zc26mm-prob-label">
+                    <span class="zc26mm-prob-name">Empate</span>
+                    <span class="zc26mm-prob-pct zc26mm-prob-pct-draw">${p.draw}%</span>
+                </div>
+                <div class="zc26mm-prob-label">
+                    <span class="zc26mm-prob-name">${ctx.away}</span>
+                    <span class="zc26mm-prob-pct zc26mm-prob-pct-away">${p.away}%</span>
+                </div>
+            </div>
+            <div class="zc26mm-prob-bar">
+                <span class="zc26mm-prob-seg zc26mm-prob-seg-home" style="width:${p.home}%"></span>
+                <span class="zc26mm-prob-seg zc26mm-prob-seg-draw" style="width:${p.draw}%"></span>
+                <span class="zc26mm-prob-seg zc26mm-prob-seg-away" style="width:${p.away}%"></span>
+            </div>
+        </div>`;
+    }
+    // ZC26 · Plantillas por equipo (fuente: analisis_equipos).
+    // Roles: cap = Capitán, lid = Líder, tit = Titular, jug = Jugador,
+    //        sup = Suplente, man = Manager, coa = Coach · Jugador
+    const ZC26_ROSTERS = {
+        "Leviatán Esports": [["JulioCr36D","cap"],["lXlCross","tit"],["TX JOAR","tit"],["alva210","sup"],["Freddy.jh","sup"],["Nico","sup"]],
+        "Peruanos FC": [["JuegenColette1","cap"],["TiliinInzanoAlex","jug"],["TomiokaTxA","jug"],["Twiceulibrws","jug"]],
+        "Quiero KeKe": [["Doslox","cap"],["Mag","jug"],["lcomic","jug"]],
+        "POS JR": [["Nen","cap"],["Mateo","jug"],["Arc/Rafa","jug"],["TK Carl","jug"],["TH Scar","sup"]],
+        "GAMBLING FC": [["Jeta","cap"],["Ogaru","cap"],["pan_con_queso","tit"],["tiinas0","sup"],["gabri","sup"]],
+        "KURO ØNIX": [["sjoacedbamypasa","cap"],["Gabonix","jug"],["Simon el prro","jug"]],
+        "SGC": [["CESAR","cap"],["Denshol","jug"],["CharlesTQ","jug"]],
+        "POS": [["PosiLegend966P","cap"],["Gold","jug"],["Pato Mauri","jug"],["fran","jug"],["PosiSalchi","sup"]],
+        "LPE": [["Steve","cap"],["Daniel","jug"],["Gary","jug"]],
+        "Phoenix": [["Amberchu01","cap"],["Trdgx98","jug"],["bititobrawl","jug"],["12skividi","sup"]],
+        "BLASTERS": [["Diego","lid"],["shirox","jug"],["vsblees","jug"]],
+        "TEAM ATENAS": [["kaenluc","lid"],["reyes17","jug"],["sebazz","jug"],["ale","sup"],["messpvp","sup"]],
+        "Baraja de Elite": [["Heritage","cap"],["Sukhoi","tit"],["Destroyer","tit"]],
+        "Sinister Haven": [["Isakiu","lid"],["rnowtt","jug"],["JDxZ","jug"],["Banditoo","jug"]],
+        "Unorthodox": [["robertbv","cap"],["Xell Lie in April!","jug"],["Miseryoung","jug"]],
+        "GTA": [["Adri","cap"],["thoniolo","jug"],["Gabinho","jug"],["nefi","jug"]],
+        "RAISE EARTH": [["F nero","cap"],["kikyy","jug"],["Hacent","jug"],["Hagnes","sup"],["PatitoAtlas","sup"],["JEAN","sup"],["Tsukuyo Amane","sup"]],
+        "op7": [["Naori","man"],["Ricky","cap"],["Darkxz","jug"],["smk myst!","jug"]],
+        "SYNOX GAMING": [["Ghost","coa"],["abelldx","cap"],["Deizz","tit"],["romanqq","tit"],["angeliuki","tit"],["Rickylove","sup"]],
+        "Wosu Esport": [["Blaxxyy","cap"],["Jhxfwxy","tit"],["Ninferum","tit"],["Selavi","sup"]],
+        "Pro Legends": [["OwnerOnYT","cap"],["EL_CHINO.504","jug"],["Claustin","jug"]],
+        "Egresados Del Conalep": [["new_faxtory","cap"],["AUMcxD","jug"],["Sanz","jug"],["luisitopro123","sup"]],
+        "Acuñas": [["RoyZtrike","cap"],["Xabi","jug"],["Galactus","jug"]],
+        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["Zousa","jug"]]
+    };
+    const ZC26_ROLE_LABEL = { cap: "Capitán", lid: "Líder", tit: "Titular", jug: "Jugador", sup: "Suplente", man: "Manager", coa: "Coach" };
+    function zc26Esc(v) {
+        return String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+    function zc26LineupCard(name, role) {
+        return `<div class="zc26lu-card">
+            <img class="zc26lu-avatar" src="palyer_sep.png" alt="">
+            <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
+            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
+        </div>`;
+    }
+    const ZC26_ABBR = {
+        "Leviatán Esports": "LEV", "Peruanos FC": "PFC", "Quiero KeKe": "QKK", "POS JR": "PJR",
+        "GAMBLING FC": "GFC", "KURO ØNIX": "KRO", "SGC": "SGC", "POS": "POS",
+        "LPE": "LPE", "Phoenix": "PH", "BLASTERS": "BLS", "TEAM ATENAS": "ATN",
+        "Baraja de Elite": "BE", "Sinister Haven": "SNH", "Unorthodox": "UN", "GTA": "GTA",
+        "RAISE EARTH": "RE", "op7": "OP7", "SYNOX GAMING": "SNX", "Wosu Esport": "WSU",
+        "Pro Legends": "PL", "Egresados Del Conalep": "EDC", "Acuñas": "ACU", "OMEN NOCTE": "OMN"
+    };
+    function zc26Abbr(team) { return ZC26_ABBR[team] || String(team).slice(0, 3).toUpperCase(); }
+    function zc26LineupBox(title, cls, ctx, pick) {
+        const parts = [ctx.home, ctx.away].map(team => {
+            const list = pick(ZC26_ROSTERS[team] || []);
+            if (!list.length) return "";
+            const players = list.filter(m => m[1] !== "coa");
+            const coaches = list.filter(m => m[1] === "coa");
+            return `<div class="zc26lu-team"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>`
+                + players.map(m => zc26LineupCard(m[0], m[1])).join("")
+                + (coaches.length ? `<div class="zc26lu-break"></div>` + coaches.map(m => zc26LineupCard(m[0], m[1])).join("") : "");
+        }).join("");
+        if (!parts) return "";
+        return `<div class="lu-block ${cls}">
+            <div class="lu-sub-title">${title}</div>
+            <div class="lu-block-grid zc26lu-grid">${parts}</div>
+        </div>`;
+    }
+    // Suplentes: equipo A a la izquierda y equipo B a la derecha.
+    function zc26SubsBox(ctx, pick) {
+        const lists = [ctx.home, ctx.away].map(team => pick(ZC26_ROSTERS[team] || []));
+        if (!lists[0].length && !lists[1].length) return "";
+        const col = (team, list) => `<div class="zc26lu-subs-col">
+                <div class="zc26lu-team"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>
+                ${list.length ? list.map(m => zc26LineupCard(m[0], m[1])).join("") : `<div class="zc26lu-none">Sin suplentes</div>`}
+            </div>`;
+        return `<div class="lu-block lu-block-suplentes">
+            <div class="lu-sub-title">Suplentes</div>
+            <div class="zc26lu-subs-cols">${col(ctx.home, lists[0])}${col(ctx.away, lists[1])}</div>
+        </div>`;
+    }
+    // Máximo 3 titulares por equipo. El capitán/líder va SIEMPRE en medio.
+    // El coach va con los jugadores, en una fila justo detrás (debajo) del capitán.
+    // El resto pasa a suplentes; el manager va a suplentes.
+    function zc26SplitRoster(roster) {
+        const isLead = r => r === "cap" || r === "lid";
+        const players = roster.filter(m => m[1] !== "sup" && m[1] !== "man" && m[1] !== "coa")
+            .sort((x, y) => (isLead(y[1]) ? 1 : 0) - (isLead(x[1]) ? 1 : 0));
+        const coaches = roster.filter(m => m[1] === "coa");
+        const managers = roster.filter(m => m[1] === "man");
+        const originalSubs = roster.filter(m => m[1] === "sup");
+        const overflow = players.slice(3).map(m => [m[0], "sup"]);
+        const top = players.slice(0, 3);
+        let arranged = top;
+        if (top.length >= 3 && isLead(top[0][1])) {
+            arranged = [top[1], top[0], top[2]];
+        }
+        return {
+            starters: arranged.concat(coaches),
+            subs: overflow.concat(originalSubs, managers)
+        };
+    }
+    function zc26CoachOf(team) {
+        const c = (ZC26_ROSTERS[team] || []).find(m => m[1] === "coa");
+        return c ? c[0] : "N/A";
+    }
+    function zc26CoachesHtml(ctx) {
+        const one = team => `<div class="lu-coach">
+                <span class="lu-coach-name">${zc26Esc(zc26CoachOf(team))}</span>
+                <span class="lu-coach-role zc26lu-coach-role"><img src="${zc26Logo(team)}" alt="">${zc26Esc(zc26Abbr(team))}Coach</span>
+            </div>`;
+        return `<div class="lu-block zc26lu-coach-block">
+            <div class="lu-coaches">${one(ctx.home)}${one(ctx.away)}</div>
+            <div class="lu-ratings-note">Calificaciones de los jugadores (0/11) basadas en los datos de los partidos</div>
+        </div>`;
+    }
+    function zc26LineupsHtml(ctx) {
+        const starters = roster => zc26SplitRoster(roster).starters;
+        const subs = roster => zc26SplitRoster(roster).subs;
+        return `<div class="lu-wrap zc26mm-lu-wrap">
+            ${zc26LineupBox("Titulares", "lu-block-titulares", ctx, starters)}
+            ${zc26SubsBox(ctx, subs)}
+            ${zc26CoachesHtml(ctx)}
+        </div>`;
+    }
+    function zc26GeneralSection(title, innerHtml) {
+        return `<div class="zc26mm-general-section">
+            <div class="zc26mm-general-section-title">${title}</div>
+            ${innerHtml || ""}
+        </div>`;
+    }
+    function zc26RenderTabContent(tab, ctx) {
+        if (!ctx) return "";
+        if (tab === "estadisticas") {
+            return zc26StatsBlocksHtml(ctx);
+        }
+        if (tab === "alineaciones") {
+            return zc26LineupsHtml(ctx);
+        }
+        if (tab === "general") {
+            return `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 SEPTIEMBRE", manejado por el equipo del soporte</span></div>
+                <div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>`
+                + zc26GeneralSection("Alineaciones", zc26LineupsHtml(ctx))
+                + zc26GeneralSection("Estadísticas", zc26StatsBlocksHtml(ctx));
+        }
+        return "";
+    }
+    let zc26mmCurrentMatch = null;
     function openZc26Match(card) {
         const panel = document.getElementById("zc26MatchPanel");
         if (!panel || !card) return;
@@ -11708,6 +12315,7 @@
         const month = card.dataset.month || "";
         const accent = ZC26_GROUP_COLORS[group] || "#8a8f98";
         const monthFull = ZC26_MONTH_NAMES[month] || month;
+        zc26mmCurrentMatch = { home, away, group };
         panel.innerHTML = `
             <div class="info-close"><span class="info-close-x">✕</span></div>
             <div class="zc26mm-head">
@@ -11745,6 +12353,7 @@
                 <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="estadisticas">Estadísticas</button>
                 <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="mas-partidos">Más partidos</button>
             </div>
+            <div class="zc26mm-tab-content" id="zc26mmTabContent">${zc26RenderTabContent("general", zc26mmCurrentMatch)}</div>
         `;
         zcPlaySound("clickentrar");
         openModal("zc26MatchOverlay");
@@ -11762,6 +12371,9 @@
     });
     function applyZc26Filters() {
         const searchInput = document.getElementById("zc26SearchInput");
+        if (searchInput && searchInput.closest(".zc-search-wrap")) {
+            searchInput.closest(".zc-search-wrap").classList.toggle("has-value", !!searchInput.value);
+        }
         const searchVal = searchNorm((searchInput && searchInput.value) || "").trim();
         const activeGroupBtn = document.querySelector("#zc26GroupFilter .am-filter-btn.active");
         const activeGroup = activeGroupBtn ? activeGroupBtn.dataset.zc26GroupFilter : "all";
@@ -11837,6 +12449,17 @@
             zc26SearchBoxEl.style.display = "none";
             applyZc26Filters();
             zcPlaySound("click");
+        });
+    }
+    const zc26SearchClearEl = document.getElementById("zc26SearchClear");
+    if (zc26SearchClearEl && zc26SearchInputEl) {
+        zc26SearchClearEl.addEventListener("mousedown", (e) => e.preventDefault());
+        zc26SearchClearEl.addEventListener("click", () => {
+            zc26SearchInputEl.value = "";
+            if (zc26SearchBoxEl) { zc26SearchBoxEl.innerHTML = ""; zc26SearchBoxEl.style.display = "none"; }
+            applyZc26Filters();
+            zcPlaySound("click");
+            if (window.matchMedia && window.matchMedia("(hover: hover)").matches) zc26SearchInputEl.focus();
         });
     }
     const zc26GroupFilterEl = document.getElementById("zc26GroupFilter");
