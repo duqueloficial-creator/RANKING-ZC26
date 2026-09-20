@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZC26 - Brawl Stars Championship</title>
     <style>
+        /* Pantalla de carga inicial: círculo girando hasta que carguen todas las imágenes */
+        #zcPreloader {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 2147483000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.45s ease, visibility 0.45s ease;
+        }
+        #zcPreloader.zc-hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .zc-preloader-spinner {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.14);
+            border-top-color: #ffffff;
+            animation: zcPreloaderSpin 0.8s linear infinite;
+        }
+        @keyframes zcPreloaderSpin {
+            to { transform: rotate(360deg); }
+        }
+        html.zc-loading, html.zc-loading body {
+            overflow: hidden !important;
+        }
+    </style>
+    <noscript><style>#zcPreloader { display: none !important; }</style></noscript>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -7334,6 +7372,42 @@
 </head>
 <body>
 
+<div id="zcPreloader" role="status" aria-live="polite" aria-label="Cargando">
+    <div class="zc-preloader-spinner"></div>
+</div>
+<script>
+(function () {
+    var loader = document.getElementById("zcPreloader");
+    if (!loader) return;
+    var root = document.documentElement;
+    root.classList.add("zc-loading");
+    var done = false;
+    function finish() {
+        if (done) return;
+        done = true;
+        root.classList.remove("zc-loading");
+        loader.classList.add("zc-hide");
+        setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 600);
+    }
+    // Espera a que TODAS las imágenes del documento terminen (cargadas o con error)
+    function imagesReady() {
+        var imgs = document.images;
+        for (var i = 0; i < imgs.length; i++) {
+            if (!imgs[i].complete) return false;
+        }
+        return true;
+    }
+    function check() {
+        if (imagesReady()) finish();
+        else setTimeout(check, 120);
+    }
+    if (document.readyState === "complete") check();
+    else window.addEventListener("load", check);
+    // Seguridad: si algo se queda colgado, no bloquear la página para siempre
+    setTimeout(finish, 20000);
+})();
+</script>
+
 <div class="site-header" id="top">
     <div class="site-header-inner">
         <div class="site-header-brand">
@@ -7386,7 +7460,7 @@
             </div>
         </div>
         <button type="button" class="mobile-menu-mute" id="soundMuteBtn" data-i18n-aria="aria.muteSounds" data-i18n-aria-default="Silenciar sonidos" aria-label="Silenciar sonidos">
-            <img src="sound_offmuted.png" id="soundMuteIcon" alt="Sonido">
+            <img src="sound_onmuted.png" id="soundMuteIcon" alt="Sonido">
         </button>
     </div>
     <div class="mobile-menu-links">
@@ -7631,7 +7705,7 @@
                 </div>
                 <div class="story-viewer-controls">
                     <button type="button" class="story-viewer-btn" id="storyMuteBtn">
-                        <img id="storyMuteIcon" src="sound_offmuted.png" alt="Silenciar">
+                        <img id="storyMuteIcon" src="sound_onmuted.png" alt="Silenciar">
                     </button>
                     <button type="button" class="story-viewer-btn" id="storyCloseBtn">
                         <img src="closeiconex.png" alt="Cerrar">
@@ -9112,7 +9186,9 @@
     };
     const ZC_SOUND_ACTIVE = [];
     let zcActiveRankAudio = null;
-    let zcMuted = localStorage.getItem("zcMuted") === "1";
+    // Por defecto la página entra SILENCIADA en cada visita; se activa a mano
+    // desde el botón de sonido del menú (☰). No se guarda entre visitas.
+    let zcMuted = true;
     function zcPlaySound(name) {
         if (zcMuted) return;
         const src = ZC_SOUNDS[name];
@@ -9179,7 +9255,6 @@
     }
     function zcToggleMute() {
         zcMuted = !zcMuted;
-        localStorage.setItem("zcMuted", zcMuted ? "1" : "0");
         zcUpdateMuteIcon();
         if (!zcMuted) zcPlaySound("click");
     }
@@ -14070,7 +14145,7 @@
         let pendingOutgoingSlideTimer = null;
         const STORY_CROSSFADE_MS = 220;
         let bgAudio = null;
-        let storyMuted = localStorage.getItem("zcStoryMuted") === "1";
+        let storyMuted = true; // silenciadas por defecto; se activan a mano con el botón de sonido
         let isPaused = false;
         let progressTimer = null;
         let progressStartTime = 0;
@@ -14552,7 +14627,6 @@
         // Silenciar / activar sonido (afecta música de fondo y video)
         muteBtn.addEventListener("click", () => {
             storyMuted = !storyMuted;
-            localStorage.setItem("zcStoryMuted", storyMuted ? "1" : "0");
             updateMuteIcon();
             if (bgAudio) bgAudio.muted = storyMuted;
             const fgV3 = getFgVideo(); if (fgV3) fgV3.muted = storyMuted;
