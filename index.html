@@ -1930,6 +1930,25 @@
             font-weight: 700;
         }
 
+        /* ===================== SECRETO · imagen sorpresa por spam de clics ===================== */
+        .zc-easter-egg {
+            position: fixed;
+            width: 130px;
+            height: 130px;
+            z-index: 99999;
+            pointer-events: none;
+            display: none;
+        }
+        .zc-easter-egg.show {
+            display: block;
+        }
+        .zc-easter-egg img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
         /* ===================== ZC26 · GROUP (clasificación) ===================== */
         .zcgrp-phase-tabs {
             display: flex;
@@ -11557,7 +11576,8 @@
         "Wosu Esport": "escudo_logo/Wosu-Esport.png",
         "Egresados Del Conalep": "escudo_logo/Egresados-Del-Conalep.png",
         "Acuñas": "escudo_logo/Acuñas.png",
-        "OMEN NOCTE": "escudo_logo/OMEN-NOCTE.png"
+        "OMEN NOCTE": "escudo_logo/OMEN-NOCTE.png",
+        "Pro Legends": "escudo_logo/escudo-default.png"
     };
     function zc26Logo(team) {
         return ZC26_TEAM_LOGOS[team] || "escudo_logo/escudo-default.png";
@@ -11571,7 +11591,7 @@
                 { group: "C", home: "LPE", away: "Phoenix" },
                 { group: "D", home: "Baraja de Elite", away: "Sinister Haven" },
                 { group: "E", home: "RAISE EARTH", away: "op7" },
-                { group: "F", home: "Wosu Esport", away: "Egresados Del Conalep" }
+                { group: "F", home: "Pro Legends", away: "Egresados Del Conalep" }
             ]
         },
         {
@@ -11593,7 +11613,7 @@
                 { group: "C", home: "LPE", away: "TEAM ATENAS" },
                 { group: "D", home: "Unorthodox", away: "Baraja de Elite" },
                 { group: "E", home: "RAISE EARTH", away: "Wosu Esport" },
-                { group: "F", home: "Wosu Esport", away: "OMEN NOCTE" }
+                { group: "F", home: "Pro Legends", away: "OMEN NOCTE" }
             ]
         },
         {
@@ -11615,7 +11635,7 @@
                 { group: "C", home: "LPE", away: "BLASTERS" },
                 { group: "D", home: "GTA", away: "Baraja de Elite" },
                 { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING" },
-                { group: "F", home: "Acuñas", away: "Wosu Esport" }
+                { group: "F", home: "Acuñas", away: "Pro Legends" }
             ]
         },
         {
@@ -13599,6 +13619,80 @@
         });
         document.addEventListener("dragstart", (e) => {
             if (isProtectedImg(e.target)) e.preventDefault();
+        });
+    })();
+
+    /* ======================================================================
+       SECRETO: si el usuario pasa ~10 segundos cambiando de menú/categoría
+       sin parar (spam de clics en pestañas, fases, rondas o filtros),
+       aparece de golpe (sin animación) una imagen sorpresa en un punto
+       aleatorio de la pantalla y se va también de golpe poco después.
+       Solo se garantiza la primera vez; luego es mucho menos probable.
+    ====================================================================== */
+    (function () {
+        const EGG_IMG = "Juju_Sprite-9.webp";
+        const DETECT_WINDOW_MS = 10000;
+        const MIN_CLICKS_IN_WINDOW = 9;
+        const MAX_GAP_MS = 1600;
+        const SHOW_MS = 1400;
+        const REPEAT_CHANCE = 0.01;
+        const TRIGGER_SELECTOR = ".section-tab, .zcgrp-phase-tab, .zcgrp-round-item, .am-filter-btn";
+
+        let clickTimes = [];
+        let hideTimer = null;
+        let eggEl = null;
+
+        function ensureEggEl() {
+            if (eggEl) return eggEl;
+            eggEl = document.createElement("div");
+            eggEl.className = "zc-easter-egg";
+            eggEl.innerHTML = `<img src="${EGG_IMG}" alt="">`;
+            document.body.appendChild(eggEl);
+            return eggEl;
+        }
+
+        function randomizePosition(el) {
+            const margin = 30;
+            const w = window.innerWidth || document.documentElement.clientWidth;
+            const h = window.innerHeight || document.documentElement.clientHeight;
+            const maxX = Math.max(w - margin * 2 - 140, 40);
+            const maxY = Math.max(h - margin * 2 - 140, 40);
+            el.style.left = (margin + Math.random() * maxX) + "px";
+            el.style.top = (margin + Math.random() * maxY) + "px";
+        }
+
+        function hideEgg() {
+            if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+            if (eggEl) eggEl.classList.remove("show");
+        }
+
+        function showEgg() {
+            const el = ensureEggEl();
+            randomizePosition(el);
+            el.classList.add("show");
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(hideEgg, SHOW_MS);
+        }
+
+        function registerSwitch() {
+            const now = Date.now();
+            if (clickTimes.length) {
+                const gap = now - clickTimes[clickTimes.length - 1];
+                if (gap > MAX_GAP_MS) clickTimes = [];
+            }
+            clickTimes.push(now);
+            clickTimes = clickTimes.filter(t => now - t < DETECT_WINDOW_MS);
+
+            if (clickTimes.length >= MIN_CLICKS_IN_WINDOW) {
+                clickTimes = [];
+                if (Math.random() < REPEAT_CHANCE) {
+                    showEgg();
+                }
+            }
+        }
+
+        document.addEventListener("click", function (e) {
+            if (e.target.closest(TRIGGER_SELECTOR)) registerSwitch();
         });
     })();
 </script>
