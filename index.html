@@ -13067,7 +13067,9 @@
         "LPE|Phoenix":                        { h: 2, a: 0 },
         "Baraja de Elite|Sinister Haven":     { h: 0, a: 2 },
         "RAISE EARTH|op7":                    { h: 0, a: 3 },
-        "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 }
+        "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 },
+        "Quiero KeKe|POS JR":                 { h: 3, a: 0 },
+        "BLASTERS|TEAM ATENAS":               { h: 3, a: 0, wo: "TEAM ATENAS" }
     };
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
@@ -13076,14 +13078,16 @@
         ["infernus", "LPE", "LPE|Phoenix"], ["stevv", "LPE", "LPE|Phoenix"],
         ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["Jora", "Leviatán Esports", "Leviatán Esports|Peruanos FC"],
         ["Fax", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"], ["Luisitopro", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"], ["AUMCxd", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"],
-        ["Jet li", "op7", "RAISE EARTH|op7"], ["darkzz", "op7", "RAISE EARTH|op7"], ["Smk myst", "op7", "RAISE EARTH|op7"]
+        ["Jet li", "op7", "RAISE EARTH|op7"], ["darkzz", "op7", "RAISE EARTH|op7"], ["Smk myst", "op7", "RAISE EARTH|op7"],
+        ["Marron", "Quiero KeKe", "Quiero KeKe|POS JR"], ["Iconoc", "Quiero KeKe", "Quiero KeKe|POS JR"], ["Doslox", "Quiero KeKe", "Quiero KeKe|POS JR"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
     const ZC26_STAR_ALIAS = {
         "rnowtt prime": "rnowtt", "stevv": "Steve", "iCross": "lXlCross", "Jora": "TX JOAR",
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
-        "darkzz": "Darkxz", "Smk myst": "smk myst!"
+        "darkzz": "Darkxz", "Smk myst": "smk myst!",
+        "Marron": "Mag", "Iconoc": "lcomic"
     };
     /* Tarjetas de los reportes. team = null → el reporte no dice a qué equipo pertenece.
        type: "ta" amarilla, "tr" roja. player = nombre en la plantilla; rep = como salió en el reporte. */
@@ -13108,7 +13112,8 @@
     const ZC26_PLAYER_STATUS = [
         { team: "GAMBLING FC", player: "Ogaru", status: "lesion" },
         { team: "GAMBLING FC", player: "tiinas0", status: "lesion" },
-        { team: "GAMBLING FC", player: "gabri", status: "lesion" }
+        { team: "GAMBLING FC", player: "gabri", status: "lesion" },
+        { team: "POS JR", player: "TK Carl", status: "lesion" }
     ];
     /* Jugadores que salen (Sale) durante un partido; el suplente que entra ya se marca solo (Entra). */
     const ZC26_SUB_OUT = [
@@ -13588,7 +13593,8 @@
        +1.1 por cada vez Estelar, +0.5 por gol, +0.3 por asistencia, −0.4 por amarilla, −1.5 por roja. */
     /* Calificaciones fijadas a mano ("local|visitante" → jugador → nota); mandan sobre la fórmula. */
     const ZC26_RATING_OVERRIDES = {
-        "Leviatán Esports|Peruanos FC": { "JulioCr36D": 7.8 }
+        "Leviatán Esports|Peruanos FC": { "JulioCr36D": 7.8 },
+        "Quiero KeKe|POS JR": { "Mateo": 5.3, "TK Carl": 5.9, "Arc/Rafa": 5.7, "Doslox": 7.9, "Mag": 8.1 }
     };
     /* Bonus fijo de calificación por equipo (se suma a la fórmula a todos sus jugadores). */
     const ZC26_RATING_TEAM_BONUS = { "op7": 1.2 };
