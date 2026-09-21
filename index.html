@@ -2466,7 +2466,7 @@
             margin: 4px 0;
         }
         .zc26mm-scoreboard .team {
-            width: 33%;
+            width: 27%;
         }
         .zc26mm-scoreboard .team-logo {
             width: 56px;
@@ -2484,14 +2484,24 @@
             text-align: center;
         }
         .zc26mm-scoreboard .score-center {
-            width: 34%;
-            gap: 8px;
+            width: 46%;
+            gap: 12px;
         }
         .zc26mm-scoreboard .score-number {
             font-size: 1.7rem;
         }
         .zc26mm-scoreboard .score-number-empty {
             min-width: 24px;
+        }
+        .zc26mm-scoreboard .status-date {
+            text-align: center;
+            white-space: nowrap;
+        }
+        .zc26mm-scoreboard .status-badge {
+            font-size: 0.5rem;
+            padding: 1px 8px;
+            letter-spacing: 0.3px;
+            border-radius: 9px;
         }
         .zc26mm-tabs {
             display: flex;
@@ -2551,6 +2561,8 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .zc26lu-team:not(:first-child) { margin-top: 4px; }
+        .zc26lu-team-bottom { border-bottom: none; border-top: 1px solid rgba(255,255,255,0.05); padding: 3px 2px 2px; }
+        .zc26lu-gap { flex: 0 0 100%; height: 8px; }
         .zc26lu-team img { width: 14px; height: 14px; object-fit: contain; }
         .zc26lu-card {
             display: flex;
@@ -2772,14 +2784,17 @@
         }
 
         /* --- Tamaños reducidos del modal de partido --- */
-        .zc26mm-head { margin-bottom: 12px; }
+        .zc26mm-head { margin-bottom: 12px; padding-top: 8px; }
+        /* La ✕ va pegada a la esquina superior derecha, sin ocupar una fila propia */
+        #zc26MatchPanel > .info-close { position: absolute; top: 0; right: 2px; z-index: 5; }
+        #zc26MatchPanel > .info-close .info-close-x { padding: 6px 8px; }
         .zc26mm-title { font-size: 0.85rem; }
         .zc26mm-title-sub { font-size: 0.7rem; }
         .zc26mm-date { font-size: 0.6rem; margin-top: 3px; }
         .zc26mm-tag, .zc26mm-status { font-size: 0.55rem; padding: 3px 7px; border-radius: 6px; }
         .zc26mm-scoreboard .team-logo { width: 54px; height: 54px; padding: 9px; border-radius: 15px; }
         .zc26mm-scoreboard .team-name { font-size: 0.56rem; }
-        .zc26mm-scoreboard .score-number { font-size: 1.3rem; }
+        .zc26mm-scoreboard .score-number { font-size: 1.8rem; }
         .zc26mm-tabs { margin-top: 14px; gap: 6px; }
         .zc26mm-tab-btn { font-size: 0.62rem; padding: 6px 12px; }
         .zc26mm-tab-content {
@@ -13687,14 +13702,16 @@
     function zc26Abbr(team) { return ZC26_ABBR[team] || String(team).slice(0, 3).toUpperCase(); }
     function zc26LineupBox(title, cls, ctx, pick) {
         const isStarterBox = /titulares/.test(cls);
-        const parts = [ctx.home, ctx.away].map(team => {
+        // Equipo local: nombre y logo arriba de sus jugadores. Equipo visitante: nombre y logo ABAJO de sus jugadores.
+        const parts = [ctx.home, ctx.away].map((team, i) => {
             const list = pick(ZC26_ROSTERS[team] || [], team, ctx);
             if (!list.length) return "";
             const players = list.filter(m => m[1] !== "coa");
             const coaches = list.filter(m => m[1] === "coa");
-            return `<div class="zc26lu-team"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>`
-                + players.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("")
+            const label = `<div class="zc26lu-team${i === 1 ? " zc26lu-team-bottom" : ""}"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>`;
+            const body = players.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("")
                 + (coaches.length ? `<div class="zc26lu-break"></div>` + coaches.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("") : "");
+            return i === 1 ? `<div class="zc26lu-gap"></div>` + body + label : label + body;
         }).join("");
         if (!parts) return "";
         return `<div class="lu-block ${cls}">
@@ -13876,7 +13893,7 @@
                     <div class="match-status">
                         <span class="status-badge">${statusTxt}</span>
                         <span class="status-date">${res && res.wo ? "W.O." : (ls ? ls.date : String(num).padStart(2, "0") + "/09")}</span>
-                        ${ls && !res ? `<span class="status-date"><img class="zcc-status-flag" src="${zc26FlagSrc(zc26CountryCode)}" alt="">${ls.time}</span>` : ""}
+                        ${ls && !res ? `<span class="status-date">${ls.time}</span>` : ""}
                     </div>
                     ${res ? `<span class="score-number${res.a < res.h ? " score-number-lose" : ""}">${res.a}</span>` : `<span class="score-number score-number-empty"></span>`}
                 </div>
