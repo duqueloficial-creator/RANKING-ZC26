@@ -2715,8 +2715,19 @@
         .zc26lu-chip-sym .zc26sym-svg { width: 14px; height: 14px; }
         .zc26lu-chip-in { top: -8px; left: -13px; }
         .zc26lu-chip-ast { bottom: 3px; left: -13px; }
+        /* ZC26 · Más partidos: tarjetas (mismo estilo mp-card) de los otros partidos de los dos equipos */
+        .zc26mm-more { display: flex; flex-direction: column; gap: 8px; }
+        .zc26mm-more .zcfx-card { cursor: default; }
+        .zcfx-group-badge-more { text-transform: none; letter-spacing: 0.2px; font-weight: 600; }
+        .zc26mm-more .zcfx-card:active { transform: none; }
+        .zc26mm-more-empty { text-align: center; font-size: 0.7rem; color: #8a8f98; padding: 18px 8px; }
         .zc26lu-chip-ast .zc26sym-img { width: 12px; height: 12px; }
         .zc26lu-chip-ast .zc26sym-img img { width: 72%; height: 72%; }
+        /* Asistencia: círculo (1) o barra con número (2+); el icono va sin fondo gris */
+        .zc26lu-chip-ast img.zc26lu-ast-img { width: 10px; height: 10px; flex: 0 0 10px; object-fit: contain; display: block; }
+        .zc26lu-chip-ast-one { width: 16px; min-width: 16px; height: 16px; padding: 0; border-radius: 50%; }
+        .zc26lu-chip-ast-num { height: 16px; min-width: 0; padding: 0 5px 0 3px; gap: 2px; border-radius: 9px; left: -17px; }
+        .zc26lu-chip-ast-num span { font-size: 0.52rem; font-weight: 800; color: #ffffff; line-height: 1; }
         .zc26lu-avwrap-plain { position: relative; display: block; width: 34px; height: 34px; flex-shrink: 0; }
         .zc26lu-avwrap-plain .zc26lu-avatar { display: block; }
         .zc26lu-legend { padding: 9px 10px 10px; }
@@ -13076,7 +13087,7 @@
         { m: "Leviatán Esports|Peruanos FC", team: "Leviatán Esports", player: "TX JOAR", n: 1 },
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "rnowtt", n: 1 },
         { m: "RAISE EARTH|op7", team: "op7", player: "Darkxz", n: 1 },
-        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "luisitopro123", n: 1 }
+        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "luisitopro123", n: 2 }
     ];
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
     const ZC26_PLAYER_STATUS = [
@@ -13579,6 +13590,13 @@
     function zc26RatingCls(v) {
         return v >= 9 ? "rt-top" : v >= 7 ? "rt-elite" : v >= 6 ? "rt-good" : v >= 5 ? "rt-mid" : "rt-low";
     }
+    // Asistencias: 1 = círculo con el icono; 2 o más = barra con el icono y el número.
+    function zc26AssistChip(n) {
+        const img = '<img class="zc26lu-ast-img" src="icon_stats%20(2).png" alt="">';
+        return n > 1
+            ? `<span class="zc26lu-chip zc26lu-chip-ast zc26lu-chip-ast-num">${img}<span>${n}</span></span>`
+            : `<span class="zc26lu-chip zc26lu-chip-ast zc26lu-chip-ast-one">${img}</span>`;
+    }
     function zc26LineupCard(name, role, team, ctx, isStarter) {
         const played = ctx && ctx.res && !ctx.res.wo && role !== "coa" && role !== "man";
         const status = (role !== "coa" && role !== "man") ? zc26PlayerStatus(team, name) : "";
@@ -13605,7 +13623,7 @@
                 : wentOut ? sym("zc26lu-chip-in", "sale")
                 : status ? sym("zc26lu-chip-in", status)
                 : (st.g ? chip("zc26lu-chip-goal", ZC26_ICON_BALL, st.g) : ""))
-            + (st.a ? chip("zc26lu-chip-ast", zc26Sym("asist"), st.a) : "")
+            + (st.a ? zc26AssistChip(st.a) : "")
             + (st.ta >= 2 && !st.tr ? sym("zc26lu-chip-ta", "yy") : (st.ta ? sym("zc26lu-chip-ta", "ta") : ""))
             + (st.tr ? sym("zc26lu-chip-tr", "tr") : "");
         return `<div class="zc26lu-card zc26lu-played" role="button" tabindex="0" data-zc26-player="${zc26Esc(name)}" data-zc26-team="${zc26Esc(team)}" data-zc26-role="${role}" data-zc26-starter="${isStarter ? 1 : 0}" aria-label="Ver estadísticas de ${zc26Esc(name)}">
@@ -13768,8 +13786,37 @@
             ${innerHtml || ""}
         </div>`;
     }
+    // "Más partidos": solo los encuentros donde se enfrentan exactamente estos dos equipos (jugados o por jugar), en orden de fecha.
+    // Usa la misma tarjeta (diseño y tamaños) que la lista de Partidos.
+    function zc26MoreMatchesHtml(ctx) {
+        const cards = [];
+        ZC26_FIXTURES.forEach(day => day.matches.forEach(m => {
+            const samePair = (m.home === ctx.home && m.away === ctx.away) || (m.home === ctx.away && m.away === ctx.home);
+            if (!samePair) return;
+            const r = zc26GetResult(m.home, m.away);
+            cards.push(`<div class="zcfx-card">
+                <span class="zcfx-group-badge zcfx-group-badge-more">ZC26 · Fase de Grupos ${m.group}</span>
+                <div class="zcfx-teams">
+                    <div class="zcfx-team-row${zc26RowCls(r, "home")}">
+                        <span class="zcfx-team-logo"><img src="${zc26Logo(m.home)}" alt="${zc26Esc(m.home)}"></span>
+                        <span class="zcfx-team-name">${zc26Esc(m.home)}</span>
+                    </div>
+                    <div class="zcfx-team-row${zc26RowCls(r, "away")}">
+                        <span class="zcfx-team-logo"><img src="${zc26Logo(m.away)}" alt="${zc26Esc(m.away)}"></span>
+                        <span class="zcfx-team-name">${zc26Esc(m.away)}</span>
+                    </div>
+                </div>
+                ${zc26ScoresHtml(r)}
+                <span class="zcfx-divider"></span>
+                ${zc26DateHtml(day, r, m)}
+            </div>`);
+        }));
+        return cards.length ? `<div class="zc26mm-more">${cards.join("")}</div>`
+            : `<div class="zc26mm-more-empty">No hay partidos entre estos equipos.</div>`;
+    }
     function zc26RenderTabContent(tab, ctx) {
         if (!ctx) return "";
+        if (tab === "mas-partidos") return zc26MoreMatchesHtml(ctx);
         if (tab === "estadisticas") {
             return zc26StatsBlocksHtml(ctx);
         }
@@ -13782,7 +13829,8 @@
             return woLine + `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 SEPTIEMBRE", manejado por el equipo del soporte</span></div>
                 <div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>`
                 + zc26GeneralSection("Alineaciones", zc26LineupsHtml(ctx))
-                + zc26GeneralSection("Estadísticas", zc26StatsBlocksHtml(ctx));
+                + zc26GeneralSection("Estadísticas", zc26StatsBlocksHtml(ctx))
+                + zc26GeneralSection("Más partidos", zc26MoreMatchesHtml(ctx));
         }
         return "";
     }
@@ -13882,9 +13930,9 @@
             ["Rol", ZC26_ROLE_LABEL[role] + (!isStarter && hasData ? " · Jugó" : "")],
             ["Resultado del equipo", participated ? (won ? "Ganó" : "Perdió") : "No jugó"],
             ...(!isStarter && hasData ? [["Sustitución", "Entra"]] : (zc26IsSubbedOut(ctx, team, name) ? [["Sustitución", "Sale"]] : [])),
-            [`<span class="zc26qs-lbl">${ZC26_ICON_STAR}Estelar</span>`, st.star],
+            [`<span class="zc26qs-lbl">Estelar${ZC26_ICON_STAR}</span>`, st.star],
             ["Set Marcado", st.star + st.g],
-            [`<span class="zc26qs-lbl"><img src="icon_stats%20(2).png" alt="">Asistencias</span>`, st.a],
+            [`<span class="zc26qs-lbl">Asistencias<img src="icon_stats%20(2).png" alt=""></span>`, st.a],
             ["Tarjetas Amarillas", st.ta],
             ["Tarjetas Rojas", st.tr]
         ].map(([l, v]) => `<div class="qs2-stat-row"><span>${l}</span><b>${v}</b></div>`).join("");
