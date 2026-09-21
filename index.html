@@ -1876,6 +1876,65 @@
             margin-top: 10px;
         }
 
+        /* ===================== ZC26 · Jugador Estelar (Estadísticas) ===================== */
+        .wcstat-list { margin-top: 2px; }
+        .wcstat-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .wcstat-row:last-child { border-bottom: none; }
+        .wcstat-rank {
+            flex: 0 0 18px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #8a8f98;
+            text-align: center;
+        }
+        .wcstat-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .wcstat-logo img { width: 21px; height: 21px; object-fit: contain; }
+        .wcstat-who {
+            flex: 1 1 auto;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+        .wcstat-name {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .wcstat-team {
+            font-size: 0.68rem;
+            color: #8a8f98;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .wcstat-val {
+            flex-shrink: 0;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #ffffff;
+            font-variant-numeric: tabular-nums;
+            padding-right: 2px;
+        }
+
         /* ===================== ZC26 · PREDICCIONES (top 10 a ganar el torneo) ===================== */
         .wcpred {
             margin-top: 16px;
@@ -2087,6 +2146,34 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        /* Partidos ya jugados: marcador a la derecha de los equipos */
+        .zcfx-scores {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding-top: 14px;
+            min-width: 22px;
+        }
+        .zcfx-score {
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #8a8f98;
+            font-variant-numeric: tabular-nums;
+        }
+        .zcfx-score-win { color: #ffffff; font-weight: 800; }
+        .zcfx-row-win .zcfx-team-name { color: #ffffff; font-weight: 700; }
+        .zcfx-row-lose .zcfx-team-name { color: #9a9fa8; }
+        .zcfx-date-num.zcfx-date-final {
+            font-size: 0.72rem;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
         .zcfx-divider {
             width: 1px;
             align-self: stretch;
@@ -2116,6 +2203,108 @@
             color: #8a8f98;
             text-transform: uppercase;
         }
+        .zcfx-date-month.zcfx-date-time {
+            font-size: 0.62rem;
+            letter-spacing: 0.2px;
+            text-transform: none;
+            white-space: nowrap;
+        }
+        .zcfx-date-num.zcfx-date-num-sm {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        /* ZC26 · Partidos: botón de país (horarios adaptados a cada país) */
+        .zcc-row {
+            display: flex;
+            align-items: stretch;
+            gap: 8px;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+        #zc26 .zcc-row .zc-search-wrap { flex: 1 1 auto; min-width: 0; margin: 0; }
+        .zcc-wrap { position: relative; flex: 0 0 auto; display: flex; }
+        .zcc-btn {
+            position: relative;
+            width: 44px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 10px;
+            color: #d5d8de;
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+        }
+        .zcc-btn:hover { background: rgba(255,255,255,0.1); color: #ffffff; }
+        .zcc-btn:active { transform: scale(0.94); }
+        .zcc-btn[aria-expanded="true"] { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.32); color: #ffffff; }
+        .zcc-btn svg { width: 20px; height: 20px; }
+        .zcc-btn-flag {
+            position: absolute;
+            right: 3px;
+            bottom: 3px;
+            width: 17px;
+            height: 12px;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.65);
+        }
+        .zcc-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            width: 262px;
+            max-width: calc(100vw - 32px);
+            padding: 6px;
+            background: #1b1e24;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 12px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+            z-index: 60;
+        }
+        .zcc-menu.open { display: block; }
+        .zcc-menu-title {
+            padding: 6px 10px 8px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #8a8f98;
+        }
+        .zcc-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            color: #e6e8ec;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.12s ease;
+        }
+        .zcc-item:hover { background: rgba(255,255,255,0.07); }
+        .zcc-item.active { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); color: #ffffff; }
+        .zcc-item img {
+            width: 24px;
+            height: 17px;
+            object-fit: cover;
+            border-radius: 3px;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+        }
+        .zcc-item-name { flex: 1 1 auto; min-width: 0; }
+        .zcc-item-diff { font-size: 0.62rem; font-weight: 600; color: #8a8f98; white-space: nowrap; }
+        .zcc-status-flag { width: 14px; height: 10px; object-fit: cover; border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
         @media (min-width: 700px) {
             .zcfx-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         }
@@ -2347,7 +2536,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px 4px;
+            gap: 14px 10px;
         }
         .zc26lu-team {
             flex: 0 0 100%;
@@ -2390,7 +2579,7 @@
             flex-wrap: wrap;
             justify-content: center;
             align-content: flex-start;
-            gap: 8px 2px;
+            gap: 14px 6px;
             padding: 0 4px;
             min-width: 0;
         }
@@ -2419,6 +2608,150 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        /* Cronología bajo el marcador (partidos jugados): goles y tarjetas con minuto */
+        .zc26mm-timeline { margin-top: 12px; gap: 6px; }
+        .zc26mm-timeline .timeline-block { padding: 9px 12px; border-radius: 12px; }
+        .zc26mm-timeline .timeline-entry { font-size: 0.7rem; cursor: default; }
+        .zc26mm-timeline .timeline-time { font-size: 0.7rem; color: #8a8f98; }
+        .zc26mm-timeline .timeline-icon-win { width: 24px; height: 24px; }
+        .zc26mm-timeline .timeline-icon-card { width: 20px; height: 20px; }
+        /* Partidos ya jugados: calificación 1-10, Estelar y tarjetas sobre el avatar */
+        .zc26lu-played { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        .zc26lu-avwrap {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            margin-bottom: 9px;
+        }
+        .zc26lu-avwrap .zc26lu-avatar { width: 38px; height: 38px; display: block; }
+        .zc26lu-rating {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 27px;
+            padding: 2px 0;
+            border-radius: 6px;
+            border: 2px solid #141414;
+            font-size: 0.56rem;
+            font-weight: 800;
+            line-height: 1;
+            text-align: center;
+            color: #ffffff;
+            box-sizing: content-box;
+            z-index: 3;
+        }
+        .zc26lu-rating.rt-top { background: #1565c0; }
+        .zc26lu-rating.rt-elite { background: #1e8e3e; }
+        .zc26lu-rating.rt-good { background: #f9a825; color: #1a1400; }
+        .zc26lu-rating.rt-mid { background: #e8720c; }
+        .zc26lu-rating.rt-low { background: #d93025; }
+        .zc26lu-rating.rt-na { background: #4a4a4a; color: #f0f0f0; }
+        .zc26lu-chip {
+            position: absolute;
+            min-width: 14px;
+            height: 14px;
+            padding: 0 3px;
+            box-sizing: border-box;
+            border-radius: 9px;
+            background: #141414;
+            border: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            font-size: 0.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .zc26lu-chip svg { width: 10px; height: 10px; display: block; }
+        .zc26lu-chip img { width: 9px; height: 9px; object-fit: contain; display: block; }
+        .zc26lu-chip-star { bottom: 3px; right: -13px; }
+        .zc26lu-chip-goal { top: -8px; left: -13px; }
+        .zc26lu-chip-ta { top: -8px; right: -13px; }
+        .zc26lu-chip-tr { top: -8px; right: -13px; }
+        .zc26lu-chip-ta + .zc26lu-chip-tr { top: 7px; }
+        .zc26lu-cardico {
+            display: inline-block;
+            width: 7px;
+            height: 10px;
+            border-radius: 1.5px;
+            flex-shrink: 0;
+        }
+        .zc26lu-cardico-ta { background: #f5c518; }
+        .zc26lu-cardico-tr { background: #e53935; }
+        /* Símbolos de la alineación y su leyenda */
+        .zc26sym {
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .zc26sym-sm { width: 15px; height: 15px; }
+        .zc26sym-svg { width: 100%; height: 100%; display: block; }
+        .zc26sym-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #1c1e22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zc26sym-img img { width: 64%; height: 64%; object-fit: contain; display: block; }
+        .zc26lu-chip-sym {
+            width: 14px;
+            min-width: 0;
+            height: 14px;
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+        .zc26lu-chip-sym .zc26sym-svg { width: 14px; height: 14px; }
+        .zc26lu-chip-in { top: -8px; left: -13px; }
+        .zc26lu-chip-ast { bottom: 3px; left: -13px; }
+        .zc26lu-chip-ast .zc26sym-img { width: 12px; height: 12px; }
+        .zc26lu-chip-ast .zc26sym-img img { width: 72%; height: 72%; }
+        .zc26lu-avwrap-plain { position: relative; display: block; width: 34px; height: 34px; flex-shrink: 0; }
+        .zc26lu-avwrap-plain .zc26lu-avatar { display: block; }
+        .zc26lu-legend { padding: 9px 10px 10px; }
+        .zc26lu-legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 10px;
+        }
+        .zc26lu-legend-col { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+        .zc26lu-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.58rem;
+            color: #a3a8b0;
+            line-height: 1.2;
+        }
+        .zc26qs-lbl { display: inline-flex; align-items: center; gap: 6px; }
+        .zc26qs-lbl img { width: 14px; height: 14px; object-fit: contain; display: block; }
+        .zc26lu-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 2px 6px 4px;
+        }
+        .zc26lu-cards-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.62rem;
+            color: #d3d5da;
+        }
+        .zc26lu-cards-row b { color: #ffffff; font-weight: 700; }
+        .zc26lu-cards-team { color: #8a8f98; font-size: 0.55rem; }
+        .zc26lu-cards-note { color: #6f747c; font-size: 0.52rem; }
         .zc26lu-role {
             font-size: 0.42rem;
             color: #888888;
@@ -2510,6 +2843,16 @@
             border: 1.5px solid rgba(255,255,255,0.3);
             background: transparent;
         }
+        .zc26mm-form-dot-win, .zc26mm-form-dot-draw, .zc26mm-form-dot-loss {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zc26mm-form-dot svg { width: 60%; height: 60%; }
+        .zc26mm-form-dot-win { background: #2fa84f; }
+        .zc26mm-form-dot-draw { background: #9a9ea8; }
+        .zc26mm-form-dot-loss { background: #d64545; }
+        .zc26mm-scoreboard .score-number-lose { color: #8a8f98; }
         .zc26mm-prob-block .zc26mm-stat-title {
             font-size: 0.95rem;
         }
@@ -2859,12 +3202,20 @@
             box-sizing: border-box;
         }
         .zcgrp-dot {
-            width: 13px;
-            height: 13px;
+            width: 14px;
+            height: 14px;
+            box-sizing: border-box;
             border-radius: 50%;
             border: 1.5px solid rgba(255,255,255,0.22);
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        .zcgrp-dot svg { width: 64%; height: 64%; }
+        .zcgrp-dot-win { background: #2fa84f; border-color: #2fa84f; }
+        .zcgrp-dot-draw { background: #9a9ea8; border-color: #9a9ea8; }
+        .zcgrp-dot-loss { background: #d64545; border-color: #d64545; }
         .zcgrp-round-carousel {
             display: flex;
             align-items: center;
@@ -8381,7 +8732,7 @@
                                                                 <span class="lu-coach-role"><img src="LPR.png" alt="LPR">Coach</span>
                                                             </div>
                                                         </div>
-                                                        <div class="lu-ratings-note">Calificaciones de los jugadores (0/11) basadas en los datos de los partidos</div>
+                                                        <div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div>
                                                     </div>
 
                                                 </div>
@@ -8732,7 +9083,7 @@
                                                                 <span class="lu-coach-role"><img src="LPR.png" alt="LPR">Coach</span>
                                                             </div>
                                                         </div>
-                                                        <div class="lu-ratings-note">Calificaciones de los jugadores (0/11) basadas en los datos de los partidos</div>
+                                                        <div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div>
                                                     </div>
 
                                                 </div>
@@ -9076,11 +9427,20 @@
     <div class="section-block" id="zc26">
         <div class="section-title">ZC26 · PARTIDOS</div>
         <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
-        <div class="zc-search-wrap">
-            <input type="text" class="zc-search-input" id="zc26SearchInput" enterkeyhint="search" placeholder="Buscar equipo, grupo o día..." autocomplete="off">
-            <span class="zc-search-icon"></span>
-            <button type="button" class="zc-search-clear" id="zc26SearchClear" aria-label="Borrar búsqueda" title="Borrar búsqueda"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-            <div class="zc-search-suggestions" id="zc26SearchBox"></div>
+        <div class="zcc-row">
+            <div class="zc-search-wrap">
+                <input type="text" class="zc-search-input" id="zc26SearchInput" enterkeyhint="search" placeholder="Buscar equipo, grupo o día..." autocomplete="off">
+                <span class="zc-search-icon"></span>
+                <button type="button" class="zc-search-clear" id="zc26SearchClear" aria-label="Borrar búsqueda" title="Borrar búsqueda"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <div class="zc-search-suggestions" id="zc26SearchBox"></div>
+            </div>
+            <div class="zcc-wrap">
+                <button type="button" class="zcc-btn" id="zc26CountryBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Horario por país" title="Horario por país">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"/></svg>
+                    <img class="zcc-btn-flag" id="zc26CountryBtnFlag" alt="">
+                </button>
+                <div class="zcc-menu" id="zc26CountryMenu" role="listbox" aria-label="País"></div>
+            </div>
         </div>
         <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
@@ -9187,15 +9547,15 @@
         <div class="panel">
             <div class="wcstat-panel active" data-wcstat-panel="estelar">
                 <div class="wcstat-table-head"><span>Jugador</span><span>Estelar</span></div>
-                <div class="wcstat-empty">Aún no hay datos disponibles.</div>
+                <div class="wcstat-list" id="wcstatEstelarList"></div>
             </div>
             <div class="wcstat-panel" data-wcstat-panel="asistencias">
                 <div class="wcstat-table-head"><span>Jugador</span><span>Asistencias</span></div>
-                <div class="wcstat-empty">Aún no hay datos disponibles.</div>
+                <div class="wcstat-list" id="wcstatAsistList"></div>
             </div>
             <div class="wcstat-panel" data-wcstat-panel="amarillas">
                 <div class="wcstat-table-head"><span>Jugador</span><span>Tarjetas amarillas</span></div>
-                <div class="wcstat-empty">Aún no hay datos disponibles.</div>
+                <div class="wcstat-list" id="wcstatYellowList"></div>
             </div>
             <div class="wcstat-panel" data-wcstat-panel="rojas">
                 <div class="wcstat-table-head"><span>Jugador</span><span>Tarjetas rojas</span></div>
@@ -9213,11 +9573,11 @@
             <div class="wcpred-body" id="wcPredBody">
                 <div class="wcpred-inner">
                     <ul class="wcpred-list" id="wcPredList"></ul>
-                    <p class="wcpred-foot">Probabilidades estimadas con fines informativos. Cambiarán conforme se disputen los partidos.</p>
+                    <p class="wcpred-foot">Probabilidades estimadas con fines informativos. Cambian según los resultados de cada equipo.</p>
                 </div>
             </div>
         </div>
-        <div class="section-updated">Se actualizará una vez inicien los partidos</div>
+        <div class="section-updated">Se actualiza conforme se disputan los partidos</div>
     </div>
 
     <div class="section-block" id="contribuciones">
@@ -12344,7 +12704,9 @@
     };
     const QS2_MATCH_SUMMARY = { home: "LEV", away: "LPR", scoreHome: 3, scoreAway: 1, status: "Finalizado" };
 
+    let qsStacked = false; // true = minimenú de jugador abierto encima del partido (el partido sigue visible detrás)
     function openQuickStats(row) {
+        qsStacked = false;
         zcPlaySound("clickentrar");
         const panel = document.getElementById("quickStatsPanel");
         const nameBtn = row.querySelector(".stat-name-btn");
@@ -12415,6 +12777,12 @@
 
     function closeQuickStats() {
         zcPlaySound("clicksalir");
+        if (qsStacked) {
+            // Solo se cierra el minimenú: el partido queda tal como estaba (mismo scroll y pestaña).
+            qsStacked = false;
+            document.getElementById("quickStatsOverlay").classList.remove("active");
+            return;
+        }
         closeModal("quickStatsOverlay");
     }
 
@@ -12490,6 +12858,7 @@
     }
     function closeAllModals() {
         modalStack = [];
+        qsStacked = false;
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
         modalImg.src = "";
         zcStopRankSound();
@@ -12598,70 +12967,295 @@
         {
             day: "Domingo", num: 20, month: "SEP",
             matches: [
-                { group: "A", home: "Leviatán Esports", away: "Peruanos FC" },
-                { group: "B", home: "GAMBLING FC", away: "KURO ØNIX" },
-                { group: "C", home: "LPE", away: "Phoenix" },
-                { group: "D", home: "Baraja de Elite", away: "Sinister Haven" },
-                { group: "E", home: "RAISE EARTH", away: "op7" },
-                { group: "F", home: "Pro Legends", away: "Egresados Del Conalep" }
+                { group: "A", home: "Leviatán Esports", away: "Peruanos FC", time: "5:00 p.m." },
+                { group: "B", home: "GAMBLING FC", away: "KURO ØNIX", time: "5:35 p.m." },
+                { group: "C", home: "LPE", away: "Phoenix", time: "6:10 p.m." },
+                { group: "D", home: "Baraja de Elite", away: "Sinister Haven", time: "7:10 p.m." },
+                { group: "E", home: "RAISE EARTH", away: "op7", time: "8:00 p.m." },
+                { group: "F", home: "Pro Legends", away: "Egresados Del Conalep", time: "8:35 p.m." }
             ]
         },
         {
             day: "Lunes", num: 21, month: "SEP",
             matches: [
-                { group: "A", home: "Quiero KeKe", away: "POS JR" },
-                { group: "B", home: "POS", away: "SGC" },
-                { group: "C", home: "BLASTERS", away: "TEAM ATENAS" },
-                { group: "D", home: "GTA", away: "Unorthodox" },
-                { group: "E", home: "SYNOX GAMING", away: "Wosu Esport" },
-                { group: "F", home: "Acuñas", away: "OMEN NOCTE" }
+                { group: "A", home: "Quiero KeKe", away: "POS JR", time: "5:00 p.m." },
+                { group: "B", home: "POS", away: "SGC", time: "5:35 p.m." },
+                { group: "C", home: "BLASTERS", away: "TEAM ATENAS", time: "6:10 p.m." },
+                { group: "D", home: "GTA", away: "Unorthodox", time: "7:10 p.m." },
+                { group: "E", home: "SYNOX GAMING", away: "Wosu Esport", time: "8:00 p.m." },
+                { group: "F", home: "Acuñas", away: "OMEN NOCTE", time: "8:35 p.m." }
             ]
         },
         {
             day: "Martes", num: 22, month: "SEP",
             matches: [
-                { group: "A", home: "Leviatán Esports", away: "Quiero KeKe" },
-                { group: "B", home: "GAMBLING FC", away: "SGC" },
-                { group: "C", home: "LPE", away: "TEAM ATENAS" },
-                { group: "D", home: "Unorthodox", away: "Baraja de Elite" },
-                { group: "E", home: "RAISE EARTH", away: "Wosu Esport" },
-                { group: "F", home: "Pro Legends", away: "OMEN NOCTE" }
+                { group: "A", home: "Leviatán Esports", away: "Quiero KeKe", time: "5:00 p.m." },
+                { group: "B", home: "GAMBLING FC", away: "SGC", time: "5:35 p.m." },
+                { group: "C", home: "LPE", away: "TEAM ATENAS", time: "6:10 p.m." },
+                { group: "D", home: "Unorthodox", away: "Baraja de Elite", time: "7:10 p.m." },
+                { group: "E", home: "RAISE EARTH", away: "Wosu Esport", time: "8:00 p.m." },
+                { group: "F", home: "Pro Legends", away: "OMEN NOCTE", time: "8:35 p.m." }
             ]
         },
         {
             day: "Miércoles", num: 23, month: "SEP",
             matches: [
-                { group: "A", home: "POS JR", away: "Peruanos FC" },
-                { group: "B", home: "KURO ØNIX", away: "POS" },
-                { group: "C", home: "Phoenix", away: "BLASTERS" },
-                { group: "D", home: "GTA", away: "Sinister Haven" },
-                { group: "E", home: "SYNOX GAMING", away: "op7" },
-                { group: "F", home: "Acuñas", away: "Egresados Del Conalep" }
+                { group: "A", home: "POS JR", away: "Peruanos FC", time: "5:00 p.m." },
+                { group: "B", home: "KURO ØNIX", away: "POS", time: "5:35 p.m." },
+                { group: "C", home: "Phoenix", away: "BLASTERS", time: "6:10 p.m." },
+                { group: "D", home: "GTA", away: "Sinister Haven", time: "7:10 p.m." },
+                { group: "E", home: "SYNOX GAMING", away: "op7", time: "8:00 p.m." },
+                { group: "F", home: "Acuñas", away: "Egresados Del Conalep", time: "8:35 p.m." }
             ]
         },
         {
             day: "Jueves", num: 24, month: "SEP",
             matches: [
-                { group: "A", home: "Leviatán Esports", away: "POS JR" },
-                { group: "B", home: "GAMBLING FC", away: "POS" },
-                { group: "C", home: "LPE", away: "BLASTERS" },
-                { group: "D", home: "GTA", away: "Baraja de Elite" },
-                { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING" },
-                { group: "F", home: "Acuñas", away: "Pro Legends" }
+                { group: "A", home: "Leviatán Esports", away: "POS JR", time: "5:00 p.m." },
+                { group: "B", home: "GAMBLING FC", away: "POS", time: "5:35 p.m." },
+                { group: "C", home: "LPE", away: "BLASTERS", time: "6:10 p.m." },
+                { group: "D", home: "GTA", away: "Baraja de Elite", time: "7:10 p.m." },
+                { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING", time: "8:00 p.m." },
+                { group: "F", home: "Acuñas", away: "Pro Legends", time: "8:35 p.m." }
             ]
         },
         {
             day: "Viernes", num: 25, month: "SEP",
             matches: [
-                { group: "A", home: "Quiero KeKe", away: "Peruanos FC" },
-                { group: "B", home: "KURO ØNIX", away: "SGC" },
-                { group: "C", home: "Phoenix", away: "TEAM ATENAS" },
-                { group: "D", home: "Unorthodox", away: "Sinister Haven" },
-                { group: "E", home: "Wosu Esport", away: "op7" },
-                { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE" }
+                { group: "A", home: "Quiero KeKe", away: "Peruanos FC", time: "5:00 p.m." },
+                { group: "B", home: "KURO ØNIX", away: "SGC", time: "5:35 p.m." },
+                { group: "C", home: "Phoenix", away: "TEAM ATENAS", time: "6:10 p.m." },
+                { group: "D", home: "Unorthodox", away: "Sinister Haven", time: "7:10 p.m." },
+                { group: "E", home: "Wosu Esport", away: "op7", time: "8:00 p.m." },
+                { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE", time: "8:35 p.m." }
             ]
         }
     ];
+    /* ZC26 · Resultados de la fase de grupos.
+       Clave "local|visitante" → h / a = marcador en sets (el del encabezado de cada reporte).
+       wo = equipo que NO se presentó (incomparecencia). Criterio aplicado: el de la FIFA
+       (Código Disciplinario, usado en el Mundial 2026): derrota 3-0 para el ausente. */
+    const ZC26_RESULTS = {
+        "Leviatán Esports|Peruanos FC":       { h: 3, a: 0 },
+        "GAMBLING FC|KURO ØNIX":              { h: 0, a: 3, wo: "GAMBLING FC" },
+        "LPE|Phoenix":                        { h: 2, a: 0 },
+        "Baraja de Elite|Sinister Haven":     { h: 0, a: 2 },
+        "RAISE EARTH|op7":                    { h: 0, a: 3 },
+        "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 }
+    };
+    /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
+       (El Estelar siempre sale del equipo que gana el mapa.) */
+    const ZC26_STAR_PLAYERS = [
+        ["rnowtt prime", "Sinister Haven", "Baraja de Elite|Sinister Haven"], ["JDxZ", "Sinister Haven", "Baraja de Elite|Sinister Haven"],
+        ["infernus", "LPE", "LPE|Phoenix"], ["stevv", "LPE", "LPE|Phoenix"],
+        ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["Jora", "Leviatán Esports", "Leviatán Esports|Peruanos FC"],
+        ["Fax", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"], ["Luisitopro", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"], ["AUMCxd", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"],
+        ["Jet li", "op7", "RAISE EARTH|op7"], ["darkzz", "op7", "RAISE EARTH|op7"], ["Smk myst", "op7", "RAISE EARTH|op7"]
+    ];
+    /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
+       en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
+    const ZC26_STAR_ALIAS = {
+        "rnowtt prime": "rnowtt", "stevv": "Steve", "iCross": "lXlCross", "Jora": "TX JOAR",
+        "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
+        "darkzz": "Darkxz", "Smk myst": "smk myst!"
+    };
+    /* Tarjetas de los reportes. team = null → el reporte no dice a qué equipo pertenece.
+       type: "ta" amarilla, "tr" roja. player = nombre en la plantilla; rep = como salió en el reporte. */
+    const ZC26_CARDS = [
+        { m: "Baraja de Elite|Sinister Haven", type: "ta", team: "Baraja de Elite", player: "Heritage", rep: "Heritage" },
+        { m: "Baraja de Elite|Sinister Haven", type: "ta", team: "Sinister Haven", player: "Isakiu", rep: "Anikio", note: "fuera de juego" },
+        { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "bititobrawl", rep: "20tistos_bitito.fc" },
+        { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "Amberchu01", rep: "amberchu01" },
+        { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "Trdgx98", rep: "trdgx879" }
+    ];
+    /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
+    const ZC26_GOALS = [];
+    /* Asistencias: tampoco vienen en los reportes. Para cargarlas: { m: "local|visitante", team, player, n } */
+    const ZC26_ASSISTS = [
+        { m: "Leviatán Esports|Peruanos FC", team: "Leviatán Esports", player: "JulioCr36D", n: 1 },
+        { m: "Leviatán Esports|Peruanos FC", team: "Leviatán Esports", player: "TX JOAR", n: 1 },
+        { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "rnowtt", n: 1 },
+        { m: "RAISE EARTH|op7", team: "op7", player: "Darkxz", n: 1 },
+        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "luisitopro123", n: 1 }
+    ];
+    /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
+    const ZC26_PLAYER_STATUS = [
+        { team: "GAMBLING FC", player: "Ogaru", status: "lesion" },
+        { team: "GAMBLING FC", player: "tiinas0", status: "lesion" },
+        { team: "GAMBLING FC", player: "gabri", status: "lesion" }
+    ];
+    /* Jugadores que salen (Sale) durante un partido; el suplente que entra ya se marca solo (Entra). */
+    const ZC26_SUB_OUT = [
+        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "Sanz" },
+        { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "Isakiu" }
+    ];
+    function zc26PlayerStatus(team, name) {
+        const x = ZC26_PLAYER_STATUS.find(e => e.team === team && e.player === name);
+        return x ? x.status : "";
+    }
+    function zc26IsSubbedOut(ctx, team, name) {
+        const k = `${ctx.home}|${ctx.away}`;
+        return ZC26_SUB_OUT.some(e => e.m === k && e.team === team && e.player === name);
+    }
+    function zc26GetResult(home, away) { return ZC26_RESULTS[`${home}|${away}`] || null; }
+    /* Cronología del partido (como en "Último partido importa"): cada set ganado cuenta como "Gol"
+       del Estelar de ese mapa, y las tarjetas de los reportes. Los minutos son aleatorios entre 1 y 120
+       (duración del torneo), fijos por partido (semilla), en orden de mapa para los goles. */
+    function zc26Rng(seed) {
+        let h = 1779033703 ^ seed.length;
+        for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+        let a = h >>> 0;
+        return function () {
+            a = (a + 0x6D2B79F5) | 0;
+            let t = Math.imul(a ^ (a >>> 15), 1 | a);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+    }
+    const zc26TlCache = {};
+    function zc26MatchTimeline(k) {
+        if (zc26TlCache[k]) return zc26TlCache[k];
+        const rng = zc26Rng(k);
+        const stars = ZC26_STAR_PLAYERS.filter(x => x[2] === k);
+        const mins = [];
+        while (mins.length < stars.length) {
+            const m = 1 + Math.floor(rng() * 120);
+            if (!mins.some(x => Math.abs(x - m) < 4)) mins.push(m);
+        }
+        mins.sort((x, y) => x - y);
+        const goals = stars.map(([rep, team], i) => ({ team, name: ZC26_STAR_ALIAS[rep] || rep, min: mins[i] }));
+        const cards = ZC26_CARDS.filter(c => c.m === k && c.team)
+            .map(c => ({ team: c.team, name: c.player, type: c.type, min: 1 + Math.floor(rng() * 120) }));
+        return (zc26TlCache[k] = { goals, cards });
+    }
+    function zc26ResultIcon(r) {
+        const inner = r === "w" ? '<path d="M5 13l4.5 4.5L19 7"/>'
+            : r === "l" ? '<path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>'
+            : '<line x1="6" y1="12" x2="18" y2="12"/>';
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+    }
+    // Tabla de posiciones: Pts 3 por victoria, 1 por empate, 0 por derrota. SF/SC = sets a favor / en contra.
+    function zc26ComputeStandings() {
+        const st = {};
+        const ensure = t => st[t] || (st[t] = { pj: 0, g: 0, e: 0, p: 0, pts: 0, sf: 0, sc: 0, ds: 0, form: [] });
+        ZC26_FIXTURES.forEach(day => day.matches.forEach(m => {
+            ensure(m.home); ensure(m.away);
+            const r = zc26GetResult(m.home, m.away);
+            if (!r) return;
+            [[m.home, r.h, r.a], [m.away, r.a, r.h]].forEach(([t, f, c]) => {
+                const x = st[t];
+                x.pj++; x.sf += f; x.sc += c; x.ds = x.sf - x.sc;
+                if (f > c) { x.g++; x.pts += 3; x.form.push("w"); }
+                else if (f < c) { x.p++; x.form.push("l"); }
+                else { x.e++; x.pts += 1; x.form.push("d"); }
+            });
+        }));
+        return st;
+    }
+    function zc26SortByStandings(teams, st) {
+        return teams.map((t, i) => ({ t, i, s: st[t] || {} }))
+            .sort((a, b) => ((b.s.pts || 0) - (a.s.pts || 0)) || ((b.s.ds || 0) - (a.s.ds || 0)) || ((b.s.sf || 0) - (a.s.sf || 0)) || (a.i - b.i))
+            .map(x => x.t);
+    }
+    function zc26StatVal(s, col) {
+        if (!s) return 0;
+        return ({ PJ: s.pj, G: s.g, E: s.e, P: s.p, Pts: s.pts, SF: s.sf, SC: s.sc, DS: s.ds })[col];
+    }
+    function zc26GrpDots(s) {
+        const f = ((s && s.form) || []).slice(-5);
+        const cls = r => r === "w" ? "win" : r === "l" ? "loss" : "draw";
+        return f.map(r => `<span class="zcgrp-dot zcgrp-dot-${cls(r)}">${zc26ResultIcon(r)}</span>`).join("")
+            + `<span class="zcgrp-dot"></span>`.repeat(5 - f.length);
+    }
+    function zc26RowCls(r, side) {
+        if (!r) return "";
+        const mine = side === "home" ? r.h : r.a, opp = side === "home" ? r.a : r.h;
+        return mine > opp ? " zcfx-row-win" : mine < opp ? " zcfx-row-lose" : "";
+    }
+    function zc26ScoresHtml(r) {
+        if (!r) return "";
+        return `<div class="zcfx-scores">
+            <span class="zcfx-score${r.h > r.a ? " zcfx-score-win" : ""}">${r.h}</span>
+            <span class="zcfx-score${r.a > r.h ? " zcfx-score-win" : ""}">${r.a}</span>
+        </div>`;
+    }
+    const ZC26_MONTH_NUM = { ENE: "01", FEB: "02", MAR: "03", ABR: "04", MAY: "05", JUN: "06", JUL: "07", AGO: "08", SEP: "09", OCT: "10", NOV: "11", DIC: "12" };
+    /* ZC26 · Horarios por país. Las horas de ZC26_FIXTURES están en hora de Perú (UTC-5, hora base).
+       La conversión usa las zonas horarias reales (Intl), así España pasa sola de +7 h a +6 h al acabar el horario de verano. */
+    const ZC26_BASE_UTC_OFFSET = -5;
+    const ZC26_COUNTRIES = [
+        { code: "PE",  tz: "America/Lima" },
+        { code: "CO",  tz: "America/Bogota" },
+        { code: "HON", tz: "America/Tegucigalpa" },
+        { code: "MX",  tz: "America/Mexico_City" },
+        { code: "BOL", tz: "America/La_Paz" },
+        { code: "AR",  tz: "America/Argentina/Buenos_Aires" },
+        { code: "ES",  tz: "Europe/Madrid" }
+    ];
+    const ZC26_WEEKDAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const ZC26_MONTHS_LC = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    let zc26CountryCode = "PE";
+    try {
+        const saved = localStorage.getItem("zc26Country");
+        if (saved && ZC26_COUNTRIES.some(c => c.code === saved)) zc26CountryCode = saved;
+    } catch (e) {}
+    function zc26FlagSrc(code) { return "assets/flags/" + FLAGS[code].file; }
+    function zc26Pad2(n) { return String(n).padStart(2, "0"); }
+    function zc26Fmt12(h, min) {
+        return (h % 12 === 0 ? 12 : h % 12) + ":" + zc26Pad2(min) + " " + (h >= 12 ? "p.m." : "a.m.");
+    }
+    // Convierte la hora base ("5:00 p.m.") del día dado a la hora local del país. Devuelve fecha DD/MM, hora, día de la semana y mes.
+    function zc26LocalSchedule(day, timeStr, code) {
+        const t = /^(\d{1,2}):(\d{2})\s*([ap])/i.exec(timeStr || "");
+        if (!t) return null;
+        const mon = parseInt(ZC26_MONTH_NUM[day.month] || "9", 10);
+        const h = (parseInt(t[1], 10) % 12) + (t[3].toLowerCase() === "p" ? 12 : 0);
+        const min = parseInt(t[2], 10);
+        const country = ZC26_COUNTRIES.find(c => c.code === code) || ZC26_COUNTRIES[0];
+        let y = 2026, M = mon, d = day.num, hh = h, mm = min;
+        if (country.code !== "PE") {
+            try {
+                const inst = new Date(Date.UTC(2026, mon - 1, day.num, h - ZC26_BASE_UTC_OFFSET, min));
+                const p = {};
+                new Intl.DateTimeFormat("en-US", { timeZone: country.tz, hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" })
+                    .formatToParts(inst).forEach(x => { if (x.type !== "literal") p[x.type] = parseInt(x.value, 10); });
+                if (p.year && p.month && p.day && p.hour !== undefined) { y = p.year; M = p.month; d = p.day; hh = p.hour % 24; mm = p.minute; }
+            } catch (e) {}
+        }
+        const wd = new Date(Date.UTC(y, M - 1, d)).getUTCDay();
+        return { date: zc26Pad2(d) + "/" + zc26Pad2(M), time: zc26Fmt12(hh, mm), weekday: ZC26_WEEKDAYS[wd], d: d, monthName: ZC26_MONTHS_LC[M - 1], hh: hh, mm: mm, dayShift: Math.round((Date.UTC(y, M - 1, d) - Date.UTC(2026, mon - 1, day.num)) / 86400000) };
+    }
+    // Diferencia en horas respecto a Perú (referencia: 12:00 p.m. del 21/09).
+    function zc26CountryDiffLabel(code) {
+        if (code === "PE") return "Hora base";
+        const r = zc26LocalSchedule({ num: 21, month: "SEP" }, "12:00 p.m.", code);
+        if (!r) return "";
+        const diff = r.dayShift * 24 + r.hh - 12;
+        if (diff === 0) return "Misma hora";
+        const n = Math.abs(diff);
+        return n + (n === 1 ? " hora " : " horas ") + (diff < 0 ? "menos" : "más");
+    }
+    function zc26DateHtml(day, r, m) {
+        if (r) {
+            const lsF = (m && m.time) ? zc26LocalSchedule(day, m.time, zc26CountryCode) : null;
+            const dtF = lsF ? lsF.date : zc26Pad2(day.num) + "/" + (ZC26_MONTH_NUM[day.month] || day.month);
+            return `<div class="zcfx-date">
+            <span class="zcfx-date-num zcfx-date-num-sm">Fin</span>
+            <span class="zcfx-date-month zcfx-date-time">${r.wo ? "W.O." : dtF}</span>
+        </div>`;
+        }
+        if (m && m.time) {
+            const ls = zc26LocalSchedule(day, m.time, zc26CountryCode);
+            if (ls) return `<div class="zcfx-date">
+            <span class="zcfx-date-num zcfx-date-num-sm">${ls.date}</span>
+            <span class="zcfx-date-month zcfx-date-time">${ls.time}</span>
+        </div>`;
+        }
+        return `<div class="zcfx-date">
+            <span class="zcfx-date-num">${day.num}</span>
+            <span class="zcfx-date-month">${day.month}</span>
+        </div>`;
+    }
     function renderZc26Fixtures() {
         const wrap = document.getElementById("zc26FixturesList");
         if (!wrap) return;
@@ -12672,31 +13266,74 @@
                     <span class="zcfx-day-date">${day.num} ${day.month}</span>
                 </div>
                 <div class="zcfx-list">
-                    ${day.matches.map(m => `
-                        <div class="zcfx-card" data-zc26-match data-group="${m.group}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}">
+                    ${day.matches.map(m => { const r = zc26GetResult(m.home, m.away); return `
+                        <div class="zcfx-card" data-zc26-match data-group="${m.group}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}" data-time="${m.time || ''}">
                             <span class="zcfx-group-badge">Grupo ${m.group}</span>
                             <div class="zcfx-teams">
-                                <div class="zcfx-team-row">
+                                <div class="zcfx-team-row${zc26RowCls(r, "home")}">
                                     <span class="zcfx-team-logo"><img src="${zc26Logo(m.home)}" alt="${m.home}"></span>
                                     <span class="zcfx-team-name">${m.home}</span>
                                 </div>
-                                <div class="zcfx-team-row">
+                                <div class="zcfx-team-row${zc26RowCls(r, "away")}">
                                     <span class="zcfx-team-logo"><img src="${zc26Logo(m.away)}" alt="${m.away}"></span>
                                     <span class="zcfx-team-name">${m.away}</span>
                                 </div>
                             </div>
+                            ${zc26ScoresHtml(r)}
                             <span class="zcfx-divider"></span>
-                            <div class="zcfx-date">
-                                <span class="zcfx-date-num">${day.num}</span>
-                                <span class="zcfx-date-month">${day.month}</span>
-                            </div>
+                            ${zc26DateHtml(day, r, m)}
                         </div>
-                    `).join("")}
+                    `; }).join("")}
                 </div>
             </div>
         `).join("");
     }
     renderZc26Fixtures();
+
+    /* ZC26 · Botón de país: cambia el horario de los partidos al del país elegido */
+    (function () {
+        const btn = document.getElementById("zc26CountryBtn");
+        const menu = document.getElementById("zc26CountryMenu");
+        const btnFlag = document.getElementById("zc26CountryBtnFlag");
+        if (!btn || !menu) return;
+        function updateBtn() {
+            if (btnFlag) { btnFlag.src = zc26FlagSrc(zc26CountryCode); btnFlag.alt = FLAGS[zc26CountryCode].name; }
+            btn.title = "Horario por país: " + FLAGS[zc26CountryCode].name;
+        }
+        function renderMenu() {
+            menu.innerHTML = '<div class="zcc-menu-title">Horario por país</div>' + ZC26_COUNTRIES.map(c => `
+                <button type="button" class="zcc-item${c.code === zc26CountryCode ? " active" : ""}" role="option" aria-selected="${c.code === zc26CountryCode}" data-zc26-country="${c.code}">
+                    <img src="${zc26FlagSrc(c.code)}" alt="">
+                    <span class="zcc-item-name">${FLAGS[c.code].name}</span>
+                    <span class="zcc-item-diff">${zc26CountryDiffLabel(c.code)}</span>
+                </button>`).join("");
+        }
+        function setOpen(open) {
+            if (open) renderMenu();
+            menu.classList.toggle("open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            zcPlaySound("click");
+            setOpen(!menu.classList.contains("open"));
+        });
+        menu.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const item = e.target.closest("[data-zc26-country]");
+            if (!item) return;
+            zc26CountryCode = item.dataset.zc26Country;
+            try { localStorage.setItem("zc26Country", zc26CountryCode); } catch (err) {}
+            zcPlaySound("click");
+            updateBtn();
+            renderZc26Fixtures();
+            applyZc26Filters();
+            setOpen(false);
+        });
+        document.addEventListener("click", function () { if (menu.classList.contains("open")) setOpen(false); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menu.classList.contains("open")) setOpen(false); });
+        updateBtn();
+    })();
 
     function resetZc26GroupFilter() {
         const wrap = document.getElementById("zc26GroupFilter");
@@ -12777,9 +13414,11 @@
         if (reverse) return { home: reverse[2], draw: reverse[1], away: reverse[0] };
         return { home: 33, draw: 34, away: 33 };
     }
-    function zc26FormDots() {
-        // No hay encuentros jugados todavía: los 5 espacios quedan como "No jugó"
-        return `<span class="zc26mm-form-dot zc26mm-form-dot-none"></span>`.repeat(5);
+    function zc26FormDots(team) {
+        const f = (((zc26ComputeStandings()[team]) || {}).form || []).slice(-5);
+        const cls = r => r === "w" ? "win" : r === "l" ? "loss" : "draw";
+        return f.map(r => `<span class="zc26mm-form-dot zc26mm-form-dot-${cls(r)}">${zc26ResultIcon(r)}</span>`).join("")
+            + `<span class="zc26mm-form-dot zc26mm-form-dot-none"></span>`.repeat(5 - f.length);
     }
     function zc26StatsBlocksHtml(ctx) {
         const p = zc26GetProb(ctx.home, ctx.away);
@@ -12792,17 +13431,17 @@
                     <img class="zc26mm-form-logo" src="${zc26Logo(ctx.home)}" alt="">
                     <span class="zc26mm-form-name">${ctx.home}</span>
                 </div>
-                <div class="zc26mm-form-dots">${zc26FormDots()}</div>
+                <div class="zc26mm-form-dots">${zc26FormDots(ctx.home)}</div>
             </div>
             <div class="zc26mm-form-row">
                 <div class="zc26mm-form-team">
                     <img class="zc26mm-form-logo" src="${zc26Logo(ctx.away)}" alt="">
                     <span class="zc26mm-form-name">${ctx.away}</span>
                 </div>
-                <div class="zc26mm-form-dots">${zc26FormDots()}</div>
+                <div class="zc26mm-form-dots">${zc26FormDots(ctx.away)}</div>
             </div>
         </div>
-        <div class="zc26mm-stat-block zc26mm-prob-block">
+        ${ctx.res ? "" : `<div class="zc26mm-stat-block zc26mm-prob-block">
             <div class="zc26mm-stat-title-row">
                 <span class="zc26mm-stat-title">Probabilidad de victoria</span>
             </div>
@@ -12825,7 +13464,7 @@
                 <span class="zc26mm-prob-seg zc26mm-prob-seg-draw" style="width:${p.draw}%"></span>
                 <span class="zc26mm-prob-seg zc26mm-prob-seg-away" style="width:${p.away}%"></span>
             </div>
-        </div>`;
+        </div>`}`;
     }
     // ZC26 · Plantillas por equipo (fuente: analisis_equipos).
     // Roles: cap = Capitán, lid = Líder, tit = Titular, jug = Jugador,
@@ -12833,7 +13472,7 @@
     const ZC26_ROSTERS = {
         "Leviatán Esports": [["JulioCr36D","cap"],["lXlCross","tit"],["TX JOAR","tit"],["alva210","sup"],["Freddy.jh","sup"],["Nico","sup"]],
         "Peruanos FC": [["JuegenColette1","cap"],["TiliinInzanoAlex","jug"],["TomiokaTxA","jug"],["Twiceulibrws","jug"]],
-        "Quiero KeKe": [["Doslox","cap"],["Mag","jug"],["lcomic","jug"]],
+        "Quiero KeKe": [["Doslox","cap"],["Mag","jug"],["lcomic","jug"],["Marro9281","sup"]],
         "POS JR": [["Nen","cap"],["Mateo","jug"],["Arc/Rafa","jug"],["TK Carl","jug"],["TH Scar","sup"]],
         "GAMBLING FC": [["Jeta","cap"],["Ogaru","cap"],["pan_con_queso","tit"],["tiinas0","sup"],["gabri","sup"]],
         "KURO ØNIX": [["sjoacedbamypasa","cap"],["Gabonix","jug"],["Simon el prro","jug"]],
@@ -12844,27 +13483,179 @@
         "BLASTERS": [["Diego","lid"],["shirox","jug"],["vsblees","jug"]],
         "TEAM ATENAS": [["kaenluc","lid"],["reyes17","jug"],["sebazz","jug"],["ale","sup"],["messpvp","sup"]],
         "Baraja de Elite": [["Heritage","cap"],["Sukhoi","tit"],["Destroyer","tit"]],
-        "Sinister Haven": [["Isakiu","lid"],["rnowtt","jug"],["JDxZ","jug"],["Banditoo","jug"]],
+        "Sinister Haven": [["Isakiu","lid"],["rnowtt","jug"],["JDxZ","jug"],["Banditoo!","jug"]],
         "Unorthodox": [["robertbv","cap"],["Xell Lie in April!","jug"],["Miseryoung","jug"]],
         "GTA": [["Adri","cap"],["thoniolo","jug"],["Gabinho","jug"],["nefi","jug"]],
         "RAISE EARTH": [["F nero","cap"],["kikyy","jug"],["Hacent","jug"],["Hagnes","sup"],["PatitoAtlas","sup"],["JEAN","sup"],["Tsukuyo Amane","sup"]],
-        "op7": [["Naori","man"],["Ricky","cap"],["Darkxz","jug"],["smk myst!","jug"]],
+        "op7": [["Naori","man"],["Ricky","cap"],["Darkxz","jug"],["smk myst!","jug"],["Sasori037","coa"]],
         "SYNOX GAMING": [["Ghost","coa"],["abelldx","cap"],["Deizz","tit"],["romanqq","tit"],["angeliuki","tit"],["Rickylove","sup"]],
         "Wosu Esport": [["Blaxxyy","cap"],["Jhxfwxy","tit"],["Ninferum","tit"],["Selavi","sup"]],
         "Pro Legends": [["OwnerOnYT","cap"],["EL_CHINO.504","jug"],["Claustin","jug"]],
         "Egresados Del Conalep": [["new_faxtory","cap"],["AUMcxD","jug"],["Sanz","jug"],["luisitopro123","sup"]],
-        "Acuñas": [["RoyZtrike","cap"],["Xabi","jug"],["Galactus","jug"]],
-        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["Zousa","jug"]]
+        "Acuñas": [["RoyZtrike","cap"],["Xabi","jug"],["Galactus","jug"],["Diego(A)","sup"],["Yascer","sup"]],
+        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["AdmirerTensai","tit"],["Zousa","sup"],["R3QU1EMBRUH","sup"],["DominatorAngel27","sup"]]
     };
     const ZC26_ROLE_LABEL = { cap: "Capitán", lid: "Líder", tit: "Titular", jug: "Jugador", sup: "Suplente", man: "Manager", coa: "Coach" };
     function zc26Esc(v) {
         return String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     }
-    function zc26LineupCard(name, role) {
-        return `<div class="zc26lu-card">
-            <img class="zc26lu-avatar" src="palyer_sep.png" alt="">
+    const ZC26_ICON_STAR = '<img src="icon_stats%20(1).png" alt="">'; // Estelar
+    const ZC26_ICON_BALL = '<svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.5 2.5-1.3 4h-4.4l-1.3-4z" fill="#ffffff" stroke="none"/></svg>';
+    /* Símbolos de la alineación (dibujados en SVG, sin emojis ni caracteres). */
+    function zc26Sym(name) {
+        const wrap = inner => `<svg class="zc26sym-svg" viewBox="0 0 24 24" aria-hidden="true">${inner}</svg>`;
+        const dark = '<circle cx="12" cy="12" r="12" fill="#1c1e22"/>';
+        const card = (x, y, fill, rot) => `<rect x="${x}" y="${y}" width="9" height="12.5" rx="1.9" fill="${fill}" transform="rotate(${rot} 12 12)"/>`;
+        const pink = "#f4c7c7";
+        switch (name) {
+            case "ta": return wrap(dark + card(7.5, 5.75, "#f5c518", 7));
+            case "tr": return wrap(dark + card(7.5, 5.75, "#e94a3f", 7));
+            case "yy": return wrap(dark + card(5.6, 6.4, "#f5c518", -13) + card(9.6, 5.4, "#e94a3f", 9));
+            case "entra": return wrap('<circle cx="12" cy="12" r="12" fill="#1b5e20"/><path d="M12 17.2V7M7.6 11.4L12 7l4.4 4.4" fill="none" stroke="#e8f5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>');
+            case "sale": return wrap('<circle cx="12" cy="12" r="12" fill="#9b1c1c"/><path d="M12 6.8V17M7.6 12.6L12 17l4.4-4.4" fill="none" stroke="#fdecea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>');
+            case "lesion": return wrap(dark + `<rect x="6.4" y="6.4" width="11.2" height="11.2" rx="2.6" fill="none" stroke="${pink}" stroke-width="1.8"/><path d="M12 9.2v5.6M9.2 12h5.6" stroke="${pink}" stroke-width="1.8" stroke-linecap="round"/>`);
+            case "susp": return wrap(dark + `<circle cx="12" cy="12" r="5.7" fill="none" stroke="${pink}" stroke-width="1.8"/><path d="M8 16L16 8" stroke="${pink}" stroke-width="1.8" stroke-linecap="round"/>`);
+            case "estelar": return `<span class="zc26sym-img"><img src="icon_stats%20(1).png" alt=""></span>`;
+            case "asist": return `<span class="zc26sym-img"><img src="icon_stats%20(2).png" alt=""></span>`;
+        }
+        return "";
+    }
+    function zc26LegendHtml() {
+        const item = (sym, label) => `<div class="zc26lu-legend-item"><span class="zc26sym">${zc26Sym(sym)}</span><span>${label}</span></div>`;
+        return `<div class="lu-block zc26lu-legend">
+            <div class="zc26lu-legend-grid">
+                <div class="zc26lu-legend-col">
+                    ${item("estelar", "Estelar")}
+                    ${item("asist", "Asistencia")}
+                    ${item("ta", "Tarjeta amarilla")}
+                    ${item("tr", "Tarjeta roja")}
+                    ${item("yy", "2 tarjetas amarillas")}
+                </div>
+                <div class="zc26lu-legend-col">
+                    ${item("entra", "Entra")}
+                    ${item("sale", "Sale")}
+                    ${item("lesion", "Con lesión")}
+                    ${item("susp", "Con suspensión")}
+                </div>
+            </div>
+        </div>`;
+    }
+    // Estadísticas de un jugador en un partido ya jugado (según los reportes).
+    function zc26PlayerStats(ctx, team, name) {
+        const k = `${ctx.home}|${ctx.away}`;
+        const st = { star: 0, ta: 0, tr: 0, g: 0, a: 0 };
+        ZC26_STAR_PLAYERS.forEach(([rep, t, mk]) => {
+            if (mk === k && t === team && (ZC26_STAR_ALIAS[rep] || rep) === name) st.star++;
+        });
+        ZC26_CARDS.forEach(c => {
+            if (c.m === k && c.team === team && c.player === name) { if (c.type === "ta") st.ta++; else st.tr++; }
+        });
+        ZC26_GOALS.forEach(g => {
+            if (g.m === k && g.team === team && g.player === name) st.g += (g.n || 1);
+        });
+        ZC26_ASSISTS.forEach(g => {
+            if (g.m === k && g.team === team && g.player === name) st.a += (g.n || 1);
+        });
+        return st;
+    }
+    /* Calificación 1-10 estimada (no viene en los reportes): base 6.0, +0.7 si su equipo ganó / −0.3 si perdió,
+       +1.1 por cada vez Estelar, +0.5 por gol, +0.3 por asistencia, −0.4 por amarilla, −1.5 por roja. */
+    /* Calificaciones fijadas a mano ("local|visitante" → jugador → nota); mandan sobre la fórmula. */
+    const ZC26_RATING_OVERRIDES = {
+        "Leviatán Esports|Peruanos FC": { "JulioCr36D": 7.8 }
+    };
+    /* Bonus fijo de calificación por equipo (se suma a la fórmula a todos sus jugadores). */
+    const ZC26_RATING_TEAM_BONUS = { "op7": 1.2 };
+    /* Bonus fijo de calificación por jugador (nombre en la plantilla). */
+    const ZC26_RATING_PLAYER_BONUS = { "lXlCross": 0.5 };
+    function zc26Rating(ctx, team, st, name) {
+        const ov = ZC26_RATING_OVERRIDES[`${ctx.home}|${ctx.away}`];
+        if (ov && name != null && ov[name] != null) return Math.max(1, Math.min(10, Math.round((ov[name] + 0.3 * st.a) * 10) / 10));
+        const r = ctx.res;
+        const won = team === ctx.home ? r.h > r.a : r.a > r.h;
+        const v = 6.0 + (won ? 0.7 : -0.3) + 1.1 * st.star + 0.5 * st.g - 0.4 * st.ta - 1.5 * st.tr + 0.3 * st.a + (ZC26_RATING_TEAM_BONUS[team] || 0) + (ZC26_RATING_PLAYER_BONUS[name] || 0);
+        return Math.max(1, Math.min(10, Math.round(v * 10) / 10));
+    }
+    function zc26RatingCls(v) {
+        return v >= 9 ? "rt-top" : v >= 7 ? "rt-elite" : v >= 6 ? "rt-good" : v >= 5 ? "rt-mid" : "rt-low";
+    }
+    function zc26LineupCard(name, role, team, ctx, isStarter) {
+        const played = ctx && ctx.res && !ctx.res.wo && role !== "coa" && role !== "man";
+        const status = (role !== "coa" && role !== "man") ? zc26PlayerStatus(team, name) : "";
+        if (!played) {
+            const avatar = status
+                ? `<span class="zc26lu-avwrap-plain"><img class="zc26lu-avatar" src="palyer_sep.png" alt=""><span class="zc26lu-chip zc26lu-chip-sym zc26lu-chip-in">${zc26Sym(status)}</span></span>`
+                : `<img class="zc26lu-avatar" src="palyer_sep.png" alt="">`;
+            return `<div class="zc26lu-card">
+            ${avatar}
             <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
             <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
+        </div>`;
+        }
+        const st = zc26PlayerStats(ctx, team, name);
+        const hasData = st.star || st.ta || st.tr || st.g || st.a;
+        const participated = isStarter || hasData;
+        const rating = participated ? zc26Rating(ctx, team, st, name) : null;
+        const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}">${inner}${n > 1 ? n : ""}</span>`;
+        const sym = (cls, name) => `<span class="zc26lu-chip zc26lu-chip-sym ${cls}">${zc26Sym(name)}</span>`;
+        const cameOn = !isStarter && hasData; // suplente que entró a jugar
+        const wentOut = zc26IsSubbedOut(ctx, team, name); // titular que salió
+        const chips = (st.star ? chip("zc26lu-chip-star", ZC26_ICON_STAR, st.star) : "")
+            + (cameOn ? sym("zc26lu-chip-in", "entra")
+                : wentOut ? sym("zc26lu-chip-in", "sale")
+                : status ? sym("zc26lu-chip-in", status)
+                : (st.g ? chip("zc26lu-chip-goal", ZC26_ICON_BALL, st.g) : ""))
+            + (st.a ? chip("zc26lu-chip-ast", zc26Sym("asist"), st.a) : "")
+            + (st.ta >= 2 && !st.tr ? sym("zc26lu-chip-ta", "yy") : (st.ta ? sym("zc26lu-chip-ta", "ta") : ""))
+            + (st.tr ? sym("zc26lu-chip-tr", "tr") : "");
+        return `<div class="zc26lu-card zc26lu-played" role="button" tabindex="0" data-zc26-player="${zc26Esc(name)}" data-zc26-team="${zc26Esc(team)}" data-zc26-role="${role}" data-zc26-starter="${isStarter ? 1 : 0}" aria-label="Ver estadísticas de ${zc26Esc(name)}">
+            <div class="zc26lu-avwrap">
+                <img class="zc26lu-avatar" src="palyer_sep.png" alt="">
+                <span class="zc26lu-rating ${rating === null ? "rt-na" : zc26RatingCls(rating)}">${rating === null ? "N/A" : rating.toFixed(1)}</span>
+                ${chips}
+            </div>
+            <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
+            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}${!isStarter && hasData ? " · Jugó" : ""}</span>
+        </div>`;
+    }
+    function zc26TimelineHtml(ctx) {
+        if (!ctx || !ctx.res || ctx.res.wo) return "";
+        const tl = zc26MatchTimeline(`${ctx.home}|${ctx.away}`);
+        const side = (list, team) => {
+            const by = {};
+            list.filter(e => e.team === team).forEach(e => { (by[e.name] = by[e.name] || []).push(e.min); });
+            return Object.entries(by).map(([n, m]) => [n, m.sort((x, y) => x - y)])
+                .sort((x, y) => x[1][0] - y[1][0])
+                .map(([n, m]) => `<span class="timeline-entry">${zc26Esc(n)} <span class="timeline-time">${m.map(x => x + "'").join(", ")}</span></span>`).join("");
+        };
+        const block = (icon, cls, list) => list.length ? `<div class="timeline-block">
+                <div class="timeline-row">
+                    <div class="timeline-side timeline-side-left">${side(list, ctx.home)}</div>
+                    <div class="timeline-icon ${cls}">${icon}</div>
+                    <div class="timeline-side timeline-side-right">${side(list, ctx.away)}</div>
+                </div>
+            </div>` : "";
+        const yellow = tl.cards.filter(c => c.type === "ta");
+        const red = tl.cards.filter(c => c.type === "tr");
+        const html = block('<img src="win_icon.png" alt="Gol">', "timeline-icon-win", tl.goals)
+            + block('<img src="tarjeta_amarilla.png" alt="Tarjeta amarilla">', "timeline-icon-card", yellow)
+            + block('<i class="zc26lu-cardico zc26lu-cardico-tr" style="width:14px;height:19px"></i>', "timeline-icon-card", red);
+        return html ? `<div class="match-timeline zc26mm-timeline">${html}</div>` : "";
+    }
+    // Bloque "Tarjetas" del partido (solo partidos jugados con tarjetas en el reporte)
+    function zc26CardsBlockHtml(ctx) {
+        if (!ctx.res || ctx.res.wo) return "";
+        const k = `${ctx.home}|${ctx.away}`;
+        const list = ZC26_CARDS.filter(c => c.m === k);
+        if (!list.length) return "";
+        return `<div class="lu-block zc26lu-cards-block">
+            <div class="lu-sub-title">Tarjetas</div>
+            <div class="zc26lu-cards-list">${list.map(c => `<div class="zc26lu-cards-row">
+                <span class="zc26sym zc26sym-sm">${zc26Sym(c.type)}</span>
+                <b>${zc26Esc(c.rep)}</b>
+                ${c.team ? `<span class="zc26lu-cards-team">${zc26Esc(zc26Abbr(c.team))}</span>` : ""}
+                ${c.note ? `<span class="zc26lu-cards-note">(${zc26Esc(c.note)})</span>` : ""}
+            </div>`).join("")}</div>
         </div>`;
     }
     const ZC26_ABBR = {
@@ -12877,14 +13668,15 @@
     };
     function zc26Abbr(team) { return ZC26_ABBR[team] || String(team).slice(0, 3).toUpperCase(); }
     function zc26LineupBox(title, cls, ctx, pick) {
+        const isStarterBox = /titulares/.test(cls);
         const parts = [ctx.home, ctx.away].map(team => {
-            const list = pick(ZC26_ROSTERS[team] || []);
+            const list = pick(ZC26_ROSTERS[team] || [], team, ctx);
             if (!list.length) return "";
             const players = list.filter(m => m[1] !== "coa");
             const coaches = list.filter(m => m[1] === "coa");
             return `<div class="zc26lu-team"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>`
-                + players.map(m => zc26LineupCard(m[0], m[1])).join("")
-                + (coaches.length ? `<div class="zc26lu-break"></div>` + coaches.map(m => zc26LineupCard(m[0], m[1])).join("") : "");
+                + players.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("")
+                + (coaches.length ? `<div class="zc26lu-break"></div>` + coaches.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("") : "");
         }).join("");
         if (!parts) return "";
         return `<div class="lu-block ${cls}">
@@ -12894,11 +13686,11 @@
     }
     // Suplentes: equipo A a la izquierda y equipo B a la derecha.
     function zc26SubsBox(ctx, pick) {
-        const lists = [ctx.home, ctx.away].map(team => pick(ZC26_ROSTERS[team] || []));
+        const lists = [ctx.home, ctx.away].map(team => pick(ZC26_ROSTERS[team] || [], team, ctx));
         if (!lists[0].length && !lists[1].length) return "";
         const col = (team, list) => `<div class="zc26lu-subs-col">
                 <div class="zc26lu-team"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>
-                ${list.length ? list.map(m => zc26LineupCard(m[0], m[1])).join("") : `<div class="zc26lu-none">Sin suplentes</div>`}
+                ${list.length ? list.map(m => zc26LineupCard(m[0], m[1], team, ctx, false)).join("") : `<div class="zc26lu-none">Sin suplentes</div>`}
             </div>`;
         return `<div class="lu-block lu-block-suplentes">
             <div class="lu-sub-title">Suplentes</div>
@@ -12908,6 +13700,25 @@
     // Máximo 3 titulares por equipo. El capitán/líder va SIEMPRE en medio.
     // El coach va con los jugadores, en una fila justo detrás (debajo) del capitán.
     // El resto pasa a suplentes; el manager va a suplentes.
+    /* Alineación distinta a la de la plantilla en un partido concreto:
+       "local|visitante" → equipo → { starters (el de en medio va segundo), subs }. */
+    const ZC26_MATCH_LINEUP = {
+        "Baraja de Elite|Sinister Haven": {
+            "Sinister Haven": { starters: ["JDxZ", "Isakiu", "Banditoo!"], subs: ["rnowtt"] }
+        }
+    };
+    function zc26MatchSplit(roster, team, ctx) {
+        const split = zc26SplitRoster(roster);
+        const byMatch = ZC26_MATCH_LINEUP[`${ctx.home}|${ctx.away}`];
+        const ov = byMatch && byMatch[team];
+        if (!ov) return split;
+        const by = n => roster.find(m => m[0] === n);
+        const used = new Set(ov.starters.concat(ov.subs));
+        return {
+            starters: ov.starters.map(by).filter(Boolean).concat(split.starters.filter(m => m[1] === "coa")),
+            subs: ov.subs.map(by).filter(Boolean).concat(split.subs.filter(m => !used.has(m[0])))
+        };
+    }
     function zc26SplitRoster(roster) {
         const isLead = r => r === "cap" || r === "lid";
         const players = roster.filter(m => m[1] !== "sup" && m[1] !== "man" && m[1] !== "coa")
@@ -12937,16 +13748,18 @@
             </div>`;
         return `<div class="lu-block zc26lu-coach-block">
             <div class="lu-coaches">${one(ctx.home)}${one(ctx.away)}</div>
-            <div class="lu-ratings-note">Calificaciones de los jugadores (0/11) basadas en los datos de los partidos</div>
+            <div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div>
         </div>`;
     }
     function zc26LineupsHtml(ctx) {
-        const starters = roster => zc26SplitRoster(roster).starters;
-        const subs = roster => zc26SplitRoster(roster).subs;
+        const starters = (roster, team) => zc26MatchSplit(roster, team, ctx).starters;
+        const subs = (roster, team) => zc26MatchSplit(roster, team, ctx).subs;
         return `<div class="lu-wrap zc26mm-lu-wrap">
             ${zc26LineupBox("Titulares", "lu-block-titulares", ctx, starters)}
             ${zc26SubsBox(ctx, subs)}
+            ${zc26CardsBlockHtml(ctx)}
             ${zc26CoachesHtml(ctx)}
+            ${zc26LegendHtml()}
         </div>`;
     }
     function zc26GeneralSection(title, innerHtml) {
@@ -12964,7 +13777,9 @@
             return zc26LineupsHtml(ctx);
         }
         if (tab === "general") {
-            return `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 SEPTIEMBRE", manejado por el equipo del soporte</span></div>
+            const woLine = (ctx.res && ctx.res.wo)
+                ? `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Resultado:</span> <span class="tab-info-value">${zc26Esc(ctx.res.wo)} no se presentó. Derrota 3-0 por incomparecencia (W.O.).</span></div>` : "";
+            return woLine + `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 SEPTIEMBRE", manejado por el equipo del soporte</span></div>
                 <div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>`
                 + zc26GeneralSection("Alineaciones", zc26LineupsHtml(ctx))
                 + zc26GeneralSection("Estadísticas", zc26StatsBlocksHtml(ctx));
@@ -12981,19 +13796,26 @@
         const day = card.dataset.day || "";
         const num = card.dataset.num || "";
         const month = card.dataset.month || "";
+        const time = card.dataset.time || "";
         const accent = ZC26_GROUP_COLORS[group] || "#8a8f98";
         const monthFull = ZC26_MONTH_NAMES[month] || month;
-        zc26mmCurrentMatch = { home, away, group };
+        const res = zc26GetResult(home, away);
+        // Partido con hora: fecha y hora según el país elegido
+        const ls = time ? zc26LocalSchedule({ num: parseInt(num, 10), month: month }, time, zc26CountryCode) : null;
+        const statusTxt = res ? "Finalizado" : "Próximo";
+        zc26mmCurrentMatch = { home, away, group, res };
+        qsStacked = false;
+        panel.scrollTop = 0;
         panel.innerHTML = `
             <div class="info-close"><span class="info-close-x">✕</span></div>
             <div class="zc26mm-head">
                 <div>
                     <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">Fase de grupos</span></div>
-                    <div class="zc26mm-date">${day} ${num} de ${monthFull} · 2026</div>
+                    <div class="zc26mm-date">${ls ? ls.weekday + " " + ls.d + " de " + ls.monthName : day + " " + num + " de " + monthFull} · 2026</div>
                 </div>
                 <div class="zc26mm-tags">
                     <span class="zc26mm-tag">Grupo ${group}</span>
-                    <span class="zc26mm-status" style="color:${accent};background:${accent}22;border:1px solid ${accent}55">Próximo</span>
+                    <span class="zc26mm-status" style="color:${accent};background:${accent}22;border:1px solid ${accent}55">${statusTxt}</span>
                 </div>
             </div>
             <div class="scoreboard zc26mm-scoreboard">
@@ -13002,18 +13824,20 @@
                     <span class="team-name">${home}</span>
                 </div>
                 <div class="score-center">
-                    <span class="score-number score-number-empty"></span>
+                    ${res ? `<span class="score-number${res.h < res.a ? " score-number-lose" : ""}">${res.h}</span>` : `<span class="score-number score-number-empty"></span>`}
                     <div class="match-status">
-                        <span class="status-badge">Próximo</span>
-                        <span class="status-date">${String(num).padStart(2, "0")}/09</span>
+                        <span class="status-badge">${statusTxt}</span>
+                        <span class="status-date">${res && res.wo ? "W.O." : (ls ? ls.date : String(num).padStart(2, "0") + "/09")}</span>
+                        ${ls && !res ? `<span class="status-date"><img class="zcc-status-flag" src="${zc26FlagSrc(zc26CountryCode)}" alt="">${ls.time}</span>` : ""}
                     </div>
-                    <span class="score-number score-number-empty"></span>
+                    ${res ? `<span class="score-number${res.a < res.h ? " score-number-lose" : ""}">${res.a}</span>` : `<span class="score-number score-number-empty"></span>`}
                 </div>
                 <div class="team">
                     <div class="team-logo"><img src="${zc26Logo(away)}" alt="${away}"></div>
                     <span class="team-name">${away}</span>
                 </div>
             </div>
+            ${zc26TimelineHtml(zc26mmCurrentMatch)}
             <div class="zc26mm-tabs">
                 <button type="button" class="zc26mm-tab-btn active" data-zc26mm-tab="general">Información general</button>
                 <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="cronologia">Cronología</button>
@@ -13025,6 +13849,9 @@
         `;
         zcPlaySound("clickentrar");
         openModal("zc26MatchOverlay");
+        panel.scrollTop = 0;
+        const zcOv = document.getElementById("zc26MatchOverlay");
+        if (zcOv) zcOv.scrollTop = 0;
     }
     function closeZc26Match() {
         zcPlaySound("clicksalir");
@@ -13036,6 +13863,72 @@
     });
     document.getElementById("zc26MatchOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeZc26Match();
+    });
+    // Minimenú del jugador: usa el mismo panel y estilo (qs2-*) que "Último partido importa".
+    function openZc26PlayerStats(card) {
+        const ctx = zc26mmCurrentMatch;
+        const panel = document.getElementById("quickStatsPanel");
+        if (!ctx || !ctx.res || !panel || !card) return;
+        const name = card.dataset.zc26Player || "";
+        const team = card.dataset.zc26Team || "";
+        const role = card.dataset.zc26Role || "jug";
+        const isStarter = card.dataset.zc26Starter === "1";
+        const st = zc26PlayerStats(ctx, team, name);
+        const hasData = st.star || st.ta || st.tr || st.g || st.a;
+        const participated = isStarter || hasData;
+        const rating = participated ? zc26Rating(ctx, team, st, name) : null;
+        const won = team === ctx.home ? ctx.res.h > ctx.res.a : ctx.res.a > ctx.res.h;
+        const rows = [
+            ["Rol", ZC26_ROLE_LABEL[role] + (!isStarter && hasData ? " · Jugó" : "")],
+            ["Resultado del equipo", participated ? (won ? "Ganó" : "Perdió") : "No jugó"],
+            ...(!isStarter && hasData ? [["Sustitución", "Entra"]] : (zc26IsSubbedOut(ctx, team, name) ? [["Sustitución", "Sale"]] : [])),
+            [`<span class="zc26qs-lbl">${ZC26_ICON_STAR}Estelar</span>`, st.star],
+            ["Set Marcado", st.star + st.g],
+            [`<span class="zc26qs-lbl"><img src="icon_stats%20(2).png" alt="">Asistencias</span>`, st.a],
+            ["Tarjetas Amarillas", st.ta],
+            ["Tarjetas Rojas", st.tr]
+        ].map(([l, v]) => `<div class="qs2-stat-row"><span>${l}</span><b>${v}</b></div>`).join("");
+        panel.innerHTML = `
+            <div class="info-close"><span class="info-close-x">✕</span></div>
+            <div class="qs2-photo-row">
+                <img class="qs2-photo" src="palyer_sep.png" alt="${zc26Esc(name)}">
+                <div>
+                    <div class="qs2-name">${zc26Esc(name)}</div>
+                    <div class="qs2-team-line"><img src="${zc26Logo(team)}" alt="">${zc26Esc(team)}</div>
+                </div>
+            </div>
+            <div class="qs2-match">
+                <span class="qs2-match-team"><img src="${zc26Logo(ctx.home)}" alt="">${zc26Esc(zc26Abbr(ctx.home))}</span>
+                <span class="qs2-match-score">${ctx.res.h}</span>
+                <span class="qs2-match-dash">-</span>
+                <span class="qs2-match-score">${ctx.res.a}</span>
+                <span class="qs2-match-team">${zc26Esc(zc26Abbr(ctx.away))}<img src="${zc26Logo(ctx.away)}" alt=""></span>
+                <span class="qs2-match-status">Finalizado</span>
+            </div>
+            <div class="qs2-stats-title">Estadísticas del partido</div>
+            <div class="qs2-rating-row">
+                <div>
+                    <div class="qs2-rating-label">Calificación del jugador</div>
+                    <div class="qs2-rating-sub">Estimada según el resultado, Estelar y tarjetas</div>
+                </div>
+                <span class="qs2-rating-badge lu-rating ${rating === null ? "rt-na" : zc26RatingCls(rating)}">${rating === null ? "N/A" : rating.toFixed(1)}</span>
+            </div>
+            <div class="qs2-stat-list">${rows}</div>
+        `;
+        zcPlaySound("clickentrar");
+        // Se abre encima del partido (sin ocultarlo): el fondo queda difuminado detrás.
+        qsStacked = true;
+        panel.scrollTop = 0;
+        document.getElementById("quickStatsOverlay").classList.add("active");
+    }
+    document.getElementById("zc26MatchPanel").addEventListener("click", function (e) {
+        const card = e.target.closest(".zc26lu-played");
+        if (card) openZc26PlayerStats(card);
+    });
+    document.getElementById("zc26MatchPanel").addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        const card = e.target.closest(".zc26lu-played");
+        if (card) { e.preventDefault(); openZc26PlayerStats(card); }
     });
     function applyZc26Filters() {
         const searchInput = document.getElementById("zc26SearchInput");
@@ -13201,12 +14094,13 @@
         const wrap = document.getElementById("zcgrpGroupsList");
         if (!wrap) return;
         const byGroup = zc26TeamsByGroup();
+        const st = zc26ComputeStandings();
         const groupLetters = ["A", "B", "C", "D", "E", "F"];
         const last5Dots = `<span class="zcgrp-dot"></span>`.repeat(5);
         const statCols = ["PJ", "G", "E", "P", "Pts", "SF", "SC", "DS"];
         const colCls = c => "zcgrp-col-num" + (c === "Pts" ? " zcgrp-col-pts" : "");
         wrap.innerHTML = groupLetters.map(g => {
-            const teams = byGroup[g] || [];
+            const teams = zc26SortByStandings(byGroup[g] || [], st);
             return `
             <div class="zcgrp-group">
                 <div class="zcgrp-group-title">Grupo ${g}</div>
@@ -13230,8 +14124,8 @@
                                 <span class="zcgrp-team-name">${t}</span>
                             </span>
                         </div>
-                        ${statCols.map(c => `<span class="${colCls(c)}">0</span>`).join("")}
-                        <span class="zcgrp-col-last5">${last5Dots}</span>
+                        ${statCols.map(c => `<span class="${colCls(c)}">${zc26StatVal(st[t], c)}</span>`).join("")}
+                        <span class="zcgrp-col-last5">${zc26GrpDots(st[t])}</span>
                     </div>`).join("")}
                     </div>
                   </div>
@@ -13318,24 +14212,74 @@
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         zcPlaySound("click");
     });
+    /* ZC26 · Estadísticas → Jugador Estelar y Asistencias: ranking de cada uno */
+    (function () {
+        function renderRank(listId, entries) {
+            const list = document.getElementById(listId);
+            if (!list) return;
+            const agg = {};
+            entries.forEach(([player, team, n]) => {
+                const k = player.toLowerCase() + "|" + team;
+                (agg[k] = agg[k] || { player, team, n: 0 }).n += (n || 1);
+            });
+            const rows = Object.values(agg).sort((a, b) => (b.n - a.n) || a.player.localeCompare(b.player, "es", { sensitivity: "base" }));
+            if (!rows.length) {
+                list.innerHTML = '<div class="wcstat-empty">Aún no hay datos disponibles.</div>';
+                return;
+            }
+            let lastN = null, rank = 0;
+            list.innerHTML = rows.map((r, i) => {
+                if (r.n !== lastN) { rank = i + 1; lastN = r.n; }
+                return `<div class="wcstat-row">
+                <span class="wcstat-rank">${rank}</span>
+                <span class="wcstat-logo"><img src="${zc26Logo(r.team)}" alt=""></span>
+                <span class="wcstat-who"><span class="wcstat-name">${zc26Esc(r.player)}</span><span class="wcstat-team">${zc26Esc(r.team)}</span></span>
+                <span class="wcstat-val">${r.n}</span>
+            </div>`;
+            }).join("");
+        }
+        renderRank("wcstatEstelarList", ZC26_STAR_PLAYERS.map(([player, team]) => [player, team, 1]));
+        renderRank("wcstatAsistList", ZC26_ASSISTS.map(a => [a.player, a.team, a.n]));
+        /* Amarillas: si el reporte no dice el equipo, se muestran los dos equipos del partido. */
+        renderRank("wcstatYellowList", ZC26_CARDS.filter(c => c.type === "ta").map(c => [c.player, c.team || c.m.replace("|", " / "), 1]));
+    })();
     /* ZC26 · Predicciones: top 10 de equipos con más probabilidad de ganar el torneo.
        Porcentajes bajos a propósito (aún no se juegan partidos). Se pueden editar aquí. */
     (function () {
-        const WC_PRED_TOP10 = [
-            ["op7", 10],
-            ["SYNOX GAMING", 9],
-            ["BLASTERS", 8],
-            ["Leviatán Esports", 7],
-            ["GTA", 6],
-            ["Unorthodox", 5],
-            ["OMEN NOCTE", 4],
-            ["GAMBLING FC", 4],
-            ["POS", 3],
-            ["Egresados Del Conalep", 3]
-        ];
+        /* Probabilidad base de ganar el torneo (%) antes de jugar. Se pueden editar aquí.
+           El top 10 que se muestra sale de aplicar los resultados: cada partido jugado sube a quien
+           ganó y baja a quien perdió (más si fue por más sets), y luego se reparte para sumar 100%. */
+        const WC_PRED_BASE = {
+            "op7": 10, "SYNOX GAMING": 9, "BLASTERS": 8, "Leviatán Esports": 7, "GTA": 6,
+            "Unorthodox": 5, "OMEN NOCTE": 4, "GAMBLING FC": 4, "POS": 3, "Egresados Del Conalep": 3,
+            "TEAM ATENAS": 2.9, "Pro Legends": 2.9, "KURO ØNIX": 2.9, "SGC": 2.9, "Acuñas": 2.9,
+            "POS JR": 2.9, "LPE": 2.9, "Quiero KeKe": 2.9, "Baraja de Elite": 2.9, "Sinister Haven": 2.9,
+            "Peruanos FC": 2.9, "Phoenix": 2.9, "Wosu Esport": 2.9, "RAISE EARTH": 2.9
+        };
+        const WC_PRED_K = 0.1; // cuánto pesa cada set de diferencia
+        const predNorm = obj => {
+            const tot = Object.values(obj).reduce((a, b) => a + b, 0);
+            const out = {};
+            Object.keys(obj).forEach(t => { out[t] = obj[t] * 100 / tot; });
+            return out;
+        };
+        const predNow = { ...WC_PRED_BASE };
+        Object.keys(ZC26_RESULTS).forEach(key => {
+            const r = ZC26_RESULTS[key];
+            const [home, away] = key.split("|");
+            const d = r.h - r.a; // + = ganó el local
+            if (predNow[home] != null) predNow[home] *= Math.exp(WC_PRED_K * d);
+            if (predNow[away] != null) predNow[away] *= Math.exp(-WC_PRED_K * d);
+        });
+        const predBase = predNorm(WC_PRED_BASE);
+        const predCur = predNorm(predNow);
+        const WC_PRED_TOP10 = Object.keys(predCur)
+            .sort((a, b) => predCur[b] - predCur[a])
+            .slice(0, 10)
+            .map(t => ({ team: t, pct: Math.round(predCur[t]), delta: predCur[t] - predBase[t] }));
         const list = document.getElementById("wcPredList");
         if (list) {
-            list.innerHTML = WC_PRED_TOP10.map(([team, pct]) => `
+            list.innerHTML = WC_PRED_TOP10.map(({ team, pct, delta }) => `
                 <li class="wcpred-item">
                     <span class="wcpred-logo"><img src="${zc26Logo(team)}" alt=""></span>
                     <span class="wcpred-name">${team}</span>
