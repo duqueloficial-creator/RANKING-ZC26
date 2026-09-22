@@ -13163,6 +13163,10 @@
         { team: "GAMBLING FC", player: "gabri", status: "lesion" },
         { team: "POS JR", player: "TK Carl", status: "lesion" }
     ];
+    /* Lesiones ocurridas durante un partido, para mostrarlas en la Cronología. */
+    const ZC26_INJURIES = [
+        { m: "Quiero KeKe|POS JR", team: "POS JR", player: "TK Carl", min: 56 }
+    ];
     /* Jugadores que salen (Sale) durante un partido; el suplente que entra ya se marca solo (Entra). */
     const ZC26_SUB_OUT = [
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "Sanz" },
@@ -13180,7 +13184,7 @@
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", out: "Isakiu", in: "rnowtt", min: 63 },
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", out: "Sanz", in: "luisitopro123" },
         { m: "GTA|Unorthodox", team: "GTA", out: "nefi", in: "Gabinho", min: 121 },
-        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "DominatorAngel27", min: 20 }
+        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "R3QU1EMBRUH", min: 20 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
@@ -13193,6 +13197,12 @@
     function zc26IsSubbedOut(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
         return ZC26_SUB_OUT.some(e => e.m === k && e.team === team && e.player === name);
+    }
+    // Un jugador "entra" si tiene estadísticas propias o si aparece como el "in" de un cambio,
+    // aunque no tenga estadísticas registradas en el reporte.
+    function zc26IsSubbedIn(ctx, team, name) {
+        const k = `${ctx.home}|${ctx.away}`;
+        return ZC26_SUB_PAIR.some(e => e.m === k && e.team === team && e.in === name);
     }
     function zc26GetResult(home, away) { return ZC26_RESULTS[`${home}|${away}`] || null; }
     /* Cronología del partido (como en "Último partido importa"): cada set ganado cuenta como "Gol"
@@ -13617,7 +13627,7 @@
         "Pro Legends": [["OwnerOnYT","cap"],["EL_CHINO.504","jug"],["Claustin","jug"]],
         "Egresados Del Conalep": [["new_faxtory","cap"],["AUMcxD","jug"],["Sanz","jug"],["luisitopro123","sup"]],
         "Acuñas": [["RoyZtrike","cap"],["Xabi","jug"],["Galactus","jug"],["Diego(A)","sup"],["Yascer","sup"]],
-        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["AdmirerTensai","tit"],["Zousa","sup"],["R3QU1EMBRUH","jug"],["DominatorAngel27","sup"]]
+        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["AdmirerTensai","tit"],["Zousa","sup"],["R3QU1EMBRUH","sup"],["DominatorAngel27","sup"]]
     };
     const ZC26_ROLE_LABEL = { cap: "Capitán", lid: "Líder", tit: "Titular", jug: "Jugador", sup: "Suplente", man: "Manager", coa: "Coach" };
     function zc26Esc(v) {
@@ -13742,7 +13752,7 @@
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
         const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}">${inner}${n > 1 ? n : ""}</span>`;
         const sym = (cls, name) => `<span class="zc26lu-chip zc26lu-chip-sym ${cls}">${zc26Sym(name)}</span>`;
-        const cameOn = !isStarter && hasData; // suplente que entró a jugar
+        const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name)); // suplente que entró a jugar
         const wentOut = zc26IsSubbedOut(ctx, team, name); // titular que salió
         const chips = (st.star ? chip("zc26lu-chip-star", ZC26_ICON_STAR, st.star) : "")
             + (cameOn ? sym("zc26lu-chip-in", "entra")
@@ -13816,9 +13826,11 @@
         const cardEvents = tl.cards.map(c => ({ kind: "card", min: c.min, team: c.team, name: c.name, type: c.type }));
         const subEvents = ZC26_SUB_PAIR.filter(p => p.m === k)
             .map(p => ({ kind: "sub", min: p.min != null ? p.min : null, team: p.team, in: p.in, out: p.out }));
+        const injuryEvents = ZC26_INJURIES.filter(p => p.m === k)
+            .map(p => ({ kind: "lesion", min: p.min != null ? p.min : null, team: p.team, name: p.player }));
         // Si un cambio y un gol caen en el mismo minuto, el cambio se muestra primero
         // (el jugador que entra ya está en cancha cuando se gana ese set).
-        const events = subEvents.concat(goalEvents, cardEvents);
+        const events = subEvents.concat(goalEvents, cardEvents, injuryEvents);
         events.sort((a, b) => (a.min == null ? -1 : a.min) - (b.min == null ? -1 : b.min));
         const minLabel = m => m == null ? "Antes de iniciar" : `${m}'`;
         const player = (team, name) => `<div class="zc26cron-player"><img class="zc26cron-badge" src="${zc26Logo(team)}" alt="">
@@ -13872,6 +13884,14 @@
                             ${player(e.team, e.out)}
                         </div>
                     </div>
+                </div>`;
+            }
+            if (e.kind === "lesion") {
+                return `<div class="zc26cron-item">
+                    <div class="zc26cron-head"><span class="zc26cron-icon">${zc26Sym("lesion")}</span>
+                        <span class="zc26cron-label">Lesión</span>
+                        <span class="zc26cron-min">${minLabel(e.min)}</span></div>
+                    <div class="zc26cron-body"><div class="zc26cron-block">${player(e.team, e.name)}</div></div>
                 </div>`;
             }
             const label = e.type === "tr" ? "Tarjeta roja" : "Tarjeta amarilla";
@@ -13960,7 +13980,7 @@
             "GTA": { starters: ["thoniolo", "Adri", "nefi"], subs: ["Gabinho"] }
         },
         "Acuñas|OMEN NOCTE": {
-            "OMEN NOCTE": { starters: ["Mokka", "Ovied7", "AdmirerTensai", "R3QU1EMBRUH"], subs: ["Zousa", "DominatorAngel27"] }
+            "OMEN NOCTE": { starters: ["Mokka", "Ovied7", "AdmirerTensai"], subs: ["Zousa", "R3QU1EMBRUH"], exclude: ["DominatorAngel27"] }
         }
     };
     function zc26MatchSplit(roster, team, ctx) {
@@ -13969,7 +13989,7 @@
         const ov = byMatch && byMatch[team];
         if (!ov) return split;
         const by = n => roster.find(m => m[0] === n);
-        const used = new Set(ov.starters.concat(ov.subs));
+        const used = new Set(ov.starters.concat(ov.subs, ov.exclude || []));
         return {
             starters: ov.starters.map(by).filter(Boolean),
             subs: ov.subs.map(by).filter(Boolean).concat(split.subs.filter(m => !used.has(m[0])))
