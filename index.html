@@ -2600,6 +2600,7 @@
         .zc26lu-subs-col .zc26lu-card { width: 64px; }
         .zc26lu-none { flex: 0 0 100%; text-align: center; font-size: 0.55rem; color: #6f747c; padding-top: 4px; }
         .zc26lu-break { flex: 0 0 100%; height: 0; }
+        .zc26lu-sub-pair { display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .zc26mm-lu-wrap .zc26lu-coach-block { padding: 6px 8px; border-radius: 12px; }
         .zc26mm-lu-wrap .lu-coaches { padding: 4px 4px; }
         .zc26mm-lu-wrap .lu-coach-name { font-size: 0.64rem; }
@@ -2682,9 +2683,9 @@
         .zc26lu-chip svg { width: 10px; height: 10px; display: block; }
         .zc26lu-chip img { width: 9px; height: 9px; object-fit: contain; display: block; }
         .zc26lu-chip-star { bottom: 3px; right: -13px; }
-        .zc26lu-chip-goal { top: -8px; left: -13px; }
-        .zc26lu-chip-ta { top: -8px; right: -13px; }
-        .zc26lu-chip-tr { top: -8px; right: -13px; }
+        .zc26lu-chip-goal { top: -8px; left: -8px; }
+        .zc26lu-chip-ta { top: -8px; right: -8px; }
+        .zc26lu-chip-tr { top: -8px; right: -8px; }
         .zc26lu-chip-ta + .zc26lu-chip-tr { top: 7px; }
         .zc26lu-cardico {
             display: inline-block;
@@ -2725,7 +2726,7 @@
             border: none;
         }
         .zc26lu-chip-sym .zc26sym-svg { width: 14px; height: 14px; }
-        .zc26lu-chip-in { top: -8px; left: -13px; }
+        .zc26lu-chip-in { top: -8px; left: -8px; }
         .zc26lu-chip-ast { bottom: 3px; left: -13px; }
         /* ZC26 · Más partidos: tarjetas (mismo estilo mp-card) de los otros partidos de los dos equipos */
         .zc26mm-more { display: flex; flex-direction: column; gap: 8px; }
@@ -2974,6 +2975,32 @@
         .zc26mm-stat-sub { font-size: 0.6rem; margin-bottom: 8px; }
         .zc26mm-general-section + .zc26mm-general-section { margin-top: 14px; padding-top: 12px; }
         .zc26mm-general-section-title { font-size: 0.85rem; }
+        /* Cronología (cambios y tarjetas) dentro de Información general */
+        .zc26cron-list { display: flex; flex-direction: column; gap: 8px; }
+        .zc26cron-item { border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.02); }
+        .zc26cron-head { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .zc26cron-icon { flex: 0 0 auto; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+        .zc26cron-svg { width: 18px; height: 18px; }
+        .zc26cron-label { flex: 1 1 auto; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: #e7e9ec; }
+        .zc26cron-min { font-size: 0.6rem; color: #9298a1; font-weight: 600; }
+        .zc26cron-body { padding: 9px 10px; display: flex; flex-direction: column; gap: 10px; }
+        .zc26cron-block:not(:first-child) { margin-top: 2px; }
+        .zc26cron-tag { display: block; font-size: 0.56rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+        .zc26cron-tag-in { color: #3ecf6b; }
+        .zc26cron-tag-out { color: #e5484d; }
+        .zc26cron-player { display: flex; align-items: center; gap: 7px; }
+        .zc26cron-badge { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; flex: 0 0 auto; }
+        .zc26cron-name { font-size: 0.68rem; font-weight: 600; color: #f1f2f4; }
+        .zc26cron-milestone { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 8px; color: #8a8f98; }
+        .zc26cron-milestone-icon { width: 20px; height: 20px; }
+        .zc26cron-milestone-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #c9cdd3; }
+        .zc26cron-milestone-time { font-size: 0.6rem; color: #8a8f98; }
+        .zc26cron-goal-banner { padding: 12px 10px 10px; text-align: center; }
+        .zc26cron-goal-icon { display: inline-flex; width: 20px; height: 20px; margin-bottom: 4px; }
+        .zc26cron-goal-title { font-size: 0.78rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.4px; }
+        .zc26cron-goal-min { font-size: 0.6rem; color: rgba(255,255,255,0.85); margin-top: 2px; }
+        .zc26cron-goal-score { text-align: center; font-size: 0.72rem; font-weight: 800; padding: 6px 10px; }
+        .zc26cron-goal-star { font-size: 0.62rem; color: #9298a1; }
         .zc26mm-form-row {
             justify-content: space-between;
             gap: 10px;
@@ -13069,7 +13096,11 @@
         "RAISE EARTH|op7":                    { h: 0, a: 3 },
         "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 },
         "Quiero KeKe|POS JR":                 { h: 3, a: 0 },
-        "BLASTERS|TEAM ATENAS":               { h: 3, a: 0, wo: "TEAM ATENAS" }
+        "BLASTERS|TEAM ATENAS":               { h: 3, a: 0, wo: "TEAM ATENAS" },
+        "GTA|Unorthodox":                      { h: 0, a: 3 },
+        "SYNOX GAMING|Wosu Esport":            { h: 3, a: 0 },
+        "Acuñas|OMEN NOCTE":                   { h: 0, a: 3 },
+        "POS|SGC":                             { h: 0, a: 3 }
     };
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
@@ -13079,7 +13110,11 @@
         ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["Jora", "Leviatán Esports", "Leviatán Esports|Peruanos FC"],
         ["Fax", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"], ["Luisitopro", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"], ["AUMCxd", "Egresados Del Conalep", "Pro Legends|Egresados Del Conalep"],
         ["Jet li", "op7", "RAISE EARTH|op7"], ["darkzz", "op7", "RAISE EARTH|op7"], ["Smk myst", "op7", "RAISE EARTH|op7"],
-        ["Marron", "Quiero KeKe", "Quiero KeKe|POS JR"], ["Iconoc", "Quiero KeKe", "Quiero KeKe|POS JR"], ["Doslox", "Quiero KeKe", "Quiero KeKe|POS JR"]
+        ["Marron", "Quiero KeKe", "Quiero KeKe|POS JR"], ["Iconoc", "Quiero KeKe", "Quiero KeKe|POS JR"], ["Doslox", "Quiero KeKe", "Quiero KeKe|POS JR"],
+        ["Lie in April!", "Unorthodox", "GTA|Unorthodox"], ["Lie in April!", "Unorthodox", "GTA|Unorthodox"], ["patch", "Unorthodox", "GTA|Unorthodox"],
+        ["Deizz", "SYNOX GAMING", "SYNOX GAMING|Wosu Esport"], ["abelldx", "SYNOX GAMING", "SYNOX GAMING|Wosu Esport"], ["romanqq", "SYNOX GAMING", "SYNOX GAMING|Wosu Esport"],
+        ["AdmirerTensai", "OMEN NOCTE", "Acuñas|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "Acuñas|OMEN NOCTE"], ["R3QU1EMBRUH", "OMEN NOCTE", "Acuñas|OMEN NOCTE"],
+        ["cesar", "SGC", "POS|SGC"], ["charles", "SGC", "POS|SGC"], ["cesar", "SGC", "POS|SGC"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -13087,16 +13122,28 @@
         "rnowtt prime": "rnowtt", "stevv": "Steve", "iCross": "lXlCross", "Jora": "TX JOAR",
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
         "darkzz": "Darkxz", "Smk myst": "smk myst!",
-        "Marron": "Mag", "Iconoc": "lcomic"
+        "Marron": "Mag", "Iconoc": "lcomic",
+        "cesar": "CESAR", "charles": "CharlesTQ"
+    };
+    /* Minutos exactos (en orden de mapa) para los "Ganador del Set" de la Cronología.
+       Si un partido no está aquí, los minutos se generan al azar (fijos por partido). */
+    const ZC26_GOAL_MINUTES = {
+        "SYNOX GAMING|Wosu Esport": [17, 73, 101],
+        "POS|SGC": [18, 38, 98],
+        "GTA|Unorthodox": [14, 107, 121]
     };
     /* Tarjetas de los reportes. team = null → el reporte no dice a qué equipo pertenece.
        type: "ta" amarilla, "tr" roja. player = nombre en la plantilla; rep = como salió en el reporte. */
     const ZC26_CARDS = [
         { m: "Baraja de Elite|Sinister Haven", type: "ta", team: "Baraja de Elite", player: "Heritage", rep: "Heritage" },
-        { m: "Baraja de Elite|Sinister Haven", type: "ta", team: "Sinister Haven", player: "Isakiu", rep: "Anikio", note: "fuera de juego" },
+        { m: "Baraja de Elite|Sinister Haven", type: "ta", team: "Sinister Haven", player: "Isakiu", rep: "Anikio", note: "fuera de juego", min: 61 },
         { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "bititobrawl", rep: "20tistos_bitito.fc" },
         { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "Amberchu01", rep: "amberchu01" },
-        { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "Trdgx98", rep: "trdgx879" }
+        { m: "LPE|Phoenix", type: "ta", team: "Phoenix", player: "Trdgx98", rep: "trdgx879" },
+        { m: "Quiero KeKe|POS JR", type: "ta", team: "Quiero KeKe", player: "Marro9281", rep: "Marro9281", min: 101 },
+        { m: "GTA|Unorthodox", type: "ta", team: "Unorthodox", player: "Lie in April!", rep: "Lie in April!" },
+        { m: "GTA|Unorthodox", type: "ta", team: "Unorthodox", player: "patch", rep: "patch" },
+        { m: "GTA|Unorthodox", type: "ta", team: "GTA", player: "Gabinho", rep: "Gabinho" }
     ];
     /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
     const ZC26_GOALS = [];
@@ -13106,7 +13153,8 @@
         { m: "Leviatán Esports|Peruanos FC", team: "Leviatán Esports", player: "TX JOAR", n: 1 },
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "rnowtt", n: 1 },
         { m: "RAISE EARTH|op7", team: "op7", player: "Darkxz", n: 1 },
-        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "luisitopro123", n: 2 }
+        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "luisitopro123", n: 2 },
+        { m: "POS|SGC", team: "SGC", player: "CharlesTQ", n: 1 }
     ];
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
     const ZC26_PLAYER_STATUS = [
@@ -13118,8 +13166,26 @@
     /* Jugadores que salen (Sale) durante un partido; el suplente que entra ya se marca solo (Entra). */
     const ZC26_SUB_OUT = [
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "Sanz" },
-        { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "Isakiu" }
+        { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "Isakiu" },
+        { m: "GTA|Unorthodox", team: "Unorthodox", player: "robertbv" },
+        { m: "GTA|Unorthodox", team: "GTA", player: "nefi" },
+        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" }
     ];
+    /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
+       (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
+    /* min: minuto exacto del cambio. Si no se pone, se asume que pasó antes de iniciar el partido
+       (lo más común: el titular no llegó a jugar), y se muestra como "Antes de iniciar". */
+    const ZC26_SUB_PAIR = [
+        { m: "GTA|Unorthodox", team: "Unorthodox", out: "robertbv", in: "patch" },
+        { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", out: "Isakiu", in: "rnowtt", min: 63 },
+        { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", out: "Sanz", in: "luisitopro123" },
+        { m: "GTA|Unorthodox", team: "GTA", out: "nefi", in: "Gabinho", min: 121 },
+        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "DominatorAngel27", min: 20 }
+    ];
+    function zc26SubPair(ctx, team, name) {
+        const k = `${ctx.home}|${ctx.away}`;
+        return ZC26_SUB_PAIR.find(e => e.m === k && e.team === team && e.out === name) || null;
+    }
     function zc26PlayerStatus(team, name) {
         const x = ZC26_PLAYER_STATUS.find(e => e.team === team && e.player === name);
         return x ? x.status : "";
@@ -13148,15 +13214,18 @@
         if (zc26TlCache[k]) return zc26TlCache[k];
         const rng = zc26Rng(k);
         const stars = ZC26_STAR_PLAYERS.filter(x => x[2] === k);
-        const mins = [];
-        while (mins.length < stars.length) {
-            const m = 1 + Math.floor(rng() * 120);
-            if (!mins.some(x => Math.abs(x - m) < 4)) mins.push(m);
+        const override = ZC26_GOAL_MINUTES[k];
+        let mins = (override && override.length === stars.length) ? override.slice() : [];
+        if (!mins.length) {
+            while (mins.length < stars.length) {
+                const m = 1 + Math.floor(rng() * 120);
+                if (!mins.some(x => Math.abs(x - m) < 4)) mins.push(m);
+            }
+            mins.sort((x, y) => x - y);
         }
-        mins.sort((x, y) => x - y);
         const goals = stars.map(([rep, team], i) => ({ team, name: ZC26_STAR_ALIAS[rep] || rep, min: mins[i] }));
         const cards = ZC26_CARDS.filter(c => c.m === k && c.team)
-            .map(c => ({ team: c.team, name: c.player, type: c.type, min: 1 + Math.floor(rng() * 120) }));
+            .map(c => ({ team: c.team, name: c.player, type: c.type, min: c.min != null ? c.min : (1 + Math.floor(rng() * 120)) }));
         return (zc26TlCache[k] = { goals, cards });
     }
     function zc26ResultIcon(r) {
@@ -13265,6 +13334,30 @@
         if (diff === 0) return "Misma hora";
         const n = Math.abs(diff);
         return n + (n === 1 ? " hora " : " horas ") + (diff < 0 ? "menos" : "más");
+    }
+    /* Los partidos empiezan tarde respecto a la hora anunciada (entre 10 y 35 min), y la duración
+       total (incluido el tiempo extra mostrado al final, ej. "120+6'") también varía un poco.
+       Ambos valores son aleatorios pero fijos por partido (semilla = la llave del partido). */
+    function zc26MatchStartDelay(k) { const rng = zc26Rng(k + "::inicio"); return 10 + Math.floor(rng() * 26); }
+    function zc26MatchExtraTime(k) { const rng = zc26Rng(k + "::extra"); return 1 + Math.floor(rng() * 9); }
+    function zc26AddMinutes(ls, addMin) {
+        if (!ls) return null;
+        let total = ls.hh * 60 + ls.mm + addMin;
+        total = ((total % 1440) + 1440) % 1440;
+        const hh = Math.floor(total / 60), mm = total % 60;
+        return { hh, mm, time: zc26Fmt12(hh, mm) };
+    }
+    // Hora real de inicio y de fin de un partido ya jugado, según el país elegido.
+    function zc26MatchClock(ctx) {
+        if (!ctx || !ctx.time || !ctx.num || !ctx.month) return null;
+        const ls = zc26LocalSchedule({ num: parseInt(ctx.num, 10), month: ctx.month }, ctx.time, zc26CountryCode);
+        if (!ls) return null;
+        const k = `${ctx.home}|${ctx.away}`;
+        const delay = zc26MatchStartDelay(k);
+        const extra = zc26MatchExtraTime(k);
+        const start = zc26AddMinutes(ls, delay);
+        const end = zc26AddMinutes(start, 120 + extra);
+        return { start: start.time, end: end.time, extra };
     }
     function zc26DateHtml(day, r, m) {
         if (r) {
@@ -13515,7 +13608,7 @@
         "TEAM ATENAS": [["kaenluc","lid"],["reyes17","jug"],["sebazz","jug"],["ale","sup"],["messpvp","sup"]],
         "Baraja de Elite": [["Heritage","cap"],["Sukhoi","tit"],["Destroyer","tit"]],
         "Sinister Haven": [["Isakiu","lid"],["rnowtt","jug"],["JDxZ","jug"],["Banditoo!","jug"]],
-        "Unorthodox": [["robertbv","cap"],["Xell Lie in April!","jug"],["Miseryoung","jug"]],
+        "Unorthodox": [["robertbv","cap"],["Lie in April!","jug"],["Miseryoung","jug"],["patch","sup"]],
         "GTA": [["Adri","cap"],["thoniolo","jug"],["Gabinho","jug"],["nefi","jug"]],
         "RAISE EARTH": [["F nero","cap"],["kikyy","jug"],["Hacent","jug"],["Hagnes","sup"],["PatitoAtlas","sup"],["JEAN","sup"],["Tsukuyo Amane","sup"]],
         "op7": [["Naori","man"],["Ricky","cap"],["Darkxz","jug"],["smk myst!","jug"],["Sasori037","coa"]],
@@ -13524,7 +13617,7 @@
         "Pro Legends": [["OwnerOnYT","cap"],["EL_CHINO.504","jug"],["Claustin","jug"]],
         "Egresados Del Conalep": [["new_faxtory","cap"],["AUMcxD","jug"],["Sanz","jug"],["luisitopro123","sup"]],
         "Acuñas": [["RoyZtrike","cap"],["Xabi","jug"],["Galactus","jug"],["Diego(A)","sup"],["Yascer","sup"]],
-        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["AdmirerTensai","tit"],["Zousa","sup"],["R3QU1EMBRUH","sup"],["DominatorAngel27","sup"]]
+        "OMEN NOCTE": [["Ovied7","cap"],["Mokka","jug"],["AdmirerTensai","tit"],["Zousa","sup"],["R3QU1EMBRUH","jug"],["DominatorAngel27","sup"]]
     };
     const ZC26_ROLE_LABEL = { cap: "Capitán", lid: "Líder", tit: "Titular", jug: "Jugador", sup: "Suplente", man: "Manager", coa: "Coach" };
     function zc26Esc(v) {
@@ -13594,18 +13687,30 @@
     /* Calificaciones fijadas a mano ("local|visitante" → jugador → nota); mandan sobre la fórmula. */
     const ZC26_RATING_OVERRIDES = {
         "Leviatán Esports|Peruanos FC": { "JulioCr36D": 7.8 },
-        "Quiero KeKe|POS JR": { "Mateo": 5.3, "TK Carl": 5.9, "Arc/Rafa": 5.7, "Doslox": 7.9, "Mag": 8.1 }
+        "Quiero KeKe|POS JR": { "Mateo": 5.3, "TK Carl": 5.9, "Arc/Rafa": 5.7, "Doslox": 7.9, "Mag": 8.1 },
+        "GTA|Unorthodox": { "Adri": 6.1, "thoniolo": 6.7, "nefi": 5.9, "Gabinho": 4.1 }
     };
     /* Bonus fijo de calificación por equipo (se suma a la fórmula a todos sus jugadores). */
     const ZC26_RATING_TEAM_BONUS = { "op7": 1.2 };
     /* Bonus fijo de calificación por jugador (nombre en la plantilla). */
     const ZC26_RATING_PLAYER_BONUS = { "lXlCross": 0.5 };
+    /* Pequeña variación (±0.1 a ±0.3) derivada del nombre del jugador, para que las notas
+       de quienes no tienen estadísticas propias (goles/asistencias/tarjetas) no queden todas
+       idénticas (p.ej. todos 5.7 en el equipo perdedor). Es determinística por nombre, así
+       que no genera un patrón repetido entre jugadores. */
+    function zc26RatingJitter(name) {
+        let h = 0;
+        const s = String(name || "");
+        for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+        const steps = [-0.3, -0.2, -0.1, 0.1, 0.2, 0.3];
+        return steps[h % steps.length];
+    }
     function zc26Rating(ctx, team, st, name) {
         const ov = ZC26_RATING_OVERRIDES[`${ctx.home}|${ctx.away}`];
         if (ov && name != null && ov[name] != null) return Math.max(1, Math.min(10, Math.round((ov[name] + 0.3 * st.a) * 10) / 10));
         const r = ctx.res;
         const won = team === ctx.home ? r.h > r.a : r.a > r.h;
-        const v = 6.0 + (won ? 0.7 : -0.3) + 1.1 * st.star + 0.5 * st.g - 0.4 * st.ta - 1.5 * st.tr + 0.3 * st.a + (ZC26_RATING_TEAM_BONUS[team] || 0) + (ZC26_RATING_PLAYER_BONUS[name] || 0);
+        const v = 6.0 + (won ? 0.7 : -0.3) + 1.1 * st.star + 0.5 * st.g - 0.4 * st.ta - 1.5 * st.tr + 0.3 * st.a + (ZC26_RATING_TEAM_BONUS[team] || 0) + (ZC26_RATING_PLAYER_BONUS[name] || 0) + zc26RatingJitter(name);
         return Math.max(1, Math.min(10, Math.round(v * 10) / 10));
     }
     function zc26RatingCls(v) {
@@ -13654,7 +13759,7 @@
                 ${chips}
             </div>
             <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
-            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}${!isStarter && hasData ? " · Jugó" : ""}</span>
+            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
         </div>`;
     }
     function zc26TimelineHtml(ctx) {
@@ -13697,6 +13802,99 @@
             </div>`).join("")}</div>
         </div>`;
     }
+    // Cronología del partido: INICIO, cada Set ganado (con marcador y Estelar), cambios,
+    // tarjetas y FINAL DEL PARTIDO. Orden por minuto; los cambios sin "min" van primero.
+    function zc26ChronologyHtml(ctx) {
+        if (!ctx.res || ctx.res.wo) return "";
+        const k = `${ctx.home}|${ctx.away}`;
+        const tl = zc26MatchTimeline(k);
+        let hCount = 0, aCount = 0;
+        const goalEvents = tl.goals.map((g, i) => {
+            if (g.team === ctx.home) hCount++; else aCount++;
+            return { kind: "goal", min: g.min, team: g.team, name: g.name, set: i + 1, h: hCount, a: aCount };
+        });
+        const cardEvents = tl.cards.map(c => ({ kind: "card", min: c.min, team: c.team, name: c.name, type: c.type }));
+        const subEvents = ZC26_SUB_PAIR.filter(p => p.m === k)
+            .map(p => ({ kind: "sub", min: p.min != null ? p.min : null, team: p.team, in: p.in, out: p.out }));
+        // Si un cambio y un gol caen en el mismo minuto, el cambio se muestra primero
+        // (el jugador que entra ya está en cancha cuando se gana ese set).
+        const events = subEvents.concat(goalEvents, cardEvents);
+        events.sort((a, b) => (a.min == null ? -1 : a.min) - (b.min == null ? -1 : b.min));
+        const minLabel = m => m == null ? "Antes de iniciar" : `${m}'`;
+        const player = (team, name) => `<div class="zc26cron-player"><img class="zc26cron-badge" src="${zc26Logo(team)}" alt="">
+                <span class="zc26cron-name">${zc26Esc(name)}</span></div>`;
+        const cambioIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none">
+            <path d="M8 20V6M8 6L4 10M8 6l4 4" stroke="#3ecf6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 4v14M16 18l4-4M16 18l-4-4" stroke="#e5484d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+        const ballIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.5 2.5-1.3 4h-4.4l-1.3-4z" fill="#fff" stroke="none"/></svg>`;
+        const clockIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v2"/></svg>`;
+        // Ganador del Set: solo azul/rojo (mismos tonos de la barra de Probabilidad de victoria),
+        // azul para el equipo favorito (mayor probabilidad pre-partido), rojo para el otro.
+        const ZC26_SET_BLUE = "#6ea8fe";
+        const ZC26_SET_RED = "#ef5350";
+        const zc26SetProbs = zc26GetProb(ctx.home, ctx.away);
+        const zc26FavTeam = zc26SetProbs.home >= zc26SetProbs.away ? ctx.home : ctx.away;
+        const teamAccent = t => t === zc26FavTeam ? ZC26_SET_BLUE : ZC26_SET_RED;
+        const rows = events.map(e => {
+            if (e.kind === "goal") {
+                const accent = teamAccent(e.team);
+                return `<div class="zc26cron-item zc26cron-goal">
+                    <div class="zc26cron-goal-banner" style="background:${accent}">
+                        <span class="zc26cron-goal-icon">${ballIcon}</span>
+                        <div class="zc26cron-goal-title">Ganador del Set ${e.set}</div>
+                        <div class="zc26cron-goal-min">${minLabel(e.min)}</div>
+                    </div>
+                    <div class="zc26cron-goal-score" style="background:${accent}26;color:${accent}">
+                        ${zc26Esc(zc26Abbr(ctx.home))} ${e.h} - ${e.a} ${zc26Esc(zc26Abbr(ctx.away))}
+                    </div>
+                    <div class="zc26cron-body">
+                        <div class="zc26cron-block">
+                            <span class="zc26cron-tag" style="color:${accent}">Ganó el set</span>
+                            ${player(e.team, e.team)}
+                        </div>
+                        <div class="zc26cron-goal-star">Estelar: <b>${zc26Esc(e.name)}</b></div>
+                    </div>
+                </div>`;
+            }
+            if (e.kind === "sub") {
+                return `<div class="zc26cron-item">
+                    <div class="zc26cron-head"><span class="zc26cron-icon">${cambioIcon}</span>
+                        <span class="zc26cron-label">Cambio</span>
+                        <span class="zc26cron-min">${minLabel(e.min)}</span></div>
+                    <div class="zc26cron-body">
+                        <div class="zc26cron-block">
+                            <span class="zc26cron-tag zc26cron-tag-in">Entra</span>
+                            ${player(e.team, e.in)}
+                        </div>
+                        <div class="zc26cron-block">
+                            <span class="zc26cron-tag zc26cron-tag-out">Sale</span>
+                            ${player(e.team, e.out)}
+                        </div>
+                    </div>
+                </div>`;
+            }
+            const label = e.type === "tr" ? "Tarjeta roja" : "Tarjeta amarilla";
+            return `<div class="zc26cron-item">
+                <div class="zc26cron-head"><span class="zc26cron-icon"><i class="zc26lu-cardico zc26lu-cardico-${e.type}" style="width:13px;height:18px"></i></span>
+                    <span class="zc26cron-label">${label}</span>
+                    <span class="zc26cron-min">${minLabel(e.min)}</span></div>
+                <div class="zc26cron-body"><div class="zc26cron-block">${player(e.team, e.name)}</div></div>
+            </div>`;
+        }).join("");
+        const clock = zc26MatchClock(ctx);
+        const milestone = (label, time) => `<div class="zc26cron-milestone">
+                <span class="zc26cron-milestone-icon">${clockIcon}</span>
+                <span class="zc26cron-milestone-label">${label}</span>
+                <span class="zc26cron-milestone-time">${time}</span>
+            </div>`;
+        if (!rows && !clock) return "";
+        return `<div class="zc26cron-list">
+            ${clock ? milestone("Inicio", clock.start) : ""}
+            ${rows}
+            ${clock ? milestone("Final del partido", clock.end) : ""}
+        </div>`;
+    }
     const ZC26_ABBR = {
         "Leviatán Esports": "LEV", "Peruanos FC": "PFC", "Quiero KeKe": "QKK", "POS JR": "PJR",
         "GAMBLING FC": "GFC", "KURO ØNIX": "KRO", "SGC": "SGC", "POS": "POS",
@@ -13715,8 +13913,19 @@
             const players = list.filter(m => m[1] !== "coa");
             const coaches = list.filter(m => m[1] === "coa");
             const label = `<div class="zc26lu-team${i === 1 ? " zc26lu-team-bottom" : ""}"><img src="${zc26Logo(team)}" alt=""><span>${zc26Esc(team)}</span></div>`;
-            const body = players.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("")
-                + (coaches.length ? `<div class="zc26lu-break"></div>` + coaches.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("") : "");
+            const playersHtml = players.map(m => {
+                const card = zc26LineupCard(m[0], m[1], team, ctx, isStarterBox);
+                const pair = isStarterBox ? zc26SubPair(ctx, team, m[0]) : null;
+                if (!pair) return card;
+                const inEntry = (ZC26_ROSTERS[team] || []).find(r => r[0] === pair.in);
+                const inCard = zc26LineupCard(pair.in, inEntry ? inEntry[1] : "sup", team, ctx, false);
+                return `<div class="zc26lu-sub-pair">${inCard}${card}</div>`;
+            }).join("");
+            const coachesHtml = coaches.length ? `<div class="zc26lu-break"></div>` + coaches.map(m => zc26LineupCard(m[0], m[1], team, ctx, isStarterBox)).join("") : "";
+            // El coach va detrás del capitán, es decir, del lado de su propio rótulo de equipo:
+            // equipo de arriba (local, i=0) → rótulo arriba → coach arriba, antes de los jugadores.
+            // equipo de abajo (visitante, i=1) → rótulo abajo → coach abajo, después de los jugadores.
+            const body = i === 0 ? coachesHtml + playersHtml : playersHtml + coachesHtml;
             return i === 1 ? `<div class="zc26lu-gap"></div>` + body + label : label + body;
         }).join("");
         if (!parts) return "";
@@ -13746,6 +13955,12 @@
     const ZC26_MATCH_LINEUP = {
         "Baraja de Elite|Sinister Haven": {
             "Sinister Haven": { starters: ["JDxZ", "Isakiu", "Banditoo!"], subs: ["rnowtt"] }
+        },
+        "GTA|Unorthodox": {
+            "GTA": { starters: ["thoniolo", "Adri", "nefi"], subs: ["Gabinho"] }
+        },
+        "Acuñas|OMEN NOCTE": {
+            "OMEN NOCTE": { starters: ["Mokka", "Ovied7", "AdmirerTensai", "R3QU1EMBRUH"], subs: ["Zousa", "DominatorAngel27"] }
         }
     };
     function zc26MatchSplit(roster, team, ctx) {
@@ -13756,7 +13971,7 @@
         const by = n => roster.find(m => m[0] === n);
         const used = new Set(ov.starters.concat(ov.subs));
         return {
-            starters: ov.starters.map(by).filter(Boolean).concat(split.starters.filter(m => m[1] === "coa")),
+            starters: ov.starters.map(by).filter(Boolean),
             subs: ov.subs.map(by).filter(Boolean).concat(split.subs.filter(m => !used.has(m[0])))
         };
     }
@@ -13764,7 +13979,6 @@
         const isLead = r => r === "cap" || r === "lid";
         const players = roster.filter(m => m[1] !== "sup" && m[1] !== "man" && m[1] !== "coa")
             .sort((x, y) => (isLead(y[1]) ? 1 : 0) - (isLead(x[1]) ? 1 : 0));
-        const coaches = roster.filter(m => m[1] === "coa");
         const managers = roster.filter(m => m[1] === "man");
         const originalSubs = roster.filter(m => m[1] === "sup");
         const overflow = players.slice(3).map(m => [m[0], "sup"]);
@@ -13774,7 +13988,7 @@
             arranged = [top[1], top[0], top[2]];
         }
         return {
-            starters: arranged.concat(coaches),
+            starters: arranged,
             subs: overflow.concat(originalSubs, managers)
         };
     }
@@ -13846,6 +14060,9 @@
         if (tab === "alineaciones") {
             return zc26LineupsHtml(ctx);
         }
+        if (tab === "cronologia") {
+            return zc26ChronologyHtml(ctx) || `<div class="zc26mm-more-empty">No hay cambios ni tarjetas registrados en este partido.</div>`;
+        }
         if (tab === "general") {
             const woLine = (ctx.res && ctx.res.wo)
                 ? `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Resultado:</span> <span class="tab-info-value">${zc26Esc(ctx.res.wo)} no se presentó. Derrota 3-0 por incomparecencia (W.O.).</span></div>` : "";
@@ -13853,7 +14070,8 @@
                 <div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>`
                 + zc26GeneralSection("Alineaciones", zc26LineupsHtml(ctx))
                 + zc26GeneralSection("Estadísticas", zc26StatsBlocksHtml(ctx))
-                + zc26GeneralSection("Más partidos", zc26MoreMatchesHtml(ctx));
+                + zc26GeneralSection("Más partidos", zc26MoreMatchesHtml(ctx))
+                + (zc26ChronologyHtml(ctx) ? zc26GeneralSection("Cronología", zc26ChronologyHtml(ctx)) : "");
         }
         return "";
     }
@@ -13874,7 +14092,7 @@
         // Partido con hora: fecha y hora según el país elegido
         const ls = time ? zc26LocalSchedule({ num: parseInt(num, 10), month: month }, time, zc26CountryCode) : null;
         const statusTxt = res ? "Finalizado" : "Próximo";
-        zc26mmCurrentMatch = { home, away, group, res };
+        zc26mmCurrentMatch = { home, away, group, res, day, num, month, time };
         qsStacked = false;
         panel.scrollTop = 0;
         panel.innerHTML = `
