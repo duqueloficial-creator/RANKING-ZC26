@@ -13089,6 +13089,9 @@
        wo = equipo que NO se presentó (incomparecencia). Criterio aplicado: el de la FIFA
        (Código Disciplinario, usado en el Mundial 2026): derrota 3-0 para el ausente. */
     const ZC26_RESULTS = {
+        "Unorthodox|Baraja de Elite":         { h: 3, a: 0, wo: "Baraja de Elite" },
+        "LPE|XBlood":                         { h: 3, a: 0, wo: "XBlood" },
+        "Leviatán Esports|Quiero KeKe":       { h: 1, a: 3 },
         "Leviatán Esports|Peruanos FC":       { h: 3, a: 0 },
         "Rostizados|KURO ØNIX":              { h: 0, a: 3, wo: "Rostizados" },
         "LPE|Phoenix":                        { h: 2, a: 0 },
@@ -13105,6 +13108,8 @@
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
     const ZC26_STAR_PLAYERS = [
+        ["Sxrgio", "Leviatán Esports", "Leviatán Esports|Quiero KeKe"], ["Marg", "Quiero KeKe", "Leviatán Esports|Quiero KeKe"],
+        ["iTheRealMag", "Quiero KeKe", "Leviatán Esports|Quiero KeKe"], ["Doslox", "Quiero KeKe", "Leviatán Esports|Quiero KeKe"],
         ["rnowtt prime", "Sinister Haven", "Baraja de Elite|Sinister Haven"], ["JDxZ", "Sinister Haven", "Baraja de Elite|Sinister Haven"],
         ["infernus", "LPE", "LPE|Phoenix"], ["stevv", "LPE", "LPE|Phoenix"],
         ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["iCross", "Leviatán Esports", "Leviatán Esports|Peruanos FC"], ["Jora", "Leviatán Esports", "Leviatán Esports|Peruanos FC"],
@@ -13122,12 +13127,13 @@
         "rnowtt prime": "rnowtt", "stevv": "Steve", "iCross": "lXlCross", "Jora": "TX JOAR",
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
         "darkzz": "Darkxz", "Smk myst": "smk myst!",
-        "Marron": "Marro9281", "Iconoc": "lcomic",
+        "Marron": "Marro9281", "Iconoc": "lcomic", "Marg": "Mag", "iTheRealMag": "Mag",
         "cesar": "CESAR", "charles": "CharlesTQ"
     };
     /* Minutos exactos (en orden de mapa) para los "Ganador del Set" de la Cronología.
        Si un partido no está aquí, los minutos se generan al azar (fijos por partido). */
     const ZC26_GOAL_MINUTES = {
+        "Leviatán Esports|Quiero KeKe": [15, 50, 85, 110],
         "SYNOX GAMING|Wosu Esport": [17, 73, 101],
         "POS|SGC": [18, 38, 98],
         "GTA|Unorthodox": [14, 107, 121]
@@ -13162,10 +13168,13 @@
     ];
     /* Lesiones ocurridas durante un partido, para mostrarlas en la Cronología. */
     const ZC26_INJURIES = [
+        { m: "Unorthodox|Baraja de Elite", team: "Unorthodox", player: "patch", min: 4 },
         { m: "Quiero KeKe|POS JR", team: "POS JR", player: "TK Carl", min: 56 }
     ];
     /* Jugadores que salen (Sale) durante un partido; el suplente que entra ya se marca solo (Entra). */
     const ZC26_SUB_OUT = [
+        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", player: "lXlCross" },
+        { m: "Leviatán Esports|Quiero KeKe", team: "Quiero KeKe", player: "lcomic" },
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", player: "Mag" },
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "Sanz" },
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "Isakiu" },
@@ -13178,6 +13187,10 @@
     /* min: minuto exacto del cambio. Si no se pone, se asume que pasó antes de iniciar el partido
        (lo más común: el titular no llegó a jugar), y se muestra como "Antes de iniciar". */
     const ZC26_SUB_PAIR = [
+        { m: "Unorthodox|Baraja de Elite", team: "Unorthodox", out: "patch", in: "Miseryoung", min: 5 },
+        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", out: "lXlCross", in: "Sxrgio" },
+        { m: "Leviatán Esports|Quiero KeKe", team: "Quiero KeKe", out: "lcomic", in: "Marro9281", min: 55 },
+        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", out: "Sxrgio", in: "Shark", min: 58 },
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", out: "Mag", in: "Marro9281", min: 7 },
         { m: "GTA|Unorthodox", team: "Unorthodox", out: "robertbv", in: "patch" },
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", out: "Isakiu", in: "rnowtt", min: 63 },
@@ -13607,7 +13620,7 @@
     // Roles: cap = Capitán, lid = Líder, tit = Titular, jug = Jugador,
     //        sup = Suplente, man = Manager, coa = Coach · Jugador
     const ZC26_ROSTERS = {
-        "Leviatán Esports": [["JulioCr36D","cap"],["lXlCross","tit"],["TX JOAR","tit"],["alva210","sup"],["Freddy.jh","sup"],["Nico","sup"]],
+        "Leviatán Esports": [["JulioCr36D","cap"],["lXlCross","tit"],["TX JOAR","tit"],["alva210","sup"],["Freddy.jh","sup"],["Sxrgio","sup"],["Shark","sup"]],
         "Peruanos FC": [["JuegenColette1","cap"],["TiliinInzanoAlex","jug"],["TomiokaTxA","jug"],["Twiceulibrws","jug"]],
         "Quiero KeKe": [["Doslox","cap"],["Mag","jug"],["lcomic","jug"],["Marro9281","sup"]],
         "POS JR": [["TK Carl","cap"],["Mateo","jug"],["Arc/Rafa","jug"],["valli","jug"],["TH Scar","sup"]],
@@ -13699,6 +13712,7 @@
        +1.1 por cada vez Estelar, +0.5 por gol, +0.3 por asistencia, −0.4 por amarilla, −1.5 por roja. */
     /* Calificaciones fijadas a mano ("local|visitante" → jugador → nota); mandan sobre la fórmula. */
     const ZC26_RATING_OVERRIDES = {
+        "Leviatán Esports|Quiero KeKe": { "Shark": 5.5 },
         "Leviatán Esports|Peruanos FC": { "JulioCr36D": 7.8 },
         "Quiero KeKe|POS JR": { "Mateo": 5.3, "TK Carl": 5.9, "Arc/Rafa": 5.7, "Doslox": 7.9, "Mag": 5.0, "Marro9281": 8.1 },
         "GTA|Unorthodox": { "Adri": 6.1, "thoniolo": 6.7, "nefi": 5.9, "Gabinho": 4.1 }
@@ -13818,8 +13832,11 @@
     // Cronología del partido: INICIO, cada Set ganado (con marcador y Estelar), cambios,
     // tarjetas y FINAL DEL PARTIDO. Orden por minuto; los cambios sin "min" van primero.
     function zc26ChronologyHtml(ctx) {
-        if (!ctx.res || ctx.res.wo) return "";
+        if (!ctx.res) return "";
         const k = `${ctx.home}|${ctx.away}`;
+        // En un W.O. normalmente no hay nada que mostrar, salvo que se haya registrado
+        // algún cambio o lesión de los jugadores que sí se presentaron a esperar.
+        if (ctx.res.wo && !ZC26_SUB_PAIR.some(p => p.m === k) && !ZC26_INJURIES.some(p => p.m === k)) return "";
         const tl = zc26MatchTimeline(k);
         let hCount = 0, aCount = 0;
         const goalEvents = tl.goals.map((g, i) => {
