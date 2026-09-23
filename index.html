@@ -9490,7 +9490,6 @@
             <div class="zcc-wrap">
                 <button type="button" class="zcc-btn" id="zc26CountryBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Horario por país" title="Horario por país">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"/></svg>
-                    <img class="zcc-btn-flag" id="zc26CountryBtnFlag" alt="">
                 </button>
                 <div class="zcc-menu" id="zc26CountryMenu" role="listbox" aria-label="País"></div>
             </div>
@@ -13166,7 +13165,12 @@
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "rnowtt", n: 1 },
         { m: "RAISE EARTH|op7", team: "op7", player: "Darkxz", n: 1 },
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "luisitopro123", n: 2 },
-        { m: "POS|SGC", team: "SGC", player: "CharlesTQ", n: 1 }
+        { m: "POS|SGC", team: "SGC", player: "CharlesTQ", n: 1 },
+        { m: "Rostizados|SGC", team: "SGC", player: "Denshol", n: 1 },
+        { m: "Pro Legends|OMEN NOCTE", team: "OMEN NOCTE", player: "AdmirerTensai", n: 1 },
+        { m: "Pro Legends|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 1 },
+        { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", player: "Marro9281", n: 1 },
+        { m: "SYNOX GAMING|Wosu Esport", team: "SYNOX GAMING", player: "romanqq", n: 1 }
     ];
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
     const ZC26_PLAYER_STATUS = [
@@ -13187,7 +13191,8 @@
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", player: "Isakiu" },
         { m: "GTA|Unorthodox", team: "Unorthodox", player: "robertbv" },
         { m: "GTA|Unorthodox", team: "GTA", player: "nefi" },
-        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" }
+        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" },
+        { m: "Rostizados|SGC", team: "Rostizados", player: "Ale's Pet" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -13203,7 +13208,8 @@
         { m: "Baraja de Elite|Sinister Haven", team: "Sinister Haven", out: "Isakiu", in: "rnowtt", min: 63 },
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", out: "Sanz", in: "luisitopro123" },
         { m: "GTA|Unorthodox", team: "GTA", out: "nefi", in: "Gabinho", min: 121 },
-        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "R3QU1EMBRUH", min: 20 }
+        { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "R3QU1EMBRUH", min: 20 },
+        { m: "Rostizados|SGC", team: "Rostizados", out: "Ale's Pet", in: "Santi", min: 94 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
@@ -13319,6 +13325,7 @@
         { code: "MX",  tz: "America/Mexico_City" },
         { code: "BOL", tz: "America/La_Paz" },
         { code: "AR",  tz: "America/Argentina/Buenos_Aires" },
+        { code: "CL",  tz: "America/Santiago" },
         { code: "ES",  tz: "Europe/Madrid" }
     ];
     const ZC26_WEEKDAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -13447,10 +13454,8 @@
     (function () {
         const btn = document.getElementById("zc26CountryBtn");
         const menu = document.getElementById("zc26CountryMenu");
-        const btnFlag = document.getElementById("zc26CountryBtnFlag");
         if (!btn || !menu) return;
         function updateBtn() {
-            if (btnFlag) { btnFlag.src = zc26FlagSrc(zc26CountryCode); btnFlag.alt = FLAGS[zc26CountryCode].name; }
             btn.title = "Horario por país: " + FLAGS[zc26CountryCode].name;
         }
         function renderMenu() {
@@ -13636,7 +13641,7 @@
         "SGC": [["CESAR","cap"],["Denshol","jug"],["CharlesTQ","jug"]],
         "POS": [["PosiLegend966P","cap"],["Gold","jug"],["enjiynn","jug"],["fran","jug"],["PosiSalchi","sup"]],
         "LPE": [["Steve","cap"],["Daniel","jug"],["Gary","jug"]],
-        "Phoenix": [["Amberchu01","cap"],["Trdgx98","jug"],["bititobrawl","jug"],["12skividi","sup"]],
+        "Phoenix": [["Amberchu01","cap"],["Trdgx98","jug"],["bititobrawl","jug"],["12skividi","sup"],["Franger hp","sup"]],
         "BLASTERS": [["Diego","lid"],["shirox","jug"],["vsblees","jug"]],
         "XBlood": [["Relaxx","cap"],["Tsubasa","tit"],["Adrix","tit"],["Ben10","sup"],["SalvaToxic","sup"],["CrazyMan","sup"]],
         "Baraja de Elite": [["Heritage","cap"],["Sukhoi","tit"],["Destroyer","tit"]],
