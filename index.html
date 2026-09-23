@@ -13065,7 +13065,7 @@
             day: "Jueves", num: 24, month: "SEP",
             matches: [
                 { group: "A", home: "Leviatán Esports", away: "POS JR", time: "5:00 p.m." },
-                { group: "B", home: "Rostizados", away: "POS", time: "5:35 p.m." },
+                { group: "B", home: "Rostizados", away: "POS", time: "9:30 p.m." },
                 { group: "C", home: "LPE", away: "BLASTERS", time: "6:10 p.m." },
                 { group: "D", home: "GTA", away: "Baraja de Elite", time: "7:10 p.m." },
                 { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING", time: "8:00 p.m." },
@@ -13077,7 +13077,7 @@
             matches: [
                 { group: "A", home: "Quiero KeKe", away: "Peruanos FC", time: "5:00 p.m." },
                 { group: "B", home: "KURO ØNIX", away: "SGC", time: "5:35 p.m." },
-                { group: "C", home: "Phoenix", away: "XBlood", time: "6:10 p.m." },
+                { group: "C", home: "Phoenix", away: "XBlood", time: "9:45 p.m." },
                 { group: "D", home: "Unorthodox", away: "Sinister Haven", time: "7:10 p.m." },
                 { group: "E", home: "Wosu Esport", away: "op7", time: "8:00 p.m." },
                 { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE", time: "8:35 p.m." }
@@ -13103,7 +13103,9 @@
         "GTA|Unorthodox":                      { h: 0, a: 3 },
         "SYNOX GAMING|Wosu Esport":            { h: 3, a: 0 },
         "Acuñas|OMEN NOCTE":                   { h: 0, a: 3 },
-        "POS|SGC":                             { h: 0, a: 3 }
+        "POS|SGC":                             { h: 0, a: 3 },
+        "Pro Legends|OMEN NOCTE":              { h: 0, a: 3 },
+        "RAISE EARTH|Wosu Esport":             { h: 1, a: 3 }
     };
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
@@ -13119,7 +13121,9 @@
         ["Lie in April!", "Unorthodox", "GTA|Unorthodox"], ["Lie in April!", "Unorthodox", "GTA|Unorthodox"], ["patch", "Unorthodox", "GTA|Unorthodox"],
         ["Deizz", "SYNOX GAMING", "SYNOX GAMING|Wosu Esport"], ["abelldx", "SYNOX GAMING", "SYNOX GAMING|Wosu Esport"], ["romanqq", "SYNOX GAMING", "SYNOX GAMING|Wosu Esport"],
         ["AdmirerTensai", "OMEN NOCTE", "Acuñas|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "Acuñas|OMEN NOCTE"], ["R3QU1EMBRUH", "OMEN NOCTE", "Acuñas|OMEN NOCTE"],
-        ["cesar", "SGC", "POS|SGC"], ["charles", "SGC", "POS|SGC"], ["cesar", "SGC", "POS|SGC"]
+        ["cesar", "SGC", "POS|SGC"], ["charles", "SGC", "POS|SGC"], ["cesar", "SGC", "POS|SGC"],
+        ["mokka", "OMEN NOCTE", "Pro Legends|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "Pro Legends|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "Pro Legends|OMEN NOCTE"],
+        ["F nero", "RAISE EARTH", "RAISE EARTH|Wosu Esport"], ["Blaxxyy", "Wosu Esport", "RAISE EARTH|Wosu Esport"], ["Blaxxyy", "Wosu Esport", "RAISE EARTH|Wosu Esport"], ["Raí", "Wosu Esport", "RAISE EARTH|Wosu Esport"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -13128,7 +13132,7 @@
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
         "darkzz": "Darkxz", "Smk myst": "smk myst!",
         "Marron": "Marro9281", "Iconoc": "lcomic", "Marg": "Mag", "iTheRealMag": "Mag",
-        "cesar": "CESAR", "charles": "CharlesTQ"
+        "cesar": "CESAR", "charles": "CharlesTQ", "mokka": "Mokka"
     };
     /* Minutos exactos (en orden de mapa) para los "Ganador del Set" de la Cronología.
        Si un partido no está aquí, los minutos se generan al azar (fijos por partido). */
@@ -13164,7 +13168,8 @@
     ];
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
     const ZC26_PLAYER_STATUS = [
-        { team: "POS JR", player: "TK Carl", status: "lesion" }
+        { team: "POS JR", player: "TK Carl", status: "lesion" },
+        { team: "Unorthodox", player: "patch", status: "lesion" }
     ];
     /* Lesiones ocurridas durante un partido, para mostrarlas en la Cronología. */
     const ZC26_INJURIES = [
@@ -13712,7 +13717,7 @@
        +1.1 por cada vez Estelar, +0.5 por gol, +0.3 por asistencia, −0.4 por amarilla, −1.5 por roja. */
     /* Calificaciones fijadas a mano ("local|visitante" → jugador → nota); mandan sobre la fórmula. */
     const ZC26_RATING_OVERRIDES = {
-        "Leviatán Esports|Quiero KeKe": { "Shark": 5.5 },
+        "Leviatán Esports|Quiero KeKe": { "Shark": 5.7 },
         "Leviatán Esports|Peruanos FC": { "JulioCr36D": 7.8 },
         "Quiero KeKe|POS JR": { "Mateo": 5.3, "TK Carl": 5.9, "Arc/Rafa": 5.7, "Doslox": 7.9, "Mag": 5.0, "Marro9281": 8.1 },
         "GTA|Unorthodox": { "Adri": 6.1, "thoniolo": 6.7, "nefi": 5.9, "Gabinho": 4.1 }
@@ -13765,11 +13770,11 @@
         }
         const st = zc26PlayerStats(ctx, team, name);
         const hasData = st.star || st.ta || st.tr || st.g || st.a;
-        const participated = isStarter || hasData;
+        const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name)); // suplente que entró a jugar
+        const participated = isStarter || hasData || cameOn;
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
         const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}">${inner}${n > 1 ? n : ""}</span>`;
         const sym = (cls, name) => `<span class="zc26lu-chip zc26lu-chip-sym ${cls}">${zc26Sym(name)}</span>`;
-        const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name)); // suplente que entró a jugar
         const wentOut = zc26IsSubbedOut(ctx, team, name); // titular que salió
         const chips = (st.star ? chip("zc26lu-chip-star", ZC26_ICON_STAR, st.star) : "")
             + (cameOn ? sym("zc26lu-chip-in", "entra")
@@ -14204,13 +14209,14 @@
         const isStarter = card.dataset.zc26Starter === "1";
         const st = zc26PlayerStats(ctx, team, name);
         const hasData = st.star || st.ta || st.tr || st.g || st.a;
-        const participated = isStarter || hasData;
+        const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name));
+        const participated = isStarter || hasData || cameOn;
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
         const won = team === ctx.home ? ctx.res.h > ctx.res.a : ctx.res.a > ctx.res.h;
         const rows = [
-            ["Rol", ZC26_ROLE_LABEL[role] + (!isStarter && hasData ? " · Jugó" : "")],
+            ["Rol", ZC26_ROLE_LABEL[role] + (cameOn ? " · Jugó" : "")],
             ["Resultado del equipo", participated ? (won ? "Ganó" : "Perdió") : "No jugó"],
-            ...(!isStarter && hasData ? [["Sustitución", "Entra"]] : (zc26IsSubbedOut(ctx, team, name) ? [["Sustitución", "Sale"]] : [])),
+            ...(cameOn ? [["Sustitución", "Entra"]] : (zc26IsSubbedOut(ctx, team, name) ? [["Sustitución", "Sale"]] : [])),
             [`<span class="zc26qs-lbl">Estelar${ZC26_ICON_STAR}</span>`, st.star],
             ["Set Marcado", st.star + st.g],
             [`<span class="zc26qs-lbl">Asistencias<img src="icon_stats%20(2).png" alt=""></span>`, st.a],
@@ -14543,6 +14549,7 @@
     });
     /* ZC26 · Estadísticas → Jugador Estelar y Asistencias: ranking de cada uno */
     (function () {
+        const WCSTAT_TOP_N = 10;
         function renderRank(listId, entries) {
             const list = document.getElementById(listId);
             if (!list) return;
@@ -14557,7 +14564,7 @@
                 return;
             }
             let lastN = null, rank = 0;
-            list.innerHTML = rows.map((r, i) => {
+            const rowHtml = (r, i) => {
                 if (r.n !== lastN) { rank = i + 1; lastN = r.n; }
                 return `<div class="wcstat-row">
                 <span class="wcstat-rank">${rank}</span>
@@ -14565,7 +14572,24 @@
                 <span class="wcstat-who"><span class="wcstat-name">${zc26Esc(r.player)}</span><span class="wcstat-team">${zc26Esc(r.team)}</span></span>
                 <span class="wcstat-val">${r.n}</span>
             </div>`;
-            }).join("");
+            };
+            const visibleHtml = rows.slice(0, WCSTAT_TOP_N).map((r, i) => rowHtml(r, i)).join("");
+            const extraRows = rows.slice(WCSTAT_TOP_N);
+            const extraHtml = extraRows.map((r, i) => rowHtml(r, i + WCSTAT_TOP_N)).join("");
+            list.innerHTML = visibleHtml
+                + (extraRows.length ? `<div class="wcstat-extra" style="display:none">${extraHtml}</div>
+                <button type="button" class="mvs-more-btn wcstat-more-btn" data-wcstat-more>Mostrar todo</button>` : "");
+            if (extraRows.length) {
+                const extraWrap = list.querySelector(".wcstat-extra");
+                const btn = list.querySelector("[data-wcstat-more]");
+                let expanded = false;
+                btn.addEventListener("click", () => {
+                    zcPlaySound("click");
+                    expanded = !expanded;
+                    extraWrap.style.display = expanded ? "" : "none";
+                    btn.textContent = expanded ? "Mostrar menos" : "Mostrar todo";
+                });
+            }
         }
         renderRank("wcstatEstelarList", ZC26_STAR_PLAYERS.map(([player, team]) => [player, team, 1]));
         renderRank("wcstatAsistList", ZC26_ASSISTS.map(a => [a.player, a.team, a.n]));
