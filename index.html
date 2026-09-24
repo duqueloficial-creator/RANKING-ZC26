@@ -13053,7 +13053,7 @@
             day: "Miércoles", num: 23, month: "SEP",
             matches: [
                 { group: "A", home: "POS JR", away: "Peruanos FC", time: "5:45 p.m." },
-                { group: "B", home: "KURO ØNIX", away: "POS", time: "6:25 p.m." },
+                { group: "B", home: "KURO ØNIX", away: "POS", time: "8:30 p.m." },
                 { group: "C", home: "Phoenix", away: "BLASTERS", time: "7:10 p.m." },
                 { group: "D", home: "GTA", away: "Sinister Haven", time: "7:45 p.m." },
                 { group: "E", home: "SYNOX GAMING", away: "op7", time: "8:35 p.m." },
@@ -13192,7 +13192,8 @@
         { m: "GTA|Unorthodox", team: "Unorthodox", player: "robertbv" },
         { m: "GTA|Unorthodox", team: "GTA", player: "nefi" },
         { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" },
-        { m: "Rostizados|SGC", team: "Rostizados", player: "Ale's Pet" }
+        { m: "Rostizados|SGC", team: "Rostizados", player: "Ale's Pet" },
+        { m: "Phoenix|BLASTERS", team: "Phoenix", player: "Amberchu01" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -13209,7 +13210,8 @@
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", out: "Sanz", in: "luisitopro123" },
         { m: "GTA|Unorthodox", team: "GTA", out: "nefi", in: "Gabinho", min: 121 },
         { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "R3QU1EMBRUH", min: 20 },
-        { m: "Rostizados|SGC", team: "Rostizados", out: "Ale's Pet", in: "Santi", min: 94 }
+        { m: "Rostizados|SGC", team: "Rostizados", out: "Ale's Pet", in: "Santi", min: 94 },
+        { m: "Phoenix|BLASTERS", team: "Phoenix", out: "Amberchu01", in: "Sweetie Fox", min: 0 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
@@ -13641,7 +13643,7 @@
         "SGC": [["CESAR","cap"],["Denshol","jug"],["CharlesTQ","jug"]],
         "POS": [["PosiLegend966P","cap"],["Gold","jug"],["enjiynn","jug"],["fran","jug"],["PosiSalchi","sup"]],
         "LPE": [["Steve","cap"],["Daniel","jug"],["Gary","jug"]],
-        "Phoenix": [["Amberchu01","cap"],["Trdgx98","jug"],["bititobrawl","jug"],["12skividi","sup"],["Franger hp","sup"]],
+        "Phoenix": [["Amberchu01","cap"],["Trdgx98","jug"],["bititobrawl","jug"],["12skividi","sup"],["Sweetie Fox","sup"]],
         "BLASTERS": [["Diego","lid"],["shirox","jug"],["vsblees","jug"]],
         "XBlood": [["Relaxx","cap"],["Tsubasa","tit"],["Adrix","tit"],["Ben10","sup"],["SalvaToxic","sup"],["CrazyMan","sup"]],
         "Baraja de Elite": [["Heritage","cap"],["Sukhoi","tit"],["Destroyer","tit"]],
@@ -13766,6 +13768,16 @@
         const played = ctx && ctx.res && !ctx.res.wo && role !== "coa" && role !== "man";
         const status = (role !== "coa" && role !== "man") ? zc26PlayerStatus(team, name) : "";
         if (!played) {
+            // Partido sin resultado: se muestran solo los iconos de cambio (sube / baja), sin datos.
+            const preSwap = (ctx && !ctx.res && role !== "coa" && role !== "man")
+                ? (zc26IsSubbedIn(ctx, team, name) ? "entra" : (zc26IsSubbedOut(ctx, team, name) ? "sale" : "")) : "";
+            if (preSwap) {
+                return `<div class="zc26lu-card">
+            <span class="zc26lu-avwrap-plain"><img class="zc26lu-avatar" src="palyer_sep.png" alt=""><span class="zc26lu-chip zc26lu-chip-sym zc26lu-chip-in">${zc26Sym(preSwap)}</span></span>
+            <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
+            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
+        </div>`;
+            }
             const avatar = status
                 ? `<span class="zc26lu-avwrap-plain"><img class="zc26lu-avatar" src="palyer_sep.png" alt=""><span class="zc26lu-chip zc26lu-chip-sym zc26lu-chip-in">${zc26Sym(status)}</span></span>`
                 : `<img class="zc26lu-avatar" src="palyer_sep.png" alt="">`;
@@ -13844,27 +13856,30 @@
     // Cronología del partido: INICIO, cada Set ganado (con marcador y Estelar), cambios,
     // tarjetas y FINAL DEL PARTIDO. Orden por minuto; los cambios sin "min" van primero.
     function zc26ChronologyHtml(ctx) {
-        if (!ctx.res) return "";
         const k = `${ctx.home}|${ctx.away}`;
+        // Partido sin resultado (aún no se juega): solo se muestran los cambios hechos antes de iniciar.
+        const isPre = !ctx.res;
+        const preStart = p => p.m === k && (p.min == null || p.min === 0);
+        if (isPre && !ZC26_SUB_PAIR.some(preStart)) return "";
         // En un W.O. normalmente no hay nada que mostrar, salvo que se haya registrado
         // algún cambio o lesión de los jugadores que sí se presentaron a esperar.
-        if (ctx.res.wo && !ZC26_SUB_PAIR.some(p => p.m === k) && !ZC26_INJURIES.some(p => p.m === k)) return "";
+        if (!isPre && ctx.res.wo && !ZC26_SUB_PAIR.some(p => p.m === k) && !ZC26_INJURIES.some(p => p.m === k)) return "";
         const tl = zc26MatchTimeline(k);
         let hCount = 0, aCount = 0;
-        const goalEvents = tl.goals.map((g, i) => {
+        const goalEvents = (isPre ? [] : tl.goals).map((g, i) => {
             if (g.team === ctx.home) hCount++; else aCount++;
             return { kind: "goal", min: g.min, team: g.team, name: g.name, set: i + 1, h: hCount, a: aCount };
         });
-        const cardEvents = tl.cards.map(c => ({ kind: "card", min: c.min, team: c.team, name: c.name, type: c.type }));
-        const subEvents = ZC26_SUB_PAIR.filter(p => p.m === k)
+        const cardEvents = (isPre ? [] : tl.cards).map(c => ({ kind: "card", min: c.min, team: c.team, name: c.name, type: c.type }));
+        const subEvents = ZC26_SUB_PAIR.filter(p => isPre ? preStart(p) : p.m === k)
             .map(p => ({ kind: "sub", min: p.min != null ? p.min : null, team: p.team, in: p.in, out: p.out }));
-        const injuryEvents = ZC26_INJURIES.filter(p => p.m === k)
+        const injuryEvents = (isPre ? [] : ZC26_INJURIES).filter(p => p.m === k)
             .map(p => ({ kind: "lesion", min: p.min != null ? p.min : null, team: p.team, name: p.player }));
         // Si un cambio y un gol caen en el mismo minuto, el cambio se muestra primero
         // (el jugador que entra ya está en cancha cuando se gana ese set).
         const events = subEvents.concat(goalEvents, cardEvents, injuryEvents);
         events.sort((a, b) => (a.min == null ? -1 : a.min) - (b.min == null ? -1 : b.min));
-        const minLabel = m => m == null ? "Antes de iniciar" : `${m}'`;
+        const minLabel = m => m == null ? "Antes de iniciar" : (m === 0 ? "0' · Antes de iniciar" : `${m}'`);
         const player = (team, name) => `<div class="zc26cron-player"><img class="zc26cron-badge" src="${zc26Logo(team)}" alt="">
                 <span class="zc26cron-name">${zc26Esc(name)}</span></div>`;
         const cambioIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none">
@@ -13934,7 +13949,7 @@
                 <div class="zc26cron-body"><div class="zc26cron-block">${player(e.team, e.name)}</div></div>
             </div>`;
         }).join("");
-        const clock = zc26MatchClock(ctx);
+        const clock = isPre ? null : zc26MatchClock(ctx);
         const milestone = (label, time) => `<div class="zc26cron-milestone">
                 <span class="zc26cron-milestone-icon">${clockIcon}</span>
                 <span class="zc26cron-milestone-label">${label}</span>
