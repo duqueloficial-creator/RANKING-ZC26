@@ -2209,22 +2209,6 @@
             text-transform: none;
             white-space: nowrap;
         }
-        .zcfx-countdown {
-            font-size: 0.5rem;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            color: #ffb020;
-            background: rgba(255,176,32,0.12);
-            border: 1px solid rgba(255,176,32,0.35);
-            padding: 2px 6px;
-            border-radius: 6px;
-            margin-top: 2px;
-            white-space: nowrap;
-            font-variant-numeric: tabular-nums;
-        }
-        .zcfx-countdown:empty {
-            display: none;
-        }
         .zcfx-date-num.zcfx-date-num-sm {
             font-size: 0.7rem;
             font-weight: 700;
@@ -2809,6 +2793,100 @@
         /* La ✕ va pegada a la esquina superior derecha, sin ocupar una fila propia */
         #zc26MatchPanel > .info-close { position: absolute; top: 0; right: 2px; z-index: 5; }
         #zc26MatchPanel > .info-close .info-close-x { padding: 6px 8px; }
+        /* Cuenta regresiva del partido: esquina superior izquierda, un poco más adentro
+           y más abajo (no pegada del todo a la esquina), simétrica a la ✕ */
+        .zc26mm-countdown {
+            position: absolute;
+            top: 6px;
+            left: 9px;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            color: #9aa0a8;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+            transform: translate(0, 0) scale(1);
+            transition: border-color 0.4s ease, background 0.4s ease, color 0.4s ease, opacity 0.5s ease,
+                        padding 0.6s cubic-bezier(0.22, 1, 0.36, 1), gap 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            animation: zc26CdBadgeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            /* Antes de calcular la hora es un cuadrado (mismo padding en todos los lados,
+               sin separación con el texto porque el texto todavía pesa 0) */
+            padding: 6px;
+            gap: 0;
+        }
+        /* Ya calculada la hora: se transforma a la píldora final con el texto al lado */
+        .zc26mm-countdown.zc26mm-countdown-ready {
+            padding: 6px 9px;
+            gap: 5px;
+        }
+        @keyframes zc26CdBadgeIn {
+            0% { opacity: 0; transform: translateY(-4px) scale(0.92); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        /* Toque en el cronómetro: solo feedback visual, no hace nada */
+        .zc26mm-countdown.zc26mm-countdown-tap { animation: zc26CdTap 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes zc26CdTap {
+            0% { transform: scale(1); }
+            35% { transform: scale(0.92); }
+            100% { transform: scale(1); }
+        }
+        .zc26mm-countdown-icon {
+            display: flex;
+            flex-shrink: 0;
+            animation: zc26CdIconPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            animation-delay: 0.05s;
+        }
+        @keyframes zc26CdIconPop {
+            0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+            60% { opacity: 1; transform: scale(1.15) rotate(4deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+        .zc26mm-countdown-icon svg { width: 12px; height: 12px; display: block; }
+        /* El número tarda un poco en calcularse: el cuadro se expande hacia la
+           derecha (como una cortina que se abre) mientras la hora se desliza
+           dentro de ese espacio que se va revelando */
+        .zc26mm-countdown-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            vertical-align: middle;
+            width: 0;
+            opacity: 0;
+            transform: translateX(6px);
+            transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.4s ease,
+                        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zc26mm-countdown-text.zc26mm-countdown-text-in {
+            width: var(--zc26-cd-tw, auto);
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Al llegar a cero: se pone en el centro del panel con una animación y luego
+           desaparece para siempre */
+        .zc26mm-countdown-done {
+            color: #ffffff;
+            border-color: #ffffff;
+            background: rgba(255,255,255,0.14);
+            animation: zc26CountdownPop 0.9s ease forwards;
+        }
+        .zc26mm-countdown-fade {
+            opacity: 0;
+        }
+        @keyframes zc26CountdownPop {
+            0%   { transform: translate(0, 0) scale(1); }
+            55%  { transform: translate(var(--zc26cd-dx, 0px), var(--zc26cd-dy, 0px)) scale(1.3); }
+            100% { transform: translate(var(--zc26cd-dx, 0px), var(--zc26cd-dy, 0px)) scale(1.1); }
+        }
         .zc26mm-title { font-size: 0.85rem; }
         .zc26mm-title-sub { font-size: 0.7rem; }
         .zc26mm-date { font-size: 0.6rem; margin-top: 3px; }
@@ -13085,7 +13163,7 @@
             matches: [
                 { group: "A", home: "Leviatán Esports", away: "POS JR", time: "7:25 p.m." },
                 { group: "B", home: "Rostizados", away: "POS", time: "5:40 p.m." },
-                { group: "C", home: "LPE", away: "BLASTERS", time: "8:00 p.m." },
+                { group: "C", home: "LPE", away: "BLASTERS", time: "8:45 p.m." },
                 { group: "D", home: "GTA", away: "Baraja de Elite", time: "7:10 p.m." },
                 { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING", time: "8:00 p.m." },
                 { group: "F", home: "Acuñas", away: "Pro Legends", time: "5:35 p.m." }
@@ -13345,6 +13423,8 @@
         </div>`;
     }
     const ZC26_MONTH_NUM = { ENE: "01", FEB: "02", MAR: "03", ABR: "04", MAY: "05", JUN: "06", JUL: "07", AGO: "08", SEP: "09", OCT: "10", NOV: "11", DIC: "12" };
+    // Mismo ícono de reloj que se usa en "Cronología" (Inicio / Final del partido)
+    const ZC26_CLOCK_ICON = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v2"/></svg>`;
     /* ZC26 · Horarios por país. Las horas de ZC26_FIXTURES están en hora de Perú (UTC-5, hora base).
        La conversión usa las zonas horarias reales (Intl), así España pasa sola de +7 h a +6 h al acabar el horario de verano. */
     const ZC26_BASE_UTC_OFFSET = -5;
@@ -13360,10 +13440,40 @@
     ];
     const ZC26_WEEKDAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     const ZC26_MONTHS_LC = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    // Zonas horarias reales (incluye variantes por ciudad) que se mapean a cada país disponible,
+    // para poder detectar automáticamente el país del visitante según la zona horaria de su navegador/dispositivo.
+    const ZC26_TZ_TO_COUNTRY = {
+        "America/Lima": "PE",
+        "America/Bogota": "CO",
+        "America/Tegucigalpa": "HON",
+        "America/Mexico_City": "MX", "America/Cancun": "MX", "America/Merida": "MX",
+        "America/Monterrey": "MX", "America/Matamoros": "MX", "America/Mazatlan": "MX",
+        "America/Chihuahua": "MX", "America/Ojinaga": "MX", "America/Hermosillo": "MX",
+        "America/Tijuana": "MX", "America/Bahia_Banderas": "MX",
+        "America/La_Paz": "BOL",
+        "America/Argentina/Buenos_Aires": "AR", "America/Buenos_Aires": "AR",
+        "America/Argentina/Cordoba": "AR", "America/Argentina/Salta": "AR",
+        "America/Argentina/Jujuy": "AR", "America/Argentina/Tucuman": "AR",
+        "America/Argentina/Catamarca": "AR", "America/Argentina/La_Rioja": "AR",
+        "America/Argentina/San_Juan": "AR", "America/Argentina/Mendoza": "AR",
+        "America/Argentina/San_Luis": "AR", "America/Argentina/Rio_Gallegos": "AR",
+        "America/Argentina/Ushuaia": "AR",
+        "America/Santiago": "CL", "America/Punta_Arenas": "CL",
+        "Europe/Madrid": "ES", "Africa/Ceuta": "ES", "Atlantic/Canary": "ES"
+    };
     let zc26CountryCode = "PE";
     try {
         const saved = localStorage.getItem("zc26Country");
-        if (saved && ZC26_COUNTRIES.some(c => c.code === saved)) zc26CountryCode = saved;
+        if (saved && ZC26_COUNTRIES.some(c => c.code === saved)) {
+            zc26CountryCode = saved;
+        } else {
+            // Sin preferencia guardada todavía: se detecta el país según la zona horaria
+            // del dispositivo y se preselecciona solo. Si no coincide con ninguna de las
+            // disponibles, se queda con "PE" (comportamiento de siempre).
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const detected = ZC26_TZ_TO_COUNTRY[tz];
+            if (detected) zc26CountryCode = detected;
+        }
     } catch (e) {}
     function zc26FlagSrc(code) { return "assets/flags/" + FLAGS[code].file; }
     function zc26Pad2(n) { return String(n).padStart(2, "0"); }
@@ -13448,12 +13558,9 @@
         }
         if (m && m.time) {
             const ls = zc26LocalSchedule(day, m.time, zc26CountryCode);
-            const startTs = zc26MatchStartTimestamp(day, m.time);
-            const cd = startTs ? ` data-zc26-countdown="${startTs}"` : "";
             if (ls) return `<div class="zcfx-date">
             <span class="zcfx-date-num zcfx-date-num-sm">${ls.date}</span>
             <span class="zcfx-date-month zcfx-date-time">${ls.time}</span>
-            <span class="zcfx-countdown"${cd}></span>
         </div>`;
         }
         return `<div class="zcfx-date">
@@ -13498,28 +13605,78 @@
     /* Cuenta regresiva de los partidos que aún no empiezan: se calcula siempre desde
        la hora real del dispositivo contra el instante absoluto guardado en cada tarjeta
        (data-zc26-countdown), así que no hace falta guardar nada aparte: al recargar el
-       html el cronómetro sigue mostrando el tiempo correcto. Cuando llega a cero, se
-       vacía el elemento (y con :empty en CSS, desaparece) para ese partido. */
+       html el cronómetro sigue mostrando el tiempo correcto. Cuando llega a cero, hace
+       una animación (se pone en blanco y se va al centro del panel) y desaparece para
+       siempre. */
+    function zc26FinishCountdown(el) {
+        if (el.dataset.zc26Finishing) return;
+        el.dataset.zc26Finishing = "1";
+        el.removeAttribute("data-zc26-countdown");
+        const textEl = el.querySelector(".zc26mm-countdown-text");
+        if (textEl) textEl.textContent = "¡Empezó!";
+        const panel = el.closest(".info-panel");
+        if (panel) {
+            const pr = panel.getBoundingClientRect();
+            const er = el.getBoundingClientRect();
+            const dx = (pr.left + pr.width / 2) - (er.left + er.width / 2);
+            const dy = (pr.top + pr.height / 2) - (er.top + er.height / 2);
+            el.style.setProperty("--zc26cd-dx", dx + "px");
+            el.style.setProperty("--zc26cd-dy", dy + "px");
+        }
+        requestAnimationFrame(() => el.classList.add("zc26mm-countdown-done"));
+        setTimeout(() => {
+            el.classList.add("zc26mm-countdown-fade");
+            setTimeout(() => el.remove(), 550);
+        }, 950);
+    }
     function zc26UpdateCountdowns() {
         const now = Date.now();
         document.querySelectorAll("[data-zc26-countdown]").forEach(el => {
             const target = parseInt(el.getAttribute("data-zc26-countdown"), 10);
-            if (!target || isNaN(target)) { el.textContent = ""; el.removeAttribute("data-zc26-countdown"); return; }
+            if (!target || isNaN(target)) { zc26FinishCountdown(el); return; }
             const diff = target - now;
-            if (diff <= 0) {
-                el.textContent = "";
-                el.removeAttribute("data-zc26-countdown");
-                return;
-            }
+            if (diff <= 0) { zc26FinishCountdown(el); return; }
+            const textEl = el.querySelector(".zc26mm-countdown-text") || el;
             const d = Math.floor(diff / 86400000);
             const h = Math.floor((diff % 86400000) / 3600000);
             const mnt = Math.floor((diff % 3600000) / 60000);
             const s = Math.floor((diff % 60000) / 1000);
-            el.textContent = `${d}d ${h}h ${mnt}m ${s}s`;
+            const parts = [];
+            let started = false;
+            if (d > 0) { parts.push(d + "d"); started = true; }
+            if (started || h > 0) { parts.push(h + "h"); started = true; }
+            if (started || mnt > 0) { parts.push(mnt + "m"); started = true; }
+            parts.push(s + "s");
+            const newText = parts.join(" ");
+            if (!el.dataset.zc26CdFilled) {
+                el.dataset.zc26CdFilled = "1";
+                textEl.textContent = newText;
+                const tw = textEl.scrollWidth; // ancho real del texto, aunque esté colapsado a 0
+                textEl.style.setProperty("--zc26-cd-tw", tw + "px");
+                requestAnimationFrame(() => {
+                    el.classList.add("zc26mm-countdown-ready");
+                    textEl.classList.add("zc26mm-countdown-text-in");
+                });
+            } else {
+                textEl.textContent = newText;
+            }
         });
     }
     zc26UpdateCountdowns();
     setInterval(zc26UpdateCountdowns, 1000);
+
+    /* Tocar el cronómetro no hace nada, pero da una pequeña respuesta visual (rebote) */
+    document.addEventListener("click", (e) => {
+        const badge = e.target.closest(".zc26mm-countdown");
+        if (!badge) return;
+        e.stopPropagation();
+        badge.classList.remove("zc26mm-countdown-tap");
+        void badge.offsetWidth; // reinicia la animación si se toca varias veces seguidas
+        badge.classList.add("zc26mm-countdown-tap");
+    });
+    document.addEventListener("animationend", (e) => {
+        if (e.animationName === "zc26CdTap") e.target.classList.remove("zc26mm-countdown-tap");
+    });
 
     /* ZC26 · Botón de país: cambia el horario de los partidos al del país elegido */
     (function () {
@@ -13956,7 +14113,7 @@
             <path d="M16 4v14M16 18l4-4M16 18l-4-4" stroke="#e5484d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`;
         const ballIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.5 2.5-1.3 4h-4.4l-1.3-4z" fill="#fff" stroke="none"/></svg>`;
-        const clockIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v2"/></svg>`;
+        const clockIcon = ZC26_CLOCK_ICON;
         // Ganador del Set: solo azul/rojo (mismos tonos de la barra de Probabilidad de victoria),
         // azul para el equipo favorito (mayor probabilidad pre-partido), rojo para el otro.
         const ZC26_SET_BLUE = "#6ea8fe";
@@ -14228,11 +14385,14 @@
         // Partido con hora: fecha y hora según el país elegido
         const ls = time ? zc26LocalSchedule({ num: parseInt(num, 10), month: month }, time, zc26CountryCode) : null;
         const statusTxt = res ? "Finalizado" : "Próximo";
+        const startTsRaw = (!res && time) ? zc26MatchStartTimestamp({ num: parseInt(num, 10), month: month }, time) : null;
+        const startTs = (startTsRaw && startTsRaw > Date.now()) ? startTsRaw : null;
         zc26mmCurrentMatch = { home, away, group, res, day, num, month, time };
         qsStacked = false;
         panel.scrollTop = 0;
         panel.innerHTML = `
             <div class="info-close"><span class="info-close-x">✕</span></div>
+            ${startTs ? `<span class="zc26mm-countdown" data-zc26-countdown="${startTs}"><span class="zc26mm-countdown-icon">${ZC26_CLOCK_ICON}</span><span class="zc26mm-countdown-text"></span></span>` : ""}
             <div class="zc26mm-head">
                 <div>
                     <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">Fase de grupos</span></div>
