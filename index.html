@@ -13105,7 +13105,13 @@
         "POS|SGC":                             { h: 0, a: 3 },
         "Pro Legends|OMEN NOCTE":              { h: 0, a: 3 },
         "RAISE EARTH|Wosu Esport":             { h: 1, a: 3 },
-        "Rostizados|SGC":                      { h: 1, a: 3 }
+        "Rostizados|SGC":                      { h: 1, a: 3 },
+        "GTA|Sinister Haven":                  { h: 3, a: 0 },
+        "KURO ØNIX|POS":                       { h: 1, a: 3 },
+        "Phoenix|BLASTERS":                    { h: 0, a: 0, wo: "ambos" },
+        "POS JR|Peruanos FC":                  { h: 0, a: 0, wo: "ambos" },
+        "SYNOX GAMING|op7":                    { h: 2, a: 2 },
+        "Acuñas|Egresados Del Conalep":        { h: 0, a: 3 }
     };
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
@@ -13124,7 +13130,11 @@
         ["cesar", "SGC", "POS|SGC"], ["charles", "SGC", "POS|SGC"], ["cesar", "SGC", "POS|SGC"],
         ["mokka", "OMEN NOCTE", "Pro Legends|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "Pro Legends|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "Pro Legends|OMEN NOCTE"],
         ["F nero", "RAISE EARTH", "RAISE EARTH|Wosu Esport"], ["Blaxxyy", "Wosu Esport", "RAISE EARTH|Wosu Esport"], ["Blaxxyy", "Wosu Esport", "RAISE EARTH|Wosu Esport"], ["Raí", "Wosu Esport", "RAISE EARTH|Wosu Esport"],
-        ["Santi", "Rostizados", "Rostizados|SGC"], ["CESAR", "SGC", "Rostizados|SGC"], ["CESAR", "SGC", "Rostizados|SGC"], ["CharlesTQ", "SGC", "Rostizados|SGC"]
+        ["Santi", "Rostizados", "Rostizados|SGC"], ["CESAR", "SGC", "Rostizados|SGC"], ["CESAR", "SGC", "Rostizados|SGC"], ["CharlesTQ", "SGC", "Rostizados|SGC"],
+        ["gabino", "GTA", "GTA|Sinister Haven"], ["Reniolo", "GTA", "GTA|Sinister Haven"], ["gabino", "GTA", "GTA|Sinister Haven"],
+        ["Gold", "POS", "KURO ØNIX|POS"], ["Gold", "POS", "KURO ØNIX|POS"], ["sjoacedbamypasa", "KURO ØNIX", "KURO ØNIX|POS"], ["enjoy n", "POS", "KURO ØNIX|POS"],
+        ["Darkxz", "op7", "SYNOX GAMING|op7"], ["Ricky", "op7", "SYNOX GAMING|op7"], ["Deizz", "SYNOX GAMING", "SYNOX GAMING|op7"], ["Deizz", "SYNOX GAMING", "SYNOX GAMING|op7"],
+        ["Sanz", "Egresados Del Conalep", "Acuñas|Egresados Del Conalep"], ["Sanz", "Egresados Del Conalep", "Acuñas|Egresados Del Conalep"], ["new_faxtory", "Egresados Del Conalep", "Acuñas|Egresados Del Conalep"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -13133,7 +13143,7 @@
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
         "darkzz": "Darkxz", "Smk myst": "smk myst!",
         "Marron": "Marro9281", "Iconoc": "lcomic", "Marg": "Mag", "iTheRealMag": "Mag",
-        "cesar": "CESAR", "charles": "CharlesTQ", "mokka": "Mokka"
+        "cesar": "CESAR", "charles": "CharlesTQ", "mokka": "Mokka", "gabino": "Gabinho", "enjoy n": "enjiynn"
     };
     /* Minutos exactos (en orden de mapa) para los "Ganador del Set" de la Cronología.
        Si un partido no está aquí, los minutos se generan al azar (fijos por partido). */
@@ -13192,8 +13202,7 @@
         { m: "GTA|Unorthodox", team: "Unorthodox", player: "robertbv" },
         { m: "GTA|Unorthodox", team: "GTA", player: "nefi" },
         { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" },
-        { m: "Rostizados|SGC", team: "Rostizados", player: "Ale's Pet" },
-        { m: "Phoenix|BLASTERS", team: "Phoenix", player: "Amberchu01" }
+        { m: "Rostizados|SGC", team: "Rostizados", player: "Ale's Pet" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -13210,8 +13219,7 @@
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", out: "Sanz", in: "luisitopro123" },
         { m: "GTA|Unorthodox", team: "GTA", out: "nefi", in: "Gabinho", min: 121 },
         { m: "Acuñas|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "R3QU1EMBRUH", min: 20 },
-        { m: "Rostizados|SGC", team: "Rostizados", out: "Ale's Pet", in: "Santi", min: 94 },
-        { m: "Phoenix|BLASTERS", team: "Phoenix", out: "Amberchu01", in: "Sweetie Fox", min: 0 }
+        { m: "Rostizados|SGC", team: "Rostizados", out: "Ale's Pet", in: "Santi", min: 94 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
@@ -14132,7 +14140,7 @@
         }
         if (tab === "general") {
             const woLine = (ctx.res && ctx.res.wo)
-                ? `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Resultado:</span> <span class="tab-info-value">${zc26Esc(ctx.res.wo)} no se presentó. Derrota 3-0 por incomparecencia (W.O.).</span></div>` : "";
+                ? `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Resultado:</span> <span class="tab-info-value">${ctx.res.wo === "ambos" ? zc26Esc(ctx.home) + " y " + zc26Esc(ctx.away) + " no se presentaron. Empate 0-0 por incomparecencia de ambos equipos (W.O.)." : zc26Esc(ctx.res.wo) + " no se presentó. Derrota 3-0 por incomparecencia (W.O.)."}</span></div>` : "";
             return woLine + `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 SEPTIEMBRE", manejado por el equipo del soporte</span></div>
                 <div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>`
                 + zc26GeneralSection("Alineaciones", zc26LineupsHtml(ctx))
