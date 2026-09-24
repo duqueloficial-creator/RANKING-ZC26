@@ -2209,6 +2209,22 @@
             text-transform: none;
             white-space: nowrap;
         }
+        .zcfx-countdown {
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            color: #ffb020;
+            background: rgba(255,176,32,0.12);
+            border: 1px solid rgba(255,176,32,0.35);
+            padding: 2px 6px;
+            border-radius: 6px;
+            margin-top: 2px;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+        .zcfx-countdown:empty {
+            display: none;
+        }
         .zcfx-date-num.zcfx-date-num-sm {
             font-size: 0.7rem;
             font-weight: 700;
@@ -2377,9 +2393,10 @@
             border: 1px solid transparent;
             border-radius: 9px;
             color: #9a9fa8;
+            background: rgba(255,255,255,0.05);
             transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
         }
-        #zc26 #zc26GroupFilter .am-filter-btn:hover { color: #ffffff; background: rgba(255,255,255,0.05); }
+        #zc26 #zc26GroupFilter .am-filter-btn:hover { color: #ffffff; background: rgba(255,255,255,0.09); }
         #zc26 #zc26GroupFilter .am-filter-btn:active { transform: scale(0.95); }
         #zc26 #zc26GroupFilter .am-filter-btn.active {
             color: #ffffff;
@@ -2461,6 +2478,9 @@
             padding: 5px 10px;
             border-radius: 8px;
             letter-spacing: 0.3px;
+            color: #c9cdd3;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .zc26mm-scoreboard {
             margin: 4px 0;
@@ -2785,7 +2805,7 @@
         }
 
         /* --- Tamaños reducidos del modal de partido --- */
-        .zc26mm-head { margin-bottom: 12px; padding-top: 8px; }
+        .zc26mm-head { margin-bottom: 12px; padding-top: 22px; }
         /* La ✕ va pegada a la esquina superior derecha, sin ocupar una fila propia */
         #zc26MatchPanel > .info-close { position: absolute; top: 0; right: 2px; z-index: 5; }
         #zc26MatchPanel > .info-close .info-close-x { padding: 6px 8px; }
@@ -13064,7 +13084,7 @@
             day: "Jueves", num: 24, month: "SEP",
             matches: [
                 { group: "A", home: "Leviatán Esports", away: "POS JR", time: "7:25 p.m." },
-                { group: "B", home: "Rostizados", away: "POS", time: "9:30 p.m." },
+                { group: "B", home: "Rostizados", away: "POS", time: "5:40 p.m." },
                 { group: "C", home: "LPE", away: "BLASTERS", time: "8:00 p.m." },
                 { group: "D", home: "GTA", away: "Baraja de Elite", time: "7:10 p.m." },
                 { group: "E", home: "RAISE EARTH", away: "SYNOX GAMING", time: "8:00 p.m." },
@@ -13371,6 +13391,18 @@
         const wd = new Date(Date.UTC(y, M - 1, d)).getUTCDay();
         return { date: zc26Pad2(d) + "/" + zc26Pad2(M), time: zc26Fmt12(hh, mm), weekday: ZC26_WEEKDAYS[wd], d: d, monthName: ZC26_MONTHS_LC[M - 1], hh: hh, mm: mm, dayShift: Math.round((Date.UTC(y, M - 1, d) - Date.UTC(2026, mon - 1, day.num)) / 86400000) };
     }
+    // Instante real (timestamp UTC en ms) en el que arranca un partido, calculado desde la
+    // hora base de Perú de ZC26_FIXTURES. Es un valor absoluto: no depende del país elegido
+    // para mostrar la hora, ni de nada guardado en el navegador, así que sigue siendo correcto
+    // aunque se recargue la página o se reinicie el sitio.
+    function zc26MatchStartTimestamp(day, timeStr) {
+        const t = /^(\d{1,2}):(\d{2})\s*([ap])/i.exec(timeStr || "");
+        if (!t) return null;
+        const mon = parseInt(ZC26_MONTH_NUM[day.month] || "9", 10);
+        const h = (parseInt(t[1], 10) % 12) + (t[3].toLowerCase() === "p" ? 12 : 0);
+        const min = parseInt(t[2], 10);
+        return Date.UTC(2026, mon - 1, day.num, h - ZC26_BASE_UTC_OFFSET, min);
+    }
     // Diferencia en horas respecto a Perú (referencia: 12:00 p.m. del 21/09).
     function zc26CountryDiffLabel(code) {
         if (code === "PE") return "Hora base";
@@ -13416,9 +13448,12 @@
         }
         if (m && m.time) {
             const ls = zc26LocalSchedule(day, m.time, zc26CountryCode);
+            const startTs = zc26MatchStartTimestamp(day, m.time);
+            const cd = startTs ? ` data-zc26-countdown="${startTs}"` : "";
             if (ls) return `<div class="zcfx-date">
             <span class="zcfx-date-num zcfx-date-num-sm">${ls.date}</span>
             <span class="zcfx-date-month zcfx-date-time">${ls.time}</span>
+            <span class="zcfx-countdown"${cd}></span>
         </div>`;
         }
         return `<div class="zcfx-date">
@@ -13459,6 +13494,32 @@
         `).join("");
     }
     renderZc26Fixtures();
+
+    /* Cuenta regresiva de los partidos que aún no empiezan: se calcula siempre desde
+       la hora real del dispositivo contra el instante absoluto guardado en cada tarjeta
+       (data-zc26-countdown), así que no hace falta guardar nada aparte: al recargar el
+       html el cronómetro sigue mostrando el tiempo correcto. Cuando llega a cero, se
+       vacía el elemento (y con :empty en CSS, desaparece) para ese partido. */
+    function zc26UpdateCountdowns() {
+        const now = Date.now();
+        document.querySelectorAll("[data-zc26-countdown]").forEach(el => {
+            const target = parseInt(el.getAttribute("data-zc26-countdown"), 10);
+            if (!target || isNaN(target)) { el.textContent = ""; el.removeAttribute("data-zc26-countdown"); return; }
+            const diff = target - now;
+            if (diff <= 0) {
+                el.textContent = "";
+                el.removeAttribute("data-zc26-countdown");
+                return;
+            }
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const mnt = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            el.textContent = `${d}d ${h}h ${mnt}m ${s}s`;
+        });
+    }
+    zc26UpdateCountdowns();
+    setInterval(zc26UpdateCountdowns, 1000);
 
     /* ZC26 · Botón de país: cambia el horario de los partidos al del país elegido */
     (function () {
@@ -14179,7 +14240,7 @@
                 </div>
                 <div class="zc26mm-tags">
                     <span class="zc26mm-tag">Grupo ${group}</span>
-                    <span class="zc26mm-status" style="color:${accent};background:${accent}22;border:1px solid ${accent}55">${statusTxt}</span>
+                    <span class="zc26mm-status">${statusTxt}</span>
                 </div>
             </div>
             <div class="scoreboard zc26mm-scoreboard">
