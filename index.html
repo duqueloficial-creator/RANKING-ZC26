@@ -13129,7 +13129,7 @@
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
     const ZC26_STAR_ALIAS = {
-        "rnowtt prime": "rnowtt", "stevv": "Steve", "iCross": "lXlCross", "Jora": "TX JOAR",
+        "rnowtt prime": "rnowtt", "stevv": "Steve", "iCross": "Cross", "Jora": "TX JOAR",
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
         "darkzz": "Darkxz", "Smk myst": "smk myst!",
         "Marron": "Marro9281", "Iconoc": "lcomic", "Marg": "Mag", "iTheRealMag": "Mag",
@@ -13184,7 +13184,7 @@
     ];
     /* Jugadores que salen (Sale) durante un partido; el suplente que entra ya se marca solo (Entra). */
     const ZC26_SUB_OUT = [
-        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", player: "lXlCross" },
+        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", player: "Cross" },
         { m: "Leviatán Esports|Quiero KeKe", team: "Quiero KeKe", player: "lcomic" },
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", player: "Mag" },
         { m: "Pro Legends|Egresados Del Conalep", team: "Egresados Del Conalep", player: "Sanz" },
@@ -13201,7 +13201,7 @@
        (lo más común: el titular no llegó a jugar), y se muestra como "Antes de iniciar". */
     const ZC26_SUB_PAIR = [
         { m: "Unorthodox|Baraja de Elite", team: "Unorthodox", out: "patch", in: "Miseryoung", min: 5 },
-        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", out: "lXlCross", in: "Sxrgio" },
+        { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", out: "Cross", in: "Sxrgio" },
         { m: "Leviatán Esports|Quiero KeKe", team: "Quiero KeKe", out: "lcomic", in: "Marro9281", min: 55 },
         { m: "Leviatán Esports|Quiero KeKe", team: "Leviatán Esports", out: "Sxrgio", in: "Shark", min: 58 },
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", out: "Mag", in: "Marro9281", min: 7 },
@@ -13634,7 +13634,7 @@
     // Roles: cap = Capitán, lid = Líder, tit = Titular, jug = Jugador,
     //        sup = Suplente, man = Manager, coa = Coach · Jugador
     const ZC26_ROSTERS = {
-        "Leviatán Esports": [["JulioCr36D","cap"],["lXlCross","tit"],["TX JOAR","tit"],["alva210","sup"],["Freddy.jh","sup"],["Sxrgio","sup"],["Shark","sup"]],
+        "Leviatán Esports": [["JulioCr36D","cap"],["Cross","tit"],["TX JOAR","tit"],["alva210","sup"],["Freddy.jh","sup"],["Sxrgio","sup"],["Shark","sup"]],
         "Peruanos FC": [["JuegenColette1","cap"],["TiliinInzanoAlex","jug"],["TomiokaTxA","jug"],["Twiceulibrws","jug"]],
         "Quiero KeKe": [["Doslox","cap"],["Mag","jug"],["lcomic","jug"],["Marro9281","sup"]],
         "POS JR": [["TK Carl","cap"],["Mateo","jug"],["Arc/Rafa","jug"],["valli","jug"],["TH Scar","sup"]],
@@ -13651,7 +13651,7 @@
         "Unorthodox": [["robertbv","cap"],["Lie in April!","jug"],["Miseryoung","jug"],["patch","sup"]],
         "GTA": [["Adri","cap"],["thoniolo","jug"],["Gabinho","jug"],["nefi","jug"]],
         "RAISE EARTH": [["F nero","cap"],["kikyy","jug"],["Hacent","jug"],["Hagnes","sup"],["PatitoAtlas","sup"],["JEAN","sup"],["Tsukuyo Amane","sup"]],
-        "op7": [["Naori","man"],["Ricky","cap"],["Darkxz","jug"],["smk myst!","jug"],["Sasori037","coa"]],
+        "op7": [["Naori","man"],["Ricky","cap"],["Darkxz","jug"],["smk myst!","jug"],["Sasori xd","sup"],["CrazzyMan","sup"],["Sasori037","coa"]],
         "SYNOX GAMING": [["Ghost","coa"],["abelldx","cap"],["Deizz","tit"],["romanqq","tit"],["angeliuki","tit"],["Rickylove","sup"]],
         "Wosu Esport": [["Blaxxyy","cap"],["Jhxfwxy","tit"],["Ninferum","tit"],["Selavi","sup"]],
         "Pro Legends": [["OwnerOnYT","cap"],["EL_CHINO.504","jug"],["Claustin","jug"]],
@@ -13734,7 +13734,7 @@
     /* Bonus fijo de calificación por equipo (se suma a la fórmula a todos sus jugadores). */
     const ZC26_RATING_TEAM_BONUS = { "op7": 1.2 };
     /* Bonus fijo de calificación por jugador (nombre en la plantilla). */
-    const ZC26_RATING_PLAYER_BONUS = { "lXlCross": 0.5 };
+    const ZC26_RATING_PLAYER_BONUS = { "Cross": 0.5 };
     /* Pequeña variación (±0.1 a ±0.3) derivada del nombre del jugador, para que las notas
        de quienes no tienen estadísticas propias (goles/asistencias/tarjetas) no queden todas
        idénticas (p.ej. todos 5.7 en el equipo perdedor). Es determinística por nombre, así
