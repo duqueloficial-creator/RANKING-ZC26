@@ -2058,6 +2058,14 @@
             flex-direction: column;
             gap: 22px;
         }
+        .zcfx-phase-divider {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #6c7280;
+            text-align: center;
+        }
         .zcfx-day {
             display: flex;
             flex-direction: column;
@@ -2310,6 +2318,7 @@
         }
         .zcfx-card { cursor: pointer; transition: border-color 0.15s ease, transform 0.15s ease; }
         .zcfx-card:active { transform: scale(0.98); }
+        .zcfx-card-highlight { border-color: rgba(255,255,255,0.22); }
         #zc26 .zc-search-wrap { margin-top: 12px; margin-bottom: 10px; }
         #zc26 .am-filter-group { margin-bottom: 14px; justify-content: center; }
         /* ZC26 · Partidos: búsqueda con botón borrar + filtros de grupo */
@@ -3262,6 +3271,17 @@
             background: #4a80f5;
             z-index: 1;
         }
+        /* Barra celeste (más clara) a la izquierda: mejores terceros que también clasifican. */
+        .zcgrp-row-quali-third .zcgrp-sticky::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #8ec7ff;
+            z-index: 1;
+        }
         /* Columna fija a la izquierda: N° + logo + nombre (más espacio para los equipos) */
         .zcgrp-sticky {
             position: sticky;
@@ -3492,6 +3512,141 @@
             padding: 40px 16px;
             border: 1px dashed rgba(255,255,255,0.12);
             border-radius: 14px;
+        }
+        /* ===================== ZC26 · Bracket de la fase de eliminación directa ===================== */
+        .zcbracket-outer {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            margin-top: 14px;
+            padding-bottom: 6px;
+        }
+        .zcbracket-outer::-webkit-scrollbar { display: none; }
+        .zcbracket {
+            --zcbr-gap: 28px;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            width: max-content;
+            min-width: 100%;
+            margin: 0 auto;
+            padding: 4px 14px 10px 2px;
+            box-sizing: border-box;
+        }
+        .zcbracket-col {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            width: 248px;
+            position: relative;
+            z-index: 2;
+        }
+        .zcbracket-col + .zcbracket-col { margin-left: var(--zcbr-gap); }
+        .zcbracket-col-title {
+            text-align: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #9aa0a6;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            padding: 5px 0;
+            margin-bottom: 16px;
+        }
+        .zcbracket-slot { position: relative; }
+        .zcbracket-match {
+            background: linear-gradient(135deg, #14161c 0%, #0c0d11 100%);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 6px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            overflow: hidden;
+        }
+        .zcbracket-match[data-zcbr-home]:not([data-zcbr-home=""])[data-zcbr-away]:not([data-zcbr-away=""]) {
+            cursor: pointer;
+        }
+        .zcbracket-match-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.54rem;
+            color: #6f757c;
+            letter-spacing: 0.2px;
+            padding-bottom: 3px;
+            margin-bottom: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .zcbracket-status {
+            font-size: 0.5rem;
+            font-weight: 700;
+            color: #cfd3d8;
+            background: rgba(255,255,255,0.08);
+            padding: 1px 6px;
+            border-radius: 3px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .zcbracket-status-fin { color: #17181a; background: #7fd858; }
+        .zcbracket-team {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-width: 0;
+        }
+        .zcbracket-team-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            transition: opacity 180ms ease-out;
+        }
+        .zcbracket-team-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .zcbracket-team-name {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #e9e9eb;
+            white-space: normal;
+            line-height: 1.18;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1 1 auto;
+            min-width: 0;
+            transition: opacity 180ms ease-out;
+        }
+        .zcbracket-team-score {
+            margin-left: auto;
+            padding-left: 8px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .zcbracket-team.is-winner .zcbracket-team-name { color: #fff; }
+        .zcbracket-team.is-winner .zcbracket-team-score { color: #ffd257; }
+        .zcbracket-team.is-loser { opacity: 0.55; }
+        .zcbracket-team.is-tbd .zcbracket-team-name { color: #4c5157; font-style: italic; }
+        .zcbracket-team.is-tbd .zcbracket-team-logo { background: rgba(255,255,255,0.03); }
+        .zcbracket-lines { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+        .zcbl-h { position: absolute; height: 0; border-top: 1.5px solid #6f757c; }
+        .zcbl-v { position: absolute; width: 0; border-left: 1.5px solid #6f757c; }
+        .zcbl-h.zcbl-dashed, .zcbl-v.zcbl-dashed { border-style: dashed; }
+        .zcbracket-note {
+            text-align: center;
+            font-size: 0.66rem;
+            color: #6f757c;
+            line-height: 1.5;
+            padding: 14px 4px 2px;
         }
         .zcgrp-legend {
             background: none;
@@ -9425,6 +9580,7 @@
         </div>
         <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#f97316"><span class="zcg-txt">Octavos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="A" style="--gc:#22c55e"><span class="zcg-txt"><span class="zcg-pre">Group </span>A</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="B" style="--gc:#3b82f6"><span class="zcg-txt"><span class="zcg-pre">Group </span>B</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="C" style="--gc:#eab308"><span class="zcg-txt"><span class="zcg-pre">Group </span>C</span></button>
@@ -9506,10 +9662,10 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
                 </button>
             </div>
-            <div class="zcgrp-empty-state">
-                La fase de eliminación directa todavía no está disponible.<br>
-                Se habilitará automáticamente al terminar la fase de grupos, con los cruces de cada llave.
+            <div class="zcbracket-outer" id="zcbracketOuter">
+                <div class="zcbracket" id="zcbracket"></div>
             </div>
+            <div class="zcbracket-note">Los resultados y cruces se completan automáticamente conforme avanza la fase de eliminación directa.</div>
         </div>
         <div class="section-updated">La clasificación se actualizará conforme se disputen los encuentros</div>
     </div>
@@ -13594,6 +13750,25 @@
                 { group: "E", home: "Wosu Esport", away: "op7", time: "8:00 p.m." },
                 { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE", time: "8:35 p.m." }
             ]
+        },
+        {
+            day: "Domingo", num: 27, month: "SEP",
+            phaseDivider: "Fase de eliminación directa",
+            matches: [
+                { label: "Octavos de final", home: "Leviatán Esports", away: "Egresados Del Conalep", time: "7:30 p.m." },
+                { label: "Octavos de final", home: "Phoenix", away: "POS JR", time: "8:15 p.m." },
+                { label: "Octavos de final", home: "LPE", away: "Acuñas", time: "9:00 p.m." },
+                { label: "Octavos de final", home: "OMEN NOCTE", away: "KURO ØNIX", time: "9:45 p.m." }
+            ]
+        },
+        {
+            day: "Lunes", num: 28, month: "SEP",
+            matches: [
+                { label: "Octavos de final", home: "BLASTERS", away: "op7", time: "5:00 p.m." },
+                { label: "Octavos de final", home: "GTA", away: "RAISE EARTH", time: "5:45 p.m." },
+                { label: "Octavos de final", home: "SYNOX GAMING", away: "SGC", time: "6:30 p.m." },
+                { label: "Octavos de final", home: "Unorthodox", away: "Quiero KeKe", time: "7:15 p.m." }
+            ]
         }
     ];
     /* ZC26 · Resultados de la fase de grupos.
@@ -13798,6 +13973,242 @@
         return ZC26_SUB_PAIR.some(e => e.m === k && e.team === team && e.in === name);
     }
     function zc26GetResult(home, away) { return ZC26_RESULTS[`${home}|${away}`] || null; }
+
+    /* ===================== ZC26 · Bracket de la fase de eliminación directa =====================
+       Cruce de Octavos ya definido. Cuando se juegue un partido de esta fase, se agrega su
+       resultado en ZC26_KO_RESULTS con la MISMA clave "local|visitante" que usa ZC26_RESULTS,
+       y el bracket completo (Cuartos, Semifinal, Final y 3er puesto) se recalcula solo:
+       arrastra ganadores/perdedores ronda por ronda hasta donde haya resultados cargados. */
+    const ZC26_KO_R16 = [
+        { home: "Leviatán Esports", away: "Egresados Del Conalep" },
+        { home: "Phoenix", away: "POS JR" },
+        { home: "LPE", away: "Acuñas" },
+        { home: "OMEN NOCTE", away: "KURO ØNIX" },
+        { home: "BLASTERS", away: "op7" },
+        { home: "GTA", away: "RAISE EARTH" },
+        { home: "SYNOX GAMING", away: "SGC" },
+        { home: "Unorthodox", away: "Quiero KeKe" }
+    ];
+    const ZC26_KO_RESULTS = {
+        // "Equipo A|Equipo B": { h: 3, a: 1 }
+    };
+    function zc26KoResult(home, away) {
+        if (!home || !away) return null;
+        return ZC26_KO_RESULTS[`${home}|${away}`] || null;
+    }
+    function zc26KoWinner(home, away) {
+        const r = zc26KoResult(home, away);
+        if (!r) return null;
+        return r.h > r.a ? home : away;
+    }
+    function zc26KoLoser(home, away) {
+        const r = zc26KoResult(home, away);
+        if (!r) return null;
+        return r.h > r.a ? away : home;
+    }
+    // Arma cada ronda siguiente a partir de los ganadores de la ronda anterior (null = aún no definido).
+    function zc26ComputeBracket() {
+        const r16 = ZC26_KO_R16.map(m => [m.home, m.away]);
+        const qf = [];
+        for (let i = 0; i < 4; i++) {
+            const a = r16[i * 2], b = r16[i * 2 + 1];
+            qf.push([zc26KoWinner(a[0], a[1]), zc26KoWinner(b[0], b[1])]);
+        }
+        const sf = [];
+        for (let i = 0; i < 2; i++) {
+            const a = qf[i * 2], b = qf[i * 2 + 1];
+            sf.push([zc26KoWinner(a[0], a[1]), zc26KoWinner(b[0], b[1])]);
+        }
+        const final = [zc26KoWinner(sf[0][0], sf[0][1]), zc26KoWinner(sf[1][0], sf[1][1])];
+        const third = [zc26KoLoser(sf[0][0], sf[0][1]), zc26KoLoser(sf[1][0], sf[1][1])];
+        return { r16, qf, sf, final, third };
+    }
+    function zc26KoMatchHtml(home, away, opts) {
+        opts = opts || {};
+        const res = (home && away) ? zc26KoResult(home, away) : null;
+        const hasTeams = !!(home || away);
+        let homeCls = "", awayCls = "";
+        let homeScore = "", awayScore = "";
+        if (res) {
+            homeCls = res.h > res.a ? "is-winner" : "is-loser";
+            awayCls = res.a > res.h ? "is-winner" : "is-loser";
+            homeScore = `<span class="zcbracket-team-score">${res.h}</span>`;
+            awayScore = `<span class="zcbracket-team-score">${res.a}</span>`;
+        }
+        const statusTxt = res ? "Fin" : "Próximo";
+        const statusCls = res ? "zcbracket-status-fin" : "";
+        const meta = (hasTeams || opts.forceMeta)
+            ? `<div class="zcbracket-match-meta"><span>${opts.dateLabel || "Fecha por confirmar"}</span><span class="zcbracket-status ${statusCls}">${statusTxt}</span></div>`
+            : "";
+        return `<div class="zcbracket-match" data-zcbr-home="${zc26Esc(home || "")}" data-zcbr-away="${zc26Esc(away || "")}">
+            ${meta}
+            ${home ? `<div class="zcbracket-team ${homeCls}" data-zcbr-team="${zc26Esc(home)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(home)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(home)}</span>${homeScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
+            ${away ? `<div class="zcbracket-team ${awayCls}" data-zcbr-team="${zc26Esc(away)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(away)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(away)}</span>${awayScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
+        </div>`;
+    }
+    function zc26RenderBracket() {
+        const bracket = document.getElementById("zcbracket");
+        if (!bracket) return;
+        bracket.innerHTML = "";
+        const data = zc26ComputeBracket();
+
+        function makeCol(title, extraClass) {
+            const c = document.createElement("div");
+            c.className = "zcbracket-col" + (extraClass ? " " + extraClass : "");
+            c.innerHTML = `<div class="zcbracket-col-title">${title}</div>`;
+            return c;
+        }
+        function makeSlot(html) {
+            const s = document.createElement("div");
+            s.className = "zcbracket-slot";
+            s.innerHTML = html;
+            return s;
+        }
+
+        const colR16 = makeCol("Octavos");
+        data.r16.forEach((m, i) => {
+            const s = makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: i < 4 ? "27/09" : "28/09", forceMeta: true }));
+            s.style.marginBottom = (i < data.r16.length - 1 ? "14px" : "0");
+            colR16.appendChild(s);
+        });
+        bracket.appendChild(colR16);
+
+        const colQF = makeCol("Cuartos");
+        data.qf.forEach(m => colQF.appendChild(makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: "Cuartos", forceMeta: true }))));
+        bracket.appendChild(colQF);
+
+        const colSF = makeCol("Semifinal");
+        data.sf.forEach(m => colSF.appendChild(makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: "Semifinal", forceMeta: true }))));
+        bracket.appendChild(colSF);
+
+        const colF = makeCol("Final");
+        const finalSlot = makeSlot(zc26KoMatchHtml(data.final[0], data.final[1], { dateLabel: "Gran final", forceMeta: true }));
+        const thirdSlot = makeSlot(zc26KoMatchHtml(data.third[0], data.third[1], { dateLabel: "3er puesto", forceMeta: true }));
+        colF.appendChild(finalSlot);
+        colF.appendChild(thirdSlot);
+        bracket.appendChild(colF);
+
+        // ---- Alinea cada ronda con su alimentador SUPERIOR (no el punto medio): esto hace que
+        //      el bracket "suba" como una escalera, terminando con la Final arriba del todo ----
+        function centerOf(el, relativeTo) {
+            const r = el.getBoundingClientRect();
+            const base = relativeTo.getBoundingClientRect();
+            return Math.round((r.top + r.bottom) / 2 - base.top);
+        }
+        function setTopMargin(slotEl, targetCenter, prevBottom) {
+            const h = Math.round(slotEl.querySelector(".zcbracket-match").getBoundingClientRect().height);
+            const desiredTop = targetCenter - h / 2;
+            const margin = Math.max(0, Math.round(desiredTop - prevBottom));
+            slotEl.style.marginTop = margin + "px";
+            return desiredTop + h;
+        }
+        function layoutRound(prevSlots, curSlots) {
+            // Arranca desde la posición NATURAL del primer slot (justo debajo del título
+            // de la columna), no desde 0 — si no, todas las cajas quedan corridas hacia
+            // abajo por la altura del título y los conectores terminan en el lugar equivocado.
+            let prevBottom = curSlots[0].getBoundingClientRect().top - bracket.getBoundingClientRect().top;
+            for (let i = 0; i < curSlots.length; i++) {
+                const a = prevSlots[i * 2];
+                const b = prevSlots[i * 2 + 1];
+                // Centrado en el punto medio de AMBOS alimentadores (no solo el primero),
+                // para que el tronco compartido de los conectores llegue justo al centro
+                // de la caja siguiente, en vez de a un lado.
+                let targetCenter;
+                if (a && b) targetCenter = (centerOf(a, bracket) + centerOf(b, bracket)) / 2;
+                else if (a) targetCenter = centerOf(a, bracket);
+                else if (b) targetCenter = centerOf(b, bracket);
+                else targetCenter = prevBottom;
+                prevBottom = setTopMargin(curSlots[i], targetCenter, prevBottom);
+            }
+        }
+
+        const r16Slots = Array.from(colR16.querySelectorAll(".zcbracket-slot"));
+        const qfSlots = Array.from(colQF.querySelectorAll(".zcbracket-slot"));
+        const sfSlots = Array.from(colSF.querySelectorAll(".zcbracket-slot"));
+
+        layoutRound(r16Slots, qfSlots);
+        layoutRound(qfSlots, sfSlots);
+        (function () {
+            const targetCenter = sfSlots[1]
+                ? (centerOf(sfSlots[0], bracket) + centerOf(sfSlots[1], bracket)) / 2
+                : centerOf(sfSlots[0], bracket);
+            const h = finalSlot.querySelector(".zcbracket-match").getBoundingClientRect().height;
+            const naturalTop = finalSlot.getBoundingClientRect().top - bracket.getBoundingClientRect().top;
+            finalSlot.style.marginTop = Math.max(0, (targetCenter - h / 2) - naturalTop) + "px";
+            thirdSlot.style.marginTop = "36px";
+        })();
+
+        // ---- Dibuja las líneas conectoras entre rondas ----
+        // Conector clásico de bracket: cada alimentador saca un tramo corto y recto
+        // hasta un tronco vertical compartido, y desde ese tronco sale un único tramo
+        // hacia la caja siguiente (que ahora está centrada exactamente en el punto
+        // medio de ambos alimentadores, así que ese tramo entra derecho, sin desvíos).
+        function drawLines(prevSlots, curSlots, container, dashed) {
+            const gap = 28;
+            const baseRect = container.getBoundingClientRect();
+            curSlots.forEach((target, i) => {
+                const a = prevSlots[i * 2];
+                const b = prevSlots[i * 2 + 1];
+                const sources = [a, b].filter(Boolean);
+                if (!sources.length) return;
+                const tRect = target.getBoundingClientRect();
+                const ty = Math.round((tRect.top + tRect.bottom) / 2 - baseRect.top);
+                const x2 = Math.round(tRect.left - baseRect.left);
+                const xmid = Math.round(x2 - gap / 2);
+                if (sources.length === 1) {
+                    const sRect = sources[0].getBoundingClientRect();
+                    const sy = Math.round((sRect.top + sRect.bottom) / 2 - baseRect.top);
+                    const x1 = Math.round(sRect.right - baseRect.left);
+                    addH(container, x1, x2, sy, dashed);
+                    return;
+                }
+                const rectA = a.getBoundingClientRect();
+                const rectB = b.getBoundingClientRect();
+                const syA = Math.round((rectA.top + rectA.bottom) / 2 - baseRect.top);
+                const syB = Math.round((rectB.top + rectB.bottom) / 2 - baseRect.top);
+                const x1 = Math.round(Math.max(rectA.right, rectB.right) - baseRect.left);
+                addH(container, x1, xmid, syA, dashed);
+                addH(container, x1, xmid, syB, dashed);
+                addV(container, xmid, Math.min(syA, syB), Math.max(syA, syB), dashed);
+                addH(container, xmid, x2, ty, dashed);
+            });
+        }
+        function addH(container, x1, x2, y, dashed) {
+            const d = document.createElement("div");
+            d.className = "zcbl-h" + (dashed ? " zcbl-dashed" : "");
+            d.style.left = Math.min(x1, x2) + "px";
+            d.style.width = Math.abs(x2 - x1) + "px";
+            d.style.top = y + "px";
+            container.appendChild(d);
+        }
+        function addV(container, x, y1, y2, dashed) {
+            const d = document.createElement("div");
+            d.className = "zcbl-v" + (dashed ? " zcbl-dashed" : "");
+            d.style.left = x + "px";
+            d.style.top = y1 + "px";
+            d.style.height = (y2 - y1) + "px";
+            container.appendChild(d);
+        }
+
+        const linesLayer = document.createElement("div");
+        linesLayer.className = "zcbracket-lines";
+        bracket.style.position = "relative";
+        bracket.appendChild(linesLayer);
+
+        drawLines(r16Slots, qfSlots, linesLayer);
+        drawLines(qfSlots, sfSlots, linesLayer);
+        drawLines(sfSlots, [finalSlot], linesLayer);
+
+        // Permite recalcular las líneas conectoras cuando el efecto de scroll comprime las cajas
+        bracket._zcbrRedrawLines = function () {
+            linesLayer.innerHTML = "";
+            drawLines(r16Slots, qfSlots, linesLayer);
+            drawLines(qfSlots, sfSlots, linesLayer);
+            drawLines(sfSlots, [finalSlot], linesLayer);
+        };
+
+        return { colR16, colQF, colSF, colF };
+    }
     /* Cronología del partido (como en "Último partido importa"): cada set ganado cuenta como "Gol"
        del Estelar de ese mapa, y las tarjetas de los reportes. Los minutos son aleatorios entre 1 y 120
        (duración del torneo), fijos por partido (semilla), en orden de mapa para los goles. */
@@ -14032,6 +14443,7 @@
         const wrap = document.getElementById("zc26FixturesList");
         if (!wrap) return;
         wrap.innerHTML = ZC26_FIXTURES.map(day => `
+            ${day.phaseDivider ? `<div class="zcfx-phase-divider">${day.phaseDivider}</div>` : ''}
             <div class="zcfx-day">
                 <div class="zcfx-day-head">
                     <span class="zcfx-day-name">${day.day}</span>
@@ -14039,8 +14451,8 @@
                 </div>
                 <div class="zcfx-list">
                     ${day.matches.map(m => { const r = zc26GetResult(m.home, m.away); return `
-                        <div class="zcfx-card" data-zc26-match data-group="${m.group}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}" data-time="${m.time || ''}">
-                            <span class="zcfx-group-badge">Grupo ${m.group}</span>
+                        <div class="zcfx-card" data-zc26-match data-group="${m.group || ''}" data-label="${m.label || ''}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}" data-time="${m.time || ''}">
+                            ${(m.label || m.group) ? `<span class="zcfx-group-badge">${m.label || ('Grupo ' + m.group)}</span>` : ''}
                             <div class="zcfx-teams">
                                 <div class="zcfx-team-row${zc26RowCls(r, "home")}">
                                     <span class="zcfx-team-logo"><img src="${zc26Logo(m.home)}" alt="${m.home}"></span>
@@ -14255,7 +14667,17 @@
         "Pro Legends|Acuñas": [46, 11, 43],
         "Egresados Del Conalep|OMEN NOCTE": [43, 12, 45],
         "Egresados Del Conalep|Acuñas": [56, 16, 28],
-        "OMEN NOCTE|Acuñas": [48, 14, 38]
+        "OMEN NOCTE|Acuñas": [48, 14, 38],
+
+        // Fase de eliminación directa · Octavos de final
+        "Leviatán Esports|Egresados Del Conalep": [52, 6, 42],
+        "Phoenix|POS JR": [55, 8, 37],
+        "LPE|Acuñas": [60, 7, 33],
+        "OMEN NOCTE|KURO ØNIX": [49, 24, 27],
+        "BLASTERS|op7": [27, 9, 64],
+        "GTA|RAISE EARTH": [68, 6, 26],
+        "SYNOX GAMING|SGC": [47, 9, 44],
+        "Unorthodox|Quiero KeKe": [69, 8, 23]
     };
     function zc26GetProb(teamHome, teamAway) {
         const direct = ZC26_PROBS[`${teamHome}|${teamAway}`];
@@ -14993,10 +15415,12 @@
             let dayHasVisible = false;
             dayEl.querySelectorAll(".zcfx-card").forEach(card => {
                 const group = card.dataset.group || "";
+                const label = card.dataset.label || "";
                 const home = searchNorm(card.dataset.home || "");
                 const away = searchNorm(card.dataset.away || "");
                 const dayName = searchNorm(card.dataset.day || "");
-                const matchesGroup = activeGroup === "all" || group === activeGroup;
+                const matchesGroup = activeGroup === "all"
+                    || (activeGroup === "OCTAVOS" ? label === "Octavos de final" : group === activeGroup);
                 const matchesSearch = !searchVal
                     || home.includes(searchVal)
                     || away.includes(searchVal)
@@ -15128,6 +15552,14 @@
     }
 
     /* ===================== ZC26 · GROUP (clasificación) ===================== */
+    // Los 4 "mejores terceros" que también avanzan a Octavos (además de los 12 top-1/top-2).
+    // Escribe aquí el nombre EXACTO de cada equipo tal como aparece en ZC26_FIXTURES.
+    const ZC26_BEST_THIRD_QUALIFIERS = [
+        "POS JR",
+        "Phoenix",
+        "RAISE EARTH",
+        "Acuñas"
+    ];
     function zc26TeamsByGroup() {
         const map = {};
         ZC26_FIXTURES.forEach(day => {
@@ -15166,7 +15598,7 @@
                         <span class="zcgrp-col-last5">Últimos 5</span>
                     </div>
                     ${teams.map((t, i) => `
-                    <div class="zcgrp-row${i < 2 ? " zcgrp-row-quali" : ""}">
+                    <div class="zcgrp-row${i < 2 ? " zcgrp-row-quali" : (i === 2 && ZC26_BEST_THIRD_QUALIFIERS.includes(t) ? " zcgrp-row-quali-third" : "")}">
                         <div class="zcgrp-sticky">
                             <span class="zcgrp-col-pos">${i + 1}</span>
                             <span class="zcgrp-col-team" data-zcgrp-team="${t}">
@@ -15264,7 +15696,7 @@
     });
     /* ZC26 · Estadísticas → Jugador Estelar y Asistencias: ranking de cada uno */
     (function () {
-        const WCSTAT_TOP_N = 10;
+        const WCSTAT_TOP_N = 5;
         function renderRank(listId, entries) {
             const list = document.getElementById(listId);
             if (!list) return;
@@ -15293,7 +15725,7 @@
             const extraHtml = extraRows.map((r, i) => rowHtml(r, i + WCSTAT_TOP_N)).join("");
             list.innerHTML = visibleHtml
                 + (extraRows.length ? `<div class="wcstat-extra" style="display:none">${extraHtml}</div>
-                <button type="button" class="mvs-more-btn wcstat-more-btn" data-wcstat-more>Mostrar todo</button>` : "");
+                <button type="button" class="mvs-more-btn wcstat-more-btn" data-wcstat-more>Mostrar Todo</button>` : "");
             if (extraRows.length) {
                 const extraWrap = list.querySelector(".wcstat-extra");
                 const btn = list.querySelector("[data-wcstat-more]");
@@ -15302,7 +15734,7 @@
                     zcPlaySound("click");
                     expanded = !expanded;
                     extraWrap.style.display = expanded ? "" : "none";
-                    btn.textContent = expanded ? "Mostrar menos" : "Mostrar todo";
+                    btn.textContent = expanded ? "Mostrar menos" : "Mostrar Todo";
                 });
             }
         }
@@ -15385,25 +15817,83 @@
             const knockoutPanel = document.getElementById("zcgrpKnockoutPanel");
             if (groupsPanel) groupsPanel.style.display = phase === "groups" ? "" : "none";
             if (knockoutPanel) knockoutPanel.style.display = phase === "knockout" ? "" : "none";
+            // El bracket se mide con getBoundingClientRect(): si se calculó estando oculto
+            // (display:none) todo sale en 0, así que se recalcula cada vez que se hace visible.
+            if (phase === "knockout") zc26RenderBracket();
             zcPlaySound("click");
         });
     });
 
-    // ===================== ZC26 · Carrusel de rondas (eliminación directa) =====================
+    // ===================== ZC26 · Bracket + carrusel de rondas (eliminación directa) =====================
+    zc26RenderBracket();
+    // Al tocar una llave del bracket con equipos definidos, lleva a la sección "Partidos"
+    // y hace scroll hasta la tarjeta del partido correspondiente, resaltándola brevemente.
+    (function () {
+        const bracketEl = document.getElementById("zcbracket");
+        if (!bracketEl) return;
+        bracketEl.addEventListener("click", function (e) {
+            const box = e.target.closest(".zcbracket-match");
+            if (!box) return;
+            const home = box.dataset.zcbrHome || "";
+            const away = box.dataset.zcbrAway || "";
+            if (!home || !away) return;
+            const cards = document.querySelectorAll("#zc26FixturesList [data-zc26-match]");
+            let target = null;
+            cards.forEach(c => {
+                if (target) return;
+                if (c.dataset.home === home && c.dataset.away === away) target = c;
+            });
+            if (!target) return;
+            zcPlaySound("clickentrar");
+            const zc26Tab = document.querySelector('.section-tab[data-section-tab="zc26"]');
+            if (zc26Tab) { setActiveSectionTab("zc26"); applySectionFilter("zc26"); }
+            const octavosBtn = document.querySelector('#zc26GroupFilter .am-filter-btn[data-zc26-group-filter="OCTAVOS"]');
+            if (octavosBtn) {
+                document.querySelectorAll("#zc26GroupFilter .am-filter-btn").forEach(b => b.classList.remove("active"));
+                octavosBtn.classList.add("active");
+                if (typeof applyZc26Filters === "function") applyZc26Filters();
+            }
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: "smooth", block: "center" });
+                target.classList.add("zcfx-card-highlight");
+                setTimeout(() => target.classList.remove("zcfx-card-highlight"), 1600);
+            }, 120);
+        });
+    })();
     (function () {
         const track = document.getElementById("zcgrpRoundTrack");
         const carousel = document.getElementById("zcgrpRoundCarousel");
+        const outer = document.getElementById("zcbracketOuter");
         if (!track || !carousel) return;
         const items = Array.from(track.querySelectorAll(".zcgrp-round-item"));
         const prevBtn = carousel.querySelector('[data-round-dir="prev"]');
         const nextBtn = carousel.querySelector('[data-round-dir="next"]');
 
-        function setActive(index) {
+        // Actualiza solo la pestaña activa (sin desplazar el bracket ni la página);
+        // la usan tanto los clics como la sincronización por swipe/scroll del bracket.
+        function centerItemInTrack(item) {
+            const trackRect = track.getBoundingClientRect();
+            const itemRect = item.getBoundingClientRect();
+            const offset = (itemRect.left + itemRect.width / 2) - (trackRect.left + trackRect.width / 2);
+            track.scrollTo({ left: track.scrollLeft + offset, behavior: "smooth" });
+        }
+        function setActiveUI(index) {
             index = Math.max(0, Math.min(items.length - 1, index));
             items.forEach((it, i) => it.classList.toggle("active", i === index));
-            items[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+            centerItemInTrack(items[index]);
             if (prevBtn) prevBtn.disabled = index === 0;
             if (nextBtn) nextBtn.disabled = index === items.length - 1;
+            return index;
+        }
+
+        function setActive(index) {
+            index = setActiveUI(index);
+            // Desplaza el bracket horizontalmente hasta la ronda elegida
+            if (outer) {
+                const cols = document.querySelectorAll("#zcbracket .zcbracket-col");
+                const col = cols[index];
+                if (col) outer.scrollTo({ left: Math.max(0, col.offsetLeft - 10), behavior: "smooth" });
+            }
         }
 
         items.forEach((item, i) => {
@@ -15423,6 +15913,50 @@
             zcPlaySound("click");
         });
         setActive(0);
+
+        // Al deslizar/mover el bracket manualmente, activa la pestaña de la ronda
+        // que queda más cerca de la vista (sin volver a mover el bracket).
+        if (outer) {
+            let syncTicking = false;
+            function syncActiveFromScroll() {
+                syncTicking = false;
+                const cols = document.querySelectorAll("#zcbracket .zcbracket-col");
+                if (!cols.length) return;
+                const maxScroll = outer.scrollWidth - outer.clientWidth;
+                let closest;
+                if (outer.scrollLeft >= maxScroll - 2) {
+                    // Ya llegó al final del scroll: activa siempre la última ronda (Final),
+                    // aunque su columna esté más lejos en distancia bruta que la anterior.
+                    closest = cols.length - 1;
+                } else if (outer.scrollLeft <= 2) {
+                    closest = 0;
+                } else {
+                    closest = 0;
+                    let closestDist = Infinity;
+                    cols.forEach((col, i) => {
+                        const dist = Math.abs(col.offsetLeft - outer.scrollLeft);
+                        if (dist < closestDist) { closestDist = dist; closest = i; }
+                    });
+                }
+                setActiveUI(closest);
+            }
+            outer.addEventListener("scroll", () => {
+                if (!syncTicking) {
+                    syncTicking = true;
+                    requestAnimationFrame(syncActiveFromScroll);
+                }
+            }, { passive: true });
+        }
+    })();
+    (function () {
+        let zcbrResizeT = null;
+        window.addEventListener("resize", () => {
+            clearTimeout(zcbrResizeT);
+            zcbrResizeT = setTimeout(() => {
+                zc26RenderBracket();
+                if (window.zc26UpdateBracketCompress) window.zc26UpdateBracketCompress();
+            }, 200);
+        });
     })();
 
     renderRanking();
