@@ -197,10 +197,10 @@
             opacity: 1;
         }
         .section-tab-zc26 {
-            color: #ff8a1e;
+            color: #00FF55;
         }
         .section-tab-zc26.active {
-            color: #ff8a1e;
+            color: #00FF55;
         }
         .menu-toggle {
             width: 34px;
@@ -295,12 +295,12 @@
             color: #d4af37;
         }
         .mobile-menu-link-zc26 {
-            color: #ff8a1e;
+            color: #00FF55;
         }
         /* Menú móvil: submenús con cruz animada (+ / −) */
         .mm-row { display: flex; align-items: center; }
         .mm-row .mobile-menu-link { flex: 0 0 auto; padding-right: 8px; }
-        .mm-group-zc .mm-toggle { color: #ff8a1e; }
+        .mm-group-zc .mm-toggle { color: #00FF55; }
         .mm-toggle {
             width: 34px;
             height: 34px;
@@ -2747,6 +2747,18 @@
         .zc26lu-chip-ast-num span { font-size: 0.52rem; font-weight: 800; color: #ffffff; line-height: 1; }
         .zc26lu-avwrap-plain { position: relative; display: block; width: 34px; height: 34px; flex-shrink: 0; }
         .zc26lu-avwrap-plain .zc26lu-avatar { display: block; }
+        .zc26lu-cap-badge {
+            display: inline-flex;
+            width: 10px;
+            height: 10px;
+            vertical-align: -1.5px;
+            margin-right: 3px;
+        }
+        .zc26lu-cap-badge svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
         .zc26lu-legend { padding: 9px 10px 10px; }
         .zc26lu-legend-grid {
             display: grid;
@@ -13583,6 +13595,8 @@
         "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 },
         "Quiero KeKe|POS JR":                 { h: 3, a: 0 },
         "Quiero KeKe|Peruanos FC":             { h: 3, a: 0, wo: "Peruanos FC" },
+        "KURO ØNIX|SGC":                       { h: 0, a: 2 },
+        "Phoenix|XBlood":                      { h: 0, a: 0, wo: "ambos" },
         "BLASTERS|XBlood":               { h: 3, a: 0, wo: "XBlood" },
         "GTA|Unorthodox":                      { h: 0, a: 3 },
         "SYNOX GAMING|Wosu Esport":            { h: 3, a: 0 },
@@ -13633,7 +13647,8 @@
         ["Xabi", "Acuñas", "Acuñas|Pro Legends"], ["RoyZtrike", "Acuñas", "Acuñas|Pro Legends"],
         ["F nero", "RAISE EARTH", "RAISE EARTH|SYNOX GAMING"], ["F nero", "RAISE EARTH", "RAISE EARTH|SYNOX GAMING"], ["kikyy", "RAISE EARTH", "RAISE EARTH|SYNOX GAMING"],
         ["Gabinho", "GTA", "GTA|Baraja de Elite"], ["Adri", "GTA", "GTA|Baraja de Elite"], ["nefi", "GTA", "GTA|Baraja de Elite"],
-        ["shirox", "BLASTERS", "LPE|BLASTERS"], ["vsblees", "BLASTERS", "LPE|BLASTERS"], ["Diego", "BLASTERS", "LPE|BLASTERS"]
+        ["shirox", "BLASTERS", "LPE|BLASTERS"], ["vsblees", "BLASTERS", "LPE|BLASTERS"], ["Diego", "BLASTERS", "LPE|BLASTERS"],
+        ["Denshol", "SGC", "KURO ØNIX|SGC"], ["Denshol", "SGC", "KURO ØNIX|SGC"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14325,6 +14340,7 @@
             case "susp": return wrap(dark + `<circle cx="12" cy="12" r="5.7" fill="none" stroke="${pink}" stroke-width="1.8"/><path d="M8 16L16 8" stroke="${pink}" stroke-width="1.8" stroke-linecap="round"/>`);
             case "estelar": return `<span class="zc26sym-img"><img src="icon_stats%20(1).png" alt=""></span>`;
             case "asist": return `<span class="zc26sym-img"><img src="icon_stats%20(2).png" alt=""></span>`;
+            case "cap": return wrap(dark + `<circle cx="12" cy="12" r="12" fill="none" stroke="#9aa0a6" stroke-width="1.3"/><text x="12" y="15.6" text-anchor="middle" font-size="10" font-weight="800" fill="#cfcfcf" font-family="Segoe UI, Roboto, system-ui, sans-serif">C</text>`);
         }
         return "";
     }
@@ -14411,6 +14427,7 @@
             : `<span class="zc26lu-chip zc26lu-chip-ast zc26lu-chip-ast-one">${img}</span>`;
     }
     function zc26LineupCard(name, role, team, ctx, isStarter) {
+        const capBadge = role === "cap" ? '<span class="zc26lu-cap-badge">' + zc26Sym("cap") + '</span>' : "";
         const played = ctx && ctx.res && !ctx.res.wo && role !== "coa" && role !== "man";
         const status = (role !== "coa" && role !== "man") ? zc26PlayerStatus(team, name) : "";
         if (!played) {
@@ -14421,7 +14438,7 @@
                 return `<div class="zc26lu-card">
             <span class="zc26lu-avwrap-plain"><img class="zc26lu-avatar" src="palyer_sep.png" alt=""><span class="zc26lu-chip zc26lu-chip-sym zc26lu-chip-in">${zc26Sym(preSwap)}</span></span>
             <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
-            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
+            <span class="zc26lu-role">${capBadge}${ZC26_ROLE_LABEL[role]}</span>
         </div>`;
             }
             const avatar = status
@@ -14430,7 +14447,7 @@
             return `<div class="zc26lu-card">
             ${avatar}
             <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
-            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
+            <span class="zc26lu-role">${capBadge}${ZC26_ROLE_LABEL[role]}</span>
         </div>`;
         }
         const st = zc26PlayerStats(ctx, team, name);
@@ -14456,7 +14473,7 @@
                 ${chips}
             </div>
             <span class="zc26lu-name" title="${zc26Esc(name)}">${zc26Esc(name)}</span>
-            <span class="zc26lu-role">${ZC26_ROLE_LABEL[role]}</span>
+            <span class="zc26lu-role">${capBadge}${ZC26_ROLE_LABEL[role]}</span>
         </div>`;
     }
     function zc26TimelineHtml(ctx) {
