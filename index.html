@@ -3817,13 +3817,24 @@
             align-self: center;
             display: block;
         }
+        /* ZC26 · agrupa bandera + nombre para poder centrarlos juntos como
+           un solo bloque dentro del espacio disponible de la fila */
+        .rank-name-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 6px;
+            min-width: 0;
+            flex: 1 1 auto;
+        }
         .rank-row2-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start;
             gap: 2px;
             min-width: 0;
-            flex: 1 1 auto;
+            flex: 0 1 auto;
             padding: 3px 0;
         }
         .rank-row2-top {
@@ -3844,31 +3855,23 @@
             text-align: left;
         }
         .rank-name2:hover { text-decoration: underline; }
-        .rank-flag2 { width: 19px; height: 13px; overflow: hidden; flex-shrink: 0; align-self: center; margin-right: 2px; }
+        .rank-flag2 { width: 19px; height: 13px; overflow: hidden; flex-shrink: 0; align-self: center; }
         .rank-flag2 img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .rank-row2-bottom {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            font-size: 0.54rem;
-            color: #9a9a9a;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-            overflow: hidden;
-            margin-left: -3px;
+            display: none;
         }
         .rank-row2-points { white-space: nowrap; margin-left: auto; padding-left: 10px; }
-        /* ZC26 · columna de "Puntos" propia, solo visible en tablet/
-           escritorio (en móvil los puntos se muestran junto al tier,
-           como ya estaba) */
+        /* ZC26 · columna de "Puntos" propia, visible en todos los tamaños
+           (como en la tabla de referencia de FIFA): CL | Equipo | Puntos | Más */
         .rank-points-col {
-            display: none;
-            width: 88px;
-            min-width: 88px;
+            display: inline-flex;
+            width: 64px;
+            min-width: 64px;
             justify-content: center;
             text-align: center;
             font-weight: 800;
             color: #ffffff;
+            font-size: 0.74rem;
             white-space: nowrap;
             margin-left: auto;
             padding: 0 4px;
@@ -4567,6 +4570,10 @@
             background: rgba(160,80,80,0.10);
             border-color: rgba(160,80,80,0.35);
         }
+        .match-row.match-draw {
+            background: rgba(140,140,140,0.10);
+            border-color: rgba(140,140,140,0.35);
+        }
         .match-row:last-child { margin-bottom: 0; }
         .recent-list {
             overflow-y: auto;
@@ -4618,6 +4625,10 @@
         .match-badge.loss {
             background: rgba(210,70,70,0.22);
             color: #ff6b6b;
+        }
+        .match-badge.draw {
+            background: rgba(150,150,150,0.22);
+            color: #a8a8a8;
         }
         .match-row-score {
             display: flex;
@@ -4708,6 +4719,7 @@
         }
         .am-row.am-win { border-left-color: #5fd97a; }
         .am-row.am-loss { border-left-color: #ff6b6b; }
+        .am-row.am-draw { border-left-color: #a8a8a8; }
         .am-row-date {
             font-size: 0.62rem;
             color: #888888;
@@ -4860,6 +4872,7 @@
         }
         .am-filter-btn.active[data-result-filter="win"] { color: #5fd97a; }
         .am-filter-btn.active[data-result-filter="loss"] { color: #ff6b6b; }
+        .am-filter-btn.active[data-result-filter="draw"] { color: #a8a8a8; }
         /* ZC26 · barra de búsqueda de las modales "Todos los partidos" /
            "Todos los logros": input + lista de sugerencias con el texto
            coincidente en negrita. */
@@ -5411,9 +5424,38 @@
         .stat-radar-wrap {
             position: relative;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            gap: 4px;
             flex: 1 1 150px;
             padding: 2px 0 0;
+        }
+        .radar-legend {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.62rem;
+            color: #9a9a9a;
+        }
+        .radar-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .radar-legend-swatch {
+            width: 9px;
+            height: 9px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .radar-legend-before {
+            background: rgba(255,255,255,0.16);
+            border: 1.5px dashed rgba(255,255,255,0.55);
+        }
+        .radar-legend-now {
+            background: rgba(111,207,151,0.32);
+            border: 1.5px solid #6fcf97;
         }
         .stat-radar-svg {
             width: 100%;
@@ -7459,6 +7501,13 @@
                 width: 19px;
                 height: 13px;
             }
+            /* ZC26 · el contenedor de bandera + nombre sigue ocupando el
+               mismo espacio de siempre (para que puntos y región no se
+               muevan de su sitio), pero ahora centra su contenido dentro
+               de ese espacio en vez de pegarlo a la izquierda */
+            .rank-row2-info {
+                flex: 0 1 auto;
+            }
             .rank-row2-bottom {
                 font-size: 0.56rem;
             }
@@ -7469,6 +7518,8 @@
             }
             .rank-points-col {
                 display: inline-flex;
+                width: 88px;
+                min-width: 88px;
                 font-size: 0.78rem;
             }
             .rank-row2-points {
@@ -7650,6 +7701,9 @@
             .rank-flag2 {
                 width: 22px;
                 height: 15px;
+            }
+            .rank-row2-info {
+                flex: 0 1 auto;
             }
             .rank-row2-bottom {
                 font-size: 0.6rem;
@@ -9626,12 +9680,14 @@
     const PLAYERS = [
         {
             key: "taikisha",
-            name: "iXLCross", country: "MX", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 295,
+            name: "iXLCross", country: "MX", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 303, prevPoints: 295,
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["@x_xv", "タイキシャ", "Taikisha"],
             winnings: "$0", credits: "6,000 créditos",
             recent: [
+                { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
@@ -9641,12 +9697,15 @@
         },
         {
             key: "julio",
-            name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270,
+            name: "Juliocr36D", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 271, prevPoints: 270,
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Inactivo", role: "Player · Capitán",
             alternateIds: ["@juliocr36", "SK | Julio"],
             winnings: "$10.59", credits: "10,000 créditos",
             recent: [
+                { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
@@ -9656,12 +9715,14 @@
         },
         {
             key: "jc",
-            name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 270,
+            name: "JOAR", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 271, prevPoints: 270,
             events: "1 (3v3)", titles: "Campeón", sets: "3 - 1", matches: "7 - 3",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["JC", "~ T X -->JC"],
             winnings: "$0", credits: "10,000 créditos",
             recent: [
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
             ],
@@ -9795,12 +9856,14 @@
         },
         {
             key: "aumc",
-            name: "AUMC", country: "MX", team: "WB", teamTag: "WB", points: 105,
+            name: "AUMC", country: "MX", team: "WB", teamTag: "WB", points: 112, prevPoints: 105,
             events: "1 (3v3)", titles: "3er Lugar", sets: "1 - 2", matches: "3 - 6",
             born: "Por confirmar", status: "Inactivo", role: "Player · Capitán",
             alternateIds: ["@AUMCxD"],
             winnings: "$0", credits: "500 créditos",
             recent: [
+                { date: "23 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 2, teamB: "Egresados del Conalep", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Pro Legends", scoreA: 0, teamB: "Egresados del Conalep", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 3, teamB: "QQQ", scoreB: 2, tourney: "ZC26 · 3er y 4to Lugar" },
             ],
@@ -10109,12 +10172,13 @@
         },
         {
             key: "robertbv",
-            name: "RobertBV", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 116, prevPoints: 101,
+            name: "RobertBV", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 123, prevPoints: 116,
             events: "2 (1v1)", titles: "1er Lugar", sets: "4 - 1", matches: "10 - 2",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["Pibble", "robertbv2902", "Robert"],
             winnings: "$5.00", credits: "7,300 créditos",
             recent: [
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Zyrox", scoreA: 2, teamB: "RobertBV", scoreB: 1, tourney: "ZC26 1v1 Edición 4 · Ronda 1" },
                 { date: "27 ago 2026", time: "UTC-5", teamA: "RobertBV", scoreA: 3, teamB: "Sebas", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
                 { date: "27 ago 2026", time: "UTC-5", teamA: "Zyrox", scoreA: 0, teamB: "RobertBV", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
@@ -10307,12 +10371,15 @@
         },
         {
             key: "heritage",
-            name: "Heritage", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 52,
+            name: "Heritage", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 45, prevPoints: 52,
             events: "1 (1v1)", titles: "2do Lugar", sets: "3 - 1", matches: "8 - 4",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
             recent: [
+                { date: "24 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Zyrox", scoreA: 3, teamB: "Heritage", scoreB: 2, tourney: "ZC26 1v1 Edición 4 · Gran Final" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Heritage", scoreA: 2, teamB: "Kaiser", scoreB: 1, tourney: "ZC26 1v1 Edición 4 · Semifinal" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Heritage", scoreA: 2, teamB: "Owneronyt", scoreB: 0, tourney: "ZC26 1v1 Edición 4 · Ronda 2" },
@@ -10492,6 +10559,624 @@
             ],
             achievements: []
         },
+        {
+            key: "ghost",
+            name: "Ghost", country: "ECU", team: "SYNOX GAMING", teamTag: "SYX", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "abelldx",
+            name: "abelldx", country: "ECU", team: "SYNOX GAMING", teamTag: "SYX", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "RAISE EARTH", scoreA: 3, teamB: "SYNOX GAMING", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 2, teamB: "op7", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 3, teamB: "Wosu Esports", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                ],
+            achievements: []
+        },
+        {
+            key: "deizz",
+            name: "Deizz", country: "CL", team: "SYNOX GAMING", teamTag: "SYX", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "RAISE EARTH", scoreA: 3, teamB: "SYNOX GAMING", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 2, teamB: "op7", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 3, teamB: "Wosu Esports", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                ],
+            achievements: []
+        },
+        {
+            key: "romanqq",
+            name: "romanqq", country: "PE", team: "SYNOX GAMING", teamTag: "SYX", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "RAISE EARTH", scoreA: 3, teamB: "SYNOX GAMING", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 2, teamB: "op7", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 3, teamB: "Wosu Esports", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                ],
+            achievements: []
+        },
+        {
+            key: "angelluki",
+            name: "angelluki", country: "MX", team: "SYNOX GAMING", teamTag: "SYX", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "rickylove",
+            name: "Rickylove", country: "MX", team: "SYNOX GAMING", teamTag: "SYX", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "amberchuu01",
+            name: "Amberchuu01", country: "MX", team: "Phoenix", teamTag: "PHX", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "Phoenix", scoreA: 0, teamB: "BLASTERS", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo C (Empate W.O.)" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "LPE", scoreA: 2, teamB: "Phoenix", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo C" },
+                ],
+            achievements: []
+        },
+        {
+            key: "trdgx98",
+            name: "Trdgx98", country: "MX", team: "Phoenix", teamTag: "PHX", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "Phoenix", scoreA: 0, teamB: "BLASTERS", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo C (Empate W.O.)" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "LPE", scoreA: 2, teamB: "Phoenix", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo C" },
+                ],
+            achievements: []
+        },
+        {
+            key: "phserperior",
+            name: "PH | serperior", country: "MX", team: "Phoenix", teamTag: "PHX", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "bititofcq",
+            name: "Bitito.FCQ", country: "MX", team: "Phoenix", teamTag: "PHX", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "Phoenix", scoreA: 0, teamB: "BLASTERS", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo C (Empate W.O.)" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "LPE", scoreA: 2, teamB: "Phoenix", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo C" },
+                ],
+            achievements: []
+        },
+        {
+            key: "newfactory",
+            name: "new_factory", country: "MX", team: "Egresados del Conalep", teamTag: "EDC", points: 7, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 2, teamB: "Egresados del Conalep", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Pro Legends", scoreA: 0, teamB: "Egresados del Conalep", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "sanz",
+            name: "Sanz", country: "MX", team: "Egresados del Conalep", teamTag: "EDC", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 2, teamB: "Egresados del Conalep", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "luisitopro123",
+            name: "luisitopro123", country: "MX", team: "Egresados del Conalep", teamTag: "EDC", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "20 sep 2026", time: "UTC-5", teamA: "Pro Legends", scoreA: 0, teamB: "Egresados del Conalep", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "sjoacedbamypasa",
+            name: "sjoacedbamypasa", country: "CL", team: "KURO ONIX", teamTag: "ONX", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "KURO ØNIX", scoreA: 1, teamB: "POS", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 0, teamB: "KURO ØNIX", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B (W.O.)" },
+                ],
+            achievements: []
+        },
+        {
+            key: "gabonix",
+            name: "Gabonix", country: "CL", team: "KURO ONIX", teamTag: "ONX", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "KURO ØNIX", scoreA: 1, teamB: "POS", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 0, teamB: "KURO ØNIX", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B (W.O.)" },
+                ],
+            achievements: []
+        },
+        {
+            key: "simonelprro",
+            name: "Simon el prro", country: "CL", team: "KURO ONIX", teamTag: "ONX", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "KURO ØNIX", scoreA: 1, teamB: "POS", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 0, teamB: "KURO ØNIX", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B (W.O.)" },
+                ],
+            achievements: []
+        },
+        {
+            key: "xellexll",
+            name: "Xell.exll", country: "MX", team: "Unorthodox (UNORTHODOX GANG)", teamTag: "UOG", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "miseryoung",
+            name: ".miseryoung", country: "MX", team: "Unorthodox (UNORTHODOX GANG)", teamTag: "UOG", points: 15, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 0, teamB: "Unorthodox", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "kaenluc",
+            name: "kaenluc", country: "PE", team: "TEAM ATENAS", teamTag: "ATN", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Líder",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "reyes1",
+            name: "reyes1", country: "MX", team: "TEAM ATENAS", teamTag: "ATN", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "ale",
+            name: "ale", country: "AR", team: "TEAM ATENAS", teamTag: "ATN", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "messpp",
+            name: "messpp", country: "CL", team: "TEAM ATENAS", teamTag: "ATN", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "sebazz",
+            name: "sebazz", country: "CL", team: "TEAM ATENAS", teamTag: "ATN", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "isakku",
+            name: "Isakku", country: "PE", team: "Sinister Haven", teamTag: "SIN", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Líder",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Sinister Haven", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "rnowtt",
+            name: "rNowtt", country: "PE", team: "Sinister Haven", teamTag: "SIN", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Sinister Haven", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "jdxz",
+            name: "JdXz", country: "PE", team: "Sinister Haven", teamTag: "SIN", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "23 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Sinister Haven", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "banditoo",
+            name: "Banditoo", country: "CO", team: "Sinister Haven", teamTag: "SIN", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "3eta",
+            name: "3eta", country: "MX", team: "GAMBLING FC", teamTag: "GFC", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "ogarucap",
+            name: "Ogaru CAP", country: "MX", team: "GAMBLING FC", teamTag: "GFC", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "panconqueso",
+            name: "pan_con_queso", country: "MX", team: "GAMBLING FC", teamTag: "GFC", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "tlinao9",
+            name: "tlinao9", country: "MX", team: "GAMBLING FC", teamTag: "GFC", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "gabri",
+            name: "gabri", country: "PE", team: "GAMBLING FC", teamTag: "GFC", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "royzrike",
+            name: "Royzrike", country: "CL", team: "Acuñas", teamTag: "ACU", points: 9, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 3, teamB: "Pro Legends", scoreB: 1, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 2, teamB: "Egresados del Conalep", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "xabi",
+            name: "Xabi", country: "MX", team: "Acuñas", teamTag: "ACU", points: 9, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 3, teamB: "Pro Legends", scoreB: 1, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 2, teamB: "Egresados del Conalep", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "galactus",
+            name: "Galactus", country: "MX", team: "Acuñas", teamTag: "ACU", points: 9, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 3, teamB: "Pro Legends", scoreB: 1, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 2, teamB: "Egresados del Conalep", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "diegoa",
+            name: "Diego(A)", country: "MX", team: "Acuñas", teamTag: "ACU", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "yacer",
+            name: "Yacer", country: "MX", team: "Acuñas", teamTag: "ACU", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 3, teamB: "Pro Legends", scoreB: 1, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                ],
+            achievements: []
+        },
+        {
+            key: "poslegend966p",
+            name: "PosLegend966p", country: "CL", team: "POS", teamTag: "POS", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 3, teamB: "POS", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "KURO ØNIX", scoreA: 1, teamB: "POS", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "POS", scoreA: 0, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                ],
+            achievements: []
+        },
+        {
+            key: "gold",
+            name: "Gold", country: "MX", team: "POS", teamTag: "POS", points: 16, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 3, teamB: "POS", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "23 sep 2026", time: "UTC-5", teamA: "KURO ØNIX", scoreA: 1, teamB: "POS", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "POS", scoreA: 0, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                ],
+            achievements: []
+        },
+        {
+            key: "patomauri",
+            name: "Pato Mauri", country: "MX", team: "POS", teamTag: "POS", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "fran",
+            name: "fran", country: "MX", team: "POS", teamTag: "POS", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "possalchi",
+            name: "PosSalchi", country: "MX", team: "POS", teamTag: "POS", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "cesar",
+            name: "CESAR", country: "PE", team: "SGC", teamTag: "SGC", points: 1, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 1, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "POS", scoreA: 0, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                ],
+            achievements: []
+        },
+        {
+            key: "denshol",
+            name: "Denshol", country: "MX", team: "SGC", teamTag: "SGC", points: 1, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 1, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "POS", scoreA: 0, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                ],
+            achievements: []
+        },
+        {
+            key: "charlestq",
+            name: "CharlesTQ", country: "MX", team: "SGC", teamTag: "SGC", points: 1, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "Rostizados", scoreA: 1, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "POS", scoreA: 0, teamB: "SGC", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo B" },
+                ],
+            achievements: []
+        },
+        {
+            key: "pelsantigamer",
+            name: "pelsantigamer", country: "CL", team: "Banco BBVA", teamTag: "BBVA", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "peijakov",
+            name: "PeIjakov", country: "CL", team: "Banco BBVA", teamTag: "BBVA", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "messigoat",
+            name: "messigoat", country: "CL", team: "Banco BBVA", teamTag: "BBVA", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "bancobbva",
+            name: "Banco BBVA", country: "CL", team: "Banco BBVA", teamTag: "BBVA", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "sukhoi",
+            name: "Sukhoi", country: "CL", team: "Baraja de Elite", teamTag: "BDE", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "destroyer",
+            name: "Destroyer", country: "CL", team: "Baraja de Elite", teamTag: "BDE", points: 8, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "24 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
+                ],
+            achievements: []
+        },
+        {
+            key: "blaxxyy",
+            name: "Blaxxyy", country: "CL", team: "Wosu Esports", teamTag: "WSU", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "RAISE EARTH", scoreA: 1, teamB: "Wosu Esports", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 3, teamB: "Wosu Esports", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                ],
+            achievements: []
+        },
+        {
+            key: "jhxfwy",
+            name: "Jhxfwy", country: "CL", team: "Wosu Esports", teamTag: "WSU", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "RAISE EARTH", scoreA: 1, teamB: "Wosu Esports", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 3, teamB: "Wosu Esports", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                ],
+            achievements: []
+        },
+        {
+            key: "n1nferun",
+            name: "N1nferun", country: "CL", team: "Wosu Esports", teamTag: "WSU", points: 0, prevPoints: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Titular",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [                { date: "22 sep 2026", time: "UTC-5", teamA: "RAISE EARTH", scoreA: 1, teamB: "Wosu Esports", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "SYNOX GAMING", scoreA: 3, teamB: "Wosu Esports", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo E" },
+                ],
+            achievements: []
+        },
+        {
+            key: "selavi",
+            name: "Selavi", country: "CL", team: "Wosu Esports", teamTag: "WSU", points: 0,
+            events: "0", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
     ];
 
     // --- Sistema de desempate por puntos decimales ---
@@ -10522,7 +11207,7 @@
     // al ranking no empuja artificialmente a todos los demás hacia abajo:
     // solo baja quien fue realmente superado por alguien que sumó puntos, y
     // sube quien fue superado por alguien que perdió terreno relativo.
-    const RANK_NEW_PLAYERS = new Set(["heritage", "kaiser", "misery", "jormargg", "peepe", "owneronyt", "aaron13", "obito", "remot_bs", "tiagoxcv", "thteamnegro", "yanielgg", "kittypou26", "thherian"]);
+    const RANK_NEW_PLAYERS = new Set(["heritage", "kaiser", "misery", "jormargg", "peepe", "owneronyt", "aaron13", "obito", "remot_bs", "tiagoxcv", "thteamnegro", "yanielgg", "kittypou26", "thherian", "ghost", "abelldx", "deizz", "romanqq", "angelluki", "rickylove", "amberchuu01", "trdgx98", "phserperior", "bititofcq", "newfactory", "sanz", "luisitopro123", "sjoacedbamypasa", "gabonix", "simonelprro", "xellexll", "miseryoung", "kaenluc", "reyes1", "ale", "messpp", "sebazz", "isakku", "rnowtt", "jdxz", "banditoo", "3eta", "ogarucap", "panconqueso", "tlinao9", "gabri", "royzrike", "xabi", "galactus", "diegoa", "yacer", "poslegend966p", "gold", "patomauri", "fran", "possalchi", "cesar", "denshol", "charlestq", "pelsantigamer", "peijakov", "messigoat", "bancobbva", "sukhoi", "destroyer", "blaxxyy", "jhxfwy", "n1nferun", "selavi"]);
     const RETURNING_PLAYERS = PLAYERS.filter(p => !RANK_NEW_PLAYERS.has(p.key));
     const PREV_POS_BY_KEY = new Map(
         RETURNING_PLAYERS.slice()
@@ -11220,13 +11905,15 @@
                         <span class="rank-pos2 ${medal}">${pos}<span class="rank-pos2-dot">.</span></span>${subPosHtml}
                     </div>
                     ${iconHtml}
-                    <span class="rank-flag2">${flagImg(p.country, true)}</span>
-                    <div class="rank-row2-info">
-                        <div class="rank-row2-top">
-                            <button class="rank-name2 ${medal}" data-open="${i}">${p.name}</button>
-                        </div>
-                        <div class="rank-row2-bottom">
-                            <span class="rank-row2-points">${zcFormatPoints(p.points)} pts</span>
+                    <div class="rank-name-wrap">
+                        <span class="rank-flag2">${flagImg(p.country, true)}</span>
+                        <div class="rank-row2-info">
+                            <div class="rank-row2-top">
+                                <button class="rank-name2 ${medal}" data-open="${i}">${p.name}</button>
+                            </div>
+                            <div class="rank-row2-bottom">
+                                <span class="rank-row2-points">${zcFormatPoints(p.points)} pts</span>
+                            </div>
                         </div>
                     </div>
                     <span class="rank-points-col">${zcFormatPoints(p.points)} pts</span>
@@ -11477,6 +12164,7 @@
         if (sideMatches(m.teamA)) side = "A";
         else if (sideMatches(m.teamB)) side = "B";
         if (!side) return "";
+        if (m.scoreA === m.scoreB) return "match-draw";
         const won = side === "A" ? m.scoreA > m.scoreB : m.scoreB > m.scoreA;
         return won ? "match-win" : "match-loss";
     }
@@ -11509,7 +12197,7 @@
         const oppScore = side === "A" ? m.scoreB : m.scoreA;
         const oppLabel = side === "A" ? m.teamB : m.teamA;
         const ownLabel = side === "A" ? m.teamA : m.teamB;
-        return { myScore, oppScore, oppLabel, ownLabel, win: myScore > oppScore, oppPlayer: findPlayerByToken(oppLabel) };
+        return { myScore, oppScore, oppLabel, ownLabel, win: myScore > oppScore, draw: myScore === oppScore, oppPlayer: findPlayerByToken(oppLabel) };
     }
 
     // ZC26 · clasifica cada partida por Tier y nombre de torneo:
@@ -11865,6 +12553,15 @@
 
     function buildRadarSvg(p) {
         const items = RADAR_ITEMS.map(it => ({ label: it.label, value: Math.max(0, Math.min(100, it.get(p))) }));
+        // ZC26 · si el jugador tiene una foto anterior de puntos (prevPoints,
+        // el mismo dato que ya se usa para las flechas de +/- del ranking),
+        // se dibuja también el polígono "de antes" en gris translúcido detrás
+        // del actual, para comparar cómo estaba el jugador y cómo está ahora
+        // tras los resultados nuevos.
+        const hasBefore = p.prevPoints != null && p.prevPoints !== p.points;
+        const prevItems = hasBefore
+            ? RADAR_ITEMS.map(it => ({ label: it.label, value: Math.max(0, Math.min(100, it.get({ ...p, points: p.prevPoints }))) }))
+            : null;
         const n = items.length;
         const size = 200;
         const center = size / 2;
@@ -11883,6 +12580,12 @@
             return `<line x1="${center}" y1="${center}" x2="${x}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
         }).join("");
         const dataPts = items.map((it, i) => pointAt(i, maxR * (it.value / 100)).join(",")).join(" ");
+        const prevPolygon = prevItems
+            ? (() => {
+                const prevPts = prevItems.map((it, i) => pointAt(i, maxR * (it.value / 100)).join(",")).join(" ");
+                return `<polygon points="${prevPts}" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="3,3"/>`;
+            })()
+            : "";
         const labels = items.map((it, i) => {
             const [x, y] = pointAt(i, maxR + 18);
             let anchor = "middle";
@@ -11895,8 +12598,12 @@
                 <text x="${x}" y="${y + 7}" text-anchor="${anchor}" dominant-baseline="middle" class="radar-value" pointer-events="none">${displayVal}</text>
             </g>`;
         }).join("");
-        return `<svg viewBox="0 0 ${size} ${size}" class="stat-radar-svg">
+        const legend = hasBefore
+            ? `<div class="radar-legend"><span class="radar-legend-item"><span class="radar-legend-swatch radar-legend-before"></span>Antes</span><span class="radar-legend-item"><span class="radar-legend-swatch radar-legend-now"></span>Ahora</span></div>`
+            : "";
+        return `${legend}<svg viewBox="0 0 ${size} ${size}" class="stat-radar-svg">
             ${rings}${axes}
+            ${prevPolygon}
             <polygon points="${dataPts}" fill="rgba(111,207,151,0.32)" stroke="#6fcf97" stroke-width="1.5"/>
             ${labels}
         </svg>`;
@@ -11972,7 +12679,8 @@
             ? `<div class="recent-list" id="recentList" tabindex="0">${p.recent.map(m => {
                 const rc = matchResultClass(p, m);
                 const badge = rc === "match-win" ? `<span class="match-badge win">W</span>`
-                    : rc === "match-loss" ? `<span class="match-badge loss">L</span>` : "";
+                    : rc === "match-loss" ? `<span class="match-badge loss">L</span>`
+                    : rc === "match-draw" ? `<span class="match-badge draw">D</span>` : "";
                 return `
                 <div class="match-row ${rc}">
                     <div class="match-row-top">
@@ -12207,30 +12915,35 @@
                 const oppNameHtml = oppIdx >= 0
                     ? `<button type="button" class="am-score-name am-score-name-opp am-opponent" data-open-player="${oppIdx}">${persp.oppLabel}</button>`
                     : `<span class="am-score-name am-score-name-opp am-opponent-plain">${persp.oppLabel}</span>`;
+                const rBadgeCls = persp.draw ? "draw" : (persp.win ? "win" : "loss");
+                const rBadgeTxt = persp.draw ? "D" : (persp.win ? "W" : "L");
+                const rRowCls = persp.draw ? "am-draw" : (persp.win ? "am-win" : "am-loss");
+                const rResult = persp.draw ? "draw" : (persp.win ? "win" : "loss");
+                const rSearchTxt = persp.draw ? "empate draw" : (persp.win ? "victoria win" : "derrota loss");
                 return `
-                <div class="am-row ${persp.win ? "am-win" : "am-loss"}" data-tier="${meta.tierClass}" data-result="${persp.win ? "win" : "loss"}" data-search="${searchNorm([m.date, m.time, meta.tier, meta.tournament, meta.round, persp.ownLabel, persp.oppLabel, persp.win ? "victoria win" : "derrota loss"].filter(Boolean).join(" "))}">
+                <div class="am-row ${rRowCls}" data-tier="${meta.tierClass}" data-result="${rResult}" data-search="${searchNorm([m.date, m.time, meta.tier, meta.tournament, meta.round, persp.ownLabel, persp.oppLabel, rSearchTxt].filter(Boolean).join(" "))}">
                     <div class="am-row-date am-row-date-corner">${m.date}${m.time ? " · " + m.time : ""}</div>
                     <div class="am-row-tier">
                         <span class="am-tier-badge ${meta.tierClass}">${meta.tier}</span>
-                        <span class="match-badge ${persp.win ? "win" : "loss"}">${persp.win ? "W" : "L"}</span>
+                        <span class="match-badge ${rBadgeCls}">${rBadgeTxt}</span>
                     </div>
                     <div class="am-row-tourney">
                         <span class="am-tourney-name">${meta.tournament}</span>${meta.round ? `<span class="am-round">${meta.round}</span>` : ""}
                     </div>
                     <div class="am-row-score">
-                        <span class="match-badge ${persp.win ? "win" : "loss"}">${persp.win ? "W" : "L"}</span>
+                        <span class="match-badge ${rBadgeCls}">${rBadgeTxt}</span>
                         <div class="am-score-team am-score-team-own">
                             ${!meta.is3v3 ? teamShieldHtml() : ""}
                             <span class="am-score-name am-score-name-own">${persp.ownLabel}</span>
                             ${rankPillHtml(ownIdx)}
                         </div>
                         <span class="am-score-nums">
-                            <span class="am-score-num ${persp.win ? "am-score-white" : "am-score-gray"}">${persp.myScore}</span>
+                            <span class="am-score-num ${persp.draw ? "am-score-white" : (persp.win ? "am-score-white" : "am-score-gray")}">${persp.myScore}</span>
                             <span class="am-score-status">
                                 <span class="am-score-finished">Finished</span>
                                 <span class="am-score-status-date">${m.date}</span>
                             </span>
-                            <span class="am-score-num ${persp.win ? "am-score-gray" : "am-score-white"}">${persp.oppScore}</span>
+                            <span class="am-score-num ${persp.draw ? "am-score-white" : (persp.win ? "am-score-gray" : "am-score-white")}">${persp.oppScore}</span>
                         </span>
                         <div class="am-score-team am-score-team-opp">
                             ${!meta.is3v3 ? teamShieldHtml() : ""}
@@ -12258,7 +12971,7 @@
             addCand(meta.round);
             addCand(meta.tier);
             addCand(persp.oppLabel);
-            addCand(persp.win ? "Victoria" : "Derrota");
+            addCand(persp.draw ? "Empate" : (persp.win ? "Victoria" : "Derrota"));
         });
         panel.className = "info-panel";
         const filtersHtml = matches.length ? `
@@ -12272,6 +12985,7 @@
                 <div class="am-filter-group" data-filter-group="result">
                     <button type="button" class="am-filter-btn active" data-result-filter="all">Todos</button>
                     <button type="button" class="am-filter-btn" data-result-filter="win">Victorias</button>
+                    <button type="button" class="am-filter-btn" data-result-filter="draw">Empates</button>
                     <button type="button" class="am-filter-btn" data-result-filter="loss">Derrotas</button>
                 </div>
             </div>` : "";
@@ -12844,12 +13558,12 @@
         {
             day: "Viernes", num: 25, month: "SEP",
             matches: [
-                { group: "A", home: "Quiero KeKe", away: "Peruanos FC", time: "7:00 p.m." },
-                { group: "B", home: "KURO ØNIX", away: "SGC", time: "7:35 p.m." },
-                { group: "C", home: "Phoenix", away: "XBlood", time: "11:45 p.m." },
-                { group: "D", home: "Unorthodox", away: "Sinister Haven", time: "9:10 p.m." },
-                { group: "E", home: "Wosu Esport", away: "op7", time: "10:00 p.m." },
-                { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE", time: "10:35 p.m." }
+                { group: "A", home: "Quiero KeKe", away: "Peruanos FC", time: "5:00 p.m." },
+                { group: "B", home: "KURO ØNIX", away: "SGC", time: "5:35 p.m." },
+                { group: "C", home: "Phoenix", away: "XBlood", time: "9:45 p.m." },
+                { group: "D", home: "Unorthodox", away: "Sinister Haven", time: "7:10 p.m." },
+                { group: "E", home: "Wosu Esport", away: "op7", time: "8:00 p.m." },
+                { group: "F", home: "Egresados Del Conalep", away: "OMEN NOCTE", time: "8:35 p.m." }
             ]
         }
     ];
@@ -12868,6 +13582,7 @@
         "RAISE EARTH|op7":                    { h: 0, a: 3 },
         "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 },
         "Quiero KeKe|POS JR":                 { h: 3, a: 0 },
+        "Quiero KeKe|Peruanos FC":             { h: 3, a: 0, wo: "Peruanos FC" },
         "BLASTERS|XBlood":               { h: 3, a: 0, wo: "XBlood" },
         "GTA|Unorthodox":                      { h: 0, a: 3 },
         "SYNOX GAMING|Wosu Esport":            { h: 3, a: 0 },
@@ -16090,13 +16805,13 @@
     })();
 
     /* ======================================================================
-       NOVEDADES — feed deslizable con barras de progreso (15s c/u)
+       NOVEDADES — feed deslizable con barras de progreso (4.5s c/u)
        La barra de la novedad activa se ve ancha (como en el ejemplo de FIFA);
        las demás quedan finas. Se puede deslizar con el dedo o esperar a que
        avance sola. Solo el botón "Más info." abre el detalle.
     ====================================================================== */
     (function () {
-        const NOVEDAD_DURATION_MS = 15000; // 15s por novedad
+        const NOVEDAD_DURATION_MS = 4500; // 4.5s por novedad
         const card = document.getElementById("novedadesCard");
         if (!card) return;
 
@@ -16162,11 +16877,11 @@
             }, NOVEDAD_DURATION_MS);
         }
 
-        function scrollToSlide(index) {
+        function scrollToSlide(index, instant) {
             programmaticScroll = true;
-            trackEl.scrollTo({ left: trackEl.clientWidth * index, behavior: "smooth" });
+            trackEl.scrollTo({ left: trackEl.clientWidth * index, behavior: instant ? "auto" : "smooth" });
             // liberar el flag una vez termina el scroll suave
-            setTimeout(() => { programmaticScroll = false; }, 500);
+            setTimeout(() => { programmaticScroll = false; }, instant ? 50 : 500);
         }
 
         function goTo(index) {
@@ -16252,6 +16967,40 @@
 
         render();
         scheduleNext();
+
+        // ZC26 · si la tarjeta de novedades queda fuera de pantalla (el
+        // usuario se va a otra sección) o la app pasa a segundo plano, el
+        // navegador puede "congelar" el scroll interno o dejar mal
+        // calculado el ancho del carrusel. Al volver a quedar visible,
+        // resincronizamos la posición (sin animación) y reiniciamos el
+        // temporizador para que el avance cada 4.5s no se quede pegado.
+        let cardIsVisible = true;
+        function resyncAndResume() {
+            clearTimer();
+            scrollToSlide(currentIndex, true);
+            scheduleNext();
+        }
+        if ("IntersectionObserver" in window) {
+            const novedadesIO = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const wasVisible = cardIsVisible;
+                    cardIsVisible = entry.isIntersecting;
+                    if (cardIsVisible && !wasVisible && document.visibilityState !== "hidden") {
+                        resyncAndResume();
+                    } else if (!cardIsVisible) {
+                        clearTimer();
+                    }
+                });
+            }, { threshold: 0.15 });
+            novedadesIO.observe(card);
+        }
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "hidden") {
+                clearTimer();
+            } else if (cardIsVisible) {
+                resyncAndResume();
+            }
+        });
 
         // ===================== DETALLE DE NOVEDAD =====================
         const NOVEDAD_DETAILS = {
