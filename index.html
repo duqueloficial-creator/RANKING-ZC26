@@ -2749,10 +2749,12 @@
         .zc26lu-avwrap-plain .zc26lu-avatar { display: block; }
         .zc26lu-cap-badge {
             display: inline-flex;
-            width: 10px;
-            height: 10px;
-            vertical-align: -1.5px;
-            margin-right: 3px;
+            align-items: center;
+            width: 9px;
+            height: 9px;
+            margin-right: 1.5px;
+            transform: translateY(-0.6px);
+            flex-shrink: 0;
         }
         .zc26lu-cap-badge svg {
             width: 100%;
@@ -2798,6 +2800,9 @@
             text-transform: uppercase;
             letter-spacing: 0.4px;
             text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* --- Tamaños reducidos del modal de partido --- */
@@ -3244,6 +3249,18 @@
         }
         .zcgrp-row:last-child {
             border-bottom: none;
+        }
+        /* Barra azul a la izquierda: equipos clasificados a la fase de eliminación (top 2 del grupo).
+           Va en .zcgrp-sticky (no en .zcgrp-row) para que quede fija al hacer scroll horizontal. */
+        .zcgrp-row-quali .zcgrp-sticky::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #4a80f5;
+            z-index: 1;
         }
         /* Columna fija a la izquierda: N° + logo + nombre (más espacio para los equipos) */
         .zcgrp-sticky {
@@ -13597,6 +13614,7 @@
         "Quiero KeKe|Peruanos FC":             { h: 3, a: 0, wo: "Peruanos FC" },
         "KURO ØNIX|SGC":                       { h: 0, a: 2 },
         "Phoenix|XBlood":                      { h: 0, a: 0, wo: "ambos" },
+        "Unorthodox|Sinister Haven":            { h: 3, a: 0, wo: "Sinister Haven" },
         "BLASTERS|XBlood":               { h: 3, a: 0, wo: "XBlood" },
         "GTA|Unorthodox":                      { h: 0, a: 3 },
         "SYNOX GAMING|Wosu Esport":            { h: 3, a: 0 },
@@ -13616,7 +13634,9 @@
         "Acuñas|Pro Legends":                  { h: 3, a: 1 },
         "RAISE EARTH|SYNOX GAMING":            { h: 3, a: 0 },
         "GTA|Baraja de Elite":                 { h: 3, a: 0 },
-        "LPE|BLASTERS":                        { h: 0, a: 3 }
+        "LPE|BLASTERS":                        { h: 0, a: 3 },
+        "Wosu Esport|op7":                     { h: 0, a: 3, wo: "Wosu Esport" },
+        "Egresados Del Conalep|OMEN NOCTE":    { h: 0, a: 3 }
     };
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
@@ -13648,7 +13668,8 @@
         ["F nero", "RAISE EARTH", "RAISE EARTH|SYNOX GAMING"], ["F nero", "RAISE EARTH", "RAISE EARTH|SYNOX GAMING"], ["kikyy", "RAISE EARTH", "RAISE EARTH|SYNOX GAMING"],
         ["Gabinho", "GTA", "GTA|Baraja de Elite"], ["Adri", "GTA", "GTA|Baraja de Elite"], ["nefi", "GTA", "GTA|Baraja de Elite"],
         ["shirox", "BLASTERS", "LPE|BLASTERS"], ["vsblees", "BLASTERS", "LPE|BLASTERS"], ["Diego", "BLASTERS", "LPE|BLASTERS"],
-        ["Denshol", "SGC", "KURO ØNIX|SGC"], ["Denshol", "SGC", "KURO ØNIX|SGC"]
+        ["Denshol", "SGC", "KURO ØNIX|SGC"], ["Denshol", "SGC", "KURO ØNIX|SGC"],
+        ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -13657,7 +13678,8 @@
         "Fax": "new_faxtory", "Luisitopro": "luisitopro123", "AUMCxd": "AUMcxD",
         "darkzz": "Darkxz", "Smk myst": "smk myst!",
         "Marron": "Marro9281", "Iconoc": "lcomic", "Marg": "Mag", "iTheRealMag": "Mag",
-        "cesar": "CESAR", "charles": "CharlesTQ", "mokka": "Mokka", "gabino": "Gabinho", "enjoy n": "enjiynn"
+        "cesar": "CESAR", "charles": "CharlesTQ", "mokka": "Mokka", "gabino": "Gabinho", "enjoy n": "enjiynn",
+        "Zouza": "Zousa"
     };
     /* Minutos exactos (en orden de mapa) para los "Ganador del Set" de la Cronología.
        Si un partido no está aquí, los minutos se generan al azar (fijos por partido). */
@@ -13669,7 +13691,8 @@
         "Leviatán Esports|POS JR": [12, 47, 82, 112],
         "Rostizados|POS": [8, 18, 25],
         "Acuñas|Pro Legends": [15, 50, 85, 110],
-        "RAISE EARTH|SYNOX GAMING": [15, 55, 95]
+        "RAISE EARTH|SYNOX GAMING": [15, 55, 95],
+        "Egresados Del Conalep|OMEN NOCTE": [20, 55, 90]
     };
     /* Tarjetas de los reportes. team = null → el reporte no dice a qué equipo pertenece.
        type: "ta" amarilla, "tr" roja. player = nombre en la plantilla; rep = como salió en el reporte. */
@@ -13683,7 +13706,8 @@
         { m: "GTA|Unorthodox", type: "ta", team: "Unorthodox", player: "Lie in April!", rep: "Lie in April!" },
         { m: "GTA|Unorthodox", type: "ta", team: "Unorthodox", player: "patch", rep: "patch" },
         { m: "GTA|Unorthodox", type: "ta", team: "GTA", player: "Gabinho", rep: "Gabinho" },
-        { m: "Leviatán Esports|POS JR", type: "ta", team: "Leviatán Esports", player: "Sxrgio", rep: "Sxrgio", min: 25 }
+        { m: "Leviatán Esports|POS JR", type: "ta", team: "Leviatán Esports", player: "Sxrgio", rep: "Sxrgio", min: 25 },
+        { m: "Unorthodox|Sinister Haven", type: "ta", team: "Unorthodox", player: "Miseryoung", rep: "Miseryoung" }
     ];
     /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
     const ZC26_GOALS = [];
@@ -13701,7 +13725,8 @@
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", player: "Marro9281", n: 1 },
         { m: "SYNOX GAMING|Wosu Esport", team: "SYNOX GAMING", player: "romanqq", n: 1 },
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", player: "Shark", n: 1 },
-        { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "kikyy", n: 1 }
+        { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "kikyy", n: 1 },
+        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 2 }
     ];
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
     const ZC26_PLAYER_STATUS = [
@@ -13728,7 +13753,8 @@
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", player: "TX JOAR" },
         { m: "Leviatán Esports|POS JR", team: "POS JR", player: "TK Carl" },
         { m: "Acuñas|Pro Legends", team: "Acuñas", player: "Galactus" },
-        { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "Hacent" }
+        { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "Hacent" },
+        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Mokka" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -13750,7 +13776,8 @@
         { m: "Leviatán Esports|POS JR", team: "POS JR", out: "TK Carl", in: "valli" },
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", out: "Sxrgio", in: "Shark", min: 27 },
         { m: "Acuñas|Pro Legends", team: "Acuñas", out: "Galactus", in: "Yascer", min: 20 },
-        { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", out: "Hacent", in: "Hagnes", min: 70 }
+        { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", out: "Hacent", in: "Hagnes", min: 70 },
+        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", out: "Mokka", in: "Zousa", min: 5 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
@@ -14340,7 +14367,7 @@
             case "susp": return wrap(dark + `<circle cx="12" cy="12" r="5.7" fill="none" stroke="${pink}" stroke-width="1.8"/><path d="M8 16L16 8" stroke="${pink}" stroke-width="1.8" stroke-linecap="round"/>`);
             case "estelar": return `<span class="zc26sym-img"><img src="icon_stats%20(1).png" alt=""></span>`;
             case "asist": return `<span class="zc26sym-img"><img src="icon_stats%20(2).png" alt=""></span>`;
-            case "cap": return wrap(dark + `<circle cx="12" cy="12" r="12" fill="none" stroke="#9aa0a6" stroke-width="1.3"/><text x="12" y="15.6" text-anchor="middle" font-size="10" font-weight="800" fill="#cfcfcf" font-family="Segoe UI, Roboto, system-ui, sans-serif">C</text>`);
+            case "cap": return wrap(dark + `<circle cx="12" cy="12" r="10" fill="none" stroke="#9aa0a6" stroke-width="1.4"/><text x="12" y="12" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="800" fill="#cfcfcf" font-family="Segoe UI, Roboto, system-ui, sans-serif">C</text>`);
         }
         return "";
     }
@@ -15139,7 +15166,7 @@
                         <span class="zcgrp-col-last5">Últimos 5</span>
                     </div>
                     ${teams.map((t, i) => `
-                    <div class="zcgrp-row">
+                    <div class="zcgrp-row${i < 2 ? " zcgrp-row-quali" : ""}">
                         <div class="zcgrp-sticky">
                             <span class="zcgrp-col-pos">${i + 1}</span>
                             <span class="zcgrp-col-team" data-zcgrp-team="${t}">
@@ -15292,7 +15319,7 @@
            ganó y baja a quien perdió (más si fue por más sets), y luego se reparte para sumar 100%. */
         const WC_PRED_BASE = {
             "op7": 10, "SYNOX GAMING": 9, "BLASTERS": 8, "Leviatán Esports": 7, "GTA": 6,
-            "Unorthodox": 5, "OMEN NOCTE": 4, "Rostizados": 4, "POS": 3, "Egresados Del Conalep": 3,
+            "Unorthodox": 5, "OMEN NOCTE": 5, "Rostizados": 4, "POS": 3, "Egresados Del Conalep": 3,
             "XBlood": 2.9, "Pro Legends": 2.9, "KURO ØNIX": 2.9, "SGC": 2.9, "Acuñas": 2.9,
             "POS JR": 2.9, "LPE": 2.9, "Quiero KeKe": 2.9, "Baraja de Elite": 2.9, "Sinister Haven": 2.9,
             "Peruanos FC": 2.9, "Phoenix": 2.9, "Wosu Esport": 2.9, "RAISE EARTH": 2.9
