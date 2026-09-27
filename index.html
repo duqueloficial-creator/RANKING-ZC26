@@ -2695,7 +2695,22 @@
         }
         .zc26lu-chip svg { width: 10px; height: 10px; display: block; }
         .zc26lu-chip img { width: 9px; height: 9px; object-fit: contain; display: block; }
-        .zc26lu-chip-star { bottom: 3px; right: -13px; }
+        .zc26lu-chip-star {
+            bottom: -1px;
+            right: -14px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            padding: 0;
+        }
+        .zc26lu-chip-star img { width: 14px; height: 14px; }
+        .zc26lu-chip-star.zc26lu-chip-wide {
+            right: -19px;
+            min-width: 26px;
+            width: auto;
+            border-radius: 8px;
+            padding: 0 4px 0 1px;
+        }
         .zc26lu-chip-goal { top: -8px; left: -8px; }
         .zc26lu-chip-ta { top: -8px; right: -8px; }
         .zc26lu-chip-tr { top: -8px; right: -8px; }
@@ -3681,6 +3696,9 @@
         }
         .zcgrp-legend-swatch-blue {
             background: #4a80f5;
+        }
+        .zcgrp-legend-swatch-lightblue {
+            background: #8ec7ff;
         }
         .zcgrp-legend-abbr {
             flex: 0 0 66px;
@@ -9610,6 +9628,10 @@
                     <span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span>
                     <span>Fase de eliminación directa</span>
                 </div>
+                <div class="zcgrp-legend-item">
+                    <span class="zcgrp-legend-swatch zcgrp-legend-swatch-lightblue"></span>
+                    <span>Fase de eliminación directa default</span>
+                </div>
                 <div class="zcgrp-cols" id="zcgrpCols">
                     <button type="button" class="zcgrp-cols-head" id="zcgrpColsToggle" aria-expanded="false" aria-controls="zcgrpColsBody">
                         <span>Columnas</span><span class="mm-plus" aria-hidden="true"></span>
@@ -13755,19 +13777,19 @@
             day: "Domingo", num: 27, month: "SEP",
             phaseDivider: "Fase de eliminación directa",
             matches: [
-                { label: "Octavos de final", home: "Leviatán Esports", away: "Egresados Del Conalep", time: "7:30 p.m." },
-                { label: "Octavos de final", home: "Phoenix", away: "POS JR", time: "8:15 p.m." },
-                { label: "Octavos de final", home: "LPE", away: "Acuñas", time: "9:00 p.m." },
-                { label: "Octavos de final", home: "OMEN NOCTE", away: "KURO ØNIX", time: "9:45 p.m." }
+                { label: "Octavos de final", home: "BLASTERS", away: "op7", time: "5:00 p.m." },
+                { label: "Octavos de final", home: "GTA", away: "RAISE EARTH", time: "5:45 p.m." },
+                { label: "Octavos de final", home: "SYNOX GAMING", away: "SGC", time: "6:30 p.m." },
+                { label: "Octavos de final", home: "Unorthodox", away: "Quiero KeKe", time: "7:15 p.m." }
             ]
         },
         {
             day: "Lunes", num: 28, month: "SEP",
             matches: [
-                { label: "Octavos de final", home: "BLASTERS", away: "op7", time: "5:00 p.m." },
-                { label: "Octavos de final", home: "GTA", away: "RAISE EARTH", time: "5:45 p.m." },
-                { label: "Octavos de final", home: "SYNOX GAMING", away: "SGC", time: "6:30 p.m." },
-                { label: "Octavos de final", home: "Unorthodox", away: "Quiero KeKe", time: "7:15 p.m." }
+                { label: "Octavos de final", home: "Leviatán Esports", away: "Egresados Del Conalep", time: "7:30 p.m." },
+                { label: "Octavos de final", home: "Phoenix", away: "POS JR", time: "8:15 p.m." },
+                { label: "Octavos de final", home: "LPE", away: "Acuñas", time: "9:00 p.m." },
+                { label: "Octavos de final", home: "OMEN NOCTE", away: "KURO ØNIX", time: "9:45 p.m." }
             ]
         }
     ];
@@ -14067,7 +14089,7 @@
 
         const colR16 = makeCol("Octavos");
         data.r16.forEach((m, i) => {
-            const s = makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: i < 4 ? "27/09" : "28/09", forceMeta: true }));
+            const s = makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: i < 4 ? "28/09" : "27/09", forceMeta: true }));
             s.style.marginBottom = (i < data.r16.length - 1 ? "14px" : "0");
             colR16.appendChild(s);
         });
@@ -14904,7 +14926,7 @@
         const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name)); // suplente que entró a jugar
         const participated = isStarter || hasData || cameOn;
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
-        const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}">${inner}${n > 1 ? n : ""}</span>`;
+        const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}${n > 2 ? " zc26lu-chip-wide" : ""}">${inner}${n > 1 ? n : ""}</span>`;
         const sym = (cls, name) => `<span class="zc26lu-chip zc26lu-chip-sym ${cls}">${zc26Sym(name)}</span>`;
         const wentOut = zc26IsSubbedOut(ctx, team, name); // titular que salió
         const chips = (st.star ? chip("zc26lu-chip-star", ZC26_ICON_STAR, st.star) : "")
