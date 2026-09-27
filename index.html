@@ -2655,11 +2655,11 @@
             bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 27px;
+            width: 22px;
             padding: 2px 0;
             border-radius: 6px;
             border: 2px solid #141414;
-            font-size: 0.56rem;
+            font-size: 0.52rem;
             font-weight: 800;
             line-height: 1;
             text-align: center;
@@ -2755,7 +2755,7 @@
         }
         .zc26lu-chip-sym .zc26sym-svg { width: 14px; height: 14px; }
         .zc26lu-chip-in { top: -8px; left: -8px; }
-        .zc26lu-chip-ast { bottom: 3px; left: -13px; }
+        .zc26lu-chip-ast { bottom: -1px; left: -13px; }
         /* ZC26 · Más partidos: tarjetas (mismo estilo mp-card) de los otros partidos de los dos equipos */
         .zc26mm-more { display: flex; flex-direction: column; gap: 8px; }
         .zc26mm-more .zcfx-card { cursor: default; }
@@ -3583,6 +3583,16 @@
         }
         .zcbracket-match[data-zcbr-home]:not([data-zcbr-home=""])[data-zcbr-away]:not([data-zcbr-away=""]) {
             cursor: pointer;
+            transition: box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+        }
+        .zcbracket-match[data-zcbr-home]:not([data-zcbr-home=""])[data-zcbr-away]:not([data-zcbr-away=""]):hover {
+            border-color: rgba(255,255,255,0.18);
+        }
+        .zcbracket-match[data-zcbr-home]:not([data-zcbr-home=""])[data-zcbr-away]:not([data-zcbr-away=""]):active,
+        .zcbracket-match.zcbr-pressed {
+            border-color: rgba(255,255,255,0.3);
+            background: linear-gradient(135deg, #1c1f27 0%, #101217 100%);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 6px 16px rgba(0,0,0,0.5);
         }
         .zcbracket-match-meta {
             display: flex;
@@ -3663,6 +3673,120 @@
             line-height: 1.5;
             padding: 14px 4px 2px;
         }
+        /* ---- Botón para abrir el bracket en modo zoom/pan a pantalla completa ---- */
+        .zcbracket-toolbar {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 12px;
+        }
+        .zcbracket-zoom-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #e9e9eb;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            padding: 8px 13px;
+            border-radius: 999px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .zcbracket-zoom-btn:active { background: rgba(255,255,255,0.12); }
+        .zcbracket-zoom-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+        /* ---- Overlay de bracket a pantalla completa: pan (arriba/abajo/izq/der) + zoom ----
+           Vive por completo fuera del flujo normal de la página (position: fixed + body
+           bloqueado mientras está abierto), así que sus gestos táctiles nunca compiten con
+           el scroll vertical normal de la página: fuera de este overlay nada cambia. */
+        .zcbrz-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #0b0c0f;
+            display: none;
+            flex-direction: column;
+        }
+        .zcbrz-overlay.active { display: flex; }
+        .zcbrz-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .zcbrz-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.2px;
+        }
+        .zcbrz-hint {
+            font-size: 0.62rem;
+            color: #7c828a;
+            margin-top: 2px;
+        }
+        .zcbrz-close {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.06);
+            color: #e9e9eb;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .zcbrz-stage {
+            position: relative;
+            flex: 1 1 auto;
+            overflow: hidden;
+            touch-action: none;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: grab;
+        }
+        .zcbrz-stage.zcbrz-dragging { cursor: grabbing; }
+        .zcbrz-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            will-change: transform;
+        }
+        .zcbrz-canvas .zcbracket { padding: 20px; margin: 0; min-width: 0; }
+        .zcbrz-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+            border-top: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .zcbrz-ctrl-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.07);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .zcbrz-ctrl-btn:active { background: rgba(255,255,255,0.14); }
+        .zcbrz-ctrl-btn svg { width: 18px; height: 18px; }
         .zcgrp-legend {
             background: none;
             border: none;
@@ -9687,7 +9811,32 @@
             <div class="zcbracket-outer" id="zcbracketOuter">
                 <div class="zcbracket" id="zcbracket"></div>
             </div>
+            <div class="zcbracket-toolbar">
+                <button type="button" class="zcbracket-zoom-btn" id="zcbracketZoomBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+                    Ver bracket completo
+                </button>
+            </div>
             <div class="zcbracket-note">Los resultados y cruces se completan automáticamente conforme avanza la fase de eliminación directa.</div>
+        </div>
+        <div class="zcbrz-overlay" id="zcbrzOverlay">
+            <div class="zcbrz-header">
+                <div>
+                    <div class="zcbrz-title">Bracket completo</div>
+                    <div class="zcbrz-hint">Arrastra para moverte · pellizca o usa +/− para hacer zoom</div>
+                </div>
+                <button type="button" class="zcbrz-close" id="zcbrzCloseBtn" aria-label="Cerrar">✕</button>
+            </div>
+            <div class="zcbrz-stage" id="zcbrzStage">
+                <div class="zcbrz-canvas" id="zcbrzCanvas"></div>
+            </div>
+            <div class="zcbrz-controls">
+                <button type="button" class="zcbrz-ctrl-btn" id="zcbrzZoomOut" aria-label="Alejar">−</button>
+                <button type="button" class="zcbrz-ctrl-btn" id="zcbrzZoomFit" aria-label="Ver todo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                </button>
+                <button type="button" class="zcbrz-ctrl-btn" id="zcbrzZoomIn" aria-label="Acercar">+</button>
+            </div>
         </div>
         <div class="section-updated">La clasificación se actualizará conforme se disputen los encuentros</div>
     </div>
@@ -13777,10 +13926,10 @@
             day: "Domingo", num: 27, month: "SEP",
             phaseDivider: "Fase de eliminación directa",
             matches: [
-                { label: "Octavos de final", home: "BLASTERS", away: "op7", time: "5:00 p.m." },
-                { label: "Octavos de final", home: "GTA", away: "RAISE EARTH", time: "5:45 p.m." },
-                { label: "Octavos de final", home: "SYNOX GAMING", away: "SGC", time: "6:30 p.m." },
-                { label: "Octavos de final", home: "Unorthodox", away: "Quiero KeKe", time: "7:15 p.m." }
+                { label: "Octavos de final", home: "BLASTERS", away: "op7", time: "6:30 p.m." },
+                { label: "Octavos de final", home: "GTA", away: "RAISE EARTH", time: "7:15 p.m." },
+                { label: "Octavos de final", home: "SYNOX GAMING", away: "SGC", time: "8:00 p.m." },
+                { label: "Octavos de final", home: "Unorthodox", away: "Quiero KeKe", time: "8:45 p.m." }
             ]
         },
         {
@@ -14068,8 +14217,8 @@
             ${away ? `<div class="zcbracket-team ${awayCls}" data-zcbr-team="${zc26Esc(away)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(away)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(away)}</span>${awayScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
         </div>`;
     }
-    function zc26RenderBracket() {
-        const bracket = document.getElementById("zcbracket");
+    function zc26RenderBracket(targetBracket) {
+        const bracket = targetBracket || document.getElementById("zcbracket");
         if (!bracket) return;
         bracket.innerHTML = "";
         const data = zc26ComputeBracket();
@@ -14926,7 +15075,7 @@
         const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name)); // suplente que entró a jugar
         const participated = isStarter || hasData || cameOn;
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
-        const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}${n > 2 ? " zc26lu-chip-wide" : ""}">${inner}${n > 1 ? n : ""}</span>`;
+        const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}${n > 1 ? " zc26lu-chip-wide" : ""}">${inner}${n > 1 ? n : ""}</span>`;
         const sym = (cls, name) => `<span class="zc26lu-chip zc26lu-chip-sym ${cls}">${zc26Sym(name)}</span>`;
         const wentOut = zc26IsSubbedOut(ctx, team, name); // titular que salió
         const chips = (st.star ? chip("zc26lu-chip-star", ZC26_ICON_STAR, st.star) : "")
@@ -15850,36 +15999,314 @@
     zc26RenderBracket();
     // Al tocar una llave del bracket con equipos definidos, lleva a la sección "Partidos"
     // y hace scroll hasta la tarjeta del partido correspondiente, resaltándola brevemente.
+    // Función compartida: la usan tanto el bracket normal como la vista de zoom a pantalla completa.
+    function zc26GoToBracketMatch(home, away) {
+        if (!home || !away) return;
+        const cards = document.querySelectorAll("#zc26FixturesList [data-zc26-match]");
+        let target = null;
+        cards.forEach(c => {
+            if (target) return;
+            if (c.dataset.home === home && c.dataset.away === away) target = c;
+        });
+        if (!target) return;
+        zcPlaySound("clickentrar");
+        const zc26Tab = document.querySelector('.section-tab[data-section-tab="zc26"]');
+        if (zc26Tab) { setActiveSectionTab("zc26"); applySectionFilter("zc26"); }
+        const octavosBtn = document.querySelector('#zc26GroupFilter .am-filter-btn[data-zc26-group-filter="OCTAVOS"]');
+        if (octavosBtn) {
+            document.querySelectorAll("#zc26GroupFilter .am-filter-btn").forEach(b => b.classList.remove("active"));
+            octavosBtn.classList.add("active");
+            if (typeof applyZc26Filters === "function") applyZc26Filters();
+        }
+        setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth", block: "center" });
+            target.classList.add("zcfx-card-highlight");
+            setTimeout(() => target.classList.remove("zcfx-card-highlight"), 1600);
+        }, 120);
+    }
     (function () {
         const bracketEl = document.getElementById("zcbracket");
         if (!bracketEl) return;
+        // Feedback táctil: al tocar/presionar una casilla del bracket se marca visualmente
+        // como "presionada" (misma clase que usa el :active de CSS), para que quede claro
+        // que al soltar el dedo esa casilla va a llevarte a la tarjeta del partido. Se
+        // mantiene visible un instante tras soltar (en vez de quitarla al toque) porque en
+        // un tap real, presionar y soltar pasan casi en el mismo frame: sin este pequeño
+        // margen, la animación de "encogerse" no alcanza a verse antes de que la página
+        // haga scroll hacia la tarjeta del partido.
+        let zcbrPressTimer = null;
+        function zcbrPressOn(e) {
+            const box = e.target.closest(".zcbracket-match");
+            if (!box) return;
+            if (zcbrPressTimer) { clearTimeout(zcbrPressTimer); zcbrPressTimer = null; }
+            bracketEl.querySelectorAll(".zcbracket-match.zcbr-pressed").forEach(b => b.classList.remove("zcbr-pressed"));
+            box.classList.add("zcbr-pressed");
+        }
+        function zcbrPressOff() {
+            if (zcbrPressTimer) clearTimeout(zcbrPressTimer);
+            zcbrPressTimer = setTimeout(() => {
+                bracketEl.querySelectorAll(".zcbracket-match.zcbr-pressed").forEach(b => b.classList.remove("zcbr-pressed"));
+                zcbrPressTimer = null;
+            }, 180);
+        }
+        bracketEl.addEventListener("touchstart", zcbrPressOn, { passive: true });
+        bracketEl.addEventListener("mousedown", zcbrPressOn);
+        bracketEl.addEventListener("touchend", zcbrPressOff);
+        bracketEl.addEventListener("touchcancel", zcbrPressOff);
+        bracketEl.addEventListener("mouseup", zcbrPressOff);
+        bracketEl.addEventListener("mouseleave", zcbrPressOff);
         bracketEl.addEventListener("click", function (e) {
             const box = e.target.closest(".zcbracket-match");
             if (!box) return;
-            const home = box.dataset.zcbrHome || "";
-            const away = box.dataset.zcbrAway || "";
-            if (!home || !away) return;
-            const cards = document.querySelectorAll("#zc26FixturesList [data-zc26-match]");
-            let target = null;
-            cards.forEach(c => {
-                if (target) return;
-                if (c.dataset.home === home && c.dataset.away === away) target = c;
-            });
-            if (!target) return;
-            zcPlaySound("clickentrar");
-            const zc26Tab = document.querySelector('.section-tab[data-section-tab="zc26"]');
-            if (zc26Tab) { setActiveSectionTab("zc26"); applySectionFilter("zc26"); }
-            const octavosBtn = document.querySelector('#zc26GroupFilter .am-filter-btn[data-zc26-group-filter="OCTAVOS"]');
-            if (octavosBtn) {
-                document.querySelectorAll("#zc26GroupFilter .am-filter-btn").forEach(b => b.classList.remove("active"));
-                octavosBtn.classList.add("active");
-                if (typeof applyZc26Filters === "function") applyZc26Filters();
+            zc26GoToBracketMatch(box.dataset.zcbrHome || "", box.dataset.zcbrAway || "");
+        });
+    })();
+    // ===================== ZC26 · Vista de bracket a pantalla completa (zoom + pan) =====================
+    // Overlay independiente del flujo de la página: mientras está abierto, el body queda
+    // bloqueado (mismo patrón que el resto de overlays de la app), así que arrastrar o
+    // pellizcar aquí dentro NUNCA compite con el scroll normal de la página. Al cerrarlo,
+    // todo vuelve exactamente a como estaba.
+    (function () {
+        const openBtn = document.getElementById("zcbracketZoomBtn");
+        const overlay = document.getElementById("zcbrzOverlay");
+        const closeBtn = document.getElementById("zcbrzCloseBtn");
+        const stage = document.getElementById("zcbrzStage");
+        const canvas = document.getElementById("zcbrzCanvas");
+        const zoomInBtn = document.getElementById("zcbrzZoomIn");
+        const zoomOutBtn = document.getElementById("zcbrzZoomOut");
+        const zoomFitBtn = document.getElementById("zcbrzZoomFit");
+        if (!openBtn || !overlay || !stage || !canvas) return;
+
+        let scale = 1, minScale = 1, maxScale = 1;
+        let x = 0, y = 0; // traslado del canvas dentro del stage, en px, siempre <= 0
+        let contentW = 0, contentH = 0;
+        let zcbrzLastW = window.innerWidth, zcbrzResizeT = null;
+
+        function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+        // Recalcula los límites de traslado para que el bracket nunca pueda arrastrarse
+        // más allá de sus propios bordes: siempre queda contenido dentro del stage,
+        // el resto del contenido "se mueve a otra área" en vez de salirse de sus dimensiones.
+        function clampPosition() {
+            const stageW = stage.clientWidth, stageH = stage.clientHeight;
+            const w = contentW * scale, h = contentH * scale;
+            const minX = Math.min(0, stageW - w);
+            const minY = Math.min(0, stageH - h);
+            x = clamp(x, minX, 0);
+            y = clamp(y, minY, 0);
+            // Si el contenido es más chico que el stage en algún eje, se centra en ese eje.
+            if (w <= stageW) x = (stageW - w) / 2;
+            if (h <= stageH) y = (stageH - h) / 2;
+        }
+        function apply() {
+            clampPosition();
+            canvas.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        }
+        function setScale(newScale, originX, originY) {
+            newScale = clamp(newScale, minScale, maxScale);
+            if (originX === undefined) {
+                originX = stage.clientWidth / 2;
+                originY = stage.clientHeight / 2;
             }
-            setTimeout(() => {
-                target.scrollIntoView({ behavior: "smooth", block: "center" });
-                target.classList.add("zcfx-card-highlight");
-                setTimeout(() => target.classList.remove("zcfx-card-highlight"), 1600);
-            }, 120);
+            // Mantiene el punto bajo el dedo/cursor fijo al hacer zoom, en vez de saltar.
+            const contentX = (originX - x) / scale;
+            const contentY = (originY - y) / scale;
+            scale = newScale;
+            x = originX - contentX * scale;
+            y = originY - contentY * scale;
+            apply();
+        }
+        function fitToScreen() {
+            const stageW = stage.clientWidth, stageH = stage.clientHeight;
+            if (!contentW || !contentH || !stageW || !stageH) return;
+            minScale = Math.min(stageW / contentW, stageH / contentH) * 0.98;
+            maxScale = Math.max(minScale * 3.2, 1.6);
+            scale = minScale;
+            x = (stageW - contentW * scale) / 2;
+            y = (stageH - contentH * scale) / 2;
+            apply();
+        }
+
+        function buildCanvas() {
+            // Antes esto clonaba el bracket ya renderizado (cloneNode), pero las líneas
+            // conectoras quedan grabadas como coordenadas en píxeles calculadas para el
+            // padding/márgenes ORIGINALES; al clonarlas dentro de un contenedor con otro
+            // padding, las cajas se movían pero las líneas se quedaban donde estaban →
+            // resultado: conectores desalineados y feos, sobre todo aquí en el zoom.
+            // Arreglo: se vuelve a renderizar el bracket desde cero directamente en este
+            // contenedor, así las líneas se calculan ya con la geometría real que le
+            // corresponde aquí, igual de precisas que en la vista normal.
+            canvas.innerHTML = "";
+            const target = document.createElement("div");
+            target.className = "zcbracket";
+            canvas.appendChild(target);
+            zc26RenderBracket(target);
+            contentW = target.scrollWidth;
+            contentH = target.scrollHeight;
+            let zcbrzPressTimer = null;
+            function zcbrzPressOn(e) {
+                const box = e.target.closest(".zcbracket-match");
+                if (!box) return;
+                if (zcbrzPressTimer) { clearTimeout(zcbrzPressTimer); zcbrzPressTimer = null; }
+                target.querySelectorAll(".zcbracket-match.zcbr-pressed").forEach(b => b.classList.remove("zcbr-pressed"));
+                box.classList.add("zcbr-pressed");
+            }
+            function zcbrzPressOff() {
+                if (zcbrzPressTimer) clearTimeout(zcbrzPressTimer);
+                zcbrzPressTimer = setTimeout(() => {
+                    target.querySelectorAll(".zcbracket-match.zcbr-pressed").forEach(b => b.classList.remove("zcbr-pressed"));
+                    zcbrzPressTimer = null;
+                }, 180);
+            }
+            target.addEventListener("touchstart", zcbrzPressOn, { passive: true });
+            target.addEventListener("mousedown", zcbrzPressOn);
+            target.addEventListener("touchend", zcbrzPressOff);
+            target.addEventListener("touchcancel", zcbrzPressOff);
+            target.addEventListener("mouseup", zcbrzPressOff);
+            target.addEventListener("mouseleave", zcbrzPressOff);
+            target.addEventListener("click", (e) => {
+                const box = e.target.closest(".zcbracket-match");
+                if (!box) return;
+                const home = box.dataset.zcbrHome || "";
+                const away = box.dataset.zcbrAway || "";
+                if (!home || !away) return;
+                closeOverlay();
+                setTimeout(() => zc26GoToBracketMatch(home, away), 260);
+            });
+        }
+
+        function openOverlay() {
+            // El bracket clonado se debe medir DESPUÉS de que el overlay ya sea visible:
+            // medir su ancho/alto mientras el overlay todavía está en display:none siempre
+            // da 0, lo que dejaba el zoom "atascado" en escala 1 (no hacía nada) y el
+            // bracket se mostraba a tamaño real sin encajar en la pantalla.
+            overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+            zcbrzLastW = window.innerWidth;
+            buildCanvas();
+            fitToScreen();
+            // Una segunda pasada por si el navegador todavía no había terminado de
+            // aplicar el layout del overlay en el mismo frame (algunos Android/WebView).
+            requestAnimationFrame(fitToScreen);
+            zcPlaySound("clickentrar");
+        }
+        function closeOverlay() {
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+            zcPlaySound("clicksalir");
+        }
+        openBtn.addEventListener("click", openOverlay);
+        closeBtn.addEventListener("click", closeOverlay);
+        overlay.addEventListener("keydown", (e) => { if (e.key === "Escape") closeOverlay(); });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay.classList.contains("active")) closeOverlay();
+        });
+
+        zoomInBtn.addEventListener("click", () => setScale(scale * 1.35));
+        zoomOutBtn.addEventListener("click", () => setScale(scale / 1.35));
+        zoomFitBtn.addEventListener("click", fitToScreen);
+
+        // ---- Gestos táctiles: un dedo = mover (pan) en las 4 direcciones; dos dedos = zoom.
+        // touch-action:none en el stage deja todo el manejo del gesto en manos de este
+        // código, así que el navegador nunca intenta hacer scroll de página, "pull to
+        // refresh" ni su propio pinch-zoom por encima de esto (la causa típica de que
+        // el swipe se "trabe" en Android al mezclar gestos táctiles con scroll nativo).
+        let pts = new Map();
+        let dragging = false;
+        let lastX = 0, lastY = 0;
+        let pinchStartDist = 0, pinchStartScale = 1;
+
+        function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+        function midpoint(a, b) {
+            const r = stage.getBoundingClientRect();
+            return { x: (a.x + b.x) / 2 - r.left, y: (a.y + b.y) / 2 - r.top };
+        }
+
+        stage.addEventListener("touchstart", (e) => {
+            for (const t of e.changedTouches) pts.set(t.identifier, { x: t.clientX, y: t.clientY });
+            if (pts.size === 1) {
+                const p = pts.values().next().value;
+                dragging = true;
+                lastX = p.x; lastY = p.y;
+                stage.classList.add("zcbrz-dragging");
+            } else if (pts.size === 2) {
+                dragging = false;
+                const [a, b] = Array.from(pts.values());
+                pinchStartDist = dist(a, b) || 1;
+                pinchStartScale = scale;
+            }
+        }, { passive: true });
+
+        stage.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+            for (const t of e.changedTouches) {
+                if (pts.has(t.identifier)) pts.set(t.identifier, { x: t.clientX, y: t.clientY });
+            }
+            if (pts.size === 1 && dragging) {
+                const p = pts.values().next().value;
+                x += p.x - lastX;
+                y += p.y - lastY;
+                lastX = p.x; lastY = p.y;
+                apply();
+            } else if (pts.size === 2) {
+                const [a, b] = Array.from(pts.values());
+                const d = dist(a, b) || 1;
+                const mid = midpoint(a, b);
+                setScale(pinchStartScale * (d / pinchStartDist), mid.x, mid.y);
+            }
+        }, { passive: false });
+
+        function endTouch(e) {
+            for (const t of e.changedTouches) pts.delete(t.identifier);
+            if (pts.size === 0) {
+                dragging = false;
+                stage.classList.remove("zcbrz-dragging");
+            } else if (pts.size === 1) {
+                const p = pts.values().next().value;
+                dragging = true;
+                lastX = p.x; lastY = p.y;
+            }
+        }
+        stage.addEventListener("touchend", endTouch, { passive: true });
+        stage.addEventListener("touchcancel", endTouch, { passive: true });
+
+        // ---- Mouse (desktop): arrastrar para mover, rueda para hacer zoom ----
+        let mouseDown = false;
+        stage.addEventListener("mousedown", (e) => {
+            mouseDown = true;
+            lastX = e.clientX; lastY = e.clientY;
+            stage.classList.add("zcbrz-dragging");
+        });
+        window.addEventListener("mousemove", (e) => {
+            if (!mouseDown) return;
+            x += e.clientX - lastX;
+            y += e.clientY - lastY;
+            lastX = e.clientX; lastY = e.clientY;
+            apply();
+        });
+        window.addEventListener("mouseup", () => { mouseDown = false; stage.classList.remove("zcbrz-dragging"); });
+        stage.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            const r = stage.getBoundingClientRect();
+            setScale(scale * (e.deltaY < 0 ? 1.12 : 1 / 1.12), e.clientX - r.left, e.clientY - r.top);
+        }, { passive: false });
+
+        window.addEventListener("resize", () => {
+            // En móviles, la barra de direcciones del navegador se oculta/muestra al
+            // hacer scroll (rápido o a velocidad media, cualquiera dispara esto igual),
+            // y eso lanza un evento "resize" que solo cambia el ALTO del viewport. El
+            // ancho de las columnas del bracket es fijo, así que reconstruir toda su
+            // estructura en esos casos era lo que se veía como el glitch/salto hacia
+            // arriba: aquí solo se reconstruye si de verdad cambió el ANCHO; si solo
+            // cambió el alto, se reajusta el encuadre del zoom sin tocar la estructura.
+            if (!overlay.classList.contains("active")) return;
+            const widthChanged = window.innerWidth !== zcbrzLastW;
+            zcbrzLastW = window.innerWidth;
+            clearTimeout(zcbrzResizeT);
+            zcbrzResizeT = setTimeout(() => {
+                if (widthChanged) buildCanvas();
+                fitToScreen();
+            }, 200);
         });
     })();
     (function () {
@@ -15972,7 +16399,15 @@
     })();
     (function () {
         let zcbrResizeT = null;
+        let zcbrLastW = window.innerWidth;
         window.addEventListener("resize", () => {
+            // Mismo motivo que en el zoom: en móviles, mostrar/ocultar la barra de
+            // direcciones al hacer scroll dispara "resize" cambiando solo el ALTO del
+            // viewport. El ancho de las columnas del bracket es fijo, así que no hace
+            // falta reconstruirlo por eso — y hacerlo era justo lo que causaba el
+            // glitch y el salto hacia arriba. Se ignora si el ancho no cambió.
+            if (window.innerWidth === zcbrLastW) return;
+            zcbrLastW = window.innerWidth;
             clearTimeout(zcbrResizeT);
             zcbrResizeT = setTimeout(() => {
                 zc26RenderBracket();
