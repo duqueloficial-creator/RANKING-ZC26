@@ -3135,6 +3135,7 @@
         .zc26cron-milestone-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #c9cdd3; }
         .zc26cron-milestone-time { font-size: 0.6rem; color: #8a8f98; }
         .zc26cron-goal-banner { padding: 12px 10px 10px; text-align: center; }
+        .zc26cron-set-img { width: 100%; height: 100%; object-fit: contain; display: block; }
         .zc26cron-goal-icon { display: inline-flex; width: 20px; height: 20px; margin-bottom: 4px; }
         .zc26cron-goal-title { font-size: 0.78rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.4px; }
         .zc26cron-goal-min { font-size: 0.6rem; color: rgba(255,255,255,0.85); margin-top: 2px; }
@@ -3407,6 +3408,13 @@
         .zcgrp-col-pts {
             color: #ffffff;
             font-weight: 800;
+        }
+        /* Equipos que NO clasificaron a la fase de eliminación: letras en gris */
+        .zcgrp-row-out .zcgrp-col-pos,
+        .zcgrp-row-out .zcgrp-team-name,
+        .zcgrp-row-out .zcgrp-col-num,
+        .zcgrp-row-out .zcgrp-col-pts {
+            color: #6b7079;
         }
         .zcgrp-col-last5 {
             flex: 1.8 0 108px;
@@ -4969,6 +4977,50 @@
             color: #666666;
             text-align: center;
             margin-top: 4px;
+        }
+        /* ZC26 · partidos de equipos (edición actual): logo + nombre pequeño */
+        .match-row-score.has-logos { align-items: center; gap: 8px; }
+        .match-team {
+            flex: 1 1 0;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .match-team-logo {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            display: block;
+        }
+        .match-team-name {
+            max-width: 100%;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            color: #9a9a9a;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .am-team-logo {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+        }
+        .am-row-score .am-score-name.am-name-sm,
+        .am-score-name.am-name-sm {
+            font-size: 0.56rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            color: #9a9a9a;
+        }
+        @media (max-width: 699px) {
+            .am-team-logo { width: 44px; height: 44px; }
         }
         /* ZC26 · botón "Ver todos" junto al título "Partidas recientes" */
         .am-open-btn {
@@ -8312,15 +8364,6 @@
         <div class="home-section" id="home-novedades">
             <div class="novedades-card" id="novedadesCard">
                 <div class="novedades-track" id="novedadesTrack">
-                    <div class="novedad-slide" data-novedad-index="5">
-                        <div class="novedad-img-wrap"><img src="news/novedadesxdsep27.png" alt="ZC26 ESPORTS"></div>
-                        <div class="novedad-body">
-                            <div class="novedad-tag">ZC26 ESPORTS™</div>
-                            <div class="novedad-text">Predicción del ganador del torneo</div>
-                            <button type="button" class="novedad-more-btn" data-open-novedad="5">Más info.</button>
-                        </div>
-                    </div>
-
                     <div class="novedad-slide" data-novedad-index="4">
                         <div class="novedad-img-wrap"><img src="news/novedades27sep1.jpg" alt="ZC26 ESPORTS"></div>
                         <div class="novedad-body">
@@ -10052,6 +10095,7 @@
             winnings: "$0", credits: "6,000 créditos",
             recent: [
                 { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "WB", scoreA: 0, teamB: "LEV", scoreB: 3, tourney: "ZC26 · Semifinal" },
@@ -10086,6 +10130,7 @@
             alternateIds: ["JC", "~ T X -->JC"],
             winnings: "$0", credits: "10,000 créditos",
             recent: [
+                { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
@@ -10153,6 +10198,9 @@
             alternateIds: ["alva210"],
             winnings: "$0", credits: "0 créditos",
             recent: [
+                { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "8 ago 2026", time: "UTC-5", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, tourney: "ZC26 · Gran Final" },
             ],
             achievements: [
@@ -10537,13 +10585,16 @@
         },
         {
             key: "robertbv",
+            zcTeam: "Unorthodox",
             name: "RobertBV", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 123, prevPoints: 116,
             events: "2 (1v1)", titles: "1er Lugar", sets: "4 - 1", matches: "10 - 2",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["Pibble", "robertbv2902", "Robert"],
             winnings: "$5.00", credits: "7,300 créditos",
             recent: [
+                { date: "25 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Sinister Haven", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
+                { date: "21 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 0, teamB: "Unorthodox", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo D" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Zyrox", scoreA: 2, teamB: "RobertBV", scoreB: 1, tourney: "ZC26 1v1 Edición 4 · Ronda 1" },
                 { date: "27 ago 2026", time: "UTC-5", teamA: "RobertBV", scoreA: 3, teamB: "Sebas", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
                 { date: "27 ago 2026", time: "UTC-5", teamA: "Zyrox", scoreA: 0, teamB: "RobertBV", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
@@ -10736,6 +10787,7 @@
         },
         {
             key: "heritage",
+            zcTeam: "Baraja de Elite",
             name: "Heritage", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 45, prevPoints: 52,
             events: "1 (1v1)", titles: "2do Lugar", sets: "3 - 1", matches: "8 - 4",
             born: "Por confirmar", status: "Activo", role: "Player",
@@ -10816,12 +10868,16 @@
         },
         {
             key: "owneronyt",
+            zcTeam: "Pro Legends",
             name: "Owneronyt", country: "HON", team: "Jugador individual (1vs1)", teamTag: "", points: 30,
             events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
             winnings: "$0", credits: "0 créditos",
             recent: [
+                { date: "24 sep 2026", time: "UTC-5", teamA: "Acuñas", scoreA: 3, teamB: "Pro Legends", scoreB: 1, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Pro Legends", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Pro Legends", scoreA: 0, teamB: "Egresados del Conalep", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo F" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Heritage", scoreA: 2, teamB: "Owneronyt", scoreB: 0, tourney: "ZC26 1v1 Edición 4 · Ronda 2" },
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Owneronyt", scoreA: 2, teamB: "Yanielgg", scoreB: 0, tourney: "ZC26 1v1 Edición 4 · Ronda 1" },
             ],
@@ -12491,6 +12547,28 @@
         });
     }
 
+    // ZC26 · partidos de la edición actual (fase de grupos / eliminación):
+    // se muestran con el logo del equipo y el nombre en letra pequeña.
+    const ZC_TEAM_LOGO_FALLBACK = "escudo_logo/escudo-default.png";
+    function zcIsEditionMatch(m) {
+        return /Fase de Grupos|Octavos de final|Cuartos de final/i.test((m && m.tourney) || "");
+    }
+    function zcTeamLogoSrc(name) {
+        const n = normId(name);
+        const keys = Object.keys(ZC26_TEAM_LOGOS);
+        for (let i = 0; i < keys.length; i++) {
+            if (normId(keys[i]) === n) return ZC26_TEAM_LOGOS[keys[i]];
+        }
+        return ZC_TEAM_LOGO_FALLBACK;
+    }
+    const ZC_LOGO_ONERROR = "this.onerror=function(){this.style.visibility='hidden'};this.src='escudo_logo/escudo-default.png'";
+    function zcTeamCellHtml(name) {
+        return `<span class="match-team"><img class="match-team-logo" src="${zcTeamLogoSrc(name)}" alt="${name}" onerror="${ZC_LOGO_ONERROR}"><span class="match-team-name">${name}</span></span>`;
+    }
+    function zcAmLogoHtml(name) {
+        return `<img class="am-team-logo" src="${zcTeamLogoSrc(name)}" alt="${name}" onerror="${ZC_LOGO_ONERROR}">`;
+    }
+
     function scorePairHtml(scoreA, scoreB, flat) {
         if (flat) {
             return `<span class="score-pair"><span class="score-flat">${scoreA}</span><span class="score-sep">:</span><span class="score-flat">${scoreB}</span></span>`;
@@ -12519,6 +12597,7 @@
     function matchResultClass(p, m) {
         const tokens = [p.name, ...(p.alternateIds || [])];
         if (p.teamTag) tokens.push(p.teamTag);
+        if (p.zcTeam) tokens.push(p.zcTeam);
         const normTokens = tokens.map(normId).filter(Boolean);
         function sideMatches(sideName) {
             const ns = normId(sideName);
@@ -12551,6 +12630,7 @@
     function matchPerspective(p, m) {
         const tokens = [p.name, ...(p.alternateIds || [])];
         if (p.teamTag) tokens.push(p.teamTag);
+        if (p.zcTeam) tokens.push(p.zcTeam);
         const normTokens = tokens.map(normId).filter(Boolean);
         function sideMatches(sideName) {
             const ns = normId(sideName);
@@ -13052,9 +13132,11 @@
                         <span>${m.date} · ${m.time || ""}</span>
                         ${badge}
                     </div>
-                    <div class="match-row-score">
+                    ${zcIsEditionMatch(m) ? `<div class="match-row-score has-logos">
+                        ${zcTeamCellHtml(m.teamA)}${scorePairHtml(m.scoreA, m.scoreB)}${zcTeamCellHtml(m.teamB)}
+                    </div>` : `<div class="match-row-score">
                         <span>${m.teamA}</span>${scorePairHtml(m.scoreA, m.scoreB)}<span>${m.teamB}</span>
-                    </div>
+                    </div>`}
                     <div class="match-row-tourney">${m.tourney}</div>
                 </div>
             `;
@@ -13275,11 +13357,12 @@
             ? matches.map(m => {
                 const meta = matchTierMeta(m.tourney);
                 const persp = matchPerspective(p, m);
+                const zcEd = zcIsEditionMatch(m);
                 const oppIdx = (!meta.is3v3 && persp.oppPlayer) ? PLAYERS.indexOf(persp.oppPlayer) : -1;
                 const ownIdx = !meta.is3v3 ? PLAYERS.indexOf(p) : -1;
                 const oppNameHtml = oppIdx >= 0
-                    ? `<button type="button" class="am-score-name am-score-name-opp am-opponent" data-open-player="${oppIdx}">${persp.oppLabel}</button>`
-                    : `<span class="am-score-name am-score-name-opp am-opponent-plain">${persp.oppLabel}</span>`;
+                    ? `<button type="button" class="am-score-name am-score-name-opp am-opponent${zcEd ? " am-name-sm" : ""}" data-open-player="${oppIdx}">${persp.oppLabel}</button>`
+                    : `<span class="am-score-name am-score-name-opp am-opponent-plain${zcEd ? " am-name-sm" : ""}">${persp.oppLabel}</span>`;
                 const rBadgeCls = persp.draw ? "draw" : (persp.win ? "win" : "loss");
                 const rBadgeTxt = persp.draw ? "D" : (persp.win ? "W" : "L");
                 const rRowCls = persp.draw ? "am-draw" : (persp.win ? "am-win" : "am-loss");
@@ -13298,8 +13381,8 @@
                     <div class="am-row-score">
                         <span class="match-badge ${rBadgeCls}">${rBadgeTxt}</span>
                         <div class="am-score-team am-score-team-own">
-                            ${!meta.is3v3 ? teamShieldHtml() : ""}
-                            <span class="am-score-name am-score-name-own">${persp.ownLabel}</span>
+                            ${!meta.is3v3 ? teamShieldHtml() : (zcEd ? zcAmLogoHtml(persp.ownLabel) : "")}
+                            <span class="am-score-name am-score-name-own${zcEd ? " am-name-sm" : ""}">${persp.ownLabel}</span>
                             ${rankPillHtml(ownIdx)}
                         </div>
                         <span class="am-score-nums">
@@ -13311,7 +13394,7 @@
                             <span class="am-score-num ${persp.draw ? "am-score-white" : (persp.win ? "am-score-gray" : "am-score-white")}">${persp.oppScore}</span>
                         </span>
                         <div class="am-score-team am-score-team-opp">
-                            ${!meta.is3v3 ? teamShieldHtml() : ""}
+                            ${!meta.is3v3 ? teamShieldHtml() : (zcEd ? zcAmLogoHtml(persp.oppLabel) : "")}
                             ${oppNameHtml}
                             ${rankPillHtml(oppIdx)}
                         </div>
@@ -15178,7 +15261,7 @@
             <path d="M8 20V6M8 6L4 10M8 6l4 4" stroke="#3ecf6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M16 4v14M16 18l4-4M16 18l-4-4" stroke="#e5484d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`;
-        const ballIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.5 2.5-1.3 4h-4.4l-1.3-4z" fill="#fff" stroke="none"/></svg>`;
+        const ballIcon = `<img class="zc26cron-set-img" src="assets/icon_wim_set.png" alt="">`;
         const clockIcon = ZC26_CLOCK_ICON;
         // Ganador del Set: solo azul/rojo (mismos tonos de la barra de Probabilidad de victoria),
         // azul para el equipo favorito (mayor probabilidad pre-partido), rojo para el otro.
@@ -15778,7 +15861,7 @@
                         <span class="zcgrp-col-last5">Últimos 5</span>
                     </div>
                     ${teams.map((t, i) => `
-                    <div class="zcgrp-row${i < 2 ? " zcgrp-row-quali" : (i === 2 && ZC26_BEST_THIRD_QUALIFIERS.includes(t) ? " zcgrp-row-quali-third" : "")}">
+                    <div class="zcgrp-row${i < 2 ? " zcgrp-row-quali" : (i === 2 && ZC26_BEST_THIRD_QUALIFIERS.includes(t) ? " zcgrp-row-quali-third" : " zcgrp-row-out")}">
                         <div class="zcgrp-sticky">
                             <span class="zcgrp-col-pos">${i + 1}</span>
                             <span class="zcgrp-col-team" data-zcgrp-team="${t}">
@@ -19617,18 +19700,6 @@
                                 ]
                 }
 ]
-            },
-            5: {
-                tag: "ZC26 ESPORTS™",
-                title: "Predicción del ganador del torneo",
-                hero: "news/novedadesxdsep27.png",
-                paragraphs: [
-                    "¿Crees poder acertar todos los enfrentamientos?",
-                    "Haz tus predicciones del torneo y, si consigues acertarlas todas, ¡podrás ganar un Brawl Pass completamente GRATIS!",
-                    "Demuestra cuánto sabes y confía en tus predicciones.",
-                    "<a href=\"https://forms.gle/g6pCoo4cAGx9ThzcA\" target=\"_blank\" rel=\"noopener\" class=\"novedad-social-btn\"><img src=\"reenviar.png\" alt=\"\">Hacer mi predicción</a>",
-                    "No se permiten cuentas múltiples. Deberás brindar tu información de Gmail en un chat privado de Discord con Zephyra."
-                ]
             }
         };
 
