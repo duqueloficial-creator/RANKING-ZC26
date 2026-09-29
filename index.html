@@ -200,10 +200,10 @@
             opacity: 1;
         }
         .section-tab-zc26 {
-            color: #00FF55;
+            color: #FFFF2B;
         }
         .section-tab-zc26.active {
-            color: #00FF55;
+            color: #FFFF2B;
         }
         .menu-toggle {
             width: 34px;
@@ -298,12 +298,12 @@
             color: #d4af37;
         }
         .mobile-menu-link-zc26 {
-            color: #00FF55;
+            color: #FFFF2B;
         }
         /* Menú móvil: submenús con cruz animada (+ / −) */
         .mm-row { display: flex; align-items: center; }
         .mm-row .mobile-menu-link { flex: 0 0 auto; padding-right: 8px; }
-        .mm-group-zc .mm-toggle { color: #00FF55; }
+        .mm-group-zc .mm-toggle { color: #FFFF2B; }
         .mm-toggle {
             width: 34px;
             height: 34px;
@@ -3761,6 +3761,16 @@
             font-weight: 800;
             color: #fff;
             letter-spacing: 0.2px;
+        }
+        /* Mientras el bracket completo está abierto, los menús (partido, jugador, etc.) se abren encima de él */
+        body.zcbrz-open .modal-overlay { z-index: 10050; }
+        body.zcbrz-open #quickStatsOverlay, body.zcbrz-open #playerModalOverlay, body.zcbrz-open #trophyModalOverlay { z-index: 10060; }
+        body.zcbrz-open #allMatchesOverlay { z-index: 10070; }
+        body.zcbrz-open #modalOverlay { z-index: 10100; }
+        .zcbrz-hint-desktop { display: none; }
+        @media (hover: hover) and (pointer: fine) {
+            .zcbrz-hint-mobile { display: none; }
+            .zcbrz-hint-desktop { display: inline; }
         }
         .zcbrz-hint {
             font-size: 0.62rem;
@@ -7395,7 +7405,7 @@
             flex: 0 0 84%;
             max-width: 360px;
             scroll-snap-align: start;
-            background: linear-gradient(135deg, #14161c 0%, #0c0d11 100%);
+            background: #0e0f13;
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 8px;
             padding: 13px 14px 12px;
@@ -7429,7 +7439,9 @@
         .sz-score { font-size: 0.95rem; font-weight: 700; color: #8a8f98; line-height: 1.5; font-variant-numeric: tabular-nums; }
         .sz-score.sz-score-win { color: #ffffff; font-weight: 800; }
         .sz-bar { width: 100%; height: 1px; background: #2ea44f; border-radius: 1px; margin: 2px 0; }
-        .sz-time { font-size: 0.85rem; font-weight: 800; color: #ffffff; white-space: nowrap; }
+        .sz-dt { display: flex; flex-direction: column; align-items: center; gap: 2px; line-height: 1.2; }
+        .sz-date { font-size: 0.72rem; font-weight: 700; color: #ffffff; font-variant-numeric: tabular-nums; }
+        .sz-time { font-size: 0.6rem; font-weight: 600; color: #8a8f98; white-space: nowrap; }
         @media (min-width: 768px) { .sz-card { flex-basis: 340px; } }
         .momentos-row {
             display: flex;
@@ -10113,7 +10125,7 @@
             <div class="zcbrz-header">
                 <div>
                     <div class="zcbrz-title">Bracket completo</div>
-                    <div class="zcbrz-hint">Arrastra para moverte · pellizca o usa +/− para hacer zoom</div>
+                    <div class="zcbrz-hint"><span class="zcbrz-hint-mobile">Arrastra para moverte pellizca o usa los botones de más o menos para hacer zoom</span><span class="zcbrz-hint-desktop">Arrastra para moverte con el cursor o táctil y usa los botones o opciones para hacer zoom</span></div>
                 </div>
                 <button type="button" class="zcbrz-close" id="zcbrzCloseBtn" aria-label="Cerrar">✕</button>
             </div>
@@ -15078,7 +15090,9 @@
             const m = x.m;
             const r = zc26GetResult(m.home, m.away) || ZC26_KO_RESULTS[m.home + "|" + m.away] || null;
             const phase = m.group ? "Fase de grupos · Grupo " + m.group : m.label;
-            const time = zc26Fmt12(x.d.getHours(), x.d.getMinutes());
+            const time = zc26Fmt12(x.d.getHours(), x.d.getMinutes()).replace(" ", "");
+            const dateTxt = String(x.d.getDate()).padStart(2, "0") + "/" + String(x.d.getMonth() + 1).padStart(2, "0");
+            const dtHtml = `<div class="sz-dt"><span class="sz-date">${dateTxt}</span><span class="sz-time">${time}</span></div>`;
             const elapsed = now.getTime() - x.ts;
             let side;
             if (r) {
@@ -15089,9 +15103,9 @@
                         <span class="sz-score${r.a > r.h ? " sz-score-win" : ""}">${r.a}</span>
                     </div>`;
             } else if (elapsed >= 0 && elapsed < 3 * 3600000) {
-                side = `<span class="sz-status sz-live">En juego</span><span class="sz-time">${time}</span>`;
+                side = `<div class="sz-dt"><span class="sz-status sz-live">En juego</span><span class="sz-date">${dateTxt}</span><span class="sz-time">${time}</span></div>`;
             } else {
-                side = `<span class="sz-time">${time}</span>`;
+                side = dtHtml;
             }
             const cls = side2 => r ? (side2 === "h" ? (r.h > r.a ? " sz-win" : r.h < r.a ? " sz-lose" : "") : (r.a > r.h ? " sz-win" : r.a < r.h ? " sz-lose" : "")) : "";
             return `<div class="sz-card" role="button" tabindex="0" data-sz-match data-group="${m.group || ''}" data-label="${m.label || ''}" data-home="${m.home}" data-away="${m.away}" data-day="${x.day.day}" data-num="${x.day.num}" data-month="${x.day.month}" data-time="${m.time || ''}">
@@ -16778,10 +16792,17 @@
             // Arreglo: se vuelve a renderizar el bracket desde cero directamente en este
             // contenedor, así las líneas se calculan ya con la geometría real que le
             // corresponde aquí, igual de precisas que en la vista normal.
+            // Las líneas se calculan con getBoundingClientRect(): si el canvas todavía tiene
+            // aplicada la escala/traslado de la vez anterior, todas las medidas salen
+            // distorsionadas y las líneas se rompen al volver a entrar. Se mide siempre
+            // sin transformación y el encuadre se aplica después (fitToScreen).
+            canvas.style.transform = "none";
+            scale = 1; x = 0; y = 0;
             canvas.innerHTML = "";
             const target = document.createElement("div");
             target.className = "zcbracket";
             canvas.appendChild(target);
+            void canvas.offsetWidth;
             zc26RenderBracket(target);
             contentW = target.scrollWidth;
             contentH = target.scrollHeight;
@@ -16812,8 +16833,8 @@
                 const home = box.dataset.zcbrHome || "";
                 const away = box.dataset.zcbrAway || "";
                 if (!home || !away) return;
-                closeOverlay();
-                setTimeout(() => zc26GoToBracketMatch(home, away), 260);
+                // El menú del partido se abre encima del bracket completo (sin cerrarlo).
+                zc26GoToBracketMatch(home, away);
             });
         }
 
@@ -16823,6 +16844,7 @@
             // da 0, lo que dejaba el zoom "atascado" en escala 1 (no hacía nada) y el
             // bracket se mostraba a tamaño real sin encajar en la pantalla.
             overlay.classList.add("active");
+            document.body.classList.add("zcbrz-open");
             document.body.style.overflow = "hidden";
             zcbrzLastW = window.innerWidth;
             buildCanvas();
@@ -16834,6 +16856,7 @@
         }
         function closeOverlay() {
             overlay.classList.remove("active");
+            document.body.classList.remove("zcbrz-open");
             document.body.style.overflow = "";
             zcPlaySound("clicksalir");
         }
@@ -16841,7 +16864,7 @@
         closeBtn.addEventListener("click", closeOverlay);
         overlay.addEventListener("keydown", (e) => { if (e.key === "Escape") closeOverlay(); });
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && overlay.classList.contains("active")) closeOverlay();
+            if (e.key === "Escape" && overlay.classList.contains("active") && !document.querySelector(".modal-overlay.active")) closeOverlay();
         });
 
         zoomInBtn.addEventListener("click", () => setScale(scale * 1.35));
