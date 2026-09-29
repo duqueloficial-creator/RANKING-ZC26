@@ -802,6 +802,57 @@
             padding: 8px 22px;
             cursor: pointer;
         }
+        /* ZC26 · Jugadores del partido dentro de Estadísticas del partido */
+        .mvs-players-row {
+            margin: 0 0 14px;
+        }
+        .mvs-players-label {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #777777;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .mvs-players-list {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 2px 2px 4px;
+        }
+        .mvs-players-list::-webkit-scrollbar { display: none; }
+        .mvs-player-chip {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 20px;
+            padding: 5px 12px 5px 5px;
+            color: #ffffff;
+            font-size: 0.66rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .mvs-player-chip:hover,
+        .mvs-player-chip:focus-visible {
+            background: rgba(74,134,232,0.18);
+            border-color: #4a86e8;
+        }
+        .mvs-player-avatar {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            flex-shrink: 0;
+        }
         .mp-card {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
@@ -3623,7 +3674,6 @@
             letter-spacing: 0.3px;
             text-transform: uppercase;
         }
-        .zcbracket-status-fin { color: #17181a; background: #7fd858; }
         .zcbracket-team {
             display: flex;
             align-items: center;
@@ -3666,7 +3716,7 @@
             flex-shrink: 0;
         }
         .zcbracket-team.is-winner .zcbracket-team-name { color: #fff; }
-        .zcbracket-team.is-winner .zcbracket-team-score { color: #ffd257; }
+        .zcbracket-team.is-winner .zcbracket-team-score { color: #fff; }
         .zcbracket-team.is-loser { opacity: 0.55; }
         .zcbracket-team.is-tbd .zcbracket-team-name { color: #4c5157; font-style: italic; }
         .zcbracket-team.is-tbd .zcbracket-team-logo { background: rgba(255,255,255,0.03); }
@@ -6058,6 +6108,7 @@
         /* Site footer */
         .site-footer {
             display: flex;
+            justify-content: center;
             align-items: flex-start;
             gap: 14px;
             padding-top: 20px;
@@ -6077,6 +6128,8 @@
             object-fit: contain;
         }
         .site-footer-text {
+            text-align: center;
+            width: 100%;
             font-size: 0.5rem;
             line-height: 1.5;
             color: #666666;
@@ -6099,6 +6152,7 @@
         .footer-extended {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 4px 10px;
             padding: 8px 0;
             margin: 6px 0;
@@ -6113,6 +6167,29 @@
         .footer-extended-link:hover {
             color: #d4af37;
         }
+        .footer-credits {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+            padding: 8px 0;
+            margin: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer-credits-group { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+        .footer-credits-title {
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.55rem;
+        }
+        .footer-credits-names {
+            color: #999999;
+            font-size: 0.55rem;
+            line-height: 1.6;
+        }
         .footer-terms-title {
             color: #999999;
             font-weight: 700;
@@ -6120,6 +6197,20 @@
             letter-spacing: 1px;
             font-size: 0.55rem;
             margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .footer-end-logo {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .footer-end-logo img {
+            height: 84px;
+            width: auto;
+            object-fit: contain;
         }
         .version-tag {
             text-align: center;
@@ -8535,7 +8626,6 @@
                 <div class="novedad-detail-related-list" id="novedadDetailRelatedList"></div>
             </div>
             <div class="novedad-detail-credits site-footer-text">
-                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
                 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
@@ -8549,9 +8639,15 @@
                     <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
                     <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
                 </div>
+                <div class="footer-credits">
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF ZC ESPORTS</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
                 <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
     </div>
@@ -8639,7 +8735,6 @@
                 </ol>
             </div>
             <div class="novedad-detail-credits site-footer-text">
-                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
                 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
@@ -8651,7 +8746,15 @@
                     <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
                     <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
                 </div>
+                <div class="footer-credits">
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF ZC ESPORTS</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                </div>
+                <p class="footer-terms-title">Términos de uso</p>
+                <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
                 <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
     </div>
@@ -8669,7 +8772,6 @@
             <div class="section-updated" id="rankingNovedadDetailDate" style="text-align:left;margin:-10px 0 16px;"></div>
             <div class="novedad-detail-body" id="rankingNovedadDetailBody"></div>
             <div class="novedad-detail-credits site-footer-text">
-                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
                 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
@@ -8681,7 +8783,15 @@
                     <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
                     <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
                 </div>
+                <div class="footer-credits">
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF ZC ESPORTS</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                </div>
+                <p class="footer-terms-title">Términos de uso</p>
+                <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
                 <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
     </div>
@@ -8697,7 +8807,6 @@
             <div class="novedad-detail-title">Clasificación ZC26 - Últimas noticias</div>
             <div class="zcnr-all-grid" id="zcnrAllGrid"></div>
             <div class="novedad-detail-credits site-footer-text">
-                <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
                 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
@@ -8709,7 +8818,15 @@
                     <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
                     <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
                 </div>
+                <div class="footer-credits">
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF ZC ESPORTS</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                </div>
+                <p class="footer-terms-title">Términos de uso</p>
+                <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
                 <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
     </div>
@@ -9075,6 +9192,18 @@
                                                     <div class="mvs-header-row">
                                                         <span class="mvs-header">Estadísticas del partido</span>
                                                     </div>
+                                                    <div class="mvs-players-row">
+                                                        <span class="mvs-players-label">Jugadores del partido</span>
+                                                        <div class="mvs-players-list">
+                                                            <button type="button" class="mvs-player-chip" data-open-player="taikisha"><img class="mvs-player-avatar" src="cross.png" alt="">iXCross</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="julio"><img class="mvs-player-avatar" src="julio.png" alt="">Julio</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="jc"><img class="mvs-player-avatar" src="joac.png" alt="">JOAR</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="ninja"><img class="mvs-player-avatar" src="ninja.png" alt="">Ninja</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="nacaru"><img class="mvs-player-avatar" src="nacaru.png" alt="">Nacaru</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="juanjo"><img class="mvs-player-avatar" src="juanjo.png" alt="">Juanjoxd</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="alvaro"><img class="mvs-player-avatar" src="alva210.png" alt="">Álvaro</button>
+                                                        </div>
+                                                    </div>
                                                     <div class="mvs-tabs-wrapper">
                                                         <div class="mvs-tabs">
                                                             <button type="button" class="mvs-tab active" data-mvs-tab="clave">Estadísticas clave</button>
@@ -9423,6 +9552,18 @@
                                                 <div class="mvs-wrap">
                                                     <div class="mvs-header-row">
                                                         <span class="mvs-header">Estadísticas del partido</span>
+                                                    </div>
+                                                    <div class="mvs-players-row">
+                                                        <span class="mvs-players-label">Jugadores del partido</span>
+                                                        <div class="mvs-players-list">
+                                                            <button type="button" class="mvs-player-chip" data-open-player="taikisha"><img class="mvs-player-avatar" src="cross.png" alt="">iXCross</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="julio"><img class="mvs-player-avatar" src="julio.png" alt="">Julio</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="jc"><img class="mvs-player-avatar" src="joac.png" alt="">JOAR</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="ninja"><img class="mvs-player-avatar" src="ninja.png" alt="">Ninja</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="nacaru"><img class="mvs-player-avatar" src="nacaru.png" alt="">Nacaru</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="juanjo"><img class="mvs-player-avatar" src="juanjo.png" alt="">Juanjoxd</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="alvaro"><img class="mvs-player-avatar" src="alva210.png" alt="">Álvaro</button>
+                                                        </div>
                                                     </div>
                                                     <div class="mvs-tabs-wrapper">
                                                         <div class="mvs-tabs">
@@ -9962,9 +10103,7 @@
     </div>
 
     <div class="site-footer" id="creditos">
-        <div class="site-footer-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
         <div class="site-footer-text">
-            <p class="copy-line">© ZC26 | Todos los derechos reservados.</p>
             <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
             <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
             <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
@@ -9978,14 +10117,19 @@
                 <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
                 <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
             </div>
+            <div class="footer-credits">
+                <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
+                <div class="footer-credits-group"><span class="footer-credits-title">STAFF ZC ESPORTS</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+            </div>
             <p class="footer-terms-title">Términos de uso</p>
             <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
             <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+            <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
         </div>
     </div>
 
-    <a href="#top" class="back-to-top-btn">Volver arriba</a>
-    <div class="version-tag">Versión 4.2.0.19</div>
+    <div class="version-tag">Versión 7.0.3.190</div>
 
 </div>
 
@@ -11748,6 +11892,12 @@
                 { platform: "YouTube", handle: "@byzephyra", url: "https://www.youtube.com/@IstZephyra" },
                 { platform: "Instagram", handle: "@byezephyra", url: "https://www.instagram.com/byezephyra?igsh=Yzc4ODZiMm5hMzFs" }
             ]
+        },
+        {
+            name: "MoonSheep", country: "MX", amount: 20.99, bestAmount: 20.99,
+            status: "Activo", supportTeam: "Por confirmar",
+            alternateIds: [],
+            socials: []
         },
         {
             name: "carldeidad_11", country: "PE", amount: 0.05, bestAmount: 0.05,
@@ -13913,6 +14063,13 @@
             if (oppBtn) {
                 zcPlaySound("click");
                 openPlayerModal(PLAYERS[Number(oppBtn.dataset.openPlayer)]);
+                return;
+            }
+            const mvsPlayerBtn = e.target.closest(".mvs-player-chip[data-open-player]");
+            if (mvsPlayerBtn) {
+                zcPlaySound("click");
+                const player = PLAYERS.find(pl => pl.key === mvsPlayerBtn.dataset.openPlayer);
+                if (player) openPlayerModal(player);
             }
         }
     });
@@ -14045,6 +14202,7 @@
         "Leviatán Esports|Peruanos FC":       { h: 3, a: 0 },
         "Rostizados|KURO ØNIX":              { h: 0, a: 3, wo: "Rostizados" },
         "LPE|Phoenix":                        { h: 2, a: 0 },
+        "Phoenix|POS JR":                     { h: 0, a: 3 },
         "Baraja de Elite|Sinister Haven":     { h: 0, a: 2 },
         "RAISE EARTH|op7":                    { h: 0, a: 3 },
         "Pro Legends|Egresados Del Conalep":  { h: 0, a: 3 },
@@ -14107,7 +14265,8 @@
         ["Gabinho", "GTA", "GTA|Baraja de Elite"], ["Adri", "GTA", "GTA|Baraja de Elite"], ["nefi", "GTA", "GTA|Baraja de Elite"],
         ["shirox", "BLASTERS", "LPE|BLASTERS"], ["vsblees", "BLASTERS", "LPE|BLASTERS"], ["Diego", "BLASTERS", "LPE|BLASTERS"],
         ["Denshol", "SGC", "KURO ØNIX|SGC"], ["Denshol", "SGC", "KURO ØNIX|SGC"],
-        ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"]
+        ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"],
+        ["Mateo", "POS JR", "Phoenix|POS JR"], ["Mateo", "POS JR", "Phoenix|POS JR"], ["Arc/Rafa", "POS JR", "Phoenix|POS JR"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14145,7 +14304,8 @@
         { m: "GTA|Unorthodox", type: "ta", team: "Unorthodox", player: "patch", rep: "patch" },
         { m: "GTA|Unorthodox", type: "ta", team: "GTA", player: "Gabinho", rep: "Gabinho" },
         { m: "Leviatán Esports|POS JR", type: "ta", team: "Leviatán Esports", player: "Sxrgio", rep: "Sxrgio", min: 25 },
-        { m: "Unorthodox|Sinister Haven", type: "ta", team: "Unorthodox", player: "Miseryoung", rep: "Miseryoung" }
+        { m: "Unorthodox|Sinister Haven", type: "ta", team: "Unorthodox", player: "Miseryoung", rep: "Miseryoung" },
+        { m: "Phoenix|POS JR", type: "tr", team: "Phoenix", player: "Trdgx98", rep: "Trdgx98", min: 34 }
     ];
     /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
     const ZC26_GOALS = [];
@@ -14166,6 +14326,15 @@
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "kikyy", n: 1 },
         { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 2 }
     ];
+    // Titulares que, aunque figuran en la plantilla, no llegaron a jugar este partido
+    // (p. ej. por lesión): no reciben calificación (N/A) aunque no se haya registrado un cambio.
+    const ZC26_DID_NOT_PLAY = [
+        { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" }
+    ];
+    function zc26DidNotPlay(ctx, team, name) {
+        const k = `${ctx.home}|${ctx.away}`;
+        return ZC26_DID_NOT_PLAY.some(e => e.m === k && e.team === team && e.player === name);
+    }
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
     const ZC26_PLAYER_STATUS = [
         { team: "POS JR", player: "TK Carl", status: "lesion" },
@@ -14192,7 +14361,8 @@
         { m: "Leviatán Esports|POS JR", team: "POS JR", player: "TK Carl" },
         { m: "Acuñas|Pro Legends", team: "Acuñas", player: "Galactus" },
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "Hacent" },
-        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Mokka" }
+        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Mokka" },
+        { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -14215,7 +14385,8 @@
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", out: "Sxrgio", in: "Shark", min: 27 },
         { m: "Acuñas|Pro Legends", team: "Acuñas", out: "Galactus", in: "Yascer", min: 20 },
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", out: "Hacent", in: "Hagnes", min: 70 },
-        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", out: "Mokka", in: "Zousa", min: 5 }
+        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", out: "Mokka", in: "Zousa", min: 5 },
+        { m: "Phoenix|POS JR", team: "POS JR", out: "TK Carl", in: "valli" },
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${ctx.home}|${ctx.away}`;
@@ -14254,6 +14425,7 @@
     ];
     const ZC26_KO_RESULTS = {
         // "Equipo A|Equipo B": { h: 3, a: 1 }
+        "Phoenix|POS JR": { h: 0, a: 3 }
     };
     function zc26KoResult(home, away) {
         if (!home || !away) return null;
@@ -14286,6 +14458,13 @@
         const third = [zc26KoLoser(sf[0][0], sf[0][1]), zc26KoLoser(sf[1][0], sf[1][1])];
         return { r16, qf, sf, final, third };
     }
+    // Si el equipo tuvo una expulsión (tarjeta roja) en este cruce, se muestra el icono junto a su nombre.
+    function zc26KoRedCardIcon(home, away, team) {
+        if (!home || !away || !team) return "";
+        const k = `${home}|${away}`;
+        const hasRed = ZC26_CARDS.some(c => c.m === k && c.team === team && c.type === "tr");
+        return hasRed ? `<span class="zc26sym zc26sym-sm zcbracket-card-icon">${zc26Sym("tr")}</span>` : "";
+    }
     function zc26KoMatchHtml(home, away, opts) {
         opts = opts || {};
         const res = (home && away) ? zc26KoResult(home, away) : null;
@@ -14298,15 +14477,15 @@
             homeScore = `<span class="zcbracket-team-score">${res.h}</span>`;
             awayScore = `<span class="zcbracket-team-score">${res.a}</span>`;
         }
-        const statusTxt = res ? "Fin" : "Próximo";
-        const statusCls = res ? "zcbracket-status-fin" : "";
+        const statusTxt = res ? "Finalizado" : "Próximo";
+        const statusCls = "";
         const meta = (hasTeams || opts.forceMeta)
             ? `<div class="zcbracket-match-meta"><span>${opts.dateLabel || "Fecha por confirmar"}</span><span class="zcbracket-status ${statusCls}">${statusTxt}</span></div>`
             : "";
         return `<div class="zcbracket-match" data-zcbr-home="${zc26Esc(home || "")}" data-zcbr-away="${zc26Esc(away || "")}">
             ${meta}
-            ${home ? `<div class="zcbracket-team ${homeCls}" data-zcbr-team="${zc26Esc(home)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(home)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(home)}</span>${homeScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
-            ${away ? `<div class="zcbracket-team ${awayCls}" data-zcbr-team="${zc26Esc(away)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(away)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(away)}</span>${awayScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
+            ${home ? `<div class="zcbracket-team ${homeCls}" data-zcbr-team="${zc26Esc(home)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(home)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(home)}</span>${zc26KoRedCardIcon(home, away, home)}${homeScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
+            ${away ? `<div class="zcbracket-team ${awayCls}" data-zcbr-team="${zc26Esc(away)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(away)}" alt=""></div><span class="zcbracket-team-name">${zc26Esc(away)}</span>${zc26KoRedCardIcon(home, away, away)}${awayScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
         </div>`;
     }
     function zc26RenderBracket(targetBracket) {
@@ -14516,6 +14695,7 @@
         const st = {};
         const ensure = t => st[t] || (st[t] = { pj: 0, g: 0, e: 0, p: 0, pts: 0, sf: 0, sc: 0, ds: 0, form: [] });
         ZC26_FIXTURES.forEach(day => day.matches.forEach(m => {
+            if (!m.group) return; // los partidos de eliminación directa no cuentan para la fase de grupos
             ensure(m.home); ensure(m.away);
             const r = zc26GetResult(m.home, m.away);
             if (!r) return;
@@ -14719,11 +14899,11 @@
                             <div class="zcfx-teams">
                                 <div class="zcfx-team-row${zc26RowCls(r, "home")}">
                                     <span class="zcfx-team-logo"><img src="${zc26Logo(m.home)}" alt="${m.home}"></span>
-                                    <span class="zcfx-team-name">${m.home}</span>
+                                    <span class="zcfx-team-name">${m.home}</span>${zc26KoRedCardIcon(m.home, m.away, m.home)}
                                 </div>
                                 <div class="zcfx-team-row${zc26RowCls(r, "away")}">
                                     <span class="zcfx-team-logo"><img src="${zc26Logo(m.away)}" alt="${m.away}"></span>
-                                    <span class="zcfx-team-name">${m.away}</span>
+                                    <span class="zcfx-team-name">${m.away}</span>${zc26KoRedCardIcon(m.home, m.away, m.away)}
                                 </div>
                             </div>
                             ${zc26ScoresHtml(r)}
@@ -15103,7 +15283,8 @@
         "Quiero KeKe|POS JR": { "Mateo": 5.3, "TK Carl": 5.9, "Arc/Rafa": 5.7, "Doslox": 7.9, "Mag": 5.0, "Marro9281": 8.1 },
         "GTA|Unorthodox": { "Adri": 6.1, "thoniolo": 6.7, "nefi": 5.9, "Gabinho": 4.1 },
         "Leviatán Esports|POS JR": { "Sxrgio": 0.2, "Cross": 6.9, "JulioCr36D": 7.1, "Shark": 6.7 },
-        "RAISE EARTH|SYNOX GAMING": { "F nero": 8.7, "kikyy": 8.2, "Hacent": 7.4, "Hagnes": 7.0 }
+        "RAISE EARTH|SYNOX GAMING": { "F nero": 8.7, "kikyy": 8.2, "Hacent": 7.4, "Hagnes": 7.0 },
+        "Phoenix|POS JR": { "valli": 6.3, "Mateo": 7.6, "Arc/Rafa": 7.0 }
     };
     /* Bonus fijo de calificación por equipo (se suma a la fórmula a todos sus jugadores). */
     const ZC26_RATING_TEAM_BONUS = { "op7": 1.2 };
@@ -15165,7 +15346,7 @@
         const st = zc26PlayerStats(ctx, team, name);
         const hasData = st.star || st.ta || st.tr || st.g || st.a;
         const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name)); // suplente que entró a jugar
-        const participated = isStarter || hasData || cameOn;
+        const participated = (isStarter && !zc26DidNotPlay(ctx, team, name)) || hasData || cameOn;
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
         const chip = (cls, inner, n) => `<span class="zc26lu-chip ${cls}${n > 1 ? " zc26lu-chip-wide" : ""}">${inner}${n > 1 ? n : ""}</span>`;
         const sym = (cls, name) => `<span class="zc26lu-chip zc26lu-chip-sym ${cls}">${zc26Sym(name)}</span>`;
@@ -15610,7 +15791,7 @@
         const st = zc26PlayerStats(ctx, team, name);
         const hasData = st.star || st.ta || st.tr || st.g || st.a;
         const cameOn = !isStarter && (hasData || zc26IsSubbedIn(ctx, team, name));
-        const participated = isStarter || hasData || cameOn;
+        const participated = (isStarter && !zc26DidNotPlay(ctx, team, name)) || hasData || cameOn;
         const rating = participated ? zc26Rating(ctx, team, st, name) : null;
         const won = team === ctx.home ? ctx.res.h > ctx.res.a : ctx.res.a > ctx.res.h;
         const rows = [
