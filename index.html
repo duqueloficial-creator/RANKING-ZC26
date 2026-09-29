@@ -151,6 +151,9 @@
             background: #050505;
             border-bottom: 1px solid rgba(255,255,255,0.16);
             overflow-x: auto;
+            /* Sin estiramiento vertical (arriba/abajo): la barra solo se desliza a los lados */
+            overflow-y: hidden;
+            overscroll-behavior-y: none;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
@@ -376,7 +379,7 @@
         .mm-sub-link:hover { color: #d4af37; }
         .mm-sub-link:last-child { margin-bottom: 4px; }
         #ranking, #ultima-clasificacion, #zceloFaq, #zcnrBlock, #matchTabs, #zcgrpPhaseTabs,
-        #home-destacadas, #home-novedades, #home-momentos, #home-historias { scroll-margin-top: 16px; }
+        #home-destacadas, #home-novedades, #home-sigue, #home-momentos, #home-historias, #home-vive, #home-proximos { scroll-margin-top: 16px; }
         .mobile-menu-more-label {
             padding: 0 28px 6px;
             font-size: 0.62rem;
@@ -3237,25 +3240,31 @@
 
         /* ===================== ZC26 · GROUP (clasificación) ===================== */
         .zcgrp-phase-tabs {
+            /* Línea a todo el ancho de la pantalla (móvil y escritorio) */
+            width: 100vw;
+            max-width: 100vw;
+            margin: 14px 0 20px calc(50% - 50vw);
+            /* Las pestañas quedan centradas dentro del ancho de la página */
+            padding: 0 max(20px, calc((100vw - var(--page-width)) / 2));
+            box-sizing: border-box;
             display: flex;
             justify-content: center;
-            gap: 22px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin: 14px 0 20px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .zcgrp-phase-tabs::-webkit-scrollbar {
-            display: none;
+            align-items: stretch;
+            gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.14);
+            overflow: hidden;
         }
         .zcgrp-phase-tab {
+            flex: 1 1 0;
+            min-width: 0;
             background: none;
             border: none;
             color: #8a8f98;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 0 0 11px;
+            line-height: 1.25;
+            text-align: center;
+            padding: 13px 4px 13px;
             cursor: pointer;
             position: relative;
             white-space: nowrap;
@@ -3267,9 +3276,9 @@
             left: 0;
             right: 0;
             bottom: -1px;
-            height: 2px;
+            height: 3px;
             background: #ffffff;
-            border-radius: 2px;
+            border-radius: 3px 3px 0 0;
             transform: scaleX(0);
             opacity: 0;
             transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
@@ -3280,6 +3289,9 @@
         .zcgrp-phase-tab.active::after {
             transform: scaleX(1);
             opacity: 1;
+        }
+        @media (min-width: 768px) {
+            .zcgrp-phase-tab { font-size: 0.85rem; padding: 15px 12px; }
         }
         .zcgrp-group {
             margin-bottom: 24px;
@@ -3492,91 +3504,60 @@
         .zcgrp-dot-loss { background: #d64545; border-color: #d64545; }
         .zcgrp-dot-latest { outline: 1.5px solid #ffffff; outline-offset: 0px; }
         .zcgrp-round-carousel {
+            /* Línea a todo el ancho de la pantalla, igual que la de fases */
+            width: 100vw;
+            max-width: 100vw;
+            margin: -20px 0 16px calc(50% - 50vw);
+            padding: 0 max(20px, calc((100vw - var(--page-width)) / 2));
+            box-sizing: border-box;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: -18px;
-            margin-bottom: 18px;
-        }
-        .zcgrp-round-arrow {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.18);
-            background: transparent;
-            color: #c9cdd3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
-        }
-        .zcgrp-round-arrow svg {
-            width: 15px;
-            height: 15px;
-        }
-        .zcgrp-round-arrow:hover {
-            border-color: rgba(255,255,255,0.4);
-            color: #ffffff;
-            background: rgba(255,255,255,0.05);
-        }
-        .zcgrp-round-arrow:active {
-            transform: scale(0.86);
-        }
-        .zcgrp-round-arrow:disabled {
-            opacity: 0.35;
-            cursor: default;
-            transform: none;
+            border-bottom: 1px solid rgba(255,255,255,0.14);
         }
         .zcgrp-round-track {
             flex: 1;
             display: flex;
             justify-content: center;
-            gap: 26px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            padding: 2px 4px 10px;
-        }
-        .zcgrp-round-track::-webkit-scrollbar {
-            display: none;
+            gap: 0;
+            min-width: 0;
         }
         .zcgrp-round-item {
-            flex-shrink: 0;
+            flex: 1 1 0;
+            min-width: 0;
             background: none;
             border: none;
-            font-size: 0.88rem;
+            font-size: 0.72rem;
             font-weight: 700;
+            line-height: 1.25;
+            text-align: center;
             color: #767b85;
-            padding: 0 0 10px;
+            padding: 8px 4px 12px;
             position: relative;
             white-space: nowrap;
             cursor: pointer;
-            transition: color 0.25s ease, transform 0.25s cubic-bezier(.4,0,.2,1);
+            transition: color 0.25s ease;
         }
         .zcgrp-round-item::after {
             content: "";
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 0;
-            height: 2px;
+            bottom: -1px;
+            height: 1.5px;
             background: #ffffff;
-            border-radius: 2px;
+            border-radius: 1px 1px 0 0;
             transform: scaleX(0);
             opacity: 0;
             transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
         }
         .zcgrp-round-item.active {
             color: #ffffff;
-            font-weight: 800;
-            transform: scale(1.05);
         }
         .zcgrp-round-item.active::after {
             transform: scaleX(1);
             opacity: 1;
+        }
+        @media (min-width: 768px) {
+            .zcgrp-round-item { font-size: 0.85rem; padding: 14px 12px; }
         }
         .zcgrp-empty-state {
             text-align: center;
@@ -6112,7 +6093,19 @@
             align-items: flex-start;
             gap: 14px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+        }
+        /* Línea separadora a todo el ancho de la pantalla (móvil y escritorio) */
+        .site-footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100vw;
+            transform: translateX(-50%);
+            height: 1px;
+            background: rgba(255,255,255,0.06);
+            pointer-events: none;
         }
         .site-footer-logo {
             width: 56px;
@@ -6156,8 +6149,6 @@
             gap: 4px 10px;
             padding: 8px 0;
             margin: 6px 0;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .footer-extended-link {
             color: #999999;
@@ -6167,6 +6158,11 @@
         .footer-extended-link:hover {
             color: #d4af37;
         }
+        .footer-social { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 2px 8px; padding: 0; margin: 0 0 8px; }
+        .footer-social-title { color: #ffffff; font-weight: 700; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer-social-icons { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 2px 8px; }
+        .footer-social-link { color: #999999; text-decoration: none; font-size: 0.55rem; transition: color 0.2s ease; }
+        .footer-social-link:hover { color: #d4af37; }
         .footer-credits {
             display: flex;
             flex-direction: column;
@@ -6175,7 +6171,6 @@
             gap: 8px;
             padding: 8px 0;
             margin: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .footer-credits-group { display: flex; flex-direction: column; align-items: center; gap: 1px; }
         .footer-credits-title {
@@ -6912,7 +6907,7 @@
             font-weight: 800;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #B8863D;
+            color: #ffffff;
             padding: 0 2px;
         }
         .stories-row {
@@ -6946,7 +6941,7 @@
             width: 66px;
             height: 66px;
             border-radius: 50%;
-            padding: 3px;
+            padding: 1.5px;
             background: conic-gradient(from 45deg, #d4af37, #FFE9A0, #B8863D, #7A4A2A, #d4af37);
             display: flex;
             align-items: center;
@@ -6978,7 +6973,7 @@
         .story-label {
             font-size: 11px;
             font-weight: 600;
-            color: #D9E1E8;
+            color: #ffffff;
             text-align: center;
             line-height: 1.2;
             max-width: 72px;
@@ -7281,13 +7276,13 @@
             font-weight: 800;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: #B8863D;
+            color: #ffffff;
             margin-bottom: 6px;
         }
         .novedad-text {
             font-size: 15px;
             font-weight: 700;
-            color: #F0EDE6;
+            color: #ffffff;
             line-height: 1.4;
             margin-bottom: 14px;
         }
@@ -7330,12 +7325,112 @@
         .section-heading {
             font-size: 21px;
             font-weight: 900;
-            color: #F0EDE6;
+            color: #ffffff;
             line-height: 1.28;
             padding: 0 2px;
         }
 
         /* ===================== MOMENTOS DE LA BSC (clips) ===================== */
+        /* ===================== HOME · VIVE LOS TORNEOS / PRÓXIMOS TORNEOS ===================== */
+        .tv-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2px 2px 10px 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .tv-row::-webkit-scrollbar { display: none; }
+        .tv-card {
+            flex: 0 0 78%;
+            max-width: 320px;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .tv-img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #14161c;
+        }
+        .tv-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+        .tv-img-ph {
+            background: linear-gradient(135deg, #1b1e27 0%, #0c0d11 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-sizing: border-box;
+        }
+        .tv-caption { text-align: left; padding: 0 2px; display: flex; flex-direction: column; gap: 3px; }
+        .tv-caption-title { color: #ffffff; font-weight: 700; font-size: 0.8rem; line-height: 1.25; }
+        .tv-caption-desc { color: #9a9ea8; font-size: 0.7rem; line-height: 1.4; }
+        .tv-card { cursor: pointer; padding: 0; border: none; background: none; font-family: inherit; transition: transform 0.15s ease; }
+        .tv-card:active { transform: scale(0.97); }
+        @media (min-width: 768px) { .tv-card { flex-basis: 300px; } }
+        /* ===================== HOME · SIGUE LA ZC26 ===================== */
+        .sz-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2px 2px 10px 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .sz-row::-webkit-scrollbar { display: none; }
+        .sz-card[data-sz-match] { cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.15s ease; }
+        .sz-card[data-sz-match]:active { transform: scale(0.98); }
+        .sz-card {
+            flex: 0 0 84%;
+            max-width: 360px;
+            scroll-snap-align: start;
+            background: linear-gradient(135deg, #14161c 0%, #0c0d11 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 13px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .sz-title { font-size: 0.8rem; font-weight: 800; color: #ffffff; }
+        .sz-sub {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #8a8f98;
+            line-height: 1.4;
+        }
+        .sz-when { flex-shrink: 0; color: #ffffff; font-weight: 700; }
+        .sz-body { display: flex; align-items: center; gap: 10px; }
+        .sz-teams { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+        .sz-team { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .sz-logo { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .sz-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .sz-name { font-size: 0.72rem; font-weight: 600; color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sz-team.sz-lose .sz-name { color: #9a9fa8; }
+        .sz-team.sz-win .sz-name { color: #ffffff; font-weight: 800; }
+        .sz-side { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; }
+        .sz-status { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #c9cdd3; }
+        .sz-status.sz-live { color: #ff5a5a; }
+        .sz-scores { display: flex; flex-direction: column; align-items: center; min-width: 24px; }
+        .sz-score { font-size: 0.95rem; font-weight: 700; color: #8a8f98; line-height: 1.5; font-variant-numeric: tabular-nums; }
+        .sz-score.sz-score-win { color: #ffffff; font-weight: 800; }
+        .sz-bar { width: 100%; height: 1px; background: #2ea44f; border-radius: 1px; margin: 2px 0; }
+        .sz-time { font-size: 0.85rem; font-weight: 800; color: #ffffff; white-space: nowrap; }
+        @media (min-width: 768px) { .sz-card { flex-basis: 340px; } }
         .momentos-row {
             display: flex;
             gap: 12px;
@@ -7449,13 +7544,13 @@
             font-weight: 800;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: #B8863D;
+            color: #ffffff;
         }
         .hd-hero-title {
             margin-top: 4px;
             font-size: 16px;
             font-weight: 800;
-            color: #F0EDE6;
+            color: #ffffff;
             line-height: 1.35;
         }
         .hd-list {
@@ -7499,13 +7594,13 @@
             font-weight: 800;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: #B8863D;
+            color: #ffffff;
             margin-bottom: 3px;
         }
         .hd-list-title {
             font-size: 13.5px;
             font-weight: 700;
-            color: #F0EDE6;
+            color: #ffffff;
             line-height: 1.35;
         }
 
@@ -7560,7 +7655,7 @@
             font-weight: 800;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #B8863D;
+            color: #ffffff;
             margin-bottom: 10px;
         }
         .novedad-detail-title {
@@ -8353,8 +8448,11 @@
             <div class="mm-sub"><div class="mm-sub-inner">
                 <a href="#home-destacadas" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-destacadas">Destacadas</a>
                 <a href="#home-novedades" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-novedades">Novedades</a>
+                <a href="#home-sigue" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-sigue">Sigue la ZC26</a>
                 <a href="#home-momentos" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-momentos">Momentos de la BSC de la ZC26™</a>
                 <a href="#home-historias" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-historias">Historias destacadas</a>
+                <a href="#home-vive" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-vive">Vive los torneos tú mismo</a>
+                <a href="#home-proximos" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-proximos">Próximos torneos y eventos</a>
             </div></div>
         </div>
         <div class="mm-group" data-mm-group>
@@ -8507,6 +8605,12 @@
             </div>
         </div>
 
+        <!-- ===================== SIGUE LA ZC26 (PARTIDOS DEL DÍA) ===================== -->
+        <div class="home-section" id="home-sigue">
+            <div class="section-heading">Sigue la ZC26</div>
+            <div class="sz-row" id="szRow"></div>
+        </div>
+
         <!-- ===================== MOMENTOS DE LA BSC (CLIPS) ===================== -->
         <div class="home-section" id="home-momentos">
             <div class="section-heading">Momentos de la BSC de la ZC26™</div>
@@ -8514,29 +8618,29 @@
                 <button type="button" class="momento-card" data-story-id="clip-1">
                     <span class="momento-badge">NEW</span>
                     <span class="momento-play"></span>
-                    <img src="clip/clip(1).png" alt="">
-                    <span class="momento-caption">Gran Final 🏆</span>
+                    <img src="momentos/clip(1).png" alt="">
+                    <span class="momento-caption">Gran Final</span>
                 </button>
                 <button type="button" class="momento-card" data-story-id="clip-2">
                     <span class="momento-badge">NEW</span>
                     <span class="momento-play"></span>
-                    <img src="clip/clip(2).png" alt="">
-                    <span class="momento-caption">Taikisha, MVP 🏆</span>
+                    <img src="momentos/clip(2).png" alt="">
+                    <span class="momento-caption">Taikisha, MVP</span>
                 </button>
                 <button type="button" class="momento-card" data-story-id="clip-3">
                     <span class="momento-badge">NEW</span>
                     <span class="momento-play"></span>
-                    <img src="clip/clip(3).png" alt="">
+                    <img src="momentos/clip(3).png" alt="">
                     <span class="momento-caption">Punto de campeonato</span>
                 </button>
                 <button type="button" class="momento-card" data-story-id="clip-4">
                     <span class="momento-play"></span>
-                    <img src="clip/clip(4).png" alt="">
+                    <img src="momentos/clip(4).png" alt="">
                     <span class="momento-caption">Mejor jugada</span>
                 </button>
                 <button type="button" class="momento-card" data-story-id="clip-5">
                     <span class="momento-play"></span>
-                    <img src="clip/clip(5).png" alt="">
+                    <img src="momentos/clip(5).png" alt="">
                     <span class="momento-caption">Highlights</span>
                 </button>
             </div>
@@ -8575,6 +8679,18 @@
                     </div>
                 </button>
             </div>
+        </div>
+
+        <!-- ===================== VIVE LOS TORNEOS TÚ MISMO ===================== -->
+        <div class="home-section" id="home-vive">
+            <div class="section-heading">Vive los torneos tú mismo</div>
+            <div class="tv-row" id="tvViveRow"></div>
+        </div>
+
+        <!-- ===================== PRÓXIMOS TORNEOS Y EVENTOS ===================== -->
+        <div class="home-section" id="home-proximos">
+            <div class="section-heading">Próximos torneos y eventos</div>
+            <div class="tv-row" id="tvProximosRow"></div>
         </div>
 
     </div>
@@ -8626,19 +8742,12 @@
                 <div class="novedad-detail-related-list" id="novedadDetailRelatedList"></div>
             </div>
             <div class="novedad-detail-credits site-footer-text">
-                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+<div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
+<p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
-                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
                 <p>¿Quieres apoyar a ZC26? Con una donación desde 1 dólar a través de <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a> puedes obtener beneficios dentro de la comunidad.</p>
-                <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página — como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil — por favor contáctanos a través de los medios oficiales indicados arriba.</p>
+                <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página, como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil, por favor contáctanos a través de los medios oficiales indicados arriba.</p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
-                <div class="footer-extended">
-                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
-                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
-                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
-                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
-                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
-                </div>
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
@@ -8649,6 +8758,21 @@
                 <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
                 <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- ===================== DETALLE: VIVE LOS TORNEOS / PRÓXIMOS TORNEOS ===================== -->
+    <div class="novedad-detail" id="tvDetail">
+        <div class="novedad-detail-back" id="tvDetailBack">
+            <img src="iconoderegresar.png" alt="">
+            <span>Regresar</span>
+        </div>
+        <img class="novedad-detail-hero" id="tvDetailHero" src="" alt="">
+        <div class="novedad-detail-content">
+            <div class="novedad-detail-tag" id="tvDetailTag"></div>
+            <div class="novedad-detail-title" id="tvDetailTitle"></div>
+            <div class="novedad-detail-body" id="tvDetailBody"></div>
+            <div id="tvDetailCredits"></div>
         </div>
     </div>
 
@@ -8735,17 +8859,10 @@
                 </ol>
             </div>
             <div class="novedad-detail-credits site-footer-text">
-                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+<div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
+<p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
-                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
-                <div class="footer-extended">
-                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
-                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
-                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
-                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
-                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
-                </div>
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
@@ -8772,17 +8889,10 @@
             <div class="section-updated" id="rankingNovedadDetailDate" style="text-align:left;margin:-10px 0 16px;"></div>
             <div class="novedad-detail-body" id="rankingNovedadDetailBody"></div>
             <div class="novedad-detail-credits site-footer-text">
-                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+<div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
+<p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
-                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
-                <div class="footer-extended">
-                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
-                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
-                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
-                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
-                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
-                </div>
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
@@ -8807,17 +8917,10 @@
             <div class="novedad-detail-title">Clasificación ZC26 - Últimas noticias</div>
             <div class="zcnr-all-grid" id="zcnrAllGrid"></div>
             <div class="novedad-detail-credits site-footer-text">
-                <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+<div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
+<p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
-                <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
-                <div class="footer-extended">
-                    <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
-                    <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
-                    <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
-                    <a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
-                    <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
-                </div>
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
@@ -9988,18 +10091,12 @@
         </div>
         <div class="zcgrp-phase-panel" id="zcgrpKnockoutPanel" style="display:none;">
             <div class="zcgrp-round-carousel" id="zcgrpRoundCarousel">
-                <button type="button" class="zcgrp-round-arrow" data-round-dir="prev" aria-label="Ronda anterior">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
-                </button>
                 <div class="zcgrp-round-track" id="zcgrpRoundTrack">
                     <button type="button" class="zcgrp-round-item active" data-round="0">Octavos</button>
                     <button type="button" class="zcgrp-round-item" data-round="1">Cuartos</button>
                     <button type="button" class="zcgrp-round-item" data-round="2">Semifinal</button>
                     <button type="button" class="zcgrp-round-item" data-round="3">Final</button>
                 </div>
-                <button type="button" class="zcgrp-round-arrow" data-round-dir="next" aria-label="Ronda siguiente">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-                </button>
             </div>
             <div class="zcbracket-outer" id="zcbracketOuter">
                 <div class="zcbracket" id="zcbracket"></div>
@@ -10104,19 +10201,12 @@
 
     <div class="site-footer" id="creditos">
         <div class="site-footer-text">
-            <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
+<div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
+<p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
             <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
-            <p>Redes oficiales: <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener">Discord</a> · <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a></p>
             <p>¿Quieres apoyar a ZC26? Con una donación desde 1 dólar a través de <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener">PayPal</a> puedes obtener beneficios dentro de la comunidad.</p>
-            <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página — como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil — por favor contáctanos a través de los medios oficiales indicados arriba.</p>
+            <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página, como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil, por favor contáctanos a través de los medios oficiales indicados arriba.</p>
             <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
-            <div class="footer-extended">
-                <a href="mailto:zc26.esports.official@gmail.com" class="footer-extended-link">Contacto</a>
-                <a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-extended-link">Discord</a>
-                <a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-extended-link">TikTok</a>
-                <a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="footer-extended-link">YouTube</a>
-                <a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-extended-link">PayPal</a>
-            </div>
             <div class="footer-credits">
                 <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                 <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
@@ -12460,7 +12550,7 @@
         list.innerHTML = entries.map(({ p, i, subPos }) => {
             const pos = i + 1; // posición derivada del orden del array: nunca se repite/empata
             const medal = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
-            const rowTier = pos === 1 ? "tier-gold" : pos === 2 ? "tier-silver" : pos === 3 ? "tier-bronze" : (pos >= 4 && pos <= 7) ? "tier-gray" : "";
+            const rowTier = ""; // sin fondos de color para el top 3 / top 7: solo el patrón alterno gris/negro
             const subPosHtml = (showSubPos && subPos) ? `<span class="zcf-subpos">(${subPos})</span>` : "";
             const change = getRankChange(p.key, pos);
             const h = computeHighlights(pos, PLAYERS.length);
@@ -14944,6 +15034,266 @@
     }
     renderZc26Fixtures();
 
+    /* ===================== HOME · SIGUE LA ZC26 =====================
+       Muestra los partidos de HOY según la fecha y hora del dispositivo. Cada partido se ubica
+       por su instante real (hora base de Perú de ZC26_FIXTURES) convertido a la hora local del
+       teléfono. Si hoy no hay partidos, muestra los del día más reciente que ya se jugó (y si el
+       torneo aún no empieza, los del próximo día con partidos). */
+    function renderSigueZc26() {
+        const row = document.getElementById("szRow");
+        if (!row) return;
+        const now = new Date();
+        const dayKey = d => d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+        const todayKey = dayKey(now);
+        const all = [];
+        ZC26_FIXTURES.forEach(day => day.matches.forEach(m => {
+            const ts = zc26MatchStartTimestamp(day, m.time);
+            if (ts === null) return;
+            const d = new Date(ts);
+            all.push({ m, day, ts, d, key: dayKey(d) });
+        }));
+        all.sort((a, b) => a.ts - b.ts);
+        let shown = all.filter(x => x.key === todayKey);
+        if (!shown.length) {
+            const past = all.filter(x => x.key < todayKey);
+            if (past.length) {
+                const k = past[past.length - 1].key;
+                shown = past.filter(x => x.key === k);
+            } else if (all.length) {
+                const k = all[0].key;
+                shown = all.filter(x => x.key === k);
+            }
+        }
+        const MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+        function whenLabel(d) {
+            const t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+            const d0 = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+            const diff = Math.round((d0 - t0) / 86400000);
+            if (diff === 0) return "Hoy";
+            if (diff === -1) return "Ayer";
+            if (diff === 1) return "Mañana";
+            return d.getDate() + " " + MONTHS[d.getMonth()];
+        }
+        row.innerHTML = shown.map(x => {
+            const m = x.m;
+            const r = zc26GetResult(m.home, m.away) || ZC26_KO_RESULTS[m.home + "|" + m.away] || null;
+            const phase = m.group ? "Fase de grupos · Grupo " + m.group : m.label;
+            const time = zc26Fmt12(x.d.getHours(), x.d.getMinutes());
+            const elapsed = now.getTime() - x.ts;
+            let side;
+            if (r) {
+                side = `<span class="sz-status">${r.wo ? "W.O." : "Final"}</span>
+                    <div class="sz-scores">
+                        <span class="sz-score${r.h > r.a ? " sz-score-win" : ""}">${r.h}</span>
+                        <span class="sz-bar"></span>
+                        <span class="sz-score${r.a > r.h ? " sz-score-win" : ""}">${r.a}</span>
+                    </div>`;
+            } else if (elapsed >= 0 && elapsed < 3 * 3600000) {
+                side = `<span class="sz-status sz-live">En juego</span><span class="sz-time">${time}</span>`;
+            } else {
+                side = `<span class="sz-time">${time}</span>`;
+            }
+            const cls = side2 => r ? (side2 === "h" ? (r.h > r.a ? " sz-win" : r.h < r.a ? " sz-lose" : "") : (r.a > r.h ? " sz-win" : r.a < r.h ? " sz-lose" : "")) : "";
+            return `<div class="sz-card" role="button" tabindex="0" data-sz-match data-group="${m.group || ''}" data-label="${m.label || ''}" data-home="${m.home}" data-away="${m.away}" data-day="${x.day.day}" data-num="${x.day.num}" data-month="${x.day.month}" data-time="${m.time || ''}">
+                <div class="sz-title">ZC26™ Brawl Stars</div>
+                <div class="sz-sub"><span>${phase}</span><span class="sz-when">${whenLabel(x.d)}</span></div>
+                <div class="sz-body">
+                    <div class="sz-teams">
+                        <div class="sz-team${cls("h")}"><span class="sz-logo"><img src="${zc26Logo(m.home)}" alt=""></span><span class="sz-name">${m.home}</span></div>
+                        <div class="sz-team${cls("a")}"><span class="sz-logo"><img src="${zc26Logo(m.away)}" alt=""></span><span class="sz-name">${m.away}</span></div>
+                    </div>
+                    <div class="sz-side">${side}</div>
+                </div>
+            </div>`;
+        }).join("");
+    }
+    renderSigueZc26();
+    // Al tocar un partido de "Sigue la ZC26" se abre el detalle de ese partido
+    (function () {
+        const szRowEl = document.getElementById("szRow");
+        if (!szRowEl) return;
+        const openFromSz = el => {
+            const card = el.closest("[data-sz-match]");
+            if (card && typeof openZc26Match === "function") openZc26Match(card);
+        };
+        szRowEl.addEventListener("click", e => openFromSz(e.target));
+        szRowEl.addEventListener("keydown", e => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openFromSz(e.target); }
+        });
+    })();
+    // Se actualiza sola: cambia el estado (hora / en juego / final) y el día al pasar la medianoche.
+    setInterval(renderSigueZc26, 60000);
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") renderSigueZc26(); });
+
+    /* ===================== HOME · VIVE LOS TORNEOS TÚ MISMO / PRÓXIMOS TORNEOS Y EVENTOS =====================
+       Las tarjetas son SOLO imágenes. Las portadas se buscan solas en la carpeta TORNEOS_FOLDER:
+         Vive los torneos tú mismo   → VLTTM(1).png, VLTTM(2).png ...
+         Próximos torneos y eventos  → PTYE(1).PNG,  PTYE(2).PNG ...
+       Se prueba (1), (2), (3)... y se detiene en el primer número que no exista (acepta png/PNG/jpg/jpeg/webp).
+       Al tocar una tarjeta se abre una ventana de detalle como la de las novedades; su contenido sale de la
+       misma posición en las listas de abajo (1ª imagen = 1er elemento).
+       Si una sección aún no tiene imágenes, se muestran portadas provisionales vacías (una por elemento). */
+    const TORNEOS_FOLDER = "torneos";
+    const TV_VIVE = [
+        {
+            tag: "ZC26 ESPORTS™", title: "Inscripción de equipos · ZC26 Brawl Stars", desc: "Inscribe a tu equipo de 3 jugadores en la fase clasificatoria abierta y pelea por un cupo en el torneo principal.",
+            blocks: [
+                { t: "p", x: "Fase Clasificatoria Abierta. ¿Tienes un equipo preparado y listo para competir? Inscribe a tu escuadra para participar en las clasificatorias oficiales y luchar por un cupo en el torneo principal de ZC26." },
+                { t: "h4", x: "1. Requisitos generales" },
+                { t: "ul", x: ["Equipos formados por 3 jugadores titulares (1 suplente opcional).", "Todos los integrantes deben contar con una cuenta activa de Brawl Stars y conexión estable a internet.", "Tener disponibilidad en los horarios de las partidas clasificatorias.", "Estar presentes en el servidor oficial de Discord para coordinar las salas y enviar capturas de pantalla."] },
+                { t: "h4", x: "2. Formulario de inscripción del equipo" },
+                { t: "p", x: "Copia, llena y envía este formato por nuestros canales oficiales." },
+                { t: "h5", x: "Datos del equipo" },
+                { t: "ul", x: ["Nombre del equipo", "Logo o banner (opcional, link de imagen)", "Tag / abreviatura del equipo (Ej: [ZC])"] },
+                { t: "h5", x: "Jugador 1 (capitán y contacto principal)" },
+                { t: "ul", x: ["Nickname en Brawl Stars", "Player Tag (#ID del jugador)", "Tag de Discord", "Número de teléfono (para emergencias / grupo de WhatsApp)"] },
+                { t: "h5", x: "Jugador 2 (titular)" },
+                { t: "ul", x: ["Nickname en Brawl Stars", "Player Tag (#ID del jugador)", "Tag de Discord"] },
+                { t: "h5", x: "Jugador 3 (titular)" },
+                { t: "ul", x: ["Nickname en Brawl Stars", "Player Tag (#ID del jugador)", "Tag de Discord"] },
+                { t: "h5", x: "Jugador 4 (suplente, opcional)" },
+                { t: "ul", x: ["Nickname en Brawl Stars", "Player Tag (#ID del jugador)", "Tag de Discord"] },
+                { t: "h4", x: "3. Proceso de registro" },
+                { t: "ol", x: ["Completa la ficha de arriba con los datos reales de todo tu equipo.", "Envía la ficha por uno de estos medios: el canal de Discord #registro-equipos o un mensaje directo al Staff de ZC26.", "Espera la confirmación del staff y tu rol de \"Equipo Registrado\" en el Discord.", "Consulta el cuadro de enfrentamientos (bracket) para conocer la fecha y hora exacta de tus partidas clasificatorias."] },
+                { t: "p", x: "¡Demuestra que tu equipo es el número 1!" }
+            ]
+        },
+        {
+            tag: "ZC26 ESPORTS™", title: "Vacantes para participar como Staff", desc: "Postúlate como Caster, Árbitro o Community Manager, o sé Partner o patrocinador de la ZC26.",
+            blocks: [
+                { t: "p", x: "Además de competir, también puedes ser parte de la organización de la ZC26. Estamos abiertos a sumar personas al equipo como Staff, Casters y Partners." },
+                { t: "p", x: "Si quieres postularte, escríbenos por los canales oficiales de Discord o al correo de contacto indicado al final de esta página." },
+                { t: "h4", x: "Únete al equipo ZC26 Esports · Convocatoria de Staff y Programa de Partners" },
+                { t: "p", x: "¿Quieres ser parte de la organización de los mejores torneos independientes de Brawl Stars? En ZC26 estamos buscando talento para ampliar nuestro equipo y marcas aliadas para hacer crecer la escena competitiva." },
+                { t: "h4", x: "1. Vacantes de Staff y colaboradores" },
+                { t: "h5", x: "Caster / Comentarista de Esports" },
+                { t: "p", x: "Responsabilidades: narrar y analizar las partidas en vivo durante los torneos oficiales." },
+                { t: "ul", x: ["Buen micrófono y conexión estable a internet.", "Conocimiento del meta actual de Brawl Stars (drafts, brawlers, mapas).", "Fluidez verbal, energía y buena actitud en transmisión."] },
+                { t: "h5", x: "Árbitro / Administrador de torneos" },
+                { t: "p", x: "Responsabilidades: controlar el flujo de las salas amistosas, verificar resultados/capturas y resolver disputas entre jugadores." },
+                { t: "ul", x: ["Disponibilidad durante los días del evento.", "Imparcialidad, paciencia y conocimiento estricto del reglamento."] },
+                { t: "h5", x: "Creador de contenido / Community Manager" },
+                { t: "p", x: "Responsabilidades: diseñar miniaturas para transmisiones, banners de torneos y gestión de redes sociales." },
+                { t: "ul", x: ["Manejo de herramientas de edición (diseño gráfico o vídeo).", "Creatividad para anunciar nuevos eventos y mantener activa a la comunidad."] },
+                { t: "h4", x: "2. Programa de patrocinadores y Partners (inversores)" },
+                { t: "p", x: "Buscamos marcas, empresas, creadores de contenido o inversores independientes que deseen potenciar el Pozo de Premios (Prize Pool) e impulsar la producción de nuestros eventos." },
+                { t: "h5", x: "Patrocinador financiero / Inversor" },
+                { t: "p", x: "Aporte de capital directo destinado al pozo de premios o logística del torneo. Beneficios para el Partner:" },
+                { t: "ul", x: ["Logo destacado en todas las piezas gráficas, trailers y sobrepantallas (overlays) del directo.", "Menciones patrocinadas en vivo por nuestros Casters durante las transmisiones.", "Canal/Categoría exclusiva en nuestro servidor oficial y menciones @everyone.", "Nombre del torneo personalizado con la marca del patrocinador (Ejemplo: \"Copa [Tu Marca] x ZC26\")."] },
+                { t: "h5", x: "Partner de colaboración / Comunidad" },
+                { t: "p", x: "Aporte de premios en especie (Pases de batalla, Gemas, periféricos) o difusión masiva." },
+                { t: "ul", x: ["Beneficios: co-branding, raids en directos y menciones en redes sociales."] },
+                { t: "h4", x: "3. ¿Cómo postularte o contactarnos?" },
+                { t: "p", x: "Si te interesa cualquiera de nuestros puestos de staff o deseas invertir/patrocinar un torneo, completa los siguientes datos y contáctanos:" },
+                { t: "ul", x: ["Nombre / Nickname", "Rol de interés (Caster / Árbitro / Diseñador / Partner - Inversor)", "Enlace a tus redes o portafolio (si aplica)", "Breve propuesta o experiencia previa"] },
+                { t: "h5", x: "Contacto directo" },
+                { t: "ul", x: ["Discord: discord.gg/jfDvXrQ2fu", "Correo electrónico: zc26.esports.official@gmail.com", "Redes sociales: TikTok @zc.esports · YouTube @zc26esports"] },
+                { t: "p", x: "¡Hagamos crecer la comunidad juntos!" }
+            ]
+        }
+    ];
+    const TV_PROXIMOS = [
+        { tag: "En trabajo · Próximamente", title: "Torneo Femenino de Brawl Stars", desc: "Un torneo exclusivo para las mejores jugadoras del servidor.", blocks: [
+            { t: "p", x: "¡Atención a toda la comunidad! Estamos preparando un torneo exclusivo para las mejores jugadoras del servidor. Un espacio dedicado a demostrar el verdadero talento femenino en el juego." } ] },
+        { tag: "En trabajo · Próximamente", title: "Torneo de Creadores de Contenido", desc: "Tus streamers y creadores favoritos se enfrentan en la arena.", blocks: [
+            { t: "p", x: "Tus streamers y Creadores de Contenido favoritos se enfrentarán en la arena para ver quién manda. ¡Prepárate para ver partidas épicas, momentos divertidos y mucha rivalidad!" } ] },
+        { tag: "En trabajo · Próximamente", title: "Torneo Tier-S (Nivel Profesional)", desc: "El torneo de más alto nivel para pro players y equipos competitivos.", blocks: [
+            { t: "p", x: "El torneo de más alto nivel para los verdaderos 'pro players' y jugadores competitivos. Solo los mejores equipos y jugadores con más copas/rango Competitivo podrán aspirar al título supremo." } ] },
+        { tag: "En trabajo · Próximamente", title: "Torneo Modo Duelos", desc: "Elige tus 3 Brawlers estrella y elimina al rival uno a uno.", blocks: [
+            { t: "p", x: "¿Confías plenamente en tu habilidad individual? El modo Duelos llega en formato torneo. Elige tus 3 Brawlers estrella y elimina al rival uno a uno." } ] },
+        { tag: "En trabajo · Próximamente", title: "Torneo 1vs1", desc: "Batallas individuales mano a mano en mapas cerrados.", blocks: [
+            { t: "p", x: "Directo al grano. Batallas individuales mano a mano en mapas cerrados y de francotiradores para demostrar quién tiene la mejor puntería y reflejos." } ] },
+        { tag: "En trabajo · Próximamente", title: "Torneo de Supervivencia (Showdown)", desc: "El caótico modo Supervivencia en formato competitivo: Solo, Dúos y 3vs3.", blocks: [
+            { t: "p", x: "El caótico modo Supervivencia llevado al formato competitivo. Se están preparando modalidades para jugarlo en:" },
+            { t: "ul", x: ["Solo (1vs1 supervivencia libre o en arena)", "Dúos (2vs2 con estrategias de supervivencia)", "Partidas especiales 3vs3 en mapa de Showdown"] } ] }
+    ];
+    function tvEsc(v) { return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+    function tvBlocksHtml(blocks) {
+        return blocks.map(b => {
+            if (b.t === "h4") return `<h4>${tvEsc(b.x)}</h4>`;
+            if (b.t === "h5") return `<h5>${tvEsc(b.x)}</h5>`;
+            if (b.t === "ul") return `<ul>${b.x.map(i => `<li>${tvEsc(i)}</li>`).join("")}</ul>`;
+            if (b.t === "ol") return `<ol>${b.x.map(i => `<li>${tvEsc(i)}</li>`).join("")}</ol>`;
+            return `<p>${tvEsc(b.x)}</p>`;
+        }).join("");
+    }
+    (function () {
+        const overlay = document.getElementById("tvDetail");
+        if (!overlay) return;
+        const back = document.getElementById("tvDetailBack");
+        const hero = document.getElementById("tvDetailHero");
+        const tag = document.getElementById("tvDetailTag");
+        const title = document.getElementById("tvDetailTitle");
+        const body = document.getElementById("tvDetailBody");
+        const creditsHost = document.getElementById("tvDetailCredits");
+        window.tvOpenDetail = function (data, coverSrc) {
+            if (!data) return;
+            if (coverSrc) { hero.src = coverSrc; hero.style.display = ""; } else { hero.removeAttribute("src"); hero.style.display = "none"; }
+            tag.textContent = data.tag;
+            title.textContent = data.title;
+            body.innerHTML = tvBlocksHtml(data.blocks);
+            // Mismo pie de página (créditos, redes, términos) que el detalle de las novedades
+            if (!creditsHost.firstChild) {
+                const src = document.querySelector("#novedadDetail .novedad-detail-credits");
+                if (src) creditsHost.appendChild(src.cloneNode(true));
+            }
+            overlay.classList.add("active");
+            overlay.scrollTop = 0;
+            document.body.style.overflow = "hidden";
+            if (typeof zcPlaySound === "function") zcPlaySound("entrar");
+        };
+        back.addEventListener("click", () => {
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+            if (typeof zcPlaySound === "function") zcPlaySound("salir");
+        });
+    })();
+    function tvTryImage(src) {
+        return new Promise(res => {
+            const im = new Image();
+            im.onload = () => res(true);
+            im.onerror = () => res(false);
+            im.src = src;
+        });
+    }
+    async function tvFindCovers(prefix) {
+        const exts = [".png", ".PNG", ".jpg", ".JPG", ".jpeg", ".webp"];
+        const found = [];
+        for (let n = 1; n <= 30; n++) {
+            let hit = null;
+            for (const ext of exts) {
+                const src = TORNEOS_FOLDER + "/" + prefix + "(" + n + ")" + ext;
+                if (await tvTryImage(src)) { hit = src; break; }
+            }
+            if (!hit) break;
+            found.push(hit);
+        }
+        return found;
+    }
+    async function tvRenderRow(sectionId, rowId, prefix, items) {
+        const section = document.getElementById(sectionId);
+        const row = document.getElementById(rowId);
+        if (!section || !row) return;
+        const covers = await tvFindCovers(prefix);
+        // Sin portadas todavía: una tarjeta provisional vacía por elemento (sin texto)
+        const slots = covers.length ? covers : items.map(() => null);
+        row.innerHTML = slots.map((src, i) => {
+            const it = items[i];
+            const alt = it ? tvEsc(it.title) : "";
+            return `<button type="button" class="tv-card" data-tv-index="${i}"><div class="tv-img${src ? "" : " tv-img-ph"}">${src ? `<img src="${src}" alt="${alt}" draggable="false">` : ""}</div>${it ? `<div class="tv-caption"><div class="tv-caption-title">${tvEsc(it.title)}</div>${it.desc ? `<div class="tv-caption-desc">${tvEsc(it.desc)}</div>` : ""}</div>` : ""}</button>`;
+        }).join("");
+        row.querySelectorAll(".tv-card").forEach(card => {
+            card.addEventListener("click", () => {
+                const i = parseInt(card.getAttribute("data-tv-index"), 10);
+                const img = card.querySelector("img");
+                if (items[i]) window.tvOpenDetail(items[i], img ? img.getAttribute("src") : null);
+            });
+        });
+        section.style.display = "";
+    }
+    tvRenderRow("home-vive", "tvViveRow", "VLTTM", TV_VIVE);
+    tvRenderRow("home-proximos", "tvProximosRow", "PTYE", TV_PROXIMOS);
+
     /* Cuenta regresiva de los partidos que aún no empiezan: se calcula siempre desde
        la hora real del dispositivo contra el instante absoluto guardado en cada tarjeta
        (data-zc26-countdown), así que no hace falta guardar nada aparte: al recargar el
@@ -16300,8 +16650,8 @@
 
     // ===================== ZC26 · Bracket + carrusel de rondas (eliminación directa) =====================
     zc26RenderBracket();
-    // Al tocar una llave del bracket con equipos definidos, lleva a la sección "Partidos"
-    // y hace scroll hasta la tarjeta del partido correspondiente, resaltándola brevemente.
+    // Al tocar una llave del bracket con equipos definidos, abre el menú con la información
+    // de ese partido (sin cambiar de sección).
     // Función compartida: la usan tanto el bracket normal como la vista de zoom a pantalla completa.
     function zc26GoToBracketMatch(home, away) {
         if (!home || !away) return;
@@ -16312,20 +16662,9 @@
             if (c.dataset.home === home && c.dataset.away === away) target = c;
         });
         if (!target) return;
-        zcPlaySound("clickentrar");
-        const zc26Tab = document.querySelector('.section-tab[data-section-tab="zc26"]');
-        if (zc26Tab) { setActiveSectionTab("zc26"); applySectionFilter("zc26"); }
-        const octavosBtn = document.querySelector('#zc26GroupFilter .am-filter-btn[data-zc26-group-filter="OCTAVOS"]');
-        if (octavosBtn) {
-            document.querySelectorAll("#zc26GroupFilter .am-filter-btn").forEach(b => b.classList.remove("active"));
-            octavosBtn.classList.add("active");
-            if (typeof applyZc26Filters === "function") applyZc26Filters();
-        }
-        setTimeout(() => {
-            target.scrollIntoView({ behavior: "smooth", block: "center" });
-            target.classList.add("zcfx-card-highlight");
-            setTimeout(() => target.classList.remove("zcfx-card-highlight"), 1600);
-        }, 120);
+        // Ya no redirige a la sección de partidos: abre directamente el menú con la
+        // información de ese partido (el mismo que se abre al tocar un partido de Octavos).
+        openZc26Match(target);
     }
     (function () {
         const bracketEl = document.getElementById("zcbracket");
@@ -17557,33 +17896,33 @@
             },
             "clip-1": {
                 username: "GRAN FINAL",
-                avatar: "clip/clip(1).png",
+                avatar: "momentos/clip(1).png",
                 music: null,
-                items: [ { type: "video", src: "clip/video(1).mp4" } ]
+                items: [ { type: "video", src: "momentos/video(1).mp4" } ]
             },
             "clip-2": {
                 username: "TAIKISHA, MVP",
-                avatar: "clip/clip(2).png",
+                avatar: "momentos/clip(2).png",
                 music: null,
-                items: [ { type: "video", src: "clip/video(2).mp4" } ]
+                items: [ { type: "video", src: "momentos/video(2).mp4" } ]
             },
             "clip-3": {
                 username: "PUNTO DE CAMPEONATO",
-                avatar: "clip/clip(3).png",
+                avatar: "momentos/clip(3).png",
                 music: null,
-                items: [ { type: "video", src: "clip/video(3).mp4" } ]
+                items: [ { type: "video", src: "momentos/video(3).mp4" } ]
             },
             "clip-4": {
                 username: "MEJOR JUGADA",
-                avatar: "clip/clip(4).png",
+                avatar: "momentos/clip(4).png",
                 music: null,
-                items: [ { type: "video", src: "clip/video(4).mp4" } ]
+                items: [ { type: "video", src: "momentos/video(4).mp4" } ]
             },
             "clip-5": {
                 username: "HIGHLIGHTS",
-                avatar: "clip/clip(5).png",
+                avatar: "momentos/clip(5).png",
                 music: null,
-                items: [ { type: "video", src: "clip/video(5).mp4" } ]
+                items: [ { type: "video", src: "momentos/video(5).mp4" } ]
             }
         };
 
@@ -18143,13 +18482,13 @@
     })();
 
     /* ======================================================================
-       NOVEDADES — feed deslizable con barras de progreso (4.5s c/u)
+       NOVEDADES — feed deslizable con barras de progreso (3.5s c/u)
        La barra de la novedad activa se ve ancha (como en el ejemplo de FIFA);
        las demás quedan finas. Se puede deslizar con el dedo o esperar a que
        avance sola. Solo el botón "Más info." abre el detalle.
     ====================================================================== */
     (function () {
-        const NOVEDAD_DURATION_MS = 4500; // 4.5s por novedad
+        const NOVEDAD_DURATION_MS = 3500; // 3.5s por novedad
         const card = document.getElementById("novedadesCard");
         if (!card) return;
 
@@ -18163,6 +18502,8 @@
         let isUserScrolling = false;
         let scrollEndTimeout = null;
         let programmaticScroll = false;
+        let nextAt = 0;          // momento (ms) en que toca avanzar
+        let lastUserScrollAt = 0; // último evento de scroll manual
 
         // construir barras de progreso (una por novedad)
         slides.forEach(() => {
@@ -18209,13 +18550,17 @@
 
         function scheduleNext() {
             clearTimer();
+            nextAt = Date.now() + NOVEDAD_DURATION_MS;
             timer = setTimeout(() => {
+                timer = null;
                 const nextIndex = (currentIndex + 1) % total;
                 goTo(nextIndex);
             }, NOVEDAD_DURATION_MS);
         }
 
         function scrollToSlide(index, instant) {
+            // Si la sección está oculta (display:none) el ancho es 0: no hay nada que desplazar
+            if (!trackEl.clientWidth) return;
             programmaticScroll = true;
             trackEl.scrollTo({ left: trackEl.clientWidth * index, behavior: instant ? "auto" : "smooth" });
             // liberar el flag una vez termina el scroll suave
@@ -18242,6 +18587,8 @@
         // en vez de esperar a que el scroll termine por completo.
         let liveSyncRAF = null;
         function liveSync() {
+            // Oculto (otra categoría): clientWidth = 0 daría NaN y rompería el índice
+            if (!trackEl.clientWidth) return;
             const newIndex = Math.max(0, Math.min(Math.round(trackEl.scrollLeft / trackEl.clientWidth), total - 1));
             if (newIndex !== currentIndex) {
                 currentIndex = newIndex;
@@ -18259,20 +18606,22 @@
         if ("onscrollend" in window) {
             // API moderna: dispara justo cuando el scroll (y el snap) terminan, sin retrasos artificiales
             trackEl.addEventListener("scroll", () => {
-                if (programmaticScroll) return;
+                if (programmaticScroll || !trackEl.clientWidth) return;
                 isUserScrolling = true;
+                lastUserScrollAt = Date.now();
                 clearTimer();
                 scheduleLiveSync();
             }, { passive: true });
             trackEl.addEventListener("scrollend", () => {
-                if (programmaticScroll) return;
+                if (programmaticScroll || !trackEl.clientWidth) return;
                 syncToScrollPosition();
             });
         } else {
             // Fallback para navegadores sin scrollend
             trackEl.addEventListener("scroll", () => {
-                if (programmaticScroll) return;
+                if (programmaticScroll || !trackEl.clientWidth) return;
                 isUserScrolling = true;
+                lastUserScrollAt = Date.now();
                 clearTimer();
                 scheduleLiveSync();
                 clearTimeout(scrollEndTimeout);
@@ -18315,9 +18664,36 @@
         let cardIsVisible = true;
         function resyncAndResume() {
             clearTimer();
+            isUserScrolling = false;
+            if (!(currentIndex >= 0 && currentIndex < total)) currentIndex = 0;
+            render(); // reinicia la barra de la novedad activa desde 0
             scrollToSlide(currentIndex, true);
             scheduleNext();
         }
+        function novedadesShown() {
+            return card.offsetWidth > 0 && trackEl.clientWidth > 0 && document.visibilityState !== "hidden";
+        }
+        // Al volver a la categoría Home la tarjeta pasa de display:none a visible:
+        // el ancho deja de ser 0 y se reanuda el avance automático.
+        if ("ResizeObserver" in window) {
+            let lastW = trackEl.clientWidth;
+            new ResizeObserver(() => {
+                const w = trackEl.clientWidth;
+                if (w > 0 && lastW === 0) { cardIsVisible = true; resyncAndResume(); }
+                lastW = w;
+            }).observe(trackEl);
+        }
+        // Vigilante: si por cualquier motivo el temporizador se perdió o se retrasó
+        // (throttling del navegador, scrollend que no llegó, etc.), fuerza el cambio.
+        setInterval(() => {
+            if (!cardIsVisible || !novedadesShown()) return;
+            if (isUserScrolling && Date.now() - lastUserScrollAt > 1200) isUserScrolling = false;
+            if (isUserScrolling || programmaticScroll) return;
+            if (timer === null || Date.now() > nextAt + 400) {
+                clearTimer();
+                goTo(currentIndex + 1);
+            }
+        }, 500);
         if ("IntersectionObserver" in window) {
             const novedadesIO = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
