@@ -10031,6 +10031,7 @@
         <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#f97316"><span class="zcg-txt">Octavos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="CUARTOS" style="--gc:#f97316"><span class="zcg-txt">Cuartos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="A" style="--gc:#22c55e"><span class="zcg-txt"><span class="zcg-pre">Group </span>A</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="B" style="--gc:#3b82f6"><span class="zcg-txt"><span class="zcg-pre">Group </span>B</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="C" style="--gc:#eab308"><span class="zcg-txt"><span class="zcg-pre">Group </span>C</span></button>
@@ -14291,6 +14292,20 @@
                 { label: "Octavos de final", home: "LPE", away: "Acuñas", time: "9:00 p.m." },
                 { label: "Octavos de final", home: "OMEN NOCTE", away: "KURO ØNIX", time: "9:45 p.m." }
             ]
+        },
+        {
+            day: "Miércoles", num: 30, month: "SEP",
+            matches: [
+                { label: "Cuartos de final", home: "op7", away: "GTA", time: "7:30 p.m." },
+                { label: "Cuartos de final", home: "SGC", away: "Unorthodox", time: "8:15 p.m." }
+            ]
+        },
+        {
+            day: "Jueves", num: 1, month: "OCT",
+            matches: [
+                { label: "Cuartos de final", home: "LPE", away: "OMEN NOCTE", time: "8:15 p.m." },
+                { label: "Cuartos de final", home: "Leviatán Esports", away: "POS JR", time: "9:30 p.m." }
+            ]
         }
     ];
     /* ZC26 · Resultados de la fase de grupos.
@@ -14338,7 +14353,10 @@
         "GTA|Baraja de Elite":                 { h: 3, a: 0 },
         "LPE|BLASTERS":                        { h: 0, a: 3 },
         "Wosu Esport|op7":                     { h: 0, a: 3, wo: "Wosu Esport" },
-        "Egresados Del Conalep|OMEN NOCTE":    { h: 0, a: 3 }
+        "Egresados Del Conalep|OMEN NOCTE":    { h: 0, a: 3 },
+        "OMEN NOCTE|KURO ØNIX":                { h: 4, a: 2 },
+        "Leviatán Esports|Egresados Del Conalep":  { h: 3, a: 0 },
+        "LPE|Acuñas":                         { h: 3, a: 1 }
     };
     /* Jugador Estelar de cada mapa jugado: [jugador, equipo].
        (El Estelar siempre sale del equipo que gana el mapa.) */
@@ -14377,7 +14395,13 @@
         ["shirox", "BLASTERS", "LPE|BLASTERS"], ["vsblees", "BLASTERS", "LPE|BLASTERS"], ["Diego", "BLASTERS", "LPE|BLASTERS"],
         ["Denshol", "SGC", "KURO ØNIX|SGC"], ["Denshol", "SGC", "KURO ØNIX|SGC"],
         ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"],
-        ["Mateo", "POS JR", "Phoenix|POS JR"], ["Mateo", "POS JR", "Phoenix|POS JR"], ["Arc/Rafa", "POS JR", "Phoenix|POS JR"]
+        ["Mateo", "POS JR", "Phoenix|POS JR"], ["Mateo", "POS JR", "Phoenix|POS JR"], ["Arc/Rafa", "POS JR", "Phoenix|POS JR"],
+        ["sjoacedbamypasa", "KURO ØNIX", "OMEN NOCTE|KURO ØNIX"], ["AdmirerTensai", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
+        ["Gabonix", "KURO ØNIX", "OMEN NOCTE|KURO ØNIX"], ["Mokka", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
+        ["AdmirerTensai", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"], ["Mokka", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
+        ["JulioCr36D", "Leviatán Esports", "Leviatán Esports|Egresados Del Conalep"], ["Shark", "Leviatán Esports", "Leviatán Esports|Egresados Del Conalep"], ["Shark", "Leviatán Esports", "Leviatán Esports|Egresados Del Conalep"],
+        ["Steve", "LPE", "LPE|Acuñas"], ["Gary", "LPE", "LPE|Acuñas"], ["Daniel", "LPE", "LPE|Acuñas"],
+        ["Xabi", "Acuñas", "LPE|Acuñas"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14426,7 +14450,20 @@
         { m: "SYNOX GAMING|SGC", type: "ta", team: "SYNOX GAMING", player: "romanqq", rep: "romanqq", min: 4 },
         { m: "SYNOX GAMING|SGC", type: "tr", team: "SYNOX GAMING", player: "romanqq", rep: "romanqq", min: 4 },
         { m: "SYNOX GAMING|SGC", type: "ta", team: "SYNOX GAMING", player: "abelldx", rep: "abelldx", min: 118 },
-        { m: "SYNOX GAMING|SGC", type: "ta", team: "SYNOX GAMING", player: "Deizz", rep: "Deizz", min: 118 }
+        { m: "SYNOX GAMING|SGC", type: "ta", team: "SYNOX GAMING", player: "Deizz", rep: "Deizz", min: 118 },
+        { m: "Leviatán Esports|Egresados Del Conalep", type: "ta", team: "Egresados Del Conalep", player: "new_faxtory", rep: "new_faxtory" },
+        { m: "Leviatán Esports|Egresados Del Conalep", type: "ta", team: "Egresados Del Conalep", player: "new_faxtory", rep: "new_faxtory" },
+        { m: "Leviatán Esports|Egresados Del Conalep", type: "tr", team: "Egresados Del Conalep", player: "new_faxtory", rep: "new_faxtory" },
+        { m: "Leviatán Esports|Egresados Del Conalep", type: "ta", team: "Egresados Del Conalep", player: "AUMcxD", rep: "AUMcxD" },
+        { m: "Leviatán Esports|Egresados Del Conalep", type: "ta", team: "Egresados Del Conalep", player: "Sanz", rep: "Sanz" },
+        { m: "Leviatán Esports|Egresados Del Conalep", type: "ta", team: "Egresados Del Conalep", player: "luisitopro123", rep: "luisitopro123" },
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "RoyZtrike", rep: "RoyZtrike" },
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "RoyZtrike", rep: "RoyZtrike" },
+        { m: "LPE|Acuñas", type: "tr", team: "Acuñas", player: "RoyZtrike", rep: "RoyZtrike" },
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Xabi", rep: "Xabi" },
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Galactus", rep: "Galactus" },
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Diego(A)", rep: "Diego(A)" },
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Yascer", rep: "Yascer" }
     ];
     /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
     const ZC26_GOALS = [];
@@ -14445,7 +14482,13 @@
         { m: "SYNOX GAMING|Wosu Esport", team: "SYNOX GAMING", player: "romanqq", n: 1 },
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", player: "Shark", n: 1 },
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "kikyy", n: 1 },
-        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 2 }
+        { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 2 },
+        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Ovied7", n: 2 },
+        { m: "OMEN NOCTE|KURO ØNIX", team: "KURO ØNIX", player: "Gabonix", n: 1 },
+        { m: "OMEN NOCTE|KURO ØNIX", team: "KURO ØNIX", player: "Simon el prro", n: 1 },
+        { m: "LPE|Acuñas", team: "LPE", player: "Steve", n: 1 },
+        { m: "LPE|Acuñas", team: "LPE", player: "Gary", n: 1 },
+        { m: "LPE|Acuñas", team: "LPE", player: "Daniel", n: 1 }
     ];
     // Titulares que, aunque figuran en la plantilla, no llegaron a jugar este partido
     // (p. ej. por lesión): no reciben calificación (N/A) aunque no se haya registrado un cambio.
@@ -14453,7 +14496,7 @@
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" }
     ];
     function zc26DidNotPlay(ctx, team, name) {
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         return ZC26_DID_NOT_PLAY.some(e => e.m === k && e.team === team && e.player === name);
     }
     /* Estado de un jugador (se ve en todas sus alineaciones): "lesion" = con lesión, "susp" = con suspensión. */
@@ -14512,7 +14555,7 @@
         { m: "BLASTERS|op7", team: "op7", out: "smk myst!", in: "Naori", min: 60 },
     ];
     function zc26SubPair(ctx, team, name) {
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         return ZC26_SUB_PAIR.find(e => e.m === k && e.team === team && e.out === name) || null;
     }
     function zc26PlayerStatus(team, name) {
@@ -14520,16 +14563,30 @@
         return x ? x.status : "";
     }
     function zc26IsSubbedOut(ctx, team, name) {
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         return ZC26_SUB_OUT.some(e => e.m === k && e.team === team && e.player === name);
     }
     // Un jugador "entra" si tiene estadísticas propias o si aparece como el "in" de un cambio,
     // aunque no tenga estadísticas registradas en el reporte.
     function zc26IsSubbedIn(ctx, team, name) {
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         return ZC26_SUB_PAIR.some(e => e.m === k && e.team === team && e.in === name);
     }
     function zc26GetResult(home, away) { return ZC26_RESULTS[`${home}|${away}`] || null; }
+    /* Un cruce de eliminación directa que ya se jugó en la fase de grupos (mismo local|visitante)
+       usa la clave "local|visitante|KO" en las tablas de datos (Estelares, tarjetas, alineaciones...)
+       para no mezclarse con el partido de grupos. Sus marcadores van en ZC26_KO_RESULTS (clave normal). */
+    function zc26CtxKey(ctx) {
+        const k = `${ctx.home}|${ctx.away}`;
+        // Solo si esos dos equipos ya se enfrentaron en un partido de FASE DE GRUPOS (ZC26_RESULTS
+        // también guarda los marcadores de eliminatoria, por eso no basta con mirar esa tabla).
+        const playedInGroups = ZC26_FIXTURES.some(d => d.matches.some(x => x.group && x.home === ctx.home && x.away === ctx.away));
+        return (ctx.label && playedInGroups) ? k + "|KO" : k;
+    }
+    function zc26ResultFor(m) {
+        if (m.label) return ZC26_KO_RESULTS[`${m.home}|${m.away}`] || null;
+        return zc26GetResult(m.home, m.away);
+    }
 
     /* ===================== ZC26 · Bracket de la fase de eliminación directa =====================
        Cruce de Octavos ya definido. Cuando se juegue un partido de esta fase, se agrega su
@@ -14552,7 +14609,10 @@
         "BLASTERS|op7": { h: 2, a: 3 },
         "GTA|RAISE EARTH": { h: 3, a: 0 },
         "Unorthodox|Quiero KeKe": { h: 3, a: 0 },
-        "SYNOX GAMING|SGC": { h: 0, a: 3 }
+        "SYNOX GAMING|SGC": { h: 0, a: 3 },
+        "OMEN NOCTE|KURO ØNIX": { h: 4, a: 2 },
+        "Leviatán Esports|Egresados Del Conalep": { h: 3, a: 0 },
+        "LPE|Acuñas": { h: 3, a: 1 }
     };
     function zc26KoResult(home, away) {
         if (!home || !away) return null;
@@ -14591,6 +14651,16 @@
         const k = `${home}|${away}`;
         const hasRed = ZC26_CARDS.some(c => c.m === k && c.team === team && c.type === "tr");
         return hasRed ? `<span class="zc26sym zc26sym-sm zcbracket-card-icon">${zc26Sym("tr")}</span>` : "";
+    }
+    // Fecha (dd/mm) de un cruce de eliminación directa según ZC26_FIXTURES (solo partidos con etiqueta de ronda).
+    function zc26KoDateLabel(home, away, fallback) {
+        if (home && away) {
+            for (const day of ZC26_FIXTURES) {
+                const m = day.matches.find(x => x.label && x.home === home && x.away === away);
+                if (m) return String(day.num).padStart(2, "0") + "/" + (ZC26_MONTH_NUM[day.month] || "");
+            }
+        }
+        return fallback;
     }
     function zc26KoMatchHtml(home, away, opts) {
         opts = opts || {};
@@ -14636,14 +14706,14 @@
 
         const colR16 = makeCol("Octavos");
         data.r16.forEach((m, i) => {
-            const s = makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: i < 4 ? "28/09" : "27/09", forceMeta: true }));
+            const s = makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: zc26KoDateLabel(m[0], m[1], i < 4 ? "29/09" : "28/09"), forceMeta: true }));
             s.style.marginBottom = (i < data.r16.length - 1 ? "14px" : "0");
             colR16.appendChild(s);
         });
         bracket.appendChild(colR16);
 
         const colQF = makeCol("Cuartos");
-        data.qf.forEach(m => colQF.appendChild(makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: "Cuartos", forceMeta: true }))));
+        data.qf.forEach(m => colQF.appendChild(makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: zc26KoDateLabel(m[0], m[1], "Cuartos"), forceMeta: true }))));
         bracket.appendChild(colQF);
 
         const colSF = makeCol("Semifinal");
@@ -14983,7 +15053,7 @@
         if (!ctx || !ctx.time || !ctx.num || !ctx.month) return null;
         const ls = zc26LocalSchedule({ num: parseInt(ctx.num, 10), month: ctx.month }, ctx.time, zc26CountryCode);
         if (!ls) return null;
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         const delay = zc26MatchStartDelay(k);
         const extra = zc26MatchExtraTime(k);
         const start = zc26AddMinutes(ls, delay);
@@ -15022,7 +15092,7 @@
                     <span class="zcfx-day-date">${day.num} ${day.month}</span>
                 </div>
                 <div class="zcfx-list">
-                    ${day.matches.map(m => { const r = zc26GetResult(m.home, m.away); return `
+                    ${day.matches.map(m => { const r = zc26ResultFor(m); return `
                         <div class="zcfx-card" data-zc26-match data-group="${m.group || ''}" data-label="${m.label || ''}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}" data-time="${m.time || ''}">
                             ${(m.label || m.group) ? `<span class="zcfx-group-badge">${m.label || ('Grupo ' + m.group)}</span>` : ''}
                             <div class="zcfx-teams">
@@ -15088,7 +15158,7 @@
         }
         row.innerHTML = shown.map(x => {
             const m = x.m;
-            const r = zc26GetResult(m.home, m.away) || ZC26_KO_RESULTS[m.home + "|" + m.away] || null;
+            const r = zc26ResultFor(m);
             const phase = m.group ? "Fase de grupos · Grupo " + m.group : m.label;
             const time = zc26Fmt12(x.d.getHours(), x.d.getMinutes()).replace(" ", "");
             const dateTxt = String(x.d.getDate()).padStart(2, "0") + "/" + String(x.d.getMonth() + 1).padStart(2, "0");
@@ -15454,7 +15524,8 @@
         F: "#06b6d4"
     };
     const ZC26_MONTH_NAMES = {
-        SEP: "septiembre"
+        SEP: "septiembre",
+        OCT: "octubre"
     };
     // Probabilidades recalculadas tras la Jornada 1 (todos los equipos ya jugaron):
     // los partidos ya disputados no se muestran (se ocultan solos, ver zc26StatsBlocksHtml),
@@ -15527,7 +15598,9 @@
             + `<span class="zc26mm-form-dot zc26mm-form-dot-none"></span>`.repeat(5 - f.length);
     }
     function zc26StatsBlocksHtml(ctx) {
-        const p = zc26GetProb(ctx.home, ctx.away);
+        const p = (zc26CtxKey(ctx).endsWith("|KO") && !ZC26_PROBS[zc26CtxKey(ctx)])
+            ? { home: 33, draw: 34, away: 33 }
+            : zc26GetProb(ctx.home, ctx.away);
         return `
         <div class="zc26mm-stat-block">
             <div class="zc26mm-stat-title">Formación reciente</div>
@@ -15649,7 +15722,7 @@
     }
     // Estadísticas de un jugador en un partido ya jugado (según los reportes).
     function zc26PlayerStats(ctx, team, name) {
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         const st = { star: 0, ta: 0, tr: 0, g: 0, a: 0 };
         ZC26_STAR_PLAYERS.forEach(([rep, t, mk]) => {
             if (mk === k && t === team && (ZC26_STAR_ALIAS[rep] || rep) === name) st.star++;
@@ -15694,7 +15767,7 @@
         return steps[h % steps.length];
     }
     function zc26Rating(ctx, team, st, name) {
-        const ov = ZC26_RATING_OVERRIDES[`${ctx.home}|${ctx.away}`];
+        const ov = ZC26_RATING_OVERRIDES[`${zc26CtxKey(ctx)}`];
         if (ov && name != null && ov[name] != null) return Math.max(0, Math.min(10, Math.round((ov[name] + 0.3 * st.a) * 10) / 10));
         const r = ctx.res;
         const won = team === ctx.home ? r.h > r.a : r.a > r.h;
@@ -15764,7 +15837,7 @@
     }
     function zc26TimelineHtml(ctx) {
         if (!ctx || !ctx.res || ctx.res.wo) return "";
-        const tl = zc26MatchTimeline(`${ctx.home}|${ctx.away}`);
+        const tl = zc26MatchTimeline(`${zc26CtxKey(ctx)}`);
         const side = (list, team) => {
             const by = {};
             list.filter(e => e.team === team).forEach(e => { (by[e.name] = by[e.name] || []).push(e.min); });
@@ -15789,7 +15862,7 @@
     // Bloque "Tarjetas" del partido (solo partidos jugados con tarjetas en el reporte)
     function zc26CardsBlockHtml(ctx) {
         if (!ctx.res || ctx.res.wo) return "";
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         const list = ZC26_CARDS.filter(c => c.m === k);
         if (!list.length) return "";
         return `<div class="lu-block zc26lu-cards-block">
@@ -15805,7 +15878,7 @@
     // Cronología del partido: INICIO, cada Set ganado (con marcador y Estelar), cambios,
     // tarjetas y FINAL DEL PARTIDO. Orden por minuto; los cambios sin "min" van primero.
     function zc26ChronologyHtml(ctx) {
-        const k = `${ctx.home}|${ctx.away}`;
+        const k = `${zc26CtxKey(ctx)}`;
         // Partido sin resultado (aún no se juega): solo se muestran los cambios hechos antes de iniciar.
         const isPre = !ctx.res;
         const preStart = p => p.m === k && (p.min == null || p.min === 0);
@@ -15981,7 +16054,7 @@
     };
     function zc26MatchSplit(roster, team, ctx) {
         const split = zc26SplitRoster(roster);
-        const byMatch = ZC26_MATCH_LINEUP[`${ctx.home}|${ctx.away}`];
+        const byMatch = ZC26_MATCH_LINEUP[`${zc26CtxKey(ctx)}`];
         const ov = byMatch && byMatch[team];
         if (!ov) return split;
         const by = n => roster.find(m => m[0] === n);
@@ -16046,9 +16119,9 @@
         ZC26_FIXTURES.forEach(day => day.matches.forEach(m => {
             const samePair = (m.home === ctx.home && m.away === ctx.away) || (m.home === ctx.away && m.away === ctx.home);
             if (!samePair) return;
-            const r = zc26GetResult(m.home, m.away);
+            const r = zc26ResultFor(m);
             cards.push(`<div class="zcfx-card">
-                <span class="zcfx-group-badge zcfx-group-badge-more">ZC26 · Fase de Grupos ${m.group}</span>
+                <span class="zcfx-group-badge zcfx-group-badge-more">${m.group ? "ZC26 · Fase de Grupos " + m.group : "ZC26 · " + zc26Esc(m.label || "")}</span>
                 <div class="zcfx-teams">
                     <div class="zcfx-team-row${zc26RowCls(r, "home")}">
                         <span class="zcfx-team-logo"><img src="${zc26Logo(m.home)}" alt="${zc26Esc(m.home)}"></span>
@@ -16096,6 +16169,7 @@
         const panel = document.getElementById("zc26MatchPanel");
         if (!panel || !card) return;
         const group = card.dataset.group || "";
+        const label = card.dataset.label || "";
         const home = card.dataset.home || "";
         const away = card.dataset.away || "";
         const day = card.dataset.day || "";
@@ -16104,13 +16178,13 @@
         const time = card.dataset.time || "";
         const accent = ZC26_GROUP_COLORS[group] || "#8a8f98";
         const monthFull = ZC26_MONTH_NAMES[month] || month;
-        const res = zc26GetResult(home, away);
+        const res = label ? (ZC26_KO_RESULTS[`${home}|${away}`] || null) : zc26GetResult(home, away);
         // Partido con hora: fecha y hora según el país elegido
         const ls = time ? zc26LocalSchedule({ num: parseInt(num, 10), month: month }, time, zc26CountryCode) : null;
         const statusTxt = res ? "Finalizado" : "Próximo";
         const startTsRaw = (!res && time) ? zc26MatchStartTimestamp({ num: parseInt(num, 10), month: month }, time) : null;
         const startTs = (startTsRaw && startTsRaw > Date.now()) ? startTsRaw : null;
-        zc26mmCurrentMatch = { home, away, group, res, day, num, month, time };
+        zc26mmCurrentMatch = { home, away, group, label, res, day, num, month, time };
         qsStacked = false;
         panel.scrollTop = 0;
         panel.innerHTML = `
@@ -16118,11 +16192,11 @@
             ${startTs ? `<span class="zc26mm-countdown" data-zc26-countdown="${startTs}"><span class="zc26mm-countdown-icon">${ZC26_CLOCK_ICON}</span><span class="zc26mm-countdown-text"></span></span>` : ""}
             <div class="zc26mm-head">
                 <div>
-                    <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">Fase de grupos</span></div>
+                    <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">${group ? "Fase de grupos" : (label || "Fase de grupos")}</span></div>
                     <div class="zc26mm-date">${ls ? ls.weekday + " " + ls.d + " de " + ls.monthName : day + " " + num + " de " + monthFull} · 2026</div>
                 </div>
                 <div class="zc26mm-tags">
-                    <span class="zc26mm-tag">Grupo ${group}</span>
+                    <span class="zc26mm-tag">${group ? "Grupo " + group : "Eliminatoria"}</span>
                     <span class="zc26mm-status">${statusTxt}</span>
                 </div>
             </div>
@@ -16257,7 +16331,7 @@
                 const away = searchNorm(card.dataset.away || "");
                 const dayName = searchNorm(card.dataset.day || "");
                 const matchesGroup = activeGroup === "all"
-                    || (activeGroup === "OCTAVOS" ? label === "Octavos de final" : group === activeGroup);
+                    || (activeGroup === "OCTAVOS" ? label === "Octavos de final" : activeGroup === "CUARTOS" ? label === "Cuartos de final" : group === activeGroup);
                 const matchesSearch = !searchVal
                     || home.includes(searchVal)
                     || away.includes(searchVal)
@@ -16671,7 +16745,13 @@
         if (!home || !away) return;
         const cards = document.querySelectorAll("#zc26FixturesList [data-zc26-match]");
         let target = null;
+        // El bracket solo muestra partidos de eliminación directa: se prefiere la tarjeta con
+        // etiqueta de ronda (Octavos/Cuartos...) y no el partido de fase de grupos entre los mismos equipos.
         cards.forEach(c => {
+            if (target) return;
+            if (c.dataset.label && c.dataset.home === home && c.dataset.away === away) target = c;
+        });
+        if (!target) cards.forEach(c => {
             if (target) return;
             if (c.dataset.home === home && c.dataset.away === away) target = c;
         });
