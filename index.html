@@ -2690,11 +2690,11 @@
         }
         /* Cronología bajo el marcador (partidos jugados): goles y tarjetas con minuto */
         .zc26mm-timeline { margin-top: 12px; gap: 6px; }
-        .zc26mm-timeline .timeline-block { padding: 9px 12px; border-radius: 12px; }
-        .zc26mm-timeline .timeline-entry { font-size: 0.7rem; cursor: default; }
-        .zc26mm-timeline .timeline-time { font-size: 0.7rem; color: #8a8f98; }
-        .zc26mm-timeline .timeline-icon-win { width: 24px; height: 24px; }
-        .zc26mm-timeline .timeline-icon-card { width: 20px; height: 20px; }
+        .zc26mm-timeline .timeline-block { padding: 6px 10px; border-radius: 10px; }
+        .zc26mm-timeline .timeline-entry { font-size: 0.56rem; cursor: default; }
+        .zc26mm-timeline .timeline-time { font-size: 0.56rem; color: #8a8f98; }
+        .zc26mm-timeline .timeline-icon-win { width: 16px; height: 16px; }
+        .zc26mm-timeline .timeline-icon-card { width: 14px; height: 14px; }
         /* Partidos ya jugados: calificación 1-10, Estelar y tarjetas sobre el avatar */
         .zc26lu-played { cursor: pointer; -webkit-tap-highlight-color: transparent; }
         .zc26lu-avwrap {
@@ -3169,32 +3169,57 @@
         .zc26mm-general-section + .zc26mm-general-section { margin-top: 14px; padding-top: 12px; }
         .zc26mm-general-section-title { font-size: 0.85rem; }
         /* Cronología (cambios y tarjetas) dentro de Información general */
-        .zc26cron-list { display: flex; flex-direction: column; gap: 8px; }
-        .zc26cron-item { border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.02); }
-        .zc26cron-head { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .zc26cron-icon { flex: 0 0 auto; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+        /* ===== Cronología estilo línea de tiempo (más reciente arriba, inicio abajo) ===== */
+        .zt-list { display: flex; flex-direction: column; padding: 2px 0; --zt-line: rgba(255,255,255,0.15); --zt-lane: 26px; --zt-w: 1.5px; }
+        .zt-ev { display: flex; align-items: stretch; gap: 5px; padding: 0 6px; }
+        .zt-ev.zt-right { flex-direction: row-reverse; text-align: right; }
+        .zt-node { flex: 0 0 40px; width: 40px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .zt-ico { min-height: 12px; display: flex; align-items: center; justify-content: center; color: #fff; }
+        .zt-ico img, .zt-ico svg { height: 11px; width: auto; max-width: 13px; object-fit: contain; display: block; }
+        .zt-ico .zc26lu-cardico { transform: scale(0.6); }
+        .zt-pill { min-width: 32px; padding: 2px 6px; border-radius: 999px; background: rgba(255,255,255,0.09); font-size: 0.5rem; font-weight: 600; color: #e7e9ec; text-align: center; white-space: nowrap; line-height: 1.2; }
+        .zt-ico-card { min-height: 16px; }
+        .zt-ico .zt-card-svg { width: 12px; height: 16px; max-width: none; }
+        .zt-arrow { width: 10px; height: 10px; flex: 0 0 auto; display: block; }
+        .zt-swap { display: flex; align-items: center; gap: 4px; font-size: 0.52rem; color: #d3d7dd; line-height: 1.3; overflow-wrap: anywhere; }
+        .zt-right .zt-swap { justify-content: flex-end; }
+        .zt-wrap { display: flex; flex-direction: column; }
+        .zt-filters { display: flex; gap: 6px; overflow-x: auto; padding: 2px 6px 12px; scrollbar-width: none; -ms-overflow-style: none; }
+        .zt-filters::-webkit-scrollbar { display: none; }
+        .zt-filter { flex: 0 0 auto; font-size: 0.6rem; font-weight: 700; color: #fff; background: transparent; border: 1.5px solid #fff; padding: 5px 13px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background-color .2s ease, color .2s ease, transform .15s ease; }
+        .zt-filter:active { transform: scale(0.94); }
+        .zt-filter.active { background: #fff; color: #11141b; }
+        .zt-pane { display: none; }
+        .zt-pane.active { display: flex; }
+        .zt-bar { flex: 0 0 2px; width: 2px; border-radius: 3px; background: rgba(255,255,255,0.18); }
+        .zt-txt { flex: 1 1 auto; min-width: 0; align-self: center; display: flex; flex-direction: column; gap: 2px; }
+        .zt-title { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 0.58rem; font-weight: 600; color: #fff; line-height: 1.15; }
+        .zt-right .zt-title { justify-content: flex-end; }
+        .zt-score { font-size: 0.48rem; font-weight: 800; padding: 0 5px; border-radius: 999px; border: 1px solid currentColor; line-height: 1.25; }
+        .zt-sub { font-size: 0.5rem; color: #aab0ba; line-height: 1.25; overflow-wrap: anywhere; }
+        .zt-team { color: #d3d7dd; }
+        .zt-star { color: #7b818b; }
+        .zt-in { color: #3ecf6b; font-weight: 700; }
+        .zt-out { color: #e5484d; font-weight: 700; }
+        .zt-conn { position: relative; height: 16px; }
+        .zt-conn.zt-same { height: 7px; }
+        .zt-conn.zt-same::before { content: ""; position: absolute; top: 0; bottom: 0; width: var(--zt-w); border-radius: 2px; background: var(--zt-line); }
+        .zt-conn.zt-same.zt-l::before { left: calc(var(--zt-lane) - 1px); }
+        .zt-conn.zt-same.zt-r::before { right: calc(var(--zt-lane) - 1px); }
+        .zt-conn.zt-same.zt-c::before { left: calc(50% - 1px); }
+        .zt-path { position: absolute; top: 0; bottom: 0; }
+        .zt-path::before, .zt-path::after { content: ""; position: absolute; width: 50%; border: 0 solid var(--zt-line); box-sizing: border-box; }
+        .zt-path::before { left: 0; top: 0; height: 50%; border-left-width: var(--zt-w); border-bottom-width: var(--zt-w); border-bottom-left-radius: 7px; }
+        .zt-path::after { right: 0; top: calc(50% - var(--zt-w)); height: calc(50% + var(--zt-w)); border-top-width: var(--zt-w); border-right-width: var(--zt-w); border-top-right-radius: 7px; }
+        .zt-path.zt-mir { transform: scaleX(-1); }
+        .zt-path.zt-lr { left: calc(var(--zt-lane) - 1px); right: calc(var(--zt-lane) - 1px); }
+        .zt-path.zt-lc { left: calc(var(--zt-lane) - 1px); right: calc(50% - 1px); }
+        .zt-path.zt-cr { left: calc(50% - 1px); right: calc(var(--zt-lane) - 1px); }
+        .zt-mile { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 0 6px; padding: 6px 8px; border-radius: 8px; background: rgba(255,255,255,0.08); color: #f1f2f4; font-size: 0.56rem; font-weight: 600; line-height: 1.2; }
+        .zt-mile .zc26cron-svg { width: 12px; height: 12px; flex: 0 0 auto; }
+        .zt-mile-time { font-size: 0.5rem; font-weight: 500; color: #9aa0a8; }
         .zc26cron-svg { width: 18px; height: 18px; }
-        .zc26cron-label { flex: 1 1 auto; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: #e7e9ec; }
-        .zc26cron-min { font-size: 0.6rem; color: #9298a1; font-weight: 600; }
-        .zc26cron-body { padding: 9px 10px; display: flex; flex-direction: column; gap: 10px; }
-        .zc26cron-block:not(:first-child) { margin-top: 2px; }
-        .zc26cron-tag { display: block; font-size: 0.56rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
-        .zc26cron-tag-in { color: #3ecf6b; }
-        .zc26cron-tag-out { color: #e5484d; }
-        .zc26cron-player { display: flex; align-items: center; gap: 7px; }
-        .zc26cron-badge { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; flex: 0 0 auto; }
-        .zc26cron-name { font-size: 0.68rem; font-weight: 600; color: #f1f2f4; }
-        .zc26cron-milestone { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 8px; color: #8a8f98; }
-        .zc26cron-milestone-icon { width: 20px; height: 20px; }
-        .zc26cron-milestone-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #c9cdd3; }
-        .zc26cron-milestone-time { font-size: 0.6rem; color: #8a8f98; }
-        .zc26cron-goal-banner { padding: 12px 10px 10px; text-align: center; }
         .zc26cron-set-img { width: 100%; height: 100%; object-fit: contain; display: block; }
-        .zc26cron-goal-icon { display: inline-flex; width: 20px; height: 20px; margin-bottom: 4px; }
-        .zc26cron-goal-title { font-size: 0.78rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.4px; }
-        .zc26cron-goal-min { font-size: 0.6rem; color: rgba(255,255,255,0.85); margin-top: 2px; }
-        .zc26cron-goal-score { text-align: center; font-size: 0.72rem; font-weight: 800; padding: 6px 10px; }
-        .zc26cron-goal-star { font-size: 0.62rem; color: #9298a1; }
         .zc26mm-form-row {
             justify-content: space-between;
             gap: 10px;
@@ -14397,8 +14422,8 @@
         ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"], ["Zouza", "OMEN NOCTE", "Egresados Del Conalep|OMEN NOCTE"],
         ["Mateo", "POS JR", "Phoenix|POS JR"], ["Mateo", "POS JR", "Phoenix|POS JR"], ["Arc/Rafa", "POS JR", "Phoenix|POS JR"],
         ["sjoacedbamypasa", "KURO ØNIX", "OMEN NOCTE|KURO ØNIX"], ["AdmirerTensai", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
-        ["Gabonix", "KURO ØNIX", "OMEN NOCTE|KURO ØNIX"], ["Mokka", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
-        ["AdmirerTensai", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"], ["Mokka", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
+        ["Gabonix", "KURO ØNIX", "OMEN NOCTE|KURO ØNIX"], ["R3QU1EMBRUH", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
+        ["AdmirerTensai", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"], ["R3QU1EMBRUH", "OMEN NOCTE", "OMEN NOCTE|KURO ØNIX"],
         ["JulioCr36D", "Leviatán Esports", "Leviatán Esports|Egresados Del Conalep"], ["Shark", "Leviatán Esports", "Leviatán Esports|Egresados Del Conalep"], ["Shark", "Leviatán Esports", "Leviatán Esports|Egresados Del Conalep"],
         ["Steve", "LPE", "LPE|Acuñas"], ["Gary", "LPE", "LPE|Acuñas"], ["Daniel", "LPE", "LPE|Acuñas"],
         ["Xabi", "Acuñas", "LPE|Acuñas"]
@@ -14493,7 +14518,8 @@
     // Titulares que, aunque figuran en la plantilla, no llegaron a jugar este partido
     // (p. ej. por lesión): no reciben calificación (N/A) aunque no se haya registrado un cambio.
     const ZC26_DID_NOT_PLAY = [
-        { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" }
+        { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
+        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" }
     ];
     function zc26DidNotPlay(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14527,7 +14553,8 @@
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "Hacent" },
         { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Mokka" },
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
-        { m: "BLASTERS|op7", team: "op7", player: "smk myst!" }
+        { m: "BLASTERS|op7", team: "op7", player: "smk myst!" },
+        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -14553,6 +14580,7 @@
         { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", out: "Mokka", in: "Zousa", min: 5 },
         { m: "Phoenix|POS JR", team: "POS JR", out: "TK Carl", in: "valli" },
         { m: "BLASTERS|op7", team: "op7", out: "smk myst!", in: "Naori", min: 60 },
+        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", out: "Mokka", in: "R3QU1EMBRUH", min: 3 },
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -15899,90 +15927,101 @@
             .map(p => ({ kind: "lesion", min: p.min != null ? p.min : null, team: p.team, name: p.player }));
         // Si un cambio y un gol caen en el mismo minuto, el cambio se muestra primero
         // (el jugador que entra ya está en cancha cuando se gana ese set).
-        const events = subEvents.concat(goalEvents, cardEvents, injuryEvents);
+        // Si hicieron falta mapas extra (más de 4 sets jugados), se marca el corte entre los 4 mapas
+        // del Draft Map y los mapas adicionales.
+        const mileEvents = [];
+        if (!isPre && goalEvents.length > 4) {
+            const cut = goalEvents[3].min;
+            mileEvents.push({ kind: "mile", min: cut + 0.1, label: "Fin del 1er: Draft Map" });
+            mileEvents.push({ kind: "mile", min: cut + 0.2, label: "Inicio del 2do: Draft Map" });
+        }
+        const events = subEvents.concat(goalEvents, cardEvents, injuryEvents, mileEvents);
         events.sort((a, b) => (a.min == null ? -1 : a.min) - (b.min == null ? -1 : b.min));
-        const minLabel = m => m == null ? "Antes de iniciar" : (m === 0 ? "0' · Antes de iniciar" : `${m}'`);
-        const player = (team, name) => `<div class="zc26cron-player"><img class="zc26cron-badge" src="${zc26Logo(team)}" alt="">
-                <span class="zc26cron-name">${zc26Esc(name)}</span></div>`;
-        const cambioIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="none">
-            <path d="M8 20V6M8 6L4 10M8 6l4 4" stroke="#3ecf6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 4v14M16 18l4-4M16 18l-4-4" stroke="#e5484d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        const pillMin = m => `${m == null ? 0 : m}'`;
+        const cambioIcon = `<svg viewBox="0 0 24 24" fill="none">
+            <path d="M8 20V6M8 6L4 10M8 6l4 4" stroke="#3ecf6b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 4v14M16 18l4-4M16 18l-4-4" stroke="#e5484d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`;
-        const ballIcon = `<img class="zc26cron-set-img" src="assets/icon_wim_set.png" alt="">`;
-        const clockIcon = ZC26_CLOCK_ICON;
-        // Ganador del Set: solo azul/rojo (mismos tonos de la barra de Probabilidad de victoria),
-        // azul para el equipo favorito (mayor probabilidad pre-partido), rojo para el otro.
+        const ballIcon = `<img src="assets/icon_wim_set.png" alt="">`;
+        const whistleIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"/><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>`;
+        // Ganador del Set: azul para el equipo favorito (mayor probabilidad pre-partido), rojo para el rival.
+        // El resto de eventos (cambios, tarjetas, lesiones) usan la barra gris.
         const ZC26_SET_BLUE = "#6ea8fe";
         const ZC26_SET_RED = "#ef5350";
         const zc26SetProbs = zc26GetProb(ctx.home, ctx.away);
         const zc26FavTeam = zc26SetProbs.home >= zc26SetProbs.away ? ctx.home : ctx.away;
         const teamAccent = t => t === zc26FavTeam ? ZC26_SET_BLUE : ZC26_SET_RED;
-        const rows = events.map(e => {
+        const cardIco = t => `<svg class="zt-card-svg" viewBox="0 0 12 16" aria-hidden="true"><rect x="0.5" y="0.5" width="11" height="15" rx="2.4" fill="${t === "tr" ? "#e53935" : "#f5c518"}"/></svg>`;
+        // Flechas propias dibujadas con vectores (sin texto ni símbolos ↑ ↓)
+        const arrowIco = up => `<svg class="zt-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="${up ? "M6 10.6V2.2M2.6 5.6L6 2.2l3.4 3.4" : "M6 1.4V9.8M2.6 6.4L6 9.8l3.4-3.4"}" fill="none" stroke="${up ? "#3ecf6b" : "#e5484d"}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const swapLine = (up, name, side) => `<div class="zt-swap">${side === "r" ? `<span>${zc26Esc(name)}</span>${arrowIco(up)}` : `${arrowIco(up)}<span>${zc26Esc(name)}</span>`}</div>`;
+
+        // Conector entre dos puntos. from/to: "l" | "r" | "c" (centro, hacia las barras de inicio/final).
+        const conn = (from, to) => {
+            if (from === to) return `<div class="zt-conn zt-same zt-${from}"></div>`;
+            const order = { l: 0, c: 1, r: 2 };
+            const mir = order[from] > order[to];
+            const key = [from, to].sort((x, y) => order[x] - order[y]).join("");
+            return `<div class="zt-conn"><span class="zt-path zt-${key}${mir ? " zt-mir" : ""}"></span></div>`;
+        };
+        const milestone = (label, time) => `<div class="zt-mile">${whistleIcon}<span>${label}</span>${time ? `<span class="zt-mile-time">${time}</span>` : ""}</div>`;
+
+        // Cada evento -> { side: "l"|"r", html }. Local a la izquierda, visitante a la derecha.
+        const items = events.map(e => {
+            if (e.kind === "mile") return { side: "c", kind: "mile", html: milestone(e.label) };
+            const side = e.team === ctx.home ? "l" : "r";
+            let icon, title, sub = "", bar = "", cardCls = "";
             if (e.kind === "goal") {
                 const accent = teamAccent(e.team);
-                return `<div class="zc26cron-item zc26cron-goal">
-                    <div class="zc26cron-goal-banner" style="background:${accent}">
-                        <span class="zc26cron-goal-icon">${ballIcon}</span>
-                        <div class="zc26cron-goal-title">Ganador del Set ${e.set}</div>
-                        <div class="zc26cron-goal-min">${minLabel(e.min)}</div>
-                    </div>
-                    <div class="zc26cron-goal-score" style="background:${accent}26;color:${accent}">
-                        ${zc26Esc(zc26Abbr(ctx.home))} ${e.h} - ${e.a} ${zc26Esc(zc26Abbr(ctx.away))}
-                    </div>
-                    <div class="zc26cron-body">
-                        <div class="zc26cron-block">
-                            <span class="zc26cron-tag" style="color:${accent}">Ganó el set</span>
-                            ${player(e.team, e.team)}
-                        </div>
-                        ${e.noStar ? "" : `<div class="zc26cron-goal-star">Estelar: <b>${zc26Esc(e.name)}</b></div>`}
-                    </div>
-                </div>`;
+                bar = `style="background:${accent}"`;
+                icon = ballIcon;
+                title = `Ganó el SET ${e.set} <span class="zt-score" style="color:${accent};background:${accent}22">${e.h} - ${e.a}</span>`;
+                sub = `<div class="zt-sub"><span class="zt-team">${zc26Esc(e.team)}</span>${e.noStar ? "" : ` <span class="zt-star">${zc26Esc(e.name)}</span>`}</div>`;
+            } else if (e.kind === "sub") {
+                icon = cambioIcon;
+                title = "Cambio";
+                sub = swapLine(true, e.in, side) + swapLine(false, e.out, side)
+                    + `<div class="zt-sub">${zc26Esc(e.team)}</div>`;
+            } else if (e.kind === "lesion") {
+                icon = zc26Sym("lesion");
+                title = "Lesión";
+                sub = `<div class="zt-sub">${zc26Esc(e.name)} · ${zc26Esc(e.team)}</div>`;
+            } else {
+                icon = cardIco(e.type);
+                cardCls = " zt-ico-card";
+                title = e.type === "tr" ? "Tarjeta roja" : "Tarjeta amarilla";
+                sub = `<div class="zt-sub">${zc26Esc(e.name)} · ${zc26Esc(e.team)}</div>`;
             }
-            if (e.kind === "sub") {
-                return `<div class="zc26cron-item">
-                    <div class="zc26cron-head"><span class="zc26cron-icon">${cambioIcon}</span>
-                        <span class="zc26cron-label">Cambio</span>
-                        <span class="zc26cron-min">${minLabel(e.min)}</span></div>
-                    <div class="zc26cron-body">
-                        <div class="zc26cron-block">
-                            <span class="zc26cron-tag zc26cron-tag-in">Entra</span>
-                            ${player(e.team, e.in)}
-                        </div>
-                        <div class="zc26cron-block">
-                            <span class="zc26cron-tag zc26cron-tag-out">Sale</span>
-                            ${player(e.team, e.out)}
-                        </div>
-                    </div>
-                </div>`;
-            }
-            if (e.kind === "lesion") {
-                return `<div class="zc26cron-item">
-                    <div class="zc26cron-head"><span class="zc26cron-icon">${zc26Sym("lesion")}</span>
-                        <span class="zc26cron-label">Lesión</span>
-                        <span class="zc26cron-min">${minLabel(e.min)}</span></div>
-                    <div class="zc26cron-body"><div class="zc26cron-block">${player(e.team, e.name)}</div></div>
-                </div>`;
-            }
-            const label = e.type === "tr" ? "Tarjeta roja" : "Tarjeta amarilla";
-            return `<div class="zc26cron-item">
-                <div class="zc26cron-head"><span class="zc26cron-icon"><i class="zc26lu-cardico zc26lu-cardico-${e.type}" style="width:13px;height:18px"></i></span>
-                    <span class="zc26cron-label">${label}</span>
-                    <span class="zc26cron-min">${minLabel(e.min)}</span></div>
-                <div class="zc26cron-body"><div class="zc26cron-block">${player(e.team, e.name)}</div></div>
+            const html = `<div class="zt-ev ${side === "l" ? "zt-left" : "zt-right"}">
+                <div class="zt-node"><span class="zt-ico${cardCls}">${icon}</span><span class="zt-pill">${pillMin(e.min)}</span></div>
+                <span class="zt-bar" ${bar}></span>
+                <div class="zt-txt"><div class="zt-title">${title}</div>${sub}</div>
             </div>`;
-        }).join("");
+            return { side, kind: ({ goal: "sets", sub: "cambios", card: "tarjetas", lesion: "lesiones" })[e.kind], html };
+        }).reverse(); // más reciente arriba, como en la referencia
+
         const clock = isPre ? null : zc26MatchClock(ctx);
-        const milestone = (label, time) => `<div class="zc26cron-milestone">
-                <span class="zc26cron-milestone-icon">${clockIcon}</span>
-                <span class="zc26cron-milestone-label">${label}</span>
-                <span class="zc26cron-milestone-time">${time}</span>
-            </div>`;
-        if (!rows && !clock) return "";
-        return `<div class="zc26cron-list">
-            ${clock ? milestone("Inicio", clock.start) : ""}
-            ${rows}
-            ${clock ? milestone("Final del partido", clock.end) : ""}
-        </div>`;
+        if (!items.length && !clock) return "";
+const buildList = f => {
+            const seq = [];
+            if (f === "all" && clock) seq.push({ side: "c", html: milestone("Partido finalizado", clock.end) });
+            items.filter(it => f === "all" || it.kind === f || (f === "sets" && it.kind === "mile")).forEach(it => seq.push(it));
+            if (f === "all" && clock) seq.push({ side: "c", html: milestone("Partido iniciado", clock.start) });
+            let out = "";
+            seq.forEach((it, i) => { if (i) out += conn(seq[i - 1].side, it.side); out += it.html; });
+            return out;
+        };
+        // Botones: "Todo" y "Sets" siempre (en partidos jugados); Cambios, Tarjetas y Lesiones solo si hay de ese tipo.
+        const has = k => items.some(it => it.kind === k);
+        const filters = [["all", "Todo"]];
+        if (!isPre && !ctx.res.wo) filters.push(["sets", "Sets"]);
+        if (has("cambios")) filters.push(["cambios", "Cambios"]);
+        if (has("tarjetas")) filters.push(["tarjetas", "Tarjetas"]);
+        if (has("lesiones")) filters.push(["lesiones", "Lesiones"]);
+        const bar = filters.length > 1
+            ? `<div class="zt-filters">${filters.map(([k, l], i) => `<button type="button" class="zt-filter${i === 0 ? " active" : ""}" data-zt-filter="${k}">${l}</button>`).join("")}</div>` : "";
+        const panes = filters.map(([k], i) => `<div class="zt-list zt-pane${i === 0 ? " active" : ""}" data-zt-pane="${k}">${buildList(k)}</div>`).join("");
+        return `<div class="zt-wrap">${bar}${panes}</div>`;
     }
     const ZC26_ABBR = {
         "Leviatán Esports": "LEV", "Peruanos FC": "PFC", "Quiero KeKe": "QKK", "POS JR": "PJR",
@@ -16245,6 +16284,16 @@
     });
     document.getElementById("zc26MatchOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeZc26Match();
+    });
+    // Chronology filter buttons (Todo / Sets / Cambios / Tarjetas / Lesiones)
+    document.addEventListener("click", function (e) {
+        const btn = e.target.closest("[data-zt-filter]");
+        if (!btn) return;
+        const wrap = btn.closest(".zt-wrap");
+        if (!wrap) return;
+        wrap.querySelectorAll("[data-zt-filter]").forEach(b => b.classList.toggle("active", b === btn));
+        wrap.querySelectorAll("[data-zt-pane]").forEach(p => p.classList.toggle("active", p.dataset.ztPane === btn.dataset.ztFilter));
+        zcPlaySound("click");
     });
     // Minimenú del jugador: usa el mismo panel y estilo (qs2-*) que "Último partido importa".
     function openZc26PlayerStats(card) {
