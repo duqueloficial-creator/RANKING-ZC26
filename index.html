@@ -7733,8 +7733,9 @@
         }
         .novedad-detail-related-item {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 12px;
             background: none;
             border: none;
             padding: 0;
@@ -7742,6 +7743,36 @@
             cursor: pointer;
             width: 100%;
             font-family: inherit;
+        }
+        .novedad-detail-related-thumb {
+            flex: 0 0 92px;
+            width: 92px;
+            aspect-ratio: 4 / 3;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        .novedad-detail-related-thumb-ph {
+            background: linear-gradient(135deg, #1b1e25, #0f1115);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-sizing: border-box;
+        }
+        .novedad-detail-related-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+        .novedad-detail-related-text {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
         .novedad-detail-related-tag {
             font-size: 10px;
@@ -8809,6 +8840,10 @@
             <div class="novedad-detail-tag" id="tvDetailTag"></div>
             <div class="novedad-detail-title" id="tvDetailTitle"></div>
             <div class="novedad-detail-body" id="tvDetailBody"></div>
+            <div class="novedad-detail-related" id="tvDetailRelated">
+                <div class="novedad-detail-related-title">Otras novedades</div>
+                <div class="novedad-detail-related-list" id="tvDetailRelatedList"></div>
+            </div>
             <div id="tvDetailCredits"></div>
         </div>
     </div>
@@ -15319,6 +15354,52 @@
             { t: "p", x: "El caótico modo Supervivencia llevado al formato competitivo. Se están preparando modalidades para jugarlo en:" },
             { t: "ul", x: ["Solo (1vs1 supervivencia libre o en arena)", "Dúos (2vs2 con estrategias de supervivencia)", "Partidas especiales 3vs3 en mapa de Showdown"] } ] }
     ];
+    /* "Otras novedades": lista compartida al final de TODOS los detalles (novedades, Vive los torneos,
+       Próximos torneos). Cada elemento abre su propio detalle, que a su vez muestra esta lista con
+       el resto, así siempre se puede seguir navegando de novedad en novedad. */
+    window.tvCoverOf = new Map();
+    window.zcRaiseDetail = function (el) {
+        ["novedadDetail", "tvDetail"].forEach(id => {
+            const n = document.getElementById(id);
+            if (n) n.style.zIndex = (n === el) ? "3550" : "";
+        });
+    };
+    window.zcRenderRelated = function (listEl, current) {
+        if (!listEl) return 0;
+        listEl.innerHTML = "";
+        // Lista global en orden fijo: novedades, "Vive los torneos", "Próximos torneos".
+        const all = [];
+        (window.zcNovedadEntries ? window.zcNovedadEntries() : []).forEach(n => {
+            all.push({ group: "news", key: "n" + n.idx, tag: n.data.tag, title: n.data.title, cover: n.data.hero, open: () => window.zcOpenNovedadDetail(n.idx) });
+        });
+        [["vive", TV_VIVE], ["prox", TV_PROXIMOS]].forEach(([g, arr]) => arr.forEach(it => {
+            const cover = window.tvCoverOf.get(it) || null;
+            all.push({ group: g, key: it, tag: it.tag, title: it.title, cover, open: () => window.tvOpenDetail(it, window.tvCoverOf.get(it) || null) });
+        }));
+        const curKey = current && (current.news !== undefined ? "n" + current.news : current.tv);
+        const pos = all.findIndex(e => e.key === curKey);
+        const cur = pos >= 0 ? all[pos] : null;
+        // Solo 4 parecidas y sin repetirse: primero del mismo tipo, luego misma etiqueta, luego el resto.
+        // Se recorren a partir de la actual (en círculo), así cada detalle propone un grupo distinto.
+        const rotated = pos >= 0 ? all.slice(pos + 1).concat(all.slice(0, pos)) : all.slice();
+        const rank = e => !cur ? 0 : (e.group === cur.group ? 0 : (e.tag === cur.tag ? 1 : 2));
+        const seen = new Set();
+        const entries = rotated
+            .map((e, idx) => ({ e, idx }))
+            .sort((a, b) => (rank(a.e) - rank(b.e)) || (a.idx - b.idx))
+            .map(x => x.e)
+            .filter(e => { if (seen.has(e.title)) return false; seen.add(e.title); return true; })
+            .slice(0, 4);
+        entries.forEach(en => {
+            const item = document.createElement("button");
+            item.type = "button";
+            item.className = "novedad-detail-related-item";
+            item.innerHTML = `<span class="novedad-detail-related-thumb${en.cover ? "" : " novedad-detail-related-thumb-ph"}">${en.cover ? `<img src="${en.cover}" alt="" draggable="false">` : ""}</span><span class="novedad-detail-related-text"><span class="novedad-detail-related-tag">${tvEsc(en.tag)}</span><span class="novedad-detail-related-name">${tvEsc(en.title)}</span></span>`;
+            item.addEventListener("click", en.open);
+            listEl.appendChild(item);
+        });
+        return entries.length;
+    };
     function tvEsc(v) { return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
     function tvBlocksHtml(blocks) {
         return blocks.map(b => {
@@ -15338,17 +15419,22 @@
         const title = document.getElementById("tvDetailTitle");
         const body = document.getElementById("tvDetailBody");
         const creditsHost = document.getElementById("tvDetailCredits");
+        const relatedBox = document.getElementById("tvDetailRelated");
+        const relatedList = document.getElementById("tvDetailRelatedList");
         window.tvOpenDetail = function (data, coverSrc) {
             if (!data) return;
+            if (!coverSrc && window.tvCoverOf.has(data)) coverSrc = window.tvCoverOf.get(data);
             if (coverSrc) { hero.src = coverSrc; hero.style.display = ""; } else { hero.removeAttribute("src"); hero.style.display = "none"; }
             tag.textContent = data.tag;
             title.textContent = data.title;
             body.innerHTML = tvBlocksHtml(data.blocks);
+            if (relatedBox) relatedBox.style.display = window.zcRenderRelated(relatedList, { tv: data }) ? "" : "none";
             // Mismo pie de página (créditos, redes, términos) que el detalle de las novedades
             if (!creditsHost.firstChild) {
                 const src = document.querySelector("#novedadDetail .novedad-detail-credits");
                 if (src) creditsHost.appendChild(src.cloneNode(true));
             }
+            window.zcRaiseDetail(overlay);
             overlay.classList.add("active");
             overlay.scrollTop = 0;
             document.body.style.overflow = "hidden";
@@ -15356,7 +15442,8 @@
         };
         back.addEventListener("click", () => {
             overlay.classList.remove("active");
-            document.body.style.overflow = "";
+            const nd = document.getElementById("novedadDetail");
+            document.body.style.overflow = (nd && nd.classList.contains("active")) ? "hidden" : "";
             if (typeof zcPlaySound === "function") zcPlaySound("salir");
         });
     })();
@@ -15388,6 +15475,7 @@
         if (!section || !row) return;
         const covers = await tvFindCovers(prefix);
         // Sin portadas todavía: una tarjeta provisional vacía por elemento (sin texto)
+        covers.forEach((c, i) => { if (items[i]) window.tvCoverOf.set(items[i], c); });
         const slots = covers.length ? covers : items.map(() => null);
         row.innerHTML = slots.map((src, i) => {
             const it = items[i];
@@ -20458,20 +20546,10 @@ const buildList = f => {
         // directo a esa novedad sin cerrar el panel.
         function renderRelated(currentIndex) {
             if (!detailRelatedList) return;
-            detailRelatedList.innerHTML = "";
-            const otherKeys = Object.keys(NOVEDAD_DETAILS).filter((k) => parseInt(k, 10) !== currentIndex);
-            if (detailRelated) detailRelated.style.display = otherKeys.length ? "" : "none";
-            otherKeys.forEach((key) => {
-                const idx = parseInt(key, 10);
-                const data = NOVEDAD_DETAILS[idx];
-                const item = document.createElement("button");
-                item.type = "button";
-                item.className = "novedad-detail-related-item";
-                item.innerHTML = `<span class="novedad-detail-related-tag">${data.tag}</span><span class="novedad-detail-related-name">${data.title}</span>`;
-                item.addEventListener("click", () => openDetail(idx, detailCloseCb));
-                detailRelatedList.appendChild(item);
-            });
+            const n = window.zcRenderRelated ? window.zcRenderRelated(detailRelatedList, { news: currentIndex }) : 0;
+            if (detailRelated) detailRelated.style.display = n ? "" : "none";
         }
+        window.zcNovedadEntries = () => Object.keys(NOVEDAD_DETAILS).map(k => ({ idx: parseInt(k, 10), data: NOVEDAD_DETAILS[k] }));
 
         // Convierte un array de "bloques" (h4/h5/p/ul/ol) en HTML para el cuerpo del detalle.
         function zc26RenderBlocks(blocks, idPrefix) {
@@ -20545,6 +20623,7 @@ const buildList = f => {
         function openDetail(index, onClose) {
             const data = NOVEDAD_DETAILS[index];
             if (!data) return;
+            const wasActive = detailOverlay.classList.contains("active");
             clearTimer(); // pausar el carrusel de novedades mientras se lee el detalle
             detailHero.src = data.hero;
             detailTag.textContent = data.tag;
@@ -20556,11 +20635,12 @@ const buildList = f => {
                 detailBody.innerHTML = data.paragraphs.map(p => `<p>${p}</p>`).join("");
             }
             renderRelated(index);
+            if (window.zcRaiseDetail) window.zcRaiseDetail(detailOverlay);
             detailOverlay.classList.add("active");
             detailOverlay.scrollTop = 0;
             document.body.style.overflow = "hidden";
             zcPlaySound("entrar");
-            detailCloseCb = typeof onClose === "function" ? onClose : null;
+            detailCloseCb = typeof onClose === "function" ? onClose : (wasActive ? detailCloseCb : null);
         }
 
         // Se expone globalmente para poder abrir el detalle de una novedad
@@ -20569,7 +20649,8 @@ const buildList = f => {
 
         function closeDetail() {
             detailOverlay.classList.remove("active");
-            document.body.style.overflow = "";
+            const tvd = document.getElementById("tvDetail");
+            document.body.style.overflow = (tvd && tvd.classList.contains("active")) ? "hidden" : "";
             zcPlaySound("salir");
             if (detailCloseCb) { const cb = detailCloseCb; detailCloseCb = null; cb(); }
             scheduleNext(); // reanudar el carrusel de novedades
