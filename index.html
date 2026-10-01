@@ -10092,6 +10092,7 @@
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#f97316"><span class="zcg-txt">Octavos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="CUARTOS" style="--gc:#f97316"><span class="zcg-txt">Cuartos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="SEMIS" style="--gc:#f97316"><span class="zcg-txt">Semifinal</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="A" style="--gc:#22c55e"><span class="zcg-txt"><span class="zcg-pre">Group </span>A</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="B" style="--gc:#3b82f6"><span class="zcg-txt"><span class="zcg-pre">Group </span>B</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="C" style="--gc:#eab308"><span class="zcg-txt"><span class="zcg-pre">Group </span>C</span></button>
@@ -14366,6 +14367,12 @@
                 { label: "Cuartos de final", home: "LPE", away: "OMEN NOCTE", time: "8:15 p.m." },
                 { label: "Cuartos de final", home: "Leviatán Esports", away: "POS JR", time: "9:30 p.m." }
             ]
+        },
+        {
+            day: "Viernes", num: 2, month: "OCT",
+            matches: [
+                { label: "Semifinal", home: "GTA", away: "Unorthodox", time: "" }
+            ]
         }
     ];
     /* ZC26 · Resultados de la fase de grupos.
@@ -16481,7 +16488,7 @@ const buildList = f => {
                 const away = searchNorm(card.dataset.away || "");
                 const dayName = searchNorm(card.dataset.day || "");
                 const matchesGroup = activeGroup === "all"
-                    || (activeGroup === "OCTAVOS" ? label === "Octavos de final" : activeGroup === "CUARTOS" ? label === "Cuartos de final" : group === activeGroup);
+                    || (activeGroup === "OCTAVOS" ? label === "Octavos de final" : activeGroup === "CUARTOS" ? label === "Cuartos de final" : activeGroup === "SEMIS" ? label === "Semifinal" : group === activeGroup);
                 const matchesSearch = !searchVal
                     || home.includes(searchVal)
                     || away.includes(searchVal)
