@@ -280,6 +280,12 @@
             object-fit: contain;
             display: block;
         }
+        .mobile-menu-fs { color: #ffffff; }
+        .mobile-menu-fs svg { width: 22px; height: 22px; display: block; }
+        .mobile-menu-fs .fs-icon-exit { display: none; }
+        .mobile-menu-fs[aria-pressed="true"] .fs-icon-enter { display: none; }
+        .mobile-menu-fs[aria-pressed="true"] .fs-icon-exit { display: block; }
+        .mobile-menu-fs[aria-pressed="true"] { background: rgba(255,255,255,0.16); }
         .mobile-menu-links {
             display: flex;
             flex-direction: column;
@@ -3618,7 +3624,7 @@
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
-            width: 248px;
+            width: var(--zcbr-col-w, 248px);
             position: relative;
             z-index: 2;
         }
@@ -3861,6 +3867,112 @@
         }
         .zcbrz-ctrl-btn:active { background: rgba(255,255,255,0.14); }
         .zcbrz-ctrl-btn svg { width: 18px; height: 18px; }
+        /* Aviso de girar el dispositivo: flota sobre el bracket, se muestra una sola vez por apertura
+           (solo celular en vertical) y se oculta solo, al deslizar hacia arriba o al girar. */
+        .zcbrz-rotate-hint {
+            display: none; position: absolute; top: 58px; left: 50%; transform: translateX(-50%);
+            z-index: 4; max-width: calc(100% - 32px); align-items: center; gap: 8px;
+            padding: 8px 14px; border-radius: 999px; font-size: 0.64rem; font-weight: 700; color: #e9e9eb;
+            background: rgba(30,32,38,0.92); border: 1px solid rgba(255,255,255,0.14);
+            pointer-events: none; opacity: 0; transition: opacity 0.25s ease;
+        }
+        .zcbrz-rotate-hint.show { display: flex; opacity: 1; }
+        .zcbrz-rotate-hint.fade { opacity: 0; }
+        .zcbrz-rotate-hint svg { width: 16px; height: 16px; flex-shrink: 0; transform-origin: 50% 50%; animation: zcbrzPhoneTilt 1.8s ease-in-out infinite; }
+        /* El icono del teléfono se inclina de vertical a horizontal, como si lo giraras */
+        @keyframes zcbrzPhoneTilt {
+            0%, 15%   { transform: rotate(-90deg); }
+            45%, 75%  { transform: rotate(0deg); }
+            100%      { transform: rotate(-90deg); }
+        }
+        /* Entra bajando un poco y, al tocar la pantalla (o pasado un rato), vuelve a subir y desaparece */
+        .zcbrz-rotate-hint.show { animation: zcbrzHintIn 0.4s ease-out; }
+        @keyframes zcbrzHintIn {
+            from { transform: translate(-50%, -40px); opacity: 0; }
+            to   { transform: translate(-50%, 0); opacity: 1; }
+        }
+        .zcbrz-rotate-hint.dismiss { animation: zcbrzHintUp 0.45s ease-in forwards; }
+        @keyframes zcbrzHintUp {
+            0%   { transform: translate(-50%, 0); opacity: 1; }
+            25%  { transform: translate(-50%, 6px); opacity: 1; }
+            100% { transform: translate(-50%, -80px); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .zcbrz-rotate-hint svg { animation: none; }
+            .zcbrz-rotate-hint.show, .zcbrz-rotate-hint.dismiss { animation-duration: 0.01s; }
+        }
+        /* Botón único que oculta/muestra todo el texto y los demás botones */
+        .zcbrz-toggle {
+            position: absolute; top: 10px; right: 56px; z-index: 6; width: 34px; height: 34px;
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.08);
+            color: #e9e9eb; display: flex; align-items: center; justify-content: center; cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .zcbrz-toggle svg { width: 17px; height: 17px; }
+        .zcbrz-toggle .zcbrz-eye-off { display: none; }
+        .zcbrz-overlay.zcbrz-clean .zcbrz-toggle { opacity: 0.45; }
+        .zcbrz-overlay.zcbrz-clean .zcbrz-toggle .zcbrz-eye { display: none; }
+        .zcbrz-overlay.zcbrz-clean .zcbrz-toggle .zcbrz-eye-off { display: block; }
+        .zcbrz-overlay.zcbrz-clean .zcbrz-header,
+        .zcbrz-overlay.zcbrz-clean .zcbrz-controls,
+        .zcbrz-overlay.zcbrz-clean .zcbrz-rotate-hint { display: none !important; }
+        .zcbrz-header { padding-right: 100px; }
+        /* Modo compacto (horizontal): cajas más bajas para que el bracket entre en una pantalla ancha */
+        .zcbracket.zcbr-compact .zcbracket-col-title { margin-bottom: 8px; padding: 3px 0; }
+        .zcbracket.zcbr-compact .zcbracket-match { padding: 7px 10px; gap: 5px; }
+        .zcbracket.zcbr-compact .zcbracket-team { gap: 7px; }
+        .zcbracket.zcbr-compact .zcbracket-team-logo { width: 22px; height: 22px; }
+        .zcbracket.zcbr-compact .zcbracket-team-name { font-size: 0.68rem; -webkit-line-clamp: 1; }
+        .zcbracket.zcbr-compact .zcbracket-match-meta { padding-bottom: 2px; }
+        .zcbracket.zcbr-compact .zcbracket-col:first-child .zcbracket-slot { margin-bottom: 6px !important; }
+        /* Horizontal (landscape, incluye escritorio): solo el bracket a pantalla completa.
+           La barra superior y los controles flotan sobre el bracket en vez de quitarle espacio. */
+        @media (orientation: landscape) {
+            .zcbrz-stage { position: absolute; inset: 0; }
+            .zcbrz-header {
+                position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+                padding: 8px 100px 8px 14px; border-bottom: none; pointer-events: none;
+                background: linear-gradient(to bottom, rgba(11,12,15,0.85), rgba(11,12,15,0));
+            }
+            .zcbrz-header > div { pointer-events: none; }
+            .zcbrz-close { pointer-events: auto; }
+            .zcbrz-hint { display: none; }
+            .zcbrz-controls {
+                position: absolute; right: calc(12px + env(safe-area-inset-right, 0px)); bottom: 50%;
+                transform: translateY(50%); z-index: 3; flex-direction: column;
+                padding: 8px; gap: 8px; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+                background: rgba(11,12,15,0.7);
+            }
+            .zcbrz-ctrl-btn { width: 38px; height: 38px; }
+            /* El botón de ocultar/mostrar va en el margen derecho, abajo, para no tapar el bracket */
+            .zcbrz-toggle {
+                top: auto; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+                right: calc(21px + env(safe-area-inset-right, 0px));
+            }
+        }
+        /* Ojo y X: mismo tamaño, alineados en la misma línea, centrados y con más contraste */
+        .zcbrz-close, .zcbrz-toggle {
+            position: absolute; z-index: 7; width: 40px; height: 40px; padding: 0; line-height: 0;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; background: rgba(38,41,48,0.92); border: 1.5px solid rgba(255,255,255,0.32);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+            -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+            transition: background 0.15s ease, transform 0.1s ease, opacity 0.2s ease;
+        }
+        .zcbrz-close { top: calc(10px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); pointer-events: auto; }
+        .zcbrz-toggle { top: calc(10px + env(safe-area-inset-top, 0px)); right: calc(60px + env(safe-area-inset-right, 0px)); }
+        .zcbrz-close svg, .zcbrz-toggle svg { width: 20px; height: 20px; display: block; flex-shrink: 0; }
+        .zcbrz-close:active, .zcbrz-toggle:active { background: rgba(70,74,84,0.95); transform: scale(0.92); }
+        .zcbrz-overlay.zcbrz-clean .zcbrz-toggle { opacity: 0.6; }
+        .zcbrz-header { padding-right: 112px; min-height: 60px; box-sizing: border-box; }
+        @media (orientation: landscape) {
+            .zcbrz-header { padding-right: 112px; }
+            .zcbrz-toggle {
+                top: auto; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+                right: calc(14px + env(safe-area-inset-right, 0px));
+            }
+        }
+        body.zcbrz-open .zcbrz-controls { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
         .zcgrp-legend {
             background: none;
             border: none;
@@ -8506,6 +8618,10 @@
         <button type="button" class="mobile-menu-mute" id="soundMuteBtn" data-i18n-aria="aria.muteSounds" data-i18n-aria-default="Silenciar sonidos" aria-label="Silenciar sonidos">
             <img src="sound_onmuted.png" id="soundMuteIcon" alt="Sonido">
         </button>
+        <button type="button" class="mobile-menu-mute mobile-menu-fs" id="menuFullscreenBtn" aria-label="Pantalla completa" aria-pressed="false">
+            <svg class="fs-icon-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            <svg class="fs-icon-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3a2 2 0 0 0 2-2V3M16 3v3a2 2 0 0 0 2 2h3M21 16h-3a2 2 0 0 0-2 2v3M8 21v-3a2 2 0 0 0-2-2H3"/></svg>
+        </button>
     </div>
     <div class="mobile-menu-links">
         <div class="mm-group" data-mm-group>
@@ -10189,8 +10305,13 @@
                     <div class="zcbrz-title">Bracket completo</div>
                     <div class="zcbrz-hint"><span class="zcbrz-hint-mobile">Arrastra para moverte pellizca o usa los botones de más o menos para hacer zoom</span><span class="zcbrz-hint-desktop">Arrastra para moverte con el cursor o táctil y usa los botones o opciones para hacer zoom</span></div>
                 </div>
-                <button type="button" class="zcbrz-close" id="zcbrzCloseBtn" aria-label="Cerrar">✕</button>
+                <button type="button" class="zcbrz-close" id="zcbrzCloseBtn" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
             </div>
+            <button type="button" class="zcbrz-toggle" id="zcbrzToggleUI" aria-label="Ocultar o mostrar controles">
+                <svg class="zcbrz-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="zcbrz-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>
+            </button>
+            <div class="zcbrz-rotate-hint" id="zcbrzRotateHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 21h10"/></svg>Gira el teléfono en horizontal para ver el bracket más grande</div>
             <div class="zcbrz-stage" id="zcbrzStage">
                 <div class="zcbrz-canvas" id="zcbrzCanvas"></div>
             </div>
@@ -14877,7 +14998,7 @@
         // hacia la caja siguiente (que ahora está centrada exactamente en el punto
         // medio de ambos alimentadores, así que ese tramo entra derecho, sin desvíos).
         function drawLines(prevSlots, curSlots, container, dashed) {
-            const gap = 28;
+            const gap = parseFloat(getComputedStyle(container).getPropertyValue("--zcbr-gap")) || 28;
             const baseRect = container.getBoundingClientRect();
             curSlots.forEach((target, i) => {
                 const a = prevSlots[i * 2];
@@ -17057,7 +17178,26 @@ const buildList = f => {
             target.className = "zcbracket";
             canvas.appendChild(target);
             void canvas.offsetWidth;
-            zc26RenderBracket(target);
+            const landscape = window.innerWidth > window.innerHeight;
+            if (landscape) {
+                // Horizontal (también en escritorio): se reparten las cajas y las líneas para
+                // llenar la pantalla. Primero se mide la altura compacta y, según la proporción
+                // real de la pantalla, se calcula el ancho de columnas y separación.
+                target.classList.add("zcbr-compact");
+                target.style.padding = "48px 130px 14px 14px";
+                zc26RenderBracket(target);
+                const h0 = target.scrollHeight;
+                const aspect = stage.clientWidth / Math.max(1, stage.clientHeight);
+                const wantW = h0 * aspect;
+                const avail = wantW - (14 + 130);
+                const cw = clamp(avail / 4.6, 210, 460); // 4 columnas + 3 separaciones de 0.2·cw
+                const gapPx = Math.round(clamp(cw * 0.2, 36, 120));
+                target.style.setProperty("--zcbr-col-w", Math.round(cw) + "px");
+                target.style.setProperty("--zcbr-gap", gapPx + "px");
+                zc26RenderBracket(target);
+            } else {
+                zc26RenderBracket(target);
+            }
             contentW = target.scrollWidth;
             contentH = target.scrollHeight;
             let zcbrzPressTimer = null;
@@ -17092,7 +17232,44 @@ const buildList = f => {
             });
         }
 
+        // ---- Aviso "gira el teléfono": solo celular en vertical, una vez por apertura ----
+        const hintEl = document.getElementById("zcbrzRotateHint");
+        const toggleBtn = document.getElementById("zcbrzToggleUI");
+        let hintTimer = null, hintDone = true;
+        // Solo se muestra UNA vez por visita a la página (la variable se reinicia al recargar)
+        let hintShownThisVisit = false;
+        function hideHint() {
+            hintDone = true;
+            clearTimeout(hintTimer);
+            if (!hintEl || !hintEl.classList.contains("show")) return;
+            // Vuelve a subir y desaparece para siempre
+            hintEl.classList.add("dismiss");
+            setTimeout(() => { hintEl.classList.remove("show", "fade", "dismiss"); }, 460);
+        }
+        function maybeShowHint() {
+            if (!hintEl || hintShownThisVisit) return;
+            // Solo celular: pantalla táctil sin cursor, y la pantalla es de tamaño de teléfono (no computadora ni tablet grande)
+            const phone = window.matchMedia("(hover: none) and (pointer: coarse)").matches
+                && (navigator.maxTouchPoints || 0) > 0
+                && Math.min(screen.width, screen.height) <= 600;
+            if (!phone || window.innerWidth > window.innerHeight) return;
+            hintShownThisVisit = true;
+            hintDone = false;
+            hintEl.classList.remove("fade", "dismiss");
+            hintEl.classList.add("show");
+            // Se queda un rato; si tocas la pantalla desaparece antes
+            hintTimer = setTimeout(hideHint, 7000);
+        }
+        if (toggleBtn) toggleBtn.addEventListener("click", () => {
+            overlay.classList.toggle("zcbrz-clean");
+            if (overlay.classList.contains("zcbrz-clean")) hideHint();
+            requestAnimationFrame(() => { if (Math.abs(scale - minScale) < 0.001) fitToScreen(); else apply(); });
+        });
+        // Tocar la pantalla en cualquier momento cierra el aviso
+        overlay.addEventListener("touchstart", () => { if (!hintDone) hideHint(); }, { passive: true, capture: true });
+
         function openOverlay() {
+            overlay.classList.remove("zcbrz-clean");
             // El bracket clonado se debe medir DESPUÉS de que el overlay ya sea visible:
             // medir su ancho/alto mientras el overlay todavía está en display:none siempre
             // da 0, lo que dejaba el zoom "atascado" en escala 1 (no hacía nada) y el
@@ -17101,17 +17278,33 @@ const buildList = f => {
             document.body.classList.add("zcbrz-open");
             document.body.style.overflow = "hidden";
             zcbrzLastW = window.innerWidth;
+            // Intenta pasar a pantalla completa y bloquear en horizontal (solo funciona en
+            // navegadores que lo permiten, p. ej. Android); si no, se ignora sin problema.
+            try {
+                const el = document.documentElement;
+                if (!document.fullscreenElement && el.requestFullscreen && window.matchMedia("(pointer: coarse)").matches) {
+                    Promise.resolve(el.requestFullscreen()).then(() => {
+                        if (screen.orientation && screen.orientation.lock) return screen.orientation.lock("landscape");
+                    }).catch(() => {});
+                }
+            } catch (_) {}
             buildCanvas();
             fitToScreen();
             // Una segunda pasada por si el navegador todavía no había terminado de
             // aplicar el layout del overlay en el mismo frame (algunos Android/WebView).
             requestAnimationFrame(fitToScreen);
+            maybeShowHint();
             zcPlaySound("clickentrar");
         }
         function closeOverlay() {
             overlay.classList.remove("active");
             document.body.classList.remove("zcbrz-open");
             document.body.style.overflow = "";
+            hideHint();
+            try {
+                if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+            } catch (_) {}
             zcPlaySound("clicksalir");
         }
         openBtn.addEventListener("click", openOverlay);
@@ -17219,7 +17412,8 @@ const buildList = f => {
             // arriba: aquí solo se reconstruye si de verdad cambió el ANCHO; si solo
             // cambió el alto, se reajusta el encuadre del zoom sin tocar la estructura.
             if (!overlay.classList.contains("active")) return;
-            const widthChanged = window.innerWidth !== zcbrzLastW;
+            const widthChanged = window.innerWidth !== zcbrzLastW; // también cubre girar el dispositivo
+            if (!hintDone && window.innerWidth > window.innerHeight) hideHint();
             zcbrzLastW = window.innerWidth;
             clearTimeout(zcbrzResizeT);
             zcbrzResizeT = setTimeout(() => {
@@ -17601,6 +17795,25 @@ const buildList = f => {
         });
         const soundMuteBtn = document.getElementById("soundMuteBtn");
         if (soundMuteBtn) soundMuteBtn.addEventListener("click", zcToggleMute);
+        // Opción "Pantalla completa" del menú de tres líneas (se oculta si el navegador no la permite, p. ej. iPhone)
+        const menuFsBtn = document.getElementById("menuFullscreenBtn");
+        if (menuFsBtn) {
+            const de = document.documentElement;
+            if (!de.requestFullscreen) menuFsBtn.style.display = "none";
+            const syncFsLabel = () => {
+                const on = !!document.fullscreenElement;
+                menuFsBtn.setAttribute("aria-pressed", on ? "true" : "false");
+                menuFsBtn.setAttribute("aria-label", on ? "Salir de pantalla completa" : "Pantalla completa");
+            };
+            document.addEventListener("fullscreenchange", syncFsLabel);
+            menuFsBtn.addEventListener("click", () => {
+                try {
+                    if (document.fullscreenElement) document.exitFullscreen();
+                    else de.requestFullscreen();
+                } catch (_) {}
+                closeMenu();
+            });
+        }
         zcUpdateMuteIcon();
 
         (function initLangSwitcher() {
