@@ -14371,6 +14371,7 @@
         {
             day: "Viernes", num: 2, month: "OCT",
             matches: [
+                { label: "Semifinal", home: "Leviatán Esports", away: "OMEN NOCTE", time: "" },
                 { label: "Semifinal", home: "GTA", away: "Unorthodox", time: "" }
             ]
         }
@@ -14473,7 +14474,9 @@
         ["Xabi", "Acuñas", "LPE|Acuñas"],
         ["Adri", "GTA", "op7|GTA"],
         ["Lie in April!", "Unorthodox", "SGC|Unorthodox"], ["CharlesTQ", "SGC", "SGC|Unorthodox"], ["CESAR", "SGC", "SGC|Unorthodox"],
-        ["Miseryoung", "Unorthodox", "SGC|Unorthodox"], ["Lie in April!", "Unorthodox", "SGC|Unorthodox"], ["patch", "Unorthodox", "SGC|Unorthodox"]
+        ["Miseryoung", "Unorthodox", "SGC|Unorthodox"], ["Lie in April!", "Unorthodox", "SGC|Unorthodox"], ["patch", "Unorthodox", "SGC|Unorthodox"],
+        ["mokka", "OMEN NOCTE", "LPE|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "LPE|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "LPE|OMEN NOCTE"],
+        ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14497,7 +14500,8 @@
         "Acuñas|Pro Legends": [15, 50, 85, 110],
         "RAISE EARTH|SYNOX GAMING": [15, 55, 95],
         "Egresados Del Conalep|OMEN NOCTE": [20, 55, 90],
-        "SGC|Unorthodox": [15, 40, 65, 90, 115, 135]
+        "SGC|Unorthodox": [15, 40, 65, 90, 115, 135],
+        "Leviatán Esports|POS JR|KO": [18, 57, 96]
     };
     /* Orden en que se ganaron los sets (para partidos sin Estelar por mapa registrado).
        Cada elemento es el equipo que ganó ese set; los minutos se generan (fijos por partido) si no hay ZC26_GOAL_MINUTES. */
@@ -14562,13 +14566,16 @@
         { m: "OMEN NOCTE|KURO ØNIX", team: "KURO ØNIX", player: "Simon el prro", n: 1 },
         { m: "LPE|Acuñas", team: "LPE", player: "Steve", n: 1 },
         { m: "LPE|Acuñas", team: "LPE", player: "Gary", n: 1 },
-        { m: "LPE|Acuñas", team: "LPE", player: "Daniel", n: 1 }
+        { m: "LPE|Acuñas", team: "LPE", player: "Daniel", n: 1 },
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "JulioCr36D", n: 1 },
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "TX JOAR", n: 1 }
     ];
     // Titulares que, aunque figuran en la plantilla, no llegaron a jugar este partido
     // (p. ej. por lesión): no reciben calificación (N/A) aunque no se haya registrado un cambio.
     const ZC26_DID_NOT_PLAY = [
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
-        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" }
+        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" },
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" }
     ];
     function zc26DidNotPlay(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14603,7 +14610,8 @@
         { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Mokka" },
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
         { m: "BLASTERS|op7", team: "op7", player: "smk myst!" },
-        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" }
+        { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" },
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -14634,6 +14642,7 @@
         { m: "Phoenix|POS JR", team: "POS JR", out: "TK Carl", in: "valli" },
         { m: "BLASTERS|op7", team: "op7", out: "smk myst!", in: "Naori", min: 60 },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", out: "Mokka", in: "R3QU1EMBRUH", min: 3 },
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", out: "Cross", in: "Shark", min: 2 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14695,7 +14704,9 @@
         "Leviatán Esports|Egresados Del Conalep": { h: 3, a: 0 },
         "LPE|Acuñas": { h: 3, a: 1 },
         "op7|GTA": { h: 0, a: 1 },
-        "SGC|Unorthodox": { h: 2, a: 4 }
+        "SGC|Unorthodox": { h: 2, a: 4 },
+        "LPE|OMEN NOCTE": { h: 0, a: 3 },
+        "Leviatán Esports|POS JR": { h: 3, a: 0 }
     };
     function zc26KoResult(home, away) {
         if (!home || !away) return null;
@@ -15718,7 +15729,8 @@
         "BLASTERS|op7": [27, 9, 64],
         "GTA|RAISE EARTH": [68, 6, 26],
         "SYNOX GAMING|SGC": [47, 9, 44],
-        "Unorthodox|Quiero KeKe": [69, 8, 23]
+        "Unorthodox|Quiero KeKe": [69, 8, 23],
+        "Leviatán Esports|OMEN NOCTE": [54, 8, 38]
     };
     function zc26GetProb(teamHome, teamAway) {
         const direct = ZC26_PROBS[`${teamHome}|${teamAway}`];
@@ -16833,8 +16845,13 @@ const buildList = f => {
             return out;
         };
         const predNow = { ...WC_PRED_BASE };
-        Object.keys(ZC26_RESULTS).forEach(key => {
-            const r = ZC26_RESULTS[key];
+        const predAll = { ...ZC26_RESULTS };
+        Object.keys(ZC26_KO_RESULTS).forEach(k => {
+            const g = ZC26_RESULTS[k], r = ZC26_KO_RESULTS[k];
+            if (!(g && g.h === r.h && g.a === r.a)) predAll[k + (g ? "|KO" : "")] = r;
+        });
+        Object.keys(predAll).forEach(key => {
+            const r = predAll[key];
             const [home, away] = key.split("|");
             const d = r.h - r.a; // + = ganó el local
             if (predNow[home] != null) predNow[home] *= Math.exp(WC_PRED_K * d);
