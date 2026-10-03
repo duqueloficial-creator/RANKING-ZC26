@@ -10206,9 +10206,10 @@
         </div>
         <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#f97316"><span class="zcg-txt">Octavos</span></button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="CUARTOS" style="--gc:#f97316"><span class="zcg-txt">Cuartos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="FINAL" style="--gc:#f97316"><span class="zcg-txt">Gran final</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="SEMIS" style="--gc:#f97316"><span class="zcg-txt">Semifinal</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="CUARTOS" style="--gc:#f97316"><span class="zcg-txt">Cuartos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#f97316"><span class="zcg-txt">Octavos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="A" style="--gc:#22c55e"><span class="zcg-txt"><span class="zcg-pre">Group </span>A</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="B" style="--gc:#3b82f6"><span class="zcg-txt"><span class="zcg-pre">Group </span>B</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="C" style="--gc:#eab308"><span class="zcg-txt"><span class="zcg-pre">Group </span>C</span></button>
@@ -14495,6 +14496,24 @@
                 { label: "Semifinal", home: "Leviatán Esports", away: "OMEN NOCTE", time: "" },
                 { label: "Semifinal", home: "GTA", away: "Unorthodox", time: "" }
             ]
+        },
+        {
+            day: "Sábado", num: 3, month: "OCT",
+            matches: [
+                { label: "Tercer puesto", home: "Leviatán Esports", away: "GTA", time: "" }
+            ]
+        },
+        {
+            day: "Domingo", num: 4, month: "OCT",
+            matches: [
+                { label: "Gran final", home: "OMEN NOCTE", away: "Unorthodox", time: "" }
+            ]
+        },
+        {
+            day: "Lunes", num: 5, month: "OCT",
+            matches: [
+                { label: "Finalísima", home: "Unorthodox", away: "OMEN NOCTE", time: "" }
+            ]
         }
     ];
     /* ZC26 · Resultados de la fase de grupos.
@@ -14597,7 +14616,12 @@
         ["Lie in April!", "Unorthodox", "SGC|Unorthodox"], ["CharlesTQ", "SGC", "SGC|Unorthodox"], ["CESAR", "SGC", "SGC|Unorthodox"],
         ["Miseryoung", "Unorthodox", "SGC|Unorthodox"], ["Lie in April!", "Unorthodox", "SGC|Unorthodox"], ["patch", "Unorthodox", "SGC|Unorthodox"],
         ["mokka", "OMEN NOCTE", "LPE|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "LPE|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "LPE|OMEN NOCTE"],
-        ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"]
+        ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"],
+        // Semifinal · Leviatán 0-3 OMEN NOCTE (Mokka x2 + el capitán de OMEN, Ovied7)
+        ["mokka", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"], ["Ovied7", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"],
+        // Semifinal · GTA 2-4 Unorthodox (orden de los sets: U, GTA, GTA, U, U, U)
+        ["Miseryoung", "Unorthodox", "GTA|Unorthodox|KO"], ["thoniolo", "GTA", "GTA|Unorthodox|KO"], ["thoniolo", "GTA", "GTA|Unorthodox|KO"],
+        ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"], ["Miseryoung", "Unorthodox", "GTA|Unorthodox|KO"], ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14622,7 +14646,12 @@
         "RAISE EARTH|SYNOX GAMING": [15, 55, 95],
         "Egresados Del Conalep|OMEN NOCTE": [20, 55, 90],
         "SGC|Unorthodox": [15, 40, 65, 90, 115, 135],
-        "Leviatán Esports|POS JR|KO": [18, 57, 96]
+        "Leviatán Esports|POS JR|KO": [18, 57, 96],
+        "GTA|Unorthodox|KO": [15, 40, 65, 90, 115, 135]
+    };
+    /* Sets ganados de penal (P): clave del partido → índices (desde 0) de los sets. Se muestra "(P)" junto al Estelar. */
+    const ZC26_PENALTY_SETS = {
+        "GTA|Unorthodox|KO": [0]
     };
     /* Orden en que se ganaron los sets (para partidos sin Estelar por mapa registrado).
        Cada elemento es el equipo que ganó ese set; los minutos se generan (fijos por partido) si no hay ZC26_GOAL_MINUTES. */
@@ -14662,7 +14691,10 @@
         { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Xabi", rep: "Xabi" },
         { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Galactus", rep: "Galactus" },
         { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Diego(A)", rep: "Diego(A)" },
-        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Yascer", rep: "Yascer" }
+        { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Yascer", rep: "Yascer" },
+        { m: "GTA|Unorthodox|KO", type: "ta", team: "GTA", player: "Adri", rep: "Adri", min: 8 },
+        { m: "GTA|Unorthodox|KO", type: "ta", team: "Unorthodox", player: "robertbv", rep: "robertbv", min: 22 },
+        { m: "Leviatán Esports|OMEN NOCTE", type: "tr", team: "Leviatán Esports", player: "Shark", rep: "Shark", min: 34 }
     ];
     /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
     const ZC26_GOALS = [];
@@ -14696,7 +14728,8 @@
     const ZC26_DID_NOT_PLAY = [
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" },
-        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" }
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" },
+        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", player: "TX JOAR" }
     ];
     function zc26DidNotPlay(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14732,7 +14765,8 @@
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
         { m: "BLASTERS|op7", team: "op7", player: "smk myst!" },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" },
-        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" }
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" },
+        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", player: "TX JOAR" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -14763,7 +14797,8 @@
         { m: "Phoenix|POS JR", team: "POS JR", out: "TK Carl", in: "valli" },
         { m: "BLASTERS|op7", team: "op7", out: "smk myst!", in: "Naori", min: 60 },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", out: "Mokka", in: "R3QU1EMBRUH", min: 3 },
-        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", out: "Cross", in: "Shark", min: 2 }
+        { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", out: "Cross", in: "Shark", min: 2 },
+        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", out: "TX JOAR", in: "Shark" }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14827,7 +14862,10 @@
         "op7|GTA": { h: 0, a: 1 },
         "SGC|Unorthodox": { h: 2, a: 4 },
         "LPE|OMEN NOCTE": { h: 0, a: 3 },
-        "Leviatán Esports|POS JR": { h: 3, a: 0 }
+        "Leviatán Esports|POS JR": { h: 3, a: 0 },
+        // Semifinales (2 oct)
+        "Leviatán Esports|OMEN NOCTE": { h: 0, a: 3 },
+        "GTA|Unorthodox": { h: 2, a: 4 }
     };
     function zc26KoResult(home, away) {
         if (!home || !away) return null;
@@ -15093,7 +15131,8 @@
             }
             mins.sort((x, y) => x - y);
         }
-        const goals = stars.map(([rep, team, mk, noStar], i) => ({ team, name: ZC26_STAR_ALIAS[rep] || rep, min: mins[i], noStar: !!noStar }));
+        const pens = ZC26_PENALTY_SETS[k] || [];
+        const goals = stars.map(([rep, team, mk, noStar], i) => ({ team, name: ZC26_STAR_ALIAS[rep] || rep, min: mins[i], noStar: !!noStar, pen: pens.includes(i) }));
         const cards = ZC26_CARDS.filter(c => c.m === k && c.team)
             .map(c => ({ team: c.team, name: c.player, type: c.type, min: c.min != null ? c.min : (1 + Math.floor(rng() * 120)) }));
         return (zc26TlCache[k] = { goals, cards });
@@ -16109,10 +16148,10 @@
         const tl = zc26MatchTimeline(`${zc26CtxKey(ctx)}`);
         const side = (list, team) => {
             const by = {};
-            list.filter(e => e.team === team).forEach(e => { (by[e.name] = by[e.name] || []).push(e.min); });
-            return Object.entries(by).map(([n, m]) => [n, m.sort((x, y) => x - y)])
-                .sort((x, y) => x[1][0] - y[1][0])
-                .map(([n, m]) => `<span class="timeline-entry">${zc26Esc(n)} <span class="timeline-time">${m.map(x => x + "'").join(", ")}</span></span>`).join("");
+            list.filter(e => e.team === team).forEach(e => { (by[e.name] = by[e.name] || []).push({ min: e.min, pen: !!e.pen }); });
+            return Object.entries(by).map(([n, m]) => [n, m.sort((x, y) => x.min - y.min)])
+                .sort((x, y) => x[1][0].min - y[1][0].min)
+                .map(([n, m]) => `<span class="timeline-entry">${zc26Esc(n)} <span class="timeline-time">${m.map(x => x.min + "'" + (x.pen ? " (P)" : "")).join(", ")}</span></span>`).join("");
         };
         const block = (icon, cls, list) => list.length ? `<div class="timeline-block">
                 <div class="timeline-row">
@@ -16125,7 +16164,7 @@
         const red = tl.cards.filter(c => c.type === "tr");
         const html = block('<img src="win_icon.png" alt="Gol">', "timeline-icon-win", tl.goals)
             + block('<img src="tarjeta_amarilla.png" alt="Tarjeta amarilla">', "timeline-icon-card", yellow)
-            + block('<i class="zc26lu-cardico zc26lu-cardico-tr" style="width:14px;height:19px"></i>', "timeline-icon-card", red);
+            + block('<i class="zc26lu-cardico zc26lu-cardico-tr" style="width:9px;height:12px"></i>', "timeline-icon-card", red);
         return html ? `<div class="match-timeline zc26mm-timeline">${html}</div>` : "";
     }
     // Bloque "Tarjetas" del partido (solo partidos jugados con tarjetas en el reporte)
@@ -16159,7 +16198,7 @@
         let hCount = 0, aCount = 0;
         const goalEvents = (isPre ? [] : tl.goals).map((g, i) => {
             if (g.team === ctx.home) hCount++; else aCount++;
-            return { kind: "goal", min: g.min, team: g.team, name: g.name, noStar: g.noStar, set: i + 1, h: hCount, a: aCount };
+            return { kind: "goal", min: g.min, team: g.team, name: g.name, pen: g.pen, noStar: g.noStar, set: i + 1, h: hCount, a: aCount };
         });
         const cardEvents = (isPre ? [] : tl.cards).map(c => ({ kind: "card", min: c.min, team: c.team, name: c.name, type: c.type }));
         const subEvents = ZC26_SUB_PAIR.filter(p => isPre ? preStart(p) : p.m === k)
@@ -16217,7 +16256,7 @@
                 bar = `style="background:${accent}"`;
                 icon = ballIcon;
                 title = `Ganó el SET ${e.set} <span class="zt-score" style="color:${accent};background:${accent}22">${e.h} - ${e.a}</span>`;
-                sub = `<div class="zt-sub"><span class="zt-team">${zc26Esc(e.team)}</span>${e.noStar ? "" : ` <span class="zt-star">${zc26Esc(e.name)}</span>`}</div>`;
+                sub = `<div class="zt-sub"><span class="zt-team">${zc26Esc(e.team)}</span>${e.noStar ? "" : ` <span class="zt-star">${zc26Esc(e.name)}${e.pen ? " (P)" : ""}</span>`}</div>`;
             } else if (e.kind === "sub") {
                 icon = cambioIcon;
                 title = "Cambio";
@@ -16489,7 +16528,7 @@ const buildList = f => {
                     ${res ? `<span class="score-number${res.h < res.a ? " score-number-lose" : ""}">${res.h}</span>` : `<span class="score-number score-number-empty"></span>`}
                     <div class="match-status">
                         <span class="status-badge">${statusTxt}</span>
-                        <span class="status-date">${res && res.wo ? "W.O." : (ls ? ls.date : String(num).padStart(2, "0") + "/09")}</span>
+                        <span class="status-date">${res && res.wo ? "W.O." : (ls ? ls.date : String(num).padStart(2, "0") + "/" + (ZC26_MONTH_NUM[month] || "09"))}</span>
                         ${ls && !res ? `<span class="status-date">${ls.time}</span>` : ""}
                     </div>
                     ${res ? `<span class="score-number${res.a < res.h ? " score-number-lose" : ""}">${res.a}</span>` : `<span class="score-number score-number-empty"></span>`}
@@ -16621,7 +16660,7 @@ const buildList = f => {
                 const away = searchNorm(card.dataset.away || "");
                 const dayName = searchNorm(card.dataset.day || "");
                 const matchesGroup = activeGroup === "all"
-                    || (activeGroup === "OCTAVOS" ? label === "Octavos de final" : activeGroup === "CUARTOS" ? label === "Cuartos de final" : activeGroup === "SEMIS" ? label === "Semifinal" : group === activeGroup);
+                    || (activeGroup === "FINAL" ? (label === "Gran final" || label === "Finalísima" || label === "Tercer puesto") : activeGroup === "OCTAVOS" ? label === "Octavos de final" : activeGroup === "CUARTOS" ? label === "Cuartos de final" : activeGroup === "SEMIS" ? label === "Semifinal" : group === activeGroup);
                 const matchesSearch = !searchVal
                     || home.includes(searchVal)
                     || away.includes(searchVal)
@@ -16640,7 +16679,7 @@ const buildList = f => {
     const zc26SearchBoxEl = document.getElementById("zc26SearchBox");
     const ZC26_ALL_TEAM_NAMES = Object.keys(ZC26_TEAM_LOGOS);
     const ZC26_GROUP_LABELS = ["Grupo A", "Grupo B", "Grupo C", "Grupo D", "Grupo E", "Grupo F"];
-    const ZC26_DAY_NAMES = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+    const ZC26_DAY_NAMES = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     const ZC26_SEARCH_CANDIDATES = [...ZC26_ALL_TEAM_NAMES, ...ZC26_GROUP_LABELS, ...ZC26_DAY_NAMES];
     function zc26RenderSuggestions(raw) {
         if (!zc26SearchBoxEl) return;
