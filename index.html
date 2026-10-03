@@ -2995,7 +2995,7 @@
         .zc26mm-scoreboard .team-logo { width: 54px; height: 54px; padding: 9px; border-radius: 15px; }
         .zc26mm-scoreboard .team-name { font-size: 0.56rem; }
         .zc26mm-scoreboard .score-number { font-size: 1.8rem; }
-        .zc26mm-tabs { margin-top: 14px; gap: 6px; }
+        .zc26mm-tabs { margin-top: 16px; gap: 6px; }
         .zc26mm-tab-btn { font-size: 0.62rem; padding: 6px 12px; }
         .zc26mm-tab-content {
             margin-top: 18px;
@@ -3167,7 +3167,7 @@
         }
 
         /* --- Estadísticas / general: más compacto + Formación reciente alineada --- */
-        .zc26mm-tab-content { margin-top: 10px; }
+        .zc26mm-tab-content { margin-top: 14px; }
         .zc26mm-info-line { font-size: 0.68rem; margin-bottom: 4px; }
         .zc26mm-stat-block + .zc26mm-stat-block { margin-top: 14px; padding-top: 12px; }
         .zc26mm-stat-title, .zc26mm-prob-block .zc26mm-stat-title { font-size: 0.82rem; }
@@ -14618,10 +14618,14 @@
         ["mokka", "OMEN NOCTE", "LPE|OMEN NOCTE"], ["AdmirerTensai", "OMEN NOCTE", "LPE|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "LPE|OMEN NOCTE"],
         ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"], ["Shark", "Leviatán Esports", "Leviatán Esports|POS JR|KO"],
         // Semifinal · Leviatán 0-3 OMEN NOCTE (Mokka x2 + el capitán de OMEN, Ovied7)
-        ["mokka", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"], ["Ovied7", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"],
+        ["mokka", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"], ["mokka", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"], ["R3QU1EMBRUH", "OMEN NOCTE", "Leviatán Esports|OMEN NOCTE"],
         // Semifinal · GTA 2-4 Unorthodox (orden de los sets: U, GTA, GTA, U, U, U)
         ["Miseryoung", "Unorthodox", "GTA|Unorthodox|KO"], ["thoniolo", "GTA", "GTA|Unorthodox|KO"], ["thoniolo", "GTA", "GTA|Unorthodox|KO"],
-        ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"], ["Miseryoung", "Unorthodox", "GTA|Unorthodox|KO"], ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"]
+        ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"], ["Miseryoung", "Unorthodox", "GTA|Unorthodox|KO"], ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"],
+        // 3er puesto · Leviatán 4-2 GTA (orden de los sets: GTA, GTA, Lev, Lev, Lev, Lev)
+        ["thoniolo", "GTA", "Leviatán Esports|GTA"], ["nefi", "GTA", "Leviatán Esports|GTA"],
+        ["Freddy.jh", "Leviatán Esports", "Leviatán Esports|GTA"], ["Shark", "Leviatán Esports", "Leviatán Esports|GTA"],
+        ["Freddy.jh", "Leviatán Esports", "Leviatán Esports|GTA"], ["Cross", "Leviatán Esports", "Leviatán Esports|GTA"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14647,7 +14651,8 @@
         "Egresados Del Conalep|OMEN NOCTE": [20, 55, 90],
         "SGC|Unorthodox": [15, 40, 65, 90, 115, 135],
         "Leviatán Esports|POS JR|KO": [18, 57, 96],
-        "GTA|Unorthodox|KO": [15, 40, 65, 90, 115, 135]
+        "GTA|Unorthodox|KO": [15, 40, 65, 90, 115, 135],
+        "Leviatán Esports|GTA": [20, 45, 70, 90, 110, 130]
     };
     /* Sets ganados de penal (P): clave del partido → índices (desde 0) de los sets. Se muestra "(P)" junto al Estelar. */
     const ZC26_PENALTY_SETS = {
@@ -14694,7 +14699,10 @@
         { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Yascer", rep: "Yascer" },
         { m: "GTA|Unorthodox|KO", type: "ta", team: "GTA", player: "Adri", rep: "Adri", min: 8 },
         { m: "GTA|Unorthodox|KO", type: "ta", team: "Unorthodox", player: "robertbv", rep: "robertbv", min: 22 },
-        { m: "Leviatán Esports|OMEN NOCTE", type: "tr", team: "Leviatán Esports", player: "Shark", rep: "Shark", min: 34 }
+        { m: "Leviatán Esports|OMEN NOCTE", type: "tr", team: "Leviatán Esports", player: "Shark", rep: "Shark", min: 34 },
+        { m: "Leviatán Esports|GTA", type: "ta", team: "GTA", player: "Adri", rep: "Adri", min: 55 },
+        { m: "Leviatán Esports|GTA", type: "ta", team: "Leviatán Esports", player: "Shark", rep: "Shark", min: 80 },
+        { m: "Leviatán Esports|GTA", type: "ta", team: "Leviatán Esports", player: "Freddy.jh", rep: "Freddy.jh", min: 120 }
     ];
     /* Goles: los reportes no traen goles por jugador. Para cargarlos: { m: "local|visitante", team, player, n } */
     const ZC26_GOALS = [];
@@ -14712,6 +14720,8 @@
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", player: "Marro9281", n: 1 },
         { m: "SYNOX GAMING|Wosu Esport", team: "SYNOX GAMING", player: "romanqq", n: 1 },
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", player: "Shark", n: 1 },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Freddy.jh", n: 1 },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Shark", n: 1 },
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "kikyy", n: 1 },
         { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 2 },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Ovied7", n: 2 },
@@ -14729,7 +14739,10 @@
         { m: "Phoenix|POS JR", team: "POS JR", player: "TK Carl" },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" },
         { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" },
-        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", player: "TX JOAR" }
+        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", player: "TX JOAR" },
+        { m: "Leviatán Esports|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "TX JOAR" },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "JulioCr36D" }
     ];
     function zc26DidNotPlay(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14766,7 +14779,10 @@
         { m: "BLASTERS|op7", team: "op7", player: "smk myst!" },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Mokka" },
         { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", player: "Cross" },
-        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", player: "TX JOAR" }
+        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", player: "TX JOAR" },
+        { m: "Leviatán Esports|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7" },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "TX JOAR" },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "JulioCr36D" }
     ];
     /* Cuando un suplente entra por un titular, en Titulares se muestra el suplente arriba y el titular
        (que sale) debajo, en el mismo puesto. El suplente sigue apareciendo también en Suplentes. */
@@ -14798,7 +14814,11 @@
         { m: "BLASTERS|op7", team: "op7", out: "smk myst!", in: "Naori", min: 60 },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", out: "Mokka", in: "R3QU1EMBRUH", min: 3 },
         { m: "Leviatán Esports|POS JR|KO", team: "Leviatán Esports", out: "Cross", in: "Shark", min: 2 },
-        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", out: "TX JOAR", in: "Shark" }
+        { m: "Leviatán Esports|OMEN NOCTE", team: "Leviatán Esports", out: "TX JOAR", in: "Shark" },
+        { m: "Leviatán Esports|OMEN NOCTE", team: "OMEN NOCTE", out: "Ovied7", in: "R3QU1EMBRUH", min: 4 },
+        // 3er puesto · Leviatán 4-2 GTA: cambios antes del primer set
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", out: "TX JOAR", in: "Shark", min: 5 },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", out: "JulioCr36D", in: "Freddy.jh", min: 8 }
     ];
     function zc26SubPair(ctx, team, name) {
         const k = `${zc26CtxKey(ctx)}`;
@@ -14865,7 +14885,9 @@
         "Leviatán Esports|POS JR": { h: 3, a: 0 },
         // Semifinales (2 oct)
         "Leviatán Esports|OMEN NOCTE": { h: 0, a: 3 },
-        "GTA|Unorthodox": { h: 2, a: 4 }
+        "GTA|Unorthodox": { h: 2, a: 4 },
+        // 3er puesto (3 oct)
+        "Leviatán Esports|GTA": { h: 4, a: 2 }
     };
     function zc26KoResult(home, away) {
         if (!home || !away) return null;
@@ -15890,7 +15912,10 @@
         "GTA|RAISE EARTH": [68, 6, 26],
         "SYNOX GAMING|SGC": [47, 9, 44],
         "Unorthodox|Quiero KeKe": [69, 8, 23],
-        "Leviatán Esports|OMEN NOCTE": [54, 8, 38]
+        "Leviatán Esports|OMEN NOCTE": [54, 8, 38],
+
+        // Gran final
+        "Unorthodox|OMEN NOCTE": [76, 20, 4]
     };
     function zc26GetProb(teamHome, teamAway) {
         const direct = ZC26_PROBS[`${teamHome}|${teamAway}`];
