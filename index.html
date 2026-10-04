@@ -4690,6 +4690,12 @@
         #quickStatsOverlay {
             z-index: 1050;
         }
+        .hof-lu { padding: 14px 4px 6px; display: flex; flex-direction: column; gap: 10px; }
+        .hof-lu-box { border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: rgba(255,255,255,0.03); padding: 10px 14px; }
+        .hof-lu-head { display: flex; align-items: center; gap: 10px; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.8rem; font-weight: 700; color: #ffffff; }
+        .hof-lu-head img { width: 26px; height: 26px; object-fit: contain; border-radius: 6px; }
+        .hof-lu-player { font-size: 0.85rem; color: #dddddd; padding: 6px 0; }
+        .hof-lu-note { text-align: center; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: #777777; }
         #hofQuickStatsOverlay {
             z-index: 1050;
         }
@@ -6345,6 +6351,7 @@
             padding-top: 18px;
             border-top: 1px solid rgba(212,175,55,0.2);
         }
+        .trophy-summary-block, .trophy-summary-block.hof-past-summary { border-top: none; }
 
         /* Site footer */
         .site-footer {
@@ -11972,7 +11979,9 @@
         SLV: { file: "SLV.png", name: "El Salvador", region: "Norteamérica" },
         GHA: { file: "GHA.png", name: "Ghana", region: "EMEA (Europa, Medio Oriente y África)" },
         VEN: { file: "VEN.png", name: "Venezuela", region: "Sudamérica" },
-        HON: { file: "HON.png", name: "Honduras", region: "Norteamérica" }
+        HON: { file: "HON.png", name: "Honduras", region: "Norteamérica" },
+        CRC: { file: "CRC.png", name: "Costa Rica", region: "Norteamérica" },
+        UNK: { file: "", name: "Por confirmar", region: "Por confirmar" }
     };
 
     const PLAYERS = [
@@ -13528,6 +13537,102 @@
             recent: [],
             achievements: []
         },
+        {
+            key: "jerson7",
+            name: "Jer(son)7", country: "PE", team: "TEAM RADIANTE", teamTag: "TR", points: 303,
+            events: "2 (3v3)", titles: "Campeón", sets: "6 - 1", matches: "0 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "Por confirmar", credits: "Por confirmar",
+            trophyDates: ["Campeón 28-04-2024", "Campeón 07-02-2023"],
+            recent: [
+                { date: "28 abr 2024", time: "", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 1, tourney: "ZC24 · Gran Final" },
+                { date: "7 feb 2023", time: "", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 0, tourney: "ZC23 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2024-04-28", place: "1°", tier: "Campeón", tournament: "ZC24 - Gran Final", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 1, result: "Campeón" },
+                { date: "2023-02-07", place: "1°", tier: "Campeón", tournament: "ZC23 - Gran Final", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 0, result: "Campeón" }
+            ]
+        },
+        {
+            key: "joseantonio",
+            name: "Jose Antonio", country: "PE", team: "TEAM RADIANTE", teamTag: "TR", points: 303,
+            events: "2 (3v3)", titles: "Campeón", sets: "6 - 1", matches: "0 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "Por confirmar", credits: "Por confirmar",
+            trophyDates: ["Campeón 28-04-2024", "Campeón 07-02-2023"],
+            recent: [
+                { date: "28 abr 2024", time: "", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 1, tourney: "ZC24 · Gran Final" },
+                { date: "7 feb 2023", time: "", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 0, tourney: "ZC23 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2024-04-28", place: "1°", tier: "Campeón", tournament: "ZC24 - Gran Final", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 1, result: "Campeón" },
+                { date: "2023-02-07", place: "1°", tier: "Campeón", tournament: "ZC23 - Gran Final", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 0, result: "Campeón" }
+            ]
+        },
+        {
+            key: "darkiro",
+            name: "Darkiro", country: "PE", team: "TEAM RADIANTE", teamTag: "TR", points: 303,
+            events: "2 (3v3)", titles: "Campeón", sets: "6 - 1", matches: "0 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "Por confirmar", credits: "Por confirmar",
+            trophyDates: ["Campeón 28-04-2024", "Campeón 07-02-2023"],
+            recent: [
+                { date: "28 abr 2024", time: "", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 1, tourney: "ZC24 · Gran Final" },
+                { date: "7 feb 2023", time: "", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 0, tourney: "ZC23 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2024-04-28", place: "1°", tier: "Campeón", tournament: "ZC24 - Gran Final", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 1, result: "Campeón" },
+                { date: "2023-02-07", place: "1°", tier: "Campeón", tournament: "ZC23 - Gran Final", teamA: "TR", scoreA: 3, teamB: "EQB", scoreB: 0, result: "Campeón" }
+            ]
+        },
+        {
+            key: "hades",
+            name: "Hades", country: "CRC", team: "LPPS", teamTag: "LPPS", points: 271,
+            events: "1 (3v3)", titles: "Campeón", sets: "3 - 0", matches: "0 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player · Capitán",
+            alternateIds: [],
+            winnings: "Por confirmar", credits: "Por confirmar",
+            trophyDates: ["Campeón 30-06-2024"],
+            recent: [
+                { date: "30 jun 2024", time: "", teamA: "LPPS", scoreA: 3, teamB: "EQB", scoreB: 0, tourney: "ZC24 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2024-06-30", place: "1°", tier: "Campeón", tournament: "ZC24 - Gran Final", teamA: "LPPS", scoreA: 3, teamB: "EQB", scoreB: 0, result: "Campeón" }
+            ]
+        },
+        {
+            key: "andresraaj",
+            name: "AndresRaaj", country: "MX", team: "LPPS", teamTag: "LPPS", points: 271,
+            events: "1 (3v3)", titles: "Campeón", sets: "3 - 0", matches: "0 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "Por confirmar", credits: "Por confirmar",
+            trophyDates: ["Campeón 30-06-2024"],
+            recent: [
+                { date: "30 jun 2024", time: "", teamA: "LPPS", scoreA: 3, teamB: "EQB", scoreB: 0, tourney: "ZC24 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2024-06-30", place: "1°", tier: "Campeón", tournament: "ZC24 - Gran Final", teamA: "LPPS", scoreA: 3, teamB: "EQB", scoreB: 0, result: "Campeón" }
+            ]
+        },
+        {
+            key: "jared",
+            name: "Jared", country: "CRC", team: "LPPS", teamTag: "LPPS", points: 271,
+            events: "1 (3v3)", titles: "Campeón", sets: "3 - 0", matches: "0 - 0",
+            born: "Por confirmar", status: "Inactivo", role: "Player",
+            alternateIds: [],
+            winnings: "Por confirmar", credits: "Por confirmar",
+            trophyDates: ["Campeón 30-06-2024"],
+            recent: [
+                { date: "30 jun 2024", time: "", teamA: "LPPS", scoreA: 3, teamB: "EQB", scoreB: 0, tourney: "ZC24 · Gran Final" }
+            ],
+            achievements: [
+                { date: "2024-06-30", place: "1°", tier: "Campeón", tournament: "ZC24 - Gran Final", teamA: "LPPS", scoreA: 3, teamB: "EQB", scoreB: 0, result: "Campeón" }
+            ]
+        },
     ];
 
     // --- Sistema de desempate por puntos decimales ---
@@ -13558,7 +13663,7 @@
     // al ranking no empuja artificialmente a todos los demás hacia abajo:
     // solo baja quien fue realmente superado por alguien que sumó puntos, y
     // sube quien fue superado por alguien que perdió terreno relativo.
-    const RANK_NEW_PLAYERS = new Set(["heritage", "kaiser", "misery", "jormargg", "peepe", "owneronyt", "aaron13", "obito", "remot_bs", "tiagoxcv", "thteamnegro", "yanielgg", "kittypou26", "thherian", "ghost", "abelldx", "deizz", "romanqq", "angelluki", "rickylove", "amberchuu01", "trdgx98", "phserperior", "bititofcq", "newfactory", "sanz", "luisitopro123", "sjoacedbamypasa", "gabonix", "simonelprro", "xellexll", "miseryoung", "kaenluc", "reyes1", "ale", "messpp", "sebazz", "isakku", "rnowtt", "jdxz", "banditoo", "3eta", "ogarucap", "panconqueso", "tlinao9", "gabri", "royzrike", "xabi", "galactus", "diegoa", "yacer", "poslegend966p", "gold", "patomauri", "fran", "possalchi", "cesar", "denshol", "charlestq", "pelsantigamer", "peijakov", "messigoat", "bancobbva", "sukhoi", "destroyer", "blaxxyy", "jhxfwy", "n1nferun", "selavi"]);
+    const RANK_NEW_PLAYERS = new Set(["jerson7", "joseantonio", "darkiro", "hades", "andresraaj", "jared", "heritage", "kaiser", "misery", "jormargg", "peepe", "owneronyt", "aaron13", "obito", "remot_bs", "tiagoxcv", "thteamnegro", "yanielgg", "kittypou26", "thherian", "ghost", "abelldx", "deizz", "romanqq", "angelluki", "rickylove", "amberchuu01", "trdgx98", "phserperior", "bititofcq", "newfactory", "sanz", "luisitopro123", "sjoacedbamypasa", "gabonix", "simonelprro", "xellexll", "miseryoung", "kaenluc", "reyes1", "ale", "messpp", "sebazz", "isakku", "rnowtt", "jdxz", "banditoo", "3eta", "ogarucap", "panconqueso", "tlinao9", "gabri", "royzrike", "xabi", "galactus", "diegoa", "yacer", "poslegend966p", "gold", "patomauri", "fran", "possalchi", "cesar", "denshol", "charlestq", "pelsantigamer", "peijakov", "messigoat", "bancobbva", "sukhoi", "destroyer", "blaxxyy", "jhxfwy", "n1nferun", "selavi"]);
     const RETURNING_PLAYERS = PLAYERS.filter(p => !RANK_NEW_PLAYERS.has(p.key));
     const PREV_POS_BY_KEY = new Map(
         RETURNING_PLAYERS.slice()
@@ -13577,7 +13682,7 @@
     =================================================================== */
     const ZC_REGION_BY_COUNTRY = {
         AR: "SA", BOL: "SA", BR: "SA", CL: "SA", CO: "SA", ECU: "SA", PE: "SA", VEN: "SA",
-        MX: "NA", GT: "NA", HON: "NA", SLV: "NA",
+        MX: "NA", GT: "NA", HON: "NA", SLV: "NA", CRC: "NA",
         ES: "EMEA", GHA: "EMEA",
     };
     function getRegion(countryCode) {
@@ -13655,38 +13760,50 @@
     const TROPHIES = [
         {
             team: "TEAM RADIANTE", logo: "escudo_logo/escudo-default.png",
+            champDate: "Campeón 07-02-2023",
+            tourney: "ZC23 GRAND FINAL",
+            mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
+            match: { edition: "ZC23", abbr: "TR", opp: "Equipo B", oppAbbr: "EQB", oppLogo: "escudo_logo/escudo-default.png", home: 3, away: 0, flip: true, ymd: [2023, 2, 7], captain: true, end: [20, 17], mins: [9, 19, 28], lineup: { home: ["Jer(son)7", "Jose Antonio", "Darkiro"], away: ["Jugador D", "Jugador E", "Jugador F"] } },
+            desc: "TEAM RADIANTE levantó el título el 07/02/23 y consiguió así su primera victoria, la que dio inicio a su camino de éxitos. Más adelante, en abril de 2024, volvería a lo más alto para confirmar su nivel. Un logro que muestra la constancia y la unión del grupo. ¡Felicidades al equipo!"
+        },
+        {
+            team: "TEAM RADIANTE", logo: "escudo_logo/escudo-default.png",
             champDate: "Campeón 28-04-2024",
             tourney: "ZC24 GRAND FINAL",
             mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
-            desc: "TEAM RADIANTE se coronó campeón de la Gran Final ZC24 el 28/04/24 y dejó su nombre en lo más alto de la edición 2024. Un logro que refleja el esfuerzo, la constancia y el trabajo en equipo del grupo. ¡Felicidades al grupo!"
+            match: { edition: "ZC24", abbr: "TR", opp: "Equipo B", oppAbbr: "EQB", oppLogo: "escudo_logo/escudo-default.png", home: 3, away: 1, ymd: [2024, 4, 28], captain: true, end: [14, 35], mins: [8, 17, 26, 34], lineup: { home: ["Jer(son)7", "Jose Antonio", "Darkiro"], away: ["Jugador D", "Jugador E", "Jugador F"] } },
+            desc: "TEAM RADIANTE volvió a lo más alto el 28/04/24 al quedarse con la victoria de la Gran Final ZC24, confirmando que lo suyo no fue casualidad. El equipo, liderado por Jer(son)7 junto a Jose Antonio y Darkiro, consiguió así su segunda victoria tras la del 7 de febrero de 2023 y dejó su nombre en la edición 2024. Un logro que refleja el esfuerzo, la constancia y el trabajo en equipo del grupo. ¡Felicidades al grupo!"
         },
         {
             team: "LPPS", logo: "escudo_logo/LPPS.png",
             champDate: "Campeón 30-06-2024",
             tourney: "ZC24 GRAND FINAL",
             mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
-            desc: "LPPS se coronó campeón de la Gran Final ZC24 el 30/06/24 con una gran hazaña: terminó el torneo invicto y venció a jugadores de la talla de Mini y Hades. Un título que queda en la historia de la competencia y demuestra el nivel y la solidez del equipo. ¡Felicidades a todo el grupo!"
+            match: { edition: "ZC24", abbr: "LPPS", opp: "Equipo B", oppAbbr: "EQB", oppLogo: "escudo_logo/escudo-default.png", home: 3, away: 0, ymd: [2024, 6, 30], captain: true, end: [18, 47], mins: [10, 20, 29], lineup: { home: ["Hades", "AndresRaaj", "Jared"], away: ["Jugador D", "Jugador E", "Jugador F"] } },
+            desc: "LPPS alzó el trofeo de la Gran Final ZC24 el 30/06/24 con una gran hazaña: terminó el torneo invicto y dejó atrás a rivales de la talla de Mini. El equipo, liderado por Hades junto a AndresRaaj y Jared, mostró un nivel sólido de principio a fin. Un título que queda en la historia de la competencia y demuestra la solidez del equipo. ¡Felicidades a todo el grupo!"
         },
         {
             team: "THE BLACKCATS", logo: "escudo_logo/escudo-default.png",
             champDate: "Campeón 23-02-2025",
             tourney: "ZS-CHAMPIONSHIP 2025",
             mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
-            desc: "THE BLACKCATS se coronó campeón del ZS-Championship 2025 el 23/02/25 tras vencer 3-1 a Soriansitos en la final. El equipo se abrió camino hasta lo más alto y dejó su nombre en el Salón de la Fama. ¡Felicidades al grupo!"
+            match: { edition: "ZC25", abbr: "BCS", opp: "Soriansitos", oppAbbr: "SOR", oppLogo: "escudo_logo/escudo-default.png", home: 3, away: 1, ymd: [2025, 2, 23], end: [1, 50], mins: [9, 18, 27, 35], lineup: { home: ["Jugador A", "Jugador B", "Jugador C"], away: ["Jugador D", "Jugador E", "Jugador F"] } },
+            desc: "THE BLACKCATS llegó a la cima del ZS-Championship 2025 el 23/02/25 al imponerse 3-1 a Soriansitos en la final. El equipo se abrió camino paso a paso hasta lo más alto y dejó su nombre grabado en el Salón de la Fama. ¡Felicidades al grupo!"
         },
         {
             team: "LEVIATÁN ESPORT", logo: "LEV.png",
             champDate: "Campeón 09-08-2026",
             tourney: "ZC26 GRAN FINAL",
             mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
-            desc: "LEVIATÁN ESPORTS se coronó campeón de la Gran Final ZC26 el 09/08/26 tras vencer 3-1 a Cachorritas repres (LPR). Título obtenido con la alineación de Julio (capitán), iXLCross y JOAR.",
+            desc: "LEVIATÁN ESPORTS conquistó la Gran Final ZC26 el 09/08/26 al vencer 3-1 a Cachorritas repres (LPR) en un duelo de gran nivel. El título llegó con la alineación de Julio (capitán), iXLCross y JOAR, que sostuvieron al equipo hasta el final y lo dejaron en lo más alto de la edición 2026.",
             full: true
         }
     ];
 
     function flagImg(code, size) {
         const f = FLAGS[code];
-        return `<img src="assets/flags/${f.file}" alt="${f.name}" title="${f.name}" style="${size ? 'width:100%;height:100%;object-fit:cover;' : ''}">`;
+        if (!f.file) return `<span class="flag-unknown" title="${f.name}" style="display:block;width:100%;height:100%;background:rgba(255,255,255,0.12);"></span>`;
+        return `<img src="${f.file.startsWith("data:") ? f.file : "assets/flags/" + f.file}" alt="${f.name}" title="${f.name}" style="${size ? 'width:100%;height:100%;object-fit:cover;' : ''}">`;
     }
 
     const CONTRIBUTIONS = [
@@ -14165,7 +14282,7 @@
         const seen = new Set();
         const list = [];
         PLAYERS.forEach(p => {
-            if (!seen.has(p.country) && FLAGS[p.country]) {
+            if (!seen.has(p.country) && FLAGS[p.country] && FLAGS[p.country].file) {
                 seen.add(p.country);
                 list.push(p.country);
             }
@@ -15186,16 +15303,22 @@
 
             ${isChampion(p) ? `
             <div class="info-block-title">PREMIOS</div>
-            <div class="vitrina-card" id="vitrinaCard">
+            <div class="vitrina-row" style="display:flex;flex-wrap:wrap;gap:10px;">
+            ${(p.trophyDates && p.trophyDates.length
+                ? p.trophyDates.map(d => { const ti = TROPHIES.findIndex(t => t.champDate === d); return ti < 0 ? "" : { ti, date: d.replace("Campeón ", "").replace(/-(\d\d)(\d\d)$/, "-$2") }; }).filter(Boolean)
+                : [{ ti: Math.max(0, TROPHIES.findIndex(t => t.full)), date: "08-09-26" }]
+            ).map(v => `<div class="vitrina-card" data-trophy-index="${v.ti}">
                 <img src="LOGROS/champion.png" class="vitrina-img" alt="Premio">
                 <div class="vitrina-label">winner</div>
-                <div class="vitrina-date">08-09-26</div>
+                <div class="vitrina-date">${v.date}</div>
+            </div>`).join("")}
             </div>` : ""}
         </div>`;
         panel.scrollTop = 0;
         openModal("playerModalOverlay");
-        const vitrinaCard = panel.querySelector("#vitrinaCard");
-        if (vitrinaCard) vitrinaCard.addEventListener("click", () => openTrophyModal(TROPHIES.find(t => t.full) || TROPHIES[TROPHIES.length - 1]));
+        panel.querySelectorAll(".vitrina-card[data-trophy-index]").forEach(card => {
+            card.addEventListener("click", () => openTrophyModal(TROPHIES[+card.dataset.trophyIndex] || TROPHIES[TROPHIES.length - 1]));
+        });
         initCarousels(panel);
         initRadarTooltips(panel);
         const panelMedia = panel.querySelector(".panel-media");
@@ -15917,11 +16040,299 @@
     }
 
 
+    /* ===================================================================
+       Salón de la Fama · menú de partido de las finales anteriores (ZC24 / ZC25)
+       Diseño igual al de la Gran Final: encabezado, marcador y cronología de sets.
+       Datos en TROPHIES[i].match. Función propia, sin usar Partidos ni "Último partido importa".
+    =================================================================== */
+    function hofFmtClock(totalMin) {
+        const m = ((totalMin % 1440) + 1440) % 1440;
+        const h24 = Math.floor(m / 60), mm = m % 60;
+        const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+        return h12 + ":" + String(mm).padStart(2, "0") + " " + (h24 < 12 ? "a.m." : "p.m.");
+    }
+
+    function hofPastTimelineHtml(t) {
+        const mt = t.match;
+        const CH = t.team, OP = mt.opp;
+        const BLUE = "#6ea8fe", RED = "#ef5350";
+        const whistle = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"></path><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg>`;
+        const ball = `<img src="assets/icon_wim_set.png" alt="">`;
+        // Ganadores de cada set: 3-0 → CCC · 3-1 → el rival gana el set 2
+        const winners = mt.away === 0 ? ["C", "C", "C"] : ["C", "R", "C", "C"];
+        let c = 0, r = 0;
+        const events = winners.map((w, i) => {
+            if (w === "C") c++; else r++;
+            return { set: i + 1, c: c, r: r, min: mt.mins[i], champ: w === "C" };
+        });
+        const items = events.map(e => {
+            const accent = e.champ ? BLUE : RED;
+            return {
+                side: e.champ ? "r" : "l",
+                html: `<div class="zt-ev ${e.champ ? "zt-right" : "zt-left"}">
+                <div class="zt-node"><span class="zt-ico">${ball}</span><span class="zt-pill">${e.min}'</span></div>
+                <span class="zt-bar" style="background:${accent}"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET ${e.set} <span class="zt-score" style="color:${accent};background:${accent}22">${e.r} - ${e.c}</span></div><div class="zt-sub"><span class="zt-team">${e.champ ? CH : OP}</span></div></div>
+            </div>`
+            };
+        }).reverse();
+        const conn = (from, to) => {
+            if (from === to) return `<div class="zt-conn zt-same zt-${from}"></div>`;
+            const order = { l: 0, c: 1, r: 2 };
+            const mir = order[from] > order[to];
+            const key = [from, to].sort((x, y) => order[x] - order[y]).join("");
+            return `<div class="zt-conn"><span class="zt-path zt-${key}${mir ? " zt-mir" : ""}"></span></div>`;
+        };
+        const mile = (label, time) => `<div class="zt-mile">${whistle}<span>${label}</span><span class="zt-mile-time">${time}</span></div>`;
+        const endMin = mt.end[0] * 60 + mt.end[1];
+        const startMin = endMin - mt.mins[mt.mins.length - 1];
+        const seq = [{ side: "c", html: mile("Partido finalizado", hofFmtClock(endMin)) }]
+            .concat(items)
+            .concat([{ side: "c", html: mile("Partido iniciado", hofFmtClock(startMin)) }]);
+        let out = "";
+        seq.forEach((it, i) => { if (i) out += conn(seq[i - 1].side, it.side); out += it.html; });
+        return `<div class="zt-wrap"><div class="zt-list zt-pane active">${out}</div></div>`;
+    }
+
+    const HOF_DEFAULT_PHOTO = "palyer_sep.png";
+    const HOF_DEFAULT_CREST = "escudo_logo/escudo-default.png";
+
+    // Alineaciones: mismo diseño que la Gran Final (marcador, tarjetas de jugador, equipo visitante abajo).
+    function hofPastLineupHtml(t) {
+        const mt = t.match;
+        const sets = mt.home + mt.away;
+        const card = (name, role) => `
+            <div class="stat-row lu-row lu-card">
+                <div class="stat-row-main lu-row-main">
+                    <div class="lu-avatar-wrap">
+                        <img class="lu-photo" src="${HOF_DEFAULT_PHOTO}" alt="${name}">
+                        <span class="lu-rating rt-na">N/A</span>
+                    </div>
+                    <span class="lu-name-wrap">
+                        <button type="button" class="stat-name-btn">${name}</button>
+                        <span class="lu-role">${role}</span>
+                    </span>
+                </div>
+            </div>`;
+        const homeCards = mt.lineup.home.map((n, i) => card(n, i === 0 && mt.captain ? "Titular · Capitán" : "Titular")).join("");
+        const awayCards = mt.lineup.away.map(n => card(n, "Titular")).join("");
+        return `<div class="lu-wrap">
+            <div class="lu-scorebar">
+                <div class="lu-scorebar-line">
+                    <span class="lu-scorebar-team"><img src="${t.logo}" alt="${mt.abbr}">${mt.abbr}</span>
+                    <span class="lu-scorebar-score">${mt.home}</span>
+                    <span class="lu-scorebar-dash">–</span>
+                    <span class="lu-scorebar-score">${mt.away}</span>
+                    <span class="lu-scorebar-team">${mt.oppAbbr}<img src="${mt.oppLogo}" alt="${mt.oppAbbr}"></span>
+                </div>
+                <span class="lu-scorebar-rounds">${sets} Sets</span>
+            </div>
+            <div class="lu-block lu-block-titulares">
+                <div class="lu-block-title"><img class="lu-block-title-logo" src="${t.logo}" alt="${mt.abbr}">${t.team} · Titulares</div>
+                <div class="lu-block-grid">${homeCards}${awayCards}</div>
+                <div class="lu-block-title lu-block-title-bottom"><img class="lu-block-title-logo" src="${mt.oppLogo}" alt="${mt.oppAbbr}">${mt.opp} · Titulares</div>
+            </div>
+        </div>`;
+    }
+
+    // Estadísticas: mismo diseño que la Gran Final. Solo los sets y el % de victoria salen del marcador;
+    // el resto queda con "–" hasta tener los datos reales.
+    function hofPastStatsHtml(t) {
+        const mt = t.match;
+        const total = mt.home + mt.away;
+        const pctHome = Math.round(mt.home / total * 100), pctAway = 100 - pctHome;
+        const flip = !!mt.flip; // true → campeón a la derecha (ej. ZC23: 0-3)
+        const row = (cats, label, l, r, lw, rw, extra) => {
+            const L = flip ? r : l, R = flip ? l : r;
+            const LW = flip ? rw : lw, RW = flip ? lw : rw;
+            const lc = flip ? "mvs-bar-neutral" : "mvs-bar-lev", rc = flip ? "mvs-bar-lev" : "mvs-bar-neutral";
+            const lv = !flip && l !== "–" ? " mvs-win-lev" : "", rv = flip && l !== "–" ? " mvs-win-lev" : "";
+            return `
+            <div class="mvs-row" data-cat="${cats}"${extra ? ' data-extra="1" style="display:none"' : ""}><div class="mvs-row-top">
+                <span class="mvs-val${lv}">${L}</span>
+                <span class="mvs-label">${label}</span>
+                <span class="mvs-val${rv}">${R}</span>
+            </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill ${lc}" style="width:${LW}%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill ${rc}" style="width:${RW}%"></div></div></div></div>`;
+        };
+        const chip = n => `<button type="button" class="mvs-player-chip"><img class="mvs-player-avatar" src="${HOF_DEFAULT_PHOTO}" alt="">${n}</button>`;
+        const tabs = [["clave", "Estadísticas clave"], ["generales", "Estadísticas generales del partido"], ["ataques", "Ataques"], ["defensas", "Defensas"], ["sanciones", "Sanciones"]];
+        return `<div class="mvs-wrap">
+            <div class="mvs-header-row"><span class="mvs-header">Estadísticas del partido</span></div>
+            <div class="mvs-players-row">
+                <span class="mvs-players-label">Jugadores del partido</span>
+                <div class="mvs-players-list">${mt.lineup.home.concat(mt.lineup.away).map(chip).join("")}</div>
+            </div>
+            <div class="mvs-tabs-wrapper"><div class="mvs-tabs">${tabs.map((x, i) => `<button type="button" class="mvs-tab${i === 0 ? " active" : ""}" data-mvs-tab="${x[0]}">${x[1]}</button>`).join("")}</div></div>
+            <div class="mvs-teams">
+                ${flip
+                    ? `<img class="mvs-team-logo" src="${mt.oppLogo}" alt="${mt.oppAbbr}"><img class="mvs-team-logo" src="${t.logo}" alt="${mt.abbr}">`
+                    : `<img class="mvs-team-logo" src="${t.logo}" alt="${mt.abbr}"><img class="mvs-team-logo" src="${mt.oppLogo}" alt="${mt.oppAbbr}">`}
+            </div>
+            <div class="mvs-rows">
+                ${row("clave generales", "Rondas Ganadas (Sets)", mt.home, mt.away, 100, Math.round(mt.away / mt.home * 100))}
+                ${row("clave generales", "% de Victoria", pctHome + "%", pctAway + "%", 100, Math.round(pctAway / pctHome * 100))}
+                ${row("clave generales ataques", "Eliminaciones (Kills)", "–", "–", 0, 0)}
+                ${row("clave generales ataques", "Promedio DPS de Equipo", "–", "–", 0, 0)}
+                ${row("generales ataques", "Asistencias", "–", "–", 0, 0, true)}
+                ${row("generales sanciones", "Faltas", "–", "–", 0, 0, true)}
+                ${row("generales sanciones", "Tarjetas Amarillas", "–", "–", 0, 0, true)}
+                ${row("generales sanciones", "Tarjetas Rojas", "–", "–", 0, 0, true)}
+            </div>
+            <button type="button" class="mvs-more-btn" data-mvs-more style="display:none">Mostrar más</button>
+        </div>`;
+    }
+
+    // Más partidos: la final y partidos anteriores del torneo (ejemplos hasta tener los datos reales).
+    function hofPastMoreHtml(t) {
+        const mt = t.match;
+        const dd = String(mt.ymd[2]).padStart(2, "0"), mm = String(mt.ymd[1]).padStart(2, "0");
+        const cardHtml = (badge, oppName, oppLogo, h, a, label) => `
+            <div class="zcfx-card">
+                <span class="zcfx-group-badge zcfx-group-badge-more">${badge}</span>
+                <div class="zcfx-teams">
+                    <div class="zcfx-team-row zcfx-row-win"><span class="zcfx-team-logo"><img src="${t.logo}" alt="${mt.abbr}"></span><span class="zcfx-team-name">${mt.abbr}</span></div>
+                    <div class="zcfx-team-row zcfx-row-lose"><span class="zcfx-team-logo"><img src="${oppLogo}" alt="${oppName}"></span><span class="zcfx-team-name">${oppName}</span></div>
+                </div>
+                <div class="zcfx-scores"><span class="zcfx-score zcfx-score-win">${h}</span><span class="zcfx-score">${a}</span></div>
+                <span class="zcfx-divider"></span>
+                <div class="zcfx-date"><span class="zcfx-date-num zcfx-date-num-sm">${label}</span><span class="zcfx-date-month zcfx-date-time">${dd}/${mm}</span></div>
+            </div>`;
+        return `<div class="zc26mm-more">
+            ${cardHtml(mt.edition + " · Final", mt.oppAbbr, mt.oppLogo, mt.home, mt.away, "Fin")}
+        </div>`;
+    }
+
+    // Alineaciones completas (titulares + suplentes + coach + leyenda), igual que el menú de Partidos
+    function hofPastLineupFullHtml(t) {
+        const mt = t.match;
+        const col = (logo, name) => `<div class="zc26lu-subs-col">
+                <div class="zc26lu-team"><img src="${logo}" alt=""><span>${name}</span></div>
+                <div class="zc26lu-none">Sin suplentes</div>
+            </div>`;
+        const subs = `<div class="lu-block lu-block-suplentes">
+            <div class="lu-sub-title">Suplentes</div>
+            <div class="zc26lu-subs-cols">${col(t.logo, t.team)}${col(mt.oppLogo, mt.opp)}</div>
+        </div>`;
+        const coach = (logo, ab) => `<div class="lu-coach">
+                <span class="lu-coach-name">N/A</span>
+                <span class="lu-coach-role zc26lu-coach-role"><img src="${logo}" alt="">${ab}Coach</span>
+            </div>`;
+        const coaches = `<div class="lu-block zc26lu-coach-block">
+            <div class="lu-coaches">${coach(t.logo, mt.abbr)}${coach(mt.oppLogo, mt.oppAbbr)}</div>
+            <div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div>
+        </div>`;
+        const legend = (typeof zc26LegendHtml === "function") ? zc26LegendHtml() : "";
+        return hofPastLineupHtml(t).replace(/<\/div>\s*$/, subs + coaches + legend + "</div>");
+    }
+
+    function hofPastGeneralSection(title, inner) {
+        return `<div class="zc26mm-general-section"><div class="zc26mm-general-section-title">${title}</div>${inner || ""}</div>`;
+    }
+
+    function hofPastTabContent(tab, t) {
+        const mt = t.match;
+        if (tab === "cronologia") return `<div class="final-chronology">${hofPastTimelineHtml(t)}</div>`;
+        if (tab === "alineaciones") return hofPastLineupFullHtml(t);
+        if (tab === "estadisticas") return hofPastStatsHtml(t);
+        if (tab === "mas-partidos") return hofPastMoreHtml(t);
+        // Información general
+        return `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "${mt.edition}", manejado por el equipo del soporte</span></div>
+            <div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>`
+            + hofPastGeneralSection("Alineaciones", hofPastLineupFullHtml(t))
+            + hofPastGeneralSection("Estadísticas", hofPastStatsHtml(t))
+            + hofPastGeneralSection("Más partidos", hofPastMoreHtml(t))
+            + hofPastGeneralSection("Cronología", `<div class="final-chronology">${hofPastTimelineHtml(t)}</div>`);
+    }
+
+    function hofOpenPastFinalMenu(t, panel) {
+        const mt = t.match;
+        const DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        const MONTHS = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+        const [y, mo, d] = mt.ymd;
+        const wd = DAYS[new Date(y, mo - 1, d).getDay()];
+        const dd = String(d).padStart(2, "0"), mm = String(mo).padStart(2, "0");
+        panel.className = "info-panel trophy-match";
+        panel.innerHTML = `<div class="info-close"><span class="info-close-x">✕</span></div>`;
+        const card = document.createElement("div");
+        card.className = "match-card";
+        const tabDefs = [["general", "Información general"], ["cronologia", "Cronología"], ["alineaciones", "Alineaciones"], ["estadisticas", "Estadísticas"], ["mas-partidos", "Más partidos"]];
+        card.innerHTML = `
+            <div class="zc26mm-head">
+                <div>
+                    <div class="zc26mm-title">${mt.edition} <span class="zc26mm-title-sub">Gran final</span></div>
+                    <div class="zc26mm-date">${wd} ${d} de ${MONTHS[mo - 1]} · ${y}</div>
+                </div>
+                <div class="zc26mm-tags">
+                    <span class="zc26mm-tag">Eliminatoria</span>
+                    <span class="zc26mm-status">Finalizado</span>
+                </div>
+            </div>
+            ${(() => {
+                const champ = `<div class="team">
+                    <div class="team-logo lev-pop">
+                        <div class="octagon-bg"></div>
+                        <div class="octagon-ring"></div>
+                        <img src="${t.logo}" alt="${t.team}">
+                    </div>
+                    <span class="team-name team-name-pop">${mt.abbr}</span>
+                </div>`;
+                const opp = `<div class="team">
+                    <div class="team-logo"><img src="${mt.oppLogo}" alt="${mt.opp}"></div>
+                    <span class="team-name">${mt.oppAbbr}</span>
+                </div>`;
+                const mid = `<div class="match-status">
+                        <span class="status-badge">Finalizado</span>
+                        <span class="status-date">${dd}/${mm}/${String(y).slice(2)}</span>
+                    </div>`;
+                const win = `<span class="score-number">${mt.home}</span>`;
+                const lose = `<span class="score-number score-number-lose">${mt.away}</span>`;
+                return `<div class="scoreboard zc26mm-scoreboard">
+                ${mt.flip ? opp : champ}
+                <div class="score-center">
+                    ${mt.flip ? lose + mid + win : win + mid + lose}
+                </div>
+                ${mt.flip ? champ : opp}
+            </div>`;
+            })()}
+            <div class="zc26mm-tabs">${tabDefs.map((x, i) => `<button type="button" class="zc26mm-tab-btn${i === 0 ? " active" : ""}" data-hof-tab="${x[0]}">${x[1]}</button>`).join("")}</div>
+            <div class="zc26mm-tab-content" data-hof-tab-content></div>`;
+        panel.appendChild(card);
+        const content = card.querySelector("[data-hof-tab-content]");
+        const show = tab => { content.innerHTML = hofPastTabContent(tab, t); hofBindMatchStats(content); };
+        show("general");
+        card.querySelectorAll("[data-hof-tab]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                zcPlaySound("click");
+                card.querySelectorAll("[data-hof-tab]").forEach(x => x.classList.toggle("active", x === btn));
+                show(btn.dataset.hofTab);
+            });
+        });
+        const summary = document.createElement("div");
+        summary.className = "trophy-summary-block hof-past-summary";
+        summary.innerHTML = `
+            <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
+            <div class="trophy-modal-title">${t.team}</div>
+            <div class="trophy-modal-sub">${t.champDate}</div>
+            <div class="trophy-modal-tourney">${t.tourney}</div>
+            ${t.mode ? `<div class="trophy-modal-mode">${t.mode}</div>` : ""}
+            <div class="trophy-modal-desc">${t.desc}</div>
+        `;
+        panel.appendChild(summary);
+        panel.scrollTop = 0;
+        hofCloseQuickStats(true);
+        openModal("trophyModalOverlay");
+    }
+
+
     function openTrophyModal(t) {
         const panel = document.getElementById("trophyInfoPanel");
         if (t.full) {
             // Menú de la Gran Final: copia propia e independiente (ver hofOpenFinalMenu).
             hofOpenFinalMenu(t, panel);
+            return;
+        }
+        if (t.match) {
+            hofOpenPastFinalMenu(t, panel);
             return;
         }
         panel.className = "info-panel";
@@ -17127,7 +17538,7 @@
             if (detected) zc26CountryCode = detected;
         }
     } catch (e) {}
-    function zc26FlagSrc(code) { return "assets/flags/" + FLAGS[code].file; }
+    function zc26FlagSrc(code) { const fl = FLAGS[code].file; return fl.startsWith("data:") ? fl : "assets/flags/" + fl; }
     function zc26Pad2(n) { return String(n).padStart(2, "0"); }
     function zc26Fmt12(h, min) {
         return (h % 12 === 0 ? 12 : h % 12) + ":" + zc26Pad2(min) + " " + (h >= 12 ? "p.m." : "a.m.");
