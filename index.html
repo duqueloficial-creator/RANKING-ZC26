@@ -204,10 +204,10 @@
             opacity: 1;
         }
         .section-tab-zc26 {
-            color: #FFFF2B;
+            color: #ffffff;
         }
         .section-tab-zc26.active {
-            color: #FFFF2B;
+            color: #ffffff;
         }
         .menu-toggle {
             width: 34px;
@@ -1025,8 +1025,10 @@
             display: flex;
             align-items: flex-start;
             overflow-x: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             overscroll-behavior-x: contain;
+            overscroll-behavior-y: auto;
             -webkit-overflow-scrolling: touch;
             touch-action: pan-x pan-y;
             scrollbar-width: none;
@@ -2893,11 +2895,96 @@
             justify-content: center;
         }
 
+        /* --- Menú de la final y "Último partido importa": mismos títulos/tamaños que un partido de la edición --- */
+        #ultimo-partido .gen-block-title, #trophyInfoPanel.trophy-match .gen-block-title { font-size: 0.85rem; font-weight: 700; text-transform: none; letter-spacing: 0; margin-bottom: 8px; }
+        #ultimo-partido .mvs-wrap, #trophyInfoPanel.trophy-match .mvs-wrap { padding: 10px 10px 8px; border-radius: 12px; }
+        #ultimo-partido .mvs-header-row, #trophyInfoPanel.trophy-match .mvs-header-row { margin-bottom: 6px; }
+        #ultimo-partido .mvs-header, #trophyInfoPanel.trophy-match .mvs-header { font-size: 0.56rem; letter-spacing: 1.2px; }
+        #ultimo-partido .mvs-players-label, #trophyInfoPanel.trophy-match .mvs-players-label { font-size: 0.52rem; }
+        #ultimo-partido .mvs-player-chip, #trophyInfoPanel.trophy-match .mvs-player-chip { font-size: 0.56rem; }
+        #ultimo-partido .mvs-teams, #trophyInfoPanel.trophy-match .mvs-teams { padding: 8px 4px 10px; }
+        #ultimo-partido .mvs-team-logo, #trophyInfoPanel.trophy-match .mvs-team-logo { width: 26px; height: 26px; }
+        #ultimo-partido .mvs-tabs, #trophyInfoPanel.trophy-match .mvs-tabs { gap: 14px; }
+        #ultimo-partido .mvs-tab, #trophyInfoPanel.trophy-match .mvs-tab { font-size: 0.58rem; padding-bottom: 7px; }
+        #ultimo-partido .mvs-label, #trophyInfoPanel.trophy-match .mvs-label { font-size: 0.56rem; }
+        #ultimo-partido .mvs-val, #trophyInfoPanel.trophy-match .mvs-val { font-size: 0.6rem; }
+        #ultimo-partido .zc26mm-more, #trophyInfoPanel.trophy-match .zc26mm-more { gap: 8px; }
+        #ultimo-partido .zc26mm-more .zcfx-card, #trophyInfoPanel.trophy-match .zc26mm-more .zcfx-card { cursor: default; }
+
         /* --- Tamaños reducidos del modal de partido --- */
         .zc26mm-head { margin-bottom: 12px; padding-top: 22px; }
         /* La ✕ va pegada a la esquina superior derecha, sin ocupar una fila propia */
         #zc26MatchPanel > .info-close { position: absolute; top: 0; right: 2px; z-index: 5; }
         #zc26MatchPanel > .info-close .info-close-x { padding: 6px 8px; }
+        #trophyInfoPanel.trophy-match > .info-close { position: absolute; top: 0; right: 2px; z-index: 5; }
+        #trophyInfoPanel.trophy-match > .info-close .info-close-x { padding: 6px 8px; }
+        #trophyInfoPanel.trophy-match .zc26mm-head { margin-bottom: 12px; padding-top: 22px; }
+
+        /* --- La final (ventana de Leviatán y "Último partido importa"): mismos tamaños
+               que el menú de un partido de la edición --- */
+        #ultimo-partido .match-card, #trophyInfoPanel.trophy-match .match-card { gap: 12px; }
+        #ultimo-partido .league-info h2 { font-size: 0.85rem; letter-spacing: 1px; }
+        #ultimo-partido .league-info p { font-size: 0.6rem; margin-top: 3px; }
+        #ultimo-partido .header-date { font-size: 0.6rem; padding: 3px 7px; border-radius: 6px; }
+        #ultimo-partido .header-status { font-size: 0.55rem; padding: 3px 7px; border-radius: 6px; }
+        #ultimo-partido .scoreboard { margin: 4px 0; }
+        #ultimo-partido .team { width: 27%; }
+        #ultimo-partido .team-logo { width: 54px; height: 54px; }
+        #ultimo-partido .octagon-bg, #ultimo-partido .octagon-ring { width: 74px; height: 74px; }
+        #ultimo-partido .team-name { font-size: 0.56rem; line-height: 1.25; text-align: center; }
+        #ultimo-partido .score-center { width: 46%; gap: 12px; }
+        #ultimo-partido .score-number { font-size: 1.8rem; }
+        #ultimo-partido .status-badge, #trophyInfoPanel.trophy-match .status-badge { font-size: 0.5rem; padding: 1px 8px; letter-spacing: 0.3px; border-radius: 9px; }
+        #ultimo-partido .status-date, #trophyInfoPanel.trophy-match .status-date { font-size: 0.65rem; text-align: center; white-space: nowrap; }
+
+        #ultimo-partido .match-timeline, #trophyInfoPanel.trophy-match .match-timeline { gap: 6px; }
+        #ultimo-partido .timeline-block, #trophyInfoPanel.trophy-match .timeline-block { padding: 6px 10px; border-radius: 10px; }
+        #ultimo-partido .timeline-entry, #trophyInfoPanel.trophy-match .timeline-entry { font-size: 0.56rem; }
+        #ultimo-partido .timeline-time, #trophyInfoPanel.trophy-match .timeline-time { font-size: 0.56rem; color: #8a8f98; }
+        #ultimo-partido .timeline-icon-win, #trophyInfoPanel.trophy-match .timeline-icon-win { width: 16px; height: 16px; }
+        #ultimo-partido .timeline-icon-card, #trophyInfoPanel.trophy-match .timeline-icon-card { width: 14px; height: 14px; }
+
+        #ultimo-partido .match-events, #trophyInfoPanel.trophy-match .match-events { padding: 8px 10px; border-radius: 10px; gap: 10px; }
+        #ultimo-partido .event-icon, #trophyInfoPanel.trophy-match .event-icon { width: 16px; height: 16px; }
+        #ultimo-partido .event-mode, #trophyInfoPanel.trophy-match .event-mode { font-size: 0.48rem; }
+        #ultimo-partido .event-map, #trophyInfoPanel.trophy-match .event-map { font-size: 0.6rem; }
+        #ultimo-partido .event-result, #trophyInfoPanel.trophy-match .event-result { font-size: 0.62rem; min-width: 50px; gap: 6px; }
+        #ultimo-partido .event-time, #trophyInfoPanel.trophy-match .event-time { font-size: 0.52rem; }
+
+        #ultimo-partido .match-tabs-wrapper, #trophyInfoPanel.trophy-match .match-tabs-wrapper { margin-top: 0; }
+        #ultimo-partido .match-tabs, #trophyInfoPanel.trophy-match .match-tabs { gap: 6px; }
+        #ultimo-partido .match-tab, #trophyInfoPanel.trophy-match .match-tab { font-size: 0.62rem; padding: 6px 12px; }
+        #ultimo-partido .match-tab-content-inner, #trophyInfoPanel.trophy-match .match-tab-content-inner { padding-top: 6px; }
+        #ultimo-partido .tab-info-line, #trophyInfoPanel.trophy-match .tab-info-line { font-size: 0.68rem; margin-bottom: 4px; }
+        #ultimo-partido .gen-block, #trophyInfoPanel.trophy-match .gen-block { margin-top: 14px; padding-top: 12px; }
+        #ultimo-partido .gen-block-title, #trophyInfoPanel.trophy-match .gen-block-title { font-size: 0.85rem; margin-bottom: 8px; }
+        #ultimo-partido .final-chronology, #trophyInfoPanel.trophy-match .final-chronology { margin-top: 14px; }
+
+        /* --- Alineaciones de la final: más pequeñas, como en el menú de un partido de la edición --- */
+        #ultimo-partido .lu-wrap, #trophyInfoPanel.trophy-match .lu-wrap { gap: 8px; }
+        #ultimo-partido .lu-scorebar, #trophyInfoPanel.trophy-match .lu-scorebar { padding: 5px 8px; font-size: 0.56rem; }
+        #ultimo-partido .lu-scorebar-score, #trophyInfoPanel.trophy-match .lu-scorebar-score { font-size: 0.64rem; }
+        #ultimo-partido .lu-scorebar-rounds, #trophyInfoPanel.trophy-match .lu-scorebar-rounds { font-size: 0.5rem; }
+        #ultimo-partido .lu-block, #trophyInfoPanel.trophy-match .lu-block { padding: 7px 8px; border-radius: 12px; }
+        #ultimo-partido .lu-block-suplentes, #trophyInfoPanel.trophy-match .lu-block-suplentes { margin-top: 0; }
+        #ultimo-partido .lu-block-title, #trophyInfoPanel.trophy-match .lu-block-title { font-size: 0.6rem; letter-spacing: 1.6px; gap: 5px; padding-bottom: 4px; margin-bottom: 6px; }
+        #ultimo-partido .lu-block-title-logo, #trophyInfoPanel.trophy-match .lu-block-title-logo { width: 14px; height: 14px; }
+        #ultimo-partido .lu-sub-title, #trophyInfoPanel.trophy-match .lu-sub-title { font-size: 0.52rem; letter-spacing: 1.6px; padding-bottom: 4px; margin-bottom: 6px; }
+        #ultimo-partido .lu-block-grid, #trophyInfoPanel.trophy-match .lu-block-grid { gap: 14px 6px; }
+        #ultimo-partido .lu-card .lu-row-main, #trophyInfoPanel.trophy-match .lu-card .lu-row-main { gap: 10px; padding: 2px 2px; }
+        #ultimo-partido .lu-card .lu-photo, #trophyInfoPanel.trophy-match .lu-card .lu-photo { width: 38px; height: 38px; border-radius: 9px; }
+        #ultimo-partido .lu-avatar-wrap, #trophyInfoPanel.trophy-match .lu-avatar-wrap { width: 38px; height: 38px; }
+        #ultimo-partido .lu-avatar-wrap .lu-rating, #trophyInfoPanel.trophy-match .lu-avatar-wrap .lu-rating { bottom: -9px; width: 22px; padding: 2px 0; border-radius: 6px; font-size: 0.52rem; }
+        #ultimo-partido .lu-card .stat-name-btn, #trophyInfoPanel.trophy-match .lu-card .stat-name-btn { font-size: 0.62rem; font-weight: 700; }
+        #ultimo-partido .lu-role, #trophyInfoPanel.trophy-match .lu-role { font-size: 0.42rem; }
+        #ultimo-partido .lu-corner-icon-num, #trophyInfoPanel.trophy-match .lu-corner-icon-num { padding: 1px 4px 1px 3px; border-radius: 8px; }
+        #ultimo-partido .lu-corner-icon-num img, #trophyInfoPanel.trophy-match .lu-corner-icon-num img { width: 10px; height: 10px; }
+        #ultimo-partido .lu-corner-icon-num span, #trophyInfoPanel.trophy-match .lu-corner-icon-num span { font-size: 0.5rem; }
+        #ultimo-partido .lu-corner-icon, #trophyInfoPanel.trophy-match .lu-corner-icon { width: 16px; height: 16px; }
+        #ultimo-partido .lu-corner-icon img, #trophyInfoPanel.trophy-match .lu-corner-icon img { width: 10px; height: 10px; }
+        #ultimo-partido .lu-corner-tr, #trophyInfoPanel.trophy-match .lu-corner-tr { right: -7px; }
+        #ultimo-partido .lu-corner-br, #trophyInfoPanel.trophy-match .lu-corner-br { right: -12px; }
+        #ultimo-partido .lu-corner-bl, #trophyInfoPanel.trophy-match .lu-corner-bl { left: -12px; }
         /* Cuenta regresiva del partido: esquina superior izquierda, un poco más adentro
            y más abajo (no pegada del todo a la esquina), simétrica a la ✕ */
         .zc26mm-countdown {
@@ -3799,7 +3886,7 @@
         }
         /* Mientras el bracket completo está abierto, los menús (partido, jugador, etc.) se abren encima de él */
         body.zcbrz-open .modal-overlay { z-index: 10050; }
-        body.zcbrz-open #quickStatsOverlay, body.zcbrz-open #playerModalOverlay, body.zcbrz-open #trophyModalOverlay { z-index: 10060; }
+        body.zcbrz-open #quickStatsOverlay, body.zcbrz-open #hofQuickStatsOverlay, body.zcbrz-open #playerModalOverlay, body.zcbrz-open #trophyModalOverlay { z-index: 10060; }
         body.zcbrz-open #allMatchesOverlay { z-index: 10070; }
         body.zcbrz-open #modalOverlay { z-index: 10100; }
         .zcbrz-hint-desktop { display: none; }
@@ -4169,7 +4256,6 @@
         }
         .rank-row:focus-visible,
         .rank-name:focus-visible,
-        .trophy-item:focus-visible,
         .stat-row:focus-visible {
             outline: 1px solid rgba(212,175,55,0.6);
             outline-offset: -1px;
@@ -4527,9 +4613,22 @@
             gap: 6px;
             padding: 12px 6px;
             cursor: pointer;
+            transition: transform 0.2s ease;
         }
-        .trophy-item:hover {
-            background: rgba(212,175,55,0.06);
+        @media (hover: hover) {
+            .trophy-item:hover {
+                transform: scale(1.08);
+            }
+        }
+        .trophy-item:active {
+            transform: scale(1.08);
+        }
+        .trophy-item:focus {
+            outline: none;
+        }
+        .trophy-item:focus-visible {
+            outline: 1px solid rgba(255,255,255,0.35);
+            outline-offset: -1px;
         }
         .trophy-logo {
             width: 44px;
@@ -4590,6 +4689,16 @@
         }
         #quickStatsOverlay {
             z-index: 1050;
+        }
+        #hofQuickStatsOverlay {
+            z-index: 1050;
+        }
+        /* Minimenú del jugador sobre el menú de la final: desenfoque suave y poco oscurecimiento,
+           para que el menú de atrás se vea difuminado pero claramente abierto detrás. */
+        #hofQuickStatsOverlay.active {
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
         }
         #allMatchesOverlay {
             z-index: 1060;
@@ -8666,6 +8775,231 @@
             }
         }
 
+        /* ===================== BUSCADOR (lupa del encabezado) ===================== */
+        .site-search-btn {
+            width: 34px;
+            height: 34px;
+            margin-left: auto;
+            margin-right: 8px;
+            padding: 0;
+            border: none;
+            border-radius: 8px;
+            background: none;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background .2s ease;
+        }
+        .site-search-btn svg { width: 22px; height: 22px; }
+        .site-search-btn:hover { background: rgba(255,255,255,0.1); }
+        .zs-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            background: #08090c;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-12px);
+            transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            scrollbar-width: none;
+        }
+        .zs-overlay::-webkit-scrollbar { display: none; }
+        .zs-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            transition: opacity .25s ease, transform .25s ease, visibility 0s;
+        }
+        .zs-panel {
+            position: relative;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 84px 20px 60px;
+            min-height: 100%;
+        }
+        /* Botón de cierre: las 3 rayas del menú se convierten en X (misma animación del menú) */
+        .zs-close {
+            position: fixed;
+            top: 22px;
+            right: 20px;
+            width: 34px;
+            height: 26px;
+            padding: 3px 2px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 2;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .zs-close span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2px;
+            transform-origin: center;
+            transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+        }
+        .zs-close.active span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        .zs-close.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .zs-close.active span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+        @media (min-width: 700px) { .zs-close { top: 28px; right: 32px; } }
+        .zs-label { display: block; font-size: 0.95rem; color: #9aa0a6; margin-bottom: 14px; }
+        .zs-field {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 8px 0 12px;
+            border-bottom: 2px solid #ffffff;
+        }
+        .zs-field-icon { width: 26px; height: 26px; color: #ffffff; flex-shrink: 0; }
+        .zs-input {
+            flex: 1;
+            min-width: 0;
+            background: none;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-family: inherit;
+            padding: 4px 0;
+        }
+        .zs-input::placeholder { color: #5d6572; }
+        .zs-clear {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 6px 2px;
+        }
+        .zs-field.has-value .zs-clear { display: block; }
+        .zs-body { margin-top: 34px; }
+        .zs-heading { font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 18px; }
+        .zs-result {
+            display: flex;
+            align-items: stretch;
+            gap: 16px;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            background: #12151c;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            color: #ffffff;
+            text-align: left;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background .15s ease, border-color .15s ease;
+            animation: zsIn .28s ease both;
+        }
+        .zs-result:hover, .zs-result.sel { background: #1a1f2a; border-color: rgba(255,255,255,0.2); }
+        @keyframes zsIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        .zs-thumb {
+            width: 96px;
+            min-height: 84px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1d2740, #0e1119);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8dc2ff;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .zs-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .zs-thumb.contain img { object-fit: contain; padding: 10px; }
+        .zs-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 7px; }
+        .zs-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .zs-chip {
+            font-size: 0.78rem;
+            padding: 3px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.1);
+            color: #dfe4ea;
+        }
+        .zs-sub { font-size: 0.78rem; color: #8a919b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .zs-title { font-size: 1.02rem; line-height: 1.35; color: #e9ebee; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .zs-title b { color: #ffffff; font-weight: 800; }
+        .zs-skel {
+            display: flex;
+            gap: 16px;
+            padding: 12px;
+            margin-bottom: 12px;
+            background: #0f1218;
+            border-radius: 12px;
+        }
+        .zs-skel-img, .zs-skel-line {
+            background: linear-gradient(90deg, #1a1e27 25%, #242a36 50%, #1a1e27 75%);
+            background-size: 200% 100%;
+            animation: zsShimmer 1.1s linear infinite;
+        }
+        .zs-skel-img { width: 96px; height: 84px; border-radius: 8px; flex-shrink: 0; }
+        .zs-skel-lines { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+        .zs-skel-line { height: 14px; border-radius: 999px; }
+        .zs-skel-line:nth-child(2) { width: 85%; }
+        .zs-skel-line:nth-child(3) { width: 60%; }
+        @keyframes zsShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+        .zs-empty { color: #8a919b; font-size: 1rem; line-height: 1.6; padding: 10px 0; }
+        .zs-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+        .zs-suggest {
+            padding: 9px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: none;
+            color: #ffffff;
+            font-size: 0.92rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background .15s ease;
+        }
+        .zs-suggest:hover { background: rgba(255,255,255,0.1); }
+        @media (min-width: 1024px) {
+            .zs-panel { padding-top: 110px; max-width: 1000px; }
+            .zs-input { font-size: 1.9rem; }
+            .zs-result { align-items: center; padding: 8px 14px 8px 8px; margin-bottom: 9px; }
+            .zs-thumb { width: 140px; height: 72px; min-height: 0; }
+            .zs-skel-img { width: 140px; height: 72px; }
+            .zs-title { font-size: 0.95rem; -webkit-line-clamp: 2; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .zs-overlay, .zs-result { transition: none; animation: none; }
+        }
+        /* Móvil / Android: buscador más compacto */
+        @media (max-width: 1023px) {
+            .zs-panel { padding: 64px 10px 40px; }
+            .zs-label { font-size: 0.8rem; margin-bottom: 8px; }
+            .zs-field { gap: 10px; padding: 4px 0 8px; border-bottom-width: 1.5px; }
+            .zs-field-icon { width: 20px; height: 20px; }
+            .zs-input { font-size: 1.1rem; padding: 2px 0; }
+            .zs-clear { font-size: 0.82rem; }
+            .zs-body { margin-top: 22px; }
+            .zs-heading { font-size: 0.95rem; margin-bottom: 12px; }
+            .zs-chips { gap: 8px; }
+            .zs-suggest { padding: 7px 14px; font-size: 0.82rem; }
+            .zs-result { align-items: center; gap: 12px; padding: 6px 10px 6px 6px; margin-bottom: 7px; border-radius: 10px; }
+            .zs-thumb { width: 96px; height: 54px; min-height: 0; font-size: 1.2rem; border-radius: 7px; }
+            .zs-thumb.contain img { padding: 5px; }
+            .zs-skel-img { width: 96px; height: 54px; }
+            .zs-info { gap: 3px; }
+            .zs-chip { font-size: 0.62rem; padding: 2px 8px; }
+            .zs-sub { font-size: 0.64rem; }
+            .zs-title { font-size: 0.76rem; line-height: 1.25; -webkit-line-clamp: 2; }
+            .zs-empty { font-size: 0.88rem; }
+        }
+
         /* ---- Tipografía de escritorio: Noto Sans (descargada de Google Fonts), sobria como la de FIFA ----
            En Windows, Segoe UI con pesos 800/900 se ve muy grueso y "infantil";
            Arial solo tiene normal y negrita, así queda más limpia. ---- */
@@ -8710,8 +9044,8 @@
                 text-shadow: 0 0 6px rgba(255,255,255,0.55);
             }
             .section-tab-zc26:hover {
-                color: #FFFF2B;
-                text-shadow: 0 0 6px rgba(255,255,43,0.55);
+                color: #ffffff;
+                text-shadow: 0 0 6px rgba(255,255,255,0.55);
             }
             .section-tab:hover::after { transform: scaleX(1); opacity: .7; }
             .mobile-menu-link:hover,
@@ -8763,6 +9097,9 @@
         <div class="site-header-brand">
             <img src="Untitled257.jpg" alt="ZC26 ESPORTS" class="site-header-title-img">
         </div>
+        <button type="button" class="site-search-btn" id="siteSearchBtn" aria-label="Buscar" title="Buscar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        </button>
         <button class="menu-toggle" id="menuToggle" data-i18n-aria="aria.openMenu" data-i18n-aria-default="Abrir menú" aria-label="Abrir menú" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
@@ -8782,6 +9119,18 @@
     </div>
 </div>
 
+<div class="zs-overlay" id="zsOverlay" role="dialog" aria-modal="true" aria-label="Buscar" aria-hidden="true">
+    <div class="zs-panel">
+        <button type="button" class="zs-close" id="zsClose" aria-label="Cerrar búsqueda"><span></span><span></span><span></span></button>
+        <label class="zs-label" for="zsInput">¿Qué estás buscando?</label>
+        <div class="zs-field">
+            <svg class="zs-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+            <input type="text" id="zsInput" class="zs-input" placeholder="Equipos, jugadores, novedades, secciones…" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <button type="button" class="zs-clear" id="zsClear">Borrar</button>
+        </div>
+        <div class="zs-body" id="zsBody"></div>
+    </div>
+</div>
 <div class="menu-backdrop" id="menuBackdrop"></div>
 <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-topbar">
@@ -9544,9 +9893,6 @@
                                                         </div>
                                                         </div>
 
-                                                        <div class="lu-vs">
-                                                            <img src="icon_vs_trophy.png" alt="VS">
-                                                        </div>
 
                                                         <div class="lu-block-grid">
                                                         <div class="stat-row lu-row lu-card" data-player="ninja">
@@ -9798,6 +10144,14 @@
                                                     </div>
                                                 </div>
                         </div>
+                        <div class="gen-block">
+                            <div class="gen-block-title">Cronología</div>
+                            <div class="final-chronology" data-final-chronology></div>
+                        </div>
+                        <div class="footer-win">
+                <div class="selection-tag">Seleccion completa</div>
+                <div class="win-text"><span class="highlight">WIN LEVIATAN ESPORT</span></div>
+            </div>
                     </div>
                     <div class="match-tab-panel" data-tab-panel="cronologia">
                         <div class="cro-comments">
@@ -9810,6 +10164,7 @@
                             </div>
                             <div class="cro-comments-text">El encuentro terminó.</div>
                         </div>
+                        <div class="final-chronology" data-final-chronology></div>
                     </div>
                     <div class="match-tab-panel" data-tab-panel="posiciones"></div>
                     <div class="match-tab-panel" data-tab-panel="alineaciones">
@@ -9907,9 +10262,6 @@
                                                         </div>
                                                         </div>
 
-                                                        <div class="lu-vs">
-                                                            <img src="icon_vs_trophy.png" alt="VS">
-                                                        </div>
 
                                                         <div class="lu-block-grid">
                                                         <div class="stat-row lu-row lu-card" data-player="ninja">
@@ -10147,10 +10499,6 @@
                                                 </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-win">
-                <div class="selection-tag">Seleccion completa</div>
-                <div class="win-text"><span class="highlight">WIN LEVIATAN ESPORT</span></div>
             </div>
 
             <div class="watch-game-wrap">
@@ -10633,6 +10981,921 @@
     <div class="quick-stats-panel" id="quickStatsPanel"></div>
 </div>
 
+<!-- Salón de la Fama · minimenú de jugador propio de la Gran Final (independiente de "Último partido importa" y de Partidos) -->
+<div class="modal-overlay" id="hofQuickStatsOverlay">
+    <div class="quick-stats-panel" id="hofQuickStatsPanel"></div>
+</div>
+
+<!-- Salón de la Fama · copia CONGELADA del menú de la Gran Final ZC26 (LEV 3-1 LPR).
+     No se conecta con "Último partido importa": si ese partido cambia, este menú se queda igual. -->
+<template id="hofFinalTemplate"><div class="match-card">
+
+            <div class="match-header">
+                <div class="league-info">
+                    <h2>GRAN FINAL</h2>
+                    <p>Brawl Stars · Agosto 8 de 2026</p>
+                </div>
+                <div class="header-right">
+                    <span class="header-date">08/09/26</span>
+                    <span class="header-status">Finalized</span>
+                </div>
+            </div>
+
+            <div class="scoreboard">
+                <div class="team">
+                    <div class="team-logo"><img src="LPR.png" alt="LPR"></div>
+                    <span class="team-name">LPR</span>
+                </div>
+                <div class="score-center">
+                    <span class="score-number score-lpr">1</span>
+                    <div class="match-status">
+                        <span class="status-badge">Finished</span>
+                        <span class="status-date">Aug 8, 26</span>
+                    </div>
+                    <span class="score-number">3</span>
+                </div>
+                <div class="team">
+                    <div class="team-logo lev-pop">
+                        <div class="octagon-bg"></div>
+                        <div class="octagon-ring"></div>
+                        <img src="LEV.png" alt="LEV">
+                    </div>
+                    <span class="team-name team-name-pop">LEV</span>
+                </div>
+            </div>
+
+            <div class="match-swipe" id="matchSwipe">
+                <div class="match-swipe-slide">
+                    <div class="match-timeline">
+                        <div class="timeline-block">
+                            <div class="timeline-row">
+                                <div class="timeline-side timeline-side-left">
+                                    <span class="timeline-entry" data-open-player="ninja">Ninja <span class="timeline-time">8'</span></span>
+                                </div>
+                                <div class="timeline-icon timeline-icon-win"><img src="win_icon.png" alt="Gol"></div>
+                                <div class="timeline-side timeline-side-right">
+                                    <span class="timeline-entry" data-open-player="taikisha">iXLCross <span class="timeline-time">17', 26'</span></span>
+                                    <span class="timeline-entry" data-open-player="julio">Juliocr36D <span class="timeline-time">34'</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-block">
+                            <div class="timeline-row">
+                                <div class="timeline-side timeline-side-left">
+                                    <span class="timeline-entry" data-open-player="juanjo">Juanjo <span class="timeline-time">20'</span></span>
+                                </div>
+                                <div class="timeline-icon timeline-icon-card"><img src="tarjeta_amarilla.png" alt="Tarjeta amarilla"></div>
+                                <div class="timeline-side timeline-side-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="match-swipe-slide">
+                    <div class="match-events">
+                        <div class="events-col">
+                            <div class="event-item" data-image="kockout.jpg">
+                                <div class="event-left">
+                                    <div class="event-icon"><img src="hot_zone-icon.png" alt="Knockout"></div>
+                                    <div class="event-info">
+                                        <span class="event-mode">Knockout</span>
+                                        <span class="event-map">Belle rock</span>
+                                    </div>
+                                </div>
+                                <div class="event-result">2-1 <span class="event-time">20'</span></div>
+                            </div>
+                        </div>
+                        <div class="events-col">
+                            <div class="event-item event-right" data-image="heist.jpg">
+                                <div class="event-result">0-2 <span class="event-time">20'</span></div>
+                                <div class="event-left">
+                                    <div class="event-info">
+                                        <span class="event-mode">Heist</span>
+                                        <span class="event-map">tire maniacs</span>
+                                    </div>
+                                    <div class="event-icon"><img src="heist-icon.png" alt="Heist"></div>
+                                </div>
+                            </div>
+                            <div class="event-item event-right" data-image="brawlball.jpg">
+                                <div class="event-result">1-2 <span class="event-time">20'</span></div>
+                                <div class="event-left">
+                                    <div class="event-info">
+                                        <span class="event-mode">Brawl Ball</span>
+                                        <span class="event-map">leafy bushes</span>
+                                    </div>
+                                    <div class="event-icon"><img src="brawl_ball-icon.png" alt="Brawl Ball"></div>
+                                </div>
+                            </div>
+                            <div class="event-item event-right" data-image="gremgrab.jpg">
+                                <div class="event-result">0-2 <span class="event-time">20'</span></div>
+                                <div class="event-left">
+                                    <div class="event-info">
+                                        <span class="event-mode">Gem Grab</span>
+                                        <span class="event-map">doble swoosh</span>
+                                    </div>
+                                    <div class="event-icon"><img src="gem_grab-icon.png" alt="Gem Grab"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-tabs-wrapper">
+                <div class="match-tabs" id="matchTabs">
+                    <button type="button" class="match-tab active" data-tab="general">Información general</button>
+                    <button type="button" class="match-tab" data-tab="cronologia">Cronología</button>
+                    <button type="button" class="match-tab" data-tab="alineaciones">Alineaciones</button>
+                    <button type="button" class="match-tab" data-tab="estadisticas">Estadísticas</button>
+                    <button type="button" class="match-tab" data-tab="posiciones">Posiciones</button>
+                    <button type="button" class="match-tab" data-tab="mas-partidos">Más partidos</button>
+                </div>
+            </div>
+            <div class="match-tab-content has-active" id="matchTabContent">
+                <div class="match-tab-content-inner">
+                    <div class="match-tab-panel active" data-tab-panel="general">
+                        <div class="tab-info-line"><span class="tab-info-label">Lugar:</span> <span class="tab-info-value">Torneo virtual "ZC26 AUGT8", manejado por el equipo del soporte</span></div>
+                        <div class="tab-info-line"><span class="tab-info-label">Zona horaria:</span> <span class="tab-info-value">Todos los horarios corresponden a la hora estándar regional</span></div>
+
+                        <div class="gen-block">
+                            <div class="gen-block-title">Alineaciones</div>
+                                                <div class="lu-wrap">
+
+                                                    <div class="lu-scorebar">
+                                                        <div class="lu-scorebar-line">
+                                                            <span class="lu-scorebar-team"><img src="LEV.png" alt="LEV">LEV</span>
+                                                            <span class="lu-scorebar-score">3</span>
+                                                            <span class="lu-scorebar-dash">–</span>
+                                                            <span class="lu-scorebar-score">1</span>
+                                                            <span class="lu-scorebar-team">LPR<img src="LPR.png" alt="LPR"></span>
+                                                        </div>
+                                                        <span class="lu-scorebar-rounds">11 Rondas</span>
+                                                    </div>
+
+                                                    <div class="lu-block lu-block-titulares">
+                                                        <div class="lu-block-title"><img class="lu-block-title-logo" src="LEV.png" alt="LEV">LEVIATÁN ESPORT · Titulares</div>
+
+                                                        <div class="lu-block-grid">
+                                                        <div class="stat-row lu-row lu-card" data-player="taikisha">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="cross.png" alt="iXCross">
+                                                                    <span class="lu-rating rt-top">9.4</span>
+                                                                    <span class="lu-corner-icon-num lu-corner-br"><img src="icon_stats%20(1).png" alt=""><span>2</span></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="taikisha">iXCross</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>34</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>153.1</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>2</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item">MVP: <b>Sí</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="julio">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="julio.png" alt="Julio">
+                                                                    <span class="lu-rating rt-elite">7.6</span>
+                                                                    <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="julio">Julio</button>
+                                                                    <span class="lu-role">Titular · Capitán</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>20</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>104.0</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>1</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="jc">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="joac.png" alt="JOAR">
+                                                                    <span class="lu-rating rt-elite">8.6</span>
+                                                                    <span class="lu-corner-icon-num lu-corner-bl"><img src="icon_stats%20(2).png" alt=""><span>2</span></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="jc">JOAR</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>27</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>132.5</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>2</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+
+                                                        <div class="lu-block-grid">
+                                                        <div class="stat-row lu-row lu-card" data-player="ninja">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="ninja.png" alt="Ninja">
+                                                                    <span class="lu-rating rt-elite">7.1</span>
+                                                                    <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="ninja">Ninja</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>26</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>118.4</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>1</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="nacaru">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="nacaru.png" alt="Nacaru">
+                                                                    <span class="lu-rating rt-good">6.0</span>
+                                                                    <span class="lu-corner-icon lu-corner-bl"><img src="icon_stats%20(2).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="nacaru">Nacaru</button>
+                                                                    <span class="lu-role">Titular · Capitán</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>15</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>80.8</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="juanjo">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="juanjo.png" alt="Juanjoxd">
+                                                                    <span class="lu-rating rt-good">5.8</span>
+                                                                    <span class="lu-corner-icon lu-corner-tr"><img src="icon_stats%20(3).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="juanjo">Juanjoxd</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>19</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>94.8</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>1</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="lu-block-title lu-block-title-bottom"><img class="lu-block-title-logo" src="LPR.png" alt="LPR">L. Puppies Represent · Titulares</div>
+                                                    </div>
+
+                                                    <div class="lu-block lu-block-suplentes">
+                                                        <div class="lu-sub-title">Suplentes</div>
+
+                                                        <div class="lu-block-grid">
+                                                        <div class="stat-row lu-row lu-card" data-player="alvaro">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="alva210.png" alt="Álvaro">
+                                                                    <span class="lu-rating rt-na">N/A</span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="alvaro">Álvaro</button>
+                                                                    <span class="lu-role">Suplente · LEV</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>0.0</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>0/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="lu-block">
+                                                        <div class="lu-coaches">
+                                                            <div class="lu-coach">
+                                                                <span class="lu-coach-name">Z. Jack</span>
+                                                                <span class="lu-coach-role"><img src="LEV.png" alt="LEV">Coach</span>
+                                                            </div>
+                                                            <div class="lu-coach">
+                                                                <span class="lu-coach-name">N/A</span>
+                                                                <span class="lu-coach-role"><img src="LPR.png" alt="LPR">Coach</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div>
+                                                    </div>
+
+                                                </div>
+                        </div>
+
+                        <div class="gen-block">
+                            <div class="gen-block-title">Estadísticas</div>
+                                                <div class="mvs-wrap">
+                                                    <div class="mvs-header-row">
+                                                        <span class="mvs-header">Estadísticas del partido</span>
+                                                    </div>
+                                                    <div class="mvs-players-row">
+                                                        <span class="mvs-players-label">Jugadores del partido</span>
+                                                        <div class="mvs-players-list">
+                                                            <button type="button" class="mvs-player-chip" data-open-player="taikisha"><img class="mvs-player-avatar" src="cross.png" alt="">iXCross</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="julio"><img class="mvs-player-avatar" src="julio.png" alt="">Julio</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="jc"><img class="mvs-player-avatar" src="joac.png" alt="">JOAR</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="ninja"><img class="mvs-player-avatar" src="ninja.png" alt="">Ninja</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="nacaru"><img class="mvs-player-avatar" src="nacaru.png" alt="">Nacaru</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="juanjo"><img class="mvs-player-avatar" src="juanjo.png" alt="">Juanjoxd</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="alvaro"><img class="mvs-player-avatar" src="alva210.png" alt="">Álvaro</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mvs-tabs-wrapper">
+                                                        <div class="mvs-tabs">
+                                                            <button type="button" class="mvs-tab active" data-mvs-tab="clave">Estadísticas clave</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="generales">Estadísticas generales del partido</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="ataques">Ataques</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="defensas">Defensas</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="sanciones">Sanciones</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mvs-teams">
+                                                        <img class="mvs-team-logo" src="LPR.png" alt="LPR">
+                                                        <img class="mvs-team-logo" src="LEV.png" alt="LEV">
+                                                    </div>
+                                                    <div class="mvs-rows">
+                                                        <div class="mvs-row" data-cat="clave generales"><div class="mvs-row-top">
+                                                            <span class="mvs-val">1</span>
+                                                            <span class="mvs-label">Rondas Ganadas (Sets)</span>
+                                                            <span class="mvs-val mvs-win-lev">3</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:33%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="clave generales"><div class="mvs-row-top">
+                                                            <span class="mvs-val">25%</span>
+                                                            <span class="mvs-label">% de Victoria</span>
+                                                            <span class="mvs-val mvs-win-lev">75%</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:33%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="clave generales ataques"><div class="mvs-row-top">
+                                                            <span class="mvs-val">60</span>
+                                                            <span class="mvs-label">Eliminaciones (Kills)</span>
+                                                            <span class="mvs-val mvs-win-lev">81</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:74%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="clave generales ataques"><div class="mvs-row-top">
+                                                            <span class="mvs-val">98.0</span>
+                                                            <span class="mvs-label">Promedio DPS de Equipo</span>
+                                                            <span class="mvs-val mvs-win-lev">129.9</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:75%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales ataques" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">0</span>
+                                                            <span class="mvs-label">Asistencias</span>
+                                                            <span class="mvs-val mvs-win-lev">2</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:0%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales sanciones" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">9</span>
+                                                            <span class="mvs-label">Faltas</span>
+                                                            <span class="mvs-val mvs-win-lev">1</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:100%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:11%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales sanciones" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">1</span>
+                                                            <span class="mvs-label">Tarjetas Amarillas</span>
+                                                            <span class="mvs-val mvs-win-lev">0</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:100%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:0%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales sanciones" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">0</span>
+                                                            <span class="mvs-label">Tarjetas Rojas</span>
+                                                            <span class="mvs-val">0</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:0%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-neutral" style="width:0%"></div></div></div></div>
+                                                        <div class="mvs-empty" data-cat="defensas">Aún no hay estadísticas de defensa registradas para este partido.</div>
+                                                    </div>
+                                                    <button type="button" class="mvs-more-btn" data-mvs-more="">Mostrar más</button>
+                                                </div>
+                        </div>
+
+                        <div class="gen-block">
+                            <div class="gen-block-title">Baneos globales</div>
+            <div class="bans-wrapper" id="baneos-globales">
+                <div class="bans-title">Baneos globales</div>
+                <div class="bans">
+                    <div class="ban-item"><img class="ban-icon" src="Untitled262.png" alt="Ban"><span class="ban-text">belle y spike</span></div>
+                    <div class="ban-item"><img class="ban-icon" src="Untitled262.png" alt="Ban"><span class="ban-text">Bibi y Nori</span></div>
+                </div>
+            </div>
+                        </div>
+
+                        <div class="gen-block">
+                            <div class="gen-block-title">Más partidos</div>
+                                                <div class="zc26mm-more"><div class="zcfx-card">
+            <span class="zcfx-group-badge zcfx-group-badge-more">ZC26 · Gran Final</span>
+            <div class="zcfx-teams">
+                <div class="zcfx-team-row zcfx-row-win">
+                    <span class="zcfx-team-logo"><img src="LEV.png" alt="LEV"></span>
+                    <span class="zcfx-team-name">LEV</span>
+                </div>
+                <div class="zcfx-team-row zcfx-row-lose">
+                    <span class="zcfx-team-logo"><img src="LPR.png" alt="LPR"></span>
+                    <span class="zcfx-team-name">LPR</span>
+                </div>
+            </div>
+            <div class="zcfx-scores">
+            <span class="zcfx-score zcfx-score-win">3</span>
+            <span class="zcfx-score">1</span>
+        </div>
+            <span class="zcfx-divider"></span>
+            <div class="zcfx-date">
+            <span class="zcfx-date-num zcfx-date-num-sm">Fin</span>
+            <span class="zcfx-date-month zcfx-date-time">08/08</span>
+        </div>
+        </div></div>
+                        </div>
+                        <div class="gen-block">
+                            <div class="gen-block-title">Cronología</div>
+                            <div class="final-chronology" data-final-chronology=""><div class="zt-wrap"><div class="zt-filters"><button type="button" class="zt-filter active" data-zt-filter="all">Todo</button><button type="button" class="zt-filter" data-zt-filter="sets">Sets</button><button type="button" class="zt-filter" data-zt-filter="tarjetas">Tarjetas</button></div><div class="zt-list zt-pane active" data-zt-pane="all"><div class="zt-mile"><svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"></path><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Partido finalizado</span><span class="zt-mile-time">8:42 p.m.</span></div><div class="zt-conn"><span class="zt-path zt-cr"></span></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">34'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 4 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 3</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">Juliocr36D</span></div></div>
+            </div><div class="zt-conn zt-same zt-r"></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">26'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 3 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 2</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr zt-mir"></span></div><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico zt-ico-card"><svg class="zt-card-svg" viewBox="0 0 12 16" aria-hidden="true"><rect x="0.5" y="0.5" width="11" height="15" rx="2.4" fill="#f5c518"></rect></svg></span><span class="zt-pill">20'</span></div>
+                <span class="zt-bar"></span>
+                <div class="zt-txt"><div class="zt-title">Tarjeta amarilla</div><div class="zt-sub">Juanjo · L. Puppies Represent</div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr"></span></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">17'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 2 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 1</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr zt-mir"></span></div><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">8'</span></div>
+                <span class="zt-bar" style="background:#ef5350"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 1 <span class="zt-score" style="color:#ef5350;background:#ef535022">1 - 0</span></div><div class="zt-sub"><span class="zt-team">L. Puppies Represent</span> <span class="zt-star">Ninja</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lc"></span></div><div class="zt-mile"><svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"></path><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Partido iniciado</span><span class="zt-mile-time">8:00 p.m.</span></div></div><div class="zt-list zt-pane" data-zt-pane="sets"><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">34'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 4 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 3</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">Juliocr36D</span></div></div>
+            </div><div class="zt-conn zt-same zt-r"></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">26'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 3 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 2</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn zt-same zt-r"></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">17'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 2 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 1</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr zt-mir"></span></div><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">8'</span></div>
+                <span class="zt-bar" style="background:#ef5350"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 1 <span class="zt-score" style="color:#ef5350;background:#ef535022">1 - 0</span></div><div class="zt-sub"><span class="zt-team">L. Puppies Represent</span> <span class="zt-star">Ninja</span></div></div>
+            </div></div><div class="zt-list zt-pane" data-zt-pane="tarjetas"><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico zt-ico-card"><svg class="zt-card-svg" viewBox="0 0 12 16" aria-hidden="true"><rect x="0.5" y="0.5" width="11" height="15" rx="2.4" fill="#f5c518"></rect></svg></span><span class="zt-pill">20'</span></div>
+                <span class="zt-bar"></span>
+                <div class="zt-txt"><div class="zt-title">Tarjeta amarilla</div><div class="zt-sub">Juanjo · L. Puppies Represent</div></div>
+            </div></div></div></div>
+                        </div>
+                        <div class="footer-win">
+                <div class="selection-tag">Seleccion completa</div>
+                <div class="win-text"><span class="highlight">WIN LEVIATAN ESPORT</span></div>
+            </div>
+                    </div>
+                    <div class="match-tab-panel" data-tab-panel="cronologia">
+                        <div class="cro-comments">
+                            <div class="cro-comments-head">
+                                <div class="cro-comments-head-left">
+                                    <img class="cro-comments-icon" src="Untitled279.png" alt="Comentarios">
+                                    <span class="cro-comments-label">COMENTARIOS</span>
+                                </div>
+                                <div class="cro-comments-time">34'</div>
+                            </div>
+                            <div class="cro-comments-text">El encuentro terminó.</div>
+                        </div>
+                        <div class="final-chronology" data-final-chronology=""><div class="zt-wrap"><div class="zt-filters"><button type="button" class="zt-filter active" data-zt-filter="all">Todo</button><button type="button" class="zt-filter" data-zt-filter="sets">Sets</button><button type="button" class="zt-filter" data-zt-filter="tarjetas">Tarjetas</button></div><div class="zt-list zt-pane active" data-zt-pane="all"><div class="zt-mile"><svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"></path><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Partido finalizado</span><span class="zt-mile-time">8:42 p.m.</span></div><div class="zt-conn"><span class="zt-path zt-cr"></span></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">34'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 4 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 3</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">Juliocr36D</span></div></div>
+            </div><div class="zt-conn zt-same zt-r"></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">26'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 3 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 2</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr zt-mir"></span></div><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico zt-ico-card"><svg class="zt-card-svg" viewBox="0 0 12 16" aria-hidden="true"><rect x="0.5" y="0.5" width="11" height="15" rx="2.4" fill="#f5c518"></rect></svg></span><span class="zt-pill">20'</span></div>
+                <span class="zt-bar"></span>
+                <div class="zt-txt"><div class="zt-title">Tarjeta amarilla</div><div class="zt-sub">Juanjo · L. Puppies Represent</div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr"></span></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">17'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 2 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 1</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr zt-mir"></span></div><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">8'</span></div>
+                <span class="zt-bar" style="background:#ef5350"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 1 <span class="zt-score" style="color:#ef5350;background:#ef535022">1 - 0</span></div><div class="zt-sub"><span class="zt-team">L. Puppies Represent</span> <span class="zt-star">Ninja</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lc"></span></div><div class="zt-mile"><svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"></path><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Partido iniciado</span><span class="zt-mile-time">8:00 p.m.</span></div></div><div class="zt-list zt-pane" data-zt-pane="sets"><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">34'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 4 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 3</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">Juliocr36D</span></div></div>
+            </div><div class="zt-conn zt-same zt-r"></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">26'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 3 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 2</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn zt-same zt-r"></div><div class="zt-ev zt-right">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">17'</span></div>
+                <span class="zt-bar" style="background:#6ea8fe"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 2 <span class="zt-score" style="color:#6ea8fe;background:#6ea8fe22">1 - 1</span></div><div class="zt-sub"><span class="zt-team">Leviatán Esports</span> <span class="zt-star">iXLCross</span></div></div>
+            </div><div class="zt-conn"><span class="zt-path zt-lr zt-mir"></span></div><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico"><img src="assets/icon_wim_set.png" alt=""></span><span class="zt-pill">8'</span></div>
+                <span class="zt-bar" style="background:#ef5350"></span>
+                <div class="zt-txt"><div class="zt-title">Ganó el SET 1 <span class="zt-score" style="color:#ef5350;background:#ef535022">1 - 0</span></div><div class="zt-sub"><span class="zt-team">L. Puppies Represent</span> <span class="zt-star">Ninja</span></div></div>
+            </div></div><div class="zt-list zt-pane" data-zt-pane="tarjetas"><div class="zt-ev zt-left">
+                <div class="zt-node"><span class="zt-ico zt-ico-card"><svg class="zt-card-svg" viewBox="0 0 12 16" aria-hidden="true"><rect x="0.5" y="0.5" width="11" height="15" rx="2.4" fill="#f5c518"></rect></svg></span><span class="zt-pill">20'</span></div>
+                <span class="zt-bar"></span>
+                <div class="zt-txt"><div class="zt-title">Tarjeta amarilla</div><div class="zt-sub">Juanjo · L. Puppies Represent</div></div>
+            </div></div></div></div>
+                    </div>
+                    <div class="match-tab-panel" data-tab-panel="posiciones"></div>
+                    <div class="match-tab-panel" data-tab-panel="alineaciones">
+                                                <div class="lu-wrap">
+
+                                                    <div class="lu-scorebar">
+                                                        <div class="lu-scorebar-line">
+                                                            <span class="lu-scorebar-team"><img src="LEV.png" alt="LEV">LEV</span>
+                                                            <span class="lu-scorebar-score">3</span>
+                                                            <span class="lu-scorebar-dash">–</span>
+                                                            <span class="lu-scorebar-score">1</span>
+                                                            <span class="lu-scorebar-team">LPR<img src="LPR.png" alt="LPR"></span>
+                                                        </div>
+                                                        <span class="lu-scorebar-rounds">11 Rondas</span>
+                                                    </div>
+
+                                                    <div class="lu-block lu-block-titulares">
+                                                        <div class="lu-block-title"><img class="lu-block-title-logo" src="LEV.png" alt="LEV">LEVIATÁN ESPORT · Titulares</div>
+
+                                                        <div class="lu-block-grid">
+                                                        <div class="stat-row lu-row lu-card" data-player="taikisha">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="cross.png" alt="iXCross">
+                                                                    <span class="lu-rating rt-top">9.4</span>
+                                                                    <span class="lu-corner-icon-num lu-corner-br"><img src="icon_stats%20(1).png" alt=""><span>2</span></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="taikisha">iXCross</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>34</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>153.1</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>2</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item">MVP: <b>Sí</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="julio">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="julio.png" alt="Julio">
+                                                                    <span class="lu-rating rt-elite">7.6</span>
+                                                                    <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="julio">Julio</button>
+                                                                    <span class="lu-role">Titular · Capitán</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>20</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>104.0</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>1</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="jc">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="joac.png" alt="JOAR">
+                                                                    <span class="lu-rating rt-elite">8.6</span>
+                                                                    <span class="lu-corner-icon-num lu-corner-bl"><img src="icon_stats%20(2).png" alt=""><span>2</span></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="jc">JOAR</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>27</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>132.5</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>2</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+
+                                                        <div class="lu-block-grid">
+                                                        <div class="stat-row lu-row lu-card" data-player="ninja">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="ninja.png" alt="Ninja">
+                                                                    <span class="lu-rating rt-elite">7.1</span>
+                                                                    <span class="lu-corner-icon lu-corner-br"><img src="icon_stats%20(1).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="ninja">Ninja</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>26</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>118.4</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>1</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="nacaru">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="nacaru.png" alt="Nacaru">
+                                                                    <span class="lu-rating rt-good">6.0</span>
+                                                                    <span class="lu-corner-icon lu-corner-bl"><img src="icon_stats%20(2).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="nacaru">Nacaru</button>
+                                                                    <span class="lu-role">Titular · Capitán</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>15</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>80.8</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="stat-row lu-row lu-card" data-player="juanjo">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="juanjo.png" alt="Juanjoxd">
+                                                                    <span class="lu-rating rt-good">5.8</span>
+                                                                    <span class="lu-corner-icon lu-corner-tr"><img src="icon_stats%20(3).png" alt=""></span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="juanjo">Juanjoxd</button>
+                                                                    <span class="lu-role">Titular</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>19</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>94.8</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>11/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>1</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="lu-block-title lu-block-title-bottom"><img class="lu-block-title-logo" src="LPR.png" alt="LPR">L. Puppies Represent · Titulares</div>
+                                                    </div>
+
+                                                    <div class="lu-block lu-block-suplentes">
+                                                        <div class="lu-sub-title">Suplentes</div>
+
+                                                        <div class="lu-block-grid">
+                                                        <div class="stat-row lu-row lu-card" data-player="alvaro">
+                                                            <div class="stat-row-main lu-row-main">
+                                                                <div class="lu-avatar-wrap" data-quick-stats="" tabindex="0" role="button" aria-label="Ver estadisticas">
+                                                                    <img class="lu-photo" src="alva210.png" alt="Álvaro">
+                                                                    <span class="lu-rating rt-na">N/A</span>
+                                                                </div>
+                                                                <span class="lu-name-wrap">
+                                                                    <button type="button" class="stat-name-btn" data-open-player="alvaro">Álvaro</button>
+                                                                    <span class="lu-role">Suplente · LEV</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="stat-row-detail">
+                                                                <div class="lu-detail-inner">
+                                                                    <span class="lu-stat-item"><img src="image-48.png" alt="Kills">Kills: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="1359_0.png" alt="DPS">DPS: <b>0.0</b></span>
+                                                                    <span class="lu-stat-item">Set Marcado: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="People_Icon_BS_0E2F13F.png" alt="Asistencias">Asist.: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="Picsart_24-12-12_17-52-52-897.png" alt="Rondas Jugadas">Rondas: <b>0/11</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_yellowcard.png" alt="Tarjetas Amarillas">TA: <b>0</b></span>
+                                                                    <span class="lu-stat-item"><img src="football_pin_redcard.png" alt="Tarjetas Rojas">TR: <b>0</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="lu-block">
+                                                        <div class="lu-coaches">
+                                                            <div class="lu-coach">
+                                                                <span class="lu-coach-name">Z. Jack</span>
+                                                                <span class="lu-coach-role"><img src="LEV.png" alt="LEV">Coach</span>
+                                                            </div>
+                                                            <div class="lu-coach">
+                                                                <span class="lu-coach-name">N/A</span>
+                                                                <span class="lu-coach-role"><img src="LPR.png" alt="LPR">Coach</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div>
+                                                    </div>
+
+                                                </div>
+                    </div>
+                    <div class="match-tab-panel" data-tab-panel="estadisticas">
+                                                <div class="mvs-wrap">
+                                                    <div class="mvs-header-row">
+                                                        <span class="mvs-header">Estadísticas del partido</span>
+                                                    </div>
+                                                    <div class="mvs-players-row">
+                                                        <span class="mvs-players-label">Jugadores del partido</span>
+                                                        <div class="mvs-players-list">
+                                                            <button type="button" class="mvs-player-chip" data-open-player="taikisha"><img class="mvs-player-avatar" src="cross.png" alt="">iXCross</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="julio"><img class="mvs-player-avatar" src="julio.png" alt="">Julio</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="jc"><img class="mvs-player-avatar" src="joac.png" alt="">JOAR</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="ninja"><img class="mvs-player-avatar" src="ninja.png" alt="">Ninja</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="nacaru"><img class="mvs-player-avatar" src="nacaru.png" alt="">Nacaru</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="juanjo"><img class="mvs-player-avatar" src="juanjo.png" alt="">Juanjoxd</button>
+                                                            <button type="button" class="mvs-player-chip" data-open-player="alvaro"><img class="mvs-player-avatar" src="alva210.png" alt="">Álvaro</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mvs-tabs-wrapper">
+                                                        <div class="mvs-tabs">
+                                                            <button type="button" class="mvs-tab active" data-mvs-tab="clave">Estadísticas clave</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="generales">Estadísticas generales del partido</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="ataques">Ataques</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="defensas">Defensas</button>
+                                                            <button type="button" class="mvs-tab" data-mvs-tab="sanciones">Sanciones</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mvs-teams">
+                                                        <img class="mvs-team-logo" src="LPR.png" alt="LPR">
+                                                        <img class="mvs-team-logo" src="LEV.png" alt="LEV">
+                                                    </div>
+                                                    <div class="mvs-rows">
+                                                        <div class="mvs-row" data-cat="clave generales"><div class="mvs-row-top">
+                                                            <span class="mvs-val">1</span>
+                                                            <span class="mvs-label">Rondas Ganadas (Sets)</span>
+                                                            <span class="mvs-val mvs-win-lev">3</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:33%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="clave generales"><div class="mvs-row-top">
+                                                            <span class="mvs-val">25%</span>
+                                                            <span class="mvs-label">% de Victoria</span>
+                                                            <span class="mvs-val mvs-win-lev">75%</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:33%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="clave generales ataques"><div class="mvs-row-top">
+                                                            <span class="mvs-val">60</span>
+                                                            <span class="mvs-label">Eliminaciones (Kills)</span>
+                                                            <span class="mvs-val mvs-win-lev">81</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:74%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="clave generales ataques"><div class="mvs-row-top">
+                                                            <span class="mvs-val">98.0</span>
+                                                            <span class="mvs-label">Promedio DPS de Equipo</span>
+                                                            <span class="mvs-val mvs-win-lev">129.9</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:75%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales ataques" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">0</span>
+                                                            <span class="mvs-label">Asistencias</span>
+                                                            <span class="mvs-val mvs-win-lev">2</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:0%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:100%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales sanciones" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">9</span>
+                                                            <span class="mvs-label">Faltas</span>
+                                                            <span class="mvs-val mvs-win-lev">1</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:100%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:11%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales sanciones" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">1</span>
+                                                            <span class="mvs-label">Tarjetas Amarillas</span>
+                                                            <span class="mvs-val mvs-win-lev">0</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:100%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-lev" style="width:0%"></div></div></div></div>
+                                                        <div class="mvs-row" data-cat="generales sanciones" data-extra="1"><div class="mvs-row-top">
+                                                            <span class="mvs-val">0</span>
+                                                            <span class="mvs-label">Tarjetas Rojas</span>
+                                                            <span class="mvs-val">0</span>
+                                                        </div><div class="mvs-bar-row"><div class="mvs-bar-track mvs-bar-track-left"><div class="mvs-bar-fill mvs-bar-neutral" style="width:0%"></div></div><div class="mvs-bar-track mvs-bar-track-right"><div class="mvs-bar-fill mvs-bar-neutral" style="width:0%"></div></div></div></div>
+                                                        <div class="mvs-empty" data-cat="defensas">Aún no hay estadísticas de defensa registradas para este partido.</div>
+                                                    </div>
+                                                    <button type="button" class="mvs-more-btn" data-mvs-more="">Mostrar más</button>
+                                                </div>
+                    </div>
+                    <div class="match-tab-panel" data-tab-panel="mas-partidos">
+                                                <div class="zc26mm-more"><div class="zcfx-card">
+            <span class="zcfx-group-badge zcfx-group-badge-more">ZC26 · Gran Final</span>
+            <div class="zcfx-teams">
+                <div class="zcfx-team-row zcfx-row-win">
+                    <span class="zcfx-team-logo"><img src="LEV.png" alt="LEV"></span>
+                    <span class="zcfx-team-name">LEV</span>
+                </div>
+                <div class="zcfx-team-row zcfx-row-lose">
+                    <span class="zcfx-team-logo"><img src="LPR.png" alt="LPR"></span>
+                    <span class="zcfx-team-name">LPR</span>
+                </div>
+            </div>
+            <div class="zcfx-scores">
+            <span class="zcfx-score zcfx-score-win">3</span>
+            <span class="zcfx-score">1</span>
+        </div>
+            <span class="zcfx-divider"></span>
+            <div class="zcfx-date">
+            <span class="zcfx-date-num zcfx-date-num-sm">Fin</span>
+            <span class="zcfx-date-month zcfx-date-time">08/08</span>
+        </div>
+        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="watch-game-wrap">
+                <a href="https://youtube.com/shorts/y7jDOjuQcy4?si=Jir0r4eVVuz2rx8S" target="_blank" rel="noopener" class="watch-game-btn">
+                    <img src="Vod.png" alt="VOD" class="watch-game-icon">
+                    <span>Watch Game</span>
+                </a>
+            </div>
+
+            
+
+            <div class="footer-info">
+                Servidores Globales, Brawl Stars<br>
+                Todos los horarios corresponden a la hora estándar de Sudamérica
+            </div>
+
+        </div></template>
+
 <div class="modal-overlay" id="allMatchesOverlay">
     <div class="info-panel" id="allMatchesPanel"></div>
 </div>
@@ -10721,6 +11984,10 @@
             alternateIds: ["@x_xv", "タイキシャ", "Taikisha"],
             winnings: "$0", credits: "6,000 créditos",
             recent: [
+                { date: "3 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 4, teamB: "GTA", scoreB: 2, tourney: "ZC26 Tercer puesto" },
+                { date: "2 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Semifinal" },
+                { date: "1 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "POS JR", scoreB: 0, tourney: "ZC26 Cuartos de final" },
+                { date: "29 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Egresados Del Conalep", scoreB: 0, tourney: "ZC26 Octavos de final" },
                 { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
@@ -10729,6 +11996,7 @@
             ],
             achievements: [
                 { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · 500 pts · +25 Estelar (Set 4) · +25 Bono MVP" },
+                { date: "2026-10-03", place: "3°", tier: "3er Lugar", tournament: "ZC26 - 3er y 4to Lugar", teamA: "LEV", scoreA: 4, teamB: "GTA", scoreB: 2, result: "3er lugar" },
             ]
         },
         {
@@ -10739,6 +12007,10 @@
             alternateIds: ["@juliocr36", "SK | Julio"],
             winnings: "$10.59", credits: "10,000 créditos",
             recent: [
+                { date: "3 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 4, teamB: "GTA", scoreB: 2, tourney: "ZC26 Tercer puesto" },
+                { date: "2 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Semifinal" },
+                { date: "1 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "POS JR", scoreB: 0, tourney: "ZC26 Cuartos de final" },
+                { date: "29 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Egresados Del Conalep", scoreB: 0, tourney: "ZC26 Octavos de final" },
                 { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
@@ -10747,6 +12019,7 @@
             ],
             achievements: [
                 { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · 500 pts · +25 Estelar (Set 1)" },
+                { date: "2026-10-03", place: "3°", tier: "3er Lugar", tournament: "ZC26 - 3er y 4to Lugar", teamA: "LEV", scoreA: 4, teamB: "GTA", scoreB: 2, result: "3er lugar" },
             ]
         },
         {
@@ -10757,6 +12030,10 @@
             alternateIds: ["JC", "~ T X -->JC"],
             winnings: "$0", credits: "10,000 créditos",
             recent: [
+                { date: "3 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 4, teamB: "GTA", scoreB: 2, tourney: "ZC26 Tercer puesto" },
+                { date: "2 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Semifinal" },
+                { date: "1 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "POS JR", scoreB: 0, tourney: "ZC26 Cuartos de final" },
+                { date: "29 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Egresados Del Conalep", scoreB: 0, tourney: "ZC26 Octavos de final" },
                 { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
@@ -10765,6 +12042,7 @@
             ],
             achievements: [
                 { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · 500 pts · +25 Estelar (Set 3)" },
+                { date: "2026-10-03", place: "3°", tier: "3er Lugar", tournament: "ZC26 - 3er y 4to Lugar", teamA: "LEV", scoreA: 4, teamB: "GTA", scoreB: 2, result: "3er lugar" },
             ]
         },
         {
@@ -10825,6 +12103,10 @@
             alternateIds: ["alva210"],
             winnings: "$0", credits: "0 créditos",
             recent: [
+                { date: "3 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 4, teamB: "GTA", scoreB: 2, tourney: "ZC26 Tercer puesto" },
+                { date: "2 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Semifinal" },
+                { date: "1 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "POS JR", scoreB: 0, tourney: "ZC26 Cuartos de final" },
+                { date: "29 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Egresados Del Conalep", scoreB: 0, tourney: "ZC26 Octavos de final" },
                 { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
@@ -10832,6 +12114,27 @@
             ],
             achievements: [
                 { date: "2026-08-08", place: "1°", tier: "Campeón", tournament: "ZC26 - Gran Final", teamA: "LEV", scoreA: 3, teamB: "LPR", scoreB: 1, result: "Campeón · Suplente (no disputó rondas)" },
+                { date: "2026-10-03", place: "3°", tier: "3er Lugar", tournament: "ZC26 - 3er y 4to Lugar", teamA: "LEV", scoreA: 4, teamB: "GTA", scoreB: 2, result: "3er lugar · Suplente (no disputó rondas)" },
+            ]
+        },
+        {
+            key: "shark",
+            name: "Shark", country: "PE", team: "LEVIATÁN ESPORTS", teamTag: "LEV", points: 0, prevPoints: 0,
+            events: "1 (3v3)", titles: "3er Lugar", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player · Suplente",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "3 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 4, teamB: "GTA", scoreB: 2, tourney: "ZC26 Tercer puesto" },
+                { date: "2 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 0, teamB: "OMEN NOCTE", scoreB: 3, tourney: "ZC26 Semifinal" },
+                { date: "1 oct 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "POS JR", scoreB: 0, tourney: "ZC26 Cuartos de final" },
+                { date: "29 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Egresados Del Conalep", scoreB: 0, tourney: "ZC26 Octavos de final" },
+                { date: "24 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 2, teamB: "POS JR", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "22 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 1, teamB: "Quiero KeKe", scoreB: 3, tourney: "ZC26 Fase de Grupos · Grupo A" },
+                { date: "20 sep 2026", time: "UTC-5", teamA: "Leviatán Esports", scoreA: 3, teamB: "Peruanos FC", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo A" },
+            ],
+            achievements: [
+                { date: "2026-10-03", place: "3°", tier: "3er Lugar", tournament: "ZC26 - 3er y 4to Lugar", teamA: "LEV", scoreA: 4, teamB: "GTA", scoreB: 2, result: "3er lugar" },
             ]
         },
         {
@@ -12351,6 +13654,27 @@
     }
     const TROPHIES = [
         {
+            team: "TEAM RADIANTE", logo: "escudo_logo/escudo-default.png",
+            champDate: "Campeón 28-04-2024",
+            tourney: "ZC24 GRAND FINAL",
+            mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
+            desc: "TEAM RADIANTE se coronó campeón de la Gran Final ZC24 el 28/04/24 y dejó su nombre en lo más alto de la edición 2024. Un logro que refleja el esfuerzo, la constancia y el trabajo en equipo del grupo. ¡Felicidades al grupo!"
+        },
+        {
+            team: "LPPS", logo: "escudo_logo/LPPS.png",
+            champDate: "Campeón 30-06-2024",
+            tourney: "ZC24 GRAND FINAL",
+            mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
+            desc: "LPPS se coronó campeón de la Gran Final ZC24 el 30/06/24 con una gran hazaña: terminó el torneo invicto y venció a jugadores de la talla de Mini y Hades. Un título que queda en la historia de la competencia y demuestra el nivel y la solidez del equipo. ¡Felicidades a todo el grupo!"
+        },
+        {
+            team: "THE BLACKCATS", logo: "escudo_logo/escudo-default.png",
+            champDate: "Campeón 23-02-2025",
+            tourney: "ZS-CHAMPIONSHIP 2025",
+            mode: "Modalidad: 3 vs 3 · Bo5 · Tier S",
+            desc: "THE BLACKCATS se coronó campeón del ZS-Championship 2025 el 23/02/25 tras vencer 3-1 a Soriansitos en la final. El equipo se abrió camino hasta lo más alto y dejó su nombre en el Salón de la Fama. ¡Felicidades al grupo!"
+        },
+        {
             team: "LEVIATÁN ESPORT", logo: "LEV.png",
             champDate: "Campeón 09-08-2026",
             tourney: "ZC26 GRAN FINAL",
@@ -13184,7 +14508,7 @@
     // se muestran con el logo del equipo y el nombre en letra pequeña.
     const ZC_TEAM_LOGO_FALLBACK = "escudo_logo/escudo-default.png";
     function zcIsEditionMatch(m) {
-        return /Fase de Grupos|Octavos de final|Cuartos de final/i.test((m && m.tourney) || "");
+        return /Fase de Grupos|Octavos de final|Cuartos de final|ZC26 Semifinal|ZC26 Tercer puesto/i.test((m && m.tourney) || "");
     }
     function zcTeamLogoSrc(name) {
         const n = normId(name);
@@ -13871,7 +15195,7 @@
         panel.scrollTop = 0;
         openModal("playerModalOverlay");
         const vitrinaCard = panel.querySelector("#vitrinaCard");
-        if (vitrinaCard) vitrinaCard.addEventListener("click", () => openTrophyModal(TROPHIES[0]));
+        if (vitrinaCard) vitrinaCard.addEventListener("click", () => openTrophyModal(TROPHIES.find(t => t.full) || TROPHIES[TROPHIES.length - 1]));
         initCarousels(panel);
         initRadarTooltips(panel);
         const panelMedia = panel.querySelector(".panel-media");
@@ -14266,35 +15590,338 @@
         closeModal("allAchievementsOverlay");
     }
 
+    // "Más partidos" de la final (LEV 3-1 LPR): misma tarjeta (diseño y tamaños) que el menú de un partido de la edición.
+    function zcAdaptFinalMoreMatches(root) {
+        if (!root) return;
+        const cards = root.querySelectorAll(".mp-card");
+        if (!cards.length) return;
+        const finalDay = { num: 8, month: "AGO" };
+        const finalRes = { h: 3, a: 1 };
+        const html = `<div class="zc26mm-more"><div class="zcfx-card">
+            <span class="zcfx-group-badge zcfx-group-badge-more">ZC26 · Gran Final</span>
+            <div class="zcfx-teams">
+                <div class="zcfx-team-row zcfx-row-win">
+                    <span class="zcfx-team-logo"><img src="LEV.png" alt="LEV"></span>
+                    <span class="zcfx-team-name">LEV</span>
+                </div>
+                <div class="zcfx-team-row zcfx-row-lose">
+                    <span class="zcfx-team-logo"><img src="LPR.png" alt="LPR"></span>
+                    <span class="zcfx-team-name">LPR</span>
+                </div>
+            </div>
+            ${zc26ScoresHtml(finalRes)}
+            <span class="zcfx-divider"></span>
+            ${zc26DateHtml(finalDay, finalRes, { time: "7:30 p.m." })}
+        </div></div>`;
+        cards.forEach(c => { c.outerHTML = html; });
+    }
+    window.addEventListener("load", function () {
+        try { zcAdaptFinalMoreMatches(document.getElementById("ultimo-partido")); } catch (e) {}
+    });
+
+    /* ===================================================================
+       Salón de la Fama · menú de la Gran Final ZC26 (copia INDEPENDIENTE)
+       Todo lo que usa este menú vive aquí (prefijo hof): su HTML congelado
+       (<template id="hofFinalTemplate">), sus pestañas, estadísticas,
+       alineaciones, minimenú de jugador y capas. No usa ni lee "Último
+       partido importa" ni las funciones de Partidos, así que cambiar esos
+       no altera este menú.
+    =================================================================== */
+    const HOF_TEAMS = {
+        LEV: { logo: "LEV.png", full: "Leviatán Esports" },
+        LPR: { logo: "LPR.png", full: "L. Puppies Represent" }
+    };
+    const HOF_FINAL_SUMMARY = { home: "LEV", away: "LPR", scoreHome: 3, scoreAway: 1, status: "Finalizado" };
+
+    function hofOpenFinalMenu(t, panel) {
+        const tpl = document.getElementById("hofFinalTemplate");
+        panel.className = "info-panel trophy-match";
+        panel.innerHTML = `<div class="info-close"><span class="info-close-x">✕</span></div>`;
+        const card = tpl.content.firstElementChild.cloneNode(true);
+        const finalLs = zc26LocalSchedule({ num: 8, month: "AGO" }, "7:30 p.m.", zc26CountryCode);
+        const oldHeader = card.querySelector(".match-header");
+        if (oldHeader) {
+            const head = document.createElement("div");
+            head.className = "zc26mm-head";
+            head.innerHTML = `
+                <div>
+                    <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">Gran Final</span></div>
+                    <div class="zc26mm-date">${finalLs ? finalLs.weekday + " " + finalLs.d + " de " + finalLs.monthName : "Sábado 8 de agosto"} · 2026</div>
+                </div>
+                <div class="zc26mm-tags">
+                    <span class="zc26mm-tag">Final</span>
+                    <span class="zc26mm-status">Finalizado</span>
+                </div>`;
+            oldHeader.replaceWith(head);
+        }
+        const sb = card.querySelector(".scoreboard");
+        if (sb) {
+            sb.classList.add("zc26mm-scoreboard");
+            const st = sb.querySelector(".match-status");
+            if (st) {
+                const badge = st.querySelector(".status-badge");
+                if (badge) badge.textContent = "Finalizado";
+                const dateEl = st.querySelector(".status-date");
+                if (dateEl) dateEl.textContent = finalLs ? finalLs.date : "08/08";
+                const timeEl = document.createElement("span");
+                timeEl.className = "status-date";
+                timeEl.textContent = finalLs ? finalLs.time : "7:30 p.m.";
+                st.appendChild(timeEl);
+            }
+        }
+        panel.appendChild(card);
+        const summary = document.createElement("div");
+        summary.className = "trophy-summary-block";
+        summary.innerHTML = `
+            <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
+            <div class="trophy-modal-title">${t.team}</div>
+            <div class="trophy-modal-sub">${t.champDate}</div>
+            <div class="trophy-modal-tourney">${t.tourney}</div>
+            <div class="trophy-modal-mode">${t.mode}</div>
+            <div class="trophy-modal-desc">${t.desc}</div>
+        `;
+        panel.appendChild(summary);
+        panel.scrollTop = 0;
+        hofCloseQuickStats(true);
+        openModal("trophyModalOverlay");
+        hofBindStatRows(card);
+        hofBindEventItems(card);
+        hofBindTabs(card);
+        hofBindMatchStats(card);
+        hofBindTimeline(card);
+        hofBindSwipe(card);
+    }
+
+    function hofOpenPlayerProfile(player) {
+        if (player) openPlayerModal(player);
+    }
+
+    function hofBindStatRows(root) {
+        root.querySelectorAll(".stat-row[data-player]").forEach(row => {
+            const isLineupRow = row.classList.contains("lu-row");
+            if (!isLineupRow) {
+                const toggleDetail = () => {
+                    const open = row.classList.toggle("open");
+                    zcPlaySound(open ? "clickentrar" : "clicksalir");
+                    row.setAttribute("aria-expanded", open ? "true" : "false");
+                };
+                row.addEventListener("click", (e) => {
+                    if (e.target.closest("[data-open-player], [data-quick-stats]")) return;
+                    toggleDetail();
+                });
+                row.addEventListener("keydown", e => {
+                    if (e.target === row && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggleDetail(); }
+                });
+            }
+            row.querySelectorAll("[data-open-player]").forEach(openBtn => {
+                openBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    hofOpenPlayerProfile(PLAYERS.find(p => p.key === row.dataset.player));
+                });
+            });
+            const quickBtn = row.querySelector("[data-quick-stats]");
+            if (quickBtn) {
+                quickBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    hofOpenQuickStats(row);
+                });
+                quickBtn.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        hofOpenQuickStats(row);
+                    }
+                });
+            }
+        });
+    }
+
+    function hofBindEventItems(root) {
+        root.querySelectorAll(".event-item").forEach(el => {
+            el.addEventListener("click", function () {
+                const src = this.getAttribute("data-image");
+                if (src) {
+                    zcPlaySound("entrar");
+                    modalImg.src = src;
+                    openModal("modalOverlay");
+                } else {
+                    alert("Imagen no disponible");
+                }
+            });
+        });
+    }
+
+    function hofBindTabs(root) {
+        const tabs = root.querySelectorAll(".match-tab");
+        const panels = root.querySelectorAll(".match-tab-panel");
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                zcPlaySound("click");
+                tabs.forEach(x => x.classList.remove("active"));
+                panels.forEach(x => x.classList.remove("active"));
+                tab.classList.add("active");
+                const target = root.querySelector(`.match-tab-panel[data-tab-panel="${tab.dataset.tab}"]`);
+                if (target) target.classList.add("active");
+            });
+        });
+    }
+
+    function hofBindMatchStats(root) {
+        // Las barras de comparación ya vienen dibujadas en la copia congelada.
+        root.querySelectorAll(".mvs-wrap").forEach(wrap => {
+            const mvsTabs = wrap.querySelectorAll(".mvs-tab");
+            const rows = wrap.querySelectorAll(".mvs-rows [data-cat]");
+            const moreBtn = wrap.querySelector("[data-mvs-more]");
+            let active = "clave";
+            let expanded = false;
+            function render() {
+                rows.forEach(row => {
+                    const cats = row.dataset.cat.split(" ");
+                    let show = cats.includes(active);
+                    if (show && active === "generales" && row.dataset.extra === "1" && !expanded) show = false;
+                    row.style.display = show ? "" : "none";
+                });
+                if (moreBtn) {
+                    moreBtn.style.display = active === "generales" ? "block" : "none";
+                    moreBtn.textContent = expanded ? "Mostrar menos" : "Mostrar más";
+                }
+            }
+            mvsTabs.forEach(tab => {
+                tab.addEventListener("click", () => {
+                    zcPlaySound("click");
+                    mvsTabs.forEach(x => x.classList.remove("active"));
+                    tab.classList.add("active");
+                    active = tab.dataset.mvsTab;
+                    render();
+                });
+            });
+            if (moreBtn) {
+                moreBtn.addEventListener("click", () => {
+                    zcPlaySound("click");
+                    expanded = !expanded;
+                    render();
+                });
+            }
+            render();
+        });
+    }
+
+    function hofBindTimeline(root) {
+        root.querySelectorAll(".timeline-entry[data-open-player]").forEach(el => {
+            el.addEventListener("click", () => {
+                hofOpenPlayerProfile(PLAYERS.find(p => p.key === el.dataset.openPlayer));
+            });
+        });
+    }
+
+    function hofBindSwipe(root) {
+        const swipe = root.querySelector(".match-swipe");
+        if (!swipe) return;
+        const slides = Array.from(swipe.querySelectorAll(".match-swipe-slide"));
+        if (slides.length < 2) return;
+        function currentSlide() {
+            const width = swipe.clientWidth || 1;
+            const idx = Math.round(swipe.scrollLeft / width);
+            return slides[Math.max(0, Math.min(idx, slides.length - 1))];
+        }
+        function updateHeight() {
+            const slide = currentSlide();
+            if (slide) swipe.style.height = slide.scrollHeight + "px";
+        }
+        let ticking = false;
+        swipe.addEventListener("scroll", () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(() => { updateHeight(); ticking = false; });
+            }
+        });
+        window.addEventListener("resize", updateHeight);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateHeight);
+        updateHeight();
+        requestAnimationFrame(updateHeight);
+        requestAnimationFrame(() => requestAnimationFrame(updateHeight));
+        setTimeout(updateHeight, 150);
+        setTimeout(updateHeight, 500);
+    }
+
+    // Minimenú del jugador de la final: se abre ENCIMA del menú de la final (que no se cierra)
+    // y usa su propio overlay, no el de Partidos ni el de "Último partido importa".
+    function hofOpenQuickStats(row) {
+        zcPlaySound("clickentrar");
+        const panel = document.getElementById("hofQuickStatsPanel");
+        const nameBtn = row.querySelector(".stat-name-btn");
+        const photo = row.querySelector(".lu-photo");
+        const rating = row.querySelector(".lu-avatar-wrap .lu-rating");
+        const detail = row.querySelector(".lu-detail-inner");
+        const name = nameBtn ? nameBtn.textContent.trim() : "";
+        const photoSrc = photo ? photo.getAttribute("src") : "";
+        const ratingValue = rating ? rating.textContent.trim() : "N/A";
+        const ratingClass = rating ? rating.className.replace("lu-rating", "").trim() : "rt-na";
+        const player = PLAYERS.find(p => p.key === row.dataset.player);
+        const teamTag = (player && HOF_TEAMS[player.teamTag]) ? player.teamTag : "LEV";
+        const teamInfo = HOF_TEAMS[teamTag];
+        const statRows = detail ? Array.from(detail.querySelectorAll(".lu-stat-item")).map(item => {
+            const img = item.querySelector("img");
+            const bEl = item.querySelector("b");
+            const label = img ? img.getAttribute("alt") : item.textContent.split(":")[0].trim();
+            const value = bEl ? bEl.textContent.trim() : "";
+            return `<div class="qs2-stat-row"><span>${label}</span><b>${value}</b></div>`;
+        }).join("") : "";
+        const m = HOF_FINAL_SUMMARY;
+        const homeInfo = HOF_TEAMS[m.home];
+        const awayInfo = HOF_TEAMS[m.away];
+        panel.innerHTML = `
+            <div class="info-close"><span class="info-close-x">✕</span></div>
+            <div class="qs2-photo-row">
+                <img class="qs2-photo" src="${photoSrc}" alt="${name}">
+                <div>
+                    <div class="qs2-name">${name}</div>
+                    <div class="qs2-team-line"><img src="${teamInfo.logo}" alt="${teamTag}">${teamInfo.full}</div>
+                </div>
+            </div>
+            <div class="qs2-match">
+                <span class="qs2-match-team"><img src="${homeInfo.logo}" alt="${m.home}">${m.home}</span>
+                <span class="qs2-match-score">${m.scoreHome}</span>
+                <span class="qs2-match-dash">-</span>
+                <span class="qs2-match-score">${m.scoreAway}</span>
+                <span class="qs2-match-team">${m.away}<img src="${awayInfo.logo}" alt="${m.away}"></span>
+                <span class="qs2-match-status">${m.status}</span>
+            </div>
+            <div class="qs2-stats-title">Estadísticas del partido</div>
+            <div class="qs2-rating-row">
+                <div>
+                    <div class="qs2-rating-label">Calificación del jugador</div>
+                    <div class="qs2-rating-sub">Según los datos de los partidos</div>
+                </div>
+                <span class="qs2-rating-badge lu-rating ${ratingClass}">${ratingValue}</span>
+            </div>
+            <div class="qs2-stat-list">${statRows}</div>
+            <div class="qs2-more-row">
+                <button type="button" class="qs2-more-btn" id="hofMoreBtn">
+                    <img class="qs2-more-icon" src="look.png" alt="">
+                    <span>Más información sobre ${name}</span>
+                </button>
+            </div>
+        `;
+        const moreBtn = panel.querySelector("#hofMoreBtn");
+        if (moreBtn) moreBtn.addEventListener("click", () => hofOpenPlayerProfile(player));
+        panel.scrollTop = 0;
+        document.getElementById("hofQuickStatsOverlay").classList.add("active");
+    }
+
+    function hofCloseQuickStats(silent) {
+        const ov = document.getElementById("hofQuickStatsOverlay");
+        if (!ov || !ov.classList.contains("active")) return;
+        if (!silent) zcPlaySound("clicksalir");
+        ov.classList.remove("active");
+    }
+
+
     function openTrophyModal(t) {
         const panel = document.getElementById("trophyInfoPanel");
         if (t.full) {
-            panel.className = "info-panel gold";
-            panel.innerHTML = `<div class="info-close"><span>✕</span></div>`;
-            const original = document.querySelector("#ultimo-partido .match-card");
-            const clone = original.cloneNode(true);
-            const logoLarge = clone.querySelector(".logo-large");
-            if (logoLarge) logoLarge.remove();
-            panel.appendChild(clone);
-            const summary = document.createElement("div");
-            summary.className = "trophy-summary-block";
-            summary.innerHTML = `
-                <div class="trophy-modal-logo"><img src="${t.logo}" alt="${t.team}"></div>
-                <div class="trophy-modal-title">${t.team}</div>
-                <div class="trophy-modal-sub">${t.champDate}</div>
-                <div class="trophy-modal-tourney">${t.tourney}</div>
-                <div class="trophy-modal-mode">${t.mode}</div>
-                <div class="trophy-modal-desc">${t.desc}</div>
-            `;
-            panel.appendChild(summary);
-            panel.scrollTop = 0;
-            openModal("trophyModalOverlay");
-            bindStatRows(clone);
-            bindEventItems(clone);
-            bindMatchTabs(clone);
-            bindMatchStats(clone);
-            bindTimelineEntries(clone);
-            bindMatchSwipe(clone);
+            // Menú de la Gran Final: copia propia e independiente (ver hofOpenFinalMenu).
+            hofOpenFinalMenu(t, panel);
             return;
         }
         panel.className = "info-panel";
@@ -14304,7 +15931,7 @@
             <div class="trophy-modal-title">${t.team}</div>
             <div class="trophy-modal-sub">${t.champDate}</div>
             <div class="trophy-modal-tourney">${t.tourney}</div>
-            <div class="trophy-modal-mode">${t.mode}</div>
+            ${t.mode ? `<div class="trophy-modal-mode">${t.mode}</div>` : ""}
             <div class="trophy-modal-desc">${t.desc}</div>
         `;
         panel.scrollTop = 0;
@@ -14313,6 +15940,7 @@
 
     function closeTrophyModal() {
         zcPlaySound("salir");
+        hofCloseQuickStats(true);
         closeModal("trophyModalOverlay");
     }
 
@@ -14390,7 +16018,16 @@
                 if (player) openPlayerModal(player);
             });
         }
-        openModal("quickStatsOverlay");
+        // Salón de la Fama: igual que en la categoría Partidos, las estadísticas del jugador
+        // se abren ENCIMA del menú del partido, que sigue visible detrás (no se cierra).
+        const trophyOv = document.getElementById("trophyModalOverlay");
+        if (trophyOv && trophyOv.classList.contains("active")) {
+            qsStacked = true;
+            panel.scrollTop = 0;
+            document.getElementById("quickStatsOverlay").classList.add("active");
+        } else {
+            openModal("quickStatsOverlay");
+        }
     }
 
     function closeQuickStats() {
@@ -14431,15 +16068,36 @@
 
     let modalStack = [];
 
+    // Overlay activo que está realmente arriba (el de mayor z-index), no solo el primero del DOM.
+    function zcTopActiveOverlay() {
+        const act = Array.from(document.querySelectorAll(".modal-overlay.active"));
+        if (!act.length) return null;
+        return act.reduce((a, b) =>
+            ((parseInt(getComputedStyle(b).zIndex, 10) || 0) >= (parseInt(getComputedStyle(a).zIndex, 10) || 0)) ? b : a);
+    }
     function openModal(id) {
-        const current = document.querySelector(".modal-overlay.active");
+        const current = zcTopActiveOverlay();
         if (current && current.id !== id) {
-            // Oculta el modal anterior al instante (sin transición) para evitar que
-            // se vea superpuesto/parpadeando mientras el nuevo aparece encima.
-            current.style.transition = "none";
-            current.classList.remove("active");
-            void current.offsetWidth;
-            current.style.transition = "";
+            // Salón de la Fama: al tocar un jugador dentro del menú de la final (Estadísticas
+            // del partido, alineaciones, cronología...) el menú del partido NO se cierra: la
+            // ficha del jugador se abre encima y al cerrarla el menú sigue abierto tal cual.
+            // Salón de la Fama: el perfil del jugador se abre ENCIMA del menú de la final y de su
+            // minimenú (hofQuickStatsOverlay); ninguno se cierra, quedan en capas.
+            const trophyOpen = document.getElementById("trophyModalOverlay").classList.contains("active");
+            const keepUnder = id === "playerModalOverlay" && trophyOpen;
+            if (keepUnder) {
+                const top = document.getElementById(id);
+                const baseZ = Math.max(...Array.from(document.querySelectorAll(".modal-overlay.active"))
+                    .map(o => parseInt(getComputedStyle(o).zIndex, 10) || 1050));
+                if (top) top.style.zIndex = String(baseZ + 5);
+            } else {
+                // Oculta el modal anterior al instante (sin transición) para evitar que
+                // se vea superpuesto/parpadeando mientras el nuevo aparece encima.
+                current.style.transition = "none";
+                current.classList.remove("active");
+                void current.offsetWidth;
+                current.style.transition = "";
+            }
             modalStack.push(current.id);
         }
         if (mobileMenu && mobileMenu.classList.contains("open")) {
@@ -14466,6 +16124,7 @@
     }
     function closeModal(id) {
         document.getElementById(id).classList.remove("active");
+        document.getElementById(id).style.zIndex = "";
         if (modalStack.length > 0) {
             const prevId = modalStack.pop();
             document.getElementById(prevId).classList.add("active");
@@ -14478,7 +16137,7 @@
     function closeAllModals() {
         modalStack = [];
         qsStacked = false;
-        document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
+        document.querySelectorAll(".modal-overlay.active").forEach((el) => { el.classList.remove("active"); el.style.zIndex = ""; });
         modalImg.src = "";
         const menuEl = document.getElementById("mobileMenu");
         const menuOpen = menuEl && menuEl.classList.contains("open");
@@ -14493,6 +16152,9 @@
     });
     document.getElementById("quickStatsOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeQuickStats();
+    });
+    document.getElementById("hofQuickStatsOverlay").addEventListener("click", function (e) {
+        if (e.target === this) { zcPlaySound("clicksalir"); hofCloseQuickStats(true); }
     });
     document.getElementById("allMatchesOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeAllMatchesModal();
@@ -14516,6 +16178,8 @@
             closeTrophyModal();
         } else if (e.target.closest("#quickStatsPanel .info-close-x")) {
             closeQuickStats();
+        } else if (e.target.closest("#hofQuickStatsPanel .info-close-x")) {
+            hofCloseQuickStats();
         } else if (e.target.closest("#allMatchesPanel .info-close-x")) {
             closeAllMatchesModal();
         } else if (e.target.closest("#allAchievementsPanel .info-close-x")) {
@@ -15592,10 +17256,10 @@
     renderZc26Fixtures();
 
     /* ===================== HOME · SIGUE LA ZC26 =====================
-       Muestra los partidos de HOY según la fecha y hora del dispositivo. Cada partido se ubica
+       Muestra SIEMPRE 4 partidos: los últimos registrados contando desde mañana hacia atrás (fecha del dispositivo). Cada partido se ubica
        por su instante real (hora base de Perú de ZC26_FIXTURES) convertido a la hora local del
-       teléfono. Si hoy no hay partidos, muestra los del día más reciente que ya se jugó (y si el
-       torneo aún no empieza, los del próximo día con partidos). */
+       teléfono. Los partidos sin hora definida se muestran como "Por definir". Si aún no hay 4
+       partidos registrados hasta mañana, muestra los primeros 4 del torneo. */
     function renderSigueZc26() {
         const row = document.getElementById("szRow");
         if (!row) return;
@@ -15604,23 +17268,26 @@
         const todayKey = dayKey(now);
         const all = [];
         ZC26_FIXTURES.forEach(day => day.matches.forEach(m => {
-            const ts = zc26MatchStartTimestamp(day, m.time);
-            if (ts === null) return;
+            let ts = zc26MatchStartTimestamp(day, m.time);
+            let noTime = false;
+            if (ts === null) {
+                // Partido aún sin hora definida: se ubica al final de su día para poder ordenarlo
+                const mon = parseInt(ZC26_MONTH_NUM[day.month] || "9", 10);
+                ts = new Date(2026, mon - 1, day.num, 23, 59).getTime();
+                noTime = true;
+            }
             const d = new Date(ts);
-            all.push({ m, day, ts, d, key: dayKey(d) });
+            all.push({ m, day, ts, d, key: dayKey(d), noTime });
         }));
         all.sort((a, b) => a.ts - b.ts);
-        let shown = all.filter(x => x.key === todayKey);
-        if (!shown.length) {
-            const past = all.filter(x => x.key < todayKey);
-            if (past.length) {
-                const k = past[past.length - 1].key;
-                shown = past.filter(x => x.key === k);
-            } else if (all.length) {
-                const k = all[0].key;
-                shown = all.filter(x => x.key === k);
-            }
-        }
+        // Siempre 4 partidos: los últimos 4 registrados contando desde MAÑANA hacia atrás
+        // (ej. hoy 3/oct → 4/oct, 3/oct, 2/oct… hasta completar 4).
+        const SZ_COUNT = 4;
+        const tmr = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        const tomorrowKey = dayKey(tmr);
+        let upto = all.filter(x => x.key <= tomorrowKey);
+        let shown = upto.length ? upto.slice(-SZ_COUNT) : all.slice(0, SZ_COUNT);
+        if (shown.length < SZ_COUNT) shown = all.slice(0, SZ_COUNT); // pocos partidos registrados: los primeros 4
         const MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
         function whenLabel(d) {
             const t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
@@ -15635,7 +17302,7 @@
             const m = x.m;
             const r = zc26ResultFor(m);
             const phase = m.group ? "Fase de grupos · Grupo " + m.group : m.label;
-            const time = zc26Fmt12(x.d.getHours(), x.d.getMinutes()).replace(" ", "");
+            const time = x.noTime ? "Por definir" : zc26Fmt12(x.d.getHours(), x.d.getMinutes()).replace(" ", "");
             const dateTxt = String(x.d.getDate()).padStart(2, "0") + "/" + String(x.d.getMonth() + 1).padStart(2, "0");
             const dtHtml = `<div class="sz-dt"><span class="sz-date">${dateTxt}</span><span class="sz-time">${time}</span></div>`;
             const elapsed = now.getTime() - x.ts;
@@ -15647,7 +17314,7 @@
                         <span class="sz-bar"></span>
                         <span class="sz-score${r.a > r.h ? " sz-score-win" : ""}">${r.a}</span>
                     </div>`;
-            } else if (elapsed >= 0 && elapsed < 3 * 3600000) {
+            } else if (!x.noTime && elapsed >= 0 && elapsed < 3 * 3600000) {
                 side = `<div class="sz-dt"><span class="sz-status sz-live">En juego</span><span class="sz-date">${dateTxt}</span><span class="sz-time">${time}</span></div>`;
             } else {
                 side = dtHtml;
@@ -16017,6 +17684,7 @@
             zcPlaySound("click");
             updateBtn();
             renderZc26Fixtures();
+            zcRenderFinalChronology(document);
             applyZc26Filters();
             setOpen(false);
         });
@@ -16529,6 +18197,84 @@ const buildList = f => {
         const panes = filters.map(([k], i) => `<div class="zt-list zt-pane${i === 0 ? " active" : ""}" data-zt-pane="${k}">${buildList(k)}</div>`).join("");
         return `<div class="zt-wrap">${bar}${panes}</div>`;
     }
+
+    // ---- Cronología de la final (misma versión que el menú de un partido de la edición) ----
+    function zcFinalChronologyHtml() {
+        const HOME = "L. Puppies Represent", AWAY = "Leviatán Esports";
+        const BLUE = "#6ea8fe", RED = "#ef5350";
+        const whistleIcon = `<svg class="zc26cron-svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.5 14a5.5 5.5 0 0 0 10.7 1.8H20a1.5 1.5 0 0 0 1.5-1.5v-2.6a1.5 1.5 0 0 0-1.5-1.5h-8.2A5.5 5.5 0 0 0 2.5 14zm5.5 1.9a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8z"/><path d="M12.5 3.2l1 2.4M16.5 2.6l-.2 2.6M20.3 4l-1.6 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>`;
+        const ballIcon = `<img src="assets/icon_wim_set.png" alt="">`;
+        const cardIco = `<svg class="zt-card-svg" viewBox="0 0 12 16" aria-hidden="true"><rect x="0.5" y="0.5" width="11" height="15" rx="2.4" fill="#f5c518"/></svg>`;
+        const sets = [
+            { min: 8,  team: HOME, name: "Ninja" },
+            { min: 17, team: AWAY, name: "iXLCross" },
+            { min: 26, team: AWAY, name: "iXLCross" },
+            { min: 34, team: AWAY, name: "Juliocr36D" }
+        ];
+        const cards = [{ min: 20, team: HOME, name: "Juanjo" }];
+        let h = 0, a = 0;
+        const events = sets.map((e, i) => {
+            if (e.team === HOME) h++; else a++;
+            return { kind: "sets", set: i + 1, h: h, a: a, min: e.min, team: e.team, name: e.name };
+        }).concat(cards.map(c => ({ kind: "tarjetas", min: c.min, team: c.team, name: c.name })));
+        events.sort((x, y) => x.min - y.min);
+
+        const milestone = (label, time) => `<div class="zt-mile">${whistleIcon}<span>${label}</span>${time ? `<span class="zt-mile-time">${time}</span>` : ""}</div>`;
+        const conn = (from, to) => {
+            if (from === to) return `<div class="zt-conn zt-same zt-${from}"></div>`;
+            const order = { l: 0, c: 1, r: 2 };
+            const mir = order[from] > order[to];
+            const key = [from, to].sort((x, y) => order[x] - order[y]).join("");
+            return `<div class="zt-conn"><span class="zt-path zt-${key}${mir ? " zt-mir" : ""}"></span></div>`;
+        };
+        const items = events.map(e => {
+            const side = e.team === HOME ? "l" : "r";
+            let icon, title, sub, bar = "", cardCls = "";
+            if (e.kind === "sets") {
+                const accent = e.team === AWAY ? BLUE : RED;
+                bar = `style="background:${accent}"`;
+                icon = ballIcon;
+                title = `Ganó el SET ${e.set} <span class="zt-score" style="color:${accent};background:${accent}22">${e.h} - ${e.a}</span>`;
+                sub = `<div class="zt-sub"><span class="zt-team">${e.team}</span> <span class="zt-star">${e.name}</span></div>`;
+            } else {
+                icon = cardIco; cardCls = " zt-ico-card";
+                title = "Tarjeta amarilla";
+                sub = `<div class="zt-sub">${e.name} · ${e.team}</div>`;
+            }
+            const html = `<div class="zt-ev ${side === "l" ? "zt-left" : "zt-right"}">
+                <div class="zt-node"><span class="zt-ico${cardCls}">${icon}</span><span class="zt-pill">${e.min}'</span></div>
+                <span class="zt-bar" ${bar}></span>
+                <div class="zt-txt"><div class="zt-title">${title}</div>${sub}</div>
+            </div>`;
+            return { side: side, kind: e.kind, html: html };
+        }).reverse();
+
+        // Hora de inicio/fin: 7:30 p.m. (hora base) + retraso de inicio, igual que en los partidos de la edición.
+        const ls = zc26LocalSchedule({ num: 8, month: "AGO" }, "7:30 p.m.", zc26CountryCode);
+        const key = "final::LPR|LEV";
+        const start = ls ? zc26AddMinutes(ls, zc26MatchStartDelay(key)) : null;
+        const end = start ? zc26AddMinutes(start, 34 + zc26MatchExtraTime(key)) : null;
+
+        const buildList = f => {
+            const seq = [];
+            if (f === "all" && end) seq.push({ side: "c", html: milestone("Partido finalizado", end.time) });
+            items.filter(it => f === "all" || it.kind === f).forEach(it => seq.push(it));
+            if (f === "all" && start) seq.push({ side: "c", html: milestone("Partido iniciado", start.time) });
+            let out = "";
+            seq.forEach((it, i) => { if (i) out += conn(seq[i - 1].side, it.side); out += it.html; });
+            return out;
+        };
+        const filters = [["all", "Todo"], ["sets", "Sets"], ["tarjetas", "Tarjetas"]];
+        const bar = `<div class="zt-filters">${filters.map(([k, l], i) => `<button type="button" class="zt-filter${i === 0 ? " active" : ""}" data-zt-filter="${k}">${l}</button>`).join("")}</div>`;
+        const panes = filters.map(([k], i) => `<div class="zt-list zt-pane${i === 0 ? " active" : ""}" data-zt-pane="${k}">${buildList(k)}</div>`).join("");
+        return `<div class="zt-wrap">${bar}${panes}</div>`;
+    }
+    function zcRenderFinalChronology(root) {
+        try {
+            (root || document).querySelectorAll("[data-final-chronology]").forEach(el => { el.innerHTML = zcFinalChronologyHtml(); });
+        } catch (err) { console.error("Cronología de la final:", err); }
+    }
+    zcRenderFinalChronology(document);
     const ZC26_ABBR = {
         "Leviatán Esports": "LEV", "Peruanos FC": "PFC", "Quiero KeKe": "QKK", "POS JR": "PJR",
         "Rostizados": "RTZ", "KURO ØNIX": "KRO", "SGC": "SGC", "POS": "POS",
@@ -17831,6 +19577,344 @@ const buildList = f => {
                 zc26RenderBracket();
                 if (window.zc26UpdateBracketCompress) window.zc26UpdateBracketCompress();
             }, 200);
+        });
+    })();
+
+
+    /* ===================================================================
+       BUSCADOR · lupa del encabezado (Android y computadora)
+       Busca en secciones, novedades, torneos, historias, equipos y jugadores.
+       Al tocar un resultado se cierra el buscador y te lleva hasta ahí.
+    =================================================================== */
+    (function () {
+        const overlay = document.getElementById("zsOverlay");
+        const openBtn = document.getElementById("siteSearchBtn");
+        const closeBtn = document.getElementById("zsClose");
+        const input = document.getElementById("zsInput");
+        const clearBtn = document.getElementById("zsClear");
+        const body = document.getElementById("zsBody");
+        if (!overlay || !openBtn || !input || !body) return;
+        const field = input.closest(".zs-field");
+
+        // ---------- Normalización (rápida) ----------
+        // Camino rápido: NFD de toda la cadena. Solo si cambia el largo (casos raros) usa el camino lento por carácter.
+        const DIACRITICS = /[\u0300-\u036f]/g;
+        const normCache = new Map();
+        function norm(str) {
+            str = String(str || "");
+            const hit = normCache.get(str);
+            if (hit !== undefined) return hit;
+            let out = str.normalize("NFD").replace(DIACRITICS, "").toLowerCase();
+            if (out.length !== str.length) {
+                out = "";
+                for (const ch of str) {
+                    const b = ch.normalize("NFD").replace(DIACRITICS, "").toLowerCase();
+                    out += b.length === 1 ? b : ch.toLowerCase();
+                }
+            }
+            if (normCache.size > 3000) normCache.clear();
+            normCache.set(str, out);
+            return out;
+        }
+        const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
+        function esc(t) { return String(t).replace(/[&<>"]/g, c => ESC_MAP[c]); }
+        // Resalta por rangos (sin armar el HTML carácter por carácter)
+        function highlight(text, tokens) {
+            const n = norm(text);
+            if (n.length !== text.length) return esc(text);
+            const ranges = [];
+            for (const t of tokens) {
+                if (!t) continue;
+                let i = n.indexOf(t);
+                while (i !== -1) { ranges.push([i, i + t.length]); i = n.indexOf(t, i + t.length); }
+            }
+            if (!ranges.length) return esc(text);
+            ranges.sort((a, b) => a[0] - b[0]);
+            let html = "", pos = 0, curS = ranges[0][0], curE = ranges[0][1];
+            const flush = () => { html += esc(text.slice(pos, curS)) + "<b>" + esc(text.slice(curS, curE)) + "</b>"; pos = curE; };
+            for (let k = 1; k < ranges.length; k++) {
+                if (ranges[k][0] <= curE) { if (ranges[k][1] > curE) curE = ranges[k][1]; }
+                else { flush(); curS = ranges[k][0]; curE = ranges[k][1]; }
+            }
+            flush();
+            return html + esc(text.slice(pos));
+        }
+        // Letra de respaldo cuando no hay ícono/foto o la imagen no carga
+        function letterOf(title) {
+            const m = String(title || "").match(/[A-Za-z0-9\u00C0-\u024F]/);
+            return (m ? m[0] : "?").toUpperCase();
+        }
+
+        function goSection(key) {
+            if (typeof applySectionFilter === "function") applySectionFilter(key, true);
+            if (typeof setActiveSectionTab === "function") setActiveSectionTab(key);
+            window.scrollTo({ top: 0, behavior: "instant" });
+        }
+
+        // Categorías (secciones). "Home" se puede buscar, pero NO aparece en las búsquedas sugeridas.
+        const SECTIONS = [
+            ["Home", "inicio", "inicio principal portada", true],
+            ["Partidos", "zc26", "calendario fixture encuentros resultados"],
+            ["Posiciones", "group", "grupos tabla bracket octavos cuartos semifinal final eliminacion"],
+            ["Estadísticas", "wc-stats", "stats goles asistencias tarjetas mvp"],
+            ["Último partido importa", "ultimo-partido", "ultimo partido alineaciones cronologia"],
+            ["Ranking", "ranking", "clasificacion elo puntos jugadores"],
+            ["Partners", "contribuciones", "contribuciones patrocinadores apoyo donaciones"],
+            ["Salón de la fama", "salon-fama", "campeones trofeos historia"]
+        ];
+
+        // ---------- Índice de búsqueda (se arma una vez y se reutiliza) ----------
+        let INDEX = [], indexSig = "", resultCache = new Map();
+        function signature() {
+            let n = 0;
+            try { n += window.zcNovedadEntries ? window.zcNovedadEntries().length : 0; } catch (_) {}
+            const q = (sel) => document.querySelectorAll(sel).length;
+            return [n, q("[data-open-ranking-novedad]"), q(".story-item[data-story-id], .momento-card[data-story-id]"),
+                typeof PLAYERS !== "undefined" && PLAYERS ? PLAYERS.length : 0].join("|");
+        }
+        function buildIndex() {
+            const idx = [];
+            const add = (e) => { e.n = norm([e.title, e.sub || "", e.kw || ""].join(" ")); e.nt = norm(e.title); idx.push(e); };
+            const goTeam = (team) => () => {
+                goSection("zc26");
+                const si = document.getElementById("zc26SearchInput");
+                if (si) { si.value = team; if (typeof applyZc26Filters === "function") applyZc26Filters(); }
+            };
+
+            // Secciones
+            SECTIONS.forEach(([title, key, kw]) => add({ type: "Sección", title, kw, rank: 0, go: () => goSection(key) }));
+
+            // Novedades (Home)
+            try {
+                (window.zcNovedadEntries ? window.zcNovedadEntries() : []).forEach(n => add({
+                    type: "Novedad", title: n.data.title, sub: n.data.tag, thumb: n.data.hero, rank: 1,
+                    go: () => { goSection("inicio"); setTimeout(() => window.zcOpenNovedadDetail && window.zcOpenNovedadDetail(n.idx), 60); }
+                }));
+            } catch (_) {}
+
+            // Novedades de la clasificación (Ranking)
+            document.querySelectorAll("[data-open-ranking-novedad]").forEach(card => {
+                const t = card.querySelector(".zcnr-card-title");
+                if (!t) return;
+                const im = card.querySelector("img");
+                const tag = card.querySelector(".zcnr-card-tag");
+                const date = card.querySelector(".zcnr-card-date");
+                add({
+                    type: "Ranking", title: t.textContent.trim(), sub: (date ? date.textContent.trim() : (tag ? tag.textContent.trim() : "")),
+                    kw: tag ? tag.textContent : "", thumb: im ? im.getAttribute("src") : null, rank: 1,
+                    go: () => { goSection("ranking"); setTimeout(() => card.click(), 60); }
+                });
+            });
+
+            // Torneos
+            try {
+                [[TV_VIVE, "Torneo"], [TV_PROXIMOS, "Próximo torneo"]].forEach(([arr, type]) => (arr || []).forEach(it => add({
+                    type, title: it.title, sub: it.tag, kw: it.desc || "", rank: 2,
+                    thumb: (window.tvCoverOf && window.tvCoverOf.get(it)) || null,
+                    go: () => { goSection("inicio"); setTimeout(() => window.tvOpenDetail && window.tvOpenDetail(it, (window.tvCoverOf && window.tvCoverOf.get(it)) || null), 60); }
+                })));
+            } catch (_) {}
+
+            // Historias y momentos
+            document.querySelectorAll(".story-item[data-story-id], .momento-card[data-story-id]").forEach(el => {
+                const lbl = el.querySelector(".story-label") || el.querySelector(".momento-title") || el;
+                const title = (lbl.textContent || "").trim().replace(/\s+/g, " ");
+                if (!title) return;
+                const im = el.querySelector("img");
+                add({
+                    type: "Historia", title, thumb: im ? im.getAttribute("src") : null, rank: 3,
+                    go: () => { goSection("inicio"); setTimeout(() => el.click(), 60); }
+                });
+            });
+
+            // Equipos de la ZC26
+            try {
+                Object.keys(ZC26_TEAM_LOGOS).forEach(team => {
+                    const members = (ZC26_ROSTERS[team] || []).map(m => m[0]).join(" ");
+                    add({ type: "Equipo", title: team, sub: "Ver partidos", kw: members, thumb: zc26Logo(team), contain: true, rank: 2, go: goTeam(team) });
+                });
+            } catch (_) {}
+
+            // Jugadores del ranking
+            try {
+                PLAYERS.forEach(p => add({
+                    type: "Jugador", title: p.name, sub: [p.team, p.country].filter(Boolean).join(" · "),
+                    kw: (p.alternateIds || []).join(" ") + " " + (p.teamTag || ""), rank: 2,
+                    thumb: (typeof ZC_PLAYER_ICON !== "undefined" && ZC_PLAYER_ICON[p.key]) ? "assets/icons/" + ZC_PLAYER_ICON[p.key] : null,
+                    go: () => openPlayerModal(p)
+                }));
+            } catch (_) {}
+
+            // Integrantes de los equipos ZC26 (llevan al equipo)
+            try {
+                Object.keys(ZC26_ROSTERS).forEach(team => (ZC26_ROSTERS[team] || []).forEach(m => add({
+                    type: "Jugador ZC26", title: m[0], sub: team, rank: 3, thumb: zc26Logo(team), contain: true, go: goTeam(team)
+                })));
+            } catch (_) {}
+
+            INDEX = idx;
+            resultCache = new Map();
+            indexSig = signature();
+        }
+        function ensureIndex() {
+            if (!INDEX.length || indexSig !== signature()) buildIndex();
+        }
+        // Precalcula el índice cuando el navegador está libre (así abrir la lupa es instantáneo)
+        function prebuild() {
+            const run = () => { try { ensureIndex(); } catch (_) {} };
+            if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 4000 });
+            else setTimeout(run, 1500);
+        }
+        if (document.readyState === "complete") prebuild();
+        else window.addEventListener("load", () => setTimeout(prebuild, 600), { once: true });
+
+        const MAX_RESULTS = 20;
+        function search(q) {
+            const nq = norm(q).trim();
+            const tokens = nq.split(/\s+/).filter(Boolean);
+            if (!tokens.length) return { tokens, list: [] };
+            const key = tokens.join(" ");
+            const cached = resultCache.get(key);
+            if (cached) return { tokens, list: cached };
+            const scored = [];
+            for (let i = 0; i < INDEX.length; i++) {
+                const e = INDEX[i];
+                let sc = 0, ok = true;
+                for (let k = 0; k < tokens.length; k++) {
+                    const t = tokens[k];
+                    if (e.n.indexOf(t) === -1) { ok = false; break; }
+                    if (e.nt === t) sc += 100;
+                    else if (e.nt.startsWith(t)) sc += 60;
+                    else if (e.nt.indexOf(" " + t) !== -1) sc += 40;
+                    else if (e.nt.indexOf(t) !== -1) sc += 25;
+                    else sc += 8;
+                }
+                if (ok) scored.push({ e, sc: sc - e.rank });
+            }
+            scored.sort((a, b) => b.sc - a.sc);
+            const list = scored.slice(0, MAX_RESULTS).map(x => x.e);
+            if (resultCache.size > 60) resultCache.clear();
+            resultCache.set(key, list);
+            return { tokens, list };
+        }
+
+        // ---------- Pintado ----------
+        let selected = -1, currentResults = [], searchTimer = 0, lastRendered = null;
+        function showIdle() {
+            currentResults = []; selected = -1; lastRendered = null;
+            // Solo categorías (sin Home)
+            const sug = SECTIONS.filter(s => !s[3]).map(s => s[0]);
+            body.innerHTML = '<div class="zs-heading">Búsquedas sugeridas</div><div class="zs-chips">' +
+                sug.map(x => '<button type="button" class="zs-suggest" data-q="' + esc(x) + '">' + esc(x) + '</button>').join("") + '</div>';
+        }
+        function showResults(q) {
+            const { tokens, list } = search(q);
+            const sig = tokens.join(" ");
+            if (lastRendered === sig && list === currentResults) return; // nada que repintar
+            lastRendered = sig;
+            currentResults = list; selected = -1;
+            if (!list.length) {
+                body.innerHTML = '<div class="zs-heading">Sin resultados</div><div class="zs-empty">No encontramos nada para «' + esc(q.trim()) + '». Prueba con el nombre de un equipo, un jugador o una sección.</div>';
+                return;
+            }
+            const parts = ['<div class="zs-heading">Resultados sugeridos</div>'];
+            for (let i = 0; i < list.length; i++) {
+                const e = list[i];
+                const letter = letterOf(e.title);
+                const thumb = e.thumb
+                    ? '<img src="' + esc(e.thumb) + '" alt="" loading="lazy" decoding="async" draggable="false">'
+                    : letter;
+                parts.push('<button type="button" class="zs-result" data-i="' + i + '" style="animation-delay:' + Math.min(i, 6) * 25 + 'ms">' +
+                    '<span class="zs-thumb' + (e.contain && e.thumb ? ' contain' : '') + '" data-l="' + esc(letter) + '">' + thumb + '</span>' +
+                    '<span class="zs-info"><span class="zs-meta"><span class="zs-chip">' + esc(e.type) + '</span>' +
+                    (e.sub ? '<span class="zs-sub">' + esc(e.sub) + '</span>' : '') + '</span>' +
+                    '<span class="zs-title">' + highlight(e.title, tokens) + '</span></span></button>');
+            }
+            body.innerHTML = parts.join("");
+        }
+        // Si una imagen no carga (o no está registrada), se muestra solo la letra
+        body.addEventListener("error", (ev) => {
+            const im = ev.target;
+            if (!im || im.tagName !== "IMG") return;
+            const th = im.closest(".zs-thumb");
+            if (!th) return;
+            th.classList.remove("contain");
+            th.textContent = th.dataset.l || "?";
+        }, true);
+
+        function onType() {
+            const v = input.value;
+            field.classList.toggle("has-value", !!v);
+            clearTimeout(searchTimer);
+            if (!v.trim()) { showIdle(); return; }
+            // debounce corto: no se busca/pinta en cada tecla
+            searchTimer = setTimeout(() => { ensureIndex(); showResults(v); }, 110);
+        }
+        function setSel(i) {
+            const items = body.querySelectorAll(".zs-result");
+            if (!items.length) return;
+            selected = (i + items.length) % items.length;
+            items.forEach((el, k) => el.classList.toggle("sel", k === selected));
+            items[selected].scrollIntoView({ block: "nearest" });
+        }
+
+        function openSearch() {
+            if (typeof closeMenu === "function" && document.getElementById("mobileMenu").classList.contains("open")) closeMenu();
+            if (typeof zcPlaySound === "function") zcPlaySound("clickentrar");
+            overlay.classList.add("open");
+            overlay.setAttribute("aria-hidden", "false");
+            lockBodyScroll();
+            closeBtn.classList.remove("active");
+            setTimeout(() => closeBtn.classList.add("active"), 40); // 3 rayas → X
+            input.value = ""; field.classList.remove("has-value");
+            showIdle();
+            setTimeout(() => input.focus({ preventScroll: true }), 60);
+            // refresca el índice solo si cambió algo (casi siempre ya está listo)
+            setTimeout(() => { try { ensureIndex(); } catch (_) {} }, 0);
+        }
+        function closeSearch(silent) {
+            if (!overlay.classList.contains("open")) return;
+            clearTimeout(searchTimer);
+            closeBtn.classList.remove("active"); // X → 3 rayas
+            overlay.classList.remove("open");
+            overlay.setAttribute("aria-hidden", "true");
+            input.blur();
+            unlockBodyScroll();
+            if (!silent && typeof zcPlaySound === "function") zcPlaySound("clicksalir");
+        }
+        function choose(i) {
+            const e = currentResults[i];
+            if (!e) return;
+            closeSearch(true);
+            if (typeof zcPlaySound === "function") zcPlaySound("click");
+            setTimeout(() => { try { e.go(); } catch (err) { console.error(err); } }, 80);
+        }
+
+        openBtn.addEventListener("click", openSearch);
+        closeBtn.addEventListener("click", () => closeSearch());
+        clearBtn.addEventListener("click", () => { input.value = ""; onType(); input.focus(); });
+        input.addEventListener("input", onType);
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowDown") { e.preventDefault(); setSel(selected + 1); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); setSel(selected - 1); }
+            else if (e.key === "Enter") {
+                e.preventDefault();
+                clearTimeout(searchTimer);
+                if (input.value.trim()) { ensureIndex(); showResults(input.value); choose(selected >= 0 ? selected : 0); }
+            }
+        });
+        body.addEventListener("click", (e) => {
+            const r = e.target.closest(".zs-result");
+            if (r) { choose(parseInt(r.dataset.i, 10)); return; }
+            const sg = e.target.closest(".zs-suggest");
+            if (sg) { input.value = sg.dataset.q; onType(); input.focus(); }
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay.classList.contains("open")) closeSearch();
+            // atajo: "/" abre el buscador en computadora (si no se está escribiendo en otro campo)
+            if (e.key === "/" && !overlay.classList.contains("open") && !/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || "")) {
+                e.preventDefault(); openSearch();
+            }
         });
     })();
 
