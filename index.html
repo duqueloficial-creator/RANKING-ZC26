@@ -13640,19 +13640,143 @@
     // se reparte un pequeño bono decimal (a modo de "bono por rivales vencidos
     // de mayor puntuación") para que nunca existan dos jugadores con el mismo
     // puntaje final, resolviendo así los empates de la clasificación.
-    PLAYERS.sort((a, b) => b.points - a.points);
-    (function applyPointsTiebreak() {
-        let i = 0;
-        while (i < PLAYERS.length) {
-            let j = i;
-            while (j < PLAYERS.length && PLAYERS[j].points === PLAYERS[i].points) j++;
-            const n = j - i;
-            const step = n > 1 ? 0.32 / n : 0;
-            for (let k = 0; k < n; k++) {
-                PLAYERS[i + k].points = +(PLAYERS[i + k].points + (n - k) * step).toFixed(2);
-            }
-            i = j;
-        }
+    // --- Clasificación actual (fuente: archivo de ranking) ---
+    // Cada fila: [key, puntos finales, región]. El orden de esta tabla ES el
+    // orden del ranking, y los puntos ya incluyen sus decimales de desempate,
+    // por lo que no se aplica ningún cálculo extra.
+    const RANKING_UPDATE = [
+        ["jerson7", 303.24, "SA"],  // 1. Jer(son)7
+        ["joseantonio", 303.16, "SA"],  // 2. Jose Antonio
+        ["darkiro", 303.08, "SA"],  // 3. Darkiro
+        ["taikisha", 299.32, "NA"],  // 4. iXLCross
+        ["hades", 271.19, "NA"],  // 5. Hades
+        ["andresraaj", 271.13, "SA"],  // 6. AndresRaaj
+        ["jared", 271.06, "NA"],  // 7. Jared
+        ["julio", 267.32, "SA"],  // 8. Julioor36D
+        ["jc", 267.26, "SA"],  // 9. JOAR
+        ["robertbv", 183.00, "SA"],  // 10. RobertBV
+        ["nacaru", 160.00, "NA"],  // 11. Nacaru
+        ["zyrox", 145.00, "SA"],  // 12. Zyrox
+        ["juanjo", 130.32, "SA"],  // 13. Juanjo
+        ["ninja", 130.16, "NA"],  // 14. Ninja
+        ["tiagoti", 105.32, "EMEA"],  // 15. Tiagoti
+        ["liam", 105.16, "NA"],  // 16. Liam
+        ["marcelo", 100.32, "SA"],  // 17. Marcelo
+        ["astro", 100.21, "SA"],  // 18. Astro
+        ["jmvll", 100.11, "SA"],  // 19. Jmvll
+        ["aumc", 92.00, "NA"],  // 20. AUMC
+        ["alan", 88.32, "SA"],  // 21. Alan
+        ["freddy", 88.16, "SA"],  // 22. Freddy
+        ["diego", 78.00, "NA"],  // 23. Diego
+        ["miseryoung", 75.06, "NA"],  // 24. .miseryoung
+        ["adri", 72.32, "EMEA"],  // 25. Adri
+        ["fies", 64.00, "SA"],  // 26. Fies
+        ["marcos", 60.00, "SA"],  // 27. Marcos
+        ["daniel17", 52.66, "NA"],  // 28. Daniel
+        ["sebas", 52.16, "SA"],  // 29. Sebas
+        ["sentryks", 48.00, "SA"],  // 30. Sentryks
+        ["loneliness", 45.32, "SA"],  // 31. Loneliness
+        ["javi", 42.00, "EMEA"],  // 32. Javi
+        ["kaiser", 40.00, "SA"],  // 33. Kaiser
+        ["heritage", 37.66, "SA"],  // 34. Heritage
+        ["ulises", 35.32, "NA"],  // 35. Ulises
+        ["misery", 35.16, "NA"],  // 36. Misery
+        ["cesar", 31.32, "SA"],  // 37. CESAR
+        ["denshol", 31.21, "SA"],  // 38. Denshol
+        ["charlestq", 31.11, "NA"],  // 39. CharlesTQ
+        ["kvaras", 30.32, "EMEA"],  // 40. Kvaras
+        ["papirico", 30.29, "SA"],  // 41. PapiRico
+        ["ramirino", 30.27, "SA"],  // 42. Ramiriño
+        ["zeta", 30.24, "SA"],  // 43. Zeta
+        ["soymanco", 30.21, "SA"],  // 44. SoyManco
+        ["kennediano", 30.19, "EMEA"],  // 45. Kennediano
+        ["axelito", 30.13, "NA"],  // 46. Axelito
+        ["jormargg", 30.11, "EMEA"],  // 47. jormargg
+        ["peepe", 30.08, "NA"],  // 48. peepe
+        ["aaron13", 30.03, "NA"],  // 49. Aaron13
+        ["abelldx", 26.32, "SA"],  // 50. abelldx
+        ["deizz", 26.28, "SA"],  // 51. Deizz
+        ["romanqq", 26.24, "SA"],  // 52. romanqq
+        ["jhustin", 20.00, "SA"],  // 53. Jhustin
+        ["jona", 15.32, "NA"],  // 54. Jona
+        ["hetcr", 15.26, "SA"],  // 55. Hetcr
+        ["pato", 15.19, "EMEA"],  // 56. Pato
+        ["remot_bs", 15.13, "EMEA"],  // 57. Remot_BS
+        ["elkakas", 10.32, "SA"],  // 58. ElKakas
+        ["joseprime", 10.30, "NA"],  // 59. Jose Prime
+        ["zetal", 10.28, "SA"],  // 60. Zetal
+        ["mateo", 10.26, "SA"],  // 61. Mateo
+        ["douma", 10.24, "NA"],  // 62. Douma
+        ["piero", 10.22, "SA"],  // 63. Piero
+        ["comter24", 10.20, "SA"],  // 64. Conter
+        ["santiago", 10.18, "EMEA"],  // 65. Santiago
+        ["yamil", 10.16, "SA"],  // 66. Yamil
+        ["locito", 10.14, "SA"],  // 67. Locito
+        ["obito", 10.12, "NA"],  // 68. obito
+        ["tiagoxcv", 10.10, "SA"],  // 69. Tiago XCV
+        ["thteamnegro", 10.08, "SA"],  // 70. Th/team negro
+        ["yanielgg", 10.06, "EMEA"],  // 71. Yanlelgg
+        ["kittypou26", 10.04, "SA"],  // 72. Kittypou26
+        ["thherian", 10.02, "SA"],  // 73. TH | herian
+        ["luisitopro123", 8.20, "NA"],  // 74. luisitopro123
+        ["banditoo", 8.16, "SA"],  // 75. Banditoo
+        ["owneronyt", 7.55, "SA"],  // 76. Owneronyt
+        ["royzrike", 4.82, "SA"],  // 77. RoyZrike
+        ["xabi", 4.71, "NA"],  // 78. Xabi
+        ["galactus", 4.61, "NA"],  // 79. Galactus
+        ["sukhoi", 0.58, "NA"],  // 80. Sukhoi
+        ["destroyer", 0.54, "NA"],  // 81. Destroyer
+        ["alvaro", 0.32, "SA"],  // 82. Álvaro
+        ["shark", 0.31, "SA"],  // 83. Shark
+        ["ghost", 0.30, "SA"],  // 84. Ghost
+        ["angelluki", 0.29, "SA"],  // 85. angelluki
+        ["rickylove", 0.28, "SA"],  // 86. Rickylove
+        ["phserperior", 0.27, "SA"],  // 87. PH | serperior
+        ["xellexll", 0.22, "SA"],  // 88. Xeil.exil
+        ["kaenluc", 0.21, "SA"],  // 89. kaenluc
+        ["reyes1", 0.20, "SA"],  // 90. reyes1
+        ["ale", 0.19, "SA"],  // 91. ale
+        ["messpp", 0.18, "SA"],  // 92. messpp
+        ["sebazz", 0.17, "SA"],  // 93. sebazz
+        ["3eta", 0.16, "NA"],  // 94. 3eta
+        ["ogarucap", 0.16, "SA"],  // 95. Ogaru CAP
+        ["panconqueso", 0.15, "NA"],  // 96. pan_con_queso
+        ["tlinao9", 0.14, "SA"],  // 97. tilinao9
+        ["gabri", 0.13, "SA"],  // 98. gabri
+        ["patomauri", 0.11, "NA"],  // 99. Pato Mauri
+        ["fran", 0.10, "NA"],  // 100. fran
+        ["possalchi", 0.09, "SA"],  // 101. PosSalchi
+        ["pelsantigamer", 0.08, "SA"],  // 102. pelsantigamer
+        ["peijakov", 0.07, "SA"],  // 103. Peijakov
+        ["messigoat", 0.06, "SA"],  // 104. messigoat
+        ["bancobbva", 0.05, "SA"],  // 105. Banco BBVA
+        ["isakku", 0.00, "SA"],  // 106. Isakku
+        ["rnowtt", 0.00, "SA"],  // 107. rNowtt
+        ["jdxz", 0.00, "SA"],  // 108. JdXz
+        ["poslegend966p", 0.00, "SA"],  // 109. PosLegend966p
+        ["gold", 0.00, "NA"],  // 110. Gold
+        ["amberchuu01", 0.00, "NA"],  // 111. Amberchuu01
+        ["trdgx98", 0.00, "NA"],  // 112. Trdgx98
+        ["bititofcq", 0.00, "NA"],  // 113. Bitito.FCQ
+        ["yacer", 0.00, "NA"],  // 114. Yacer
+        ["newfactory", 0.00, "SA"],  // 115. new_factory
+        ["sanz", 0.00, "SA"],  // 116. Sanz
+        ["sjoacedbamypasa", 0.00, "SA"],  // 117. sjoacedbamypasa
+        ["gabonix", 0.00, "SA"],  // 118. Gabonix
+        ["simonelprro", 0.00, "SA"],  // 119. Simon el pro
+        ["diegoa", 0.00, "NA"],  // 120. Diego(A)
+        ["blaxxyy", 0.00, "SA"],  // 121. Blaxxy
+        ["jhxfwy", 0.00, "SA"],  // 122. JhXfwy
+        ["n1nferun", 0.00, "SA"],  // 123. N1ferun
+        ["selavi", 0.00, "SA"],  // 124. Selavi
+    ];
+    (function applyRankingUpdate() {
+        const order = new Map(RANKING_UPDATE.map((r, i) => [r[0], i]));
+        RANKING_UPDATE.forEach(([key, pts, region]) => {
+            const p = PLAYERS.find(x => x.key === key);
+            if (p) { p.points = pts; p.region = region; }
+        });
+        PLAYERS.sort((a, b) => order.get(a.key) - order.get(b.key));
     })();
 
     // --- Movimiento en la clasificación (sube / baja / nuevo) ---
@@ -13950,12 +14074,12 @@
         return (str || "").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
-    function zcfGetRegionCode(country) {
+    function zcfGetRegionCode(country, regionOverride) {
         // Usa el mismo mapeo país → región que el resto del sitio (getRegion),
         // en vez de comparar contra el texto de FLAGS[country].region, que está
         // en español ("Norteamérica", "Sudamérica") y nunca coincidía con
         // "North America"/"South America", dejando NA y SA sin funcionar.
-        const region = getRegion(country);
+        const region = regionOverride || getRegion(country);
         return (region === "NA" || region === "SA" || region === "EMEA" || region === "ASIA") ? region : "OTHER";
     }
 
@@ -13993,7 +14117,7 @@
         const entries = [];
         PLAYERS.forEach((p, i) => {
             const matchQuery = zcfPlayerMatchesQuery(p, nq);
-            const matchRegion = zcfSelectedRegions.size === 0 || zcfSelectedRegions.has(zcfGetRegionCode(p.country));
+            const matchRegion = zcfSelectedRegions.size === 0 || zcfSelectedRegions.has(zcfGetRegionCode(p.country, p.region));
             const matchCountry = zcfSelectedCountries.size === 0 || zcfSelectedCountries.has(p.country);
             const matchActivity = zcfSelectedActivity.size === 0 || zcfSelectedActivity.has(p.status);
             let matchMovement = true;
@@ -14390,7 +14514,7 @@
             const h = computeHighlights(pos, PLAYERS.length);
             const realRise = change.type === "up" ? `+${change.value}` : "—";
             const realFall = change.type === "down" ? `−${change.value}` : "—";
-            const region = getRegion(p.country);
+            const region = p.region || getRegion(p.country);
             const wedgeClass = medal ? `wedge-${medal}` : "wedge-default";
             const iconHtml = ""; // playerIconHtml(p.key); — desactivado temporalmente para ver cómo luce sin íconos
             return `
@@ -16779,7 +16903,7 @@
         {
             day: "Domingo", num: 4, month: "OCT",
             matches: [
-                { label: "Gran final", home: "OMEN NOCTE", away: "Unorthodox", time: "" }
+                { label: "Gran final", home: "OMEN NOCTE", away: "Unorthodox", time: "5:20 p.m." }
             ]
         },
         {
