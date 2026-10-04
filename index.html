@@ -8524,6 +8524,189 @@
                 max-width: 860px;
             }
         }
+
+        /* ===================================================================
+           ESCRITORIO (>=1024px): novedades estilo FIFA, flechas, menú lateral
+           parcial y brillo al pasar el cursor por las pestañas.
+        =================================================================== */
+        /* Menú de tres rayas: sin barra de desplazamiento visible (el scroll sigue funcionando) */
+        .mobile-menu { scrollbar-width: none; -ms-overflow-style: none; }
+        .mobile-menu::-webkit-scrollbar { display: none; width: 0; height: 0; }
+        .menu-backdrop { display: none; }
+        .novedades-arrow { display: none; }
+        .novedades-progress-item { display: contents; }
+        .novedades-progress-label { display: none; }
+
+        @media (min-width: 1024px) {
+            /* ---- Novedades: tarjeta contenida en el ancho de la página ---- */
+            .novedades-card {
+                /* Más ancho que la columna de la página (hasta 1280px), centrado */
+                width: min(1280px, calc(100vw - 80px));
+                margin-left: calc(50% - min(640px, 50vw - 40px));
+                border-radius: 4px;
+                background: #0e0e10;
+                border: 1px solid rgba(255,255,255,0.07);
+                --nov-h: 440px;
+            }
+            .novedad-slide {
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+                height: var(--nov-h);
+            }
+            .novedad-img-wrap {
+                order: 2;
+                flex: 1 1 auto;
+                width: auto;
+                height: 100%;
+                aspect-ratio: auto;
+            }
+            .novedad-body {
+                order: 1;
+                flex: 0 0 34%;
+                max-width: 34%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 32px 34px 32px 38px;
+                background: linear-gradient(135deg, #12151c, #0b0c10);
+            }
+            .novedad-tag { font-size: 0.7rem; margin-bottom: 10px; color: #8dc2ff; }
+            .novedad-text {
+                font-size: 1.6rem;
+                line-height: 1.28;
+                font-weight: 800;
+                margin-bottom: 20px;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .novedad-more-btn { align-self: flex-start; font-size: 0.82rem; padding: 10px 22px; border-radius: 4px; transition: transform .2s ease, box-shadow .2s ease; }
+            .novedad-more-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.25); }
+            .novedad-social-row { gap: 8px; }
+
+            /* ---- Flechas: chevron blanco sobre degradado negro, solo al pasar el cursor ---- */
+            .novedades-arrow {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                top: 0;
+                height: var(--nov-h);
+                width: 120px;
+                padding: 0 22px;
+                border: none;
+                border-radius: 0;
+                background: none;
+                color: #ffffff;
+                cursor: pointer;
+                z-index: 5;
+                opacity: 0;
+                transition: opacity .25s ease;
+            }
+            .novedades-arrow svg {
+                width: 36px;
+                height: 36px;
+                filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+            }
+            .novedades-arrow-prev {
+                left: 34%;
+                justify-content: flex-start;
+                background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            }
+            .novedades-arrow-next {
+                right: 0;
+                justify-content: flex-end;
+                background: linear-gradient(to left, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            }
+            .novedades-track:hover ~ .novedades-arrow,
+            .novedades-arrow:hover,
+            .novedades-arrow:focus-visible { opacity: 1; }
+            .novedades-arrow:focus-visible { outline: none; }
+
+            /* ---- Fila inferior: barra + título de cada novedad ---- */
+            .novedades-progress-row {
+                gap: 18px;
+                padding: 0;
+                border-top: 1px solid rgba(255,255,255,0.07);
+            }
+            .novedades-progress-item {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 0;
+                min-width: 0;
+            }
+            .novedades-progress-track,
+            .novedades-progress-track.is-active { flex: none; width: 100%; height: 3px; border-radius: 0; background: rgba(255,255,255,0.14); }
+            .novedades-progress-label {
+                display: block;
+                text-align: left;
+                background: none;
+                border: none;
+                color: rgba(255,255,255,0.55);
+                padding: 12px 4px 16px;
+                cursor: pointer;
+                transition: color .2s ease;
+            }
+            .novedades-progress-label:hover,
+            .novedades-progress-item:has(.is-active) .novedades-progress-label { color: #fff; }
+            .npl-tag { display: block; font-size: 0.62rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #8dc2ff; margin-bottom: 4px; }
+            .npl-text {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                font-size: 0.85rem;
+                font-weight: 700;
+                line-height: 1.3;
+            }
+        }
+
+        /* ---- Bracket de eliminación directa en escritorio: tamaño original (se ve completo),
+               con el botón "Ver bracket completo" y sin los botones de ronda, que ahí no hacen falta ---- */
+        @media (min-width: 1024px) {
+            .zcgrp-round-carousel { display: none; }
+        }
+
+        /* ---- Menú de tres rayas: panel lateral parcial en tablet y escritorio ---- */
+        @media (min-width: 700px) {
+            .mobile-menu {
+                width: 420px;
+                max-width: 92vw;
+                border-right: 1px solid rgba(255,255,255,0.08);
+            }
+            .menu-backdrop {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.55);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity .3s ease;
+                z-index: 899;
+            }
+            .menu-backdrop.open { opacity: 1; pointer-events: auto; }
+        }
+
+        /* ---- Al pasar el cursor: solo un resplandor suave; el tamaño y el grosor no cambian,
+               así las demás pestañas nunca se mueven ---- */
+        @media (hover: hover) and (pointer: fine) {
+            .section-tab,
+            .mobile-menu-link,
+            .mm-sub-link { transition: color .25s ease, text-shadow .25s ease; }
+            .section-tab:hover {
+                color: #ffffff;
+                text-shadow: 0 0 6px rgba(255,255,255,0.55);
+            }
+            .section-tab-zc26:hover {
+                color: #FFFF2B;
+                text-shadow: 0 0 6px rgba(255,255,43,0.55);
+            }
+            .section-tab:hover::after { transform: scaleX(1); opacity: .7; }
+            .mobile-menu-link:hover,
+            .mm-sub-link:hover { color: #ffffff; text-shadow: 0 0 6px rgba(255,255,255,0.5); }
+            .mobile-menu-link-zc26:hover { color: #FFFF2B; text-shadow: 0 0 6px rgba(255,255,43,0.5); }
+        }
     </style>
 </head>
 <body>
@@ -8588,6 +8771,7 @@
     </div>
 </div>
 
+<div class="menu-backdrop" id="menuBackdrop"></div>
 <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-topbar">
         <div class="lang-switcher" id="langSwitcher">
@@ -8785,6 +8969,8 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" class="novedades-arrow novedades-arrow-prev" id="novedadesPrev" aria-label="Novedad anterior"><svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button type="button" class="novedades-arrow novedades-arrow-next" id="novedadesNext" aria-label="Siguiente novedad"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                 <div class="novedades-progress-row" id="novedadesProgressRow"></div>
             </div>
         </div>
@@ -14247,6 +14433,7 @@
         }
         if (mobileMenu && mobileMenu.classList.contains("open")) {
             mobileMenu.classList.remove("open");
+            const _bd2 = document.getElementById("menuBackdrop"); if (_bd2) _bd2.classList.remove("open");
             menuToggle.classList.remove("active");
             menuToggle.setAttribute("aria-expanded", "false");
         }
@@ -14500,7 +14687,7 @@
         {
             day: "Sábado", num: 3, month: "OCT",
             matches: [
-                { label: "Tercer puesto", home: "Leviatán Esports", away: "GTA", time: "" }
+                { label: "Tercer puesto", home: "Leviatán Esports", away: "GTA", time: "5:10 p.m." }
             ]
         },
         {
@@ -14624,8 +14811,8 @@
         ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"], ["Miseryoung", "Unorthodox", "GTA|Unorthodox|KO"], ["Lie in April!", "Unorthodox", "GTA|Unorthodox|KO"],
         // 3er puesto · Leviatán 4-2 GTA (orden de los sets: GTA, GTA, Lev, Lev, Lev, Lev)
         ["thoniolo", "GTA", "Leviatán Esports|GTA"], ["nefi", "GTA", "Leviatán Esports|GTA"],
-        ["Freddy.jh", "Leviatán Esports", "Leviatán Esports|GTA"], ["Shark", "Leviatán Esports", "Leviatán Esports|GTA"],
-        ["Freddy.jh", "Leviatán Esports", "Leviatán Esports|GTA"], ["Cross", "Leviatán Esports", "Leviatán Esports|GTA"]
+        ["Shark", "Leviatán Esports", "Leviatán Esports|GTA"], ["Shark", "Leviatán Esports", "Leviatán Esports|GTA"],
+        ["Shark", "Leviatán Esports", "Leviatán Esports|GTA"], ["Cross", "Leviatán Esports", "Leviatán Esports|GTA"]
     ];
     /* Nombre con el que aparece en los reportes → nombre en la plantilla (para poner el Estelar
        en la tarjeta del jugador). "infernus" y "Jet li" no están en las plantillas: sin asignar. */
@@ -14699,7 +14886,7 @@
         { m: "LPE|Acuñas", type: "ta", team: "Acuñas", player: "Yascer", rep: "Yascer" },
         { m: "GTA|Unorthodox|KO", type: "ta", team: "GTA", player: "Adri", rep: "Adri", min: 8 },
         { m: "GTA|Unorthodox|KO", type: "ta", team: "Unorthodox", player: "robertbv", rep: "robertbv", min: 22 },
-        { m: "Leviatán Esports|OMEN NOCTE", type: "tr", team: "Leviatán Esports", player: "Shark", rep: "Shark", min: 34 },
+        { m: "Leviatán Esports|OMEN NOCTE", type: "tr", team: "Leviatán Esports", player: "JulioCr36D", rep: "JulioCr36D", min: 34 },
         { m: "Leviatán Esports|GTA", type: "ta", team: "GTA", player: "Adri", rep: "Adri", min: 55 },
         { m: "Leviatán Esports|GTA", type: "ta", team: "Leviatán Esports", player: "Shark", rep: "Shark", min: 80 },
         { m: "Leviatán Esports|GTA", type: "ta", team: "Leviatán Esports", player: "Freddy.jh", rep: "Freddy.jh", min: 120 }
@@ -14720,8 +14907,9 @@
         { m: "Quiero KeKe|POS JR", team: "Quiero KeKe", player: "Marro9281", n: 1 },
         { m: "SYNOX GAMING|Wosu Esport", team: "SYNOX GAMING", player: "romanqq", n: 1 },
         { m: "Leviatán Esports|POS JR", team: "Leviatán Esports", player: "Shark", n: 1 },
-        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Freddy.jh", n: 1 },
-        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Shark", n: 1 },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Shark", n: 3 },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Freddy.jh", n: 3 },
+        { m: "Leviatán Esports|GTA", team: "Leviatán Esports", player: "Cross", n: 1 },
         { m: "RAISE EARTH|SYNOX GAMING", team: "RAISE EARTH", player: "kikyy", n: 1 },
         { m: "Egresados Del Conalep|OMEN NOCTE", team: "OMEN NOCTE", player: "Ovied7", n: 2 },
         { m: "OMEN NOCTE|KURO ØNIX", team: "OMEN NOCTE", player: "Ovied7", n: 2 },
@@ -16088,6 +16276,8 @@
     const ZC26_RATING_TEAM_BONUS = { "op7": 1.2 };
     /* Bonus fijo de calificación por jugador (nombre en la plantilla). */
     const ZC26_RATING_PLAYER_BONUS = { "Cross": 0.5 };
+    /* Bonus fijo por partido y equipo (clave del partido → equipo → bonus). */
+    const ZC26_RATING_MATCH_TEAM_BONUS = { "Leviatán Esports|GTA": { "GTA": 0.6 } };
     /* Pequeña variación (±0.1 a ±0.3) derivada del nombre del jugador, para que las notas
        de quienes no tienen estadísticas propias (goles/asistencias/tarjetas) no queden todas
        idénticas (p.ej. todos 5.7 en el equipo perdedor). Es determinística por nombre, así
@@ -16104,7 +16294,7 @@
         if (ov && name != null && ov[name] != null) return Math.max(0, Math.min(10, Math.round((ov[name] + 0.3 * st.a) * 10) / 10));
         const r = ctx.res;
         const won = team === ctx.home ? r.h > r.a : r.a > r.h;
-        const v = 6.0 + (won ? 0.7 : -0.3) + 1.1 * st.star + 0.5 * st.g - 0.4 * st.ta - 1.5 * st.tr + 0.3 * st.a + (ZC26_RATING_TEAM_BONUS[team] || 0) + (ZC26_RATING_PLAYER_BONUS[name] || 0) + zc26RatingJitter(name);
+        const v = 6.0 + (won ? 0.7 : -0.3) + 1.1 * st.star + 0.5 * st.g - 0.4 * st.ta - 1.5 * st.tr + 0.3 * st.a + (ZC26_RATING_TEAM_BONUS[team] || 0) + ((ZC26_RATING_MATCH_TEAM_BONUS[zc26CtxKey(ctx)] || {})[team] || 0) + (ZC26_RATING_PLAYER_BONUS[name] || 0) + zc26RatingJitter(name);
         return Math.max(1, Math.min(10, Math.round(v * 10) / 10));
     }
     function zc26RatingCls(v) {
@@ -17518,8 +17708,47 @@ const buildList = f => {
             if (outer) {
                 const cols = document.querySelectorAll("#zcbracket .zcbracket-col");
                 const col = cols[index];
-                if (col) outer.scrollTo({ left: Math.max(0, col.offsetLeft - 10), behavior: "smooth" });
+                if (col) animateBracketScroll(Math.max(0, col.offsetLeft - 10));
             }
+        }
+
+        // Desplazamiento animado con aceleración y frenado suaves (no instantáneo).
+        // Más largo cuanto más lejos esté la ronda (de Octavos a Final tarda más).
+        let bracketAnimId = null;
+        let bracketAnimating = false;
+        function animateBracketScroll(target) {
+            if (!outer) return;
+            const maxScroll = Math.max(0, outer.scrollWidth - outer.clientWidth);
+            target = Math.max(0, Math.min(maxScroll, target));
+            const start = outer.scrollLeft;
+            const dist = target - start;
+            if (Math.abs(dist) < 2) return;
+            if (bracketAnimId) cancelAnimationFrame(bracketAnimId);
+            if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                outer.scrollLeft = target;
+                return;
+            }
+            const duration = Math.min(1100, 520 + Math.abs(dist) * 0.35);
+            const t0 = performance.now();
+            const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+            bracketAnimating = true;
+            function step(now) {
+                const t = Math.min(1, (now - t0) / duration);
+                outer.scrollLeft = start + dist * ease(t);
+                if (t < 1) bracketAnimId = requestAnimationFrame(step);
+                else { bracketAnimId = null; bracketAnimating = false; }
+            }
+            bracketAnimId = requestAnimationFrame(step);
+        }
+        // Si la persona mueve el bracket a mano mientras anima, se cancela la animación
+        if (outer) {
+            const stopAnim = () => {
+                if (bracketAnimId) { cancelAnimationFrame(bracketAnimId); bracketAnimId = null; }
+                bracketAnimating = false;
+            };
+            outer.addEventListener("wheel", stopAnim, { passive: true });
+            outer.addEventListener("touchstart", stopAnim, { passive: true });
+            outer.addEventListener("pointerdown", stopAnim, { passive: true });
         }
 
         items.forEach((item, i) => {
@@ -17546,6 +17775,7 @@ const buildList = f => {
             let syncTicking = false;
             function syncActiveFromScroll() {
                 syncTicking = false;
+                if (bracketAnimating) return; // durante la animación la pestaña ya quedó en la ronda elegida
                 const cols = document.querySelectorAll("#zcbracket .zcbracket-col");
                 if (!cols.length) return;
                 const maxScroll = outer.scrollWidth - outer.clientWidth;
@@ -17800,6 +18030,7 @@ const buildList = f => {
         document.querySelectorAll(".modal-overlay.active").forEach((el) => el.classList.remove("active"));
         modalStack = [];
         mobileMenu.classList.add("open");
+        const _bd = document.getElementById("menuBackdrop"); if (_bd) _bd.classList.add("open");
         menuToggle.classList.add("active");
         menuToggle.setAttribute("aria-expanded", "true");
         lockBodyScroll();
@@ -17807,6 +18038,7 @@ const buildList = f => {
     function closeMenu() {
         zcPlaySound("clicksalir");
         mobileMenu.classList.remove("open");
+        const _bd = document.getElementById("menuBackdrop"); if (_bd) _bd.classList.remove("open");
         menuToggle.classList.remove("active");
         menuToggle.setAttribute("aria-expanded", "false");
         const anyOpen = document.querySelectorAll(".modal-overlay.active").length > 0;
@@ -17854,6 +18086,9 @@ const buildList = f => {
     applySectionFilter("inicio", true);
 
     if (menuToggle && mobileMenu) {
+        const _menuBackdrop = document.getElementById("menuBackdrop");
+        if (_menuBackdrop) _menuBackdrop.addEventListener("click", () => { if (mobileMenu.classList.contains("open")) closeMenu(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && mobileMenu.classList.contains("open")) closeMenu(); });
         menuToggle.addEventListener("click", () => {
             mobileMenu.classList.contains("open") ? closeMenu() : openMenu();
         });
@@ -19060,13 +19295,27 @@ const buildList = f => {
         let lastUserScrollAt = 0; // último evento de scroll manual
 
         // construir barras de progreso (una por novedad)
-        slides.forEach(() => {
+        slides.forEach((slide, i) => {
+            const item = document.createElement("div");
+            item.className = "novedades-progress-item";
             const barTrack = document.createElement("div");
             barTrack.className = "novedades-progress-track";
             const fill = document.createElement("div");
             fill.className = "novedades-progress-fill";
             barTrack.appendChild(fill);
-            progressRow.appendChild(barTrack);
+            item.appendChild(barTrack);
+            // Título bajo la barra (solo se muestra en escritorio, como en FIFA)
+            const lbl = document.createElement("button");
+            lbl.type = "button";
+            lbl.className = "novedades-progress-label";
+            const tagEl = slide.querySelector(".novedad-tag");
+            const txtEl = slide.querySelector(".novedad-text");
+            lbl.innerHTML = '<span class="npl-tag"></span><span class="npl-text"></span>';
+            lbl.querySelector(".npl-tag").textContent = tagEl ? tagEl.textContent : "";
+            lbl.querySelector(".npl-text").textContent = txtEl ? txtEl.textContent : "";
+            lbl.addEventListener("click", () => goTo(i));
+            item.appendChild(lbl);
+            progressRow.appendChild(item);
         });
 
         const tracks = progressRow.querySelectorAll(".novedades-progress-track");
@@ -19205,6 +19454,12 @@ const buildList = f => {
                 goTo(total - 1); // de la primera novedad, deslizar hacia atrás manda a la última
             }
         });
+
+        // Flechas de escritorio (anterior / siguiente, circulares)
+        const navPrev = document.getElementById("novedadesPrev");
+        const navNext = document.getElementById("novedadesNext");
+        if (navPrev) navPrev.addEventListener("click", () => { zcPlaySound && zcPlaySound("click"); goTo(currentIndex - 1); });
+        if (navNext) navNext.addEventListener("click", () => { zcPlaySound && zcPlaySound("click"); goTo(currentIndex + 1); });
 
         render();
         scheduleNext();
