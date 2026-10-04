@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tipografía de escritorio (Noto Sans): no depende de las fuentes instaladas en Windows -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>ZC26 - Brawl Stars Championship</title>
     <style>
         /* Pantalla de carga inicial: círculo girando hasta que carguen todas las imágenes */
@@ -8662,11 +8666,11 @@
             }
         }
 
-        /* ---- Tipografía de escritorio: Arial, sobria como la de FIFA ----
+        /* ---- Tipografía de escritorio: Noto Sans (descargada de Google Fonts), sobria como la de FIFA ----
            En Windows, Segoe UI con pesos 800/900 se ve muy grueso y "infantil";
            Arial solo tiene normal y negrita, así queda más limpia. ---- */
         @media (min-width: 1024px) {
-            * { font-family: Arial, Helvetica, sans-serif; }
+            * { font-family: 'Noto Sans', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         }
 
         /* ---- Bracket de eliminación directa en escritorio: tamaño original (se ve completo),
