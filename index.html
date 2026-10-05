@@ -6005,8 +6005,8 @@
         .ach-card.purple::before {
             content: "";
             position: absolute;
-            inset: 0;
-            border-radius: 10px;
+            inset: -1px;
+            border-radius: 7px;
             padding: 1.5px;
             pointer-events: none;
             background: linear-gradient(115deg, transparent 30%, var(--ach-shine) 50%, transparent 70%);
@@ -9225,6 +9225,48 @@
             display: block; margin-top: 2px; font-size: 0.5rem; font-weight: 500;
             letter-spacing: 0.2px; text-transform: none; color: #7d838a;
         }
+
+        /* Menú emergente de premios (Balón / Bota de Oro) */
+        .zc-award-pop {
+            position: fixed; inset: 0; z-index: 200000; display: flex; align-items: center; justify-content: center;
+            padding: 20px; background: rgba(0,0,0,0.22);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: zcAwardFade 0.25s ease; cursor: pointer;
+        }
+        .zc-award-card {
+            position: relative; width: 100%; max-width: 330px; text-align: center; padding: 22px 20px 20px;
+            background: rgba(16,16,16,0.62); border: 1px solid rgba(255,255,255,0.18); border-radius: 14px;
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.35); cursor: default;
+            animation: zcAwardPop 0.25s cubic-bezier(0.2, 0.8, 0.3, 1);
+        }
+        .zc-award-x { position: absolute; top: 8px; right: 12px; background: none; border: none; color: #8a9097; font-size: 1rem; cursor: pointer; }
+        .zc-award-img { width: 92px; height: 92px; object-fit: contain; }
+        .zc-award-title { margin-top: 8px; font-size: 1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #E3B53C; }
+        .zc-award-sub { margin-top: 2px; font-size: 0.62rem; color: #7d838a; }
+        .zc-award-text { margin-top: 12px; font-size: 0.78rem; line-height: 1.45; color: #cfd3d8; }
+        .zc-award-text b { color: #fff; }
+        @keyframes zcAwardFade { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zcAwardPop { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+        .vitrina-label { max-width: 96px; line-height: 1.2; }
+
+        /* Logros y premios un poco más pequeños (mismas proporciones) */
+        .ach-list { width: 100%; }
+        .ach-list .ach-card { zoom: 0.86; }
+        .vitrina-card { zoom: 0.85; }
+
+        /* PREMIOS: hasta 4 por fila, mismo tamaño de icono (incluido Star Player) y esquinas menos redondeadas */
+        .vitrina-row { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px !important; }
+        .vitrina-row .vitrina-card {
+            zoom: 1; width: auto; min-width: 0; padding: 8px 4px 6px; gap: 3px; border-radius: 7px;
+        }
+        .vitrina-row .vitrina-img { width: 44px; height: 44px; object-fit: contain; flex: 0 0 auto; }
+        .vitrina-row .vitrina-label {
+            max-width: 100%; font-size: 0.52rem; letter-spacing: 0.4px; white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+        .vitrina-row .vitrina-date { font-size: 0.54rem; }
+        .ach-card { border-radius: 7px; overflow: visible; }
     </style>
 </head>
 <body>
@@ -9969,6 +10011,7 @@
                             <label class="zcf-checkbox-item" data-achievement="champion"><span class="zcf-checkbox-box"></span>Champion</label>
                             <label class="zcf-checkbox-item" data-achievement="runner-up"><span class="zcf-checkbox-box"></span>2nd Runner-Up</label>
                             <label class="zcf-checkbox-item" data-achievement="3rd-4th"><span class="zcf-checkbox-box"></span>3rd-4th Place</label>
+                            <label class="zcf-checkbox-item" data-achievement="individual"><span class="zcf-checkbox-box"></span>Individual Awards</label>
                         </div>
                     </div>
                 </div>
@@ -12482,7 +12525,7 @@
         {
             key: "miseryoung",
             zcTeam: "Unorthodox",
-            name: ".miseryoung", country: "MX", team: "Unorthodox (UNORTHODOX GANG)", teamTag: "UOG", points: 15, prevPoints: 0,
+            name: ".miseryoung", country: "PE", team: "Unorthodox (UNORTHODOX GANG)", teamTag: "UOG", points: 15, prevPoints: 0,
             events: "1 (3v3)", titles: "Campeón", sets: "--", matches: "0 - 0",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: [],
@@ -13030,7 +13073,7 @@
         ["diego", 1502.32, "NA", 21, 1],  // 8. Diego
         ["daniel17", 1469.50, "NA", 41, 1],  // 9. Daniel
         ["heritage", 1463.56, "SA", 30, 1],  // 10. Heritage
-        ["miseryoung", 1415.70, "NA", 60, 1],  // 11. .miseryoung
+        ["miseryoung", 1415.70, "SA", 60, 1],  // 11. .miseryoung
         ["owneronyt", 1406.58, "SA", 45, 1],  // 12. Owneronyt
         ["rnowtt", 1395.23, "SA", 52, 1],  // 13. rNowtt
         ["jdxz", 1391.23, "SA", 53, 1],  // 14. JdXz
@@ -13313,8 +13356,22 @@
             4: { date: "2026-10-03", place: "4°", tier: "4to Lugar", tournament: "ZC26 - 3er y 4to Lugar", teamA: "GTA", scoreA: 2, teamB: "LEV", scoreB: 4, result: "4to lugar" }
         };
         const ZC26_AWARDS = {
-            miseryoung: { date: "2026-10-04", place: "Premio", tier: "Premio", tournament: "ZC26 - Premio individual", result: "Balón de Oro · MVP del torneo", img: "LOGROS/Balon-de-Oro(MejorJugador).png", cls: "award-gold", award: "mvp" },
-            mokka: { date: "2026-10-04", place: "Premio", tier: "Premio", tournament: "ZC26 - Premio individual", result: "Bota de Oro · Máximo Estelar del torneo (9 Estelares)", img: "LOGROS/Bota-de-Oro(MáximoGoleador).png" }
+            miseryoung: { date: "2026-10-04", place: "Premio", tier: "Premio", tournament: "ZC26 - Premio individual", result: "Balón de Oro · MVP del torneo", img: "LOGROS/Balon-de-Oro(MejorJugador).png", cls: "award-gold", award: "mvp", event: "ZC26 Gran Final", disp: "04-10-26" },
+            mokka: { date: "2026-10-04", place: "Premio", tier: "Premio", tournament: "ZC26 - Premio individual", result: "Star Player · Mayor cantidad de Estelares del torneo (9 Estelares)", img: "LOGROS/Bota-de-Oro(MáximoGoleador).png", cls: "award-gold", award: "boot", event: "ZC26 Gran Final", disp: "04-10-26", stars: 9 }
+        };
+        const ZC_HOF_AWARDS = {
+            // Leviatán · ZC26 Gran Final: iXLCross se lleva el Balón y la Bota de esa fecha.
+            taikisha:   [ { kind: "mvp",  iso: "2026-08-09", disp: "08-09-26", event: "ZC26 Gran Final" },
+                          { kind: "boot", iso: "2026-08-09", disp: "08-09-26", event: "ZC26 Gran Final", stars: 9 } ],
+            // Team Radiante · ZC23 Grand Final
+            jerson7:    [ { kind: "mvp",  iso: "2023-02-07", disp: "07-02-23", event: "ZC23 Grand Final" },
+                          { kind: "boot", iso: "2024-04-28", disp: "28-04-24", event: "ZC24 Grand Final", stars: 7 } ],
+            darkiro:    [ { kind: "boot", iso: "2023-02-07", disp: "07-02-23", event: "ZC23 Grand Final", stars: 8 } ],
+            // Team Radiante · ZC24 Grand Final
+            joseantonio:[ { kind: "mvp",  iso: "2024-04-28", disp: "28-04-24", event: "ZC24 Grand Final" } ],
+            // LPPS · ZC24 Grand Final
+            hades:      [ { kind: "mvp",  iso: "2024-06-30", disp: "30-06-24", event: "ZC24 Grand Final" } ],
+            jared:      [ { kind: "boot", iso: "2024-06-30", disp: "30-06-24", event: "ZC24 Grand Final", stars: 10 } ]
         };
         const TITLE_BY_TOP = { 1: "Campeón", 2: "Subcampeón", 3: "3er Lugar", 4: "4to Lugar" };
         C.newPlayers.forEach(n => {
@@ -13356,6 +13413,17 @@
             }
             // Premios individuales del torneo (se muestran en Logros con su imagen).
             if (ZC26_AWARDS[p.key]) p.achievements.push(Object.assign({}, ZC26_AWARDS[p.key]));
+            // Premios individuales de otros torneos del Salón de la Fama (MVP + Star Player de los campeones).
+            // THE BLACKCATS: sin Star Player para nadie (y sus jugadores no están en el ranking).
+            (ZC_HOF_AWARDS[p.key] || []).forEach(x => {
+                const isMvp = x.kind === "mvp";
+                p.achievements.push({
+                    date: x.iso, place: "Premio", tier: "Premio", tournament: x.event + " - Premio individual",
+                    result: isMvp ? "Balón de Oro · MVP del torneo" : "Star Player · Mayor cantidad de Estelares del torneo (" + x.stars + " Estelares)",
+                    img: isMvp ? "LOGROS/Balon-de-Oro(MejorJugador).png" : "LOGROS/Bota-de-Oro(MáximoGoleador).png",
+                    cls: "award-gold", award: x.kind, event: x.event, disp: x.disp, stars: x.stars
+                });
+            });
             if (p.trophyDates) p.trophyDates = p.trophyDates.filter(d => d !== "Campeón 04-10-2026");
             if (top === 1) p.trophyDates = (p.trophyDates || []).concat(["Campeón 04-10-2026"]);
             if (p.trophyDates && !p.trophyDates.length) delete p.trophyDates;
@@ -13702,6 +13770,7 @@
             if (a.tier === "Campeón" || a.tier === "1er Lugar") types.add("champion");
             else if (a.tier === "Subcampeón" || a.tier === "2do Lugar") types.add("runner-up");
             else if (a.tier === "3er-4to Lugar" || a.tier === "3er Lugar" || a.tier === "4to Lugar") types.add("3rd-4th");
+            if (a.award) types.add("individual");
         });
         return types;
     }
@@ -14626,9 +14695,36 @@
         return a.place;
     }
 
+    // Menú emergente de premios individuales: explica por qué se ganó el Balón / la Bota de Oro.
+    function zcOpenAwardPopup(a, p) {
+        const isBoot = a.award === "boot";
+        const title = isBoot ? "Star Player" : "Balón de Oro";
+        const ev = a.event || "ZC26";
+        const reason = isBoot
+            ? `<b>${p.name}</b> ganó el Star Player del ${ev} por conseguir la <b>mayor cantidad de Estelares del torneo</b>${a.stars ? `: <b>${a.stars} Estelares</b>` : ""}.`
+            : `<b>${p.name}</b> ganó el Balón de Oro del ${ev} por ser elegido el <b>MVP del torneo</b>, el jugador más valioso.`;
+        const old = document.getElementById("zcAwardPopup");
+        if (old) old.remove();
+        const el = document.createElement("div");
+        el.id = "zcAwardPopup";
+        el.className = "zc-award-pop";
+        el.innerHTML = `<div class="zc-award-card" role="dialog" aria-modal="true">
+            <button type="button" class="zc-award-x" aria-label="Cerrar">✕</button>
+            <img class="zc-award-img" src="${encodeURI(a.img)}" alt="">
+            <div class="zc-award-title">${title}</div>
+            <div class="zc-award-sub">${ev} · Premio individual · ${a.disp || "04-10-26"}</div>
+            <div class="zc-award-text">${reason}</div>
+        </div>`;
+        const close = () => { el.remove(); document.removeEventListener("keydown", onKey, true); };
+        const onKey = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(); } };
+        el.addEventListener("click", (e) => { if (e.target === el || e.target.closest(".zc-award-x")) close(); });
+        document.addEventListener("keydown", onKey, true);
+        document.body.appendChild(el);
+    }
+
     function achResultHtml(a) {
-        if (!a.img) return `<div class="ach-result">${a.result}</div>`;
-        return `<div class="ach-result ach-award"><img class="ach-award-img" src="${encodeURI(a.img)}" alt="" onerror="this.style.display='none'"><span>${a.result}</span></div>`;
+        // Los iconos de premios individuales (Balón/Bota de Oro) viven en PREMIOS, no en Logros.
+        return `<div class="ach-result">${a.result}</div>`;
     }
 
     function achTierClass(a) {
@@ -14791,6 +14887,18 @@
 
         // Sin puntos ni logros de ningún tipo, la reputación parte de un piso bajo.
         if (!p.points && firsts + seconds + thirds + fourths === 0) score = Math.min(score, 20);
+
+        // ZC26: impulso de reputación internacional para los jugadores de los 4 mejores equipos
+        // del torneo (campeón, subcampeón, 3.º y 4.º), más un extra para Mokka y Robert.
+        const ZC26_REP_BONUS = { "Campeón": 8, "Subcampeón": 7, "3er Lugar": 6, "4to Lugar": 5 };
+        let repBoost = 0;
+        (p.achievements || []).forEach(a => {
+            if ((a.tournament || "").indexOf("ZC26") === 0 && ZC26_REP_BONUS[a.tier]) {
+                repBoost = Math.max(repBoost, ZC26_REP_BONUS[a.tier]);
+            }
+        });
+        if (p.key === "mokka" || p.key === "robertbv") repBoost += 4;
+        score += repBoost;
 
         return Math.max(5, Math.min(99, Math.round(score)));
     }
@@ -15051,16 +15159,15 @@
                     ? [{ ti: uogIdx, date: "04-10-26", img: "LOGROS/runner-up.png", label: "runner-up" }]
                     : [];
                 // Balón de Oro (MVP del torneo): icono en la vitrina; abre la Gran Final del Salón de la Fama.
-                const mvpAward = (p.achievements || []).find(a => a.award === "mvp");
-                const mvpCards = (mvpAward && uogIdx >= 0)
-                    ? [{ ti: uogIdx, date: "04-10-26", img: mvpAward.img, label: "MVP" }]
-                    : [];
-                const cards = champCards.concat(mvpCards, runnerCards);
+                const mkAwardCard = (x) => ({ award: String((p.achievements || []).indexOf(x)), date: x.disp || "04-10-26", img: x.img, label: x.award === "boot" ? "Star Player" : "MVP" });
+                const mvpCards = (p.achievements || []).filter(x => x.award === "mvp").map(mkAwardCard);
+                const bootCards = (p.achievements || []).filter(x => x.award === "boot").map(mkAwardCard);
+                const cards = champCards.concat(mvpCards, runnerCards, bootCards);
                 if (!cards.length) return "";
                 return `
             <div class="info-block-title">PREMIOS</div>
             <div class="vitrina-row" style="display:flex;flex-wrap:wrap;gap:10px;">
-            ${cards.map(v => `<div class="vitrina-card" data-trophy-index="${v.ti}">
+            ${cards.map(v => `<div class="vitrina-card" ${v.award ? `data-award-idx="${v.award}"` : `data-trophy-index="${v.ti}"`}>
                 <img src="${encodeURI(v.img)}" class="vitrina-img" alt="Premio">
                 <div class="vitrina-label">${v.label}</div>
                 <div class="vitrina-date">${v.date}</div>
@@ -15072,6 +15179,12 @@
         openModal("playerModalOverlay");
         panel.querySelectorAll(".vitrina-card[data-trophy-index]").forEach(card => {
             card.addEventListener("click", () => openTrophyModal(TROPHIES[+card.dataset.trophyIndex] || TROPHIES[TROPHIES.length - 1]));
+        });
+        panel.querySelectorAll(".vitrina-card[data-award-idx]").forEach(card => {
+            card.addEventListener("click", () => {
+                const a = (p.achievements || [])[+card.dataset.awardIdx];
+                if (a) zcOpenAwardPopup(a, p);
+            });
         });
         initCarousels(panel);
         initRadarTooltips(panel);
@@ -15361,7 +15474,7 @@
                 const tier = achTierClass(a);
                 const place = achPlaceLabel(a);
                 return `
-                <div class="ach-card ${tier}" data-ach-tier="${tier || "other"}" data-search="${searchNorm([a.date, place, a.tournament, a.teamA, a.teamB, a.result].filter(Boolean).join(" "))}">
+                <div class="ach-card ${tier}" data-ach-tier="${a.award ? "individual" : (tier || "other")}" data-search="${searchNorm([a.date, place, a.tournament, a.teamA, a.teamB, a.result].filter(Boolean).join(" "))}">
                     <div class="ach-top">
                         <span class="ach-date">${a.date}</span>
                         <span class="ach-place ${tier}">${place}</span>
@@ -15396,6 +15509,7 @@
                     <button type="button" class="am-filter-btn" data-ach-tier-filter="gold">Oro</button>
                     <button type="button" class="am-filter-btn" data-ach-tier-filter="silver">Plata</button>
                     <button type="button" class="am-filter-btn" data-ach-tier-filter="purple">3ro-4to</button>
+                    <button type="button" class="am-filter-btn" data-ach-tier-filter="individual">Individuales</button>
                 </div>
             </div>` : "";
         const searchHtml = achievements.length ? `
