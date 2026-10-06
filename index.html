@@ -30,16 +30,37 @@
             visibility: hidden;
             pointer-events: none;
         }
-        .zc-preloader-spinner {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.14);
-            border-top-color: #ffffff;
-            animation: zcPreloaderSpin 0.8s linear infinite;
+        /* Anillo que se llena de blanco hasta consumir el círculo, y luego el negro lo vuelve a consumir */
+        .zc-preloader-ring {
+            width: 40px;
+            height: 40px;
+            animation: zcRingSpin 2.4s linear infinite;
         }
-        @keyframes zcPreloaderSpin {
+        .zc-preloader-ring circle {
+            fill: none;
+            stroke-width: 10;
+        }
+        .zc-ring-track { stroke: #2b2b2b; }
+        .zc-ring-fill {
+            stroke: #fff;
+            stroke-linecap: round;
+            stroke-dasharray: 0 100;
+            stroke-dashoffset: 0;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            animation: zcRingFill 1.8s cubic-bezier(.65,.05,.35,.95) infinite;
+        }
+        @keyframes zcRingFill {
+            0%   { stroke-dasharray: 0 100;   stroke-dashoffset: 0; }
+            50%  { stroke-dasharray: 100 100; stroke-dashoffset: 0; }
+            100% { stroke-dasharray: 0 100;   stroke-dashoffset: -100; }
+        }
+        @keyframes zcRingSpin {
             to { transform: rotate(360deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .zc-preloader-ring { animation: none; }
+            .zc-ring-fill { animation-duration: 3.6s; }
         }
         html.zc-loading, html.zc-loading body {
             overflow: hidden !important;
@@ -2282,6 +2303,8 @@
         .zcfx-score-win { color: #ffffff; font-weight: 800; }
         .zcfx-row-win .zcfx-team-name { color: #ffffff; font-weight: 700; }
         .zcfx-row-lose .zcfx-team-name { color: #9a9fa8; }
+        .zcfx-date-num.zcfx-date-cancelled { color: #f28b82; }
+        .sz-status.sz-cancelled { color: #f28b82; }
         .zcfx-date-num.zcfx-date-final {
             font-size: 0.72rem;
             letter-spacing: 0.6px;
@@ -7568,7 +7591,7 @@
         }
         .novedades-progress-track {
             flex: 1;
-            height: 2px;
+            height: 1px;
             border-radius: 2px;
             background: rgba(255,255,255,0.22);
             overflow: hidden;
@@ -8011,6 +8034,8 @@
             line-height: 1.25;
             margin-bottom: 18px;
         }
+        .novedad-detail-body a { color: #8dc2ff; text-decoration: underline; text-underline-offset: 2px; }
+        .novedad-detail-body a:active { opacity: 0.7; }
         .novedad-detail-body p {
             font-size: 13.5px;
             line-height: 1.7;
@@ -8834,7 +8859,7 @@
                 min-width: 0;
             }
             .novedades-progress-track,
-            .novedades-progress-track.is-active { flex: none; width: 100%; height: 3px; border-radius: 0; background: rgba(255,255,255,0.14); }
+            .novedades-progress-track.is-active { flex: none; width: 100%; height: 2px; border-radius: 0; background: rgba(255,255,255,0.14); }
             .novedades-progress-label {
                 display: block;
                 text-align: left;
@@ -9272,12 +9297,16 @@
 <body>
 
 <div id="zcPreloader" role="status" aria-live="polite" aria-label="Cargando">
-    <div class="zc-preloader-spinner"></div>
+    <svg class="zc-preloader-ring" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="zc-ring-track" cx="60" cy="60" r="52"/>
+        <circle class="zc-ring-fill" cx="60" cy="60" r="52" pathLength="100"/>
+    </svg>
 </div>
 <script>
 (function () {
     var loader = document.getElementById("zcPreloader");
-    if (!loader) return;
+    window.__zcLoaded = false;
+    if (!loader) { window.__zcLoaded = true; return; }
     var root = document.documentElement;
     root.classList.add("zc-loading");
     var done = false;
@@ -9286,6 +9315,11 @@
         done = true;
         root.classList.remove("zc-loading");
         loader.classList.add("zc-hide");
+        // Avisa a las demás partes de la página (p. ej. Novedades) cuando el loader ya terminó de desvanecerse
+        setTimeout(function () {
+            window.__zcLoaded = true;
+            document.dispatchEvent(new Event("zc:loaded"));
+        }, 450);
         setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 600);
     }
     // Espera a que TODAS las imágenes del documento terminen (cargadas o con error)
@@ -9501,6 +9535,15 @@
         <div class="home-section" id="home-novedades">
             <div class="novedades-card" id="novedadesCard">
                 <div class="novedades-track" id="novedadesTrack">
+                    <div class="novedad-slide" data-novedad-index="6">
+                        <div class="novedad-img-wrap"><img src="news/novedades5oct.png" alt="ZC26 ESPORTS"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">ZC26 ESPORTS™</div>
+                            <div class="novedad-text">TORNEO 1VS1 Edición México: Cómo participar y más</div>
+                            <button type="button" class="novedad-more-btn" data-open-novedad="5">Más info.</button>
+                        </div>
+                    </div>
+
                     <div class="novedad-slide" data-novedad-index="5">
                         <div class="novedad-img-wrap"><img src="news/novedades4oct.png" alt="ZC26 ESPORTS"></div>
                         <div class="novedad-body">
@@ -16775,7 +16818,7 @@
         {
             day: "Lunes", num: 5, month: "OCT",
             matches: [
-                { label: "Finalísima", home: "OMEN NOCTE", away: "Unorthodox", time: "" }
+                { label: "Finalísima", home: "OMEN NOCTE", away: "Unorthodox", time: "", cancelled: true }
             ]
         }
     ];
@@ -17654,6 +17697,14 @@
         return { start: start.time, end: end.time, extra };
     }
     function zc26DateHtml(day, r, m) {
+        if (m && m.cancelled) {
+            const lsC = m.time ? zc26LocalSchedule(day, m.time, zc26CountryCode) : null;
+            const dtC = lsC ? lsC.date : zc26Pad2(day.num) + "/" + (ZC26_MONTH_NUM[day.month] || day.month);
+            return `<div class="zcfx-date">
+            <span class="zcfx-date-num zcfx-date-num-sm zcfx-date-cancelled">Cancelado</span>
+            <span class="zcfx-date-month zcfx-date-time">${dtC}</span>
+        </div>`;
+        }
         if (r) {
             const lsF = (m && m.time) ? zc26LocalSchedule(day, m.time, zc26CountryCode) : null;
             const dtF = lsF ? lsF.date : zc26Pad2(day.num) + "/" + (ZC26_MONTH_NUM[day.month] || day.month);
@@ -17761,7 +17812,9 @@
             const dtHtml = `<div class="sz-dt"><span class="sz-date">${dateTxt}</span><span class="sz-time">${time}</span></div>`;
             const elapsed = now.getTime() - x.ts;
             let side;
-            if (r) {
+            if (m.cancelled) {
+                side = `<div class="sz-dt"><span class="sz-status sz-cancelled">Cancelado</span><span class="sz-date">${dateTxt}</span></div>`;
+            } else if (r) {
                 side = `<span class="sz-status">${r.wo ? "W.O." : (r.pen ? "Final (P)" : "Final")}</span>
                     <div class="sz-scores">
                         <span class="sz-score${zc26ResWinSide(r) === "h" ? " sz-score-win" : ""}">${r.h}${zc26PenSup(r, "h")}</span>
@@ -21920,6 +21973,8 @@ const buildList = f => {
         const total = slides.length;
 
         let currentIndex = 0;
+        // El avance automático solo arranca cuando la página terminó de cargar
+        let started = window.__zcLoaded === true;
         let timer = null;
         let isUserScrolling = false;
         let scrollEndTimeout = null;
@@ -21964,6 +22019,7 @@ const buildList = f => {
         }
 
         function animateBar(index) {
+            if (!started) return; // antes de cargar la barra se queda quieta en 0%
             const track = tracks[index];
             const fill = track.querySelector(".novedades-progress-fill");
             fill.style.transition = `width ${NOVEDAD_DURATION_MS}ms linear`;
@@ -21986,6 +22042,7 @@ const buildList = f => {
 
         function scheduleNext() {
             clearTimer();
+            if (!started) return;
             nextAt = Date.now() + NOVEDAD_DURATION_MS;
             timer = setTimeout(() => {
                 timer = null;
@@ -22096,6 +22153,12 @@ const buildList = f => {
 
         render();
         scheduleNext();
+        if (!started) {
+            document.addEventListener("zc:loaded", () => {
+                started = true;
+                resyncAndResume(); // primera novedad desde 0, y arranca el ciclo
+            }, { once: true });
+        }
 
         // ZC26 · si la tarjeta de novedades queda fuera de pantalla (el
         // usuario se va a otra sección) o la app pasa a segundo plano, el
@@ -22128,7 +22191,7 @@ const buildList = f => {
         // Vigilante: si por cualquier motivo el temporizador se perdió o se retrasó
         // (throttling del navegador, scrollend que no llegó, etc.), fuerza el cambio.
         setInterval(() => {
-            if (!cardIsVisible || !novedadesShown()) return;
+            if (!started || !cardIsVisible || !novedadesShown()) return;
             if (isUserScrolling && Date.now() - lastUserScrollAt > 1200) isUserScrolling = false;
             if (isUserScrolling || programmaticScroll) return;
             if (timer === null || Date.now() > nextAt + 400) {
@@ -23841,6 +23904,78 @@ const buildList = f => {
                         "text": "Por otro lado, Unorthodox ha cimentado su legado como un equipo capaz de sobrevivir a las peores adversidades. Superaron desventajas en el marcador, amonestaciones a su capitán, problemas técnicos severos que forzaron cambios de alineación de emergencia e investigaciones administrativas, todo sin perder el enfoque en la arena. Con un 3-3 en tiempo regular y un 3-1 en el desempate final, Unorthodox levanta merecidamente la copa del ZC26, demostrando que en el más alto nivel, la adaptabilidad y la frialdad bajo presión son las verdaderas habilidades que forjan a los campeones."
                     }
                 ]
+            },
+            5: {
+                tag: "ZC26 ESPORTS™",
+                title: "TORNEO 1VS1 Edición México: Cómo participar y más",
+                hero: "news/novedades5oct.png",
+                blocks: [
+                    {
+                        "type": "h5",
+                        "text": "TORNEO 1VS1 EDICIÓN MÉXICO: UNA COMPETENCIA EXCLUSIVA PARA JUGADORES MEXICANOS"
+                    },
+                    {
+                        "type": "p",
+                        "text": "El equipo de ZC Esports está organizando un torneo 1vs1 de Brawl Stars exclusivo para jugadores de México, donde podrán demostrar su nivel y competir por el primer lugar. La organización está a cargo de ItsZephyra."
+                    },
+                    {
+                        "type": "h4",
+                        "text": "FORMATO Y PREMIO"
+                    },
+                    {
+                        "type": "ul",
+                        "items": [
+                            "Formato: el torneo se disputará en series Bo5.",
+                            "Brackets: se definirán según la cantidad de participantes inscritos. Según el número de jugadores, también podría usarse formato liga u otro sistema.",
+                            "Premio: el ganador se llevará un Brawl Pass Plus."
+                        ]
+                    },
+                    {
+                        "type": "h4",
+                        "text": "CÓMO PARTICIPAR"
+                    },
+                    {
+                        "type": "p",
+                        "text": "Para formalizar tu inscripción, únete al servidor de Discord de la comunidad y sigue estos pasos:"
+                    },
+                    {
+                        "type": "ol",
+                        "items": [
+                            "Consulta el [canal de requerimientos](https://discord.com/channels/1399983371047927861/1545262529079549963) del servidor para conocer toda la información y el proceso de inscripción.",
+                            "Dirígete al [canal de registro](https://discord.com/channels/1399983371047927861/1400697041910501457) y envía tu información usando estrictamente este formato: [Etiqueta de Discord] - [Nombre].",
+                            "Adjunta una captura de pantalla del perfil de tu cuenta de Brawl Stars, e indica tu usuario de Discord y tu nombre exacto en Brawl Stars.",
+                            "Verifica tu apoyo al torneo: sigue las cuentas oficiales de ZC26 y apoya el [video oficial del torneo en TikTok](https://vt.tiktok.com/ZSbCW5X54/) con un like y un comentario confirmando tu participación.",
+                            "Adjunta una captura de pantalla que demuestre que sigues las cuentas y que apoyaste el video."
+                        ]
+                    },
+                    {
+                        "type": "h4",
+                        "text": "MANTENTE AL TANTO"
+                    },
+                    {
+                        "type": "p",
+                        "text": "Además, reacciona al mensaje del torneo en Discord para recibir temporalmente el rol de seguimiento. Este rol te permitirá estar al tanto de las novedades, anuncios y actualizaciones relacionadas con el torneo, además de confirmar tu interés en participar."
+                    },
+                    {
+                        "type": "p",
+                        "text": "Para que tu solicitud sea aprobada, es indispensable cumplir con la verificación de redes sociales descrita en el paso 4."
+                    },
+                    {
+                        "type": "p",
+                        "text": "Si eres de México y estás preparado para competir, ¡no dudes en unirte y demostrar de qué estás hecho!"
+                    },
+                    {
+                        "type": "h4",
+                        "text": "MÁS INFORMACIÓN"
+                    },
+                    {
+                        "type": "ul",
+                        "items": [
+                            "[Video del torneo en TikTok](https://vt.tiktok.com/ZSbCbddmy/)",
+                            "[Servidor de Discord ZC26 Esports](https://txcf3d.s.gy/ZC26-ESPORTS)"
+                        ]
+                    }
+                ]
             }
         };
 
@@ -23866,14 +24001,19 @@ const buildList = f => {
         window.zcNovedadEntries = () => Object.keys(NOVEDAD_DETAILS).map(k => ({ idx: parseInt(k, 10), data: NOVEDAD_DETAILS[k] }));
 
         // Convierte un array de "bloques" (h4/h5/p/ul/ol) en HTML para el cuerpo del detalle.
+        // Convierte [texto](https://enlace) en un enlace real que abre en pestaña nueva (el resto del texto sigue escapado).
+        function zc26Lnk(escaped) {
+            return escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+                (m, label, url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+        }
         function zc26RenderBlocks(blocks, idPrefix) {
             return blocks.map((b, i) => {
                 const anchorId = idPrefix ? ` id="${idPrefix}-b${i}"` : "";
                 if (b.type === "h4") return `<h4${anchorId}>${zc26Esc(b.text)}</h4>`;
                 if (b.type === "h5") return `<h5${anchorId}>${zc26Esc(b.text)}</h5>`;
-                if (b.type === "ul") return `<ul>${b.items.map(it => `<li>${zc26Esc(it)}</li>`).join("")}</ul>`;
-                if (b.type === "ol") return `<ol>${b.items.map(it => `<li>${zc26Esc(it)}</li>`).join("")}</ol>`;
-                return `<p${anchorId}>${zc26Esc(b.text)}</p>`;
+                if (b.type === "ul") return `<ul>${b.items.map(it => `<li>${zc26Lnk(zc26Esc(it))}</li>`).join("")}</ul>`;
+                if (b.type === "ol") return `<ol>${b.items.map(it => `<li>${zc26Lnk(zc26Esc(it))}</li>`).join("")}</ol>`;
+                return `<p${anchorId}>${zc26Lnk(zc26Esc(b.text))}</p>`;
             }).join("");
         }
 
