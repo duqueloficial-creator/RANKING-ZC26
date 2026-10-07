@@ -7830,12 +7830,12 @@
         .tl-done-text { font-size: 0.76rem; color: #d5d8ff; margin: 5px 0 11px; }
         .tl-done-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
         .tl-done-btn {
-            display: inline-block; padding: 8px 16px; border-radius: 8px; border: 0; background: #5865f2; color: #fff;
+            display: inline-block; padding: 8px 16px; border-radius: 8px; border: 0; background: #2ea44f; color: #fff;
             font-weight: 800; font-size: 0.74rem; text-decoration: none; cursor: pointer; font-family: inherit;
         }
         .tl-done-btn[hidden] { display: none; }
         .tl-done-btn:disabled { opacity: 0.6; cursor: default; }
-        .tl-discord { background: #2b2d31; border: 1px solid rgba(88,101,242,0.7); }
+        .tl-discord { background: #2b2d31; color: #fff; border: 1px solid rgba(255,255,255,0.18); }
         .tl-reset {
             align-self: center; background: none; border: 1px solid rgba(255,255,255,0.18); color: #c9cdd3;
             font-size: 0.66rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: inherit;
@@ -16953,24 +16953,98 @@
                 else { try { finish(canvas.toDataURL("image/png"), false); } catch (e) { reject(e); } }
             });
         }
+        // ---- imagen en alta calidad: se dibuja directo en un canvas, con cada logo a su resolución original ----
+        async function buildHiResCanvas() {
+            const defs = [];
+            const cin = document.getElementById("tlCinema");
+            if (cin && !cin.hidden) defs.push({ L: "AC", bg: "#8cf5a0", fg: "#1b2b1e", zone: cin.querySelector(".tl-zone") });
+            [["S", "#ff7f7f"], ["A", "#ffbf7f"], ["B", "#ffdf7f"], ["C", "#ffff7f"], ["D", "#bfff7f"]].forEach(([L, bg]) => {
+                defs.push({ L, bg, fg: "#2b2b2b", zone: board.querySelector('[data-tl-zone="' + L + '"]') });
+            });
+            const cache = {};
+            const load = src => cache[src] || (cache[src] = new Promise((res, rej) => {
+                const im = new Image();
+                im.crossOrigin = "anonymous";
+                im.onload = () => res(im);
+                im.onerror = () => rej(new Error("logo " + src));
+                im.src = src;
+            }));
+            for (const d of defs) {
+                d.imgs = await Promise.all(Array.from(d.zone.querySelectorAll(".tl-item img")).map(i => load(i.currentSrc || i.src)));
+            }
+            let maxNat = 0;
+            defs.forEach(d => d.imgs.forEach(im => { maxNat = Math.max(maxNat, im.naturalWidth, im.naturalHeight); }));
+            const cell = Math.max(192, Math.min(400, Math.round((maxNat || 200) / 0.86)));   // tamaño de casilla según la calidad real de los logos
+            const gap = Math.round(cell * 0.12), pad = Math.round(cell * 0.4), sep = Math.max(2, Math.round(cell / 60));
+            const perRow = 8, labelW = cell, zoneW = perRow * cell + (perRow + 1) * gap;
+            const titleH = Math.round(cell * 0.4);
+            const rowH = d => Math.max(1, Math.ceil(d.imgs.length / perRow)) * (cell + gap) + gap;
+            const boardH = defs.reduce((a, d) => a + rowH(d), 0) + sep * (defs.length - 1);
+            const W = pad * 2 + labelW + zoneW, H = pad * 2 + titleH + boardH;
+            const cv = document.createElement("canvas");
+            cv.width = W; cv.height = H;
+            const ctx = cv.getContext("2d", { alpha: false });   // sin transparencia: nunca quedan líneas blancas en los bordes
+            ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+            const FF = "'Segoe UI', Roboto, system-ui, sans-serif";
+            ctx.fillStyle = "#0b0b0d"; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = "#fff"; ctx.font = "900 " + Math.round(cell * 0.2) + "px " + FF;
+            ctx.textBaseline = "middle"; ctx.textAlign = "left";
+            ctx.fillText("ZC26 · Tier List de equipos", pad, pad + titleH / 2);
+            ctx.fillStyle = "#000"; ctx.fillRect(pad, pad + titleH, labelW + zoneW, boardH);
+            let y = pad + titleH;
+            defs.forEach(d => {
+                const h = rowH(d), x0 = pad;
+                ctx.fillStyle = "#15171b"; ctx.fillRect(x0 + labelW, y, zoneW, h);
+                ctx.fillStyle = d.bg; ctx.fillRect(x0, y, labelW, h);
+                ctx.fillStyle = d.fg; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                if (d.L === "AC") {
+                    const fs = Math.round(cell * 0.17), lh = fs * 1.25;
+                    ctx.font = "700 " + fs + "px " + FF;
+                    ctx.textBaseline = "alphabetic";
+                    [["Absolute", -lh / 2], ["Cinema", lh / 2]].forEach(([t, off]) => {
+                        const m = ctx.measureText(t);
+                        const asc = m.actualBoundingBoxAscent || fs * 0.72, desc = m.actualBoundingBoxDescent || 0;
+                        ctx.fillText(t, Math.round(x0 + labelW / 2), Math.round(y + h / 2 + off + (asc - desc) / 2));
+                    });
+                    ctx.textBaseline = "middle";
+                } else {
+                    ctx.font = "500 " + Math.round(cell * 0.36) + "px " + FF;
+                    ctx.fillText(d.L, x0 + labelW / 2, y + h / 2);
+                }
+                const inner = cell * 0.86;
+                d.imgs.forEach((im, i) => {
+                    const col = i % perRow, row = Math.floor(i / perRow);
+                    const cx = x0 + labelW + gap + col * (cell + gap) + cell / 2;
+                    const cy = y + gap + row * (cell + gap) + cell / 2;
+                    const k = Math.min(inner / im.naturalWidth, inner / im.naturalHeight);
+                    const w = im.naturalWidth * k, hh = im.naturalHeight * k;
+                    ctx.drawImage(im, cx - w / 2, cy - hh / 2, w, hh);
+                });
+                y += h + sep;
+            });
+            return cv;
+        }
         if (dlBtn) dlBtn.addEventListener("click", async () => {
             zcPlaySound("click");
             dlBtn.disabled = true;
             dlBtn.textContent = "Generando imagen…";
             try {
+                let canvas = null;
+                try { canvas = await buildHiResCanvas(); } catch (e0) { console.warn("Imagen HD no disponible, usando método alterno", e0); }
+                if (!canvas) {
                 const h2c = await loadHtml2Canvas();
                 const capEl = document.getElementById("tlCapture");
                 const cr0 = capEl.getBoundingClientRect();
                 const capW = Math.max(cr0.width, 1), capH = cr0.height + 100;   // + margen por la fila Absolute Cinema
                 let exScale = Math.max(3200 / capW, 3);                          // objetivo: unos 3200 px de ancho o más
                 exScale = Math.min(exScale, Math.sqrt(14e6 / (capW * capH)), 12); // sin pasarse del límite de memoria del móvil
-                exScale = Math.max(exScale, 2);
-                const canvas = await h2c(capEl, {
+                exScale = Math.max(Math.floor(exScale), 2);   // escala entera: evita franjas en los bordes
+                canvas = await h2c(capEl, {
                     backgroundColor: "#0b0b0d", scale: exScale, useCORS: true, logging: false,
                     onclone: (doc) => {
                         const cap = doc.getElementById("tlCapture");
                         if (!cap) return;
-                        cap.style.padding = "14px";
+                        cap.style.padding = "44px";
                         cap.style.background = "#0b0b0d";
                         const t = cap.querySelector(".tl-cap-title");
                         if (t) t.style.cssText = "display:block;color:#fff;font-weight:900;font-size:16px;margin:0 0 10px 2px;";
@@ -16987,6 +17061,17 @@
                         });
                     }
                 });
+                    // método alterno: rellena y recorta unos píxeles de cada borde para quitar las líneas finas
+                    const trim = Math.ceil(exScale * 1.5);
+                    if (canvas.width > trim * 4 && canvas.height > trim * 4) {
+                        const out = document.createElement("canvas");
+                        out.width = canvas.width - trim * 2; out.height = canvas.height - trim * 2;
+                        const oc = out.getContext("2d", { alpha: false });
+                        oc.fillStyle = "#0b0b0d"; oc.fillRect(0, 0, out.width, out.height);
+                        oc.drawImage(canvas, trim, trim, out.width, out.height, 0, 0, out.width, out.height);
+                        canvas = out;
+                    }
+                }
                 await saveCanvas(canvas);
                 if (doneTitle) doneTitle.textContent = "¡Imagen descargada!";
                 if (doneText) doneText.textContent = "Ahora compártela en el Discord.";
