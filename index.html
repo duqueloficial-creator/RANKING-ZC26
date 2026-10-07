@@ -550,14 +550,14 @@
         .score-push-l { animation-name: scorePushL; }
         @keyframes scorePushR {
             0%   { transform: translateX(0); }
-            15%  { transform: translateX(8px); }
-            65%  { transform: translateX(8px); }
+            15%  { transform: translateX(3px); }
+            65%  { transform: translateX(3px); }
             100% { transform: translateX(0); }
         }
         @keyframes scorePushL {
             0%   { transform: translateX(0); }
-            15%  { transform: translateX(-8px); }
-            65%  { transform: translateX(-8px); }
+            15%  { transform: translateX(-3px); }
+            65%  { transform: translateX(-3px); }
             100% { transform: translateX(0); }
         }
         .octagon-bg {
@@ -1090,11 +1090,11 @@
         .mvs-wrap[data-mvs-dyn] .mvs-bar-track { height: 4px; }
         /* Animación: al mostrarse las estadísticas (o cambiar de pestaña) las barras se llenan hasta su valor */
         @keyframes mvsBarGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        .mvs-wrap[data-mvs-dyn] .mvs-bar-fill { animation: mvsBarGrow 1s cubic-bezier(.22,.8,.25,1) .15s both; }
-        .mvs-wrap[data-mvs-dyn] .mvs-bar-track-left .mvs-bar-fill { transform-origin: right center; }
-        .mvs-wrap[data-mvs-dyn] .mvs-bar-track-right .mvs-bar-fill { transform-origin: left center; }
-        .mvs-wrap[data-mvs-dyn] .mvs-bar-fill.mvs-idle { animation: none; transform: scaleX(0); }
-        @media (prefers-reduced-motion: reduce) { .mvs-wrap[data-mvs-dyn] .mvs-bar-fill { animation: none; } }
+        .mvs-wrap .mvs-bar-fill { animation: mvsBarGrow 1s cubic-bezier(.22,.8,.25,1) .15s both; }
+        .mvs-wrap .mvs-bar-track-left .mvs-bar-fill { transform-origin: right center; }
+        .mvs-wrap .mvs-bar-track-right .mvs-bar-fill { transform-origin: left center; }
+        .mvs-wrap .mvs-bar-fill.mvs-idle { animation: none; transform: scaleX(0); }
+        @media (prefers-reduced-motion: reduce) { .mvs-wrap .mvs-bar-fill { animation: none; } .mvs-wrap .mvs-bar-fill.mvs-idle { transform: none; } }
         .mvs-wrap[data-mvs-dyn] .mvs-bar-row { gap: 3px; }
         .mvs-wrap[data-mvs-dyn] .mvs-bar-neutral { background: #6b6f76; }
         .bans-wrapper .bans:has(.ban-team) { flex-wrap: nowrap; align-items: flex-start; justify-content: center; gap: 0 20px; }
@@ -2627,6 +2627,12 @@
             background: rgba(255,255,255,0.07);
             border: 1px solid rgba(255,255,255,0.1);
         }
+        .zc26mm-status.zc26mm-status-cancelled {
+            color: #f28b82;
+            background: rgba(242,139,130,0.10);
+            border-color: rgba(242,139,130,0.28);
+        }
+        .status-badge.status-badge-cancelled { color: #f28b82; }
         .zc26mm-scoreboard {
             margin: 4px 0;
         }
@@ -3001,6 +3007,8 @@
         #ultimo-partido .mvs-val, #trophyInfoPanel.trophy-match .mvs-val { font-size: 0.6rem; }
         #ultimo-partido .zc26mm-more, #trophyInfoPanel.trophy-match .zc26mm-more { gap: 8px; }
         #ultimo-partido .zc26mm-more .zcfx-card, #trophyInfoPanel.trophy-match .zc26mm-more .zcfx-card { cursor: default; }
+        .zc26mm-more .zcfx-card[data-zc26-match], #ultimo-partido .zc26mm-more .zcfx-card[data-zc26-match] { cursor: pointer; }
+        .zc26mm-more .zcfx-card[data-zc26-match]:active { transform: scale(0.985); }
 
         /* --- Tamaños reducidos del modal de partido --- */
         .zc26mm-head { margin-bottom: 12px; padding-top: 22px; }
@@ -4483,6 +4491,23 @@
         #rankingList .rank-item .rank-row2.tier-gray:hover { background: rgba(255,255,255,0.06); }
         #rankingList .rank-item.open .rank-row2 {
             background: rgba(255,255,255,0.09);
+        }
+        /* Partners: misma lógica de color que la tabla del ranking (un tono oscuro y uno claro alternados).
+           Aquí aplica a todas las filas: con pocos partners todas caían en podio/top 4-7 y no se notaba.
+           Solo cambia el color de fondo de las filas. */
+        #contribList .rank-item .rank-row {
+            background: rgba(0,0,0,0.22);
+        }
+        #contribList .rank-item:nth-child(even) .rank-row {
+            background: rgba(255,255,255,0.055);
+        }
+        #contribList .rank-item .rank-row:hover,
+        #contribList .rank-item:nth-child(even) .rank-row:hover {
+            background: rgba(255,255,255,0.095);
+        }
+        #contribList .rank-item.open .rank-row,
+        #contribList .rank-item.open:nth-child(even) .rank-row {
+            background: rgba(255,255,255,0.11);
         }
         .rank-wedge {
             position: relative;
@@ -7726,6 +7751,98 @@
             padding: 0 2px;
         }
 
+        /* ===================== HOME · TIER LIST DE EQUIPOS ===================== */
+        #home-tierlist {
+            --tl-item: 40px; --tl-label: 44px; --tl-gap: 5px;
+            /* sin selección de texto en toda la tier list: al arrastrar no debe intentar copiar texto */
+            user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+        }
+        @media (min-width: 700px) { #home-tierlist { --tl-item: 54px; --tl-label: 60px; --tl-gap: 7px; } }
+        @media (min-width: 1000px) { #home-tierlist { --tl-item: 64px; --tl-label: 72px; --tl-gap: 8px; } }
+        .tl-heading { font-size: 17px; font-weight: 900; color: #fff; line-height: 1.28; padding: 0 2px; }
+        .tl-sub { font-size: 0.72rem; color: #9aa0a8; padding: 0 2px; margin-top: -8px; }
+        .tl-capture { background: transparent; }
+        .tl-cap-title { display: none; }
+        /* Secreto: Absolute Cinema (solo aparece al llevar un equipo hasta arriba del todo de la página) */
+        .tl-cinema[hidden] { display: none; }
+        .tl-top {
+            --tl-item: 40px; --tl-label: 44px; --tl-gap: 5px;
+            margin: -20px -20px 14px -20px; padding: env(safe-area-inset-top, 0px) 20px 0;
+            background: #000; border-bottom: 1px solid rgba(255,255,255,0.08);
+            user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+        }
+        .tl-top-inner { max-width: var(--page-width); margin: 0 auto; }
+        @media (min-width: 700px) { .tl-top { --tl-item: 54px; --tl-label: 60px; --tl-gap: 7px; } }
+        @media (min-width: 1000px) { .tl-top { --tl-item: 64px; --tl-label: 72px; --tl-gap: 8px; margin: -28px -32px 18px -32px; padding-left: 32px; padding-right: 32px; } }
+        .tl-ac { background: #8cf5a0; color: #1b2b1e; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 2px; }
+        .tl-ac span { display: block; width: 100%; font-size: 0.56rem; font-weight: 700; line-height: 1.2; letter-spacing: 0; text-align: center; }
+        @media (min-width: 700px) { .tl-ac span { font-size: 0.74rem; } }
+        /* animación al aparecer (solo ocurre cuando el equipo llega arriba del todo) */
+        .tl-top:not([hidden]) { animation: tlcPop 0.5s cubic-bezier(.34,1.56,.64,1) both; transform-origin: top center; }
+        .tl-top:not([hidden]) .tl-ac { animation: tlcLabel 0.6s 0.12s cubic-bezier(.34,1.56,.64,1) both; }
+        @keyframes tlcPop { 0% { opacity: 0; transform: translateY(-100%) scaleY(0.6); } 100% { opacity: 1; transform: none; } }
+        @keyframes tlcLabel { 0% { transform: scale(0.4); } 100% { transform: scale(1); } }
+        @media (prefers-reduced-motion: reduce) { .tl-top:not([hidden]), .tl-top:not([hidden]) .tl-ac { animation: none; } }
+        .tl-secret {
+            display: none;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 99998; pointer-events: none; text-align: center;
+            padding: calc(env(safe-area-inset-top, 0px) + 16px) 0 16px; background: linear-gradient(#000, rgba(0,0,0,0.88));
+            border-bottom: 1px solid rgba(232,199,102,0.7); color: #e8c766; font-size: 0.8rem; font-weight: 300; letter-spacing: 0.45em; text-transform: uppercase;
+            transform: translateY(-105%); transition: transform 0.28s cubic-bezier(.22,.8,.25,1);
+        }
+        .tl-secret.show { transform: translateY(0); }
+        .tl-board { display: flex; flex-direction: column; gap: 2px; border-radius: 6px; overflow: hidden; background: #000; }
+        .tl-row { display: flex; align-items: stretch; background: #15171b; }
+        .tl-label {
+            flex: 0 0 var(--tl-label); display: flex; align-items: center; justify-content: center;
+            font-size: 0.72rem; font-weight: 500; color: #2b2b2b; -webkit-font-smoothing: antialiased;
+        }
+        @media (min-width: 700px) { .tl-label { font-size: 0.9rem; } }
+        .tl-s { background: #ff7f7f; }
+        .tl-a { background: #ffbf7f; }
+        .tl-b { background: #ffdf7f; }
+        .tl-c { background: #ffff7f; }
+        .tl-d { background: #bfff7f; }
+        .tl-zone { display: flex; flex-wrap: wrap; align-content: flex-start; gap: var(--tl-gap); padding: var(--tl-gap); min-height: calc(var(--tl-item) + var(--tl-gap) * 2); flex: 1 1 auto; min-width: 0; }
+        .tl-pool { border: 1px solid rgba(255,255,255,0.18); border-radius: 4px; background: rgba(255,255,255,0.025); }
+        .tl-pool-head { display: flex; justify-content: space-between; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #c9cdd3; padding: 2px 2px 0; }
+        .tl-count { color: #8a8f98; font-weight: 700; }
+        .tl-item {
+            width: var(--tl-item); height: var(--tl-item); flex: 0 0 var(--tl-item); border-radius: 2px; background: transparent;
+            display: flex; align-items: center; justify-content: center; cursor: grab;
+            user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+        .tl-item img { width: 86%; height: 86%; object-fit: contain; pointer-events: none; -webkit-user-drag: none; }
+        .tl-item.tl-ghost { opacity: 0.35; transform: scale(0.92); }
+        .tl-clone {
+            position: fixed; z-index: 99999; pointer-events: none; margin: 0; cursor: grabbing;
+            transform: scale(1.18); background: transparent; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+        }
+        body.tl-dragging, body.tl-dragging * { cursor: grabbing !important; user-select: none !important; -webkit-user-select: none !important; }
+        .tl-done {
+            text-align: center; padding: 13px 12px; border-radius: 8px;
+            background: rgba(88,101,242,0.14); border: 1px solid rgba(88,101,242,0.45);
+            animation: tlDoneIn 0.45s cubic-bezier(.22,.8,.25,1) both;
+        }
+        .tl-done[hidden] { display: none; }
+        .tl-done-title { font-size: 0.92rem; font-weight: 900; color: #fff; }
+        .tl-done-text { font-size: 0.76rem; color: #d5d8ff; margin: 5px 0 11px; }
+        .tl-done-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .tl-done-btn {
+            display: inline-block; padding: 8px 16px; border-radius: 8px; border: 0; background: #5865f2; color: #fff;
+            font-weight: 800; font-size: 0.74rem; text-decoration: none; cursor: pointer; font-family: inherit;
+        }
+        .tl-done-btn[hidden] { display: none; }
+        .tl-done-btn:disabled { opacity: 0.6; cursor: default; }
+        .tl-discord { background: #2b2d31; border: 1px solid rgba(88,101,242,0.7); }
+        .tl-reset {
+            align-self: center; background: none; border: 1px solid rgba(255,255,255,0.18); color: #c9cdd3;
+            font-size: 0.66rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: inherit;
+        }
+        @keyframes tlDoneIn { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .tl-done { animation: none; } .tl-item { transition: none; } }
+
         /* ===================== MOMENTOS DE LA BSC (clips) ===================== */
         /* ===================== HOME · VIVE LOS TORNEOS / PRÓXIMOS TORNEOS ===================== */
         .tv-row {
@@ -9367,6 +9484,9 @@
 })();
 </script>
 
+<!-- Secreto: Absolute Cinema (tier al principio de TODA la página; aparece al llevar un equipo arriba del todo y se queda) -->
+<div class="tl-top tl-cinema" id="tlCinema" hidden><div class="tl-top-inner"><div class="tl-row"><div class="tl-label tl-ac"><span>Absolute</span><span>Cinema</span></div><div class="tl-zone" data-tl-zone="cinema"></div></div></div></div>
+
 <div class="site-header" id="top">
     <div class="site-header-inner">
         <div class="site-header-brand">
@@ -9719,6 +9839,33 @@
         <div class="home-section" id="home-proximos">
             <div class="section-heading">Próximos torneos y eventos</div>
             <div class="tv-row" id="tvProximosRow"></div>
+        </div>
+
+        <!-- ===================== TIER LIST DE EQUIPOS (final del Home) ===================== -->
+        <div class="home-section" id="home-tierlist">
+            <div class="tl-heading">Tier List de equipos</div>
+            <div class="tl-sub">Arrastra los logos y ordena a todos los equipos del torneo en S, A, B o C según tu criterio.</div>
+            <div class="tl-capture" id="tlCapture">
+                <div class="tl-cap-title">ZC26 · Tier List de equipos</div>
+                <div class="tl-board" id="tlBoard">
+                    <div class="tl-row"><div class="tl-label tl-s">S</div><div class="tl-zone" data-tl-zone="S"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-a">A</div><div class="tl-zone" data-tl-zone="A"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-b">B</div><div class="tl-zone" data-tl-zone="B"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-c">C</div><div class="tl-zone" data-tl-zone="C"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-d">D</div><div class="tl-zone" data-tl-zone="D"></div></div>
+                </div>
+            </div>
+            <div class="tl-pool-head"><span>Equipos</span><span class="tl-count" id="tlCount"></span></div>
+            <div class="tl-pool tl-zone" id="tlPool" data-tl-zone="pool"></div>
+            <div class="tl-done" id="tlDone" hidden>
+                <div class="tl-done-title" id="tlDoneTitle">¡Tier list completa!</div>
+                <div class="tl-done-text" id="tlDoneText">Descárgala como imagen y luego compártela en el Discord.</div>
+                <div class="tl-done-actions">
+                    <button type="button" class="tl-done-btn" id="tlDownload">Descargar imagen</button>
+                    <a class="tl-done-btn tl-discord" id="tlDiscord" href="https://discord.com/channels/1399983371047927861/1400696614766510191" target="_blank" rel="noopener" hidden>Ir al Discord</a>
+                </div>
+            </div>
+            <button type="button" class="tl-reset" id="tlReset">Reiniciar y mezclar</button>
         </div>
 
     </div>
@@ -13673,7 +13820,7 @@
             ]
         },
         {
-            name: "MoonSheep", country: "MX", amount: 20.99, bestAmount: 20.99,
+            name: "MoonSheep", country: "MX", amount: 27.99, bestAmount: 20.99,
             status: "Activo", supportTeam: "Por confirmar",
             alternateIds: [],
             socials: []
@@ -16728,6 +16875,297 @@
     function zc26Logo(team) {
         return ZC26_TEAM_LOGOS[team] || "escudo_logo/escudo-default.png";
     }
+
+    /* ===================== HOME · TIER LIST DE EQUIPOS (arrastrar y soltar, mouse y táctil) ===================== */
+    (function zcTierList() {
+        const board = document.getElementById("tlBoard");
+        const pool = document.getElementById("tlPool");
+        if (!board || !pool) return;
+        const done = document.getElementById("tlDone");
+        const countEl = document.getElementById("tlCount");
+        const teams = Object.keys(ZC26_TEAM_LOGOS);
+        const zones = () => Array.from(document.querySelectorAll("#home-tierlist .tl-zone, #tlCinema .tl-zone"));
+
+        function shuffle(a) {
+            for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+            return a;
+        }
+        function makeItem(team) {
+            const it = document.createElement("div");
+            it.className = "tl-item";
+            it.dataset.team = team;
+            it.title = team;
+            it.setAttribute("aria-label", team);
+            const img = document.createElement("img");
+            img.src = zc26Logo(team);
+            img.alt = team;
+            img.draggable = false;
+            img.onerror = function () { this.onerror = null; this.src = "escudo_logo/escudo-default.png"; };
+            it.appendChild(img);
+            return it;
+        }
+        const dlBtn = document.getElementById("tlDownload");
+        const discordBtn = document.getElementById("tlDiscord");
+        const doneTitle = document.getElementById("tlDoneTitle");
+        const doneText = document.getElementById("tlDoneText");
+        function resetDoneBox() {
+            if (doneTitle) doneTitle.textContent = "¡Tier list completa!";
+            if (doneText) doneText.textContent = "Descárgala como imagen y luego compártela en el Discord.";
+            if (dlBtn) { dlBtn.disabled = false; dlBtn.textContent = "Descargar imagen"; }
+            if (discordBtn) discordBtn.hidden = true;
+        }
+        function updateState() {
+            const left = pool.querySelectorAll(".tl-item").length;
+            if (countEl) countEl.textContent = (teams.length - left) + "/" + teams.length + " colocados";
+            const complete = left === 0;
+            if (done) {
+                if (complete && done.hidden) { resetDoneBox(); done.hidden = false; setTimeout(() => done.scrollIntoView({ block: "nearest", behavior: "smooth" }), 120); }
+                else if (!complete) done.hidden = true;
+            }
+        }
+
+        // ---- descarga como imagen (html2canvas, igual que la prueba testtierli.html) ----
+        let h2cPromise = null;
+        function loadHtml2Canvas() {
+            if (window.html2canvas) return Promise.resolve(window.html2canvas);
+            if (!h2cPromise) h2cPromise = new Promise((resolve, reject) => {
+                const sc = document.createElement("script");
+                sc.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+                sc.onload = () => window.html2canvas ? resolve(window.html2canvas) : reject(new Error("html2canvas"));
+                sc.onerror = () => { h2cPromise = null; reject(new Error("html2canvas")); };
+                document.head.appendChild(sc);
+            });
+            return h2cPromise;
+        }
+        function saveCanvas(canvas) {
+            return new Promise((resolve, reject) => {
+                const finish = (href, revoke) => {
+                    const a = document.createElement("a");
+                    a.download = "tier-list-zc26.png";
+                    a.href = href;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    if (revoke) setTimeout(() => URL.revokeObjectURL(href), 4000);
+                    resolve();
+                };
+                if (canvas.toBlob) canvas.toBlob(b => b ? finish(URL.createObjectURL(b), true) : reject(new Error("blob")), "image/png");
+                else { try { finish(canvas.toDataURL("image/png"), false); } catch (e) { reject(e); } }
+            });
+        }
+        if (dlBtn) dlBtn.addEventListener("click", async () => {
+            zcPlaySound("click");
+            dlBtn.disabled = true;
+            dlBtn.textContent = "Generando imagen…";
+            try {
+                const h2c = await loadHtml2Canvas();
+                const capEl = document.getElementById("tlCapture");
+                const cr0 = capEl.getBoundingClientRect();
+                const capW = Math.max(cr0.width, 1), capH = cr0.height + 100;   // + margen por la fila Absolute Cinema
+                let exScale = Math.max(3200 / capW, 3);                          // objetivo: unos 3200 px de ancho o más
+                exScale = Math.min(exScale, Math.sqrt(14e6 / (capW * capH)), 12); // sin pasarse del límite de memoria del móvil
+                exScale = Math.max(exScale, 2);
+                const canvas = await h2c(capEl, {
+                    backgroundColor: "#0b0b0d", scale: exScale, useCORS: true, logging: false,
+                    onclone: (doc) => {
+                        const cap = doc.getElementById("tlCapture");
+                        if (!cap) return;
+                        cap.style.padding = "14px";
+                        cap.style.background = "#0b0b0d";
+                        const t = cap.querySelector(".tl-cap-title");
+                        if (t) t.style.cssText = "display:block;color:#fff;font-weight:900;font-size:16px;margin:0 0 10px 2px;";
+                        const topSrc = document.getElementById("tlCinema");
+                        const topRow = topSrc && !topSrc.hidden ? topSrc.querySelector(".tl-row") : null;
+                        const capBoard = cap.querySelector(".tl-board");
+                        if (topRow && capBoard) capBoard.insertBefore(doc.importNode(topRow, true), capBoard.firstChild);   // Absolute Cinema va primero en la imagen
+                        cap.querySelectorAll(".tl-item").forEach(it => { it.style.transform = "none"; it.style.opacity = "1"; });
+                        // el logo pasa a fondo "contain" para que el recorte salga igual que en pantalla
+                        cap.querySelectorAll(".tl-item img").forEach(img => {
+                            const d = doc.createElement("div");
+                            d.style.cssText = "width:86%;height:86%;background:center / contain no-repeat url('" + img.src + "');";
+                            img.replaceWith(d);
+                        });
+                    }
+                });
+                await saveCanvas(canvas);
+                if (doneTitle) doneTitle.textContent = "¡Imagen descargada!";
+                if (doneText) doneText.textContent = "Ahora compártela en el Discord.";
+                dlBtn.textContent = "Descargar de nuevo";
+                if (discordBtn) discordBtn.hidden = false;   // el botón del Discord aparece solo después de descargar
+            } catch (err) {
+                console.error(err);
+                if (doneText) doneText.textContent = "No se pudo generar la imagen. Inténtalo de nuevo.";
+                dlBtn.textContent = "Descargar imagen";
+            }
+            dlBtn.disabled = false;
+        });
+        function fill() {
+            zones().forEach(z => { z.innerHTML = ""; });
+            shuffle(teams.slice()).forEach(t => pool.appendChild(makeItem(t)));  // orden distinto en cada visita
+            const cr = document.getElementById("tlCinema"); if (cr) { cr.hidden = true; delete cr.dataset.on; }
+            updateState();
+        }
+        fill();
+        document.getElementById("tlReset").addEventListener("click", () => { zcPlaySound("click"); fill(); });
+
+        // ---- arrastre ----
+        let drag = null;
+        const HOLD_MS = 200, MOVE_PX = 5;
+
+        document.addEventListener("touchmove", function (e) {
+            if (drag && drag.active) e.preventDefault();   // ya arrastrando: la página no debe moverse
+        }, { passive: false });
+        const tlRoot = document.getElementById("home-tierlist");
+        tlRoot.addEventListener("selectstart", e => e.preventDefault());   // nada de seleccionar/copiar texto aquí
+        tlRoot.addEventListener("dragstart", e => e.preventDefault());
+        board.addEventListener("contextmenu", e => { if (e.target.closest(".tl-item")) e.preventDefault(); });
+        pool.addEventListener("contextmenu", e => { if (e.target.closest(".tl-item")) e.preventDefault(); });
+
+        function onDown(e) {
+            const item = e.target.closest(".tl-item");
+            if (!item || drag || (e.pointerType === "mouse" && e.button !== 0)) return;
+            if (e.pointerType === "mouse") e.preventDefault();   // evita que el navegador empiece a seleccionar texto
+            try { window.getSelection().removeAllRanges(); } catch (_) {}
+            const r = item.getBoundingClientRect();
+            drag = { item, id: e.pointerId, type: e.pointerType, sx: e.clientX, sy: e.clientY, x: e.clientX, y: e.clientY,
+                     ox: e.clientX - r.left, oy: e.clientY - r.top, w: r.width, h: r.height, active: false, timer: null, raf: 0 };
+            if (drag.type !== "mouse") drag.timer = setTimeout(activate, HOLD_MS);   // táctil: mantener pulsado para arrastrar
+            document.addEventListener("pointermove", onMove);
+            document.addEventListener("pointerup", onUp);
+            document.addEventListener("pointercancel", onUp);
+        }
+        board.addEventListener("pointerdown", onDown);
+        pool.addEventListener("pointerdown", onDown);
+
+        function activate() {
+            if (!drag || drag.active) return;
+            drag.active = true;
+            clearTimeout(drag.timer);
+            const c = drag.item.cloneNode(true);
+            c.classList.add("tl-clone");
+            c.style.width = drag.w + "px"; c.style.height = drag.h + "px";
+            document.body.appendChild(c);
+            drag.clone = c;
+            drag.item.classList.add("tl-ghost");
+            document.body.classList.add("tl-dragging");
+            try { window.getSelection().removeAllRanges(); } catch (_) {}
+            loadHtml2Canvas().catch(() => {});   // precarga la librería de la imagen mientras juegas
+            try { navigator.vibrate && navigator.vibrate(12); } catch (_) {}
+            zcPlaySound("click");
+            moveClone();
+            loop();
+        }
+        function moveClone() {
+            drag.clone.style.left = (drag.x - drag.ox) + "px";
+            drag.clone.style.top = (drag.y - drag.oy) + "px";
+            place();
+        }
+        // ---- secreto: Absolute Cinema ----
+        const cinemaRow = document.getElementById("tlCinema");
+        const cinemaZone = cinemaRow ? cinemaRow.querySelector(".tl-zone") : null;
+        if (cinemaRow) {
+            cinemaRow.addEventListener("pointerdown", onDown);
+            cinemaRow.addEventListener("selectstart", e => e.preventDefault());
+            cinemaRow.addEventListener("dragstart", e => e.preventDefault());
+            cinemaRow.addEventListener("contextmenu", e => { if (e.target.closest(".tl-item")) e.preventDefault(); });
+        }
+        const secretEl = document.createElement("div");
+        secretEl.className = "tl-secret";
+        secretEl.setAttribute("aria-hidden", "true");
+        secretEl.textContent = "Absolute Cinema";
+        document.body.appendChild(secretEl);
+        let secretTimer = 0;
+        function syncCinema() {
+            if (!cinemaRow) return;
+            const n = cinemaZone.querySelectorAll(".tl-item").length;
+            cinemaRow.hidden = !(n > 0 || cinemaRow.dataset.on === "1" || (drag && drag.secret));
+        }
+        function updateSecret() {
+            const atTop = (window.scrollY || document.documentElement.scrollTop || 0) <= 1;
+            if (!drag.secret) {
+                if (atTop && drag.y <= 14) {            // literalmente arriba del todo de la página
+                    drag.secret = true;
+                    clearTimeout(secretTimer);
+                    secretEl.textContent = "Absolute Cinema";
+                    secretEl.classList.add("show");
+                    try { navigator.vibrate && navigator.vibrate([10, 40, 10]); } catch (_) {}
+                }
+            } else if (!atTop || drag.y > 90) {
+                drag.secret = false;
+                secretEl.classList.remove("show");
+            }
+        }
+        function place() {
+            if (cinemaZone) updateSecret();
+            if (drag.secret && cinemaZone) { cinemaRow.hidden = false; placeInto(cinemaZone); }
+            else placeInto(null);
+            syncCinema();
+        }
+        function placeInto(forced) {
+            const el = forced ? null : document.elementFromPoint(drag.x, drag.y);
+            const zone = forced || (el && el.closest ? el.closest(".tl-zone") : null);
+            if (!zone) return;
+            let ref = null, best = Infinity, after = false;
+            zone.querySelectorAll(".tl-item").forEach(ch => {
+                if (ch === drag.item) return;
+                const r = ch.getBoundingClientRect();
+                const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+                const d = Math.hypot(drag.x - cx, (drag.y - cy) * 1.6);
+                if (d < best) { best = d; ref = ch; after = drag.x > cx; }
+            });
+            let before = ref ? (after ? ref.nextElementSibling : ref) : null;
+            if (before === drag.item) before = drag.item.nextElementSibling;
+            if (drag.item.parentNode === zone && drag.item.nextElementSibling === before) return;   // ya está ahí
+            zone.insertBefore(drag.item, before);
+        }
+        function loop() {
+            if (!drag || !drag.active) return;
+            const m = 80, vh = window.innerHeight;
+            const fast = drag.y < 24 ? 3 : 1;   // pegado al borde de arriba sube más rápido
+            if (drag.y < m) window.scrollBy({ top: -Math.ceil((m - drag.y) / 6) * fast, behavior: "instant" });
+            else if (drag.y > vh - m) window.scrollBy({ top: Math.ceil((drag.y - (vh - m)) / 6), behavior: "instant" });
+            place();
+            drag.raf = requestAnimationFrame(loop);
+        }
+        function onMove(e) {
+            if (!drag || e.pointerId !== drag.id) return;
+            drag.x = e.clientX; drag.y = e.clientY;
+            if (!drag.active) {
+                const moved = Math.hypot(drag.x - drag.sx, drag.y - drag.sy);
+                if (drag.type === "mouse") { if (moved > MOVE_PX) activate(); }
+                else if (moved > 10) cleanup(false);          // el dedo se movió antes de mantener: es un scroll de la página
+                return;
+            }
+            e.preventDefault();
+            moveClone();
+        }
+        function onUp(e) {
+            if (!drag || e.pointerId !== drag.id) return;
+            const wasActive = drag.active;
+            cleanup(true);
+            if (wasActive) { zcPlaySound("click"); updateState(); }
+        }
+        function cleanup() {
+            if (!drag) return;
+            clearTimeout(drag.timer);
+            cancelAnimationFrame(drag.raf);
+            if (drag.clone) drag.clone.remove();
+            if (drag.secret) {   // soltó el equipo arriba del todo: queda en Absolute Cinema y la fila ya no se oculta
+                if (cinemaRow) cinemaRow.dataset.on = "1";
+                secretEl.textContent = "Absolute Cinema desbloqueado";
+                clearTimeout(secretTimer);
+                secretTimer = setTimeout(() => secretEl.classList.remove("show"), 1800);
+            } else secretEl.classList.remove("show");
+            drag.secret = false;
+            syncCinema();
+            drag.item.classList.remove("tl-ghost");
+            document.body.classList.remove("tl-dragging");
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerup", onUp);
+            document.removeEventListener("pointercancel", onUp);
+            drag = null;
+        }
+    })();
     const ZC26_FIXTURES = [
         {
             day: "Domingo", num: 20, month: "SEP",
@@ -17769,7 +18207,7 @@
                 </div>
                 <div class="zcfx-list">
                     ${day.matches.map(m => { const r = zc26ResultFor(m); return `
-                        <div class="zcfx-card" data-zc26-match data-group="${m.group || ''}" data-label="${m.label || ''}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}" data-time="${m.time || ''}">
+                        <div class="zcfx-card" data-zc26-match data-group="${m.group || ''}" data-label="${m.label || ''}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-num="${day.num}" data-month="${day.month}" data-time="${m.time || ''}"${m.cancelled ? ' data-cancelled="1"' : ''}>
                             ${(m.label || m.group) ? `<span class="zcfx-group-badge">${m.label || ('Grupo ' + m.group)}</span>` : ''}
                             <div class="zcfx-teams">
                                 <div class="zcfx-team-row${zc26RowCls(r, "home")}">
@@ -18485,7 +18923,7 @@
                 <div class="zc26mm-form-dots">${zc26FormDots(ctx.away)}</div>
             </div>
         </div>
-        ${ctx.res ? "" : `<div class="zc26mm-stat-block zc26mm-prob-block">
+        ${(ctx.res || ctx.cancelled) ? "" : `<div class="zc26mm-stat-block zc26mm-prob-block">
             <div class="zc26mm-stat-title-row">
                 <span class="zc26mm-stat-title">Probabilidad de victoria</span>
             </div>
@@ -19160,7 +19598,7 @@ const buildList = f => {
             const samePair = (m.home === ctx.home && m.away === ctx.away) || (m.home === ctx.away && m.away === ctx.home);
             if (!samePair) return;
             const r = zc26ResultFor(m);
-            cards.push(`<div class="zcfx-card">
+            cards.push(`<div class="zcfx-card" data-zc26-match data-group="${zc26Esc(m.group || "")}" data-label="${zc26Esc(m.label || "")}" data-home="${zc26Esc(m.home)}" data-away="${zc26Esc(m.away)}" data-day="${zc26Esc(day.day)}" data-num="${zc26Esc(day.num)}" data-month="${zc26Esc(day.month)}" data-time="${zc26Esc(m.time || "")}"${m.cancelled ? ' data-cancelled="1"' : ''} role="button" tabindex="0">
                 <span class="zcfx-group-badge zcfx-group-badge-more">${m.group ? "Fase de Grupos " + m.group : zc26Esc(m.label || "")}</span>
                 <div class="zcfx-teams">
                     <div class="zcfx-team-row${zc26RowCls(r, "home")}">
@@ -19207,9 +19645,13 @@ const buildList = f => {
         return "";
     }
     let zc26mmCurrentMatch = null;
-    function openZc26Match(card) {
+    // Historial de menús de partido: si abres un partido desde "Más partidos" dentro de otro menú,
+    // al cerrarlo vuelves al menú anterior (misma pestaña y mismo scroll).
+    let zc26MatchHistory = [];
+    function openZc26Match(card, keepHistory) {
         const panel = document.getElementById("zc26MatchPanel");
         if (!panel || !card) return;
+        if (!keepHistory) zc26MatchHistory.length = 0;
         const group = card.dataset.group || "";
         const label = card.dataset.label || "";
         const home = card.dataset.home || "";
@@ -19223,10 +19665,11 @@ const buildList = f => {
         const res = label ? (ZC26_KO_RESULTS[`${home}|${away}`] || null) : zc26GetResult(home, away);
         // Partido con hora: fecha y hora según el país elegido
         const ls = time ? zc26LocalSchedule({ num: parseInt(num, 10), month: month }, time, zc26CountryCode) : null;
-        const statusTxt = res ? "Finalizado" : "Próximo";
-        const startTsRaw = (!res && time) ? zc26MatchStartTimestamp({ num: parseInt(num, 10), month: month }, time) : null;
+        const cancelled = card.dataset.cancelled === "1";
+        const statusTxt = cancelled ? "Cancelado" : (res ? "Finalizado" : "Próximo");
+        const startTsRaw = (!res && !cancelled && time) ? zc26MatchStartTimestamp({ num: parseInt(num, 10), month: month }, time) : null;
         const startTs = (startTsRaw && startTsRaw > Date.now()) ? startTsRaw : null;
-        zc26mmCurrentMatch = { home, away, group, label, res, day, num, month, time };
+        zc26mmCurrentMatch = { home, away, group, label, res, day, num, month, time, cancelled };
         qsStacked = false;
         panel.scrollTop = 0;
         panel.innerHTML = `
@@ -19239,7 +19682,7 @@ const buildList = f => {
                 </div>
                 <div class="zc26mm-tags">
                     <span class="zc26mm-tag">${group ? "Grupo " + group : "Eliminatoria"}</span>
-                    <span class="zc26mm-status">${statusTxt}</span>
+                    <span class="zc26mm-status${cancelled ? " zc26mm-status-cancelled" : ""}">${statusTxt}</span>
                 </div>
             </div>
             <div class="scoreboard zc26mm-scoreboard${res && res.pen ? " zc26mm-has-pen" : ""}">
@@ -19250,7 +19693,7 @@ const buildList = f => {
                 <div class="score-center">
                     ${res ? `<span class="score-number${zc26ResWinSide(res) === "a" ? " score-number-lose" : ""}">${res.h}${zc26PenSup(res, "h")}</span>` : `<span class="score-number score-number-empty"></span>`}
                     <div class="match-status">
-                        <span class="status-badge">${res && res.pen ? statusTxt + " (P)" : statusTxt}</span>
+                        <span class="status-badge${cancelled ? " status-badge-cancelled" : ""}">${res && res.pen ? statusTxt + " (P)" : statusTxt}</span>
                         <span class="status-date">${res && res.wo ? "W.O." : (ls ? ls.date : String(num).padStart(2, "0") + "/" + (ZC26_MONTH_NUM[month] || "09"))}</span>
                         ${ls && !res ? `<span class="status-date">${ls.time}</span>` : ""}
                     </div>
@@ -19279,6 +19722,24 @@ const buildList = f => {
     }
     function closeZc26Match() {
         zcPlaySound("clicksalir");
+        const prev = zc26MatchHistory.pop();
+        if (prev) {
+            // Volver al menú de partido anterior en lugar de cerrar todo
+            openZc26Match({ dataset: prev.dataset }, true);
+            const panel = document.getElementById("zc26MatchPanel");
+            const tabBtn = panel && panel.querySelector('.zc26mm-tab-btn[data-zc26mm-tab="' + prev.tab + '"]');
+            if (tabBtn && prev.tab !== "general") {
+                panel.querySelectorAll(".zc26mm-tab-btn").forEach(b => b.classList.toggle("active", b === tabBtn));
+                const contentEl = document.getElementById("zc26mmTabContent");
+                if (contentEl) contentEl.innerHTML = zc26RenderTabContent(prev.tab, zc26mmCurrentMatch);
+            }
+            requestAnimationFrame(() => {
+                if (panel) panel.scrollTop = prev.panelScroll;
+                const ov = document.getElementById("zc26MatchOverlay");
+                if (ov) ov.scrollTop = prev.overlayScroll;
+            });
+            return;
+        }
         closeModal("zc26MatchOverlay");
     }
     document.getElementById("zc26FixturesList").addEventListener("click", function (e) {
@@ -19287,6 +19748,33 @@ const buildList = f => {
     });
     document.getElementById("zc26MatchOverlay").addEventListener("click", function (e) {
         if (e.target === this) closeZc26Match();
+    });
+    // "Más partidos": tocar una tarjeta abre el menú de ese partido (desde Último partido o desde otro menú de partido)
+    function zc26OpenFromMore(e) {
+        const card = e.target.closest(".zc26mm-more [data-zc26-match]");
+        if (!card) return;
+        e.preventDefault();
+        const ov = document.getElementById("zc26MatchOverlay");
+        const inMenu = !!(ov && ov.classList.contains("active") && card.closest("#zc26MatchPanel") && zc26mmCurrentMatch);
+        if (inMenu) {
+            // Guarda el menú actual para volver a él al cerrar el nuevo
+            const panel = document.getElementById("zc26MatchPanel");
+            const act = panel.querySelector(".zc26mm-tab-btn.active");
+            const m = zc26mmCurrentMatch;
+            zc26MatchHistory.push({
+                dataset: { group: m.group || "", label: m.label || "", home: m.home, away: m.away, day: m.day || "", num: m.num || "", month: m.month || "", time: m.time || "", cancelled: m.cancelled ? "1" : "" },
+                tab: act ? act.dataset.zc26mmTab : "general",
+                panelScroll: panel.scrollTop,
+                overlayScroll: ov.scrollTop
+            });
+            openZc26Match(card, true);
+        } else {
+            openZc26Match(card);
+        }
+    }
+    document.addEventListener("click", zc26OpenFromMore);
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") zc26OpenFromMore(e);
     });
     // Chronology filter buttons (Todo / Sets / Cambios / Tarjetas / Lesiones)
     document.addEventListener("click", function (e) {
@@ -19351,10 +19839,18 @@ const buildList = f => {
             <div class="qs2-stat-list">${rows}</div>
         `;
         zcPlaySound("clickentrar");
-        // Se abre encima del partido (sin ocultarlo): el fondo queda difuminado detrás.
-        qsStacked = true;
         panel.scrollTop = 0;
-        document.getElementById("quickStatsOverlay").classList.add("active");
+        const matchOv = document.getElementById("zc26MatchOverlay");
+        if (matchOv && matchOv.classList.contains("active")) {
+            // Dentro del menú de un partido: se abre encima (sin ocultarlo); el scroll ya está bloqueado.
+            qsStacked = true;
+            document.getElementById("quickStatsOverlay").classList.add("active");
+        } else {
+            // Desde "Último partido" (sección de la página): modal normal, que bloquea el scroll del fondo
+            // y lo libera al cerrar.
+            qsStacked = false;
+            openModal("quickStatsOverlay");
+        }
     }
     document.getElementById("zc26MatchPanel").addEventListener("click", function (e) {
         const card = e.target.closest(".zc26lu-played");
@@ -24392,7 +24888,7 @@ const buildList = f => {
    (abrir el partido, cambiar de pestaña, volver a hacer scroll hasta ellas). */
 (function () {
     if (!("IntersectionObserver" in window)) return;
-    var SEL = ".mvs-wrap[data-mvs-dyn] .mvs-bar-track";
+    var SEL = ".mvs-wrap .mvs-bar-track";
     var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
             // fuera de vista (o pestaña oculta): se vacía; al volver a verse se quita y la animación arranca de nuevo
@@ -24413,6 +24909,25 @@ const buildList = f => {
     new MutationObserver(function (muts) {
         muts.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) scan(n); }); });
     }).observe(document.body, { childList: true, subtree: true });
+
+    // Repetir la animación en TODAS las barras visibles al cambiar de pestaña o tocar "Mostrar más / menos"
+    // (las filas que ya estaban a la vista no se reiniciaban solas, solo las que aparecían).
+    function replay(wrap) {
+        var fills = wrap.querySelectorAll(".mvs-bar-fill");
+        fills.forEach(function (f) { f.classList.add("mvs-idle"); });
+        void wrap.offsetWidth; // fuerza el reflow para que la animación arranque de cero
+        requestAnimationFrame(function () {
+            fills.forEach(function (f) {
+                if (f.offsetParent !== null) f.classList.remove("mvs-idle"); // las ocultas las reactiva el observer al mostrarse
+            });
+        });
+    }
+    document.addEventListener("click", function (e) {
+        var btn = e.target.closest && e.target.closest(".mvs-tab, [data-mvs-more]");
+        if (!btn) return;
+        var wrap = btn.closest(".mvs-wrap");
+        if (wrap) setTimeout(function () { replay(wrap); }, 0); // después de que los otros handlers actualicen las filas
+    });
 })();
 </script>
 </body>
