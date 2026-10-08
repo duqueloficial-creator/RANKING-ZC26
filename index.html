@@ -7447,7 +7447,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: blur(35px) brightness(0.5) saturate(1.15);
+            filter: blur(18px) brightness(0.5) saturate(1.15);
             transform: scale(1.2);
             pointer-events: none; /* evita el menú de "descargar imagen" al mantener presionado */
             -webkit-user-drag: none;
@@ -9145,7 +9145,18 @@
             .novedad-more-btn { font-size: 0.95rem; padding: 14px 32px; border-radius: 6px; }
 
             /* Flechas: solo la anterior (la siguiente es la caja "Siguiente") */
-            .novedades-arrow-prev { left: 0; }
+            .novedades-arrow-prev {
+                left: 16px;
+                top: 50%;
+                height: 40px;
+                width: 40px;
+                margin-top: -20px;
+                padding: 0;
+                justify-content: center;
+                border-radius: 50%;
+                background: rgba(0,0,0,.5);
+            }
+            .novedades-arrow-prev svg { width: 22px; height: 22px; }
             .novedades-arrow-next { display: none; }
 
             /* ---- Caja "Siguiente" ---- */
@@ -9153,24 +9164,28 @@
                 position: absolute;
                 top: 0; right: 0;
                 height: var(--nov-h);
-                width: clamp(260px, 22%, 360px);
+                width: clamp(170px, 14%, 210px);
                 z-index: 6;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
-                padding: 0 26px 26px;
-                background: linear-gradient(180deg, rgba(5,8,16,0) 0%, rgba(5,8,16,.55) 45%, rgba(8,28,60,.92) 100%);
+                padding: 0 14px 16px;
+                background: linear-gradient(180deg, rgba(5,8,16,0) 0%, rgba(5,8,16,.35) 55%, rgba(8,28,60,.85) 100%);
                 cursor: pointer;
                 border: none;
                 text-align: left;
                 color: #fff;
                 font-family: inherit;
-                transition: opacity .3s ease;
+                transition: opacity .3s ease, width .3s ease, padding .3s ease;
             }
+            .nov-next:hover { width: clamp(220px, 18%, 270px); padding: 0 18px 20px; }
             .nov-next.nov-swap { opacity: 0; }
-            .nov-next-label { font-size: .85rem; font-weight: 500; color: rgba(255,255,255,.7); margin-bottom: 4px; }
-            .nov-next-title { font-size: 1.15rem; font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
-            .nov-next-thumb { width: 100%; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; background: #111; box-shadow: 0 8px 28px rgba(0,0,0,.5); }
+            .nov-next-label { font-size: .68rem; font-weight: 500; color: rgba(255,255,255,.7); margin-bottom: 3px; transition: font-size .3s ease; }
+            .nov-next-title { font-size: .85rem; font-weight: 800; line-height: 1.25; margin-bottom: 10px; transition: font-size .3s ease; }
+            .nov-next-label { max-height: 1.4em; overflow: hidden; transition: opacity .2s ease, max-height .3s ease, margin .3s ease, font-size .3s ease; }
+            .nov-next:hover .nov-next-label { opacity: 0; max-height: 0; margin-bottom: 0; }
+            .nov-next:hover .nov-next-title { font-size: 1.02rem; }
+            .nov-next-thumb { width: 100%; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; background: #111; box-shadow: 0 6px 20px rgba(0,0,0,.5); }
             .nov-next-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
             .nov-next:hover .nov-next-thumb img { transform: scale(1.06); }
 
@@ -9258,8 +9273,15 @@
                 position: relative;
                 transition: transform .3s ease;
             }
-            .hd-hero:hover { transform: scale(1.02); z-index: 1; }
-            .hd-list-item:hover { transform: scale(1.03); z-index: 1; }
+            .hd-hero:hover { transform: scale(1.007); z-index: 1; }
+            .hd-list-item:hover { transform: scale(1.012); z-index: 1; }
+        }
+
+        /* Destacadas (círculos: BSC OCT 4, etc.): crecen un poco al pasar el cursor */
+        @media (hover: hover) {
+            .story-ring { transition: transform .2s ease; }
+            .story-item:hover .story-ring { transform: scale(1.035); }
+            .story-item:active .story-ring { transform: scale(0.94); }
         }
 
 
@@ -9499,19 +9521,19 @@
                 scrollbar-width: none;
                 margin: 0;
                 padding: 44px max(48px, calc((100vw - 1500px) / 2)) 34px;
-                background: #f3f5f8;
-                box-shadow: 0 18px 50px rgba(0,0,0,.35);
+                background: #000000;
+                box-shadow: 0 18px 50px rgba(0,0,0,.6);
                 box-sizing: border-box;
             }
             .zs-panel::-webkit-scrollbar { display: none; }
             .zs-close { position: absolute; top: 20px; right: max(32px, calc((100vw - 1500px) / 2)); }
-            .zs-close span { background: #14181f; }
-            .zs-label { font-size: .78rem; color: #6b7480; margin-bottom: 8px; }
-            .zs-field { gap: 12px; padding: 4px 0 8px; border-bottom: 2px solid #1fb3e6; }
-            .zs-field-icon { width: 20px; height: 20px; color: #14181f; }
-            .zs-input { font-size: 1.25rem; color: #14181f; padding: 2px 0; }
-            .zs-input::placeholder { color: #9aa3ae; }
-            .zs-clear { color: #14181f; font-size: .8rem; }
+            .zs-close span { background: #ffffff; }
+            .zs-label { font-size: .78rem; color: #9aa0a6; margin-bottom: 8px; }
+            .zs-field { gap: 12px; padding: 4px 0 8px; border-bottom: 2px solid #ffffff; }
+            .zs-field-icon { width: 20px; height: 20px; color: #ffffff; }
+            .zs-input { font-size: 1.25rem; color: #ffffff; padding: 2px 0; }
+            .zs-input::placeholder { color: #6b7480; }
+            .zs-clear { color: #ffffff; font-size: .8rem; }
             .zs-body {
                 margin-top: 24px;
                 display: grid;
@@ -9520,31 +9542,31 @@
                 align-content: start;
             }
             .zs-body > .zs-heading, .zs-body > .zs-empty, .zs-body > .zs-chips { grid-column: 1 / -1; }
-            .zs-heading { color: #14181f; font-size: .85rem; margin-bottom: 6px; }
+            .zs-heading { color: #ffffff; font-size: .85rem; margin-bottom: 6px; }
             .zs-heading-idle { font-size: .78rem; margin-bottom: 8px; }
-            .zs-empty { color: #5d6572; font-size: .88rem; }
+            .zs-empty { color: #9aa0a6; font-size: .88rem; }
             .zs-result, .zs-skel { margin-bottom: 0; }
             .zs-result {
                 gap: 12px;
                 padding: 6px 12px 6px 6px;
-                background: #ffffff;
-                border: 1px solid #dfe3e9;
+                background: #0d0f14;
+                border: 1px solid rgba(255,255,255,.12);
                 border-radius: 8px;
-                color: #14181f;
+                color: #ffffff;
             }
-            .zs-result:hover, .zs-result.sel { background: #e8f4fb; border-color: #9fd4ee; }
-            .zs-thumb { width: 96px; height: 54px; font-size: 1.1rem; border-radius: 6px; background: linear-gradient(135deg, #dbe6f3, #c4d3e6); color: #1c6fb0; }
+            .zs-result:hover, .zs-result.sel { background: #1a1f2a; border-color: rgba(255,255,255,.3); }
+            .zs-thumb { width: 96px; height: 54px; font-size: 1.1rem; border-radius: 6px; background: linear-gradient(135deg, #1b2230, #11151d); color: #8dc2ff; }
             .zs-skel-img { width: 96px; height: 54px; }
             .zs-info { gap: 3px; }
-            .zs-chip { font-size: .6rem; padding: 2px 8px; background: #e3e8ee; color: #3a4350; }
-            .zs-sub { font-size: .66rem; color: #6b7480; }
-            .zs-title { font-size: .78rem; line-height: 1.3; color: #1b2029; -webkit-line-clamp: 2; }
-            .zs-title b { color: #000; }
-            .zs-skel { background: #fff; padding: 6px; }
-            .zs-skel-img, .zs-skel-line { background: linear-gradient(90deg, #e6eaf0 25%, #f2f4f7 50%, #e6eaf0 75%); background-size: 200% 100%; }
+            .zs-chip { font-size: .6rem; padding: 2px 8px; background: rgba(255,255,255,.1); color: #dfe4ea; }
+            .zs-sub { font-size: .66rem; color: #8a919b; }
+            .zs-title { font-size: .78rem; line-height: 1.3; color: #e9ebee; -webkit-line-clamp: 2; }
+            .zs-title b { color: #fff; }
+            .zs-skel { background: #0d0f14; padding: 6px; }
+            .zs-skel-img, .zs-skel-line { background: linear-gradient(90deg, #161a22 25%, #232936 50%, #161a22 75%); background-size: 200% 100%; }
             .zs-chips { gap: 8px; }
-            .zs-suggest { color: #14181f; border-color: #c7ced8; background: #fff; font-size: .74rem; padding: 6px 13px; }
-            .zs-suggest:hover { background: #e3e8ee; }
+            .zs-suggest { color: #ffffff; border-color: rgba(255,255,255,.18); background: none; font-size: .74rem; padding: 6px 13px; }
+            .zs-suggest:hover { background: rgba(255,255,255,.1); }
         }
 
         /* Detalle de novedad (PC): "Otras novedades" nunca tapa los créditos finales */
@@ -9601,13 +9623,13 @@
                 overflow: hidden;
                 z-index: 0;
             }
-            .story-desk-bg > img, .story-desk-bg > video {
+            .story-desk-bg > img, .story-desk-bg > video, .story-desk-bg > canvas {
                 position: absolute;
                 inset: -8%;
                 width: 116%;
                 height: 116%;
                 object-fit: cover;
-                filter: blur(70px) brightness(.55) saturate(1.25);
+                filter: blur(30px) brightness(.55) saturate(1.25);
                 pointer-events: none;
                 animation: storyFadeIn .4s ease both;
             }
@@ -10095,6 +10117,12 @@
                         <div class="story-ring-inner"><video src="news/UNOMM.mp4#t=0.6" poster="news/novedades4oct.png" muted playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video></div>
                     </div>
                     <span class="story-label">BSC, OCT 4</span>
+                </button>
+                <button type="button" class="story-item" data-story-id="matches-oct2">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><img src="news/matchaoct2(1).png" alt="MATCHES OCT 2"></div>
+                    </div>
+                    <span class="story-label">MATCHES, OCT 2</span>
                 </button>
                 <button type="button" class="story-item" data-story-id="unx-winner">
                     <div class="story-ring">
@@ -22310,7 +22338,10 @@ const buildList = f => {
                 }
                 setTimeout(() => {
                     const el = document.getElementById(targetId);
-                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    if (el) {
+                        const y = el.getBoundingClientRect().top + window.pageYOffset - 90;
+                        window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+                    }
                 }, 120);
             });
         });
@@ -22590,10 +22621,22 @@ const buildList = f => {
                 username: "BSC, OCT 4",
                 avatar: "news/novedades4oct.png",
                 music: null,
+                musicLabel: "Montagem Estrela - Nxght Avaru Zericxxn", // el video ya trae su propio audio; solo mostramos el nombre
                 ctaLabel: "Ver completo",
                 ctaUrl: "https://youtube.com/shorts/G7uCckGZSzA?si=4PCcfYg1op7L_Wht",
                 items: [
                     { type: "video", src: "news/UNOMM.mp4" }
+                ]
+            },
+            "matches-oct2": {
+                username: "MATCHES, OCT 2",
+                avatar: "news/matchaoct2(1).png",
+                music: "news/NutsLilPeep.ogg", // suena en bucle mientras dura esta historia
+                items: [
+                    { type: "image", src: "news/matchaoct2(1).png", duration: IMAGE_DURATION_MS },
+                    { type: "image", src: "news/matchaoct2(2).png", duration: IMAGE_DURATION_MS },
+                    { type: "image", src: "news/matchaoct2(3).png", duration: IMAGE_DURATION_MS },
+                    { type: "image", src: "news/matchaoct2(4).png", duration: IMAGE_DURATION_MS }
                 ]
             },
             "bsc-aug8": {
@@ -22669,11 +22712,12 @@ const buildList = f => {
             }
         };
 
-        const STORY_ORDER = ["bsc-oct4", "unx-winner", "brawler-blast", "resumen-agosto", "bsc-aug8", "matches-aug8", "lev-winner", "clip-1", "clip-2", "clip-3", "clip-4", "clip-5"];
+        const STORY_ORDER = ["bsc-oct4", "matches-oct2", "unx-winner", "brawler-blast", "resumen-agosto", "bsc-aug8", "matches-aug8", "lev-winner", "clip-1", "clip-2", "clip-3", "clip-4", "clip-5"];
 
         // Nombre a mostrar en el reproductor (icono de disco) para cada
         // canción de fondo de una destacada.
         const SONG_NAMES = {
+            "news/NutsLilPeep.ogg": "Nuts - Lil Peep",
             "news/song_leyend.ogg": "WE ON GO - BIA",
             "news/song_misery.ogg": "I Miss That Kind of Misery - cynthoni",
             "news/resumenagosto.ogg": "BALLOUT - unki",
@@ -22923,17 +22967,34 @@ const buildList = f => {
             }
         }
 
+        // Fondo borroso de un video: en vez de decodificar el mismo video otra vez a
+        // resolución completa, se dibuja el video principal en un canvas diminuto
+        // (baja resolución, ~10 fps). Como el fondo está desenfocado no se nota y
+        // el dispositivo trabaja mucho menos.
+        function makeLiveBlurCanvas(className, getSrcVideo) {
+            const c = document.createElement("canvas");
+            if (className) c.className = className;
+            c.width = 32; c.height = 56;
+            c.setAttribute("aria-hidden", "true");
+            const ctx = c.getContext("2d");
+            const timer = setInterval(() => {
+                if (!c.isConnected) { clearInterval(timer); return; }
+                const v = getSrcVideo();
+                if (!v || v.readyState < 2 || !v.videoWidth) return;
+                const h = Math.max(1, Math.round(32 * v.videoHeight / v.videoWidth));
+                if (c.height !== h) c.height = h;
+                try { ctx.drawImage(v, 0, 0, c.width, c.height); } catch (e) {}
+            }, 100);
+            return c;
+        }
+
         // ---- Escritorio: fondo borroso con la misma imagen/video, botones y pausa ----
         function setDeskBg(item) {
             if (!deskBg) return;
             deskBg.innerHTML = "";
             let el;
             if (item.type === "video") {
-                el = document.createElement("video");
-                el.src = item.src;
-                el.muted = true; el.autoplay = true; el.loop = true; el.playsInline = true;
-                el.tabIndex = -1;
-                el.play().catch(() => {});
+                el = makeLiveBlurCanvas("", () => getFgVideo());
             } else {
                 el = document.createElement("img");
                 el.src = item.src; el.alt = "";
@@ -23061,17 +23122,10 @@ const buildList = f => {
                 const slide = document.createElement("div");
                 slide.className = "story-slide";
 
-                const bgVideo = document.createElement("video");
-                bgVideo.className = "story-slide-bg";
-                bgVideo.src = item.src;
-                bgVideo.muted = true;
-                bgVideo.autoplay = true;
-                bgVideo.loop = true;
-                bgVideo.playsInline = true;
-                bgVideo.tabIndex = -1;
-                bgVideo.setAttribute("aria-hidden", "true");
+                let video; // video principal (el fondo borroso lo copia en baja resolución)
+                const bgVideo = makeLiveBlurCanvas("story-slide-bg", () => video);
 
-                const video = document.createElement("video");
+                video = document.createElement("video");
                 video.className = "story-slide-fg";
                 video.src = item.src;
                 video.autoplay = true;
@@ -23090,7 +23144,6 @@ const buildList = f => {
                 });
                 video.addEventListener("ended", () => { if (myToken === renderToken) advance(); });
                 video.play().catch(() => {});
-                bgVideo.play().catch(() => {});
             }
         }
 
@@ -23281,9 +23334,9 @@ const buildList = f => {
         if (deskFirst) deskFirst.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); goToStory(STORY_ORDER[0], 0); });
         if (deskLast) deskLast.addEventListener("click", (e) => {
             e.stopPropagation(); zcPlaySound("click");
-            // Va directo al final de todo: última destacada, último item (no avanza a la siguiente)
-            const lastId = STORY_ORDER[STORY_ORDER.length - 1];
-            goToStory(lastId, STORIES[lastId].items.length - 1);
+            // Salta a la siguiente destacada (primer item), sin recorrer las imágenes restantes de la actual
+            const idx = STORY_ORDER.indexOf(currentStoryId);
+            if (idx >= 0 && idx < STORY_ORDER.length - 1) goToStory(STORY_ORDER[idx + 1], 0);
         });
         if (pauseBtn) pauseBtn.addEventListener("click", (e) => { e.stopPropagation(); isPaused ? resumeStory() : pauseStory(); });
 
