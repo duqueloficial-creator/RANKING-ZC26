@@ -6442,7 +6442,6 @@
         }
         .vitrina-card:hover {
             background: rgba(255,255,255,0.09);
-            box-shadow: 0 0 10px rgba(255,255,255,0.08);
         }
         .vitrina-img {
             width: 60px;
@@ -7387,7 +7386,8 @@
             background: #0a0a0a;
             padding: 2px;
         }
-        .story-ring-inner img {
+        .story-ring-inner img,
+        .story-ring-inner video {
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -7953,6 +7953,17 @@
         .sz-date { font-size: 0.72rem; font-weight: 700; color: #ffffff; font-variant-numeric: tabular-nums; }
         .sz-time { font-size: 0.6rem; font-weight: 600; color: #8a8f98; white-space: nowrap; }
         @media (min-width: 768px) { .sz-card { flex-basis: 340px; } }
+
+        /* ESCRITORIO · "Sigue la ZC-ESPORTS": título propio y fila arrastrable con el cursor */
+        .sz-h-desk { display: none; }
+        @media (min-width: 1024px) {
+            .sz-h-mob { display: none; }
+            .sz-h-desk { display: inline; }
+            .sz-row { cursor: grab; user-select: none; -webkit-user-select: none; }
+            .sz-row.sz-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+            .sz-row.sz-dragging .sz-card { pointer-events: none; }
+            .sz-row img { -webkit-user-drag: none; }
+        }
         .momentos-row {
             display: flex;
             gap: 12px;
@@ -8186,6 +8197,27 @@
             color: #fff;
             line-height: 1.25;
             margin-bottom: 18px;
+        }
+
+        /* Fecha de publicación + descripción breve (estilo FIFA) */
+        .novedad-detail-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(141,194,255,0.35);
+            font-size: 12px;
+            line-height: 1.3;
+        }
+        .ndm-label { color: #8a8f98; }
+        .ndm-date { color: #d9e1e8; font-weight: 600; }
+        .novedad-detail-summary {
+            font-size: 14.5px;
+            font-weight: 600;
+            line-height: 1.55;
+            color: #ffffff;
+            margin: 0 0 20px 0;
         }
         .novedad-detail-body a { color: #8dc2ff; text-decoration: underline; text-underline-offset: 2px; }
         .novedad-detail-body a:active { opacity: 0.7; }
@@ -8958,7 +8990,7 @@
                 overflow: hidden;
             }
             .novedad-more-btn { align-self: flex-start; font-size: 0.82rem; padding: 10px 22px; border-radius: 4px; transition: transform .2s ease, box-shadow .2s ease; }
-            .novedad-more-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.25); }
+            .novedad-more-btn:hover { transform: none; box-shadow: none; }
             .novedad-social-row { gap: 8px; }
 
             /* ---- Flechas: chevron blanco sobre degradado negro, solo al pasar el cursor ---- */
@@ -9035,6 +9067,216 @@
                 font-weight: 700;
                 line-height: 1.3;
             }
+        }
+
+
+        /* ===================================================================
+           ESCRITORIO (>=1024px) · NOVEDADES v2
+           Imagen completa y más grande, caja "Siguiente" con miniatura que
+           se expande para convertirse en la novedad principal, barras finas
+           (como en Android) y textos más grandes y menos apretados.
+        =================================================================== */
+        @media (min-width: 1024px) {
+            .novedades-card {
+                width: min(1560px, calc(100vw - 48px));
+                margin-left: calc(50% - min(780px, 50vw - 24px));
+                --nov-h: clamp(520px, 43vw, 700px);
+                background: #05060a;
+                border: none;
+                border-radius: 8px;
+            }
+            .novedades-track {
+                display: grid;
+                overflow: hidden;
+                height: var(--nov-h);
+                scroll-snap-type: none;
+            }
+            .novedad-slide {
+                grid-area: 1 / 1;
+                position: relative;
+                flex: none;
+                width: 100%;
+                height: 100%;
+                display: block;
+                visibility: hidden;
+                pointer-events: none;
+                z-index: 0;
+            }
+            .novedad-slide.nov-on { visibility: visible; pointer-events: auto; z-index: 1; }
+            .novedad-slide.nov-entering { z-index: 2; transition: clip-path .95s cubic-bezier(.7,0,.2,1); will-change: clip-path; }
+
+            .novedad-img-wrap { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; order: 0; }
+            .novedad-img-wrap img { transform: scale(1); }
+            .novedad-img-wrap::after {
+                content: "";
+                position: absolute; inset: 0;
+                background:
+                    linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 38%, rgba(0,0,0,0) 66%),
+                    linear-gradient(0deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 35%);
+                pointer-events: none;
+            }
+            .novedad-slide.nov-entering .novedad-img-wrap img { transform: scale(1.35); transition: transform 1.05s cubic-bezier(.7,0,.2,1); }
+            .novedad-slide.nov-entering.nov-grow .novedad-img-wrap img { transform: scale(1); }
+            .novedad-slide.nov-entering .novedad-body { opacity: 0; transform: translateY(18px); }
+            .novedad-slide.nov-entering.nov-grow .novedad-body { opacity: 1; transform: none; transition: opacity .6s ease .5s, transform .6s ease .5s; }
+
+            .novedad-body {
+                position: absolute;
+                left: 0; top: 0; bottom: 0;
+                order: 0;
+                flex: none;
+                max-width: 50%;
+                width: 50%;
+                padding: 56px 40px 64px 84px;
+                justify-content: flex-end;
+                background: none;
+                z-index: 2;
+            }
+            .novedad-tag { font-size: 0.85rem; letter-spacing: .1em; margin-bottom: 16px; color: #8dc2ff; }
+            .novedad-text {
+                font-size: clamp(2rem, 2.9vw, 2.9rem);
+                line-height: 1.16;
+                font-weight: 800;
+                letter-spacing: -0.01em;
+                margin-bottom: 30px;
+                -webkit-line-clamp: 4;
+                text-shadow: 0 2px 18px rgba(0,0,0,.45);
+            }
+            .novedad-more-btn { font-size: 0.95rem; padding: 14px 32px; border-radius: 6px; }
+
+            /* Flechas: solo la anterior (la siguiente es la caja "Siguiente") */
+            .novedades-arrow-prev { left: 0; }
+            .novedades-arrow-next { display: none; }
+
+            /* ---- Caja "Siguiente" ---- */
+            .nov-next {
+                position: absolute;
+                top: 0; right: 0;
+                height: var(--nov-h);
+                width: clamp(260px, 22%, 360px);
+                z-index: 6;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 0 26px 26px;
+                background: linear-gradient(180deg, rgba(5,8,16,0) 0%, rgba(5,8,16,.55) 45%, rgba(8,28,60,.92) 100%);
+                cursor: pointer;
+                border: none;
+                text-align: left;
+                color: #fff;
+                font-family: inherit;
+                transition: opacity .3s ease;
+            }
+            .nov-next.nov-swap { opacity: 0; }
+            .nov-next-label { font-size: .85rem; font-weight: 500; color: rgba(255,255,255,.7); margin-bottom: 4px; }
+            .nov-next-title { font-size: 1.15rem; font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+            .nov-next-thumb { width: 100%; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; background: #111; box-shadow: 0 8px 28px rgba(0,0,0,.5); }
+            .nov-next-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+            .nov-next:hover .nov-next-thumb img { transform: scale(1.06); }
+
+            /* ---- Barras finas (como Android) + textos más grandes y espaciados ---- */
+            .novedades-progress-row { gap: 32px; padding: 0 40px; border-top: none; background: #05060a; }
+            .novedades-progress-track,
+            .novedades-progress-track.is-active { height: 1px; background: rgba(255,255,255,0.22); border-radius: 2px; }
+            .novedades-progress-label { padding: 18px 2px 26px; color: rgba(255,255,255,.6); }
+            .npl-tag { font-size: .66rem; margin-bottom: 6px; }
+            .npl-text { font-size: .86rem; line-height: 1.45; font-weight: 600; -webkit-line-clamp: 4; }
+        }
+
+
+        /* ===================================================================
+           ESCRITORIO (>=1024px) · botón "Más info." redondo, detalle de
+           novedad a pantalla amplia y zoom sutil en Historias destacadas
+        =================================================================== */
+        @media (min-width: 1024px) {
+            /* Botón "Más info.": totalmente redondeado, sin brillo; al pasar/pulsar solo se oscurece */
+            .novedad-more-btn {
+                border-radius: 999px;
+                transition: background-color .2s ease, transform .2s ease;
+            }
+            .novedad-more-btn:hover {
+                transform: none;
+                box-shadow: none;
+                background: #d2d2d2;
+            }
+            .novedad-more-btn:active {
+                transform: none;
+                box-shadow: none;
+                background: #b5b5b5;
+            }
+
+            /* ---- Detalle de la novedad: aprovecha todo el ancho ---- */
+            .novedad-detail-back {
+                padding: 20px max(40px, calc((100vw - 1480px) / 2));
+                font-size: 16px;
+                gap: 10px;
+                transition: opacity .2s ease;
+            }
+            .novedad-detail-back:hover { opacity: .75; }
+            .novedad-detail-back img { width: 24px; height: 24px; }
+            .novedad-detail-hero {
+                max-height: none;
+                height: clamp(380px, 40vw, 620px);
+            }
+            .novedad-detail-content {
+                max-width: min(1480px, calc(100vw - 80px));
+                padding: 48px 0 90px 0;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 380px;
+                column-gap: 72px;
+                align-items: start;
+            }
+            .novedad-detail-tag { grid-column: 1; font-size: 14px; margin-bottom: 14px; color: #8dc2ff; }
+            .novedad-detail-title { grid-column: 1; font-size: clamp(2.2rem, 3.2vw, 3.2rem); line-height: 1.15; margin-bottom: 30px; letter-spacing: -0.01em; }
+            .novedad-detail-body { grid-column: 1; max-width: 100%; }
+            .novedad-detail-body p { font-size: 17px; line-height: 1.75; margin-bottom: 20px; max-width: 920px; }
+            .novedad-detail-body h4 { font-size: 1.35rem; }
+            .novedad-detail-body li { font-size: 17px; line-height: 1.7; }
+            .novedad-detail-related {
+                grid-column: 2;
+                grid-row: 1 / span 3;
+                position: sticky;
+                top: 96px;
+                margin-top: 0;
+                padding: 0 0 0 36px;
+                border-top: none;
+                border-left: 1px solid rgba(255,255,255,0.08);
+            }
+            .novedad-detail-related-title { font-size: 14px; margin-bottom: 18px; }
+            .novedad-detail-related-list { gap: 20px; }
+            .novedad-detail-related-item { gap: 16px; transition: transform .3s ease; }
+            .novedad-detail-related-item:hover { transform: scale(1.025); }
+            .novedad-detail-related-thumb { flex: 0 0 128px; width: 128px; }
+            .novedad-detail-related-tag { font-size: 11px; }
+            .novedad-detail-related-name { font-size: 15px; }
+            .novedad-detail-credits { grid-column: 1 / -1; margin-top: 56px; }
+        }
+
+        /* Historias destacadas (PC): zoom muy sutil al pasar el cursor */
+        @media (min-width: 1024px) and (hover: hover) {
+            .hd-hero, .hd-list-item {
+                position: relative;
+                transition: transform .3s ease;
+            }
+            .hd-hero:hover { transform: scale(1.02); z-index: 1; }
+            .hd-list-item:hover { transform: scale(1.03); z-index: 1; }
+        }
+
+
+        /* ESCRITORIO: las pestañas de categorías no se mueven al hacer clic.
+           Todas tienen el mismo grosor de letra (antes la activa pasaba a negrita,
+           se ensanchaba y, al estar centradas, desplazaba a todas las demás). */
+        @media (min-width: 1024px) {
+            .section-tab,
+            .section-tab.active,
+            .section-tab:hover,
+            .section-tab:active,
+            .section-tab:focus {
+                font-weight: 600;
+                transform: none;
+                outline: none;
+            }
+            .section-tab { transition: color .25s ease; }
         }
 
         /* ===================== BUSCADOR (lupa del encabezado) ===================== */
@@ -9240,6 +9482,207 @@
         @media (prefers-reduced-motion: reduce) {
             .zs-overlay, .zs-result { transition: none; animation: none; }
         }
+
+        /* ===================================================================
+           ESCRITORIO (>=1024px) · Buscador estilo FIFA: panel claro, ancho y bajo
+           que cae desde arriba sin tapar toda la página (el resto se oscurece).
+           Más largo, más compacto y con letras más pequeñas.
+        =================================================================== */
+        @media (min-width: 1024px) {
+            .zs-overlay { background: rgba(4,8,16,.62); overflow: hidden; }
+            .zs-panel {
+                max-width: none;
+                width: 100%;
+                min-height: 0;
+                max-height: min(78vh, 760px);
+                overflow-y: auto;
+                scrollbar-width: none;
+                margin: 0;
+                padding: 44px max(48px, calc((100vw - 1500px) / 2)) 34px;
+                background: #f3f5f8;
+                box-shadow: 0 18px 50px rgba(0,0,0,.35);
+                box-sizing: border-box;
+            }
+            .zs-panel::-webkit-scrollbar { display: none; }
+            .zs-close { position: absolute; top: 20px; right: max(32px, calc((100vw - 1500px) / 2)); }
+            .zs-close span { background: #14181f; }
+            .zs-label { font-size: .78rem; color: #6b7480; margin-bottom: 8px; }
+            .zs-field { gap: 12px; padding: 4px 0 8px; border-bottom: 2px solid #1fb3e6; }
+            .zs-field-icon { width: 20px; height: 20px; color: #14181f; }
+            .zs-input { font-size: 1.25rem; color: #14181f; padding: 2px 0; }
+            .zs-input::placeholder { color: #9aa3ae; }
+            .zs-clear { color: #14181f; font-size: .8rem; }
+            .zs-body {
+                margin-top: 24px;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px 20px;
+                align-content: start;
+            }
+            .zs-body > .zs-heading, .zs-body > .zs-empty, .zs-body > .zs-chips { grid-column: 1 / -1; }
+            .zs-heading { color: #14181f; font-size: .85rem; margin-bottom: 6px; }
+            .zs-heading-idle { font-size: .78rem; margin-bottom: 8px; }
+            .zs-empty { color: #5d6572; font-size: .88rem; }
+            .zs-result, .zs-skel { margin-bottom: 0; }
+            .zs-result {
+                gap: 12px;
+                padding: 6px 12px 6px 6px;
+                background: #ffffff;
+                border: 1px solid #dfe3e9;
+                border-radius: 8px;
+                color: #14181f;
+            }
+            .zs-result:hover, .zs-result.sel { background: #e8f4fb; border-color: #9fd4ee; }
+            .zs-thumb { width: 96px; height: 54px; font-size: 1.1rem; border-radius: 6px; background: linear-gradient(135deg, #dbe6f3, #c4d3e6); color: #1c6fb0; }
+            .zs-skel-img { width: 96px; height: 54px; }
+            .zs-info { gap: 3px; }
+            .zs-chip { font-size: .6rem; padding: 2px 8px; background: #e3e8ee; color: #3a4350; }
+            .zs-sub { font-size: .66rem; color: #6b7480; }
+            .zs-title { font-size: .78rem; line-height: 1.3; color: #1b2029; -webkit-line-clamp: 2; }
+            .zs-title b { color: #000; }
+            .zs-skel { background: #fff; padding: 6px; }
+            .zs-skel-img, .zs-skel-line { background: linear-gradient(90deg, #e6eaf0 25%, #f2f4f7 50%, #e6eaf0 75%); background-size: 200% 100%; }
+            .zs-chips { gap: 8px; }
+            .zs-suggest { color: #14181f; border-color: #c7ced8; background: #fff; font-size: .74rem; padding: 6px 13px; }
+            .zs-suggest:hover { background: #e3e8ee; }
+        }
+
+        /* Detalle de novedad (PC): "Otras novedades" nunca tapa los créditos finales */
+        @media (min-width: 1024px) {
+            .novedad-detail-related {
+                max-height: calc(100vh - 130px);
+                overflow-y: auto;
+                scrollbar-width: none;
+                z-index: 1;
+            }
+            .novedad-detail-related::-webkit-scrollbar { display: none; }
+            .novedad-detail-credits {
+                position: relative;
+                z-index: 2;
+                background: #0a0a0a;
+                align-self: stretch;
+            }
+        }
+
+
+        /* PC: fecha + descripción, y "Otras novedades" fija en su sitio (no baja con el scroll) */
+        @media (min-width: 1024px) {
+            .novedad-detail-meta { grid-column: 1; max-width: 920px; font-size: 14px; padding-bottom: 14px; margin-bottom: 22px; }
+            .novedad-detail-summary { grid-column: 1; max-width: 920px; font-size: 1.2rem; line-height: 1.55; margin-bottom: 32px; }
+            .novedad-detail-related {
+                position: static;
+                top: auto;
+                grid-row: 1 / span 5;
+                align-self: start;
+                max-height: none;
+                overflow: visible;
+            }
+        }
+
+
+        /* ===================================================================
+           ESCRITORIO (>=1024px) · Visor de destacadas estilo FIFA:
+           historia vertical centrada, fondo = la misma imagen muy borrosa,
+           botones laterales (anterior/siguiente, primera/última) y pausa.
+        =================================================================== */
+        .story-desk-bg, .story-desk-nav, .story-desk-only { display: none; }
+        @media (min-width: 1024px) {
+            .story-viewer {
+                --sv-h: min(92vh, 880px);
+                --sv-w: calc(var(--sv-h) * 9 / 16);
+                align-items: center;
+                justify-content: center;
+                background: #05060a;
+            }
+            .story-desk-bg {
+                display: block;
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                z-index: 0;
+            }
+            .story-desk-bg > img, .story-desk-bg > video {
+                position: absolute;
+                inset: -8%;
+                width: 116%;
+                height: 116%;
+                object-fit: cover;
+                filter: blur(70px) brightness(.55) saturate(1.25);
+                pointer-events: none;
+                animation: storyFadeIn .4s ease both;
+            }
+            .story-viewer-media {
+                flex: none;
+                width: var(--sv-w);
+                height: var(--sv-h);
+                border-radius: 14px;
+                z-index: 1;
+                box-shadow: 0 20px 70px rgba(0,0,0,.55);
+            }
+            .story-tap-zone { cursor: pointer; }
+            .story-desk-only { display: flex; }
+            .story-viewer-btn { width: 24px; height: 24px; }
+            .story-viewer-btn svg { width: 100%; height: 100%; }
+            .story-viewer-username { font-size: 14px; }
+            .story-cta-btn { font-size: 14px; padding: 12px 34px; bottom: 28px; transition: background-color .2s ease; }
+            .story-cta-btn:hover { background: #d2d2d2; }
+            .story-desk-nav {
+                position: absolute;
+                top: 50%;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                margin-top: -22px;
+                padding: 0;
+                border: none;
+                border-radius: 50%;
+                background: none;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color .2s ease, opacity .2s ease, transform .2s ease;
+            }
+            .story-desk-nav svg { width: 24px; height: 24px; }
+            .story-desk-circle { width: 52px; height: 52px; margin-top: -26px; background: rgba(255,255,255,.2); backdrop-filter: blur(6px); }
+            .story-desk-circle svg { width: 26px; height: 26px; }
+            .story-desk-nav:hover { background: rgba(255,255,255,.3); }
+            .story-desk-next, .story-desk-next:hover { }
+            .story-desk-nav:hover { transform: scale(1.06); }
+            .story-desk-nav.is-disabled { opacity: .3; pointer-events: none; }
+            .story-desk-prev { left: calc(50% - var(--sv-w) / 2 - 84px); }
+            .story-desk-first { left: calc(50% - var(--sv-w) / 2 - 150px); }
+            .story-desk-next { right: calc(50% - var(--sv-w) / 2 - 84px); }
+            .story-desk-last { right: calc(50% - var(--sv-w) / 2 - 150px); }
+        }
+
+
+        /* PC · Novedades grandes del Home: título y botones más pequeños, menos tapado de la imagen
+           y un degradado negro suave para que el texto blanco resalte */
+        @media (min-width: 1024px) {
+            .novedad-body {
+                width: 40%;
+                max-width: 40%;
+                padding: 40px 32px 44px 72px;
+            }
+            .novedad-tag { font-size: .7rem; margin-bottom: 10px; }
+            .novedad-text {
+                font-size: clamp(1.3rem, 1.8vw, 1.8rem);
+                line-height: 1.22;
+                margin-bottom: 18px;
+                -webkit-line-clamp: 3;
+                text-shadow: 0 1px 10px rgba(0,0,0,.35);
+            }
+            .novedad-more-btn { font-size: .8rem; padding: 10px 24px; }
+            .novedad-social-btn { font-size: .72rem; padding: 7px 12px; }
+            .novedad-img-wrap::after {
+                background:
+                    linear-gradient(0deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,0) 48%),
+                    linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.22) 28%, rgba(0,0,0,0) 52%);
+            }
+        }
+
         /* Móvil / Android: buscador más compacto */
         @media (max-width: 1023px) {
             .zs-panel { padding: 64px 10px 40px; }
@@ -9306,19 +9749,17 @@
         @media (hover: hover) and (pointer: fine) {
             .section-tab,
             .mobile-menu-link,
-            .mm-sub-link { transition: color .25s ease, text-shadow .25s ease; }
+            .mm-sub-link { transition: color .25s ease; }
             .section-tab:hover {
                 color: #ffffff;
-                text-shadow: 0 0 6px rgba(255,255,255,0.55);
             }
             .section-tab-zc26:hover {
                 color: #ffffff;
-                text-shadow: 0 0 6px rgba(255,255,255,0.55);
             }
             .section-tab:hover::after { transform: scaleX(1); opacity: .7; }
             .mobile-menu-link:hover,
-            .mm-sub-link:hover { color: #ffffff; text-shadow: 0 0 6px rgba(255,255,255,0.5); }
-            .mobile-menu-link-zc26:hover { color: #FFFF2B; text-shadow: 0 0 6px rgba(255,255,43,0.5); }
+            .mm-sub-link:hover { color: #ffffff; }
+            .mobile-menu-link-zc26:hover { color: #FFFF2B; }
         }
 
         /* ===== ZC26 · Tanda de penales ===== */
@@ -9649,6 +10090,12 @@
         <!-- ===================== DESTACADAS (STORIES) ===================== -->
         <div class="home-section" id="home-destacadas">
             <div class="stories-row" id="storiesRow">
+                <button type="button" class="story-item" data-story-id="bsc-oct4">
+                    <div class="story-ring">
+                        <div class="story-ring-inner"><video src="news/UNOMM.mp4#t=0.6" poster="news/novedades4oct.png" muted playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video></div>
+                    </div>
+                    <span class="story-label">BSC, OCT 4</span>
+                </button>
                 <button type="button" class="story-item" data-story-id="unx-winner">
                     <div class="story-ring">
                         <div class="story-ring-inner"><img src="news/novedades4oct.png" alt="UNX WINNER"></div>
@@ -9766,7 +10213,7 @@
 
         <!-- ===================== SIGUE LA ZC26 (PARTIDOS DEL DÍA) ===================== -->
         <div class="home-section" id="home-sigue">
-            <div class="section-heading">Sigue la ZC26</div>
+            <div class="section-heading"><span class="sz-h-mob">Sigue la ZC26</span><span class="sz-h-desk">Sigue la ZC-ESPORTS</span></div>
             <div class="sz-row" id="szRow"></div>
         </div>
 
@@ -9883,6 +10330,11 @@
 
     <!-- ===================== STORY VIEWER OVERLAY ===================== -->
     <div class="story-viewer" id="storyViewer">
+        <div class="story-desk-bg" id="storyDeskBg" aria-hidden="true"></div>
+        <button type="button" class="story-desk-nav story-desk-first" id="storyDeskFirst" aria-label="Primera destacada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14"/><path d="M19 6l-9 6 9 6z"/></svg></button>
+        <button type="button" class="story-desk-nav story-desk-circle story-desk-prev" id="storyDeskPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="story-desk-nav story-desk-circle story-desk-next" id="storyDeskNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button type="button" class="story-desk-nav story-desk-last" id="storyDeskLast" aria-label="Última destacada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5v14"/><path d="M5 6l9 6-9 6z"/></svg></button>
         <div class="story-viewer-media" id="storyViewerMedia">
             <div class="story-progress-row" id="storyProgressRow"></div>
             <div class="story-viewer-top">
@@ -9896,6 +10348,9 @@
                     </div>
                 </div>
                 <div class="story-viewer-controls">
+                    <button type="button" class="story-viewer-btn story-desk-only" id="storyPauseBtn" aria-label="Pausar">
+                        <svg id="storyPauseIcon" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                    </button>
                     <button type="button" class="story-viewer-btn" id="storyMuteBtn">
                         <img id="storyMuteIcon" src="sound_onmuted.png" alt="Silenciar">
                     </button>
@@ -9922,6 +10377,8 @@
         <div class="novedad-detail-content">
             <div class="novedad-detail-tag" id="novedadDetailTag"></div>
             <div class="novedad-detail-title" id="novedadDetailTitle"></div>
+            <div class="novedad-detail-meta" id="novedadDetailMeta"><span class="ndm-label">Publicado</span><span class="ndm-date" id="novedadDetailDate"></span></div>
+            <p class="novedad-detail-summary" id="novedadDetailSummary"></p>
             <div class="novedad-detail-body" id="novedadDetailBody"></div>
             <div class="novedad-detail-related" id="novedadDetailRelated">
                 <div class="novedad-detail-related-title">Otras novedades</div>
@@ -18357,7 +18814,7 @@
         all.sort((a, b) => a.ts - b.ts);
         // Siempre 4 partidos: los últimos 4 registrados contando desde MAÑANA hacia atrás
         // (ej. hoy 3/oct → 4/oct, 3/oct, 2/oct… hasta completar 4).
-        const SZ_COUNT = 4;
+        const SZ_COUNT = window.matchMedia("(min-width: 1024px)").matches ? 5 : 4; // 5 en PC, 4 en móvil/tablet
         const tmr = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
         const tomorrowKey = dayKey(tmr);
         let upto = all.filter(x => x.key <= tomorrowKey);
@@ -18411,6 +18868,39 @@
         }).join("");
     }
     renderSigueZc26();
+    // Al cruzar el ancho de escritorio se vuelve a armar la fila (5 partidos en PC, 4 en el resto)
+    (function () {
+        const mq = window.matchMedia("(min-width: 1024px)");
+        const f = () => renderSigueZc26();
+        if (mq.addEventListener) mq.addEventListener("change", f); else if (mq.addListener) mq.addListener(f);
+    })();
+    // Escritorio: arrastrar la fila con el cursor de izquierda a derecha (y viceversa)
+    (function () {
+        const row = document.getElementById("szRow");
+        if (!row) return;
+        let down = false, moved = false, startX = 0, startLeft = 0;
+        row.addEventListener("mousedown", (e) => {
+            if (e.button !== 0 || !window.matchMedia("(min-width: 1024px)").matches) return;
+            down = true; moved = false;
+            startX = e.clientX; startLeft = row.scrollLeft;
+        });
+        window.addEventListener("mousemove", (e) => {
+            if (!down) return;
+            const dx = e.clientX - startX;
+            if (!moved && Math.abs(dx) > 5) { moved = true; row.classList.add("sz-dragging"); }
+            if (moved) { row.scrollLeft = startLeft - dx; e.preventDefault(); }
+        });
+        const end = () => {
+            if (!down) return;
+            down = false;
+            row.classList.remove("sz-dragging"); // el snap vuelve a alinear la tarjeta más cercana
+        };
+        window.addEventListener("mouseup", end);
+        window.addEventListener("blur", end);
+        // Si se arrastró, ese gesto no debe abrir el partido
+        row.addEventListener("click", (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+        row.addEventListener("dragstart", (e) => e.preventDefault());
+    })();
     // Al tocar un partido de "Sigue la ZC26" se abre el detalle de ese partido
     (function () {
         const szRowEl = document.getElementById("szRow");
@@ -21239,6 +21729,8 @@ const buildList = f => {
 
         openBtn.addEventListener("click", openSearch);
         closeBtn.addEventListener("click", () => closeSearch());
+        // Escritorio: clic en la zona oscurecida fuera del panel cierra el buscador
+        overlay.addEventListener("click", (e) => { if (e.target === overlay) closeSearch(); });
         clearBtn.addEventListener("click", () => { input.value = ""; onType(); input.focus(); });
         input.addEventListener("input", onType);
         input.addEventListener("keydown", (e) => {
@@ -22094,6 +22586,16 @@ const buildList = f => {
                     { type: "image", src: "news/matchaug8(1).jpg", duration: IMAGE_DURATION_MS }
                 ]
             },
+            "bsc-oct4": {
+                username: "BSC, OCT 4",
+                avatar: "news/novedades4oct.png",
+                music: null,
+                ctaLabel: "Ver completo",
+                ctaUrl: "https://youtube.com/shorts/G7uCckGZSzA?si=4PCcfYg1op7L_Wht",
+                items: [
+                    { type: "video", src: "news/UNOMM.mp4" }
+                ]
+            },
             "bsc-aug8": {
                 username: "BSC, AUG 8",
                 avatar: "LEV.png",
@@ -22167,7 +22669,7 @@ const buildList = f => {
             }
         };
 
-        const STORY_ORDER = ["unx-winner", "brawler-blast", "resumen-agosto", "bsc-aug8", "matches-aug8", "lev-winner", "clip-1", "clip-2", "clip-3", "clip-4", "clip-5"];
+        const STORY_ORDER = ["bsc-oct4", "unx-winner", "brawler-blast", "resumen-agosto", "bsc-aug8", "matches-aug8", "lev-winner", "clip-1", "clip-2", "clip-3", "clip-4", "clip-5"];
 
         // Nombre a mostrar en el reproductor (icono de disco) para cada
         // canción de fondo de una destacada.
@@ -22191,6 +22693,13 @@ const buildList = f => {
         const zoneBack = document.getElementById("storyZoneBack");
         const zoneNext = document.getElementById("storyZoneNext");
         const ctaBtn = document.getElementById("storyCtaBtn");
+        const deskBg = document.getElementById("storyDeskBg");
+        const deskFirst = document.getElementById("storyDeskFirst");
+        const deskPrev = document.getElementById("storyDeskPrev");
+        const deskNext = document.getElementById("storyDeskNext");
+        const deskLast = document.getElementById("storyDeskLast");
+        const pauseBtn = document.getElementById("storyPauseBtn");
+        const pauseIcon = document.getElementById("storyPauseIcon");
 
         let currentStoryId = null;
         let currentItemIndex = 0;
@@ -22414,6 +22923,42 @@ const buildList = f => {
             }
         }
 
+        // ---- Escritorio: fondo borroso con la misma imagen/video, botones y pausa ----
+        function setDeskBg(item) {
+            if (!deskBg) return;
+            deskBg.innerHTML = "";
+            let el;
+            if (item.type === "video") {
+                el = document.createElement("video");
+                el.src = item.src;
+                el.muted = true; el.autoplay = true; el.loop = true; el.playsInline = true;
+                el.tabIndex = -1;
+                el.play().catch(() => {});
+            } else {
+                el = document.createElement("img");
+                el.src = item.src; el.alt = "";
+            }
+            el.setAttribute("aria-hidden", "true");
+            deskBg.appendChild(el);
+        }
+        function updateDeskNav() {
+            const idx = STORY_ORDER.indexOf(currentStoryId);
+            const story = STORIES[currentStoryId];
+            const atStart = idx <= 0 && currentItemIndex === 0;
+            const atEnd = idx === STORY_ORDER.length - 1 && story && currentItemIndex >= story.items.length - 1;
+            if (deskPrev) deskPrev.classList.toggle("is-disabled", atStart);
+            if (deskFirst) deskFirst.classList.toggle("is-disabled", idx <= 0);
+            if (deskNext) deskNext.classList.toggle("is-disabled", !!atEnd);
+            if (deskLast) deskLast.classList.toggle("is-disabled", idx === STORY_ORDER.length - 1);
+        }
+        function updatePauseIcon() {
+            if (!pauseIcon) return;
+            pauseIcon.innerHTML = isPaused
+                ? '<path d="M7 5l12 7-12 7z"/>'
+                : '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+            if (pauseBtn) pauseBtn.setAttribute("aria-label", isPaused ? "Reanudar" : "Pausar");
+        }
+
         function goToStory(storyId, itemIndex) {
             const story = STORIES[storyId];
             if (!story) return;
@@ -22455,7 +23000,9 @@ const buildList = f => {
             renderItem();
         }
 
+        let renderToken = 0; // identifica el item mostrado: los eventos de videos viejos se ignoran
         function renderItem() {
+            const myToken = ++renderToken;
             // No borramos el slide actual todavía: lo dejamos visible como fondo
             // y el nuevo se desvanece encima (crossfade), así se evita el
             // parpadeo negro al cambiar de imagen/destacada.
@@ -22482,6 +23029,9 @@ const buildList = f => {
             setBarState(currentItemIndex, "active");
             refreshActiveTrackClass();
             preloadNextImage();
+            setDeskBg(item);
+            updateDeskNav();
+            updatePauseIcon();
 
             if (item.type === "image") {
                 const slide = document.createElement("div");
@@ -22534,10 +23084,11 @@ const buildList = f => {
                 currentMediaEl = slide;
                 scheduleOutgoingSlideCleanup(previousSlideEl);
                 video.addEventListener("loadedmetadata", () => {
+                    if (myToken !== renderToken) return; // un video anterior no debe adelantar la historia actual
                     const durMs = (isFinite(video.duration) && video.duration > 0) ? video.duration * 1000 : 15000;
                     startProgress(durMs);
                 });
-                video.addEventListener("ended", () => advance());
+                video.addEventListener("ended", () => { if (myToken === renderToken) advance(); });
                 video.play().catch(() => {});
                 bgVideo.play().catch(() => {});
             }
@@ -22555,6 +23106,8 @@ const buildList = f => {
         function pauseStory() {
             if (isPaused) return;
             isPaused = true;
+            updatePauseIcon();
+            { const dv = deskBg && deskBg.querySelector("video"); if (dv) dv.pause(); }
             progressElapsedAtPause = Date.now() - progressStartTime;
             clearProgressTimer();
             if (bgAudio) bgAudio.pause();
@@ -22574,6 +23127,8 @@ const buildList = f => {
         function resumeStory() {
             if (!isPaused) return;
             isPaused = false;
+            updatePauseIcon();
+            { const dv = deskBg && deskBg.querySelector("video"); if (dv) dv.play().catch(() => {}); }
             const remaining = Math.max(50, progressDuration - progressElapsedAtPause);
             if (bgAudio) bgAudio.play().catch(() => {});
             const fgV2 = getFgVideo(); if (fgV2) fgV2.play().catch(() => {});
@@ -22646,6 +23201,8 @@ const buildList = f => {
             updateMusicWidget(null);
             currentStoryId = null;
             isPaused = false;
+            if (deskBg) deskBg.innerHTML = "";
+            updatePauseIcon();
         }
 
         // Abrir historia al tocar el círculo de Destacadas o una tarjeta de Momentos
@@ -22699,27 +23256,63 @@ const buildList = f => {
 
         // Mantener presionado para pausar
         let pressTimer = null;
+        let holdPaused = false; // true solo si la pausa vino de mantener presionado (no del botón de pausa)
         function bindHoldToPause(zone) {
             const start = () => {
-                pressTimer = setTimeout(() => pauseStory(), 180);
+                pressTimer = setTimeout(() => { if (!isPaused) { holdPaused = true; pauseStory(); } }, 180);
             };
             const end = () => {
                 clearTimeout(pressTimer);
-                if (isPaused) resumeStory();
+                if (holdPaused) { holdPaused = false; if (isPaused) resumeStory(); }
             };
             zone.addEventListener("touchstart", start, { passive: true });
             zone.addEventListener("touchend", end);
             zone.addEventListener("touchcancel", end);
             zone.addEventListener("mousedown", start);
             zone.addEventListener("mouseup", end);
-            zone.addEventListener("mouseleave", () => { if (isPaused) end(); });
+            zone.addEventListener("mouseleave", () => { end(); });
         }
         bindHoldToPause(zoneBack);
         bindHoldToPause(zoneNext);
 
-        // Cerrar con Escape (accesibilidad en desktop)
+        // Escritorio: botones laterales y de pausa (también funcionan con el cursor)
+        if (deskNext) deskNext.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); navOnce(advance); });
+        if (deskPrev) deskPrev.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); navOnce(goBack); });
+        if (deskFirst) deskFirst.addEventListener("click", (e) => { e.stopPropagation(); zcPlaySound("click"); goToStory(STORY_ORDER[0], 0); });
+        if (deskLast) deskLast.addEventListener("click", (e) => {
+            e.stopPropagation(); zcPlaySound("click");
+            // Va directo al final de todo: última destacada, último item (no avanza a la siguiente)
+            const lastId = STORY_ORDER[STORY_ORDER.length - 1];
+            goToStory(lastId, STORIES[lastId].items.length - 1);
+        });
+        if (pauseBtn) pauseBtn.addEventListener("click", (e) => { e.stopPropagation(); isPaused ? resumeStory() : pauseStory(); });
+
+        // Salir sin tocar la X:
+        // · PC: clic en la zona borrosa fuera de la historia
+        viewer.addEventListener("click", (e) => {
+            if (e.target === viewer || e.target === deskBg) { zcPlaySound("salir"); closeViewer(); }
+        });
+        // · Celular: deslizar la historia hacia abajo
+        let swipeY0 = null, swipeX0 = null;
+        mediaWrap.addEventListener("touchstart", (e) => {
+            const t = e.touches && e.touches[0];
+            swipeY0 = t ? t.clientY : null; swipeX0 = t ? t.clientX : null;
+        }, { passive: true });
+        mediaWrap.addEventListener("touchend", (e) => {
+            if (swipeY0 === null) return;
+            const t = e.changedTouches && e.changedTouches[0];
+            const dy = t ? t.clientY - swipeY0 : 0, dx = t ? t.clientX - swipeX0 : 0;
+            swipeY0 = swipeX0 = null;
+            if (dy > 110 && Math.abs(dx) < 70) { zcPlaySound("salir"); closeViewer(); }
+        });
+
+        // Cerrar con Escape (accesibilidad en desktop) + flechas y espacio
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && viewer.classList.contains("active")) closeViewer();
+            if (!viewer.classList.contains("active")) return;
+            if (e.key === "Escape") closeViewer();
+            else if (e.key === "ArrowRight") navOnce(advance);
+            else if (e.key === "ArrowLeft") navOnce(goBack);
+            else if (e.key === " " && !/^(BUTTON|A|INPUT|TEXTAREA)$/.test((document.activeElement || {}).tagName || "")) { e.preventDefault(); isPaused ? resumeStory() : pauseStory(); }
         });
     })();
 
@@ -22775,6 +23368,87 @@ const buildList = f => {
 
         const tracks = progressRow.querySelectorAll(".novedades-progress-track");
 
+        /* ---------- ESCRITORIO: caja "Siguiente" + transición de miniatura a principal ---------- */
+        const deskMQ = window.matchMedia("(min-width: 1024px)");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const NOV_ANIM_MS = 1000;
+        let shownIndex = -1;
+        let animToken = 0;
+        let animTimer = null;
+
+        const nextBox = document.createElement("button");
+        nextBox.type = "button";
+        nextBox.className = "nov-next";
+        nextBox.setAttribute("aria-label", "Ver la siguiente novedad");
+        nextBox.innerHTML = '<span class="nov-next-label">Siguiente</span><span class="nov-next-title"></span><span class="nov-next-thumb"><img alt=""></span>';
+        card.appendChild(nextBox);
+        const nextTitleEl = nextBox.querySelector(".nov-next-title");
+        const nextThumbEl = nextBox.querySelector(".nov-next-thumb");
+        const nextImgEl = nextBox.querySelector("img");
+        nextBox.addEventListener("click", () => { if (typeof zcPlaySound === "function") zcPlaySound("click"); goTo(currentIndex + 1); });
+        if (!deskMQ.matches) nextBox.style.display = "none";
+
+        function shortTitle(slide) {
+            if (slide.dataset.short) return slide.dataset.short;
+            const t = (slide.querySelector(".novedad-text")?.textContent || "").trim();
+            const words = t.split(/\s+/);
+            if (words.length <= 4) return t;
+            return words.slice(0, 4).join(" ").replace(/[:,.;\-–]+$/, "") + "…";
+        }
+        function fillNextBox(index) {
+            const n = slides[(index + 1) % total];
+            nextTitleEl.textContent = shortTitle(n);
+            const im = n.querySelector(".novedad-img-wrap img");
+            if (im) nextImgEl.src = im.currentSrc || im.src;
+        }
+        function finishDesk(target) {
+            slides.forEach((sl) => {
+                if (sl !== target) sl.classList.remove("nov-on");
+                sl.classList.remove("nov-entering", "nov-grow");
+                sl.style.clipPath = "";
+            });
+            target.classList.add("nov-on");
+        }
+        function deskShow(index, instant) {
+            if (!deskMQ.matches || index === shownIndex) return;
+            const target = slides[index];
+            const prevIdx = shownIndex;
+            clearTimeout(animTimer);
+            if (prevIdx >= 0) finishDesk(slides[prevIdx]); // cierra cualquier animación pendiente
+            shownIndex = index;
+            const token = ++animToken;
+            if (instant || prevIdx < 0 || reduceMotion.matches || !nextBox.offsetWidth) {
+                finishDesk(target);
+                fillNextBox(index);
+                return;
+            }
+            // El clip-path arranca exactamente sobre la miniatura "Siguiente" y se expande a pantalla completa
+            const sr = target.getBoundingClientRect();
+            const tr = nextThumbEl.getBoundingClientRect();
+            const top = Math.max(0, tr.top - sr.top), left = Math.max(0, tr.left - sr.left);
+            const right = Math.max(0, sr.right - tr.right), bottom = Math.max(0, sr.bottom - tr.bottom);
+            target.style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px round 6px)`;
+            target.classList.add("nov-on", "nov-entering");
+            void target.offsetWidth;
+            target.classList.add("nov-grow");
+            target.style.clipPath = "inset(0px 0px 0px 0px round 0px)";
+            nextBox.classList.add("nov-swap");
+            setTimeout(() => {
+                if (token !== animToken) return;
+                fillNextBox(index);
+                nextBox.classList.remove("nov-swap");
+            }, 650);
+            animTimer = setTimeout(() => { if (token === animToken) finishDesk(target); }, NOV_ANIM_MS + 150);
+        }
+        const onDeskChange = () => {
+            nextBox.style.display = deskMQ.matches ? "" : "none";
+            shownIndex = -1;
+            if (deskMQ.matches) deskShow(currentIndex, true);
+            else scrollToSlide(currentIndex, true);
+        };
+        if (deskMQ.addEventListener) deskMQ.addEventListener("change", onDeskChange);
+        else if (deskMQ.addListener) deskMQ.addListener(onDeskChange);
+
         function setBar(index, state) {
             const track = tracks[index];
             if (!track) return;
@@ -22801,6 +23475,7 @@ const buildList = f => {
             });
             setBar(currentIndex, "active");
             animateBar(currentIndex);
+            deskShow(currentIndex);
         }
 
         function clearTimer() {
@@ -22994,6 +23669,8 @@ const buildList = f => {
                 tag: "ZC26 ESPORTS™",
                 title: "Regresa la ZC26 Brawl Stars este mes de septiembre",
                 hero: "news/novedades25sep1.jpg",
+                date: "25 sep 2026",
+                summary: "La ZC26 Brawl Stars regresa este septiembre en formato 3 contra 3, con reglas renovadas para que todos compitan en igualdad de condiciones y un equipo de moderación atento a cada partida.",
                 paragraphs: [
                     "Estimada comunidad, nos alegra mucho ponernos en contacto con ustedes para compartir varias novedades importantes sobre el desarrollo de nuestros torneos. Como bien recordarán, en la última edición el equipo de Levantan Esports se quedó con el primer lugar tras una excelente participación.",
                     "Después de ese evento, nos tomamos un tiempo fuera de las canchas para planificar todo con calma, pero la espera terminó y estamos de vuelta oficialmente con una nueva entrega de la ZC26. En esta oportunidad, volveremos a medir el nivel de todos en la modalidad de tres contra tres dentro de Brawl Stars.",
@@ -23009,6 +23686,8 @@ const buildList = f => {
                 tag: "ZC26 ESPORTS™",
                 title: "LEVIATÁN ESPORTS se corona CAMPEÓN de la ZC26 Agosto",
                 hero: "news/novedades8aug1.png",
+                date: "8 ago 2026",
+                summary: "Leviatán Esports se impuso 3-1 en la gran final y se quedó con el título de la primera edición del torneo 3 contra 3 de Brawl Stars, tras una serie de muy buen nivel.",
                 paragraphs: [
                     "El torneo oficial de tres contra tres de Brawl Stars ha llegado a su final, consagrando a Leviatán Esports como el gran campeón de esta edición inaugural. La jornada de competencia estuvo marcada por un nivel técnico sobresaliente y series de alta intensidad en cada una de las rondas disputadas.",
                     "Antes del inicio de los enfrentamientos en la gran final, ambos equipos aplicaron su estrategia en la fase de vetos. Quedaron excluidos de la partida los personajes Belle, Spike, Bibi y Nori, lo que obligó a las escuadras a replantear sus composiciones tácticas para la serie decisiva.",
@@ -23023,6 +23702,8 @@ const buildList = f => {
                 tag: "Brawl Stars Oficial",
                 title: "El sistema Camino Starr será reemplazado por una nueva mecánica llamada Brawler Blast",
                 hero: "news/novedades2sep2.jpg",
+                date: "2 sep 2026",
+                summary: "Llega Brawler Blast para reemplazar al Camino Starr: al juntar los créditos necesarios se desbloquea un personaje al azar de cierta rareza, con progreso extra incluido.",
                 paragraphs: [
                     "El sistema Camino Starr será reemplazado por una nueva mecánica llamada Brawler Blast. Con este cambio, al reunir la cantidad de créditos requerida, se desbloqueará un personaje de manera aleatoria dentro de una determinada rareza, otorgando además progresión extra para dicho personaje.",
                     "Al conseguir los créditos necesarios, se abrirá una pantalla especial donde se mostrarán los personajes disponibles. Al tocar la pantalla, las opciones se irán eliminando una a una hasta revelar al personaje obtenido.",
@@ -23035,6 +23716,8 @@ const buildList = f => {
                 tag: "ZC26 ESPORTS™",
                 title: "Fin de la fase de grupos: Arrancan los cruces de eliminatoria",
                 hero: "news/novedades27sep1.jpg",
+                date: "27 sep 2026",
+                summary: "Terminó la fase de grupos de la ZC26 y empieza la eliminatoria, con baneos globales de Brawlers y nuevas reglas que se aplicarán en cada cruce.",
                 novedadBlocks: [
                 {
                                 "type": "h4",
@@ -24564,6 +25247,8 @@ const buildList = f => {
                 tag: "ZC26 ESPORTS™",
                 title: "UNORTHODOX SE CONSAGRA CAMPEÓN DEL ZC26 TRAS VENCER AL CONJUNTO DE OMEN NOCTE",
                 hero: "news/novedades4oct.png",
+                date: "4 oct 2026",
+                summary: "Unorthodox es el nuevo campeón de la ZC26: venció a Omen Nocte en una final muy pareja que se definió desde los penales.",
                 blocks: [
                     {
                         "type": "h5",
@@ -24676,6 +25361,8 @@ const buildList = f => {
                 tag: "ZC26 ESPORTS™",
                 title: "TORNEO 1VS1 Edición México: Cómo participar y más",
                 hero: "news/novedades5oct.png",
+                date: "5 oct 2026",
+                summary: "ZC Esports prepara un torneo 1vs1 de Brawl Stars solo para jugadores de México; aquí encontrarás cómo participar y todos los detalles.",
                 blocks: [
                     {
                         "type": "h5",
@@ -24849,6 +25536,11 @@ const buildList = f => {
             detailHero.src = data.hero;
             detailTag.textContent = data.tag;
             detailTitle.textContent = data.title;
+            const metaEl = document.getElementById("novedadDetailMeta");
+            const dateEl = document.getElementById("novedadDetailDate");
+            const sumEl = document.getElementById("novedadDetailSummary");
+            if (metaEl && dateEl) { dateEl.textContent = data.date || ""; metaEl.style.display = data.date ? "" : "none"; }
+            if (sumEl) { sumEl.textContent = data.summary || ""; sumEl.style.display = data.summary ? "" : "none"; }
             if (data.novedadBlocks && data.completoSections) {
                 detailBody.innerHTML = "";
                 detailBody.appendChild(renderNovedadTabs(data));
