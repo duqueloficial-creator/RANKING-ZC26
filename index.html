@@ -68,6 +68,13 @@
     </style>
     <noscript><style>#zcPreloader { display: none !important; }</style></noscript>
     <style>
+        @font-face {
+            font-family: "Segoe UI Variable";
+            src: url("fonts/SegoeUIVF.ttf") format("truetype");
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -9263,6 +9270,10 @@
         @media (min-width: 1024px) {
             * { font-family: 'Noto Sans', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         }
+        /* Computadoras (pantalla ancha + ratón): Segoe UI Variable. Celulares y tablets no cambian. */
+        @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+            * { font-family: 'Segoe UI Variable', 'Segoe UI', 'Noto Sans', Arial, sans-serif; }
+        }
 
         /* ---- Bracket de eliminación directa en escritorio: tamaño original (se ve completo),
                con el botón "Ver bracket completo" y sin los botones de ronda, que ahí no hacen falta ---- */
@@ -16985,7 +16996,11 @@
             cv.width = W; cv.height = H;
             const ctx = cv.getContext("2d", { alpha: false });   // sin transparencia: nunca quedan líneas blancas en los bordes
             ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-            const FF = "'Segoe UI', Roboto, system-ui, sans-serif";
+            const isDesktop = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)").matches;
+            if (isDesktop && document.fonts && document.fonts.load) {
+                try { await Promise.all([document.fonts.load("500 20px 'Segoe UI Variable'"), document.fonts.load("700 20px 'Segoe UI Variable'"), document.fonts.load("900 20px 'Segoe UI Variable'")]); } catch (e1) {}
+            }
+            const FF = isDesktop ? "'Segoe UI Variable', 'Segoe UI', 'Noto Sans', Arial, sans-serif" : "'Segoe UI', Roboto, system-ui, sans-serif";
             ctx.fillStyle = "#0b0b0d"; ctx.fillRect(0, 0, W, H);
             ctx.fillStyle = "#fff"; ctx.font = "900 " + Math.round(cell * 0.2) + "px " + FF;
             ctx.textBaseline = "middle"; ctx.textAlign = "left";
