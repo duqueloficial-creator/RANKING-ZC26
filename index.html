@@ -77,20 +77,20 @@
 .zc1v1p-trop{font-size:.7rem;color:#9a9fa8;flex-shrink:0}
 body.zc-tour-1v1 #wcPred{display:none!important}
 
-.zct-bar{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:flex-start;margin:18px 0 6px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.zct-bar{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:flex-start;margin:18px -20px 6px;padding:12px 20px 0;border-top:1px solid rgba(255,255,255,.12)}
 .zct-chips{display:flex;gap:8px;flex-wrap:wrap}
 .zct-chip{border:1px solid rgba(255,255,255,.14);background:#101217;color:#c9cdd3;border-radius:999px;padding:8px 14px;font-size:.78rem;font-weight:700;cursor:pointer}
 .zct-chip.active{background:#fff;color:#101217;border-color:#fff}
 .zct-chip i{font-style:normal;font-size:.6rem;margin-left:6px;padding:2px 6px;border-radius:999px;background:#f97316;color:#fff}
 .zct-season{position:relative}
 .zct-season-btn{background:transparent;border:0;color:#9a9fa8;font-size:.7rem;text-align:left;cursor:pointer;padding:2px 0}
-.zct-season-btn b{display:block;color:#fff;font-size:1rem}
-.zct-season-menu{display:none;position:absolute;left:0;right:auto;bottom:100%;top:auto;z-index:60;min-width:130px;background:#1b1e26;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:6px 0;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.zct-season-btn b{display:block;color:#fff;font-size:.9rem}
+.zct-season-menu{display:none;position:absolute;left:0;right:auto;bottom:calc(100% + 6px);top:auto;z-index:60;min-width:130px;padding:5px;background:rgba(14,16,22,.82);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.14);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.55)}
 .zct-season.open .zct-season-menu{display:block}
-.zct-season.zct-left .zct-season-menu{left:0;right:auto;min-width:190px}
+.zct-season.zct-left .zct-season-menu{left:0;right:auto;min-width:150px}
 .zct-season.zct-left .zct-season-btn{text-align:left}
-.zct-season-menu button{display:block;width:100%;text-align:left;background:none;border:0;color:#e6e8ec;padding:10px 16px 10px 34px;font-size:.9rem;cursor:pointer;position:relative}
-.zct-season-menu button.on::before{content:"\2713";position:absolute;left:12px}
+.zct-season-menu button{display:block;width:100%;text-align:left;white-space:nowrap;background:transparent;border:1px solid transparent;border-radius:8px;color:#e6e8ec;padding:7px 10px;font-size:.72rem;font-weight:600;cursor:pointer}.zct-season-menu button:hover{background:rgba(255,255,255,.07)}
+.zct-season-menu button.on{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff}
 .zct-cards{display:grid;gap:12px}
 .zct-card{background:#101217;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
 .zct-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -274,10 +274,10 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             opacity: 1;
         }
         .section-tab-zc26 {
-            color: #9aa0a6;
+            color: #f97316;
         }
         .section-tab-zc26.active {
-            color: #ffffff;
+            color: #f97316;
         }
         .menu-toggle {
             width: 34px;
@@ -9879,7 +9879,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 color: #ffffff;
             }
             .section-tab-zc26:hover {
-                color: #ffffff;
+                color: #fb923c;
             }
             .section-tab:hover::after { transform: scaleX(1); opacity: .7; }
             .mobile-menu-link:hover,
@@ -10991,7 +10991,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         <div class="section-title">POSICIONES</div>
         <div class="zct-bar zc1v1-keep"></div>
         <div class="zct-notice zct-hide zc1v1-keep"></div>
-        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 5</span><span>Resultados de los últimos 5 partidos</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 5 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div></div></div>
+        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-legend-title">Ascenso</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span><span>Clasifica a la Gran Final</span></div><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 5</span><span>Resultados de los últimos 5 partidos</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 5 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div></div></div>
         <div class="section-subtitle">Clasificación por grupo y fases del torneo</div>
         <div class="zcgrp-phase-tabs" id="zcgrpPhaseTabs">
             <button type="button" class="zcgrp-phase-tab active" data-zcgrp-phase="groups">Fase de grupos</button>
@@ -11124,8 +11124,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         </div>
         <div class="wcpred zc1v1-only zct-hide" id="zc1v1Prob">
             <div class="wcpred-head"><h3 class="wcpred-title">Probabilidad de ganar</h3></div>
-            <p class="wcpred-desc">Calculada según los trofeos de la cuenta de Brawl Stars de cada jugador</p>
-            <div class="wcpred-body"><div class="wcpred-inner"><ul class="wcpred-list" id="zc1v1ProbList"></ul>
+                        <div class="wcpred-body"><div class="wcpred-inner"><ul class="wcpred-list" id="zc1v1ProbList"></ul>
             <p class="wcpred-foot">Probabilidades estimadas con fines informativos: cada jugador tiene un % proporcional a sus trofeos.</p></div></div>
         </div>
         <div class="wcpred" id="wcPred">
@@ -20813,7 +20812,7 @@ const buildList = f => {
     /* ===================== ZC26 · TORNEOS (1vs1 / 3vs3) + TEMPORADA + CALENDARIO 1vs1 ===================== */
     const ZC_TOURNAMENTS = [
         { id: "3v3", season: "2026", name: "3vs3 ZC26", start: "2026-09-20", end: "2026-10-04", meta: "Equipos · Tier S · Fase de grupos y eliminación directa", status: "Finalizado", note: "Campeón: Unorthodox" },
-        { id: "1v1", season: "2026", name: "1vs1 · Bo5", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "En curso", note: "Jueves 15 al miércoles 21 de octubre · 5:00 p.m. (Perú)" }
+        { id: "1v1", season: "2026", name: "1vs1 ZC26", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "En curso", note: "Jueves 15 al miércoles 21 de octubre · 5:00 p.m. (Perú)" }
     ];
     const ZC_SEASONS = ["2026", "2025", "2024", "2023"];
     function zctLatest() { return ZC_TOURNAMENTS.slice().sort((a, b) => b.start.localeCompare(a.start))[0].id; }
@@ -20868,7 +20867,7 @@ const buildList = f => {
         const probBlock = () => {
             const p = zc1v1Prob(m.home, m.away);
             if (!p || ZC1V1_RESULTS[m.id]) return "";
-            return `<div class="zc26mm-stat-block zc26mm-prob-block"><div class="zc26mm-stat-title-row"><span class="zc26mm-stat-title">Probabilidad de victoria</span></div><div class="zc26mm-stat-sub">Según los trofeos de Brawl Stars (${ZC1V1_TROPHIES[m.home] / 1000}k vs ${ZC1V1_TROPHIES[m.away] / 1000}k)</div><div class="zc26mm-prob-labels"><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.home}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-home">${p.a}%</span></div><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.away}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-away">${p.b}%</span></div></div><div class="zc26mm-prob-bar"><span class="zc26mm-prob-seg zc26mm-prob-seg-home" style="width:${p.a}%"></span><span class="zc26mm-prob-seg zc26mm-prob-seg-away" style="width:${p.b}%"></span></div></div>`;
+            return `<div class="zc26mm-stat-block zc26mm-prob-block"><div class="zc26mm-stat-title-row"><span class="zc26mm-stat-title">Probabilidad de victoria</span></div><div class="zc26mm-prob-labels"><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.home}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-home">${p.a}%</span></div><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.away}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-away">${p.b}%</span></div></div><div class="zc26mm-prob-bar"><span class="zc26mm-prob-seg zc26mm-prob-seg-home" style="width:${p.a}%"></span><span class="zc26mm-prob-seg zc26mm-prob-seg-away" style="width:${p.b}%"></span></div></div>`;
         };
         const formBlock = () => `<div class="zc26mm-stat-block"><div class="zc26mm-stat-title">Formación reciente</div><div class="zc26mm-stat-sub">Últimos 5 partidos</div>${[m.home, m.away].map(n => `<div class="zc26mm-form-row"><div class="zc26mm-form-team">${zc1v1Img(n, "zc26mm-form-logo")}<span class="zc26mm-form-name">${n}</span></div><div class="zc26mm-form-dots">${zc26GrpDots(st[n])}</div></div>`).join("")}</div>`;
         if (tab === "estadisticas") return m.tbd ? `<div class="zc26mm-more-empty">Estadísticas disponibles cuando se definan los finalistas.</div>` : formBlock() + probBlock();
@@ -21033,8 +21032,8 @@ const buildList = f => {
     function zctBarHtml() {
         const list = ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start));
         const latest = zctLatest(), cur = list.find(t => t.id === zcTour);
-        return `<div class="zct-season zct-left"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Torneo<b>${cur ? cur.name : "—"} ▾</b></button><div class="zct-season-menu" role="listbox">${list.map(t => `<button type="button" class="${t.id === zcTour ? "on" : ""}" data-zct-tour="${t.id}">${t.name}${t.id === latest ? " · Actual" : ""}</button>`).join("")}</div></div>`
-            + `<div class="zct-season"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Temporada<b>${zcSeason} ▾</b></button><div class="zct-season-menu" role="listbox">${ZC_SEASONS.map(x => `<button type="button" class="${x === zcSeason ? "on" : ""}" data-zct-season="${x}">${x}</button>`).join("")}</div></div>`;
+        return `<div class="zct-season zct-left"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Torneo<b>${cur ? cur.name : "—"}</b></button><div class="zct-season-menu" role="listbox">${list.map(t => `<button type="button" class="${t.id === zcTour ? "on" : ""}" data-zct-tour="${t.id}">${t.name}${t.id === latest ? " · Actual" : ""}</button>`).join("")}</div></div>`
+            + `<div class="zct-season"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Temporada<b>${zcSeason}</b></button><div class="zct-season-menu" role="listbox">${ZC_SEASONS.map(x => `<button type="button" class="${x === zcSeason ? "on" : ""}" data-zct-season="${x}">${x}</button>`).join("")}</div></div>`;
     }
     function zctRenderCards() {
         const box = document.getElementById("zctCards"); if (!box) return;
