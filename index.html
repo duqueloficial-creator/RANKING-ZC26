@@ -65,7 +65,49 @@
         html.zc-loading, html.zc-loading body {
             overflow: hidden !important;
         }
-    </style>
+    
+/* ZC26 · Torneos / temporada / 1vs1 */
+.zct-hide{display:none!important}
+.lu-block .lu-block-grid.zc26lu-grid.zc1v1-lu-row{display:flex!important;width:100%;box-sizing:border-box;flex-direction:row!important;justify-content:space-between!important;align-items:center;gap:8px;padding:6px 22px}.zc1v1-lu-vs{font-size:.7rem;font-weight:800;color:#6c7280;letter-spacing:1px}
+#zc1v1Bracket{flex-wrap:wrap;gap:18px;width:auto;min-width:0}#zc1v1Bracket .zcbracket-col{width:100%;max-width:300px;margin-left:0!important}
+#zc1v1Bracket .zcbracket-match[data-zc1v1-match]{cursor:pointer}
+.zc1v1p-bar{flex:1 1 100%;order:3;height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.zc1v1p-bar i{display:block;height:100%;border-radius:99px;background:var(--c)}
+.zc1v1p-item{flex-wrap:wrap}
+.zc1v1p-trop{font-size:.7rem;color:#9a9fa8;flex-shrink:0}
+body.zc-tour-1v1 #wcPred{display:none!important}
+
+.zct-bar{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:flex-start;margin:18px 0 6px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.zct-chips{display:flex;gap:8px;flex-wrap:wrap}
+.zct-chip{border:1px solid rgba(255,255,255,.14);background:#101217;color:#c9cdd3;border-radius:999px;padding:8px 14px;font-size:.78rem;font-weight:700;cursor:pointer}
+.zct-chip.active{background:#fff;color:#101217;border-color:#fff}
+.zct-chip i{font-style:normal;font-size:.6rem;margin-left:6px;padding:2px 6px;border-radius:999px;background:#f97316;color:#fff}
+.zct-season{position:relative}
+.zct-season-btn{background:transparent;border:0;color:#9a9fa8;font-size:.7rem;text-align:left;cursor:pointer;padding:2px 0}
+.zct-season-btn b{display:block;color:#fff;font-size:1rem}
+.zct-season-menu{display:none;position:absolute;left:0;right:auto;bottom:100%;top:auto;z-index:60;min-width:130px;background:#1b1e26;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:6px 0;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.zct-season.open .zct-season-menu{display:block}
+.zct-season.zct-left .zct-season-menu{left:0;right:auto;min-width:190px}
+.zct-season.zct-left .zct-season-btn{text-align:left}
+.zct-season-menu button{display:block;width:100%;text-align:left;background:none;border:0;color:#e6e8ec;padding:10px 16px 10px 34px;font-size:.9rem;cursor:pointer;position:relative}
+.zct-season-menu button.on::before{content:"\2713";position:absolute;left:12px}
+.zct-cards{display:grid;gap:12px}
+.zct-card{background:#101217;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.zct-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.zct-card-name{font-size:1.05rem;font-weight:800;color:#fff}
+.zct-tag{font-size:.62rem;font-weight:800;padding:3px 8px;border-radius:999px;background:#2a2f3a;color:#c9cdd3;text-transform:uppercase}
+.zct-tag.live{background:#f97316;color:#fff}
+.zct-card-meta{font-size:.74rem;color:#9a9fa8;line-height:1.45}
+.zct-card-btns{display:flex;gap:8px;margin-top:4px}
+.zct-card-btns button,.zct-notice button{flex:1;border:1px solid rgba(255,255,255,.14);background:transparent;color:#fff;border-radius:8px;padding:9px 10px;font-size:.78rem;font-weight:700;cursor:pointer}
+.zct-card-btns button:first-child{background:#fff;color:#101217;border-color:#fff}
+.zct-notice{background:#101217;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;color:#c9cdd3;font-size:.85rem;line-height:1.5;text-align:center}
+.zct-notice button{margin-top:10px;max-width:220px}
+#zc1v1Fixtures .zcfx-card,.zc26mm-more .zcfx-card[data-zc1v1-match]{cursor:pointer}
+#zc1v1Fixtures .zcfx-card:active{transform:scale(.985)}
+.zcgrp-row-quali-third .zcgrp-sticky::before{background:#f97316}
+.zcgrp-legend-swatch-lightblue{background:#f97316}
+</style>
     <noscript><style>#zcPreloader { display: none !important; }</style></noscript>
     <style>
         @font-face {
@@ -2564,6 +2606,67 @@
                 gap: 8px;
             }
             #zc26 #zc26GroupFilter .am-filter-btn { flex: 1 1 0; font-size: 0.8rem; padding: 11px 0; gap: 6px; }
+        }
+        #zc1v1Filter.zcg-filter {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 8px;
+            padding: 6px;
+            margin-bottom: 14px; margin-top: 4px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            /* Android: permitir deslizar en horizontal (antes pan-y lo bloqueaba) */
+            touch-action: pan-x pan-y;
+            overscroll-behavior-x: contain;
+            /* Android: con "center" el desborde se reparte a ambos lados y
+               "Todos" / "Group A" quedaban cortados a la izquierda, sin poder
+               llegar a ellos con el scroll. Se alinea al inicio. */
+            justify-content: flex-start;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            cursor: grab;
+        }
+        #zc1v1Filter.zcg-filter::-webkit-scrollbar {
+            display: none;
+        }
+        #zc1v1Filter .am-filter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            flex-shrink: 0;
+            padding: 10px 16px;
+            font-size: 0.72rem;
+            letter-spacing: 0.2px;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            color: #9a9fa8;
+            background: rgba(255,255,255,0.05);
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+        }
+        #zc1v1Filter .am-filter-btn:hover { color: #ffffff; background: rgba(255,255,255,0.09); }
+        #zc1v1Filter .am-filter-btn:active { transform: scale(0.95); }
+        #zc1v1Filter .am-filter-btn.active {
+            color: #ffffff;
+            background: rgba(255,255,255,0.12);
+            background: color-mix(in srgb, var(--gc) 22%, transparent);
+            border-color: var(--gc);
+        }
+        .zcg-pre { display: inline; }
+        @media (min-width: 640px) {
+            #zc1v1Filter.zcg-filter {
+                overflow-x: visible;
+                justify-content: space-between;
+                gap: 8px;
+            }
+            #zc1v1Filter .am-filter-btn { flex: 1 1 0; font-size: 0.8rem; padding: 11px 0; gap: 6px; }
         }
         .zc-search-suggestion-row {
             display: flex;
@@ -9978,12 +10081,12 @@
 <div class="section-tabs-wrapper" id="sectionTabsWrapper">
     <div class="section-tabs" id="sectionTabs">
         <a href="#inicio" class="section-tab active" data-section-tab="inicio" data-i18n="nav.home" data-i18n-default="Home">Home</a>
+        <a href="#zc26" class="section-tab section-tab-zc26" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="Partidos">Partidos</a>
+        <a href="#group" class="section-tab section-tab-zc26" data-section-tab="group" data-i18n="nav.group" data-i18n-default="Posiciones">Posiciones</a>
         <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
         <a href="#ranking" class="section-tab" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
         <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
         <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
-        <a href="#zc26" class="section-tab section-tab-zc26" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="Partidos">Partidos</a>
-        <a href="#group" class="section-tab section-tab-zc26" data-section-tab="group" data-i18n="nav.group" data-i18n-default="Posiciones">Posiciones</a>
         <a href="#wc-stats" class="section-tab section-tab-zc26" data-section-tab="wc-stats" data-i18n="nav.wcStats" data-i18n-default="Estadísticas">Estadísticas</a>
     </div>
 </div>
@@ -10052,6 +10155,17 @@
                 <a href="#home-proximos" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-proximos">Próximos torneos y eventos</a>
             </div></div>
         </div>
+        <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
+        <div class="mm-group mm-group-zc" data-mm-group>
+            <div class="mm-row">
+                <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
+                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Posiciones"><span class="mm-plus" aria-hidden="true"></span></button>
+            </div>
+            <div class="mm-sub"><div class="mm-sub-inner">
+                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:groups">Fase de grupos</a>
+                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:knockout">Fase de eliminación directa</a>
+            </div></div>
+        </div>
         <div class="mm-group" data-mm-group>
             <div class="mm-row">
                 <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
@@ -10075,17 +10189,6 @@
                 <a href="#ranking" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="ranking">Leaderboard</a>
                 <a href="#zceloFaq" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="zceloFaq">¿Cómo se calcula la Clasificación?</a>
                 <a href="#zcnrBlock" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="zcnrBlock">Novedades de la Clasificación</a>
-            </div></div>
-        </div>
-        <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
-        <div class="mm-group mm-group-zc" data-mm-group>
-            <div class="mm-row">
-                <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
-                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Posiciones"><span class="mm-plus" aria-hidden="true"></span></button>
-            </div>
-            <div class="mm-sub"><div class="mm-sub-inner">
-                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:groups">Fase de grupos</a>
-                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:knockout">Fase de eliminación directa</a>
             </div></div>
         </div>
         <a href="#wc-stats" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.wcStats.upper" data-i18n-default="ESTADÍSTICAS">ESTADÍSTICAS</a>
@@ -10845,7 +10948,10 @@
 
     <div class="section-block" id="zc26">
         <div class="section-title">PARTIDOS</div>
-        <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
+        <div class="zct-bar zc1v1-keep"></div>
+        <div class="zct-notice zct-hide zc1v1-keep"></div>
+        <div class="section-subtitle zc1v1-only zc1v1-keep">Encuentros oficiales, jueves 15 al miércoles 21</div>
+                <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
         <div class="zcc-row">
             <div class="zc-search-wrap">
                 <input type="text" class="zc-search-input" id="zc26SearchInput" enterkeyhint="search" placeholder="Buscar equipo, grupo o día..." autocomplete="off">
@@ -10860,6 +10966,7 @@
                 <div class="zcc-menu" id="zc26CountryMenu" role="listbox" aria-label="País"></div>
             </div>
         </div>
+        <div class="zc1v1-only zc1v1-keep" id="zc1v1Matches"><div class="am-filter-group zcg-filter" id="zc1v1Filter"><button type="button" class="am-filter-btn active" data-zc1v1-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="FINAL" style="--gc:#f97316"><span class="zcg-txt">Gran final</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="IDA" style="--gc:#22c55e"><span class="zcg-txt">Ida</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="VUELTA" style="--gc:#3b82f6"><span class="zcg-txt">Vuelta</span></button></div><div class="panel"><div class="zcfx-wrap" id="zc1v1Fixtures"></div><div class="zc26-no-results" id="zc1v1NoResults">No se encontraron partidos con ese filtro.</div></div><div class="section-updated">Calendario 1vs1 · los marcadores se actualizan al terminar cada Bo5</div></div>
         <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="FINAL" style="--gc:#f97316"><span class="zcg-txt">Gran final</span></button>
@@ -10882,6 +10989,9 @@
 
     <div class="section-block" id="group">
         <div class="section-title">POSICIONES</div>
+        <div class="zct-bar zc1v1-keep"></div>
+        <div class="zct-notice zct-hide zc1v1-keep"></div>
+        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 5</span><span>Resultados de los últimos 5 partidos</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 5 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div></div></div>
         <div class="section-subtitle">Clasificación por grupo y fases del torneo</div>
         <div class="zcgrp-phase-tabs" id="zcgrpPhaseTabs">
             <button type="button" class="zcgrp-phase-tab active" data-zcgrp-phase="groups">Fase de grupos</button>
@@ -11011,6 +11121,12 @@
                 <div class="wcstat-table-head"><span>Jugador</span><span>Tarjetas rojas</span></div>
                 <div class="wcstat-list" id="wcstatRedList"></div>
             </div>
+        </div>
+        <div class="wcpred zc1v1-only zct-hide" id="zc1v1Prob">
+            <div class="wcpred-head"><h3 class="wcpred-title">Probabilidad de ganar</h3></div>
+            <p class="wcpred-desc">Calculada según los trofeos de la cuenta de Brawl Stars de cada jugador</p>
+            <div class="wcpred-body"><div class="wcpred-inner"><ul class="wcpred-list" id="zc1v1ProbList"></ul>
+            <p class="wcpred-foot">Probabilidades estimadas con fines informativos: cada jugador tiene un % proporcional a sus trofeos.</p></div></div>
         </div>
         <div class="wcpred" id="wcPred">
             <div class="wcpred-head">
@@ -20693,6 +20809,285 @@ const buildList = f => {
         }).join("");
     }
     renderZc26Groups();
+
+    /* ===================== ZC26 · TORNEOS (1vs1 / 3vs3) + TEMPORADA + CALENDARIO 1vs1 ===================== */
+    const ZC_TOURNAMENTS = [
+        { id: "3v3", season: "2026", name: "3vs3 ZC26", start: "2026-09-20", end: "2026-10-04", meta: "Equipos · Tier S · Fase de grupos y eliminación directa", status: "Finalizado", note: "Campeón: Unorthodox" },
+        { id: "1v1", season: "2026", name: "1vs1 · Bo5", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "En curso", note: "Jueves 15 al miércoles 21 de octubre · 5:00 p.m. (Perú)" }
+    ];
+    const ZC_SEASONS = ["2026", "2025", "2024", "2023"];
+    function zctLatest() { return ZC_TOURNAMENTS.slice().sort((a, b) => b.start.localeCompare(a.start))[0].id; }
+    let zcTour = zctLatest();   // siempre arranca en el torneo más reciente
+    let zcSeason = "2026";
+
+    const ZC1V1_PLAYERS = ["Ethanzs'10", "Blacknoirz", "mateotovarr997", "_diedv"];
+    const ZC1V1_PAIRS = [[[0,1],[2,3]], [[0,2],[1,3]], [[0,3],[1,2]], [[1,0],[3,2]], [[2,0],[3,1]], [[3,0],[2,1]]];
+    const ZC1V1_DAYS = [["Jueves",15],["Viernes",16],["Sábado",17],["Domingo",18],["Lunes",19],["Martes",20]];
+    const ZC1V1_FIXTURES = ZC1V1_PAIRS.map((pairs, i) => ({
+        day: ZC1V1_DAYS[i][0], num: ZC1V1_DAYS[i][1], month: "OCT",
+        phase: i === 0 ? "Primera vuelta (ida)" : i === 3 ? "Segunda vuelta (vuelta)" : "",
+        matches: pairs.map((p, k) => ({ leg: i < 3 ? "ida" : "vuelta", id: "P" + (i * 2 + k + 1), label: "Jornada " + (i + 1) + " · " + (i < 3 ? "Ida" : "Vuelta") + " · Bo5", home: ZC1V1_PLAYERS[p[0]], away: ZC1V1_PLAYERS[p[1]], time: k ? "6:00 p.m." : "5:00 p.m." }))
+    })).concat([{ day: "Miércoles", num: 21, month: "OCT", phase: "Gran final", matches: [{ leg: "final", id: "P13", label: "Gran Final · Bo5", home: "1.º de la tabla", away: "2.º de la tabla", time: "6:00 p.m.", tbd: true }, { leg: "final", id: "P14", label: "Tercer puesto · Bo5", home: "3.º de la tabla", away: "4.º de la tabla", time: "5:00 p.m.", tbd: true }] }]);
+    // Resultados (sets ganados por cada lado). Ejemplo:  P1: { h: 3, a: 1 }  -> Ethanzs'10 3 - 1 Blacknoirz
+    const ZC1V1_RESULTS = {};
+
+
+    const ZC1V1_SHIELD = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 4l22 8v18c0 14-9 25-22 30C19 55 10 44 10 30V12z" fill="#2a2f3a" stroke="#8a8f98" stroke-width="3"/></svg>');
+    // Logo del jugador/equipo; si no tiene, usa el escudo por defecto de la página (y al final uno incrustado)
+    function zc1v1Img(n, cls) {
+        return `<img ${cls ? `class="${cls}" ` : ""}src="${zc26Logo(n)}" alt="" onerror="this.onerror=function(){this.onerror=null;this.src='${ZC1V1_SHIELD}'};this.src='escudo_logo/escudo-default.png'">`;
+    }
+    // Trofeos de cada cuenta de Brawl Stars -> probabilidad proporcional
+    const ZC1V1_TROPHIES = { "Ethanzs'10": 75000, "Blacknoirz": 70000, "_diedv": 40000, "mateotovarr997": 25000 };
+    function zc1v1Prob(a, b) {
+        const ta = ZC1V1_TROPHIES[a], tb = ZC1V1_TROPHIES[b];
+        if (!ta || !tb) return null;
+        const pa = Math.round(ta / (ta + tb) * 100);
+        return { a: pa, b: 100 - pa };
+    }
+    const ZC1V1_ALL = ZC1V1_FIXTURES.flatMap(d => d.matches.map(m => ({ d, m })));
+    function zc1v1Find(id) { return ZC1V1_ALL.find(x => x.m.id === id); }
+    function zc1v1Tab(tab, ctx) {
+        const x = zc1v1Find(ctx.id); if (!x) return "";
+        const d = x.d, m = x.m;
+        const line = (l, v) => `<div class="tab-info-line zc26mm-info-line"><span class="tab-info-label">${l}:</span> <span class="tab-info-value">${v}</span></div>`;
+        const st = zc1v1Standings(), order = zc26SortByStandings(ZC1V1_PLAYERS, st);
+        // Calificación prevista (0-10) a partir de los trofeos de Brawl Stars
+        const players = () => {
+            const card = n => {
+                return `<div class="zc26lu-card"><div class="zc26lu-avwrap">${zc26LuImg(n)}<span class="zc26lu-rating rt-na">N/A</span></div><span class="zc26lu-name" title="${n}">${n}</span><span class="zc26lu-role">Jugador</span></div>`;
+            };
+            return `<div class="lu-wrap zc26mm-lu-wrap"><div class="lu-block lu-block-titulares"><div class="lu-sub-title">Jugadores</div><div class="lu-block-grid zc26lu-grid zc1v1-lu-row">${card(m.home)}<span class="zc1v1-lu-vs">VS</span>${card(m.away)}</div></div><div class="lu-block zc26lu-coach-block"><div class="lu-ratings-note">Calificaciones de los jugadores (0-10) basadas en los datos de los partidos</div></div></div>`;
+        };
+        const more = () => {
+            const o = ZC1V1_ALL.filter(y => !y.m.tbd && (y.m.home === m.home && y.m.away === m.away) || (y.m.home === m.away && y.m.away === m.home));
+            return o.length ? `<div class="zc26mm-more"><div class="zcfx-list">${o.map(y => zc1v1Card(y.d, y.m)).join("")}</div></div>` : `<div class="zc26mm-more-empty">No hay partidos entre estos jugadores.</div>`;
+        };
+        if (tab === "mas-partidos") return more();
+        if (tab === "cronologia") return `<div class="zc26mm-more-empty">No hay cambios ni tarjetas registrados en este partido.</div>`;
+        const probBlock = () => {
+            const p = zc1v1Prob(m.home, m.away);
+            if (!p || ZC1V1_RESULTS[m.id]) return "";
+            return `<div class="zc26mm-stat-block zc26mm-prob-block"><div class="zc26mm-stat-title-row"><span class="zc26mm-stat-title">Probabilidad de victoria</span></div><div class="zc26mm-stat-sub">Según los trofeos de Brawl Stars (${ZC1V1_TROPHIES[m.home] / 1000}k vs ${ZC1V1_TROPHIES[m.away] / 1000}k)</div><div class="zc26mm-prob-labels"><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.home}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-home">${p.a}%</span></div><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.away}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-away">${p.b}%</span></div></div><div class="zc26mm-prob-bar"><span class="zc26mm-prob-seg zc26mm-prob-seg-home" style="width:${p.a}%"></span><span class="zc26mm-prob-seg zc26mm-prob-seg-away" style="width:${p.b}%"></span></div></div>`;
+        };
+        const formBlock = () => `<div class="zc26mm-stat-block"><div class="zc26mm-stat-title">Formación reciente</div><div class="zc26mm-stat-sub">Últimos 5 partidos</div>${[m.home, m.away].map(n => `<div class="zc26mm-form-row"><div class="zc26mm-form-team">${zc1v1Img(n, "zc26mm-form-logo")}<span class="zc26mm-form-name">${n}</span></div><div class="zc26mm-form-dots">${zc26GrpDots(st[n])}</div></div>`).join("")}</div>`;
+        if (tab === "estadisticas") return m.tbd ? `<div class="zc26mm-more-empty">Estadísticas disponibles cuando se definan los finalistas.</div>` : formBlock() + probBlock();
+        if (tab === "alineaciones") return players();
+        return line("Lugar", "Torneo virtual \"ZC26 1vs1\", manejado por el equipo del soporte")
+            + line("Zona horaria", "Todos los horarios corresponden a la hora estándar regional")
+            + zc26GeneralSection("Alineaciones", players())
+            + (m.tbd ? "" : zc26GeneralSection("Estadísticas", formBlock() + probBlock()))
+            + zc26GeneralSection("Más partidos", more());
+    }
+    function openZc1v1Match(id) {
+        const x = zc1v1Find(id), panel = document.getElementById("zc26MatchPanel");
+        if (!x || !panel) return;
+        const d = x.d, m = x.m, r = ZC1V1_RESULTS[m.id] || null;
+        const ls = zc26LocalSchedule(d, m.time, zc26CountryCode);
+        const status = r ? "Finalizado" : "Próximo";
+        const tsRaw = !r ? zc26MatchStartTimestamp(d, m.time) : null;
+        const ts = (tsRaw && tsRaw > Date.now()) ? tsRaw : null;
+        const win = r ? (r.h > r.a ? "h" : "a") : "";
+        const num = (v, lose) => v == null ? `<span class="score-number score-number-empty"></span>` : `<span class="score-number${lose ? " score-number-lose" : ""}">${v}</span>`;
+        zc26MatchHistory.length = 0;
+        zc26mmCurrentMatch = { is1v1: true, id: m.id, home: m.home, away: m.away, res: r };
+        panel.innerHTML = `
+            <div class="info-close"><span class="info-close-x">✕</span></div>
+            ${ts ? `<span class="zc26mm-countdown" data-zc26-countdown="${ts}"><span class="zc26mm-countdown-icon">${ZC26_CLOCK_ICON}</span><span class="zc26mm-countdown-text"></span></span>` : ""}
+            <div class="zc26mm-head"><div>
+                <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">1vs1 · ${m.label}</span></div>
+                <div class="zc26mm-date">${ls ? ls.weekday + " " + ls.d + " de " + ls.monthName : d.day + " " + d.num + " de octubre"} · 2026</div>
+            </div><div class="zc26mm-tags"><span class="zc26mm-tag">1vs1 · Bo5</span><span class="zc26mm-status">${status}</span></div></div>
+            <div class="scoreboard zc26mm-scoreboard">
+                <div class="team"><div class="team-logo">${zc1v1Img(m.home)}</div><span class="team-name">${m.home}</span></div>
+                <div class="score-center">${num(r && r.h, win === "a")}<div class="match-status"><span class="status-badge">${status}</span><span class="status-date">${ls ? ls.date : d.num + "/10"}</span>${ls && !r ? `<span class="status-date">${ls.time}</span>` : ""}</div>${num(r && r.a, win === "h")}</div>
+                <div class="team"><div class="team-logo">${zc1v1Img(m.away)}</div><span class="team-name">${m.away}</span></div>
+            </div>
+            <div class="zc26mm-tabs">
+                <button type="button" class="zc26mm-tab-btn active" data-zc26mm-tab="general">Información general</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="cronologia">Cronología</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="alineaciones">Alineaciones</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="estadisticas">Estadísticas</button>
+                <button type="button" class="zc26mm-tab-btn" data-zc26mm-tab="mas-partidos">Más partidos</button>
+            </div>
+            <div class="zc26mm-tab-content" id="zc26mmTabContent">${zc1v1Tab("general", zc26mmCurrentMatch)}</div>`;
+        zcPlaySound("clickentrar");
+        openModal("zc26MatchOverlay");
+        panel.scrollTop = 0;
+        const ov = document.getElementById("zc26MatchOverlay"); if (ov) ov.scrollTop = 0;
+    }
+    try { const _rt = zc26RenderTabContent; zc26RenderTabContent = function (tab, ctx) { return (ctx && ctx.is1v1) ? zc1v1Tab(tab, ctx) : _rt.apply(this, arguments); }; } catch (e) {}
+
+    function zc1v1Standings() {
+        const s = {};
+        ZC1V1_PLAYERS.forEach(p => s[p] = { pj: 0, g: 0, p: 0, e: 0, pts: 0, sf: 0, sc: 0, ds: 0, form: [] });
+        ZC1V1_FIXTURES.forEach(d => d.matches.forEach(m => {
+            const r = ZC1V1_RESULTS[m.id]; if (!r || m.tbd) return;
+            [[m.home, r.h, r.a], [m.away, r.a, r.h]].forEach(([t, f, c]) => {
+                const x = s[t]; x.pj++; x.sf += f; x.sc += c; x.ds = x.sf - x.sc;
+                if (f > c) { x.g++; x.pts += 3; x.form.push("w"); } else { x.p++; x.form.push("l"); }
+            });
+        }));
+        return s;
+    }
+    function zc1v1Card(day, m) {
+        const r = ZC1V1_RESULTS[m.id];
+        const logo = n => `<span class="zcfx-team-logo">${zc1v1Img(n)}</span>`;
+        const win = r ? (r.h > r.a ? "h" : "a") : "";
+        const row = (n, sd) => `<div class="zcfx-team-row${win ? (win === sd ? " zcfx-row-win" : " zcfx-row-lose") : ""}">${logo(n)}<span class="zcfx-team-name">${n}</span></div>`;
+        const ls = zc26LocalSchedule(day, m.time, zc26CountryCode);
+        const scores = r ? `<div class="zcfx-scores"><span class="zcfx-score${win === "h" ? " zcfx-score-win" : ""}">${r.h}</span><span class="zcfx-score${win === "a" ? " zcfx-score-win" : ""}">${r.a}</span></div>` : "";
+        const date = r ? `<span class="zcfx-date-num zcfx-date-num-sm">Fin</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.date : ""}</span>` : `<span class="zcfx-date-num zcfx-date-num-sm">${ls ? ls.date : day.num + "/10"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.time : m.time}</span>`;
+        return `<div class="zcfx-card" data-zc1v1-match="${m.id}" role="button" tabindex="0" data-leg="${m.leg}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-label="${m.label}"><span class="zcfx-group-badge">${m.label}</span><div class="zcfx-teams">${row(m.home, "h")}${row(m.away, "a")}</div>${scores}<span class="zcfx-divider"></span><div class="zcfx-date">${date}</div></div>`;
+    }
+    function zc1v1Day(day) {
+        return `${day.phase ? `<div class="zcfx-phase-divider">${day.phase}</div>` : ""}<div class="zcfx-day"><div class="zcfx-day-head"><span class="zcfx-day-name">${day.day}</span><span class="zcfx-day-date">${day.num} ${day.month}</span></div><div class="zcfx-list">${day.matches.map(m => zc1v1Card(day, m)).join("")}</div></div>`;
+    }
+    // Cuando termina la fase regular, 1.º-2.º juegan la Gran Final y 3.º-4.º el tercer puesto
+    function zc1v1ResolveKO() {
+        const reg = ZC1V1_ALL.filter(x => !x.m.tbd && x.m.leg !== "final");
+        const fin = ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1].matches;
+        const done = reg.length && reg.every(x => ZC1V1_RESULTS[x.m.id]);
+        const o = done ? zc26SortByStandings(ZC1V1_PLAYERS, zc1v1Standings()) : null;
+        [[fin[0], 0, 1], [fin[1], 2, 3]].forEach(([m, a, b]) => {
+            if (o) { m.home = o[a]; m.away = o[b]; m.tbd = false; }
+        });
+    }
+    function zc1v1BracketMatch(m, rank) {
+        const r = ZC1V1_RESULTS[m.id], win = r ? (r.h > r.a ? "h" : "a") : "";
+        const team = (n, sd, sc) => m.tbd
+            ? `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">${n}</span></div>`
+            : `<div class="zcbracket-team${win ? (win === sd ? " is-winner" : " is-loser") : ""}"><div class="zcbracket-team-logo">${zc1v1Img(n)}</div><span class="zcbracket-team-name">${n}</span>${r ? `<span class="zcbracket-team-score">${sc}</span>` : ""}</div>`;
+        const ls = zc26LocalSchedule(ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1], m.time, zc26CountryCode);
+        return `<div class="zcbracket-match"${m.tbd ? "" : ` data-zc1v1-match="${m.id}" data-zcbr-home="${m.home}" data-zcbr-away="${m.away}"`}><div class="zcbracket-match-meta"><span>${ls ? ls.date + " · " + ls.time : "21/10 · " + m.time}</span><span class="zcbracket-status">${r ? "Finalizado" : "Próximo"}</span></div>${team(m.home, "h", r && r.h)}${team(m.away, "a", r && r.a)}</div>`;
+    }
+    function zc1v1RenderKO() {
+        const br = document.getElementById("zc1v1Bracket"); if (!br) return;
+        const fin = ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1].matches;
+        br.innerHTML = `<div class="zcbracket-col"><div class="zcbracket-col-title">Gran final</div>${zc1v1BracketMatch(fin[0])}</div><div class="zcbracket-col"><div class="zcbracket-col-title">Tercer puesto</div>${zc1v1BracketMatch(fin[1])}</div>`;
+    }
+    function zc1v1Phase(p) {
+        const t = document.getElementById("zc1v1PhaseTabs"); if (!t) return;
+        if (!t.children.length) t.innerHTML = `<button type="button" class="zcgrp-phase-tab" data-z1p="reg">Fase regular</button><button type="button" class="zcgrp-phase-tab" data-z1p="ko">Fase de eliminación directa</button>`;
+        t.querySelectorAll("[data-z1p]").forEach(b => b.classList.toggle("active", b.dataset.z1p === p));
+        document.getElementById("zc1v1PanelReg").style.display = p === "reg" ? "" : "none";
+        document.getElementById("zc1v1PanelKo").style.display = p === "ko" ? "" : "none";
+    }
+    document.addEventListener("click", e => {
+        const b = e.target.closest("[data-z1p]"); if (!b) return;
+        zcPlaySound("click"); zc1v1Phase(b.dataset.z1p);
+    });
+    function renderZc1v1() {
+        zc1v1ResolveKO(); zc1v1RenderKO();
+        if (!document.querySelector("#zc1v1PhaseTabs .active")) zc1v1Phase("reg");
+        const fx = document.getElementById("zc1v1Fixtures");
+        if (fx) fx.innerHTML = ZC1V1_FIXTURES.filter(d => !d.matches[0].tbd).map(zc1v1Day).join("") + zc1v1Day(ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1]);
+        const tb = document.getElementById("zc1v1Table");
+        if (!tb) return;
+        const st = zc1v1Standings();
+        const cols = [["PJ", "pj"], ["G", "g"], ["E", "e"], ["P", "p"], ["Pts", "pts"], ["SF", "sf"], ["SC", "sc"], ["DS", "ds"]];
+        const cc = c => "zcgrp-col-num" + (c === "Pts" ? " zcgrp-col-pts" : "");
+        const teams = zc26SortByStandings(ZC1V1_PLAYERS, st);
+        tb.innerHTML = `<div class="zcgrp-group"><div class="zcgrp-group-title">Fase regular · 1vs1</div><div class="zcgrp-table"><div class="zcgrp-scroll"><div class="zcgrp-inner">
+            <div class="zcgrp-row zcgrp-head"><div class="zcgrp-sticky"><span class="zcgrp-col-pos">N°</span><span class="zcgrp-head-team">Jugador</span></div>${cols.map(c => `<span class="${cc(c[0])}">${c[0]}</span>`).join("")}<span class="zcgrp-col-last5">Últimos 5</span></div>
+            ${teams.map((t, i) => `<div class="zcgrp-row"><div class="zcgrp-sticky"><span class="zcgrp-col-pos">${i + 1}</span><span class="zcgrp-col-team">${zc1v1Img(t, "zcgrp-team-logo")}<span class="zcgrp-team-name">${t}</span></span></div>${cols.map(c => `<span class="${cc(c[0])}">${st[t][c[1]]}</span>`).join("")}<span class="zcgrp-col-last5">${zc26GrpDots(st[t])}</span></div>`).join("")}
+            </div></div></div></div>`;
+    }
+    // Si cambian el país/hora, se vuelve a pintar el calendario 1vs1
+    try { const _rzf = renderZc26Fixtures; renderZc26Fixtures = function () { _rzf.apply(this, arguments); renderZc1v1(); }; } catch (e) {}
+
+    const ZC1V1_CANDS = [...ZC1V1_PLAYERS, "Gran final", "Ida", "Vuelta", ...ZC1V1_DAYS.map(d => d[0]), "Miércoles", ...[1, 2, 3, 4, 5, 6].map(n => "Jornada " + n)];
+    function zc1v1ApplyFilters() {
+        const inp = document.getElementById("zc26SearchInput");
+        if (inp && inp.closest(".zc-search-wrap")) inp.closest(".zc-search-wrap").classList.toggle("has-value", !!inp.value);
+        const q = searchNorm((inp && inp.value) || "").trim();
+        const fb = document.querySelector("#zc1v1Filter .am-filter-btn.active");
+        const f = fb ? fb.dataset.zc1v1Filter : "all";
+        let any = false;
+        document.querySelectorAll("#zc1v1Fixtures .zcfx-day").forEach(d => {
+            let dv = false;
+            d.querySelectorAll(".zcfx-card").forEach(c => {
+                const leg = c.dataset.leg;
+                const okF = f === "all" || (f === "FINAL" && leg === "final") || (f === "IDA" && leg === "ida") || (f === "VUELTA" && leg === "vuelta");
+                const hay = searchNorm([c.dataset.home, c.dataset.away, c.dataset.day, c.dataset.label, leg === "final" ? "gran final" : leg].join(" "));
+                const ok = okF && (!q || hay.includes(q));
+                c.style.display = ok ? "" : "none";
+                if (ok) { dv = true; any = true; }
+            });
+            d.style.display = dv ? "" : "none";
+        });
+        document.querySelectorAll("#zc1v1Fixtures .zcfx-phase-divider").forEach(x => { x.style.display = (f !== "all" || q) ? "none" : ""; });
+        const nr = document.getElementById("zc1v1NoResults");
+        if (nr) nr.style.display = any ? "none" : "block";
+    }
+    try { const _af = applyZc26Filters; applyZc26Filters = function () { if (document.body.classList.contains("zc-tour-1v1")) return zc1v1ApplyFilters(); return _af.apply(this, arguments); }; } catch (e) {}
+
+
+    (function () {
+        const P = [{ n: "Ethanzs'10", t: 75000, c: "#f97316" }, { n: "Blacknoirz", t: 70000, c: "#22c55e" }, { n: "_diedv", t: 40000, c: "#3b82f6" }, { n: "mateotovarr997", t: 25000, c: "#a855f7" }];
+        const tot = P.reduce((a, p) => a + p.t, 0);
+        const ul = document.getElementById("zc1v1ProbList");
+        if (!ul) return;
+        ul.innerHTML = P.map(p => { const pc = p.t / tot * 100; return `<li class="wcpred-item zc1v1p-item"><span class="wcpred-logo"><img src="escudo_logo/escudo-default.png" alt="" onerror="this.onerror=null;this.src='${ZC1V1_SHIELD}'"></span><span class="wcpred-name">${p.n}</span><span class="zc1v1p-trop">${p.t / 1000}k 🏆</span><span class="wcpred-pct">${pc.toFixed(1)}%</span><span class="zc1v1p-bar" style="--c:${p.c}"><i style="width:${pc.toFixed(1)}%"></i></span></li>`; }).join("");
+    })();
+    function zctBarHtml() {
+        const list = ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start));
+        const latest = zctLatest(), cur = list.find(t => t.id === zcTour);
+        return `<div class="zct-season zct-left"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Torneo<b>${cur ? cur.name : "—"} ▾</b></button><div class="zct-season-menu" role="listbox">${list.map(t => `<button type="button" class="${t.id === zcTour ? "on" : ""}" data-zct-tour="${t.id}">${t.name}${t.id === latest ? " · Actual" : ""}</button>`).join("")}</div></div>`
+            + `<div class="zct-season"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Temporada<b>${zcSeason} ▾</b></button><div class="zct-season-menu" role="listbox">${ZC_SEASONS.map(x => `<button type="button" class="${x === zcSeason ? "on" : ""}" data-zct-season="${x}">${x}</button>`).join("")}</div></div>`;
+    }
+    function zctRenderCards() {
+        const box = document.getElementById("zctCards"); if (!box) return;
+        const latest = zctLatest();
+        box.innerHTML = zcSeason !== "2026" ? "" : ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start)).map(t => `<div class="zct-card"><div class="zct-card-top"><span class="zct-card-name">${t.name}</span><span class="zct-tag${t.status === "En curso" ? " live" : ""}">${t.id === latest ? "Actual · " : ""}${t.status}</span></div><div class="zct-card-meta">${t.meta}<br>${t.note}</div><div class="zct-card-btns"><button type="button" data-zct-go="zc26" data-zct-tour="${t.id}">Ver partidos</button><button type="button" data-zct-go="group" data-zct-tour="${t.id}">Ver posiciones</button></div></div>`).join("");
+    }
+    function zctApply() {
+        const has = zcSeason === "2026", one = zcTour === "1v1";
+        document.body.classList.toggle("zc-tour-1v1", one && has);
+        document.querySelectorAll(".zct-bar").forEach(b => { b.innerHTML = zctBarHtml(); if (b.parentNode && b.parentNode.lastElementChild !== b) b.parentNode.appendChild(b); });
+        ["zc26", "group"].forEach(id => {
+            const sec = document.getElementById(id); if (!sec) return;
+            Array.from(sec.children).forEach(ch => {
+                if (ch.classList.contains("section-title") || ch.classList.contains("zc1v1-keep")) return;
+                if (ch.classList.contains("zcc-row")) { ch.classList.toggle("zct-hide", !has); return; }
+                ch.classList.toggle("zct-hide", one || !has);
+            });
+        });
+        document.querySelectorAll(".zc1v1-only").forEach(e => e.classList.toggle("zct-hide", !(one && has)));
+        document.querySelectorAll(".zct-notice").forEach(n => {
+            n.classList.toggle("zct-hide", has);
+            n.innerHTML = has ? "" : `No hay partidos ni posiciones de la temporada ${zcSeason} en esta página. Las ediciones anteriores están en el Salón de la fama.<br><button type="button" data-zct-go="salon-fama">Ir al Salón de la fama</button>`;
+        });
+        zctRenderCards();
+        if (!window._zcOrigCands) window._zcOrigCands = ZC26_SEARCH_CANDIDATES.slice();
+        ZC26_SEARCH_CANDIDATES.length = 0;
+        ZC26_SEARCH_CANDIDATES.push(...((one && has) ? ZC1V1_CANDS : window._zcOrigCands));
+        const si = document.getElementById("zc26SearchInput");
+        if (si) { if (!si.dataset.ph3) si.dataset.ph3 = si.placeholder; si.placeholder = (one && has) ? "Buscar jugador, jornada o día..." : si.dataset.ph3; si.value = ""; }
+        applyZc26Filters();
+    }
+    function zctGo(sec) {
+        if (typeof applySectionFilter === "function") { applySectionFilter(sec); setActiveSectionTab(sec); }
+        window.scrollTo({ top: 0 });
+    }
+    document.addEventListener("click", function (e) {
+        const seasonBtn = e.target.closest(".zct-season-btn");
+        if (seasonBtn) { document.querySelectorAll(".zct-season.open").forEach(x => { if (x !== seasonBtn.parentNode) x.classList.remove("open"); }); seasonBtn.parentNode.classList.toggle("open"); zcPlaySound("click"); return; }
+        document.querySelectorAll(".zct-season.open").forEach(s => { if (!s.contains(e.target)) s.classList.remove("open"); });
+        const ss = e.target.closest("[data-zct-season]");
+        if (ss) { zcSeason = ss.dataset.zctSeason; const l = ZC_TOURNAMENTS.filter(t => t.season === zcSeason); if (l.length && !l.some(t => t.id === zcTour)) zcTour = zctLatest(); zcPlaySound("click"); zctApply(); return; }
+        const mc = e.target.closest("[data-zc1v1-match]");
+        if (mc && !mc.closest("#zc1v1Final")) { openZc1v1Match(mc.dataset.zc1v1Match); return; }
+        if (mc) { openZc1v1Match(mc.dataset.zc1v1Match); return; }
+        const ff = e.target.closest("[data-zc1v1-filter]");
+        if (ff) { document.querySelectorAll("#zc1v1Filter .am-filter-btn").forEach(b => b.classList.remove("active")); ff.classList.add("active"); zcPlaySound("click"); zc1v1ApplyFilters(); return; }
+        const go = e.target.closest("[data-zct-go]");
+        const tr = e.target.closest("[data-zct-tour]");
+        if (tr) { zcTour = tr.dataset.zctTour; zcPlaySound("click"); zctApply(); }
+        if (go) zctGo(go.dataset.zctGo);
+    });
+    renderZc1v1();
+    zctApply();
     /* Posiciones: cada grupo tiene UN solo scroll horizontal (los 4 equipos juntos).
        Al entrar (cada vez que se hace visible) siempre comienza en PJ y se
        desliza hacia la derecha para ver G, E, P, Pts, SF, SC, DS y Últimos 5. */
@@ -20879,6 +21274,15 @@ const buildList = f => {
                 zcPlaySound(willCollapse ? "clicksalir" : "clickentrar");
             });
         }
+    })();
+    (function () {
+        const cols = document.getElementById("zc1v1Cols"), btn = document.getElementById("zc1v1ColsToggle");
+        if (!cols || !btn) return;
+        btn.addEventListener("click", () => {
+            const o = !cols.classList.contains("open");
+            cols.classList.toggle("open", o); btn.setAttribute("aria-expanded", o ? "true" : "false");
+            zcPlaySound(o ? "clickentrar" : "clicksalir");
+        });
     })();
     (function () {
         const cols = document.getElementById("zcgrpCols");
