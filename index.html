@@ -274,10 +274,10 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             opacity: 1;
         }
         .section-tab-zc26 {
-            color: #f97316;
+            color: #fb923c;
         }
         .section-tab-zc26.active {
-            color: #f97316;
+            color: #fb923c;
         }
         .menu-toggle {
             width: 34px;
@@ -378,12 +378,12 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             color: #d4af37;
         }
         .mobile-menu-link-zc26 {
-            color: #FFFF2B;
+            color: #fb923c;
         }
         /* Menú móvil: submenús con cruz animada (+ / −) */
         .mm-row { display: flex; align-items: center; }
         .mm-row .mobile-menu-link { flex: 0 0 auto; padding-right: 8px; }
-        .mm-group-zc .mm-toggle { color: #FFFF2B; }
+        .mm-group-zc .mm-toggle { color: #fb923c; }
         .mm-toggle {
             width: 34px;
             height: 34px;
@@ -9879,12 +9879,12 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 color: #ffffff;
             }
             .section-tab-zc26:hover {
-                color: #fb923c;
+                color: #fdba74;
             }
             .section-tab:hover::after { transform: scaleX(1); opacity: .7; }
             .mobile-menu-link:hover,
             .mm-sub-link:hover { color: #ffffff; }
-            .mobile-menu-link-zc26:hover { color: #FFFF2B; }
+            .mobile-menu-link-zc26:hover { color: #fdba74; }
         }
 
         /* ===== ZC26 · Tanda de penales ===== */
@@ -20828,7 +20828,7 @@ const buildList = f => {
         matches: pairs.map((p, k) => ({ leg: i < 3 ? "ida" : "vuelta", id: "P" + (i * 2 + k + 1), label: "Jornada " + (i + 1) + " · " + (i < 3 ? "Ida" : "Vuelta") + " · Bo5", home: ZC1V1_PLAYERS[p[0]], away: ZC1V1_PLAYERS[p[1]], time: k ? "6:00 p.m." : "5:00 p.m." }))
     })).concat([{ day: "Miércoles", num: 21, month: "OCT", phase: "Gran final", matches: [{ leg: "final", id: "P13", label: "Gran Final · Bo5", home: "1.º de la tabla", away: "2.º de la tabla", time: "6:00 p.m.", tbd: true }, { leg: "final", id: "P14", label: "Tercer puesto · Bo5", home: "3.º de la tabla", away: "4.º de la tabla", time: "5:00 p.m.", tbd: true }] }]);
     // Resultados (sets ganados por cada lado). Ejemplo:  P1: { h: 3, a: 1 }  -> Ethanzs'10 3 - 1 Blacknoirz
-    const ZC1V1_RESULTS = {};
+    const ZC1V1_RESULTS = { P1: { h: 3, a: 2 } };
 
 
     const ZC1V1_SHIELD = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 4l22 8v18c0 14-9 25-22 30C19 55 10 44 10 30V12z" fill="#2a2f3a" stroke="#8a8f98" stroke-width="3"/></svg>');
