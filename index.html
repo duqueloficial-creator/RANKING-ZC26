@@ -82,7 +82,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 .zct-chips{display:flex;gap:8px;flex-wrap:wrap}
 .zct-chip{border:1px solid rgba(255,255,255,.14);background:#101217;color:#c9cdd3;border-radius:999px;padding:8px 14px;font-size:.78rem;font-weight:700;cursor:pointer}
 .zct-chip.active{background:#fff;color:#101217;border-color:#fff}
-.zct-chip i{font-style:normal;font-size:.6rem;margin-left:6px;padding:2px 6px;border-radius:999px;background:#f97316;color:#fff}
+.zct-chip i{font-style:normal;font-size:.6rem;margin-left:6px;padding:2px 6px;border-radius:999px;background:#38bdf8;color:#fff}
 .zct-season{position:relative}
 .zct-season-btn{background:transparent;border:0;color:#9a9fa8;font-size:.7rem;text-align:left;cursor:pointer;padding:2px 0}
 .zct-season-btn b{display:block;color:#fff;font-size:.9rem}
@@ -97,7 +97,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 .zct-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .zct-card-name{font-size:1.05rem;font-weight:800;color:#fff}
 .zct-tag{font-size:.62rem;font-weight:800;padding:3px 8px;border-radius:999px;background:#2a2f3a;color:#c9cdd3;text-transform:uppercase}
-.zct-tag.live{background:#f97316;color:#fff}
+.zct-tag.live{background:#38bdf8;color:#fff}
 .zct-card-meta{font-size:.74rem;color:#9a9fa8;line-height:1.45}
 .zct-card-btns{display:flex;gap:8px;margin-top:4px}
 .zct-card-btns button,.zct-notice button{flex:1;border:1px solid rgba(255,255,255,.14);background:transparent;color:#fff;border-radius:8px;padding:9px 10px;font-size:.78rem;font-weight:700;cursor:pointer}
@@ -106,8 +106,8 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 .zct-notice button{margin-top:10px;max-width:220px}
 #zc1v1Fixtures .zcfx-card,.zc26mm-more .zcfx-card[data-zc1v1-match]{cursor:pointer}
 #zc1v1Fixtures .zcfx-card:active{transform:scale(.985)}
-.zcgrp-row-quali-third .zcgrp-sticky::before{background:#f97316}
-.zcgrp-legend-swatch-lightblue{background:#f97316}
+.zcgrp-row-quali-third .zcgrp-sticky::before{background:#38bdf8}
+.zcgrp-legend-swatch-lightblue{background:#38bdf8}
 </style>
     <noscript><style>#zcPreloader { display: none !important; }</style></noscript>
     <style>
@@ -274,12 +274,6 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             transform: scaleX(1);
             opacity: 1;
         }
-        .section-tab-zc26 {
-            color: #fb923c;
-        }
-        .section-tab-zc26.active {
-            color: #fb923c;
-        }
         .menu-toggle {
             width: 34px;
             height: 26px;
@@ -378,13 +372,9 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         .mobile-menu-link:hover {
             color: #d4af37;
         }
-        .mobile-menu-link-zc26 {
-            color: #fb923c;
-        }
         /* Menú móvil: submenús con cruz animada (+ / −) */
         .mm-row { display: flex; align-items: center; }
         .mm-row .mobile-menu-link { flex: 0 0 auto; padding-right: 8px; }
-        .mm-group-zc .mm-toggle { color: #fb923c; }
         .mm-toggle {
             width: 34px;
             height: 34px;
@@ -2052,6 +2042,11 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 padding: 10px 22px;
             }
         }
+        .z1st-tab { flex-shrink: 0; background: rgba(255,255,255,0.08); border: 1.5px solid transparent; color: #cbccce; font-size: 0.78rem; font-weight: 600; padding: 9px 16px; border-radius: 999px; cursor: pointer; }
+        .z1st-tab.active { background: transparent; border-color: rgba(255,255,255,0.65); color: #ffffff; }
+        @media (min-width: 700px) { .z1st-tab { font-size: 0.82rem; padding: 10px 22px; } }
+        .z1st-panel { display: none; }
+        .z1st-panel.active { display: block; }
         .wcstat-panel { display: none; }
         .wcstat-panel.active { display: block; }
         .wcstat-table-head {
@@ -9879,13 +9874,9 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             .section-tab:hover {
                 color: #ffffff;
             }
-            .section-tab-zc26:hover {
-                color: #fdba74;
-            }
             .section-tab:hover::after { transform: scaleX(1); opacity: .7; }
             .mobile-menu-link:hover,
             .mm-sub-link:hover { color: #ffffff; }
-            .mobile-menu-link-zc26:hover { color: #fdba74; }
         }
 
         /* ===== ZC26 · Tanda de penales ===== */
@@ -9960,11 +9951,11 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             #zcbracket .zcbracket-col:first-child .zcbracket-slot { margin-bottom: 6px !important; }
         }
 
-        /* Campeón del torneo: nombre en amarillo */
-        .zcbracket-team .zcbracket-team-name.zcbr-champion { color: #E3B53C !important; font-weight: 700; }
+        /* Campeón del torneo: nombre en azul */
+        .zcbracket-team .zcbracket-team-name.zcbr-champion { color: #4a80f5 !important; font-weight: 700; }
         /* Unorthodox en el bracket: solo el nombre en dorado, sin marco ni fondo */
         .zcbracket-team.zcbr-champion-row { background: none; box-shadow: none; border-radius: 0; padding: 0; margin: 0; }
-        .zcbracket-team.zcbr-champion-row .zcbracket-team-name { color: #E3B53C !important; font-weight: 700; }
+        .zcbracket-team.zcbr-champion-row .zcbracket-team-name { color: #4a80f5 !important; font-weight: 700; }
 
         /* Formato de la ronda bajo el título de cada columna del bracket */
         .zcbracket-col-title .zcbracket-col-sub {
@@ -10013,6 +10004,99 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         }
         .vitrina-row .vitrina-date { font-size: 0.54rem; }
         .ach-card { border-radius: 7px; overflow: visible; }
+
+        /* ===== Bracket de eliminación directa: mismo diseño del editor "THE TOURNAMENT" (Matcherino) =====
+           Encabezado de ronda gris azulado con formato, filas gris/blanco, marcador a la derecha (verde si gana),
+           campeón en amarillo, insignia con el número de partido, etiquetas 1st/2nd en la final y
+           conectores grises. Se conservan la fecha, el estado, los logos y las tarjetas rojas. */
+        :is(.zcbracket, #zcbracket) {
+            padding: 4px 64px 10px 20px;
+            counter-reset: zcbrn;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-col-title {
+            background: #1a1d24; color: #e9e9eb; border-radius: 0;
+            font-size: 0.82rem; font-weight: 700; letter-spacing: 0; text-transform: none;
+            padding: 7px 4px 6px; margin-bottom: 12px;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-col-title .zcbracket-col-sub {
+            color: #8b919a; font-size: 0.68rem; font-weight: 400; margin-top: 1px;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-match {
+            position: relative; counter-increment: zcbrn;
+            background: none; border: 0; padding: 0; gap: 0; overflow: visible;
+            border-radius: 7px; box-shadow: none;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-match > :first-child { border-radius: 7px 7px 0 0; }
+        :is(.zcbracket, #zcbracket) .zcbracket-match > :last-child { border-radius: 0 0 7px 7px; }
+        :is(.zcbracket, #zcbracket) .zcbracket-match > :last-child .zcbracket-team-score { border-radius: 0 0 7px 0; }
+        :is(.zcbracket, #zcbracket) .zcbracket-match > :first-child .zcbracket-team-score { border-radius: 0 7px 0 0; }
+        :is(.zcbracket, #zcbracket) .zcbracket-match::before {
+            content: counter(zcbrn); position: absolute; left: -13px; top: 50%; transform: translateY(-50%);
+            background: #2b2f38; color: #e9e9eb; font-size: 0.7rem; font-weight: 700; line-height: 1.2;
+            padding: 3px 8px; border-radius: 6px; z-index: 3; pointer-events: none;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-match[data-zcbr-home]:not([data-zcbr-home=""])[data-zcbr-away]:not([data-zcbr-away=""]):hover {
+            box-shadow: 0 0 0 1px #5b6270;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-match[data-zcbr-home]:not([data-zcbr-home=""])[data-zcbr-away]:not([data-zcbr-away=""]):active,
+        :is(.zcbracket, #zcbracket) .zcbracket-match.zcbr-pressed {
+            background: none; border: 0; box-shadow: 0 0 0 1px rgba(142, 199, 255, 0.55);
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-match-meta {
+            background: #21252e; color: #9aa0a6; font-size: 0.6rem; font-weight: 500;
+            padding: 4px 8px; margin: 0; border-bottom: 0;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-status {
+            background: #2b2f38; color: #cfd3d8; font-size: 0.54rem; padding: 1px 6px; border-radius: 4px;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-team {
+            position: relative; height: 34px; box-sizing: border-box; gap: 8px; padding: 0 0 0 8px;
+            background: #1b1e27; color: #8b919a; opacity: 1;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-team-logo {
+            width: 22px; height: 22px; background: none; border-radius: 4px;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-team-name {
+            font-size: 0.78rem; font-weight: 500; color: #8b919a; -webkit-line-clamp: 1;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-team-score {
+            align-self: stretch; display: flex; align-items: center; justify-content: center;
+            width: 40px; margin-left: auto; padding: 0; background: transparent;
+            font-size: 0.95rem; font-weight: 700; color: #8b919a;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-winner { background: #12151c; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-winner .zcbracket-team-name { color: #f1f1f3; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-winner .zcbracket-team-score { color: #22c55e; background: transparent; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-loser { opacity: 1; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-loser .zcbracket-team-name,
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-loser .zcbracket-team-score { color: #8b919a; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-tbd .zcbracket-team-name { color: #4c5157; font-style: italic; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.is-tbd .zcbracket-team-logo { background: none; }
+        /* Campeón: fila azul suave en todas las rondas (fondo marino y texto azul) */
+        :is(.zcbracket, #zcbracket) .zcbracket-team.zcbr-champion-row {
+            background: #1c2450; color: #4a80f5; margin: 0; padding: 0 0 0 8px; border-radius: 0; box-shadow: none;
+        }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.zcbr-champion-row .zcbracket-team-name.zcbr-champion { color: #4a80f5 !important; font-weight: 600; }
+        :is(.zcbracket, #zcbracket) .zcbracket-team.zcbr-champion-row .zcbracket-team-score { background: transparent; color: #4a80f5; }
+        /* La fila del campeón respeta las esquinas redondeadas de la tarjeta */
+        :is(.zcbracket, #zcbracket) .zcbracket-match > .zcbracket-team.zcbr-champion-row:last-child { border-radius: 0 0 7px 7px; }
+        :is(.zcbracket, #zcbracket) .zcbracket-match > .zcbracket-team.zcbr-champion-row:first-child { border-radius: 7px 7px 0 0; }
+        /* Etiquetas de puesto a la derecha de la final y del tercer puesto */
+        .zcbr-place {
+            display: none !important; /* etiquetas 1st/2nd/3rd/4th ocultas */
+            position: absolute; left: calc(100% + 5px); top: 50%; transform: translateY(-50%);
+            padding: 3px 8px; font-size: 0.75rem; font-weight: 700; line-height: 1.2; color: #f1f1f3;
+            border-radius: 6px; white-space: nowrap; z-index: 2; pointer-events: none;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+        }
+        .zcbr-place-1 { background: #2f5de0; color: #f1f1f3; }
+        .zcbr-place-2 { background: #4b5563; color: #f1f1f3; }
+        .zcbr-place-3 { background: #8a5a2b; color: #f1f1f3; }
+        .zcbr-place-4 { background: #3b414b; color: #f1f1f3; }
+        /* Conectores grises de 2px como en el editor */
+        .zcbracket-lines .zcbl-h { border-top: 2px solid #4b5160; margin-top: -1px; }
+        .zcbracket-lines .zcbl-v { border-left: 2px solid #4b5160; margin-left: -1px; }
+        .zcbracket-lines .zcbl-h.zcbl-dashed, .zcbracket-lines .zcbl-v.zcbl-dashed { border-style: dashed; }
     </style>
 </head>
 <body>
@@ -10082,12 +10166,12 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 <div class="section-tabs-wrapper" id="sectionTabsWrapper">
     <div class="section-tabs" id="sectionTabs">
         <a href="#inicio" class="section-tab active" data-section-tab="inicio" data-i18n="nav.home" data-i18n-default="Home">Home</a>
-        <a href="#zc26" class="section-tab section-tab-zc26" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="Partidos">Partidos</a>
-        <a href="#group" class="section-tab section-tab-zc26" data-section-tab="group" data-i18n="nav.group" data-i18n-default="Posiciones">Posiciones</a>
         <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
         <a href="#ranking" class="section-tab" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
         <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
         <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
+        <a href="#zc26" class="section-tab section-tab-zc26" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="Partidos">Partidos</a>
+        <a href="#group" class="section-tab section-tab-zc26" data-section-tab="group" data-i18n="nav.group" data-i18n-default="Posiciones">Posiciones</a>
         <a href="#wc-stats" class="section-tab section-tab-zc26" data-section-tab="wc-stats" data-i18n="nav.wcStats" data-i18n-default="Estadísticas">Estadísticas</a>
     </div>
 </div>
@@ -10156,17 +10240,6 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <a href="#home-proximos" class="mm-sub-link" data-menu-sub data-parent="inicio" data-target="home-proximos">Próximos torneos y eventos</a>
             </div></div>
         </div>
-        <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
-        <div class="mm-group mm-group-zc" data-mm-group>
-            <div class="mm-row">
-                <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
-                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Posiciones"><span class="mm-plus" aria-hidden="true"></span></button>
-            </div>
-            <div class="mm-sub"><div class="mm-sub-inner">
-                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:groups">Fase de grupos</a>
-                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:knockout">Fase de eliminación directa</a>
-            </div></div>
-        </div>
         <div class="mm-group" data-mm-group>
             <div class="mm-row">
                 <a href="#ultimo-partido" class="mobile-menu-link" data-menu-link data-i18n="nav.lastMatch.upper" data-i18n-default="ÚLTIMO PARTIDO IMPORTA">ÚLTIMO PARTIDO IMPORTA</a>
@@ -10192,9 +10265,20 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <a href="#zcnrBlock" class="mm-sub-link" data-menu-sub data-parent="ranking" data-target="zcnrBlock">Novedades de la Clasificación</a>
             </div></div>
         </div>
-        <a href="#wc-stats" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.wcStats.upper" data-i18n-default="ESTADÍSTICAS">ESTADÍSTICAS</a>
         <a href="#contribuciones" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
         <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
+        <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
+        <div class="mm-group mm-group-zc" data-mm-group>
+            <div class="mm-row">
+                <a href="#group" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.group.upper" data-i18n-default="POSICIONES">POSICIONES</a>
+                <button type="button" class="mm-toggle" data-mm-toggle aria-expanded="false" aria-label="Mostrar subcategorías de Posiciones"><span class="mm-plus" aria-hidden="true"></span></button>
+            </div>
+            <div class="mm-sub"><div class="mm-sub-inner">
+                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:groups">Fase de grupos</a>
+                <a href="#zcgrpPhaseTabs" class="mm-sub-link" data-menu-sub data-parent="group" data-target="zcgrpPhaseTabs" data-action="phase:knockout">Fase de eliminación directa</a>
+            </div></div>
+        </div>
+        <a href="#wc-stats" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.wcStats.upper" data-i18n-default="ESTADÍSTICAS">ESTADÍSTICAS</a>
         <a href="#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
     </div>
     <div class="mobile-menu-bottom">
@@ -10526,7 +10610,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
@@ -10654,7 +10738,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
@@ -10684,7 +10768,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
@@ -10712,7 +10796,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="footer-credits">
                     <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
@@ -10967,13 +11051,13 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="zcc-menu" id="zc26CountryMenu" role="listbox" aria-label="País"></div>
             </div>
         </div>
-        <div class="zc1v1-only zc1v1-keep" id="zc1v1Matches"><div class="am-filter-group zcg-filter" id="zc1v1Filter"><button type="button" class="am-filter-btn active" data-zc1v1-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="FINAL" style="--gc:#f97316"><span class="zcg-txt">Gran final</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="IDA" style="--gc:#22c55e"><span class="zcg-txt">Ida</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="VUELTA" style="--gc:#3b82f6"><span class="zcg-txt">Vuelta</span></button></div><div class="panel"><div class="zcfx-wrap" id="zc1v1Fixtures"></div><div class="zc26-no-results" id="zc1v1NoResults">No se encontraron partidos con ese filtro.</div></div><div class="section-updated">Calendario 1vs1 · los marcadores se actualizan al terminar cada Bo5</div></div>
+        <div class="zc1v1-only zc1v1-keep" id="zc1v1Matches"><div class="am-filter-group zcg-filter" id="zc1v1Filter"><button type="button" class="am-filter-btn active" data-zc1v1-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="FINAL" style="--gc:#38bdf8"><span class="zcg-txt">Gran final</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="IDA" style="--gc:#22c55e"><span class="zcg-txt">Ida</span></button><button type="button" class="am-filter-btn" data-zc1v1-filter="VUELTA" style="--gc:#3b82f6"><span class="zcg-txt">Vuelta</span></button></div><div class="panel"><div class="zcfx-wrap" id="zc1v1Fixtures"></div><div class="zc26-no-results" id="zc1v1NoResults">No se encontraron partidos con ese filtro.</div></div><div class="section-updated">Calendario 1vs1 · los marcadores se actualizan al terminar cada Bo5</div></div>
         <div class="am-filter-group zcg-filter" id="zc26GroupFilter" data-filter-group="zc26-group">
             <button type="button" class="am-filter-btn active" data-zc26-group-filter="all" style="--gc:#ffffff"><span class="zcg-txt">Todos</span></button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="FINAL" style="--gc:#f97316"><span class="zcg-txt">Gran final</span></button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="SEMIS" style="--gc:#f97316"><span class="zcg-txt">Semifinal</span></button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="CUARTOS" style="--gc:#f97316"><span class="zcg-txt">Cuartos</span></button>
-            <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#f97316"><span class="zcg-txt">Octavos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="FINAL" style="--gc:#38bdf8"><span class="zcg-txt">Gran final</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="SEMIS" style="--gc:#38bdf8"><span class="zcg-txt">Semifinal</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="CUARTOS" style="--gc:#38bdf8"><span class="zcg-txt">Cuartos</span></button>
+            <button type="button" class="am-filter-btn" data-zc26-group-filter="OCTAVOS" style="--gc:#38bdf8"><span class="zcg-txt">Octavos</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="A" style="--gc:#22c55e"><span class="zcg-txt"><span class="zcg-pre">Group </span>A</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="B" style="--gc:#3b82f6"><span class="zcg-txt"><span class="zcg-pre">Group </span>B</span></button>
             <button type="button" class="am-filter-btn" data-zc26-group-filter="C" style="--gc:#eab308"><span class="zcg-txt"><span class="zcg-pre">Group </span>C</span></button>
@@ -10992,7 +11076,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         <div class="section-title">POSICIONES</div>
         <div class="zct-bar zc1v1-keep"></div>
         <div class="zct-notice zct-hide zc1v1-keep"></div>
-        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-legend-title">Ascenso</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span><span>Clasifica a la Gran Final</span></div><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 6</span><span>Resultados de los últimos 6 partidos</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 6 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div></div></div>
+        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-legend-title">Ascenso</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span><span>Clasifica a la Gran Final</span></div><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 5</span><span>Resultados de la vuelta: 3 jugados y 2 por jugar</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 6 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div></div></div>
         <div class="section-subtitle">Clasificación por grupo y fases del torneo</div>
         <div class="zcgrp-phase-tabs" id="zcgrpPhaseTabs">
             <button type="button" class="zcgrp-phase-tab active" data-zcgrp-phase="groups">Fase de grupos</button>
@@ -11096,6 +11180,25 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 
     <div class="section-block" id="wc-stats">
         <div class="section-title">ESTADÍSTICAS</div>
+        <div class="zct-bar zc1v1-keep"></div>
+        <div class="zct-notice zct-hide zc1v1-keep"></div>
+        <div class="zc1v1-only zc1v1-keep zct-hide" id="zc1v1Stats">
+            <div class="section-subtitle">Líderes individuales del torneo · 1vs1</div>
+            <div class="wcstat-tabs-wrapper">
+                <div class="wcstat-tabs" id="z1stTabs">
+                    <button type="button" class="z1st-tab active" data-z1st-tab="estelar">Jugador Estelar</button>
+                    <button type="button" class="z1st-tab" data-z1st-tab="asistencias">Asistencias</button>
+                    <button type="button" class="z1st-tab" data-z1st-tab="amarillas">Tarjetas Amarillas</button>
+                    <button type="button" class="z1st-tab" data-z1st-tab="rojas">Tarjetas rojas</button>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="z1st-panel active" data-z1st-panel="estelar"><div class="wcstat-table-head"><span>Jugador</span><span>Estelar</span></div><div class="wcstat-list" id="z1stEstelar"></div></div>
+                <div class="z1st-panel" data-z1st-panel="asistencias"><div class="wcstat-table-head"><span>Jugador</span><span>Asistencias</span></div><div class="wcstat-list" id="z1stAsist"></div></div>
+                <div class="z1st-panel" data-z1st-panel="amarillas"><div class="wcstat-table-head"><span>Jugador</span><span>Tarjetas amarillas</span></div><div class="wcstat-list" id="z1stYellow"></div></div>
+                <div class="z1st-panel" data-z1st-panel="rojas"><div class="wcstat-table-head"><span>Jugador</span><span>Tarjetas rojas</span></div><div class="wcstat-list" id="z1stRed"></div></div>
+            </div>
+        </div>
         <div class="section-subtitle">Líderes individuales del torneo</div>
         <div class="wcstat-tabs-wrapper">
             <div class="wcstat-tabs" id="wcstatTabs">
@@ -11122,11 +11225,6 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="wcstat-table-head"><span>Jugador</span><span>Tarjetas rojas</span></div>
                 <div class="wcstat-list" id="wcstatRedList"></div>
             </div>
-        </div>
-        <div class="wcpred zc1v1-only zct-hide" id="zc1v1Prob">
-            <div class="wcpred-head"><h3 class="wcpred-title">Probabilidad de ganar</h3></div>
-                        <div class="wcpred-body"><div class="wcpred-inner"><ul class="wcpred-list" id="zc1v1ProbList"></ul>
-            <p class="wcpred-foot">Probabilidades estimadas con fines informativos: cada jugador tiene un % proporcional a sus trofeos.</p></div></div>
         </div>
         <div class="wcpred" id="wcPred">
             <div class="wcpred-head">
@@ -11178,7 +11276,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             <div class="footer-credits">
                 <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
                 <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven</span></div>
+                <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
             </div>
             <p class="footer-terms-title">Términos de uso</p>
             <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
@@ -11187,7 +11285,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         </div>
     </div>
 
-    <div class="version-tag">Versión 8.0.1.39</div>
+    <div class="version-tag">Versión 11.0.19.101</div>
 
 </div>
 
@@ -18515,6 +18613,21 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         colF.appendChild(thirdSlot);
         bracket.appendChild(colF);
 
+        // Etiquetas de puesto (1st/2nd en la final, 3rd/4th en el tercer puesto) una vez hay ganador
+        function zcbrAddPlaceTags(slot, first) {
+            const win = slot.querySelector(".zcbracket-team.is-winner");
+            if (!win) return;
+            slot.querySelectorAll(".zcbracket-team.is-winner, .zcbracket-team.is-loser").forEach(function (row) {
+                const n = row === win ? first : first + 1;
+                const t = document.createElement("span");
+                t.className = "zcbr-place zcbr-place-" + n;
+                t.textContent = n + (n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th");
+                row.appendChild(t);
+            });
+        }
+        zcbrAddPlaceTags(finalSlot, 1);
+        zcbrAddPlaceTags(thirdSlot, 3);
+
         // ---- Alinea cada ronda con su alimentador SUPERIOR (no el punto medio): esto hace que
         //      el bracket "suba" como una escalera, terminando con la Final arriba del todo ----
         function centerOf(el, relativeTo) {
@@ -20820,7 +20933,7 @@ const buildList = f => {
     /* ===================== ZC26 · TORNEOS (1vs1 / 3vs3) + TEMPORADA + CALENDARIO 1vs1 ===================== */
     const ZC_TOURNAMENTS = [
         { id: "3v3", season: "2026", name: "3vs3 ZC26", start: "2026-09-20", end: "2026-10-04", meta: "Equipos · Tier S · Fase de grupos y eliminación directa", status: "Finalizado", note: "Campeón: Unorthodox" },
-        { id: "1v1", season: "2026", name: "1vs1 ZC26", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "En curso", note: "Jueves 15 al miércoles 21 de octubre · 5:00 p.m. (Perú)" }
+        { id: "1v1", season: "2026", name: "1vs1 ZC26", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "Finalizado", note: "Campeón: Ethanzs'10 · Jueves 15 al miércoles 21 de octubre" }
     ];
     const ZC_SEASONS = ["2026", "2025", "2024", "2023"];
     function zctLatest() { return ZC_TOURNAMENTS.slice().sort((a, b) => b.start.localeCompare(a.start))[0].id; }
@@ -20836,7 +20949,19 @@ const buildList = f => {
         matches: pairs.map((p, k) => ({ leg: i < 3 ? "ida" : "vuelta", id: "P" + (i * 2 + k + 1), label: "Jornada " + (i + 1) + " · " + (i < 3 ? "Ida" : "Vuelta") + " · Bo5", home: ZC1V1_PLAYERS[p[0]], away: ZC1V1_PLAYERS[p[1]], time: k ? "6:00 p.m." : "5:00 p.m." }))
     })).concat([{ day: "Miércoles", num: 21, month: "OCT", phase: "Gran final", matches: [{ leg: "final", id: "P13", label: "Gran Final · Bo5", home: "1.º de la tabla", away: "2.º de la tabla", time: "6:00 p.m.", tbd: true }, { leg: "final", id: "P14", label: "Tercer puesto · Bo5", home: "3.º de la tabla", away: "4.º de la tabla", time: "5:00 p.m.", tbd: true }] }]);
     // Resultados (sets ganados por cada lado). Ejemplo:  P1: { h: 3, a: 1 }  -> Ethanzs'10 3 - 1 Blacknoirz
-    const ZC1V1_RESULTS = { P1: { h: 3, a: 2 }, P7: { h: 3, a: 1 } };
+    const ZC1V1_RESULTS = {
+        P1: { h: 3, a: 2 },  P2: { h: 1, a: 3 },
+        P3: { h: 3, a: 0 },  P4: { h: 3, a: 1 },
+        P5: { h: 3, a: 1 },  P6: { h: 3, a: 0 },
+        P7: { h: 3, a: 1 },  P8: { h: 3, a: 1 },
+        P9: { h: 0, a: 3 },  P10: { h: 1, a: 3 },
+        P11: { h: 0, a: 3 }, P12: { h: 0, a: 3 }
+    };
+    // Todos los partidos del torneo ya se jugaron: todos los marcadores son resultados oficiales
+    const ZC1V1_OFFICIAL = new Set(["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12","P13","P14"]);
+    function zc1v1IsPred(id) { return !!ZC1V1_RESULTS[id] && !ZC1V1_OFFICIAL.has(id); }
+    // Fase final (resultado oficial): sets por jugador, se asignan a local/visitante cuando se definen los finalistas
+    const ZC1V1_KO_PRED = { P13: { "Ethanzs'10": 3, "Blacknoirz": 2 }, P14: { "_diedv": 3, "mateotovarr997": 1 } };
 
 
     const ZC1V1_SHIELD = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 4l22 8v18c0 14-9 25-22 30C19 55 10 44 10 30V12z" fill="#2a2f3a" stroke="#8a8f98" stroke-width="3"/></svg>');
@@ -20845,7 +20970,7 @@ const buildList = f => {
         return `<img ${cls ? `class="${cls}" ` : ""}src="${zc26Logo(n)}" alt="" onerror="this.onerror=function(){this.onerror=null;this.src='${ZC1V1_SHIELD}'};this.src='escudo_logo/escudo-default.png'">`;
     }
     // Trofeos de cada cuenta de Brawl Stars -> probabilidad proporcional
-    const ZC1V1_TROPHIES = { "Ethanzs'10": 75000, "Blacknoirz": 70000, "_diedv": 40000, "mateotovarr997": 25000 };
+    const ZC1V1_TROPHIES = { "Ethanzs'10": 75379, "Blacknoirz": 70033, "_diedv": 40581, "mateotovarr997": 25134 };
     function zc1v1Prob(a, b) {
         const ta = ZC1V1_TROPHIES[a], tb = ZC1V1_TROPHIES[b];
         if (!ta || !tb) return null;
@@ -20863,7 +20988,7 @@ const buildList = f => {
         const players = () => {
             const card = n => {
                 // Partido jugado: calificación 0-10 según sets a favor/en contra y si ganó; si no, N/A
-                const rs = ZC1V1_RESULTS[m.id];
+                const rs = ZC1V1_OFFICIAL.has(m.id) ? ZC1V1_RESULTS[m.id] : null;
                 let rt = null;
                 if (rs) { const f = n === m.home ? rs.h : rs.a, c = n === m.home ? rs.a : rs.h; rt = Math.max(0, Math.min(10, 6 + (f - c) * 0.5 + (f > c ? 0.4 : 0))); }
                 return `<div class="zc26lu-card"><div class="zc26lu-avwrap">${zc26LuImg(n)}<span class="zc26lu-rating ${rt === null ? "rt-na" : zc26RatingCls(rt)}">${rt === null ? "N/A" : rt.toFixed(1)}</span></div><span class="zc26lu-name" title="${n}">${n}</span><span class="zc26lu-role">Jugador</span></div>`;
@@ -20878,7 +21003,7 @@ const buildList = f => {
         if (tab === "cronologia") return `<div class="zc26mm-more-empty">No hay cambios ni tarjetas registrados en este partido.</div>`;
         const probBlock = () => {
             const p = zc1v1Prob(m.home, m.away);
-            if (!p || ZC1V1_RESULTS[m.id]) return "";
+            if (!p || (ZC1V1_RESULTS[m.id] && !zc1v1IsPred(m.id))) return "";
             return `<div class="zc26mm-stat-block zc26mm-prob-block"><div class="zc26mm-stat-title-row"><span class="zc26mm-stat-title">Probabilidad de victoria</span></div><div class="zc26mm-prob-labels"><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.home}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-home">${p.a}%</span></div><div class="zc26mm-prob-label"><span class="zc26mm-prob-name">${m.away}</span><span class="zc26mm-prob-pct zc26mm-prob-pct-away">${p.b}%</span></div></div><div class="zc26mm-prob-bar"><span class="zc26mm-prob-seg zc26mm-prob-seg-home" style="width:${p.a}%"></span><span class="zc26mm-prob-seg zc26mm-prob-seg-away" style="width:${p.b}%"></span></div></div>`;
         };
         const formBlock = () => `<div class="zc26mm-stat-block"><div class="zc26mm-stat-title">Formación reciente</div><div class="zc26mm-stat-sub">Últimos 6 partidos</div>${[m.home, m.away].map(n => `<div class="zc26mm-form-row"><div class="zc26mm-form-team">${zc1v1Img(n, "zc26mm-form-logo")}<span class="zc26mm-form-name">${n}</span></div><div class="zc26mm-form-dots">${zc1v1Dots(st[n])}</div></div>`).join("")}</div>`;
@@ -20895,8 +21020,8 @@ const buildList = f => {
         if (!x || !panel) return;
         const d = x.d, m = x.m, r = ZC1V1_RESULTS[m.id] || null;
         const ls = zc26LocalSchedule(d, m.time, zc26CountryCode);
-        const status = r ? "Finalizado" : "Próximo";
-        const tsRaw = !r ? zc26MatchStartTimestamp(d, m.time) : null;
+        const status = r ? (zc1v1IsPred(m.id) ? "Predicción" : "Finalizado") : "Próximo";
+        const tsRaw = (!r || zc1v1IsPred(m.id)) ? zc26MatchStartTimestamp(d, m.time) : null;
         const ts = (tsRaw && tsRaw > Date.now()) ? tsRaw : null;
         const win = r ? (r.h > r.a ? "h" : "a") : "";
         const num = (v, lose) => v == null ? `<span class="score-number score-number-empty"></span>` : `<span class="score-number${lose ? " score-number-lose" : ""}">${v}</span>`;
@@ -20929,11 +21054,48 @@ const buildList = f => {
     }
     try { const _rt = zc26RenderTabContent; zc26RenderTabContent = function (tab, ctx) { return (ctx && ctx.is1v1) ? zc1v1Tab(tab, ctx) : _rt.apply(this, arguments); }; } catch (e) {}
 
-    function zc1v1Standings() {
+    // Estadísticas 1vs1. Jugador Estelar = ganador de cada partido (se calcula con los resultados).
+    // Asistencias y tarjetas no se registran en 1vs1: si hay datos, se agregan aquí como { "jugador": n }.
+    const ZC1V1_STATS_EXTRA = { asistencias: {}, amarillas: {}, rojas: {} };
+    function zc1v1RenderStats() {
+        const star = {};
+        ZC1V1_FIXTURES.forEach(d => d.matches.forEach(m => {
+            const r = ZC1V1_RESULTS[m.id]; if (!r || m.tbd) return;
+            const w = r.h > r.a ? m.home : m.away; star[w] = (star[w] || 0) + 1;
+        }));
+        const fill = (id, map) => {
+            const el = document.getElementById(id); if (!el) return;
+            const rows = Object.keys(map).filter(k => map[k] > 0).sort((a, b) => (map[b] - map[a]) || a.localeCompare(b, "es", { sensitivity: "base" }));
+            if (!rows.length) { el.innerHTML = '<div class="wcstat-empty">Aún no hay datos disponibles.</div>'; return; }
+            let last = null, rank = 0;
+            el.innerHTML = rows.map((n, i) => {
+                if (map[n] !== last) { rank = i + 1; last = map[n]; }
+                return `<div class="wcstat-row"><span class="wcstat-rank">${rank}</span><span class="wcstat-logo">${zc1v1Img(n)}</span><span class="wcstat-who"><span class="wcstat-name">${zc26Esc(n)}</span><span class="wcstat-team">1vs1 ZC26</span></span><span class="wcstat-val">${map[n]}</span></div>`;
+            }).join("");
+        };
+        fill("z1stEstelar", star);
+        fill("z1stAsist", ZC1V1_STATS_EXTRA.asistencias);
+        fill("z1stYellow", ZC1V1_STATS_EXTRA.amarillas);
+        fill("z1stRed", ZC1V1_STATS_EXTRA.rojas);
+    }
+    document.addEventListener("click", function (e) {
+        const t = e.target.closest("[data-z1st-tab]"); if (!t) return;
+        const box = document.getElementById("zc1v1Stats"); if (!box) return;
+        zcPlaySound("click");
+        box.querySelectorAll(".z1st-tab").forEach(x => x.classList.toggle("active", x === t));
+        box.querySelectorAll(".z1st-panel").forEach(x => x.classList.toggle("active", x.dataset.z1stPanel === t.dataset.z1stTab));
+    });
+    function zc1v1Dots5(s) {
+        const f = ((s && s.form) || []).slice(0, 5);
+        const cls = r => r === "w" ? "win" : r === "l" ? "loss" : "draw";
+        return f.map((r, i) => `<span class="zcgrp-dot zcgrp-dot-${cls(r)}${i === f.length - 1 ? " zcgrp-dot-latest" : ""}">${zc26ResultIcon(r)}</span>`).join("")
+            + `<span class="zcgrp-dot"></span>`.repeat(5 - f.length);
+    }
+    function zc1v1Standings(leg) {
         const s = {};
         ZC1V1_PLAYERS.forEach(p => s[p] = { pj: 0, g: 0, p: 0, e: 0, pts: 0, sf: 0, sc: 0, ds: 0, form: [] });
         ZC1V1_FIXTURES.forEach(d => d.matches.forEach(m => {
-            const r = ZC1V1_RESULTS[m.id]; if (!r || m.tbd) return;
+            const r = ZC1V1_RESULTS[m.id]; if (!r || m.tbd || m.leg === "final" || (leg && m.leg !== leg)) return;
             [[m.home, r.h, r.a], [m.away, r.a, r.h]].forEach(([t, f, c]) => {
                 const x = s[t]; x.pj++; x.sf += f; x.sc += c; x.ds = x.sf - x.sc;
                 if (f > c) { x.g++; x.pts += 3; x.form.push("w"); } else { x.p++; x.form.push("l"); }
@@ -20948,7 +21110,7 @@ const buildList = f => {
         const row = (n, sd) => `<div class="zcfx-team-row${win ? (win === sd ? " zcfx-row-win" : " zcfx-row-lose") : ""}">${logo(n)}<span class="zcfx-team-name">${n}</span></div>`;
         const ls = zc26LocalSchedule(day, m.time, zc26CountryCode);
         const scores = r ? `<div class="zcfx-scores"><span class="zcfx-score${win === "h" ? " zcfx-score-win" : ""}">${r.h}</span><span class="zcfx-score${win === "a" ? " zcfx-score-win" : ""}">${r.a}</span></div>` : "";
-        const date = r ? `<span class="zcfx-date-num zcfx-date-num-sm">Fin</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.date : ""}</span>` : `<span class="zcfx-date-num zcfx-date-num-sm">${ls ? ls.date : day.num + "/10"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.time : m.time}</span>`;
+        const date = r ? `<span class="zcfx-date-num zcfx-date-num-sm">${zc1v1IsPred(m.id) ? "Pred." : "Fin"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.date : ""}</span>` : `<span class="zcfx-date-num zcfx-date-num-sm">${ls ? ls.date : day.num + "/10"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.time : m.time}</span>`;
         return `<div class="zcfx-card" data-zc1v1-match="${m.id}" role="button" tabindex="0" data-leg="${m.leg}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-label="${m.label}"><span class="zcfx-group-badge">${m.label}</span><div class="zcfx-teams">${row(m.home, "h")}${row(m.away, "a")}</div>${scores}<span class="zcfx-divider"></span><div class="zcfx-date">${date}</div></div>`;
     }
     function zc1v1Day(day) {
@@ -20961,7 +21123,11 @@ const buildList = f => {
         const done = reg.length && reg.every(x => ZC1V1_RESULTS[x.m.id]);
         const o = done ? zc26SortByStandings(ZC1V1_PLAYERS, zc1v1Standings()) : null;
         [[fin[0], 0, 1], [fin[1], 2, 3]].forEach(([m, a, b]) => {
-            if (o) { m.home = o[a]; m.away = o[b]; m.tbd = false; }
+            if (o) {
+                m.home = o[a]; m.away = o[b]; m.tbd = false;
+                const kp = ZC1V1_KO_PRED[m.id];
+                if (kp && kp[m.home] != null && kp[m.away] != null) ZC1V1_RESULTS[m.id] = { h: kp[m.home], a: kp[m.away] };
+            }
         });
     }
     function zc1v1BracketMatch(m, rank) {
@@ -20970,15 +21136,27 @@ const buildList = f => {
             ? `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">${n}</span></div>`
             : `<div class="zcbracket-team${win ? (win === sd ? " is-winner" : " is-loser") : ""}"><div class="zcbracket-team-logo">${zc1v1Img(n)}</div><span class="zcbracket-team-name">${n}</span>${r ? `<span class="zcbracket-team-score">${sc}</span>` : ""}</div>`;
         const ls = zc26LocalSchedule(ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1], m.time, zc26CountryCode);
-        return `<div class="zcbracket-match"${m.tbd ? "" : ` data-zc1v1-match="${m.id}" data-zcbr-home="${m.home}" data-zcbr-away="${m.away}"`}><div class="zcbracket-match-meta"><span>${ls ? ls.date + " · " + ls.time : "21/10 · " + m.time}</span><span class="zcbracket-status">${r ? "Finalizado" : "Próximo"}</span></div>${team(m.home, "h", r && r.h)}${team(m.away, "a", r && r.a)}</div>`;
+        return `<div class="zcbracket-match"${m.tbd ? "" : ` data-zc1v1-match="${m.id}" data-zcbr-home="${m.home}" data-zcbr-away="${m.away}"`}><div class="zcbracket-match-meta"><span>${ls ? ls.date + " · " + ls.time : "21/10 · " + m.time}</span><span class="zcbracket-status">${r ? (zc1v1IsPred(m.id) ? "Predicción" : "Finalizado") : "Próximo"}</span></div>${team(m.home, "h", r && r.h)}${team(m.away, "a", r && r.a)}</div>`;
     }
     function zc1v1RenderKO() {
         const br = document.getElementById("zc1v1Bracket"); if (!br) return;
         const fin = ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1].matches;
         br.innerHTML = `<div class="zcbracket-col"><div class="zcbracket-col-title">Gran final</div>${zc1v1BracketMatch(fin[0])}</div><div class="zcbracket-col"><div class="zcbracket-col-title">Tercer puesto</div>${zc1v1BracketMatch(fin[1])}</div>`;
+        br.querySelectorAll(".zcbracket-col").forEach(function (col, i) {
+            const win = col.querySelector(".zcbracket-team.is-winner");
+            if (!win) return;
+            col.querySelectorAll(".zcbracket-team.is-winner, .zcbracket-team.is-loser").forEach(function (row) {
+                const n = (row === win ? 1 : 2) + i * 2;
+                const t = document.createElement("span");
+                t.className = "zcbr-place zcbr-place-" + n;
+                t.textContent = n + (n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th");
+                row.appendChild(t);
+            });
+        });
     }
     function zc1v1Phase(p) {
         const t = document.getElementById("zc1v1PhaseTabs"); if (!t) return;
+        window._zc1v1Phase = p;
         if (!t.children.length) t.innerHTML = `<button type="button" class="zcgrp-phase-tab" data-z1p="reg">Fase regular</button><button type="button" class="zcgrp-phase-tab" data-z1p="ko">Fase de eliminación directa</button>`;
         t.querySelectorAll("[data-z1p]").forEach(b => b.classList.toggle("active", b.dataset.z1p === p));
         document.getElementById("zc1v1PanelReg").style.display = p === "reg" ? "" : "none";
@@ -20998,11 +21176,14 @@ const buildList = f => {
         const st = zc1v1Standings();
         const cols = [["PJ", "pj"], ["G", "g"], ["E", "e"], ["P", "p"], ["Pts", "pts"], ["SF", "sf"], ["SC", "sc"], ["DS", "ds"]];
         const cc = c => "zcgrp-col-num" + (c === "Pts" ? " zcgrp-col-pts" : "");
-        const teams = zc26SortByStandings(ZC1V1_PLAYERS, st);
-        tb.innerHTML = `<div class="zcgrp-group"><div class="zcgrp-group-title">Fase regular · 1vs1</div><div class="zcgrp-table"><div class="zcgrp-scroll"><div class="zcgrp-inner">
-            <div class="zcgrp-row zcgrp-head"><div class="zcgrp-sticky"><span class="zcgrp-col-pos">N°</span><span class="zcgrp-head-team">Jugador</span></div>${cols.map(c => `<span class="${cc(c[0])}">${c[0]}</span>`).join("")}<span class="zcgrp-col-last5">Últimos 6</span></div>
-            ${teams.map((t, i) => `<div class="zcgrp-row"><div class="zcgrp-sticky"><span class="zcgrp-col-pos">${i + 1}</span><span class="zcgrp-col-team">${zc1v1Img(t, "zcgrp-team-logo")}<span class="zcgrp-team-name">${t}</span></span></div>${cols.map(c => `<span class="${cc(c[0])}">${st[t][c[1]]}</span>`).join("")}<span class="zcgrp-col-last5">${zc1v1Dots(st[t])}</span></div>`).join("")}
+        const frame = (title, leg) => {
+            const st = zc1v1Standings(leg), teams = zc26SortByStandings(ZC1V1_PLAYERS, st);
+            return `<div class="zcgrp-group"><div class="zcgrp-group-title">${title}</div><div class="zcgrp-table"><div class="zcgrp-scroll"><div class="zcgrp-inner">
+            <div class="zcgrp-row zcgrp-head"><div class="zcgrp-sticky"><span class="zcgrp-col-pos">N°</span><span class="zcgrp-head-team">Jugador</span></div>${cols.map(c => `<span class="${cc(c[0])}">${c[0]}</span>`).join("")}<span class="zcgrp-col-last5">Últimos 5</span></div>
+            ${teams.map((t, i) => `<div class="zcgrp-row${i === 0 ? " zcgrp-row-quali" : ""}"><div class="zcgrp-sticky"><span class="zcgrp-col-pos">${i + 1}</span><span class="zcgrp-col-team">${zc1v1Img(t, "zcgrp-team-logo")}<span class="zcgrp-team-name">${t}</span></span></div>${cols.map(c => `<span class="${cc(c[0])}">${st[t][c[1]]}</span>`).join("")}<span class="zcgrp-col-last5">${zc1v1Dots5(st[t])}</span></div>`).join("")}
             </div></div></div></div>`;
+        };
+        tb.innerHTML = frame("Ida · Jornadas 1 a 3", "ida") + frame("Vuelta · Jornadas 4 a 6", "vuelta");
     }
     // Si cambian el país/hora, se vuelve a pintar el calendario 1vs1
     try { const _rzf = renderZc26Fixtures; renderZc26Fixtures = function () { _rzf.apply(this, arguments); renderZc1v1(); }; } catch (e) {}
@@ -21034,13 +21215,7 @@ const buildList = f => {
     try { const _af = applyZc26Filters; applyZc26Filters = function () { if (document.body.classList.contains("zc-tour-1v1")) return zc1v1ApplyFilters(); return _af.apply(this, arguments); }; } catch (e) {}
 
 
-    (function () {
-        const P = [{ n: "Ethanzs'10", t: 75000, c: "#f97316" }, { n: "Blacknoirz", t: 70000, c: "#22c55e" }, { n: "_diedv", t: 40000, c: "#3b82f6" }, { n: "mateotovarr997", t: 25000, c: "#a855f7" }];
-        const tot = P.reduce((a, p) => a + p.t, 0);
-        const ul = document.getElementById("zc1v1ProbList");
-        if (!ul) return;
-        ul.innerHTML = P.map(p => { const pc = p.t / tot * 100; return `<li class="wcpred-item zc1v1p-item"><span class="wcpred-logo"><img src="escudo_logo/escudo-default.png" alt="" onerror="this.onerror=null;this.src='${ZC1V1_SHIELD}'"></span><span class="wcpred-name">${p.n}</span><span class="zc1v1p-trop">${p.t / 1000}k 🏆</span><span class="wcpred-pct">${pc.toFixed(1)}%</span><span class="zc1v1p-bar" style="--c:${p.c}"><i style="width:${pc.toFixed(1)}%"></i></span></li>`; }).join("");
-    })();
+    
     function zctBarHtml() {
         const list = ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start));
         const latest = zctLatest(), cur = list.find(t => t.id === zcTour);
@@ -21056,7 +21231,7 @@ const buildList = f => {
         const has = zcSeason === "2026", one = zcTour === "1v1";
         document.body.classList.toggle("zc-tour-1v1", one && has);
         document.querySelectorAll(".zct-bar").forEach(b => { b.innerHTML = zctBarHtml(); if (b.parentNode && b.parentNode.lastElementChild !== b) b.parentNode.appendChild(b); });
-        ["zc26", "group"].forEach(id => {
+        ["zc26", "group", "wc-stats"].forEach(id => {
             const sec = document.getElementById(id); if (!sec) return;
             Array.from(sec.children).forEach(ch => {
                 if (ch.classList.contains("section-title") || ch.classList.contains("zc1v1-keep")) return;
@@ -21076,6 +21251,9 @@ const buildList = f => {
         const si = document.getElementById("zc26SearchInput");
         if (si) { if (!si.dataset.ph3) si.dataset.ph3 = si.placeholder; si.placeholder = (one && has) ? "Buscar jugador, jornada o día..." : si.dataset.ph3; si.value = ""; }
         applyZc26Filters();
+        // Al cambiar de torneo se restaura la última fase que se tenía seleccionada en ese torneo
+        if (one && has) { if (typeof zc1v1Phase === "function") zc1v1Phase(window._zc1v1Phase || "reg"); }
+        else if (has && window.zcgrpSetPhase) window.zcgrpSetPhase(window._zcgrpPhase || "groups", true);
     }
     function zctGo(sec) {
         if (typeof applySectionFilter === "function") { applySectionFilter(sec); setActiveSectionTab(sec); }
@@ -21098,6 +21276,7 @@ const buildList = f => {
         if (go) zctGo(go.dataset.zctGo);
     });
     renderZc1v1();
+    zc1v1RenderStats();
     zctApply();
     /* Posiciones: cada grupo tiene UN solo scroll horizontal (los 4 equipos juntos).
        Al entrar (cada vez que se hace visible) siempre comienza en PJ y se
@@ -21306,20 +21485,21 @@ const buildList = f => {
             zcPlaySound(willOpen ? "clickentrar" : "clicksalir");
         });
     })();
-    document.querySelectorAll(".zcgrp-phase-tab").forEach(tab => {
-        tab.addEventListener("click", function () {
-            document.querySelectorAll(".zcgrp-phase-tab").forEach(t => t.classList.remove("active"));
-            this.classList.add("active");
-            const phase = this.dataset.zcgrpPhase;
-            const groupsPanel = document.getElementById("zcgrpGroupsPanel");
-            const knockoutPanel = document.getElementById("zcgrpKnockoutPanel");
-            if (groupsPanel) groupsPanel.style.display = phase === "groups" ? "" : "none";
-            if (knockoutPanel) knockoutPanel.style.display = phase === "knockout" ? "" : "none";
-            // El bracket se mide con getBoundingClientRect(): si se calculó estando oculto
-            // (display:none) todo sale en 0, así que se recalcula cada vez que se hace visible.
-            if (phase === "knockout") zc26RenderBracket();
-            zcPlaySound("click");
-        });
+    window.zcgrpSetPhase = function (phase, silent) {
+        phase = phase === "knockout" ? "knockout" : "groups";
+        window._zcgrpPhase = phase;
+        document.querySelectorAll("#zcgrpPhaseTabs [data-zcgrp-phase]").forEach(t => t.classList.toggle("active", t.dataset.zcgrpPhase === phase));
+        const groupsPanel = document.getElementById("zcgrpGroupsPanel");
+        const knockoutPanel = document.getElementById("zcgrpKnockoutPanel");
+        if (groupsPanel) groupsPanel.style.display = phase === "groups" ? "" : "none";
+        if (knockoutPanel) knockoutPanel.style.display = phase === "knockout" ? "" : "none";
+        // El bracket se mide con getBoundingClientRect(): si se calculó estando oculto
+        // (display:none) todo sale en 0, así que se recalcula cada vez que se hace visible.
+        if (phase === "knockout") zc26RenderBracket();
+        if (!silent) zcPlaySound("click");
+    };
+    document.querySelectorAll("#zcgrpPhaseTabs [data-zcgrp-phase]").forEach(tab => {
+        tab.addEventListener("click", function () { window.zcgrpSetPhase(this.dataset.zcgrpPhase); });
     });
 
     // ===================== ZC26 · Bracket + carrusel de rondas (eliminación directa) =====================
