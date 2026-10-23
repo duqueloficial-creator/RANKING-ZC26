@@ -9941,14 +9941,14 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         @media (max-width: 1023px) {
             /* Diseño ORIGINAL (mismos colores y estilo). Solo cambia la forma: cajas más largas y
                bajas, igual que en "Bracket completo", y escalera de posiciones sin tener que abrirlo. */
-            #zcbracket { --zcbr-col-w: 262px; --zcbr-gap: 30px; }
-            #zcbracket .zcbracket-col-title { margin-bottom: 8px; padding: 3px 0; }
-            #zcbracket .zcbracket-match { padding: 7px 10px; gap: 5px; }
-            #zcbracket .zcbracket-team { gap: 7px; }
-            #zcbracket .zcbracket-team-logo { width: 22px; height: 22px; }
-            #zcbracket .zcbracket-team-name { font-size: 0.68rem; -webkit-line-clamp: 1; }
-            #zcbracket .zcbracket-match-meta { padding-bottom: 2px; }
-            #zcbracket .zcbracket-col:first-child .zcbracket-slot { margin-bottom: 6px !important; }
+            :is(#zcbracket, #zc1v1E6Bracket) { --zcbr-col-w: 262px; --zcbr-gap: 30px; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-col-title { margin-bottom: 8px; padding: 3px 0; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-match { padding: 7px 10px; gap: 5px; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-team { gap: 7px; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-team-logo { width: 22px; height: 22px; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-team-name { font-size: 0.68rem; -webkit-line-clamp: 1; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-match-meta { padding-bottom: 2px; }
+            :is(#zcbracket, #zc1v1E6Bracket) .zcbracket-col:first-child .zcbracket-slot { margin-bottom: 6px !important; }
         }
 
         /* Campeón del torneo: nombre en azul */
@@ -11035,7 +11035,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         <div class="section-title">PARTIDOS</div>
         <div class="zct-bar zc1v1-keep"></div>
         <div class="zct-notice zct-hide zc1v1-keep"></div>
-        <div class="section-subtitle zc1v1-only zc1v1-keep">Encuentros oficiales, jueves 15 al miércoles 21</div>
+        <div class="section-subtitle zc1v1-only zc1v1-keep" id="zc1v1MatchSub">Encuentros oficiales, jueves 15 al miércoles 21</div>
                 <div class="section-subtitle">Encuentros oficiales, domingo 20 al viernes 25</div>
         <div class="zcc-row">
             <div class="zc-search-wrap">
@@ -11076,7 +11076,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         <div class="section-title">POSICIONES</div>
         <div class="zct-bar zc1v1-keep"></div>
         <div class="zct-notice zct-hide zc1v1-keep"></div>
-        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-legend-title">Ascenso</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span><span>Clasifica a la Gran Final</span></div><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 5</span><span>Resultados de la vuelta: 3 jugados y 2 por jugar</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 6 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div></div></div>
+        <div class="zc1v1-only zc1v1-keep" id="zc1v1Group"><div class="section-subtitle">Clasificación de la fase regular y Gran Final</div><div class="zcgrp-phase-tabs" id="zc1v1PhaseTabs"></div><div id="zc1v1PanelReg"><div id="zc1v1Table"></div><div class="zcgrp-legend"><div class="zcgrp-legend-title">Ascenso</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-swatch zcgrp-legend-swatch-blue"></span><span>Clasifica a la Gran Final</span></div><div class="zcgrp-cols" id="zc1v1Cols"><button type="button" class="zcgrp-cols-head" id="zc1v1ColsToggle" aria-expanded="false"><span>Columnas</span><span class="mm-plus" aria-hidden="true"></span></button><div class="zcgrp-cols-body"><div class="zcgrp-cols-inner"><div class="zcgrp-legend-item" style="--i:0"><span class="zcgrp-legend-abbr">PJ</span><span>Partidos jugados</span></div><div class="zcgrp-legend-item" style="--i:1"><span class="zcgrp-legend-abbr">G</span><span>Partidos ganados</span></div><div class="zcgrp-legend-item" style="--i:2"><span class="zcgrp-legend-abbr">E</span><span>Partidos empatados (en Bo5 no hay)</span></div><div class="zcgrp-legend-item" style="--i:3"><span class="zcgrp-legend-abbr">P</span><span>Partidos perdidos</span></div><div class="zcgrp-legend-item" style="--i:4"><span class="zcgrp-legend-abbr zcgrp-legend-abbr-pts">Pts</span><span>Puntos acumulados (3 por victoria)</span></div><div class="zcgrp-legend-item" style="--i:5"><span class="zcgrp-legend-abbr">SF</span><span>Sets a favor (tú ganaste)</span></div><div class="zcgrp-legend-item" style="--i:6"><span class="zcgrp-legend-abbr">SC</span><span>Sets en contra (te ganaron)</span></div><div class="zcgrp-legend-item" style="--i:7"><span class="zcgrp-legend-abbr">DS</span><span>Diferencia de sets</span></div><div class="zcgrp-legend-item" style="--i:8"><span class="zcgrp-legend-abbr">Últimos 5</span><span>Resultados de la vuelta: 3 jugados y 2 por jugar</span></div></div></div></div><div class="zcgrp-legend-title zcgrp-legend-title-spaced">Últimos 6 partidos</div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-win"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4.5 4.5L19 7"/></svg></span><span>Ganó</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-draw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="12" x2="18" y2="12"/></svg></span><span>Empate</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-loss"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span><span>Perdió</span></div><div class="zcgrp-legend-item"><span class="zcgrp-legend-icon zcgrp-legend-icon-none"></span><span>No jugó</span></div></div></div><div id="zc1v1PanelKo" style="display:none"><div class="zcbracket-outer"><div class="zcbracket" id="zc1v1Bracket"></div></div><div class="zcbracket-outer" id="zc1v1E6Outer" style="display:none"><div class="zcbracket" id="zc1v1E6Bracket" data-zcbr-ladder="1"></div></div><div class="zcbracket-toolbar"><button type="button" class="zcbracket-zoom-btn" id="zc1v1ZoomBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg> Ver bracket completo</button></div></div></div>
         <div class="section-subtitle">Clasificación por grupo y fases del torneo</div>
         <div class="zcgrp-phase-tabs" id="zcgrpPhaseTabs">
             <button type="button" class="zcgrp-phase-tab active" data-zcgrp-phase="groups">Fase de grupos</button>
@@ -11151,7 +11151,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             </div>
             <div class="zcbracket-note">Los resultados y cruces se completan automáticamente conforme avanza la fase de eliminación directa.</div>
         </div>
-        <div class="zcbrz-overlay" id="zcbrzOverlay">
+        <div class="zcbrz-overlay zc1v1-keep" id="zcbrzOverlay">
             <div class="zcbrz-header">
                 <div>
                     <div class="zcbrz-title">Bracket completo</div>
@@ -12466,19 +12466,203 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         },
         {
             key: "diego",
-            name: "Diego", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 98,
-            events: "1 (1v1)", titles: "1er Lugar", sets: "4 - 0", matches: "9 - 2",
-            born: "Por confirmar", status: "Inactivo", role: "Player",
+            name: "LCK | iamDiegx", country: "MX", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "2 (1v1)", titles: "1er Lugar", sets: "8 - 0", matches: "18 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["DiegoU_c", "@Diego"],
             winnings: "$0", credits: "3,500 créditos",
             recent: [
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Zeta/papu", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Hetcr894", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "BE | Heritage", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Gran Final" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "l.messi", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Semifinal" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "POS | Andres", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Samuel", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Zeta/papu", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Hetcr894", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
             ],
             achievements: [
-                { date: "2026-03-30", place: "1°", tier: "1er Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, result: "1er lugar · Sets 4 - 0 · PG-PP 9 - 2 · 120 pts" },
+                { date: "2026-03-30", place: "1°", tier: "1er Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "4dr1", scoreB: 0, result: "1er lugar · Sets 4 - 0 · PG-PP 9 - 2 · 120 pts" },
+                { date: "2026-10-22", place: "1°", tier: "1er Lugar", tournament: "ZC26 1v1 Edición 6 - Gran Final", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "BE | Heritage", scoreB: 0, result: "1er lugar · Sets 4 - 0 · PG-PP 9 - 0 · 120 pts" },
+            ]
+        },
+        {
+            key: "diegob",
+            zcTeam: "BLASTERS",
+            name: "Diego", country: "MX", team: "BLASTERS", teamTag: "BLS", points: 0,
+            events: "1 (3v3)", titles: "", sets: "--", matches: "0 - 0",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [],
+            achievements: []
+        },
+        {
+            key: "samuel",
+            name: "Samuel", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Samuel", scoreA: 0, teamB: "LCK | iamDiegx", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "posilegend966p",
+            name: "PosiLegend966P", country: "PE", team: "POS", teamTag: "POS", points: 0,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: ["POS | Andres", "Andrés"],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "POS | Andres", scoreA: 0, teamB: "LCK | iamDiegx", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "POS | Andres", scoreA: 2, teamB: "Javi", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "lmessi",
+            name: "l.messi", country: "AR", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "3er Lugar", sets: "3 - 1", matches: "7 - 4",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "l.messi", scoreA: 3, teamB: "leønardø", scoreB: 1, tourney: "ZC26 1v1 Edición 6 · 3er y 4to Lugar" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "l.messi", scoreA: 0, teamB: "LCK | iamDiegx", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Semifinal" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "l.messi", scoreA: 2, teamB: "Rebeca.A", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "l.messi", scoreA: 2, teamB: "Robert", scoreB: 1, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+                { date: "2026-10-22", place: "3°", tier: "3er Lugar", tournament: "ZC26 1v1 Edición 6 - 3er y 4to Lugar", teamA: "leønardø", scoreA: 1, teamB: "l.messi", scoreB: 3, result: "3er lugar · Sets 3 - 1 · PG-PP 7 - 4 · 50 pts" },
+            ]
+        },
+        {
+            key: "rebecaa",
+            name: "Rebeca.A", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Rebeca.A", scoreA: 0, teamB: "l.messi", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Rebeca.A", scoreA: 2, teamB: "Facuslito", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "facuslito",
+            name: "Facuslito", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Facuslito", scoreA: 0, teamB: "Rebeca.A", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "gmv",
+            name: "g.m.v", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "g.m.v", scoreA: 0, teamB: "BE | Heritage", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "pizzagod",
+            name: "PizzaGOD", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "PizzaGOD", scoreA: 0, teamB: "BE | Heritage", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "PizzaGOD", scoreA: 2, teamB: "Carlos=rip", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "carlosrip",
+            name: "Carlos=rip", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Carlos=rip", scoreA: 0, teamB: "PizzaGOD", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "auraenzo",
+            name: "Aura Enzo", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "1 - 1", matches: "2 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Aura Enzo", scoreA: 0, teamB: "leønardø", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Aura Enzo", scoreA: 2, teamB: "jose", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "jose",
+            name: "jose", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "jose", scoreA: 0, teamB: "Aura Enzo", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+            ]
+        },
+        {
+            key: "leonardo",
+            name: "leønardø", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "4to Lugar", sets: "2 - 2", matches: "5 - 5",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "leønardø", scoreA: 1, teamB: "l.messi", scoreB: 3, tourney: "ZC26 1v1 Edición 6 · 3er y 4to Lugar" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "leønardø", scoreA: 0, teamB: "BE | Heritage", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Semifinal" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "leønardø", scoreA: 2, teamB: "Aura Enzo", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "leønardø", scoreA: 2, teamB: "Plazavea:p", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
+                { date: "2026-10-22", place: "4°", tier: "4to Lugar", tournament: "ZC26 1v1 Edición 6 - 3er y 4to Lugar", teamA: "leønardø", scoreA: 1, teamB: "l.messi", scoreB: 3, result: "4to lugar · Sets 2 - 2 · PG-PP 5 - 5 · 45 pts" },
+            ]
+        },
+        {
+            key: "plazaveap",
+            name: "Plazavea:p", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 0,
+            events: "1 (1v1)", titles: "", sets: "0 - 1", matches: "0 - 2",
+            born: "Por confirmar", status: "Activo", role: "Player",
+            alternateIds: [],
+            winnings: "$0", credits: "0 créditos",
+            recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Plazavea:p", scoreA: 0, teamB: "leønardø", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
+            ],
+            achievements: [
             ]
         },
         {
@@ -12628,13 +12812,13 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             alternateIds: ["4dr1"],
             winnings: "$0", credits: "1,000 créditos",
             recent: [
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "4dr1", scoreB: 0, tourney: "ZC26 1v1 · Gran Final" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Me fies 5?", scoreA: 1, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Semifinal" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "PapiRico", scoreA: 0, teamB: "4dr1", scoreB: 2, tourney: "ZC26 1v1 · Ronda 2" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "4dr1", scoreA: 2, teamB: "ZetalPapi Rick", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
             ],
             achievements: [
-                { date: "2026-03-30", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "Diego", scoreA: 3, teamB: "4dr1", scoreB: 0, result: "2do lugar · Sets 3 - 1 · PG-PP 6 - 4 · 80 pts" },
+                { date: "2026-03-30", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 - Gran Final", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "4dr1", scoreB: 0, result: "2do lugar · Sets 3 - 1 · PG-PP 6 - 4 · 80 pts" },
             ]
         },
         {
@@ -12665,14 +12849,15 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         {
             key: "javi",
             name: "Javi", country: "ES", team: "Jugador individual (1vs1)", teamTag: "", points: 42,
-            events: "3 (1v1)", titles: "3er Lugar", sets: "3 - 3", matches: "7 - 8",
+            events: "4 (1v1)", titles: "3er Lugar", sets: "3 - 4", matches: "7 - 10",
             born: "Por confirmar", status: "Inactivo", role: "Player",
             alternateIds: ["javi826378", "Jave"],
             winnings: "$0", credits: "700 créditos",
             recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Javi", scoreA: 0, teamB: "POS | Andres", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
                 { date: "27 ago 2026", time: "UTC-5", teamA: "Ulises", scoreA: 2, teamB: "Javi", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Javi", scoreA: 2, teamB: "Me fies 5?", scoreB: 1, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Javi", scoreB: 1, tourney: "ZC26 1v1 · Semifinal" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Ramiriñogod", scoreA: 0, teamB: "Javi", scoreB: 2, tourney: "ZC26 1v1 · Ronda 2" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Pato", scoreA: 1, teamB: "Javi", scoreB: 2, tourney: "ZC26 1v1 · Ronda 1" },
                 { date: "29 mar 2026", time: "UTC-5", teamA: "Jhustin", scoreA: 2, teamB: "Jav", scoreB: 0, tourney: "ZC26 1v1 · 3er y 4to Lugar" },
@@ -12752,7 +12937,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             alternateIds: ["Zeta", "papu"],
             winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Zeta/papu", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Zeta/papu", scoreB: 0, tourney: "ZC26 1v1 · Ronda 2" },
                 { date: "30 mar 2026", time: "UTC-5", teamA: "Zeta/papu", scoreA: 2, teamB: "BYE", scoreB: 0, tourney: "ZC26 1v1 · Ronda 1" },
             ],
             achievements: []
@@ -12777,7 +12962,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             alternateIds: ["Hetcr894"],
             winnings: "$0", credits: "0 créditos",
             recent: [
-                { date: "30 mar 2026", time: "UTC-5", teamA: "Diego", scoreA: 2, teamB: "Hetcr894", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
+                { date: "30 mar 2026", time: "UTC-5", teamA: "LCK | iamDiegx", scoreA: 2, teamB: "Hetcr894", scoreB: 1, tourney: "ZC26 1v1 · Ronda 1" },
             ],
             achievements: []
         },
@@ -12845,12 +13030,13 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             key: "robertbv",
             zcTeam: "Unorthodox",
             name: "RobertBV", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 123, prevPoints: 116,
-            events: "2 (1v1)", titles: "1er Lugar", sets: "4 - 1", matches: "10 - 2",
+            events: "3 (1v1)", titles: "1er Lugar", sets: "4 - 2", matches: "11 - 4",
             born: "Por confirmar", status: "Activo", role: "Player",
             alternateIds: ["Pibble", "robertbv2902", "Robert"],
             winnings: "$5.00", credits: "7,300 créditos",
             trophyDates: ["Campeón 04-10-2026"],
             recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "Robert", scoreA: 1, teamB: "l.messi", scoreB: 2, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
                 { date: "4 oct 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, penA: 3, teamB: "OMEN NOCTE", scoreB: 3, penB: 1, tourney: "ZC26 Gran final" },
                 { date: "2 oct 2026", time: "UTC-5", teamA: "GTA", scoreA: 2, teamB: "Unorthodox", scoreB: 4, tourney: "ZC26 Semifinal" },
                 { date: "30 sep 2026", time: "UTC-5", teamA: "SGC", scoreA: 2, teamB: "Unorthodox", scoreB: 4, tourney: "ZC26 Cuartos de final" },
@@ -13053,11 +13239,15 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             key: "heritage",
             zcTeam: "Baraja de Elite",
             name: "Heritage", country: "PE", team: "Jugador individual (1vs1)", teamTag: "", points: 45, prevPoints: 52,
-            events: "1 (1v1)", titles: "2do Lugar", sets: "3 - 1", matches: "8 - 4",
+            events: "2 (1v1)", titles: "2do Lugar", sets: "6 - 2", matches: "14 - 7",
             born: "Por confirmar", status: "Activo", role: "Player",
-            alternateIds: [],
+            alternateIds: ["BE | Heritage"],
             winnings: "$0", credits: "0 créditos",
             recent: [
+                { date: "22 oct 2026", time: "UTC-5", teamA: "BE | Heritage", scoreA: 0, teamB: "LCK | iamDiegx", scoreB: 3, tourney: "ZC26 1v1 Edición 6 · Gran Final" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "BE | Heritage", scoreA: 2, teamB: "leønardø", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Semifinal" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "BE | Heritage", scoreA: 2, teamB: "PizzaGOD", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 2" },
+                { date: "22 oct 2026", time: "UTC-5", teamA: "BE | Heritage", scoreA: 2, teamB: "g.m.v", scoreB: 0, tourney: "ZC26 1v1 Edición 6 · Ronda 1" },
                 { date: "24 sep 2026", time: "UTC-5", teamA: "GTA", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D" },
                 { date: "22 sep 2026", time: "UTC-5", teamA: "Unorthodox", scoreA: 3, teamB: "Baraja de Elite", scoreB: 0, tourney: "ZC26 Fase de Grupos · Grupo D (W.O.)" },
                 { date: "20 sep 2026", time: "UTC-5", teamA: "Baraja de Elite", scoreA: 0, teamB: "Sinister Haven", scoreB: 2, tourney: "ZC26 Fase de Grupos · Grupo D" },
@@ -13067,6 +13257,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 { date: "30 ago 2026", time: "UTC-5", teamA: "Heritage", scoreA: 2, teamB: "Th/team negro", scoreB: 0, tourney: "ZC26 1v1 Edición 4 · Ronda 1" },
             ],
             achievements: [
+                { date: "2026-10-22", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 Edición 6 - Gran Final", teamA: "LCK | iamDiegx", scoreA: 3, teamB: "BE | Heritage", scoreB: 0, result: "2do lugar · Sets 3 - 1 · PG-PP 6 - 3 · 80 pts" },
                 { date: "2026-08-30", place: "2°", tier: "2do Lugar", tournament: "ZC26 1v1 Edición 4 - Gran Final", teamA: "Zyrox", scoreA: 3, teamB: "Heritage", scoreB: 2, result: "2do lugar · Sets 3 - 1 · PG-PP 8 - 4 · 80 pts" },
             ]
         },
@@ -13990,94 +14181,109 @@ body.zc-tour-1v1 #wcPred{display:none!important}
     // Seed con ranking previo: P_inicial = 1600 − (R − 1) × 4.
     const RANKING_UPDATE = [
         ["taikisha", 1599.95, "NA", 1, 1],  // 1. iXLCross
-        ["robertbv", 1599.70, "SA", 14, 1],  // 2. RobertBV
-        ["julio", 1582.04, "SA", 5, 1],  // 3. Juliocr36D
-        ["jc", 1578.04, "SA", 6, 1],  // 4. JOAR
+        ["julio", 1582.04, "SA", 5, 1],  // 2. Juliocr36D
+        ["jc", 1578.04, "SA", 6, 1],  // 3. JOAR
+        ["robertbv", 1575.81, "SA", 14, 1],  // 4. RobertBV
         ["adri", 1537.65, "EMEA", 26, 1],  // 5. Adri
         ["aumc", 1523.57, "NA", 15, 1],  // 6. AUMC
         ["freddy", 1519.78, "SA", 23, 1],  // 7. Freddy
-        ["diego", 1502.32, "NA", 21, 1],  // 8. Diego
-        ["daniel17", 1469.50, "NA", 41, 1],  // 9. Daniel
-        ["heritage", 1463.56, "SA", 30, 1],  // 10. Heritage
-        ["miseryoung", 1415.70, "SA", 60, 1],  // 11. .miseryoung
-        ["owneronyt", 1406.58, "SA", 45, 1],  // 12. Owneronyt
-        ["rnowtt", 1395.23, "SA", 52, 1],  // 13. rNowtt
-        ["jdxz", 1391.23, "SA", 53, 1],  // 14. JdXz
-        ["poslegend966p", 1376.76, "SA", 54, 1],  // 15. PosLegend966p
-        ["abelldx", 1373.99, "SA", 48, 1],  // 16. abelldx
-        ["gold", 1372.76, "NA", 55, 1],  // 17. Gold
-        ["deizz", 1369.99, "SA", 49, 1],  // 18. Deizz
-        ["mateo", 1369.25, "SA", 64, 1],  // 19. Mateo
-        ["romanqq", 1365.99, "SA", 50, 1],  // 20. romanqq
-        ["cesar", 1285.53, "SA", 89, 1],  // 21. CESAR
-        ["denshol", 1281.53, "SA", 90, 1],  // 22. Denshol
-        ["charlestq", 1277.53, "NA", 91, 1],  // 23. CharlesTQ
-        ["banditoo", 1277.19, "SA", 84, 1],  // 24. Banditoo
-        ["luisitopro123", 1275.48, "NA", 83, 1],  // 25. luisitopro123
-        ["yacer", 1267.80, "NA", 85, 1],  // 26. Yacer
-        ["royzrike", 1261.90, "SA", 77, 1],  // 27. Royzrike
-        ["xabi", 1257.90, "NA", 78, 1],  // 28. Xabi
-        ["galactus", 1253.90, "NA", 79, 1],  // 29. Galactus
-        ["amberchuu01", 1246.67, "NA", 80, 1],  // 30. Amberchuu01
-        ["trdgx98", 1242.67, "NA", 81, 1],  // 31. Trdgx98
-        ["sukhoi", 1239.56, "NA", 86, 1],  // 32. Sukhoi
-        ["bititofcq", 1238.67, "NA", 82, 1],  // 33. Bitito.FCQ
-        ["destroyer", 1235.56, "NA", 87, 1],  // 34. Destroyer
-        ["newfactory", 1231.57, "SA", 88, 1],  // 35. new_factory
-        ["shark", 1227.29, "SA", 93, 1],  // 36. Shark
-        ["sanz", 1191.57, "SA", 98, 1],  // 37. Sanz
-        ["sjoacedbamypasa", 1165.53, "SA", 99, 1],  // 38. sjoacedbamypasa
-        ["gabonix", 1161.53, "SA", 100, 1],  // 39. Gabonix
-        ["simonelprro", 1157.53, "SA", 101, 1],  // 40. Simon el prro
-        ["blaxxyy", 1119.71, "SA", 121, 1],  // 41. Blaxxyy
-        ["jhxfwy", 1115.71, "SA", 122, 1],  // 42. Jhxfwy
-        ["n1nferun", 1111.71, "SA", 123, 1],  // 43. N1nferun
-        ["admirertensai", 934.63, "SA", null, 1],  // 44. AdmirerTensai
-        ["mokka", 906.63, "SA", null, 1],  // 45. Mokka
-        ["ovied7", 891.28, "SA", null, 1],  // 46. Ovied7
-        ["r3qu1embruh", 884.36, "SA", null, 1],  // 47. R3QU1EMBRUH
-        ["lieinapril", 851.70, "SA", null, 1],  // 48. Lie in April!
-        ["darkxz", 838.61, "SA", null, 1],  // 49. Darkxz
-        ["ricky", 838.61, "SA", null, 1],  // 50. Ricky
-        ["smkmyst", 838.61, "SA", null, 1],  // 51. smk myst!
-        ["thoniolo", 837.65, "SA", null, 1],  // 52. thoniolo
-        ["gabinho", 837.65, "SA", null, 1],  // 53. Gabinho
-        ["valli", 831.27, "SA", null, 1],  // 54. valli
-        ["patch", 830.74, "SA", null, 1],  // 55. patch
-        ["gary", 829.50, "SA", null, 1],  // 56. Gary
-        ["steve", 829.50, "SA", null, 1],  // 57. Steve
-        ["naori", 824.95, "SA", null, 1],  // 58. Naori
-        ["marro9281", 823.40, "SA", null, 1],  // 59. Marro9281
-        ["arcrafa", 821.25, "SA", null, 1],  // 60. Arc/Rafa
-        ["doslox", 817.57, "SA", null, 1],  // 61. Doslox
-        ["lcomic", 817.57, "SA", null, 1],  // 62. lcomic
-        ["mag", 817.57, "SA", null, 1],  // 63. Mag
-        ["hagnes", 813.70, "SA", null, 1],  // 64. Hagnes
-        ["zousa", 813.21, "SA", null, 1],  // 65. Zousa
-        ["alespet", 810.03, "SA", null, 1],  // 66. Ale's Pet
-        ["merus", 810.03, "SA", null, 1],  // 67. Merus
-        ["sift", 810.03, "SA", null, 1],  // 68. Sift
-        ["rodrixx", 803.01, "SA", null, 1],  // 69. Rodrixx
-        ["zeno", 803.01, "SA", null, 1],  // 70. Zeno
-        ["adrix", 800.00, "SA", null, 1],  // 71. Adrix
-        ["relaxx", 800.00, "SA", null, 1],  // 72. Relaxx
-        ["tsubasa", 800.00, "SA", null, 1],  // 73. Tsubasa
-        ["juegencolette1", 799.30, "SA", null, 1],  // 74. JuegenColette1
-        ["tiliininzanoalex", 799.30, "SA", null, 1],  // 75. TiliinInzanoAlex
-        ["tomiokatxa", 799.30, "SA", null, 1],  // 76. TomiokaTxA
-        ["isakiu", 799.23, "SA", null, 1],  // 77. Isakiu
-        ["santi", 797.74, "SA", null, 1],  // 78. Santi
-        ["tkcarl", 794.95, "SA", null, 1],  // 79. TK Carl
-        ["nefi", 794.64, "SA", null, 1],  // 80. nefi
-        ["fnero", 793.01, "SA", null, 1],  // 81. F nero
-        ["hacent", 793.01, "SA", null, 1],  // 82. Hacent
-        ["kikyy", 793.01, "SA", null, 1],  // 83. kikyy
-        ["enjiynn", 788.76, "SA", null, 1],  // 84. enjiynn
-        ["claustin", 782.58, "SA", null, 1],  // 85. Claustin
-        ["elchino504", 782.58, "SA", null, 1],  // 86. EL_CHINO.504
-        ["shirox", 782.32, "SA", null, 1],  // 87. shirox
-        ["vsblees", 782.32, "SA", null, 1],  // 88. vsblees
-        ["sxrgio", 781.64, "SA", null, 1],  // 89. Sxrgio
+        ["diegob", 1502.32, "NA", 21, 1],  // 8. Diego (3v3, BLASTERS)
+        ["heritage", 1470.40, "SA", 30, 1],  // 9. Heritage
+        ["daniel17", 1469.50, "NA", 41, 1],  // 10. Daniel
+        ["javi", 1456.71, "EMEA", 31, 1],  // 11. Javi
+        ["miseryoung", 1415.70, "SA", 60, 1],  // 12. .miseryoung
+        ["owneronyt", 1406.58, "SA", 45, 1],  // 13. Owneronyt
+        ["rnowtt", 1395.23, "SA", 52, 1],  // 14. rNowtt
+        ["jdxz", 1391.23, "SA", 53, 1],  // 15. JdXz
+        ["poslegend966p", 1376.76, "SA", 54, 1],  // 16. PosLegend966p
+        ["abelldx", 1373.99, "SA", 48, 1],  // 17. abelldx
+        ["gold", 1372.76, "NA", 55, 1],  // 18. Gold
+        ["deizz", 1369.99, "SA", 49, 1],  // 19. Deizz
+        ["mateo", 1369.25, "SA", 64, 1],  // 20. Mateo
+        ["romanqq", 1365.99, "SA", 50, 1],  // 21. romanqq
+        ["cesar", 1285.53, "SA", 89, 1],  // 22. CESAR
+        ["denshol", 1281.53, "SA", 90, 1],  // 23. Denshol
+        ["charlestq", 1277.53, "NA", 91, 1],  // 24. CharlesTQ
+        ["banditoo", 1277.19, "SA", 84, 1],  // 25. Banditoo
+        ["luisitopro123", 1275.48, "NA", 83, 1],  // 26. luisitopro123
+        ["yacer", 1267.80, "NA", 85, 1],  // 27. Yacer
+        ["royzrike", 1261.90, "SA", 77, 1],  // 28. Royzrike
+        ["xabi", 1257.90, "NA", 78, 1],  // 29. Xabi
+        ["galactus", 1253.90, "NA", 79, 1],  // 30. Galactus
+        ["amberchuu01", 1246.67, "NA", 80, 1],  // 31. Amberchuu01
+        ["trdgx98", 1242.67, "NA", 81, 1],  // 32. Trdgx98
+        ["sukhoi", 1239.56, "NA", 86, 1],  // 33. Sukhoi
+        ["bititofcq", 1238.67, "NA", 82, 1],  // 34. Bitito.FCQ
+        ["destroyer", 1235.56, "NA", 87, 1],  // 35. Destroyer
+        ["newfactory", 1231.57, "SA", 88, 1],  // 36. new_factory
+        ["shark", 1227.29, "SA", 93, 1],  // 37. Shark
+        ["sanz", 1191.57, "SA", 98, 1],  // 38. Sanz
+        ["sjoacedbamypasa", 1165.53, "SA", 99, 1],  // 39. sjoacedbamypasa
+        ["gabonix", 1161.53, "SA", 100, 1],  // 40. Gabonix
+        ["simonelprro", 1157.53, "SA", 101, 1],  // 41. Simon el prro
+        ["blaxxyy", 1119.71, "SA", 121, 1],  // 42. Blaxxyy
+        ["jhxfwy", 1115.71, "SA", 122, 1],  // 43. Jhxfwy
+        ["n1nferun", 1111.71, "SA", 123, 1],  // 44. N1nferun
+        ["admirertensai", 934.63, "SA", null, 1],  // 45. AdmirerTensai
+        ["mokka", 906.63, "SA", null, 1],  // 46. Mokka
+        ["ovied7", 891.28, "SA", null, 1],  // 47. Ovied7
+        ["r3qu1embruh", 884.36, "SA", null, 1],  // 48. R3QU1EMBRUH
+        ["diego", 882.34, "NA", null, 1],  // 49. LCK | iamDiegx (DiegoU_c) · 1v1
+        ["lmessi", 855.69, "SA", null, 1],  // 50. l.messi
+        ["lieinapril", 851.70, "SA", null, 1],  // 51. Lie in April!
+        ["darkxz", 838.61, "SA", null, 1],  // 52. Darkxz
+        ["ricky", 838.61, "SA", null, 1],  // 53. Ricky
+        ["smkmyst", 838.61, "SA", null, 1],  // 54. smk myst!
+        ["thoniolo", 837.65, "SA", null, 1],  // 55. thoniolo
+        ["gabinho", 837.65, "SA", null, 1],  // 56. Gabinho
+        ["valli", 831.27, "SA", null, 1],  // 57. valli
+        ["patch", 830.74, "SA", null, 1],  // 58. patch
+        ["gary", 829.50, "SA", null, 1],  // 59. Gary
+        ["steve", 829.50, "SA", null, 1],  // 60. Steve
+        ["leonardo", 825.00, "SA", null, 1],  // 61. leønardø
+        ["naori", 824.95, "SA", null, 1],  // 62. Naori
+        ["marro9281", 823.40, "SA", null, 1],  // 63. Marro9281
+        ["arcrafa", 821.25, "SA", null, 1],  // 64. Arc/Rafa
+        ["doslox", 817.57, "SA", null, 1],  // 65. Doslox
+        ["lcomic", 817.57, "SA", null, 1],  // 66. lcomic
+        ["mag", 817.57, "SA", null, 1],  // 67. Mag
+        ["hagnes", 813.70, "SA", null, 1],  // 68. Hagnes
+        ["zousa", 813.21, "SA", null, 1],  // 69. Zousa
+        ["pizzagod", 810.61, "SA", null, 1],  // 70. PizzaGOD
+        ["posilegend966p", 810.53, "SA", null, 1],  // 71. PosiLegend966P
+        ["alespet", 810.03, "SA", null, 1],  // 72. Ale's Pet
+        ["merus", 810.03, "SA", null, 1],  // 73. Merus
+        ["sift", 810.03, "SA", null, 1],  // 74. Sift
+        ["rodrixx", 803.01, "SA", null, 1],  // 75. Rodrixx
+        ["zeno", 803.01, "SA", null, 1],  // 76. Zeno
+        ["rebecaa", 800.27, "SA", null, 1],  // 77. Rebeca.A
+        ["adrix", 800.00, "SA", null, 1],  // 78. Adrix
+        ["relaxx", 800.00, "SA", null, 1],  // 79. Relaxx
+        ["tsubasa", 800.00, "SA", null, 1],  // 80. Tsubasa
+        ["auraenzo", 800.00, "SA", null, 1],  // 81. Aura Enzo
+        ["juegencolette1", 799.30, "SA", null, 1],  // 82. JuegenColette1
+        ["tiliininzanoalex", 799.30, "SA", null, 1],  // 83. TiliinInzanoAlex
+        ["tomiokatxa", 799.30, "SA", null, 1],  // 84. TomiokaTxA
+        ["isakiu", 799.23, "SA", null, 1],  // 85. Isakiu
+        ["gmv", 798.18, "SA", null, 1],  // 86. g.m.v
+        ["santi", 797.74, "SA", null, 1],  // 87. Santi
+        ["tkcarl", 794.95, "SA", null, 1],  // 88. TK Carl
+        ["nefi", 794.64, "SA", null, 1],  // 89. nefi
+        ["fnero", 793.01, "SA", null, 1],  // 90. F nero
+        ["hacent", 793.01, "SA", null, 1],  // 91. Hacent
+        ["kikyy", 793.01, "SA", null, 1],  // 92. kikyy
+        ["enjiynn", 788.76, "SA", null, 1],  // 93. enjiynn
+        ["samuel", 787.50, "SA", null, 1],  // 94. Samuel
+        ["facuslito", 787.50, "SA", null, 1],  // 95. Facuslito
+        ["carlosrip", 787.50, "SA", null, 1],  // 96. Carlos=rip
+        ["jose", 787.50, "SA", null, 1],  // 97. jose
+        ["plazaveap", 787.50, "SA", null, 1],  // 98. Plazavea:p
+        ["claustin", 782.58, "SA", null, 1],  // 99. Claustin
+        ["elchino504", 782.58, "SA", null, 1],  // 100. EL_CHINO.504
+        ["shirox", 782.32, "SA", null, 1],  // 101. shirox
+        ["vsblees", 782.32, "SA", null, 1],  // 102. vsblees
+        ["sxrgio", 781.64, "SA", null, 1],  // 103. Sxrgio
+
         ["12skividi", 0.00, "SA", null, 0],  // -. 12skividi
         ["3eta", 0.00, "NA", 108, 0],  // -. 3eta
         ["aaron13", 0.00, "NA", 46, 0],  // -. Aaron13
@@ -14105,7 +14311,6 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         ["hetcr", 0.00, "SA", 57, 0],  // -. Hetcr
         ["isakku", 0.00, "SA", 51, 0],  // -. Isakku
         ["jared", 0.00, "NA", 9, 0],  // -. Jared
-        ["javi", 0.00, "EMEA", 31, 0],  // -. Javi
         ["jean", 0.00, "SA", null, 0],  // -. JEAN
         ["jerson7", 0.00, "SA", 2, 0],  // -. Jer(son)7
         ["jhustin", 0.00, "SA", 47, 0],  // -. Jhustin
@@ -14176,7 +14381,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
     ];
     const ZC26_CORRECTED = {
         newPlayers: [{"key": "admirertensai", "name": "AdmirerTensai", "team": "OMEN NOCTE", "tag": "OMN", "zc": "OMEN NOCTE", "act": 1}, {"key": "mokka", "name": "Mokka", "team": "OMEN NOCTE", "tag": "OMN", "zc": "OMEN NOCTE", "act": 1}, {"key": "ovied7", "name": "Ovied7", "team": "OMEN NOCTE", "tag": "OMN", "zc": "OMEN NOCTE", "act": 1}, {"key": "r3qu1embruh", "name": "R3QU1EMBRUH", "team": "OMEN NOCTE", "tag": "OMN", "zc": "OMEN NOCTE", "act": 1}, {"key": "lieinapril", "name": "Lie in April!", "team": "Unorthodox (UNORTHODOX GANG)", "tag": "UOG", "zc": "Unorthodox", "act": 1}, {"key": "darkxz", "name": "Darkxz", "team": "op7", "tag": "OP7", "zc": "op7", "act": 1}, {"key": "ricky", "name": "Ricky", "team": "op7", "tag": "OP7", "zc": "op7", "act": 1}, {"key": "smkmyst", "name": "smk myst!", "team": "op7", "tag": "OP7", "zc": "op7", "act": 1}, {"key": "thoniolo", "name": "thoniolo", "team": "GTA", "tag": "GTA", "zc": "GTA", "act": 1}, {"key": "gabinho", "name": "Gabinho", "team": "GTA", "tag": "GTA", "zc": "GTA", "act": 1}, {"key": "valli", "name": "valli", "team": "POS JR", "tag": "PJR", "zc": "POS JR", "act": 1}, {"key": "patch", "name": "patch", "team": "Unorthodox (UNORTHODOX GANG)", "tag": "UOG", "zc": "Unorthodox", "act": 1}, {"key": "gary", "name": "Gary", "team": "LPE", "tag": "LPE", "zc": "LPE", "act": 1}, {"key": "steve", "name": "Steve", "team": "LPE", "tag": "LPE", "zc": "LPE", "act": 1}, {"key": "naori", "name": "Naori", "team": "op7", "tag": "OP7", "zc": "op7", "act": 1}, {"key": "marro9281", "name": "Marro9281", "team": "Quiero KeKe", "tag": "QKK", "zc": "Quiero KeKe", "act": 1}, {"key": "arcrafa", "name": "Arc/Rafa", "team": "POS JR", "tag": "PJR", "zc": "POS JR", "act": 1}, {"key": "doslox", "name": "Doslox", "team": "Quiero KeKe", "tag": "QKK", "zc": "Quiero KeKe", "act": 1}, {"key": "lcomic", "name": "lcomic", "team": "Quiero KeKe", "tag": "QKK", "zc": "Quiero KeKe", "act": 1}, {"key": "mag", "name": "Mag", "team": "Quiero KeKe", "tag": "QKK", "zc": "Quiero KeKe", "act": 1}, {"key": "hagnes", "name": "Hagnes", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 1}, {"key": "zousa", "name": "Zousa", "team": "OMEN NOCTE", "tag": "OMN", "zc": "OMEN NOCTE", "act": 1}, {"key": "alespet", "name": "Ale's Pet", "team": "Rostizados", "tag": "RST", "zc": "Rostizados", "act": 1}, {"key": "merus", "name": "Merus", "team": "Rostizados", "tag": "RST", "zc": "Rostizados", "act": 1}, {"key": "sift", "name": "Sift", "team": "Rostizados", "tag": "RST", "zc": "Rostizados", "act": 1}, {"key": "rodrixx", "name": "Rodrixx", "team": "Unorthodox (UNORTHODOX GANG)", "tag": "UOG", "zc": "Unorthodox", "act": 1}, {"key": "zeno", "name": "Zeno", "team": "Unorthodox (UNORTHODOX GANG)", "tag": "UOG", "zc": "Unorthodox", "act": 1}, {"key": "adrix", "name": "Adrix", "team": "XBlood", "tag": "XBL", "zc": "XBlood", "act": 1}, {"key": "relaxx", "name": "Relaxx", "team": "XBlood", "tag": "XBL", "zc": "XBlood", "act": 1}, {"key": "tsubasa", "name": "Tsubasa", "team": "XBlood", "tag": "XBL", "zc": "XBlood", "act": 1}, {"key": "juegencolette1", "name": "JuegenColette1", "team": "Peruanos FC", "tag": "PFC", "zc": "Peruanos FC", "act": 1}, {"key": "tiliininzanoalex", "name": "TiliinInzanoAlex", "team": "Peruanos FC", "tag": "PFC", "zc": "Peruanos FC", "act": 1}, {"key": "tomiokatxa", "name": "TomiokaTxA", "team": "Peruanos FC", "tag": "PFC", "zc": "Peruanos FC", "act": 1}, {"key": "isakiu", "name": "Isakiu", "team": "Sinister Haven", "tag": "SIN", "zc": "Sinister Haven", "act": 1}, {"key": "santi", "name": "Santi", "team": "Rostizados", "tag": "RST", "zc": "Rostizados", "act": 1}, {"key": "tkcarl", "name": "TK Carl", "team": "POS JR", "tag": "PJR", "zc": "POS JR", "act": 1}, {"key": "nefi", "name": "nefi", "team": "GTA", "tag": "GTA", "zc": "GTA", "act": 1}, {"key": "fnero", "name": "F nero", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 1}, {"key": "hacent", "name": "Hacent", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 1}, {"key": "kikyy", "name": "kikyy", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 1}, {"key": "enjiynn", "name": "enjiynn", "team": "POS", "tag": "POS", "zc": "POS", "act": 1}, {"key": "claustin", "name": "Claustin", "team": "Pro Legends", "tag": "PRL", "zc": "Pro Legends", "act": 1}, {"key": "elchino504", "name": "EL_CHINO.504", "team": "Pro Legends", "tag": "PRL", "zc": "Pro Legends", "act": 1}, {"key": "shirox", "name": "shirox", "team": "BLASTERS", "tag": "BLS", "zc": "BLASTERS", "act": 1}, {"key": "vsblees", "name": "vsblees", "team": "BLASTERS", "tag": "BLS", "zc": "BLASTERS", "act": 1}, {"key": "sxrgio", "name": "Sxrgio", "team": "LEVIATÁN ESPORTS", "tag": "LEV", "zc": "Leviatán Esports", "act": 1}, {"key": "12skividi", "name": "12skividi", "team": "Phoenix", "tag": "PHX", "zc": "Phoenix", "act": 0}, {"key": "ben10", "name": "Ben10", "team": "XBlood", "tag": "XBL", "zc": "XBlood", "act": 0}, {"key": "crazyman", "name": "CrazyMan", "team": "XBlood", "tag": "XBL", "zc": "XBlood", "act": 0}, {"key": "crazzyman", "name": "CrazzyMan", "team": "op7", "tag": "OP7", "zc": "op7", "act": 0}, {"key": "dominatorangel27", "name": "DominatorAngel27", "team": "OMEN NOCTE", "tag": "OMN", "zc": "OMEN NOCTE", "act": 0}, {"key": "jean", "name": "JEAN", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 0}, {"key": "patitoatlas", "name": "PatitoAtlas", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 0}, {"key": "salvatoxic", "name": "SalvaToxic", "team": "XBlood", "tag": "XBL", "zc": "XBlood", "act": 0}, {"key": "sasorixd", "name": "Sasori xd", "team": "op7", "tag": "OP7", "zc": "op7", "act": 0}, {"key": "sasori037", "name": "Sasori037", "team": "op7", "tag": "OP7", "zc": "op7", "act": 0}, {"key": "sweetiefox", "name": "Sweetie Fox", "team": "Phoenix", "tag": "PHX", "zc": "Phoenix", "act": 0}, {"key": "thscar", "name": "TH Scar", "team": "POS JR", "tag": "PJR", "zc": "POS JR", "act": 0}, {"key": "tsukuyoamane", "name": "Tsukuyo Amane", "team": "RAISE EARTH", "tag": "RSE", "zc": "RAISE EARTH", "act": 0}, {"key": "twiceulibrws", "name": "Twiceulibrws", "team": "Peruanos FC", "tag": "PFC", "zc": "Peruanos FC", "act": 0}],
-        teamUpdates: {"robertbv": {"team": "Unorthodox (UNORTHODOX GANG)", "tag": "UOG", "zc": "Unorthodox"}, "adri": {"team": "GTA", "tag": "GTA", "zc": "GTA"}, "aumc": {"team": "Egresados del Conalep", "tag": "EDC", "zc": "Egresados Del Conalep"}, "freddy": {"team": "LEVIATÁN ESPORTS", "tag": "LEV", "zc": "Leviatán Esports"}, "diego": {"team": "BLASTERS", "tag": "BLS", "zc": "BLASTERS"}, "daniel17": {"team": "LPE", "tag": "LPE", "zc": "LPE"}, "heritage": {"team": "Baraja de Elite", "tag": "BDE", "zc": "Baraja de Elite"}, "owneronyt": {"team": "Pro Legends", "tag": "PRL", "zc": "Pro Legends"}, "mateo": {"team": "POS JR", "tag": "PJR", "zc": "POS JR"}},
+        teamUpdates: {"robertbv": {"team": "Unorthodox (UNORTHODOX GANG)", "tag": "UOG", "zc": "Unorthodox"}, "adri": {"team": "GTA", "tag": "GTA", "zc": "GTA"}, "aumc": {"team": "Egresados del Conalep", "tag": "EDC", "zc": "Egresados Del Conalep"}, "freddy": {"team": "LEVIATÁN ESPORTS", "tag": "LEV", "zc": "Leviatán Esports"}, "diegob": {"team": "BLASTERS", "tag": "BLS", "zc": "BLASTERS"}, "daniel17": {"team": "LPE", "tag": "LPE", "zc": "LPE"}, "heritage": {"team": "Baraja de Elite", "tag": "BDE", "zc": "Baraja de Elite"}, "owneronyt": {"team": "Pro Legends", "tag": "PRL", "zc": "Pro Legends"}, "mateo": {"team": "POS JR", "tag": "PJR", "zc": "POS JR"}},
         matches: {
             "taikisha": [["3 oct 2026", "Leviatán Esports", 4, "GTA", 2, "ZC26 Tercer puesto", "W", null, null], ["2 oct 2026", "Leviatán Esports", 0, "OMEN NOCTE", 3, "ZC26 Semifinal", "L", null, null], ["29 sep 2026", "Leviatán Esports", 3, "Egresados Del Conalep", 0, "ZC26 Octavos de final", "W", null, null], ["24 sep 2026", "Leviatán Esports", 2, "POS JR", 2, "ZC26 Fase de Grupos · Grupo A", "L", null, null], ["22 sep 2026", "Leviatán Esports", 1, "Quiero KeKe", 3, "ZC26 Fase de Grupos · Grupo A", "L", null, null], ["20 sep 2026", "Leviatán Esports", 3, "Peruanos FC", 0, "ZC26 Fase de Grupos · Grupo A", "W", null, null]],
             "robertbv": [["4 oct 2026", "Unorthodox", 3, "OMEN NOCTE", 3, "ZC26 Gran final", "W", 3, 1], ["2 oct 2026", "Unorthodox", 4, "GTA", 2, "ZC26 Semifinal", "W", null, null], ["30 sep 2026", "Unorthodox", 4, "SGC", 2, "ZC26 Cuartos de final", "W", null, null], ["28 sep 2026", "Unorthodox", 3, "Quiero KeKe", 0, "ZC26 Octavos de final", "W", null, null], ["25 sep 2026", "Unorthodox", 3, "Sinister Haven", 0, "ZC26 Fase de Grupos · Grupo D (W.O.)", "W", null, null], ["22 sep 2026", "Unorthodox", 3, "Baraja de Elite", 0, "ZC26 Fase de Grupos · Grupo D (W.O.)", "W", null, null], ["21 sep 2026", "Unorthodox", 3, "GTA", 0, "ZC26 Fase de Grupos · Grupo D", "W", null, null]],
@@ -14185,7 +14390,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             "adri": [["3 oct 2026", "GTA", 2, "Leviatán Esports", 4, "ZC26 Tercer puesto", "L", null, null], ["2 oct 2026", "GTA", 2, "Unorthodox", 4, "ZC26 Semifinal", "L", null, null], ["30 sep 2026", "GTA", 1, "op7", 0, "ZC26 Cuartos de final", "W", null, null], ["28 sep 2026", "GTA", 3, "RAISE EARTH", 0, "ZC26 Octavos de final", "W", null, null], ["24 sep 2026", "GTA", 3, "Baraja de Elite", 0, "ZC26 Fase de Grupos · Grupo D", "W", null, null], ["23 sep 2026", "GTA", 3, "Sinister Haven", 0, "ZC26 Fase de Grupos · Grupo D", "W", null, null], ["21 sep 2026", "GTA", 0, "Unorthodox", 3, "ZC26 Fase de Grupos · Grupo D", "L", null, null]],
             "aumc": [["29 sep 2026", "Egresados Del Conalep", 0, "Leviatán Esports", 3, "ZC26 Octavos de final", "L", null, null], ["25 sep 2026", "Egresados Del Conalep", 0, "OMEN NOCTE", 3, "ZC26 Fase de Grupos", "L", null, null], ["23 sep 2026", "Egresados Del Conalep", 2, "Acuñas", 2, "ZC26 Fase de Grupos · Grupo F", "W", null, null], ["20 sep 2026", "Egresados Del Conalep", 3, "Pro Legends", 0, "ZC26 Fase de Grupos · Grupo F", "W", null, null]],
             "freddy": [["3 oct 2026", "Leviatán Esports", 4, "GTA", 2, "ZC26 Tercer puesto", "W", null, null]],
-            "diego": [["28 sep 2026", "BLASTERS", 2, "op7", 3, "ZC26 Octavos de final", "L", null, null], ["24 sep 2026", "BLASTERS", 3, "LPE", 0, "ZC26 Fase de Grupos", "W", null, null], ["23 sep 2026", "BLASTERS", 0, "Phoenix", 0, "ZC26 Fase de Grupos · Grupo C (Empate W.O.)", "W", null, null], ["21 sep 2026", "BLASTERS", 3, "XBlood", 0, "ZC26 Fase de Grupos", "W", null, null]],
+            "diegob": [["28 sep 2026", "BLASTERS", 2, "op7", 3, "ZC26 Octavos de final", "L", null, null], ["24 sep 2026", "BLASTERS", 3, "LPE", 0, "ZC26 Fase de Grupos", "W", null, null], ["23 sep 2026", "BLASTERS", 0, "Phoenix", 0, "ZC26 Fase de Grupos · Grupo C (Empate W.O.)", "W", null, null], ["21 sep 2026", "BLASTERS", 3, "XBlood", 0, "ZC26 Fase de Grupos", "W", null, null]],
             "daniel17": [["1 oct 2026", "LPE", 0, "OMEN NOCTE", 3, "ZC26 Cuartos de final", "L", null, null], ["29 sep 2026", "LPE", 3, "Acuñas", 1, "ZC26 Octavos de final", "W", null, null], ["24 sep 2026", "LPE", 0, "BLASTERS", 3, "ZC26 Fase de Grupos", "L", null, null], ["22 sep 2026", "LPE", 3, "XBlood", 0, "ZC26 Fase de Grupos", "W", null, null], ["20 sep 2026", "LPE", 2, "Phoenix", 0, "ZC26 Fase de Grupos · Grupo C", "W", null, null]],
             "heritage": [["24 sep 2026", "Baraja de Elite", 0, "GTA", 3, "ZC26 Fase de Grupos · Grupo D", "L", null, null], ["22 sep 2026", "Baraja de Elite", 0, "Unorthodox", 3, "ZC26 Fase de Grupos · Grupo D (W.O.)", "L", null, null], ["20 sep 2026", "Baraja de Elite", 0, "Sinister Haven", 2, "ZC26 Fase de Grupos · Grupo D", "L", null, null]],
             "miseryoung": [["4 oct 2026", "Unorthodox", 3, "OMEN NOCTE", 3, "ZC26 Gran final", "W", 3, 1], ["2 oct 2026", "Unorthodox", 4, "GTA", 2, "ZC26 Semifinal", "W", null, null], ["30 sep 2026", "Unorthodox", 4, "SGC", 2, "ZC26 Cuartos de final", "W", null, null], ["28 sep 2026", "Unorthodox", 3, "Quiero KeKe", 0, "ZC26 Octavos de final", "W", null, null], ["25 sep 2026", "Unorthodox", 3, "Sinister Haven", 0, "ZC26 Fase de Grupos · Grupo D (W.O.)", "W", null, null], ["22 sep 2026", "Unorthodox", 3, "Baraja de Elite", 0, "ZC26 Fase de Grupos · Grupo D (W.O.)", "W", null, null], ["21 sep 2026", "Unorthodox", 3, "GTA", 0, "ZC26 Fase de Grupos · Grupo D", "W", null, null]],
@@ -14314,7 +14519,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             const tu = C.teamUpdates[p.key];
             if (tu) { p.team = tu.team; p.teamTag = tu.tag; if (tu.zc) p.zcTeam = tu.zc; }
             // Solo los partidos realmente jugados en ZC26 (sep-oct); el resto del historial no se toca.
-            const older = (p.recent || []).filter(m => !SEP_OCT.test(m.date));
+            const older = (p.recent || []).filter(m => !SEP_OCT.test(m.date) || /1v1/.test(m.tourney || ""));
             const mine = (C.matches[p.key] || []).map(r => {
                 const m = { date: r[0], time: "UTC-5", teamA: r[1], scoreA: r[2], teamB: r[3], scoreB: r[4], tourney: r[5], side: "A", res: r[6] };
                 if (r[7] != null) { m.penA = r[7]; m.penB = r[8]; }
@@ -14331,7 +14536,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 if (!p.events || p.events === "0") p.events = "1 (3v3)";
             }
             const top = C.top[p.key];
-            p.achievements = (p.achievements || []).filter(a => a.date < "2026-09-20");
+            p.achievements = (p.achievements || []).filter(a => a.date < "2026-09-20" || /1v1/.test(a.tournament || ""));
             if (top) {
                 p.achievements.push(Object.assign({}, TOP[top]));
                 if (!p.titles) p.titles = TITLE_BY_TOP[top];
@@ -14375,7 +14580,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
     // --- Movimiento en la clasificación (sube / baja / nuevo) ---
     // Los jugadores que ya tenían posición (seed) se comparan entre sí: posición anterior
     // vs. posición actual dentro de ese grupo. Los jugadores nuevos aparecen como "N".
-    const RANK_NEW_PLAYERS = new Set(ZC26_CORRECTED.newPlayers.map(n => n.key));
+    const RANK_NEW_PLAYERS = new Set(ZC26_CORRECTED.newPlayers.map(n => n.key).concat(["diego","samuel","posilegend966p","lmessi","rebecaa","facuslito","gmv","pizzagod","carlosrip","auraenzo","jose","leonardo","plazaveap"]));
     const RETURNING_PLAYERS = PLAYERS.filter(p => !RANK_NEW_PLAYERS.has(p.key));
     const PREV_POS_BY_KEY = new Map(RETURNING_PLAYERS.map(p => [p.key, p.prevRank]));
     const CURR_POS_AMONG_RETURNING_BY_KEY = new Map(RETURNING_PLAYERS.map((p, i) => [p.key, i + 1]));
@@ -15457,8 +15662,9 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         let tier, tierClass, tournament, is3v3;
         if (/1v1|1vs1/i.test(event)) {
             is3v3 = false;
-            if (/edici[oó]n\s*4/i.test(event)) {
-                tier = "Tier-B"; tierClass = "tier-b"; tournament = "1vs1 Edición 4";
+            const edM = /edici[oó]n\s*([46])/i.exec(event);
+            if (edM) {
+                tier = "Tier-B"; tierClass = "tier-b"; tournament = "1vs1 Edición " + edM[1];
             } else {
                 tier = "Tier-A"; tierClass = "tier-a"; tournament = "ZC26 1v1";
             }
@@ -18549,7 +18755,8 @@ body.zc-tour-1v1 #wcPred{display:none!important}
     }
     function zc26KoMatchHtml(home, away, opts) {
         opts = opts || {};
-        const res = (home && away) ? zc26KoResult(home, away) : null;
+        const res = opts.res !== undefined ? opts.res : ((home && away) ? zc26KoResult(home, away) : null);
+        const champ = opts.champ || "Unorthodox";
         const hasTeams = !!(home || away);
         let homeCls = "", awayCls = "";
         let homeScore = "", awayScore = "";
@@ -18565,22 +18772,23 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         const meta = (hasTeams || opts.forceMeta)
             ? `<div class="zcbracket-match-meta"><span>${opts.dateLabel || "Fecha por confirmar"}</span><span class="zcbracket-status ${statusCls}">${statusTxt}</span></div>`
             : "";
-        return `<div class="zcbracket-match" data-zcbr-home="${zc26Esc(home || "")}" data-zcbr-away="${zc26Esc(away || "")}">
+        return `<div class="zcbracket-match"${opts.mid ? ` data-zc1v1-match="${opts.mid}"` : ""} data-zcbr-home="${zc26Esc(home || "")}" data-zcbr-away="${zc26Esc(away || "")}">
             ${meta}
-            ${home ? `<div class="zcbracket-team ${homeCls}${home === "Unorthodox" ? " zcbr-champion-row" : ""}" data-zcbr-team="${zc26Esc(home)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(home)}" alt=""></div><span class="zcbracket-team-name${home === "Unorthodox" ? " zcbr-champion" : ""}">${zc26Esc(home)}</span>${zc26KoRedCardIcon(home, away, home)}${homeScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
-            ${away ? `<div class="zcbracket-team ${awayCls}${away === "Unorthodox" ? " zcbr-champion-row" : ""}" data-zcbr-team="${zc26Esc(away)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(away)}" alt=""></div><span class="zcbracket-team-name${away === "Unorthodox" ? " zcbr-champion" : ""}">${zc26Esc(away)}</span>${zc26KoRedCardIcon(home, away, away)}${awayScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
+            ${home ? `<div class="zcbracket-team ${homeCls}${home === champ ? " zcbr-champion-row" : ""}" data-zcbr-team="${zc26Esc(home)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(home)}" alt=""></div><span class="zcbracket-team-name${home === champ ? " zcbr-champion" : ""}">${zc26Esc(home)}</span>${zc26KoRedCardIcon(home, away, home)}${homeScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
+            ${away ? `<div class="zcbracket-team ${awayCls}${away === champ ? " zcbr-champion-row" : ""}" data-zcbr-team="${zc26Esc(away)}"><div class="zcbracket-team-logo"><img src="${zc26Logo(away)}" alt=""></div><span class="zcbracket-team-name${away === champ ? " zcbr-champion" : ""}">${zc26Esc(away)}</span>${zc26KoRedCardIcon(home, away, away)}${awayScore}</div>` : `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">Por definir</span></div>`}
         </div>`;
     }
-    function zc26RenderBracket(targetBracket) {
+    function zc26RenderBracket(targetBracket, src) {
         const bracket = targetBracket || document.getElementById("zcbracket");
         if (!bracket) return;
         bracket.innerHTML = "";
-        const data = zc26ComputeBracket();
+        const data = src ? src.data : zc26ComputeBracket();
+        const mh = (m, o) => zc26KoMatchHtml(m[0], m[1], src ? Object.assign({}, o, { res: m[3] || null, mid: m[2], champ: src.champ, dateLabel: src.date }) : o);
 
-        function makeCol(title, extraClass) {
+        function makeCol(title, extraClass, sub) {
             const c = document.createElement("div");
             c.className = "zcbracket-col" + (extraClass ? " " + extraClass : "");
-            c.innerHTML = `<div class="zcbracket-col-title">${title}<span class="zcbracket-col-sub">Bo6</span></div>`;
+            c.innerHTML = `<div class="zcbracket-col-title">${title}<span class="zcbracket-col-sub">${sub || "Bo6"}</span></div>`;
             return c;
         }
         function makeSlot(html) {
@@ -18590,25 +18798,25 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             return s;
         }
 
-        const colR16 = makeCol("Octavos");
+        const colR16 = makeCol(src ? src.titles[0] : "Octavos", "", src && src.subs[0]);
         data.r16.forEach((m, i) => {
-            const s = makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: zc26KoDateLabel(m[0], m[1], i < 4 ? "29/09" : "28/09"), forceMeta: true }));
+            const s = makeSlot(mh(m, { dateLabel: zc26KoDateLabel(m[0], m[1], i < 4 ? "29/09" : "28/09"), forceMeta: true }));
             s.style.marginBottom = (i < data.r16.length - 1 ? "14px" : "0");
             colR16.appendChild(s);
         });
         bracket.appendChild(colR16);
 
-        const colQF = makeCol("Cuartos");
-        data.qf.forEach(m => colQF.appendChild(makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: zc26KoDateLabel(m[0], m[1], "Cuartos"), forceMeta: true }))));
+        const colQF = makeCol(src ? src.titles[1] : "Cuartos", "", src && src.subs[1]);
+        data.qf.forEach(m => colQF.appendChild(makeSlot(mh(m, { dateLabel: zc26KoDateLabel(m[0], m[1], "Cuartos"), forceMeta: true }))));
         bracket.appendChild(colQF);
 
-        const colSF = makeCol("Semifinal");
-        data.sf.forEach(m => colSF.appendChild(makeSlot(zc26KoMatchHtml(m[0], m[1], { dateLabel: "Semifinal", forceMeta: true }))));
+        const colSF = makeCol(src ? src.titles[2] : "Semifinal", "", src && src.subs[2]);
+        data.sf.forEach(m => colSF.appendChild(makeSlot(mh(m, { dateLabel: "Semifinal", forceMeta: true }))));
         bracket.appendChild(colSF);
 
-        const colF = makeCol("Final");
-        const finalSlot = makeSlot(zc26KoMatchHtml(data.final[0], data.final[1], { dateLabel: "Gran final", forceMeta: true }));
-        const thirdSlot = makeSlot(zc26KoMatchHtml(data.third[0], data.third[1], { dateLabel: "3er puesto", forceMeta: true }));
+        const colF = makeCol(src ? src.titles[3] : "Final", "", src && src.subs[3]);
+        const finalSlot = makeSlot(mh(data.final, { dateLabel: "Gran final", forceMeta: true }));
+        const thirdSlot = makeSlot(mh(data.third, { dateLabel: "3er puesto", forceMeta: true }));
         colF.appendChild(finalSlot);
         colF.appendChild(thirdSlot);
         bracket.appendChild(colF);
@@ -18642,7 +18850,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             slotEl.style.marginTop = margin + "px";
             return desiredTop + h;
         }
-        const ladder = (bracket.id === "zcbracket");
+        const ladder = (bracket.id === "zcbracket") || !!bracket.dataset.zcbrLadder;
         function layoutRound(prevSlots, curSlots) {
             // Arranca desde la posición NATURAL del primer slot (justo debajo del título
             // de la columna), no desde 0 — si no, todas las cajas quedan corridas hacia
@@ -20933,23 +21141,24 @@ const buildList = f => {
     /* ===================== ZC26 · TORNEOS (1vs1 / 3vs3) + TEMPORADA + CALENDARIO 1vs1 ===================== */
     const ZC_TOURNAMENTS = [
         { id: "3v3", season: "2026", name: "3vs3 ZC26", start: "2026-09-20", end: "2026-10-04", meta: "Equipos · Tier S · Fase de grupos y eliminación directa", status: "Finalizado", note: "Campeón: Unorthodox" },
-        { id: "1v1", season: "2026", name: "1vs1 ZC26", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "Finalizado", note: "Campeón: Ethanzs'10 · Jueves 15 al miércoles 21 de octubre" }
+        { id: "1v1", season: "2026", name: "1vs1 Edición 5", start: "2026-10-15", end: "2026-10-21", meta: "Ethanzs'10, Blacknoirz, mateotovarr997 y _diedv · Todos contra todos (ida y vuelta) + Gran Final", status: "Finalizado", note: "Campeón: Ethanzs'10 · Jueves 15 al miércoles 21 de octubre" },
+        { id: "1v1e6", season: "2026", name: "1vs1 Edición 6", start: "2026-10-22", end: "2026-10-22", meta: "16 jugadores · Eliminación directa (sin fase de grupos) · Ronda 1, Ronda 2 y Semifinal al mejor de 2 · Final al mejor de 3", status: "Finalizado", note: "Campeón: LCK | iamDiegx · Subcampeón: BE | Heritage", noCurrent: true }
     ];
     const ZC_SEASONS = ["2026", "2025", "2024", "2023"];
     function zctLatest() { return ZC_TOURNAMENTS.slice().sort((a, b) => b.start.localeCompare(a.start))[0].id; }
     let zcTour = zctLatest();   // siempre arranca en el torneo más reciente
     let zcSeason = "2026";
 
-    const ZC1V1_PLAYERS = ["Ethanzs'10", "Blacknoirz", "mateotovarr997", "_diedv"];
+    let ZC1V1_PLAYERS = ["Ethanzs'10", "Blacknoirz", "mateotovarr997", "_diedv"];
     const ZC1V1_PAIRS = [[[0,1],[2,3]], [[0,2],[1,3]], [[0,3],[1,2]], [[1,0],[3,2]], [[2,0],[3,1]], [[3,0],[2,1]]];
     const ZC1V1_DAYS = [["Jueves",15],["Viernes",16],["Sábado",17],["Domingo",18],["Lunes",19],["Martes",20]];
-    const ZC1V1_FIXTURES = ZC1V1_PAIRS.map((pairs, i) => ({
+    let ZC1V1_FIXTURES = ZC1V1_PAIRS.map((pairs, i) => ({
         day: ZC1V1_DAYS[i][0], num: ZC1V1_DAYS[i][1], month: "OCT",
         phase: i === 0 ? "Primera vuelta (ida)" : i === 3 ? "Segunda vuelta (vuelta)" : "",
         matches: pairs.map((p, k) => ({ leg: i < 3 ? "ida" : "vuelta", id: "P" + (i * 2 + k + 1), label: "Jornada " + (i + 1) + " · " + (i < 3 ? "Ida" : "Vuelta") + " · Bo5", home: ZC1V1_PLAYERS[p[0]], away: ZC1V1_PLAYERS[p[1]], time: k ? "6:00 p.m." : "5:00 p.m." }))
     })).concat([{ day: "Miércoles", num: 21, month: "OCT", phase: "Gran final", matches: [{ leg: "final", id: "P13", label: "Gran Final · Bo5", home: "1.º de la tabla", away: "2.º de la tabla", time: "6:00 p.m.", tbd: true }, { leg: "final", id: "P14", label: "Tercer puesto · Bo5", home: "3.º de la tabla", away: "4.º de la tabla", time: "5:00 p.m.", tbd: true }] }]);
     // Resultados (sets ganados por cada lado). Ejemplo:  P1: { h: 3, a: 1 }  -> Ethanzs'10 3 - 1 Blacknoirz
-    const ZC1V1_RESULTS = {
+    let ZC1V1_RESULTS = {
         P1: { h: 3, a: 2 },  P2: { h: 1, a: 3 },
         P3: { h: 3, a: 0 },  P4: { h: 3, a: 1 },
         P5: { h: 3, a: 1 },  P6: { h: 3, a: 0 },
@@ -20958,10 +21167,10 @@ const buildList = f => {
         P11: { h: 0, a: 3 }, P12: { h: 0, a: 3 }
     };
     // Todos los partidos del torneo ya se jugaron: todos los marcadores son resultados oficiales
-    const ZC1V1_OFFICIAL = new Set(["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12","P13","P14"]);
+    let ZC1V1_OFFICIAL = new Set(["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12","P13","P14"]);
     function zc1v1IsPred(id) { return !!ZC1V1_RESULTS[id] && !ZC1V1_OFFICIAL.has(id); }
     // Fase final (resultado oficial): sets por jugador, se asignan a local/visitante cuando se definen los finalistas
-    const ZC1V1_KO_PRED = { P13: { "Ethanzs'10": 3, "Blacknoirz": 2 }, P14: { "_diedv": 3, "mateotovarr997": 1 } };
+    let ZC1V1_KO_PRED = { P13: { "Ethanzs'10": 3, "Blacknoirz": 2 }, P14: { "_diedv": 3, "mateotovarr997": 1 } };
 
 
     const ZC1V1_SHIELD = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 4l22 8v18c0 14-9 25-22 30C19 55 10 44 10 30V12z" fill="#2a2f3a" stroke="#8a8f98" stroke-width="3"/></svg>');
@@ -20970,14 +21179,15 @@ const buildList = f => {
         return `<img ${cls ? `class="${cls}" ` : ""}src="${zc26Logo(n)}" alt="" onerror="this.onerror=function(){this.onerror=null;this.src='${ZC1V1_SHIELD}'};this.src='escudo_logo/escudo-default.png'">`;
     }
     // Trofeos de cada cuenta de Brawl Stars -> probabilidad proporcional
-    const ZC1V1_TROPHIES = { "Ethanzs'10": 75379, "Blacknoirz": 70033, "_diedv": 40581, "mateotovarr997": 25134 };
+    let ZC1V1_TROPHIES = { "Ethanzs'10": 75379, "Blacknoirz": 70033, "_diedv": 40581, "mateotovarr997": 25134 };
     function zc1v1Prob(a, b) {
         const ta = ZC1V1_TROPHIES[a], tb = ZC1V1_TROPHIES[b];
         if (!ta || !tb) return null;
         const pa = Math.round(ta / (ta + tb) * 100);
         return { a: pa, b: 100 - pa };
     }
-    const ZC1V1_ALL = ZC1V1_FIXTURES.flatMap(d => d.matches.map(m => ({ d, m })));
+    let ZC1V1_NAME = "1vs1 Edición 5", ZC1V1_KO_ONLY = false;
+    let ZC1V1_ALL = ZC1V1_FIXTURES.flatMap(d => d.matches.map(m => ({ d, m })));
     function zc1v1Find(id) { return ZC1V1_ALL.find(x => x.m.id === id); }
     function zc1v1Tab(tab, ctx) {
         const x = zc1v1Find(ctx.id); if (!x) return "";
@@ -21009,7 +21219,7 @@ const buildList = f => {
         const formBlock = () => `<div class="zc26mm-stat-block"><div class="zc26mm-stat-title">Formación reciente</div><div class="zc26mm-stat-sub">Últimos 6 partidos</div>${[m.home, m.away].map(n => `<div class="zc26mm-form-row"><div class="zc26mm-form-team">${zc1v1Img(n, "zc26mm-form-logo")}<span class="zc26mm-form-name">${n}</span></div><div class="zc26mm-form-dots">${zc1v1Dots(st[n])}</div></div>`).join("")}</div>`;
         if (tab === "estadisticas") return m.tbd ? `<div class="zc26mm-more-empty">Estadísticas disponibles cuando se definan los finalistas.</div>` : formBlock() + probBlock();
         if (tab === "alineaciones") return players();
-        return line("Lugar", "Torneo virtual \"ZC26 1vs1\", manejado por el equipo del soporte")
+        return line("Lugar", "Torneo virtual \"" + ZC1V1_NAME + "\", manejado por el equipo del soporte")
             + line("Zona horaria", "Todos los horarios corresponden a la hora estándar regional")
             + zc26GeneralSection("Alineaciones", players())
             + (m.tbd ? "" : zc26GeneralSection("Estadísticas", formBlock() + probBlock()))
@@ -21033,7 +21243,7 @@ const buildList = f => {
             <div class="zc26mm-head"><div>
                 <div class="zc26mm-title">ZC26 <span class="zc26mm-title-sub">1vs1 · ${m.label}</span></div>
                 <div class="zc26mm-date">${ls ? ls.weekday + " " + ls.d + " de " + ls.monthName : d.day + " " + d.num + " de octubre"} · 2026</div>
-            </div><div class="zc26mm-tags"><span class="zc26mm-tag">1vs1 · Bo5</span><span class="zc26mm-status">${status}</span></div></div>
+            </div><div class="zc26mm-tags"><span class="zc26mm-tag">1vs1 · ${m.bo || "Bo5"}</span><span class="zc26mm-status">${status}</span></div></div>
             <div class="scoreboard zc26mm-scoreboard">
                 <div class="team"><div class="team-logo">${zc1v1Img(m.home)}</div><span class="team-name">${m.home}</span></div>
                 <div class="score-center">${num(r && r.h, win === "a")}<div class="match-status"><span class="status-badge">${status}</span><span class="status-date">${ls ? ls.date : d.num + "/10"}</span>${ls && !r ? `<span class="status-date">${ls.time}</span>` : ""}</div>${num(r && r.a, win === "h")}</div>
@@ -21070,7 +21280,7 @@ const buildList = f => {
             let last = null, rank = 0;
             el.innerHTML = rows.map((n, i) => {
                 if (map[n] !== last) { rank = i + 1; last = map[n]; }
-                return `<div class="wcstat-row"><span class="wcstat-rank">${rank}</span><span class="wcstat-logo">${zc1v1Img(n)}</span><span class="wcstat-who"><span class="wcstat-name">${zc26Esc(n)}</span><span class="wcstat-team">1vs1 ZC26</span></span><span class="wcstat-val">${map[n]}</span></div>`;
+                return `<div class="wcstat-row"><span class="wcstat-rank">${rank}</span><span class="wcstat-logo">${zc1v1Img(n)}</span><span class="wcstat-who"><span class="wcstat-name">${zc26Esc(n)}</span><span class="wcstat-team">${ZC1V1_NAME}</span></span><span class="wcstat-val">${map[n]}</span></div>`;
             }).join("");
         };
         fill("z1stEstelar", star);
@@ -21095,7 +21305,7 @@ const buildList = f => {
         const s = {};
         ZC1V1_PLAYERS.forEach(p => s[p] = { pj: 0, g: 0, p: 0, e: 0, pts: 0, sf: 0, sc: 0, ds: 0, form: [] });
         ZC1V1_FIXTURES.forEach(d => d.matches.forEach(m => {
-            const r = ZC1V1_RESULTS[m.id]; if (!r || m.tbd || m.leg === "final" || (leg && m.leg !== leg)) return;
+            const r = ZC1V1_RESULTS[m.id]; if (!r || m.tbd || (m.leg === "final" && !ZC1V1_KO_ONLY) || (leg && m.leg !== leg)) return;
             [[m.home, r.h, r.a], [m.away, r.a, r.h]].forEach(([t, f, c]) => {
                 const x = s[t]; x.pj++; x.sf += f; x.sc += c; x.ds = x.sf - x.sc;
                 if (f > c) { x.g++; x.pts += 3; x.form.push("w"); } else { x.p++; x.form.push("l"); }
@@ -21110,7 +21320,7 @@ const buildList = f => {
         const row = (n, sd) => `<div class="zcfx-team-row${win ? (win === sd ? " zcfx-row-win" : " zcfx-row-lose") : ""}">${logo(n)}<span class="zcfx-team-name">${n}</span></div>`;
         const ls = zc26LocalSchedule(day, m.time, zc26CountryCode);
         const scores = r ? `<div class="zcfx-scores"><span class="zcfx-score${win === "h" ? " zcfx-score-win" : ""}">${r.h}</span><span class="zcfx-score${win === "a" ? " zcfx-score-win" : ""}">${r.a}</span></div>` : "";
-        const date = r ? `<span class="zcfx-date-num zcfx-date-num-sm">${zc1v1IsPred(m.id) ? "Pred." : "Fin"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.date : ""}</span>` : `<span class="zcfx-date-num zcfx-date-num-sm">${ls ? ls.date : day.num + "/10"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.time : m.time}</span>`;
+        const date = r ? `<span class="zcfx-date-num zcfx-date-num-sm">${zc1v1IsPred(m.id) ? "Pred." : "Fin"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.date : (ZC1V1_KO_ONLY ? "22/10" : "")}</span>` : `<span class="zcfx-date-num zcfx-date-num-sm">${ls ? ls.date : day.num + "/10"}</span><span class="zcfx-date-month zcfx-date-time">${ls ? ls.time : m.time}</span>`;
         return `<div class="zcfx-card" data-zc1v1-match="${m.id}" role="button" tabindex="0" data-leg="${m.leg}" data-home="${m.home}" data-away="${m.away}" data-day="${day.day}" data-label="${m.label}"><span class="zcfx-group-badge">${m.label}</span><div class="zcfx-teams">${row(m.home, "h")}${row(m.away, "a")}</div>${scores}<span class="zcfx-divider"></span><div class="zcfx-date">${date}</div></div>`;
     }
     function zc1v1Day(day) {
@@ -21118,6 +21328,7 @@ const buildList = f => {
     }
     // Cuando termina la fase regular, 1.º-2.º juegan la Gran Final y 3.º-4.º el tercer puesto
     function zc1v1ResolveKO() {
+        if (ZC1V1_KO_ONLY) return;
         const reg = ZC1V1_ALL.filter(x => !x.m.tbd && x.m.leg !== "final");
         const fin = ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1].matches;
         const done = reg.length && reg.every(x => ZC1V1_RESULTS[x.m.id]);
@@ -21136,10 +21347,25 @@ const buildList = f => {
             ? `<div class="zcbracket-team is-tbd"><div class="zcbracket-team-logo"></div><span class="zcbracket-team-name">${n}</span></div>`
             : `<div class="zcbracket-team${win ? (win === sd ? " is-winner" : " is-loser") : ""}"><div class="zcbracket-team-logo">${zc1v1Img(n)}</div><span class="zcbracket-team-name">${n}</span>${r ? `<span class="zcbracket-team-score">${sc}</span>` : ""}</div>`;
         const ls = zc26LocalSchedule(ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1], m.time, zc26CountryCode);
-        return `<div class="zcbracket-match"${m.tbd ? "" : ` data-zc1v1-match="${m.id}" data-zcbr-home="${m.home}" data-zcbr-away="${m.away}"`}><div class="zcbracket-match-meta"><span>${ls ? ls.date + " · " + ls.time : "21/10 · " + m.time}</span><span class="zcbracket-status">${r ? (zc1v1IsPred(m.id) ? "Predicción" : "Finalizado") : "Próximo"}</span></div>${team(m.home, "h", r && r.h)}${team(m.away, "a", r && r.a)}</div>`;
+        return `<div class="zcbracket-match"${m.tbd ? "" : ` data-zc1v1-match="${m.id}" data-zcbr-home="${m.home}" data-zcbr-away="${m.away}"`}><div class="zcbracket-match-meta"><span>${ls ? ls.date + " · " + ls.time : (ZC1V1_KO_ONLY ? "22/10" : "21/10 · " + m.time)}</span><span class="zcbracket-status">${r ? (zc1v1IsPred(m.id) ? "Predicción" : "Finalizado") : "Próximo"}</span></div>${team(m.home, "h", r && r.h)}${team(m.away, "a", r && r.a)}</div>`;
     }
-    function zc1v1RenderKO() {
-        const br = document.getElementById("zc1v1Bracket"); if (!br) return;
+    function zc1v1E6Src() {
+        const day = n => ZC1V1_FIXTURES.find(d => d.day === n).matches.map(m => [m.home, m.away, m.id, ZC1V1_RESULTS[m.id] || null]);
+        const fin = day("Final");
+        return { data: { r16: day("Ronda 1"), qf: day("Ronda 2"), sf: day("Semifinal"), final: fin[0], third: fin[1] },
+                 titles: ["Ronda 1", "Ronda 2", "Semifinal", "Final"], subs: ["Bo2", "Bo2", "Bo2", "Bo3"], champ: "LCK | iamDiegx", date: "22/10" };
+    }
+    function zc1v1E6Draw() {
+        const el = document.getElementById("zc1v1E6Bracket"); if (!el || !ZC1V1_KO_ONLY) return;
+        if (!el.offsetWidth) { window._zcE6Pending = true; return; }   // oculto: se dibuja cuando se vea
+        window._zcE6Pending = false;
+        zc26RenderBracket(el, zc1v1E6Src());
+    }
+    (function () {
+        const o = document.getElementById("zc1v1E6Outer");
+        if (o && "IntersectionObserver" in window) new IntersectionObserver(es => { if (es.some(e => e.isIntersecting) && ZC1V1_KO_ONLY && (window._zcE6Pending || !document.getElementById("zc1v1E6Bracket").children.length)) zc1v1E6Draw(); }).observe(o);
+    })();
+    function zc1v1E5Render(br) {
         const fin = ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1].matches;
         br.innerHTML = `<div class="zcbracket-col"><div class="zcbracket-col-title">Gran final</div>${zc1v1BracketMatch(fin[0])}</div><div class="zcbracket-col"><div class="zcbracket-col-title">Tercer puesto</div>${zc1v1BracketMatch(fin[1])}</div>`;
         br.querySelectorAll(".zcbracket-col").forEach(function (col, i) {
@@ -21154,13 +21380,23 @@ const buildList = f => {
             });
         });
     }
+    function zc1v1RenderKO() {
+        const br = document.getElementById("zc1v1Bracket"); if (!br) return;
+        const fin = ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1].matches;
+        const o6 = document.getElementById("zc1v1E6Outer");
+        br.parentNode.style.display = ZC1V1_KO_ONLY ? "none" : "";
+        if (o6) o6.style.display = ZC1V1_KO_ONLY ? "" : "none";
+        if (ZC1V1_KO_ONLY) { zc1v1E6Draw(); return; }
+        zc1v1E5Render(br);
+    }
     function zc1v1Phase(p) {
         const t = document.getElementById("zc1v1PhaseTabs"); if (!t) return;
-        window._zc1v1Phase = p;
+        window._zc1v1Phase = p; window._zcPhaseKind = p;
         if (!t.children.length) t.innerHTML = `<button type="button" class="zcgrp-phase-tab" data-z1p="reg">Fase regular</button><button type="button" class="zcgrp-phase-tab" data-z1p="ko">Fase de eliminación directa</button>`;
         t.querySelectorAll("[data-z1p]").forEach(b => b.classList.toggle("active", b.dataset.z1p === p));
         document.getElementById("zc1v1PanelReg").style.display = p === "reg" ? "" : "none";
         document.getElementById("zc1v1PanelKo").style.display = p === "ko" ? "" : "none";
+        if (p === "ko" && ZC1V1_KO_ONLY) zc1v1E6Draw();
     }
     document.addEventListener("click", e => {
         const b = e.target.closest("[data-z1p]"); if (!b) return;
@@ -21168,11 +21404,12 @@ const buildList = f => {
     });
     function renderZc1v1() {
         zc1v1ResolveKO(); zc1v1RenderKO();
-        if (!document.querySelector("#zc1v1PhaseTabs .active")) zc1v1Phase("reg");
+        if (!document.querySelector("#zc1v1PhaseTabs .active")) zc1v1Phase(window._zc1v1Phase || "reg");
         const fx = document.getElementById("zc1v1Fixtures");
-        if (fx) fx.innerHTML = ZC1V1_FIXTURES.filter(d => !d.matches[0].tbd).map(zc1v1Day).join("") + zc1v1Day(ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1]);
+        if (fx) fx.innerHTML = ZC1V1_KO_ONLY ? ZC1V1_FIXTURES.map(zc1v1Day).join("") : ZC1V1_FIXTURES.filter(d => !d.matches[0].tbd).map(zc1v1Day).join("") + zc1v1Day(ZC1V1_FIXTURES[ZC1V1_FIXTURES.length - 1]);
         const tb = document.getElementById("zc1v1Table");
         if (!tb) return;
+        if (ZC1V1_KO_ONLY) { tb.innerHTML = '<div class="wcstat-empty">Esta edición no tuvo fase de grupos: se jugó solo por eliminación directa. El cuadro está en «Fase de eliminación directa».</div>'; return; }
         const st = zc1v1Standings();
         const cols = [["PJ", "pj"], ["G", "g"], ["E", "e"], ["P", "p"], ["Pts", "pts"], ["SF", "sf"], ["SC", "sc"], ["DS", "ds"]];
         const cc = c => "zcgrp-col-num" + (c === "Pts" ? " zcgrp-col-pts" : "");
@@ -21188,7 +21425,7 @@ const buildList = f => {
     // Si cambian el país/hora, se vuelve a pintar el calendario 1vs1
     try { const _rzf = renderZc26Fixtures; renderZc26Fixtures = function () { _rzf.apply(this, arguments); renderZc1v1(); }; } catch (e) {}
 
-    const ZC1V1_CANDS = [...ZC1V1_PLAYERS, "Gran final", "Ida", "Vuelta", ...ZC1V1_DAYS.map(d => d[0]), "Miércoles", ...[1, 2, 3, 4, 5, 6].map(n => "Jornada " + n)];
+    let ZC1V1_CANDS = [...ZC1V1_PLAYERS, "Gran final", "Ida", "Vuelta", ...ZC1V1_DAYS.map(d => d[0]), "Miércoles", ...[1, 2, 3, 4, 5, 6].map(n => "Jornada " + n)];
     function zc1v1ApplyFilters() {
         const inp = document.getElementById("zc26SearchInput");
         if (inp && inp.closest(".zc-search-wrap")) inp.closest(".zc-search-wrap").classList.toggle("has-value", !!inp.value);
@@ -21200,7 +21437,7 @@ const buildList = f => {
             let dv = false;
             d.querySelectorAll(".zcfx-card").forEach(c => {
                 const leg = c.dataset.leg;
-                const okF = f === "all" || (f === "FINAL" && leg === "final") || (f === "IDA" && leg === "ida") || (f === "VUELTA" && leg === "vuelta");
+                const okF = f === "all" || String(f).toLowerCase() === leg;
                 const hay = searchNorm([c.dataset.home, c.dataset.away, c.dataset.day, c.dataset.label, leg === "final" ? "gran final" : leg].join(" "));
                 const ok = okF && (!q || hay.includes(q));
                 c.style.display = ok ? "" : "none";
@@ -21219,16 +21456,17 @@ const buildList = f => {
     function zctBarHtml() {
         const list = ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start));
         const latest = zctLatest(), cur = list.find(t => t.id === zcTour);
-        return `<div class="zct-season zct-left"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Torneo<b>${cur ? cur.name : "—"}</b></button><div class="zct-season-menu" role="listbox">${list.map(t => `<button type="button" class="${t.id === zcTour ? "on" : ""}" data-zct-tour="${t.id}">${t.name}${t.id === latest ? " · Actual" : ""}</button>`).join("")}</div></div>`
+        return `<div class="zct-season zct-left"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Torneo<b>${cur ? cur.name : "—"}</b></button><div class="zct-season-menu" role="listbox">${list.map(t => `<button type="button" class="${t.id === zcTour ? "on" : ""}" data-zct-tour="${t.id}">${t.name}${t.id === latest && !t.noCurrent ? " · Actual" : ""}</button>`).join("")}</div></div>`
             + `<div class="zct-season"><button type="button" class="zct-season-btn" aria-haspopup="listbox">Temporada<b>${zcSeason}</b></button><div class="zct-season-menu" role="listbox">${ZC_SEASONS.map(x => `<button type="button" class="${x === zcSeason ? "on" : ""}" data-zct-season="${x}">${x}</button>`).join("")}</div></div>`;
     }
     function zctRenderCards() {
         const box = document.getElementById("zctCards"); if (!box) return;
         const latest = zctLatest();
-        box.innerHTML = zcSeason !== "2026" ? "" : ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start)).map(t => `<div class="zct-card"><div class="zct-card-top"><span class="zct-card-name">${t.name}</span><span class="zct-tag${t.status === "En curso" ? " live" : ""}">${t.id === latest ? "Actual · " : ""}${t.status}</span></div><div class="zct-card-meta">${t.meta}<br>${t.note}</div><div class="zct-card-btns"><button type="button" data-zct-go="zc26" data-zct-tour="${t.id}">Ver partidos</button><button type="button" data-zct-go="group" data-zct-tour="${t.id}">Ver posiciones</button></div></div>`).join("");
+        box.innerHTML = zcSeason !== "2026" ? "" : ZC_TOURNAMENTS.filter(t => t.season === zcSeason).sort((a, b) => b.start.localeCompare(a.start)).map(t => `<div class="zct-card"><div class="zct-card-top"><span class="zct-card-name">${t.name}</span><span class="zct-tag${t.status === "En curso" ? " live" : ""}">${t.id === latest && !t.noCurrent ? "Actual · " : ""}${t.status}</span></div><div class="zct-card-meta">${t.meta}<br>${t.note}</div><div class="zct-card-btns"><button type="button" data-zct-go="zc26" data-zct-tour="${t.id}">Ver partidos</button><button type="button" data-zct-go="group" data-zct-tour="${t.id}">Ver posiciones</button></div></div>`).join("");
     }
     function zctApply() {
-        const has = zcSeason === "2026", one = zcTour === "1v1";
+        const has = zcSeason === "2026", one = zcTour === "1v1" || zcTour === "1v1e6";
+        if (one && has) { zc1v1Use(zcTour); renderZc1v1(); zc1v1RenderStats(); }
         document.body.classList.toggle("zc-tour-1v1", one && has);
         document.querySelectorAll(".zct-bar").forEach(b => { b.innerHTML = zctBarHtml(); if (b.parentNode && b.parentNode.lastElementChild !== b) b.parentNode.appendChild(b); });
         ["zc26", "group", "wc-stats"].forEach(id => {
@@ -21252,8 +21490,8 @@ const buildList = f => {
         if (si) { if (!si.dataset.ph3) si.dataset.ph3 = si.placeholder; si.placeholder = (one && has) ? "Buscar jugador, jornada o día..." : si.dataset.ph3; si.value = ""; }
         applyZc26Filters();
         // Al cambiar de torneo se restaura la última fase que se tenía seleccionada en ese torneo
-        if (one && has) { if (typeof zc1v1Phase === "function") zc1v1Phase(window._zc1v1Phase || "reg"); }
-        else if (has && window.zcgrpSetPhase) window.zcgrpSetPhase(window._zcgrpPhase || "groups", true);
+        if (one && has) { if (typeof zc1v1Phase === "function") zc1v1Phase(window._zcPhaseKind || window._zc1v1Phase || "reg"); }
+        else if (has && window.zcgrpSetPhase) window.zcgrpSetPhase(window._zcPhaseKind ? (window._zcPhaseKind === "ko" ? "knockout" : "groups") : (window._zcgrpPhase || "groups"), true);
     }
     function zctGo(sec) {
         if (typeof applySectionFilter === "function") { applySectionFilter(sec); setActiveSectionTab(sec); }
@@ -21275,6 +21513,45 @@ const buildList = f => {
         if (tr) { zcTour = tr.dataset.zctTour; zcPlaySound("click"); zctApply(); }
         if (go) zctGo(go.dataset.zctGo);
     });
+
+    // ===== 1vs1 Edición 6 · eliminación directa (sin fase de grupos) =====
+    const ZC1V1_ED5 = { name: "1vs1 Edición 5", koOnly: false, players: ZC1V1_PLAYERS, fixtures: ZC1V1_FIXTURES, results: ZC1V1_RESULTS, official: ZC1V1_OFFICIAL, ko: ZC1V1_KO_PRED, trophies: ZC1V1_TROPHIES, cands: ZC1V1_CANDS };
+    const ZC1V1_E6_MATCHES = [
+        ["Ronda 1", "r1", "Bo2", [["LCK | iamDiegx", 2, "Samuel", 0], ["Javi", 0, "POS | Andres", 2], ["l.messi", 2, "Robert", 1], ["Rebeca.A", 2, "Facuslito", 0], ["BE | Heritage", 2, "g.m.v", 0], ["PizzaGOD", 2, "Carlos=rip", 0], ["Aura Enzo", 2, "jose", 0], ["leønardø", 2, "Plazavea:p", 0]]],
+        ["Ronda 2", "r2", "Bo2", [["LCK | iamDiegx", 2, "POS | Andres", 0], ["l.messi", 2, "Rebeca.A", 0], ["BE | Heritage", 2, "PizzaGOD", 0], ["Aura Enzo", 0, "leønardø", 2]]],
+        ["Semifinal", "sf", "Bo2", [["LCK | iamDiegx", 2, "l.messi", 0], ["BE | Heritage", 2, "leønardø", 0]]],
+        ["Final", "final", "Bo3", [["LCK | iamDiegx", 3, "BE | Heritage", 0, "Gran Final"], ["l.messi", 3, "leønardø", 1, "Tercer puesto"]]]
+    ];
+    const ZC1V1_E6_RES = {}, ZC1V1_E6_OFF = new Set();
+    let _e6n = 0;
+    const ZC1V1_E6_FIX = ZC1V1_E6_MATCHES.map(([day, leg, bo, ms]) => ({
+        day: day, num: 22, month: "OCT", phase: "",
+        matches: ms.map(m => { const id = "E" + (++_e6n); ZC1V1_E6_RES[id] = { h: m[1], a: m[3] }; ZC1V1_E6_OFF.add(id); return { leg: leg, id: id, bo: bo, label: (m[4] || day) + " · " + bo, home: m[0], away: m[2], time: "" }; })
+    }));
+    const ZC1V1_E6_PLAYERS = []; ZC1V1_E6_FIX[0].matches.forEach(m => { ZC1V1_E6_PLAYERS.push(m.home, m.away); });
+    const ZC1V1_ED6 = { name: "1vs1 Edición 6", koOnly: true, players: ZC1V1_E6_PLAYERS, fixtures: ZC1V1_E6_FIX, results: ZC1V1_E6_RES, official: ZC1V1_E6_OFF, ko: {}, trophies: {},
+        cands: [...ZC1V1_E6_PLAYERS, "Gran final", "Tercer puesto", "Ronda 1", "Ronda 2", "Semifinal", "Final"] };
+    let _zc1v1Cur = null, _zc1v1FilterHtml = null, _zc1v1SubHtml = null, _zc1v1UpdHtml = null, _zc1v1GrpSub = null;
+    function zc1v1Use(id) {
+        const E = id === "1v1e6" ? ZC1V1_ED6 : ZC1V1_ED5;
+        const flt = document.getElementById("zc1v1Filter"), sub = document.getElementById("zc1v1MatchSub"), upd = document.querySelector("#zc1v1Matches .section-updated"), gs = document.querySelector("#zc1v1Group > .section-subtitle");
+        if (_zc1v1FilterHtml === null && flt) { _zc1v1FilterHtml = flt.innerHTML; _zc1v1SubHtml = sub ? sub.innerHTML : ""; _zc1v1UpdHtml = upd ? upd.innerHTML : ""; _zc1v1GrpSub = gs ? gs.innerHTML : ""; }
+        if (_zc1v1Cur === E) return;
+        const first = _zc1v1Cur === null;
+        _zc1v1Cur = E;
+        ZC1V1_PLAYERS = E.players; ZC1V1_FIXTURES = E.fixtures; ZC1V1_RESULTS = E.results; ZC1V1_OFFICIAL = E.official; ZC1V1_KO_PRED = E.ko; ZC1V1_TROPHIES = E.trophies; ZC1V1_CANDS = E.cands;
+        ZC1V1_ALL = ZC1V1_FIXTURES.flatMap(d => d.matches.map(m => ({ d, m })));
+        ZC1V1_NAME = E.name; ZC1V1_KO_ONLY = E.koOnly;
+        if (flt) flt.innerHTML = E.koOnly
+            ? ["all:Todos:#ffffff", "r1:Ronda 1:#22c55e", "r2:Ronda 2:#3b82f6", "sf:Semifinal:#a855f7", "final:Final:#38bdf8"].map(s => { const p = s.split(":"); return `<button type="button" class="am-filter-btn${p[0] === "all" ? " active" : ""}" data-zc1v1-filter="${p[0]}" style="--gc:${p[2] === "#ffffff" ? "#ffffff" : p[2]}"><span class="zcg-txt">${p[1]}</span></button>`; }).join("")
+            : _zc1v1FilterHtml;
+        if (sub) sub.innerHTML = E.koOnly ? "Encuentros oficiales · Eliminación directa" : _zc1v1SubHtml;
+        if (upd) upd.innerHTML = E.koOnly ? "Calendario 1vs1 · Ronda 1, Ronda 2 y Semifinal al mejor de 2 · Final al mejor de 3" : _zc1v1UpdHtml;
+        if (gs) gs.innerHTML = E.koOnly ? "Edición sin fase de grupos · solo eliminación directa" : _zc1v1GrpSub;
+        window._zc1v1Phase = window._zcPhaseKind || window._zc1v1Phase || (E.koOnly ? "ko" : "reg");
+        if (!first) { const tabs = document.getElementById("zc1v1PhaseTabs"); if (tabs && tabs.children.length && typeof zc1v1Phase === "function") zc1v1Phase(window._zc1v1Phase); }
+    }
+    zc1v1Use(zcTour);
     renderZc1v1();
     zc1v1RenderStats();
     zctApply();
@@ -21488,6 +21765,7 @@ const buildList = f => {
     window.zcgrpSetPhase = function (phase, silent) {
         phase = phase === "knockout" ? "knockout" : "groups";
         window._zcgrpPhase = phase;
+        if (!silent) window._zcPhaseKind = phase === "knockout" ? "ko" : "reg";
         document.querySelectorAll("#zcgrpPhaseTabs [data-zcgrp-phase]").forEach(t => t.classList.toggle("active", t.dataset.zcgrpPhase === phase));
         const groupsPanel = document.getElementById("zcgrpGroupsPanel");
         const knockoutPanel = document.getElementById("zcgrpKnockoutPanel");
@@ -21650,13 +21928,21 @@ const buildList = f => {
             canvas.appendChild(target);
             void canvas.offsetWidth;
             const landscape = window.innerWidth > window.innerHeight;
+            const is1v1 = window._zcBrzMode === "1v1";
+            if (is1v1 && !ZC1V1_KO_ONLY) {   // 1vs1 Edición 5: Gran final + Tercer puesto
+                target.style.padding = "48px 40px 14px 14px";
+                zc1v1E5Render(target);
+                contentW = target.scrollWidth; contentH = target.scrollHeight;
+                return;
+            }
+            const src1 = is1v1 ? zc1v1E6Src() : undefined;
             if (landscape) {
                 // Horizontal (también en escritorio): se reparten las cajas y las líneas para
                 // llenar la pantalla. Primero se mide la altura compacta y, según la proporción
                 // real de la pantalla, se calcula el ancho de columnas y separación.
                 target.classList.add("zcbr-compact");
                 target.style.padding = "48px 130px 14px 14px";
-                zc26RenderBracket(target);
+                zc26RenderBracket(target, src1);
                 const h0 = target.scrollHeight;
                 const aspect = stage.clientWidth / Math.max(1, stage.clientHeight);
                 const wantW = h0 * aspect;
@@ -21665,9 +21951,9 @@ const buildList = f => {
                 const gapPx = Math.round(clamp(cw * 0.2, 36, 120));
                 target.style.setProperty("--zcbr-col-w", Math.round(cw) + "px");
                 target.style.setProperty("--zcbr-gap", gapPx + "px");
-                zc26RenderBracket(target);
+                zc26RenderBracket(target, src1);
             } else {
-                zc26RenderBracket(target);
+                zc26RenderBracket(target, src1);
             }
             contentW = target.scrollWidth;
             contentH = target.scrollHeight;
@@ -21697,7 +21983,7 @@ const buildList = f => {
                 if (!box) return;
                 const home = box.dataset.zcbrHome || "";
                 const away = box.dataset.zcbrAway || "";
-                if (!home || !away) return;
+                if (!home || !away || box.dataset.zc1v1Match) return;
                 // El menú del partido se abre encima del bracket completo (sin cerrarlo).
                 zc26GoToBracketMatch(home, away);
             });
@@ -21778,7 +22064,9 @@ const buildList = f => {
             } catch (_) {}
             zcPlaySound("clicksalir");
         }
-        openBtn.addEventListener("click", openOverlay);
+        openBtn.addEventListener("click", () => { window._zcBrzMode = null; openOverlay(); });
+        const zb1 = document.getElementById("zc1v1ZoomBtn");
+        if (zb1) zb1.addEventListener("click", () => { window._zcBrzMode = "1v1"; openOverlay(); });
         closeBtn.addEventListener("click", closeOverlay);
         overlay.addEventListener("keydown", (e) => { if (e.key === "Escape") closeOverlay(); });
         document.addEventListener("keydown", (e) => {
