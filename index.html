@@ -213,6 +213,8 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .site-header-title-img.site-header-title-svg { height: 30px; width: auto; max-width: 100%; }
+        @media (min-width: 1024px) { .site-header-title-img.site-header-title-svg { height: 36px; } }
         .site-header-title-img {
             height: 46px;
             width: auto;
@@ -6711,6 +6713,22 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             font-size: 0.55rem;
             line-height: 1.6;
         }
+        .footer-sponsors {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 14px 24px;
+            padding: 6px 0 12px;
+            margin: 0 0 8px;
+        }
+        .footer-sponsors .footer-credits-title { flex: 0 0 100%; text-align: center; margin-bottom: -4px; }
+        .footer-sponsors img {
+            height: 56px;
+            width: auto;
+            max-width: 124px;
+            object-fit: contain;
+        }
         .footer-terms-title {
             color: #999999;
             font-weight: 700;
@@ -7897,6 +7915,9 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             transform: translateY(-105%); transition: transform 0.28s cubic-bezier(.22,.8,.25,1);
         }
         .tl-secret.show { transform: translateY(0); }
+        /* Tier list dentro de la novedad */
+        .novedad-detail-body #home-tierlist { margin-top: 6px; }
+        .novedad-detail-body .tl-top { margin: 0 0 12px 0; padding: 0; border-radius: 6px; overflow: hidden; }
         .tl-board { display: flex; flex-direction: column; gap: 2px; border-radius: 6px; overflow: hidden; background: #000; }
         .tl-row { display: flex; align-items: stretch; background: #15171b; }
         .tl-label {
@@ -10147,12 +10168,11 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 </script>
 
 <!-- Secreto: Absolute Cinema (tier al principio de TODA la página; aparece al llevar un equipo arriba del todo y se queda) -->
-<div class="tl-top tl-cinema" id="tlCinema" hidden><div class="tl-top-inner"><div class="tl-row"><div class="tl-label tl-ac"><span>Absolute</span><span>Cinema</span></div><div class="tl-zone" data-tl-zone="cinema"></div></div></div></div>
 
 <div class="site-header" id="top">
     <div class="site-header-inner">
         <div class="site-header-brand">
-            <img src="Untitled257.jpg" alt="ZC26 ESPORTS" class="site-header-title-img">
+            <svg class="site-header-title-img site-header-title-svg" viewBox="-4 -4 641.3 108" role="img" aria-label="ZC ESPORTS" xmlns="http://www.w3.org/2000/svg"><g transform="translate(21.3 0) skewX(-12)"><path transform="translate(0.0 0)" fill="#fff" d="M0 0H62V17L26 83H62V100H0V83L36 17H0Z"/><path transform="translate(70.0 0)" fill="none" stroke="#fff" stroke-width="22" d="M52 36V29Q52 10 30 10Q8 10 8 29V71Q8 90 30 90Q52 90 52 71V62"/><path transform="translate(138.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M0 0H60V17H21V41H54V58H21V83H62V100H0Z"/><path transform="translate(208.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M60 33H40V28Q40 20 30 20Q20 20 20 28Q20 36 32 42L46 49Q60 57 60 73Q60 100 30 100Q0 100 0 73V67H20V72Q20 80 30 80Q40 80 40 72Q40 65 28 59L14 52Q0 44 0 27Q0 0 30 0Q60 0 60 27Z"/><path transform="translate(276.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M0 0H36Q60 0 60 24V41Q60 65 36 65H22V100H0ZM22 18V47H33Q38 47 38 41V24Q38 18 33 18Z"/><path transform="translate(344.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M26 0H34Q60 0 60 26V74Q60 100 34 100H26Q0 100 0 74V26Q0 0 26 0ZM30 18Q22 18 22 26V74Q22 82 30 82Q38 82 38 74V26Q38 18 30 18Z"/><path transform="translate(412.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M0 0H36Q60 0 60 24V40Q60 57 46 62L62 100H39L26 65H22V100H0ZM22 18V47H33Q38 47 38 41V24Q38 18 33 18Z"/><path transform="translate(482.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M0 0H62V18H42V100H20V18H0Z"/><path transform="translate(552.0 0)" fill="#000" fill-rule="evenodd" stroke="#fff" stroke-width="3.6" stroke-linejoin="miter" d="M60 33H40V28Q40 20 30 20Q20 20 20 28Q20 36 32 42L46 49Q60 57 60 73Q60 100 30 100Q0 100 0 73V67H20V72Q20 80 30 80Q40 80 40 72Q40 65 28 59L14 52Q0 44 0 27Q0 0 30 0Q60 0 60 27Z"/></g></svg>
         </div>
         <button type="button" class="site-search-btn" id="siteSearchBtn" aria-label="Buscar" title="Buscar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
@@ -10169,10 +10189,10 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         <a href="#ultimo-partido" class="section-tab" data-section-tab="ultimo-partido" data-i18n="nav.lastMatch" data-i18n-default="Último partido importa">Último partido importa</a>
         <a href="#ranking" class="section-tab" data-section-tab="ranking" data-i18n="nav.ranking" data-i18n-default="Ranking">Ranking</a>
         <a href="#contribuciones" class="section-tab" data-section-tab="contribuciones" data-i18n="nav.partners" data-i18n-default="Partners">Partners</a>
-        <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
         <a href="#zc26" class="section-tab section-tab-zc26" data-section-tab="zc26" data-i18n="nav.zc26" data-i18n-default="Partidos">Partidos</a>
         <a href="#group" class="section-tab section-tab-zc26" data-section-tab="group" data-i18n="nav.group" data-i18n-default="Posiciones">Posiciones</a>
         <a href="#wc-stats" class="section-tab section-tab-zc26" data-section-tab="wc-stats" data-i18n="nav.wcStats" data-i18n-default="Estadísticas">Estadísticas</a>
+        <a href="#salon-fama" class="section-tab" data-section-tab="salon-fama" data-i18n="nav.hallOfFame" data-i18n-default="Salón de la fama">Salón de la fama</a>
     </div>
 </div>
 
@@ -10266,7 +10286,6 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             </div></div>
         </div>
         <a href="#contribuciones" class="mobile-menu-link" data-menu-link data-i18n="nav.partners.upper" data-i18n-default="PARTNERS">PARTNERS</a>
-        <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
         <a href="#zc26" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.zc26.upper" data-i18n-default="PARTIDOS">PARTIDOS</a>
         <div class="mm-group mm-group-zc" data-mm-group>
             <div class="mm-row">
@@ -10279,6 +10298,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             </div></div>
         </div>
         <a href="#wc-stats" class="mobile-menu-link mobile-menu-link-zc26" data-menu-link data-i18n="nav.wcStats.upper" data-i18n-default="ESTADÍSTICAS">ESTADÍSTICAS</a>
+        <a href="#salon-fama" class="mobile-menu-link" data-menu-link data-i18n="nav.hallOfFame.upper" data-i18n-default="SALON DE LA FAMA">SALON DE LA FAMA</a>
         <a href="#creditos" class="mobile-menu-link" data-menu-link data-i18n="nav.credits.upper" data-i18n-default="CREDITOS">CREDITOS</a>
     </div>
     <div class="mobile-menu-bottom">
@@ -10355,21 +10375,30 @@ body.zc-tour-1v1 #wcPred{display:none!important}
         <div class="home-section" id="home-novedades">
             <div class="novedades-card" id="novedadesCard">
                 <div class="novedades-track" id="novedadesTrack">
-                    <div class="novedad-slide" data-novedad-index="6">
-                        <div class="novedad-img-wrap"><img src="news/novedades5oct.png" alt="ZC26 ESPORTS"></div>
-                        <div class="novedad-body">
-                            <div class="novedad-tag">ZC26 ESPORTS™</div>
-                            <div class="novedad-text">TORNEO 1VS1 Edición México: Cómo participar y más</div>
-                            <button type="button" class="novedad-more-btn" data-open-novedad="5">Más info.</button>
-                        </div>
-                    </div>
-
                     <div class="novedad-slide" data-novedad-index="5">
                         <div class="novedad-img-wrap"><img src="news/novedades4oct.png" alt="ZC26 ESPORTS"></div>
                         <div class="novedad-body">
                             <div class="novedad-tag">ZC26 ESPORTS™</div>
                             <div class="novedad-text">UNORTHODOX SE CONSAGRA CAMPEÓN DEL ZC26 TRAS VENCER AL CONJUNTO DE OMEN NOCTE</div>
                             <button type="button" class="novedad-more-btn" data-open-novedad="4">Más info.</button>
+                        </div>
+                    </div>
+
+                    <div class="novedad-slide" data-novedad-index="7">
+                        <div class="novedad-img-wrap"><img src="news/novedades28oct.png" alt="ZC26 ESPORTS"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">ZC26 ESPORTS™</div>
+                            <div class="novedad-text">Tier List de equipos: ordena a los equipos del torneo a tu manera</div>
+                            <button type="button" class="novedad-more-btn" data-open-novedad="6">Más info.</button>
+                        </div>
+                    </div>
+
+                    <div class="novedad-slide" data-novedad-index="6">
+                        <div class="novedad-img-wrap"><img src="news/novedades5oct.png" alt="ZC26 ESPORTS"></div>
+                        <div class="novedad-body">
+                            <div class="novedad-tag">ZC26 ESPORTS™</div>
+                            <div class="novedad-text">TORNEO 1VS1 Edición México: Cómo participar y más</div>
+                            <button type="button" class="novedad-more-btn" data-open-novedad="5">Más info.</button>
                         </div>
                     </div>
 
@@ -10515,33 +10544,6 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             <div class="tv-row" id="tvProximosRow"></div>
         </div>
 
-        <!-- ===================== TIER LIST DE EQUIPOS (final del Home) ===================== -->
-        <div class="home-section" id="home-tierlist">
-            <div class="tl-heading">Tier List de equipos</div>
-            <div class="tl-sub">Arrastra los logos y ordena a todos los equipos del torneo en S, A, B o C según tu criterio.</div>
-            <div class="tl-capture" id="tlCapture">
-                <div class="tl-cap-title">ZC26 · Tier List de equipos</div>
-                <div class="tl-board" id="tlBoard">
-                    <div class="tl-row"><div class="tl-label tl-s">S</div><div class="tl-zone" data-tl-zone="S"></div></div>
-                    <div class="tl-row"><div class="tl-label tl-a">A</div><div class="tl-zone" data-tl-zone="A"></div></div>
-                    <div class="tl-row"><div class="tl-label tl-b">B</div><div class="tl-zone" data-tl-zone="B"></div></div>
-                    <div class="tl-row"><div class="tl-label tl-c">C</div><div class="tl-zone" data-tl-zone="C"></div></div>
-                    <div class="tl-row"><div class="tl-label tl-d">D</div><div class="tl-zone" data-tl-zone="D"></div></div>
-                </div>
-            </div>
-            <div class="tl-pool-head"><span>Equipos</span><span class="tl-count" id="tlCount"></span></div>
-            <div class="tl-pool tl-zone" id="tlPool" data-tl-zone="pool"></div>
-            <div class="tl-done" id="tlDone" hidden>
-                <div class="tl-done-title" id="tlDoneTitle">¡Tier list completa!</div>
-                <div class="tl-done-text" id="tlDoneText">Descárgala como imagen y luego compártela en el Discord.</div>
-                <div class="tl-done-actions">
-                    <button type="button" class="tl-done-btn" id="tlDownload">Descargar imagen</button>
-                    <a class="tl-done-btn tl-discord" id="tlDiscord" href="https://discord.com/channels/1399983371047927861/1400696614766510191" target="_blank" rel="noopener" hidden>Ir al Discord</a>
-                </div>
-            </div>
-            <button type="button" class="tl-reset" id="tlReset">Reiniciar y mezclar</button>
-        </div>
-
     </div>
 
     <!-- ===================== STORY VIEWER OVERLAY ===================== -->
@@ -10601,6 +10603,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <div class="novedad-detail-related-list" id="novedadDetailRelatedList"></div>
             </div>
             <div class="novedad-detail-credits site-footer-text">
+<div class="footer-sponsors"><span class="footer-credits-title">Patrocinadores</span><img src="escudo_logo/Leviatan-esports.png" alt="Leviatan Esports"><img src="escudo_logo/POS.png" alt="POS"></div>
 <div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
@@ -10608,13 +10611,13 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página, como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil, por favor contáctanos a través de los medios oficiales indicados arriba.</p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
                 <div class="footer-credits">
-                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
-                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <p class="copy-line">© 2021, 2026 ZCESPORTS™</p>
                 <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
@@ -10731,18 +10734,19 @@ body.zc-tour-1v1 #wcPred{display:none!important}
                 <p class="novedad-detail-note"><a href="https://inside.fifa.com/fifa-rankings/world-ranking/procedure-men" target="_blank" rel="noopener">inside.fifa.com/fifa-rankings/world-ranking/procedure-men</a></p>
             </div>
             <div class="novedad-detail-credits site-footer-text">
+<div class="footer-sponsors"><span class="footer-credits-title">Patrocinadores</span><img src="escudo_logo/Leviatan-esports.png" alt="Leviatan Esports"><img src="escudo_logo/POS.png" alt="POS"></div>
 <div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
                 <div class="footer-credits">
-                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
-                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <p class="copy-line">© 2021, 2026 ZCESPORTS™</p>
                 <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
@@ -10761,18 +10765,19 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             <div class="section-updated" id="rankingNovedadDetailDate" style="text-align:left;margin:-10px 0 16px;"></div>
             <div class="novedad-detail-body" id="rankingNovedadDetailBody"></div>
             <div class="novedad-detail-credits site-footer-text">
+<div class="footer-sponsors"><span class="footer-credits-title">Patrocinadores</span><img src="escudo_logo/Leviatan-esports.png" alt="Leviatan Esports"><img src="escudo_logo/POS.png" alt="POS"></div>
 <div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
                 <div class="footer-credits">
-                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
-                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <p class="copy-line">© 2021, 2026 ZCESPORTS™</p>
                 <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
@@ -10789,18 +10794,19 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             <div class="novedad-detail-title">Clasificación ZC26 - Últimas noticias</div>
             <div class="zcnr-all-grid" id="zcnrAllGrid"></div>
             <div class="novedad-detail-credits site-footer-text">
+<div class="footer-sponsors"><span class="footer-credits-title">Patrocinadores</span><img src="escudo_logo/Leviatan-esports.png" alt="Leviatan Esports"><img src="escudo_logo/POS.png" alt="POS"></div>
 <div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://youtube.com/@zc26esports?si=vi8ELFB0YEud51Li" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
                 <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
                 <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
                 <div class="footer-credits">
-                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep</span></div>
                     <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
+                    <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>KURE</span></div>
                 </div>
                 <p class="footer-terms-title">Términos de uso</p>
                 <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
-                <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+                <p class="copy-line">© 2021, 2026 ZCESPORTS™</p>
                 <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
             </div>
         </div>
@@ -11267,6 +11273,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
 
     <div class="site-footer" id="creditos">
         <div class="site-footer-text">
+<div class="footer-sponsors"><span class="footer-credits-title">Patrocinadores</span><img src="escudo_logo/Leviatan-esports.png" alt="Leviatan Esports"><img src="escudo_logo/POS.png" alt="POS"></div>
 <div class="footer-social"><span class="footer-social-title">Síguenos en</span><span class="footer-social-icons"><a href="https://discord.gg/jfDvXrQ2fu" target="_blank" rel="noopener" class="footer-social-link">Discord</a><a href="https://www.tiktok.com/@zc.esports" target="_blank" rel="noopener" class="footer-social-link">TikTok</a><a href="https://www.youtube.com/@ZC26eSports" target="_blank" rel="noopener" class="footer-social-link">YouTube</a><a href="https://www.paypal.me/ZCESportsPayPal" target="_blank" rel="noopener" class="footer-social-link">PayPal</a><a href="mailto:zc26.esports.official@gmail.com" class="footer-social-link">Gmail</a></span></div>
 <p>ZC26 es una organización independiente dedicada a la creación, desarrollo y gestión de torneos y eventos competitivos de Brawl Stars. Este evento no está afiliado, patrocinado ni respaldado por Supercell. Todos los nombres, marcas registradas, personajes e imágenes del juego pertenecen exclusivamente a sus respectivos creadores y propietarios.</p>
             <p>Organización del Evento: ZC26 BSC (Brawl Stars Championship)<br>Contacto comercial y soporte: <a href="mailto:zc26.esports.official@gmail.com">zc26.esports.official@gmail.com</a></p>
@@ -11274,18 +11281,49 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             <p>Si deseas solicitar alguna modificación sobre tu identidad dentro de la página, como corrección de nombre, región, fecha de nacimiento, apodo, redes sociales u otro dato asociado a tu perfil, por favor contáctanos a través de los medios oficiales indicados arriba.</p>
             <p class="footer-brand-names">ZC ESPORTS · ZC26 · BSC (Brawl Stars Championship)</p>
             <div class="footer-credits">
-                <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep<br>itsZephyra</span></div>
+                <div class="footer-credits-group"><span class="footer-credits-title">PARTNERS</span><span class="footer-credits-names">MoonSheep</span></div>
                 <div class="footer-credits-group"><span class="footer-credits-title">CASTERS</span><span class="footer-credits-names">Goldship<br>Dankausa</span></div>
-                <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>Lilith<br>FCSteven<br>KURE</span></div>
+                <div class="footer-credits-group"><span class="footer-credits-title">STAFF</span><span class="footer-credits-names">itsZephyra<br>KURE</span></div>
             </div>
             <p class="footer-terms-title">Términos de uso</p>
             <p>Todo el contenido publicado en esta página se ofrece de forma gratuita e informativa. No está permitido redistribuir, copiar ni reutilizar el contenido original sin autorización expresa de ZC26. La información se proporciona sin garantías y puede actualizarse sin previo aviso.</p>
-            <p class="copy-line">Copyrights © ZC ESPORTS 2026</p>
+            <p class="copy-line">© 2021, 2026 ZCESPORTS™</p>
             <div class="footer-end-logo"><img src="Untitled227_20260812131942.png" alt="ZC26"></div>
         </div>
     </div>
 
     <div class="version-tag">Versión 11.0.19.101</div>
+
+</div>
+
+<div id="tlHolder" style="display:none">
+<div class="tl-top tl-cinema" id="tlCinema" hidden><div class="tl-top-inner"><div class="tl-row"><div class="tl-label tl-ac"><span>Absolute</span><span>Cinema</span></div><div class="tl-zone" data-tl-zone="cinema"></div></div></div></div>
+        <!-- ===================== TIER LIST DE EQUIPOS (final del Home) ===================== -->
+        <div class="home-section" id="home-tierlist">
+            <div class="tl-heading">Tier List de equipos</div>
+            <div class="tl-sub">Arrastra los logos y ordena a todos los equipos del torneo en S, A, B o C según tu criterio.</div>
+            <div class="tl-capture" id="tlCapture">
+                <div class="tl-cap-title">ZC26 · Tier List de equipos</div>
+                <div class="tl-board" id="tlBoard">
+                    <div class="tl-row"><div class="tl-label tl-s">S</div><div class="tl-zone" data-tl-zone="S"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-a">A</div><div class="tl-zone" data-tl-zone="A"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-b">B</div><div class="tl-zone" data-tl-zone="B"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-c">C</div><div class="tl-zone" data-tl-zone="C"></div></div>
+                    <div class="tl-row"><div class="tl-label tl-d">D</div><div class="tl-zone" data-tl-zone="D"></div></div>
+                </div>
+            </div>
+            <div class="tl-pool-head"><span>Equipos</span><span class="tl-count" id="tlCount"></span></div>
+            <div class="tl-pool tl-zone" id="tlPool" data-tl-zone="pool"></div>
+            <div class="tl-done" id="tlDone" hidden>
+                <div class="tl-done-title" id="tlDoneTitle">¡Tier list completa!</div>
+                <div class="tl-done-text" id="tlDoneText">Descárgala como imagen y luego compártela en el Discord.</div>
+                <div class="tl-done-actions">
+                    <button type="button" class="tl-done-btn" id="tlDownload">Descargar imagen</button>
+                    <a class="tl-done-btn tl-discord" id="tlDiscord" href="https://discord.com/channels/1399983371047927861/1400696614766510191" target="_blank" rel="noopener" hidden>Ir al Discord</a>
+                </div>
+            </div>
+            <button type="button" class="tl-reset" id="tlReset">Reiniciar y mezclar</button>
+        </div>
 
 </div>
 
@@ -14668,6 +14706,24 @@ body.zc-tour-1v1 #wcPred{display:none!important}
     }
     const TROPHIES = [
         {
+            team: "LEGENDS OF KIGNS (LOK)", logo: "escudo_logo/escudo-default.png",
+            champDate: "Campeón 13-11-2021",
+            tourney: "GRAN FINAL",
+            desc: "LEGENDS OF KIGNS (LOK) se coronó campeón el 13/11/21 con un marcador final de 2-0."
+        },
+        {
+            team: "TRUENO'S VERSIÓN", logo: "escudo_logo/escudo-default.png",
+            champDate: "Campeón 14-01-2022",
+            tourney: "GRAN FINAL",
+            desc: "TRUENO'S VERSIÓN se coronó campeón el 14/01/22 con un marcador final de 2-1."
+        },
+        {
+            team: "OLYMPUS ESPORTS", logo: "escudo_logo/escudo-default.png",
+            champDate: "Campeón 15-09-2022",
+            tourney: "GRAN FINAL",
+            desc: "OLYMPUS ESPORTS se coronó campeón el 15/09/22 con un marcador final de 3-1."
+        },
+        {
             team: "TEAM RADIANTE", logo: "escudo_logo/escudo-default.png",
             champDate: "Campeón 07-02-2023",
             tourney: "ZC23 GRAND FINAL",
@@ -18021,6 +18077,21 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             if (drag && drag.active) e.preventDefault();   // ya arrastrando: la página no debe moverse
         }, { passive: false });
         const tlRoot = document.getElementById("home-tierlist");
+        const tlHolder = document.getElementById("tlHolder");
+        // La tier list vive en la novedad: se monta en el detalle al abrirlo y vuelve al contenedor oculto al cambiar de novedad
+        window.zcTierStash = function () {
+            const cin = document.getElementById("tlCinema");
+            if (cin && cin.parentNode !== tlHolder) tlHolder.appendChild(cin);
+            if (tlRoot.parentNode !== tlHolder) tlHolder.appendChild(tlRoot);
+        };
+        window.zcTierMount = function (host) {
+            const cin = document.getElementById("tlCinema");
+            if (cin) host.appendChild(cin);
+            host.appendChild(tlRoot);
+        };
+        const tlScroller = () => tlRoot.closest(".novedad-detail");
+        const tlScrollBy = (dy) => { const sc = tlScroller(); if (sc) sc.scrollTop += dy; else window.scrollBy({ top: dy, behavior: "instant" }); };
+        const tlAtTop = () => { const sc = tlScroller(); return (sc ? sc.scrollTop : (window.scrollY || document.documentElement.scrollTop || 0)) <= 1; };
         tlRoot.addEventListener("selectstart", e => e.preventDefault());   // nada de seleccionar/copiar texto aquí
         tlRoot.addEventListener("dragstart", e => e.preventDefault());
         board.addEventListener("contextmenu", e => { if (e.target.closest(".tl-item")) e.preventDefault(); });
@@ -18086,7 +18157,7 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             cinemaRow.hidden = !(n > 0 || cinemaRow.dataset.on === "1" || (drag && drag.secret));
         }
         function updateSecret() {
-            const atTop = (window.scrollY || document.documentElement.scrollTop || 0) <= 1;
+            const atTop = tlAtTop();
             if (!drag.secret) {
                 if (atTop && drag.y <= 14) {            // literalmente arriba del todo de la página
                     drag.secret = true;
@@ -18127,8 +18198,8 @@ body.zc-tour-1v1 #wcPred{display:none!important}
             if (!drag || !drag.active) return;
             const m = 80, vh = window.innerHeight;
             const fast = drag.y < 24 ? 3 : 1;   // pegado al borde de arriba sube más rápido
-            if (drag.y < m) window.scrollBy({ top: -Math.ceil((m - drag.y) / 6) * fast, behavior: "instant" });
-            else if (drag.y > vh - m) window.scrollBy({ top: Math.ceil((drag.y - (vh - m)) / 6), behavior: "instant" });
+            if (drag.y < m) tlScrollBy(-Math.ceil((m - drag.y) / 6) * fast);
+            else if (drag.y > vh - m) tlScrollBy(Math.ceil((drag.y - (vh - m)) / 6));
             place();
             drag.raf = requestAnimationFrame(loop);
         }
@@ -26293,6 +26364,14 @@ const buildList = f => {
                     }
                 ]
             },
+            6: {
+                tag: "ZC26 ESPORTS™",
+                title: "Tier List de equipos: ordena a los equipos del torneo a tu manera",
+                hero: "news/novedades28oct.png",
+                date: "28 oct 2026",
+                summary: "Arrastra los logos y ordena a todos los equipos de la ZC26 en S, A, B, C o D según tu criterio. Al terminar, descarga la imagen y compártela en el Discord.",
+                tierlist: true
+            },
             5: {
                 tag: "ZC26 ESPORTS™",
                 title: "TORNEO 1VS1 Edición México: Cómo participar y más",
@@ -26468,6 +26547,7 @@ const buildList = f => {
             const data = NOVEDAD_DETAILS[index];
             if (!data) return;
             const wasActive = detailOverlay.classList.contains("active");
+            window.zcTierStash && window.zcTierStash(); // la tier list vuelve a su contenedor oculto antes de cambiar el cuerpo
             clearTimer(); // pausar el carrusel de novedades mientras se lee el detalle
             detailHero.src = data.hero;
             detailTag.textContent = data.tag;
@@ -26477,7 +26557,10 @@ const buildList = f => {
             const sumEl = document.getElementById("novedadDetailSummary");
             if (metaEl && dateEl) { dateEl.textContent = data.date || ""; metaEl.style.display = data.date ? "" : "none"; }
             if (sumEl) { sumEl.textContent = data.summary || ""; sumEl.style.display = data.summary ? "" : "none"; }
-            if (data.novedadBlocks && data.completoSections) {
+            if (data.tierlist) {
+                detailBody.innerHTML = "";
+                window.zcTierMount(detailBody);
+            } else if (data.novedadBlocks && data.completoSections) {
                 detailBody.innerHTML = "";
                 detailBody.appendChild(renderNovedadTabs(data));
             } else if (data.blocks) {
